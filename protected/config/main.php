@@ -30,9 +30,7 @@ return array(
         'users',
         'setting',
         'pages',
-        'developers',
-        'manageApps',
-        //'ticketing',
+		'courses',
 	),
 
 	// application components

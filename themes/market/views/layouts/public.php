@@ -27,7 +27,6 @@
 <body>
 <?= $this->renderPartial('//layouts/_header'); ?>
 <?= $this->renderPartial('//layouts/_sidebar'); ?>
-<?= $this->renderPartial('//layouts/_navbar'); ?>
 <div class="main col-xs-12">
     <section class="content">
         <?php
