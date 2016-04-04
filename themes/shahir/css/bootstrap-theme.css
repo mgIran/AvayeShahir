@@ -4,29 +4,24 @@
 @font-face{
     font-family:'BYekan';
     src:
-    url(../fonts/yekan/yekan.woff) format('woff'),
-    url(../fonts/yekan/yekan.eot) format('embedded-opentype'),
-    url(../fonts/yekan/yekan.svg),
-    url(../fonts/yekan/yekan.ttf)  format('truetype'),
-    url(../fonts/yekan/yekannumbers.woff),
-    url(../fonts/yekan/yekannumbers.ttf),
-    url(../fonts/yekan/yekannumbers.svg),
-    url(../fonts/yekan/yekannumbers.eot);
+        url(../fonts/yekan/yekan.woff) format('woff'),
+        url(../fonts/yekan/yekan.eot) format('embedded-opentype'),
+        url(../fonts/yekan/yekan.svg),
+        url(../fonts/yekan/yekan.ttf)  format('truetype'),
+        url(../fonts/yekan/yekannumbers.woff),
+        url(../fonts/yekan/yekannumbers.ttf),
+        url(../fonts/yekan/yekannumbers.svg),
+        url(../fonts/yekan/yekannumbers.eot);
     font-weight: normal;
     font-style: normal;
 }
 @font-face{
-    font-family:'BMitra';
-    src:url(../fonts/mitra/mitra.ttf) format('truetype'),
-    url(../fonts/mitra/mitra.svg),
-    url(../fonts/mitra/mitra.eot) format('embedded-opentype'),
-    url(../fonts/mitra/mitra.woff) format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-@font-face{
-    font-family:'IranaianSans';
-    src:url(../fonts/Iranian%20Sans.ttf) format('truetype');
+    font-family:'AdobeArabic';
+    src:
+        url(../fonts/adobe-arabic/AdobeArabic.woff) format('woff'),
+        url(../fonts/adobe-arabic/AdobeArabic.eot) format('embedded-opentype'),
+        url(../fonts/adobe-arabic/AdobeArabic.svg),
+        url(../fonts/adobe-arabic/AdobeArabic.ttf)  format('truetype');
     font-weight: normal;
     font-style: normal;
 }
@@ -35,12 +30,8 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     outline: 0 none !important;
-}
-body{
-    font-size: 12px;
-}
-body *{
-    font-family: "IranaianSans";
+    font-family: "AdobeArabic";
+    font-size: 13pt;
 }
 div,span,input{
     box-sizing: border-box;
@@ -52,9 +43,6 @@ a{
     transition: all 0.4s ease-in-out;
     -webkit-transition: all 0.4s ease-in-out;
     -moz-transition: all 0.4s ease-in-out;
-}
-body{
-    background-color: #f8f8f8;
 }
 html{
     min-height: 100%;
@@ -95,23 +83,11 @@ header{
     -webkit-transition: all 0.4s ease-in-out;
     -moz-transition: all 0.4s ease-in-out;
 }
-.logo-box{
-    display: block;
-    overflow: hidden;
-    padding: 20px 0;
-    width: 300px;
-    height: 300px;
-    position: absolute;
-    top: 5vh;
-    right: 250px;
-    z-index: 99;
-}
-.logo-box .logo{
-    background: url("../svg/logo.svg") no-repeat scroll center transparent;
+.header .logo{
+    background: url("../svg/mini-logo.svg") no-repeat scroll center transparent;
     background-size: cover;
-    display: inline-block;
-    width: 300px;
-    height: 300px;
+    width: 50px;
+    height: 50px;
 }
 .navbar{
     margin: 0 auto;
@@ -128,12 +104,11 @@ header{
 .nav >li a{
     padding: 20px;
     color: #fff;
-    font-size: 14px;
-    font-family: "BYekan";
+    font-size: 15pt;
 }
 .nav >li:hover a{
-    color: #fff;
-    background-color: rgba(167, 200, 5, 0.70);
+    color: #a7c805;
+    background-color: transparent;
 }
 .top-slider{
     display: block;
@@ -143,6 +118,8 @@ header{
     top: 0;
     width: 100%;
     z-index: 1;
+    background-image: url("../images/slide1.jpg");
+    background-size: cover;
 }
 .top-slider img{
     display: block;
