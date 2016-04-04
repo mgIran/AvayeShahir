@@ -64,24 +64,23 @@ class Controller extends CController
                     'url' => array('/admins/dashboard')
                 ) ,
                 array(
-                    'label' => 'برنامه ها<span class="caret"></span>' ,
+                    'label' => 'دوره ها<span class="caret"></span>' ,
                     'url' => '#' ,
                     'itemOptions' => array('class' => 'dropdown' ,'tabindex' => "-1") ,
                     'linkOptions' => array('class' => 'dropdown-toggle' ,'data-toggle' => "dropdown") ,
                     'items' => array(
-                        array('label' => 'بخش اندروید' ,'url' => Yii::app()->createUrl('/manageApps/android/admin/')) ,
-                        array('label' => 'بخش آی او اس' ,'url' => Yii::app()->createUrl('/manageApps/iOS/admin/')) ,
-                        array('label' => 'بخش ویندوز فون' ,'url' => Yii::app()->createUrl('/manageApps/windowsPhone/admin/')) ,
+                        array('label' => 'مدیریت' ,'url' => Yii::app()->createUrl('/courses/manage/admin/')) ,
+                        array('label' => 'افزودن دوره' ,'url' => Yii::app()->createUrl('/courses/manage/create/')) ,
                     )
                 ) ,
                 array(
-                    'label' => 'دسته بندی برنامه ها<span class="caret"></span>' ,
+                    'label' => 'دوره ها<span class="caret"></span>' ,
                     'url' => '#' ,
                     'itemOptions' => array('class' => 'dropdown' ,'tabindex' => "-1") ,
                     'linkOptions' => array('class' => 'dropdown-toggle' ,'data-toggle' => "dropdown") ,
                     'items' => array(
-                        array('label' => 'مدیریت' ,'url' => Yii::app()->createUrl('/appCategories/admin/')) ,
-                        array('label' => 'افزودن' ,'url' => Yii::app()->createUrl('/appCategories/create/')) ,
+                        array('label' => 'مدیریت' ,'url' => Yii::app()->createUrl('/courses/manage/admin/')) ,
+                        array('label' => 'افزودن دوره' ,'url' => Yii::app()->createUrl('/courses/manage/create/')) ,
                     )
                 ) ,
                 array(
@@ -218,12 +217,6 @@ class Controller extends CController
         $english_array = array('0' ,'1' ,'2' ,'3' ,'4' ,'5' ,'6' ,'7' ,'8' ,'9');
 
         return str_replace($english_array ,$farsi_array ,$matches);
-    }
-
-    public static function allCategories()
-    {
-        Yii::import('advertises.models.AdvertiseCategories');
-        return AdvertiseCategories::model()->findAll('parent IS NULL order by name ASC');
     }
 
     public static function fileSize($file){
