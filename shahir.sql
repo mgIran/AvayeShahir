@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50612
 File Encoding         : 65001
 
-Date: 2016-04-04 14:31:40
+Date: 2016-04-05 15:02:37
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -63,7 +63,7 @@ CREATE TABLE `ym_classes` (
   `summary` text COLLATE utf8_persian_ci COMMENT 'توضیحات',
   `price` int(11) DEFAULT NULL COMMENT 'شهریه',
   `startSignupDate` datetime DEFAULT NULL COMMENT 'تاریخ شروع ثبت نام',
-  `endSingupDate` datetime DEFAULT NULL COMMENT 'تاریخ پایان ثبت نام',
+  `endSignupDate` datetime DEFAULT NULL COMMENT 'تاریخ پایان ثبت نام',
   `startClassDate` datetime DEFAULT NULL COMMENT 'تاریخ شروع کلاس',
   `endClassDate` datetime DEFAULT NULL COMMENT 'تاریخ پایان کلاس',
   `category_id` int(10) unsigned NOT NULL COMMENT 'گروه',
@@ -87,20 +87,45 @@ CREATE TABLE `ym_class_categories` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(50) CHARACTER SET utf8 COLLATE utf8_persian_ci DEFAULT NULL COMMENT 'عنوان',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of ym_class_categories
 -- ----------------------------
-INSERT INTO `ym_class_categories` VALUES ('1', 'برنامه ها');
-INSERT INTO `ym_class_categories` VALUES ('2', 'بازی ها');
-INSERT INTO `ym_class_categories` VALUES ('3', 'آموزش ها');
-INSERT INTO `ym_class_categories` VALUES ('5', 'کاربردی');
-INSERT INTO `ym_class_categories` VALUES ('6', 'خرید');
-INSERT INTO `ym_class_categories` VALUES ('7', 'صوت و موسیقی');
-INSERT INTO `ym_class_categories` VALUES ('8', 'استراتژی');
-INSERT INTO `ym_class_categories` VALUES ('9', 'رقابتی');
-INSERT INTO `ym_class_categories` VALUES ('10', 'هیجان انگیز');
+INSERT INTO `ym_class_categories` VALUES ('11', 'ترمیک');
+
+-- ----------------------------
+-- Table structure for ym_class_tags
+-- ----------------------------
+DROP TABLE IF EXISTS `ym_class_tags`;
+CREATE TABLE `ym_class_tags` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(50) CHARACTER SET utf8 COLLATE utf8_persian_ci DEFAULT NULL COMMENT 'عنوان',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of ym_class_tags
+-- ----------------------------
+INSERT INTO `ym_class_tags` VALUES ('11', 'ترمیک');
+INSERT INTO `ym_class_tags` VALUES ('13', 'فرانسه');
+
+-- ----------------------------
+-- Table structure for ym_class_tag_rel
+-- ----------------------------
+DROP TABLE IF EXISTS `ym_class_tag_rel`;
+CREATE TABLE `ym_class_tag_rel` (
+  `tag_id` int(10) unsigned NOT NULL,
+  `class_id` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`tag_id`,`class_id`),
+  KEY `class_id` (`class_id`),
+  CONSTRAINT `ym_class_tag_rel_ibfk_2` FOREIGN KEY (`class_id`) REFERENCES `ym_classes` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  CONSTRAINT `ym_class_tag_rel_ibfk_1` FOREIGN KEY (`tag_id`) REFERENCES `ym_class_tags` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
+
+-- ----------------------------
+-- Records of ym_class_tag_rel
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for ym_counter_save
@@ -115,11 +140,11 @@ CREATE TABLE `ym_counter_save` (
 -- ----------------------------
 -- Records of ym_counter_save
 -- ----------------------------
-INSERT INTO `ym_counter_save` VALUES ('counter', '0');
-INSERT INTO `ym_counter_save` VALUES ('day_time', '2457483');
-INSERT INTO `ym_counter_save` VALUES ('max_count', '0');
-INSERT INTO `ym_counter_save` VALUES ('max_time', '0');
-INSERT INTO `ym_counter_save` VALUES ('yesterday', '0');
+INSERT INTO `ym_counter_save` VALUES ('counter', '1');
+INSERT INTO `ym_counter_save` VALUES ('day_time', '2457484');
+INSERT INTO `ym_counter_save` VALUES ('max_count', '1');
+INSERT INTO `ym_counter_save` VALUES ('max_time', '1459755000');
+INSERT INTO `ym_counter_save` VALUES ('yesterday', '1');
 
 -- ----------------------------
 -- Table structure for ym_counter_users
@@ -134,7 +159,7 @@ CREATE TABLE `ym_counter_users` (
 -- ----------------------------
 -- Records of ym_counter_users
 -- ----------------------------
-INSERT INTO `ym_counter_users` VALUES ('837ec5754f503cfaaee0929fd48974e7', '1459759140');
+INSERT INTO `ym_counter_users` VALUES ('837ec5754f503cfaaee0929fd48974e7', '1459852303');
 
 -- ----------------------------
 -- Table structure for ym_courses
@@ -146,12 +171,13 @@ CREATE TABLE `ym_courses` (
   `pic` varchar(200) COLLATE utf8_persian_ci NOT NULL COMMENT 'تصویر',
   `summary` text COLLATE utf8_persian_ci NOT NULL COMMENT 'توضیحات',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
 
 -- ----------------------------
 -- Records of ym_courses
 -- ----------------------------
-INSERT INTO `ym_courses` VALUES ('4', 'sd', 'GDOXG1459759134.jpg', '<p>sdf</p>\r\n');
+INSERT INTO `ym_courses` VALUES ('7', 'دوره بزرگسالان', 'xwzpo1459830888.jpg', '<p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.</p>\r\n');
+INSERT INTO `ym_courses` VALUES ('8', 'دوره کودکان', 'XQrOh1459830549.jpg', '<p>سشیب یسب شسب سیب ش</p>\r\n');
 
 -- ----------------------------
 -- Table structure for ym_pages

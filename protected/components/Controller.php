@@ -10,6 +10,7 @@ class Controller extends CController
      * meaning using a single column layout. See 'protected/views/layouts/column1.php'.
      */
     public $layout = '//layouts/column1';
+
     /**
      * @var array context menu items. This property will be assigned to {@link CMenu::items}.
      */
@@ -64,23 +65,15 @@ class Controller extends CController
                     'url' => array('/admins/dashboard')
                 ) ,
                 array(
-                    'label' => 'دوره ها<span class="caret"></span>' ,
+                    'label' => 'آموزش<span class="caret"></span>' ,
                     'url' => '#' ,
                     'itemOptions' => array('class' => 'dropdown' ,'tabindex' => "-1") ,
                     'linkOptions' => array('class' => 'dropdown-toggle' ,'data-toggle' => "dropdown") ,
                     'items' => array(
-                        array('label' => 'مدیریت' ,'url' => Yii::app()->createUrl('/courses/manage/admin/')) ,
-                        array('label' => 'افزودن دوره' ,'url' => Yii::app()->createUrl('/courses/manage/create/')) ,
-                    )
-                ) ,
-                array(
-                    'label' => 'دوره ها<span class="caret"></span>' ,
-                    'url' => '#' ,
-                    'itemOptions' => array('class' => 'dropdown' ,'tabindex' => "-1") ,
-                    'linkOptions' => array('class' => 'dropdown-toggle' ,'data-toggle' => "dropdown") ,
-                    'items' => array(
-                        array('label' => 'مدیریت' ,'url' => Yii::app()->createUrl('/courses/manage/admin/')) ,
-                        array('label' => 'افزودن دوره' ,'url' => Yii::app()->createUrl('/courses/manage/create/')) ,
+                        array('label' => 'مدیریت دوره ها' ,'url' => Yii::app()->createUrl('/courses/manage/admin/')) ,
+                        array('label' => 'مدیریت کلاس ها' ,'url' => Yii::app()->createUrl('/courses/classes/admin/')) ,
+                        array('label' => 'مدیریت گروه ها' ,'url' => Yii::app()->createUrl('/courses/categories/admin/')) ,
+                        array('label' => 'مدیریت تگ ها' ,'url' => Yii::app()->createUrl('/courses/tags/admin/'))
                     )
                 ) ,
                 array(

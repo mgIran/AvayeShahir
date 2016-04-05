@@ -15,7 +15,10 @@ class CoursesModule extends CWebModule
 	}
 
 	public $controllerMap = array(
-		'manage' => 'courses.controllers.CoursesManageController'
+		'manage' => 'courses.controllers.CoursesManageController',
+		'classes' => 'courses.controllers.ClassesManageController',
+		'categories' => 'courses.controllers.ClassCategoriesManageController',
+		'tags' => 'courses.controllers.ClassTagsManageController'
 	);
 	public function beforeControllerAction($controller, $action)
 	{

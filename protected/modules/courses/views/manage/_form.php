@@ -4,7 +4,7 @@
 /* @var $pic [] */
 /* @var $form CActiveForm */
 ?>
-
+<? $this->renderPartial('//layouts/_flashMessage'); ?>
 <div class="form">
 
 <?php $form=$this->beginWidget('CActiveForm', array(
