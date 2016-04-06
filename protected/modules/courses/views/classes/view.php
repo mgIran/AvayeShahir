@@ -26,7 +26,7 @@ $this->menu=array(
 		'summary',
 		'price',
 		'startSignupDate',
-		'endSingupDate',
+		'endSignupDate',
 		'startClassDate',
 		'endClassDate',
 		'category_id',

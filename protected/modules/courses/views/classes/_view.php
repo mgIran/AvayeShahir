@@ -25,8 +25,8 @@
 	<?php echo CHtml::encode($data->startSignupDate); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('endSingupDate')); ?>:</b>
-	<?php echo CHtml::encode($data->endSingupDate); ?>
+	<b><?php echo CHtml::encode($data->getAttributeLabel('endSignupDate')); ?>:</b>
+	<?php echo CHtml::encode($data->endSignupDate); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('startClassDate')); ?>:</b>

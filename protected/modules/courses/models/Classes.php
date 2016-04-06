@@ -38,6 +38,8 @@ class Classes extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('title, category_id, course_id', 'required'),
+			array('endSignupDate','compare','compareAttribute'=>'startSignupDate','operator'=>'>','message'=>'تاریخ پایان ثبت نام باید بیشتر از تاریخ شروع ثبت نام باشد.'),
+			array('endClassDate','compare','compareAttribute'=>'startClassDate','operator'=>'>','message'=>'تاریخ پایان کلاس باید بیشتر از تاریخ شروع کلاس باشد.'),
 			array('price', 'numerical', 'integerOnly'=>true),
 			array('title', 'length', 'max'=>50),
 			array('category_id, course_id', 'length', 'max'=>10),
@@ -107,6 +109,7 @@ class Classes extends CActiveRecord
 		$criteria->compare('startClassDate',$this->startClassDate,true);
 		$criteria->compare('endClassDate',$this->endClassDate,true);
 		$criteria->compare('category_id',$this->category_id,true);
+		//var_dump($this->course_id);exit;
 		$criteria->compare('course_id',$this->course_id,true);
 
 		return new CActiveDataProvider($this, array(

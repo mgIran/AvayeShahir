@@ -88,7 +88,7 @@ class CoursesManageController extends Controller
 					$imager->resize($tmpDIR.$model->pic ,$picDIR.$model->pic,400,400);
 					unlink($tmpDIR.$model->pic);
 				}
-				Yii::app()->user->setFlash('success' ,'<span class="icon-check"></span>&nbsp;&nbsp;اطلاعات با موفقیت انجام شد.');
+				Yii::app()->user->setFlash('success' ,'<span class="icon-check"></span>&nbsp;&nbsp;اطلاعات با موفقیت ذخیره شد.');
 				$this->redirect(array('admin'));
 			}else
 				Yii::app()->user->setFlash('failed' ,'در ثبت اطلاعات خطایی رخ داده است! لطفا مجددا تلاش کنید.');
@@ -149,7 +149,7 @@ class CoursesManageController extends Controller
 					$imager->resize($tmpDIR.$model->pic ,$picDIR.$model->pic,400,400);
 					unlink($tmpDIR.$model->pic);
 				}
-				Yii::app()->user->setFlash('success' ,'<span class="icon-check"></span>&nbsp;&nbsp;اطلاعات با موفقیت انجام شد.');
+				Yii::app()->user->setFlash('success' ,'<span class="icon-check"></span>&nbsp;&nbsp;اطلاعات با موفقیت ذخیره شد.');
 				$this->redirect(array('admin'));
 			}else
 				Yii::app()->user->setFlash('failed' ,'در ثبت اطلاعات خطایی رخ داده است! لطفا مجددا تلاش کنید.');

@@ -19,16 +19,26 @@ $this->menu=array(
 	'filter'=>$model,
 	'columns'=>array(
 		'title',
-		'summary',
-		'price',
-		'startSignupDate',
-		'endSingupDate',
-		/*
-		'startClassDate',
-		'endClassDate',
-		'category_id',
-		'course_id',
-		*/
+		array(
+			'header' => 'دوره',
+			'value' => '$data->course->title',
+			'filter' => CHtml::activeDropDownList($model,'course_id',
+				CHtml::listData(Courses::model()->findAll(),'id' ,'title'),
+				array(
+					'prompt' => 'همه'
+				)
+			)
+		),
+		array(
+			'header' => 'گروه',
+			'value' => '$data->category->title',
+			'filter' => CHtml::activeDropDownList($model,'category_id',
+				CHtml::listData(ClassCategories::model()->findAll(),'id' ,'title'),
+				array(
+					'prompt' => 'همه'
+				)
+			)
+		),
 		array(
 			'class'=>'CButtonColumn',
 		),

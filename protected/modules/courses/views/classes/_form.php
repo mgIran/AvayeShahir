@@ -22,15 +22,15 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'summary'); ?>
-		<?php echo $form->textArea($model,'summary',array('rows'=>6, 'cols'=>50)); ?>
-		<?php echo $form->error($model,'summary'); ?>
+		<?php echo $form->labelEx($model,'course_id'); ?>
+		<?php echo $form->dropDownList($model,'course_id',CHtml::listData(Courses::model()->findAll(),'id','title')); ?>
+		<?php echo $form->error($model,'course_id'); ?>
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'price'); ?>
-		<?php echo $form->textField($model,'price'); ?>
-		<?php echo $form->error($model,'price'); ?>
+		<?php echo $form->labelEx($model,'category_id'); ?>
+		<?php echo $form->dropDownList($model,'category_id',CHtml::listData(ClassCategories::model()->findAll(),'id','title')); ?>
+		<?php echo $form->error($model,'category_id'); ?>
 	</div>
 
 	<div class="row">
@@ -61,20 +61,27 @@
 		<?php echo $form->error($model,'endClassDate'); ?>
 	</div>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'category_id'); ?>
-		<?php echo $form->textField($model,'category_id',array('size'=>10,'maxlength'=>10)); ?>
-		<?php echo $form->error($model,'category_id'); ?>
-	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'course_id'); ?>
-		<?php echo $form->textField($model,'course_id',array('size'=>10,'maxlength'=>10)); ?>
-		<?php echo $form->error($model,'course_id'); ?>
+		<?php echo $form->labelEx($model,'price'); ?>
+		<?php echo $form->textField($model,'price'); ?>
+		<?php echo $form->error($model,'price'); ?>
+	</div>
+
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'summary'); ?>
+		<?php
+		$this->widget("ext.ckeditor.CKEditor",array(
+				'model' => $model,
+				'attribute' => 'summary'
+		));
+		?>
+		<?php echo $form->error($model,'summary'); ?>
 	</div>
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+		<?php echo CHtml::submitButton($model->isNewRecord ? 'ثبت' : 'ذخیره',array('class' => 'btn btn-success')); ?>
 	</div>
 
 <?php $this->endWidget(); ?>
@@ -116,4 +123,14 @@ Yii::app()->clientScript->registerScript('datesScript','
         format: \'DD MMMM YYYY\',
         persianDigit: false
     });
+');
+$ss = !empty($model->startSignupDate)?explode('/',JalaliDate::date("Y/m/d",$model->startSignupDate,false)):explode('/',JalaliDate::date("Y/m/d",time(),false));
+$es = !empty($model->endSignupDate)?explode('/',JalaliDate::date("Y/m/d",$model->endSignupDate,false)):explode('/',JalaliDate::date("Y/m/d",time(),false));
+$sc = !empty($model->startClassDate)?explode('/',JalaliDate::date("Y/m/d",$model->startClassDate,false)):explode('/',JalaliDate::date("Y/m/d",time(),false));
+$ec = !empty($model->endClassDate)?explode('/',JalaliDate::date("Y/m/d",$model->endClassDate,false)):explode('/',JalaliDate::date("Y/m/d",time(),false));
+Yii::app()->clientScript->registerScript('dateSets', '
+	$("#startSignupDate").persianDatepicker("setDate",['.$ss[0].','.$ss[1].','.$ss[2].']);
+	$("#endSignupDate").persianDatepicker("setDate",['.$es[0].','.$es[1].','.$es[2].']);
+	$("#startClassDate").persianDatepicker("setDate",['.$sc[0].','.$sc[1].','.$sc[2].']);
+	$("#endClassDate").persianDatepicker("setDate",['.$ec[0].','.$ec[1].','.$ec[2].']);
 ');
