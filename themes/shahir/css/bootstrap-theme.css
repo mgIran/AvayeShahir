@@ -31,13 +31,10 @@
     -moz-osx-font-smoothing: grayscale;
     outline: 0 none !important;
     font-family: "AdobeArabic";
-    font-size: 13pt;
+    font-size: 14pt;
 }
 a{
     text-decoration: none !important;
-    transition: all 0.4s ease-in-out;
-    -webkit-transition: all 0.4s ease-in-out;
-    -moz-transition: all 0.4s ease-in-out;
 }
 html{
     min-height: 100%;
@@ -90,15 +87,14 @@ html{
     padding: 0 15px;
     margin-bottom: 15px;
     font-size: 16pt;
-    -webkit-transition: all 0.5s;-moz-transition: all 0.5s;-ms-transition: all 0.5s;-o-transition: all 0.5s;transition: all 0.5s;
 }
 .button-field:hover{
-    background: #86a004;
+    background: #96b404;
 }
 
 
 
-header{
+header.header{
     width: 100%;
     display: block;
     overflow: hidden;
@@ -109,9 +105,40 @@ header{
     -webkit-transition: all 0.4s ease-in-out;
     -moz-transition: all 0.4s ease-in-out;
 }
+header.header.scroll-mode{
+    background: #0b3762;
+    box-shadow: 0 0 5px #7f7f7f;
+}
 .header .container{
-    padding-top: 15px;
     border: none;
+    position: relative;
+    height: 70px;
+}
+.header .logo{
+    background: url("../svg/white-logo.svg") no-repeat scroll center transparent;
+    background-size: cover;
+    width: 0;
+    opacity: 0;
+    height: 40px;
+    position: absolute;
+    top: 15px;
+    right: 0;
+    -webkit-transition: all 0.5s;-moz-transition: all 0.5s;-ms-transition: all 0.5s;-o-transition: all 0.5s;transition: all 0.5s;
+}
+.header.scroll-mode .logo{
+    width: 100px;
+    opacity: 1;
+}
+.header .nav{
+    -webkit-transition: all 0.5s;-moz-transition: all 0.5s;-ms-transition: all 0.5s;-o-transition: all 0.5s;transition: all 0.5s;
+    position: absolute;
+    top: 10px;
+    left: 0;
+    right: 0;
+    bottom: 10px;
+}
+.header.scroll-mode .nav{
+    right: 130px;
 }
 .navbar{
     margin: 0 auto;
@@ -121,12 +148,11 @@ header{
     color: #fff;
 }
 .nav >li .divider{
-    padding: 20px 0;
+    padding: 10px 0;
     float: right;
     color: #fff;
 }
 .nav >li a{
-    padding: 20px;
     color: #fff;
     font-size: 16pt;
 }
@@ -162,11 +188,11 @@ header{
     background: url("../svg/white-logo.svg") no-repeat scroll center transparent;
     background-size: cover;
     width: 250px;
-    height: 250px;
+    height: 100px;
     position: absolute;
     top: 50%;
     left: 50%;
-    margin-top: -45px;
+    margin-top: -60px;
     -webkit-transform: translate(-50%, -50%);
     -moz-transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
@@ -177,7 +203,7 @@ header{
     position: absolute;
     top: 50%;
     left: 50%;
-    margin-top: 45px;
+    margin-top: 60px;
     -webkit-transform: translate(-50%, -50%);
     -moz-transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
@@ -209,47 +235,6 @@ header{
     color: #fff;
     fill: #fff;
 }
-.introduction .search-box{
-    position: absolute;
-    bottom: 150px;
-    display: block;
-    width: 100%;
-}
-.introduction .search-box .form {
-    display: block;
-    width: 70%;
-    margin: 0 auto;
-    overflow: hidden;
-    background-color: rgba(255, 255, 255, 0.7);
-    -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
-    -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
-    padding: 20px;
-}
-.introduction .search-box .form input{
-    float: right;
-    background-color: #fff;
-    border: none;
-    line-height: 36px;
-    font-size: 12px;
-    padding: 0 10px;
-}
-.introduction .search-box .form .btn-group{
-    padding: 0 !important;
-}
-.introduction .search-box .form .btn-group > button{
-    width: 100%;
-    background-color: #ccdceb;
-    color: #083661;
-}
-.introduction .search-box .form button{
-    line-height: 36px !important;
-    font-size: 12px;
-    padding: 0;
-    border: none;
-    display: block;
-    border-radius: 0;
-}
 .mover {
     animation: 0.7s ease 0s alternate none infinite mover;
     display: block;
@@ -271,6 +256,8 @@ header{
 }
 #login-modal .modal-header{
     border: none;
+    z-index: 2;
+    position: relative;
 }
 #login-modal .modal-header .close
 {
@@ -279,25 +266,198 @@ header{
     line-height: 40px;
     margin: 20px 25px;
 }
+#login-modal .modal-body{
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    z-index: 1;
+}
 #login-modal .box{
     width: 25%;
-    height: 100px;
+    height: 300px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
 }
 #login-modal h3{
     margin-bottom: 30px;
 }
 #login-modal .email{
     background: #fff url("../svg/email.svg") no-repeat scroll 15px center / 25px auto;
+    padding: 0 15px 0 55px;
 }
 #login-modal .password{
     background: #fff url("../svg/password.svg") no-repeat scroll 15px center / 25px auto;
+    padding: 0 15px 0 55px;
 }
 #login-modal .button-field{
     background: #a7c805;
 }
 #login-modal .button-field:hover{
-    background: #86a004;
+    background: #96b404;
 }
+#login-modal a{
+    color: #809cb6;
+}
+#login-modal a:hover{
+    opacity: 0.5;
+}
+#login-modal.modal.fade .modal-dialog {
+    -webkit-transform: scale(0.8);
+    -moz-transform: scale(0.8);
+    -ms-transform: scale(0.8);
+    transform: scale(0.8);
+    opacity: 0;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+}
+#login-modal.modal.fade.in .modal-dialog {
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+}
+section.search{
+    background: #f2f6f9;
+    position: relative;
+    overflow: hidden;
+}
+.search form{
+    position: relative;
+    overflow: hidden;
+    margin: 75px 0;
+}
+.search .text-field{
+    box-shadow: 0 0 5px #f2f2f2;
+    margin-bottom: 0;
+}
+.search .dropdown-toggle{
+    width: 100%;
+    border: none;
+    border-radius: 0;
+    background: #cddcec;
+    color: #0b3762;
+    height: 45px;
+    line-height: 45px;
+    padding: 0 15px;
+    text-align: right;
+    box-shadow: 0 0 5px #f2f2f2;
+}
+.search .dropdown-toggle:hover,
+.search .dropdown-toggle:active,
+.search .open .dropdown-toggle.btn-default{
+    background: #baccde;
+    color: #0b3762;
+}
+.search .dropdown-toggle .icon{
+    font-size: 12pt;
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+.search .btn-search{
+    background: #0f63b5;
+    border: none;
+    cursor: pointer;
+    border-radius: 2px 0 0 2px;
+    height: 45px;
+    box-shadow: 0 0 5px #f2f2f2;
+}
+.search .btn-search:hover,
+.search .btn-search:active{
+    background: #0f5da9;
+}
+.search .btn-search .search-icon{
+    background: url("../svg/search.svg") no-repeat scroll transparent center / 25px auto;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+.search .bg-icon{
+    background: url("../svg/search-blue.svg") no-repeat scroll transparent center / 200px auto;
+    position: absolute;
+    width: 300px;
+    height: 100%;
+    left: 0;
+    top: 0;
+    opacity: 0.1;
+}
+
+/*.introduction .search-box{*/
+/*position: absolute;*/
+/*bottom: 150px;*/
+/*display: block;*/
+/*width: 100%;*/
+/*}*/
+/*.introduction .search-box .form {*/
+/*display: block;*/
+/*width: 70%;*/
+/*margin: 0 auto;*/
+/*overflow: hidden;*/
+/*background-color: rgba(255, 255, 255, 0.7);*/
+/*-webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);*/
+/*-moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);*/
+/*box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);*/
+/*padding: 20px;*/
+/*}*/
+/*.introduction .search-box .form input{*/
+/*float: right;*/
+/*background-color: #fff;*/
+/*border: none;*/
+/*line-height: 36px;*/
+/*font-size: 12px;*/
+/*padding: 0 10px;*/
+/*}*/
+/*.introduction .search-box .form .btn-group{*/
+/*padding: 0 !important;*/
+/*}*/
+/*.introduction .search-box .form .btn-group > button{*/
+/*width: 100%;*/
+/*background-color: #ccdceb;*/
+/*color: #083661;*/
+/*}*/
+/*.introduction .search-box .form button{*/
+/*line-height: 36px !important;*/
+/*font-size: 12px;*/
+/*padding: 0;*/
+/*border: none;*/
+/*display: block;*/
+/*border-radius: 0;*/
+/*}*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .main-entry{
     position: relative;
     z-index: 2;
