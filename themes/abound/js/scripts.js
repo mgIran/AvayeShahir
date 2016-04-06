@@ -1,7 +1,29 @@
 $(function(){
+    // CALL CALENDAR
+    $('.datepicker').persianDatepicker({
+        altField: '.date',
+        altFormat: 'X',
+        observer: true,
+        format: 'DD MMMM YYYY',
+        persianDigit: false
+    });
+
+    $('.timepicker').persianDatepicker({
+        altField: '.time',
+        altFormat: 'X',
+        format: 'HH:mm a',
+        onlyTimePicker: true
+    });
+
+    // fade out alert messages
     setInterval(function(){
-        $(".alert").fadeOut(2000);
-    }, 20000);
+        $(".alert").fadeTo(500, 0).slideUp(500, function(){
+            $(this).remove();
+        });
+    }, 5000);
+
+
+    //
     $('.nav-tabs > li').click(function(event){
         if ($(this).hasClass('disabled')) {
             return false;

@@ -88,8 +88,10 @@ class CoursesManageController extends Controller
 					$imager->resize($tmpDIR.$model->pic ,$picDIR.$model->pic,400,400);
 					unlink($tmpDIR.$model->pic);
 				}
+				Yii::app()->user->setFlash('success' ,'<span class="icon-check"></span>&nbsp;&nbsp;اطلاعات با موفقیت ذخیره شد.');
 				$this->redirect(array('admin'));
-			}
+			}else
+				Yii::app()->user->setFlash('failed' ,'در ثبت اطلاعات خطایی رخ داده است! لطفا مجددا تلاش کنید.');
 		}
 
 		$this->render('create',array(
@@ -111,23 +113,22 @@ class CoursesManageController extends Controller
 		if (!is_dir($tmpDIR))
 			mkdir($tmpDIR);
 		$tmpUrl = Yii::app()->createAbsoluteUrl('/uploads/temp/');
-		$picUrl = Yii::app()->createAbsoluteUrl('/uploads/courses/');
 		$picDIR = Yii::getPathOfAlias("webroot") . "/uploads/courses/";
-		if (!is_dir($picDIR))
-			mkdir($picDIR);
+		$picUrl = Yii::app()->createAbsoluteUrl('/uploads/courses/');
 
 		$pic = array();
-		if ($model->pic and file_exists($tmpDIR.$model->pic)) {
+		if ($model->pic and file_exists($picDIR.$model->pic)) {
 			$file = $model->pic;
 			$pic = array(
-					'name' => $file,
-					'src' => $picUrl . '/' . $file,
-					'size' => filesize($picDIR . $file),
-					'serverName' => $file,
+				'name' => $file,
+				'src' => $picUrl . '/' . $file,
+				'size' => filesize($picDIR . $file),
+				'serverName' => $file,
 			);
 		}
+
 		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
+		$this->performAjaxValidation($model);
 
 		if(isset($_POST['Courses']))
 		{
@@ -148,8 +149,10 @@ class CoursesManageController extends Controller
 					$imager->resize($tmpDIR.$model->pic ,$picDIR.$model->pic,400,400);
 					unlink($tmpDIR.$model->pic);
 				}
+				Yii::app()->user->setFlash('success' ,'<span class="icon-check"></span>&nbsp;&nbsp;اطلاعات با موفقیت ذخیره شد.');
 				$this->redirect(array('admin'));
-			}
+			}else
+				Yii::app()->user->setFlash('failed' ,'در ثبت اطلاعات خطایی رخ داده است! لطفا مجددا تلاش کنید.');
 		}
 
 		$this->render('update',array(
@@ -176,16 +179,6 @@ class CoursesManageController extends Controller
 			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
 	}
 
-	/**
-	 * Lists all models.
-	 */
-	public function actionIndex()
-	{
-		$dataProvider=new CActiveDataProvider('Courses');
-		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
-		));
-	}
 
 	/**
 	 * Manages all models.
