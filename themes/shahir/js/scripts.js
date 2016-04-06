@@ -14,14 +14,14 @@ $(function() {
         var href = $(this).attr('href');
         if(href.substr(1,href.length))
             $('html, body').animate({
-                scrollTop: ($(href).offset().top)
+                scrollTop: ($(href).offset().top-70)
             },1000);
     });
 
     $(window).scroll(function(){
         if($(this).scrollTop() > 100)
-            $("header").css({'background-color':' rgba(3,24,45, 0.6)'});
+            $("header.header").addClass('scroll-mode');
         else
-            $("header").css({'background-color':'rgba(0,0,0,0)'});
+            $("header.header").removeClass('scroll-mode');
     });
 });

@@ -21,6 +21,7 @@
 <body>
 <header class="header">
     <div class="navbar container">
+        <div class="logo"></div>
         <ul class="nav">
             <li>
                 <a href="index.html">صفحه اصلی</a>
@@ -56,24 +57,6 @@
     <div class="mask"></div>
     <div class="logo"></div>
     <h2>همراه با ما انگلیسی را بیاموزید...</h2>
-    <!--<div class="search-box">-->
-        <!--<div class="container">-->
-            <!--<div class="form">-->
-                <!--<input type="text" class="col-lg-8 col-md-8 col-sm-8 col-xs-12" placeholder="جستجو کنید ...">-->
-                <!--<div class="btn-group col-lg-3 col-md-3 col-sm-3 col-xs-12">-->
-                    <!--<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">-->
-                        <!--<span data-bind="label">-->
-                            <!--جستجو در کل سایت-->
-                        <!--</span>-->
-                        <!--<span class="caret"></span>-->
-                    <!--</button>-->
-                    <!--<ul class="dropdown-menu" role="menu" >-->
-                    <!--</ul>-->
-                <!--</div>-->
-                <!--<button type="submit" class="btn btn-info col-lg-1 col-md-1 col-sm-1 col-xs-12">جستجو</button>-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</div>-->
     <div class="chevron">
         <a class="mover" href="#main">
             <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 245.059 245.059" xml:space="preserve">
@@ -90,6 +73,30 @@
     </div>
 </div>
 <div class="main-entry" id="main">
+    <section class="search">
+        <div class="container">
+            <form action="/search" method="post">
+                <div class="col-md-8">
+                    <div class="row">
+                        <input type="text" class="col-md-8 text-field" placeholder="جستجو کنید ...">
+                    </div>
+                </div>
+                <div class="btn-group col-md-3">
+                    <div class="row">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                            <span data-bind="label">جستجو در کل سایت</span>
+                            <span class="icon icon-angle-down"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu" ></ul>
+                    </div>
+                </div>
+                <button type="submit" class="col-md-1 btn-search">
+                    <i class="search-icon"></i>
+                </button>
+            </form>
+        </div>
+        <div class="bg-icon"></div>
+    </section>
     <div class="container box">
         <div class="inner-box">
             <h2>دوره های آموزشی</h2>
@@ -179,7 +186,8 @@
                         <input type="text" placeholder="پست الکترونیکی" class="text-field email">
                         <input type="password" placeholder="کلمه عبور" class="text-field password">
                         <input type="submit" value="ورود" class="button-field">
-
+                        <a href="#">کلمه عبور خود را فراموش کرده اید؟</a><br>
+                        <span>تازه وارد هستید؟ </span><a href="#">ثبت نام کنید.</a>
                     </form>
                 </div>
             </div>
