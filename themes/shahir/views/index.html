@@ -12,6 +12,8 @@
     <link rel="shortcut icon" href="<?= Yii::app()->createAbsoluteUrl('themes/market/images/favicon.ico'); ?>">
 
     <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap-material-design.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/ripples.min.css">
     <link rel="stylesheet" type="text/css" href="../css/font-awesome.css">
     <link rel="stylesheet" type="text/css" href="../css/owl.carousel.css">
     <link rel="stylesheet" type="text/css" href="../css/bootstrap-theme.css">
@@ -53,7 +55,7 @@
         </ul>
     </div>
 </header>
-<div class="introduction">
+<section class="introduction">
     <div class="mask"></div>
     <div class="logo"></div>
     <h2>همراه با ما انگلیسی را بیاموزید...</h2>
@@ -71,113 +73,105 @@
             </svg>
         </a>
     </div>
-</div>
-<div class="main-entry" id="main">
-    <section class="search">
-        <div class="container">
-            <form action="/search" method="post">
-                <div class="col-md-8">
-                    <div class="row">
-                        <input type="text" class="col-md-8 text-field" placeholder="جستجو کنید ...">
-                    </div>
+</section>
+<section class="search" id="main">
+    <div class="container">
+        <form action="/search" method="post">
+            <div class="col-md-8">
+                <div class="row">
+                    <input type="text" class="col-md-8 text-field" placeholder="جستجو کنید ...">
                 </div>
-                <div class="btn-group col-md-3">
-                    <div class="row">
-                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                            <span data-bind="label">جستجو در کل سایت</span>
-                            <span class="icon icon-angle-down"></span>
-                        </button>
-                        <ul class="dropdown-menu" role="menu" ></ul>
-                    </div>
+            </div>
+            <div class="btn-group col-md-3">
+                <div class="row">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                        <span data-bind="label">جستجو در کل سایت</span>
+                        <span class="icon icon-angle-down"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">کل سایت</a></li>
+                        <li><a href="#">دوره ها</a></li>
+                        <li><a href="#">همکاران</a></li>
+                        <li><a href="#">اساتید</a></li>
+                    </ul>
                 </div>
-                <button type="submit" class="col-md-1 btn-search">
-                    <i class="search-icon"></i>
-                </button>
-            </form>
-        </div>
-        <div class="bg-icon"></div>
-    </section>
-    <div class="container box">
-        <div class="inner-box">
-            <h2>دوره های آموزشی</h2>
-            <div class="course-carousel">
-                <div class="course">
-                    <div class="course-pic">
-                        <img src="../images/Non-Traditional-Student-at-Work-goodluz.jpg">
-                    </div>
-                    <div class="course-detail">
-                        <h3>دوره های بزرگ سالان</h3>
-                        <p class="">
-                            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.
-                            <span class="paragraph-end"></span>
-                        </p>
-                        <button type="button" class="btn btn-success pull-left">
-                            جزئیات
-                        </button>
-                    </div>
+            </div>
+            <button type="submit" class="col-md-1 btn-search btn">
+                <i class="search-icon"></i>
+            </button>
+        </form>
+    </div>
+    <div class="bg-icon"></div>
+</section>
+<section class="courses">
+    <div class="container">
+        <h3 class="yekan-text">دوره های آموزشی</h3>
+        <div class="course-carousel">
+            <div class="course">
+                <div class="course-pic">
+                    <img src="../images/Non-Traditional-Student-at-Work-goodluz.jpg">
                 </div>
-                <div class="course">
-                    <div class="course-pic">
-                        <img src="../images/lzeaxqbhifexdgseituh.jpg">
-                    </div>
-                    <div class="course-detail">
-                        <h3>دوره های کودکان</h3>
-                        <p class="">
-                            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.
-                            <span class="paragraph-end"></span>
-                        </p>
-                        <button type="button" class="btn btn-success pull-left">
-                            جزئیات
-                        </button>
-                    </div>
+                <div class="course-detail container-fluid">
+                    <h4><a href="#">دوره های بزرگ سالان</a></h4>
+                    <p class="text">
+                        لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.
+                        <span class="paragraph-end"></span>
+                    </p>
+                    <a href="#" class="btn pull-left">جزئیات</a>
                 </div>
-                <div class="course">
-                    <div class="course-pic">
-                        <img src="../images/Eiffel--4f11fe9aeb680_hires.jpg">
-                    </div>
-                    <div class="course-detail">
-                        <h3>دوره های فرانسه</h3>
-                        <p class="">
-                            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.
-                            <span class="paragraph-end"></span>
-                        </p>
-                        <button type="button" class="btn btn-success pull-left">
-                            جزئیات
-                        </button>
-                    </div>
+            </div>
+            <div class="course">
+                <div class="course-pic">
+                    <img src="../images/lzeaxqbhifexdgseituh.jpg">
                 </div>
-                <div class="course">
-                    <div class="course-pic">
-                        <img src="../images/6780_IELTS_Scholarship.jpg">
-                    </div>
-                    <div class="course-detail">
-                        <h3>دوره های IELTS</h3>
-                        <p class="">
-                            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.
-                            <span class="paragraph-end"></span>
-                        </p>
-                        <button type="button" class="btn btn-success pull-left">
-                            جزئیات
-                        </button>
-                    </div>
+                <div class="course-detail container-fluid">
+                    <h4><a href="#">دوره های کودکان</a></h4>
+                    <p class="text">
+                        لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.
+                        <span class="paragraph-end"></span>
+                    </p>
+                    <a href="#" class="btn pull-left">جزئیات</a>
+                </div>
+            </div>
+            <div class="course">
+                <div class="course-pic">
+                    <img src="../images/Eiffel--4f11fe9aeb680_hires.jpg">
+                </div>
+                <div class="course-detail container-fluid">
+                    <h4><a href="#">دوره های فرانسه</a></h4>
+                    <p class="text">
+                        لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.
+                        <span class="paragraph-end"></span>
+                    </p>
+                    <a href="#" class="btn pull-left">جزئیات</a>
+                </div>
+            </div>
+            <div class="course">
+                <div class="course-pic">
+                    <img src="../images/6780_IELTS_Scholarship.jpg">
+                </div>
+                <div class="course-detail container-fluid">
+                    <h4><a href="#">دوره های IELTS</a></h4>
+                    <p class="text">
+                        لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.
+                        <span class="paragraph-end"></span>
+                    </p>
+                    <a href="#" class="btn pull-left">جزئیات</a>
                 </div>
             </div>
         </div>
     </div>
-    <div class="image-background login-box">
-        <div class="inner-box">
-            <h2>ساخت حساب کاربری</h2>
-            <div class="login-form">
-
-            </div>
-        </div>
+</section>
+<section class="signup">
+    <div class="container">
+        <h2 class="yekan-text text-center">ساخت حساب کاربری</h2>
     </div>
-</div>
+</section>
 <div id="login-modal" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <button type="button" class="close btn" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
                 <div class="center-block box">
@@ -185,7 +179,7 @@
                     <form action="/login" method="post">
                         <input type="text" placeholder="پست الکترونیکی" class="text-field email">
                         <input type="password" placeholder="کلمه عبور" class="text-field password">
-                        <input type="submit" value="ورود" class="button-field">
+                        <button type="submit" class="button-field btn">ورود</button>
                         <a href="#">کلمه عبور خود را فراموش کرده اید؟</a><br>
                         <span>تازه وارد هستید؟ </span><a href="#">ثبت نام کنید.</a>
                     </form>
@@ -195,6 +189,8 @@
     </div>
 </div>
 <script type="application/javascript" src="../js/bootstrap.min.js"></script>
+<script type="application/javascript" src="../js/material.min.js"></script>
+<script type="application/javascript" src="../js/ripples.min.js"></script>
 <script type="application/javascript" src="../js/jquery.nicescroll.min.js"></script>
 <script type="application/javascript" src="../js/jquery.mousewheel.min.js"></script>
 <script type="application/javascript" src="../js/owl.carousel.min.js"></script>
@@ -204,7 +200,7 @@
         $(".course-carousel").owlCarousel({
             rtl:true,
             nav:true,
-            navText:['<span class="icon-chevron-right icon-2x"></span>','<span class="icon-chevron-left icon-2x"></span>'],
+            navText:['<span class="arrow"></span>','<span class="arrow"></span>'],
             margin:30,
             responsive : {
                 0 : {
@@ -212,6 +208,8 @@
                 }
             }
         });
+
+        $.material.init()
     });
 </script>
 </body>
