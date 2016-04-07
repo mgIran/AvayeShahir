@@ -14,7 +14,7 @@ ul.tagit li.tagit-choice {
     line-height: inherit;
 }
 input.tagit-hidden-field {
-    display: none;
+    display: none !important;
 }
 ul.tagit li.tagit-choice-read-only { 
     padding: .2em .5em .2em .5em; 

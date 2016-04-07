@@ -28,7 +28,7 @@ class ClassTagsManageController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				  'actions'=>array('index','create','update','admin','delete'),
+				  'actions'=>array('index','create','update','admin','delete','list'),
 				  'roles'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -47,17 +47,29 @@ class ClassTagsManageController extends Controller
 		$model=new ClassTags;
 
 		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
+		//$this->performAjaxValidation($model);
 
 		if(isset($_POST['ClassTags']))
 		{
 			$model->attributes=$_POST['ClassTags'];
 			if($model->save())
 			{
+				if(isset($_GET['ajax-request']))
+				{
+					echo CJSON::encode(array('state' => 1,'msg' => 'اطلاعات با موفقیت ذخیره شد.'));
+					Yii::app()->end();
+				}
 				Yii::app()->user->setFlash('success' ,'<span class="icon-check"></span>&nbsp;&nbsp;اطلاعات با موفقیت ذخیره شد.');
 				$this->redirect(array('admin'));
 			}else
+			{
+				if(isset($_GET['ajax-request']))
+				{
+					echo CJSON::encode(array('state' => 0,'msg' => 'در ثبت اطلاعات خطایی رخ داده است! لطفا مجددا تلاش کنید.'));
+					Yii::app()->end();
+				}
 				Yii::app()->user->setFlash('failed' ,'در ثبت اطلاعات خطایی رخ داده است! لطفا مجددا تلاش کنید.');
+			}
 		}
 
 		$this->render('create',array(
@@ -151,10 +163,30 @@ class ClassTagsManageController extends Controller
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='class-tags-form')
+		if(isset($_POST['ajax']))
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
+		}
+	}
+
+	public function actionList($term = null ,$currentTags = null) {
+		if ($currentTags && !empty($currentTags))
+			$currentTags = CJSON::decode($currentTags);
+		if ($term && !empty($term)) {
+			$criteria = new CDbCriteria();
+			$criteria->limit = '10';
+			$criteria->condition = 'title REGEXP :title';
+			$criteria->params = array(':title'=>$term);
+			$criteria->addNotInCondition('title',$currentTags);
+			$data = ClassTags::model()->findAll($criteria);
+			$temp = array();
+			foreach($data as $k=>$value)
+			{
+				$temp[$k]['value'] = $value->id;
+				$temp[$k]['text'] = $value->title;
+			}
+			echo CJSON::encode($temp);
 		}
 	}
 }

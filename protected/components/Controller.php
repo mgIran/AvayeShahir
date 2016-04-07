@@ -70,10 +70,10 @@ class Controller extends CController
                     'itemOptions' => array('class' => 'dropdown' ,'tabindex' => "-1") ,
                     'linkOptions' => array('class' => 'dropdown-toggle' ,'data-toggle' => "dropdown") ,
                     'items' => array(
-                        array('label' => 'مدیریت دوره ها' ,'url' => Yii::app()->createUrl('/courses/manage/admin/')) ,
-                        array('label' => 'مدیریت کلاس ها' ,'url' => Yii::app()->createUrl('/courses/classes/admin/')) ,
-                        array('label' => 'مدیریت گروه ها' ,'url' => Yii::app()->createUrl('/courses/categories/admin/')) ,
-                        array('label' => 'مدیریت تگ ها' ,'url' => Yii::app()->createUrl('/courses/tags/admin/'))
+                        array('label' => ' دوره ها' ,'url' => Yii::app()->createUrl('/courses/manage/admin/')) ,
+                        array('label' => ' کلاس ها' ,'url' => Yii::app()->createUrl('/courses/classes/admin/')) ,
+                        array('label' => ' گروه ها' ,'url' => Yii::app()->createUrl('/courses/categories/admin/')) ,
+                        array('label' => ' تگ ها' ,'url' => Yii::app()->createUrl('/courses/tags/admin/'))
                     )
                 ) ,
                 array(

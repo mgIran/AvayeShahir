@@ -58,6 +58,7 @@ class ClassesManageController extends Controller
 		if(isset($_POST['Classes']))
 		{
 			$model->attributes=$_POST['Classes'];
+			$model->formTags = $_POST['Classes']['formTags']?explode(',',$_POST['Classes']['formTags']):null;
 			if($model->save())
 			{
 				Yii::app()->user->setFlash('success' ,'<span class="icon-check"></span>&nbsp;&nbsp;اطلاعات با موفقیت ذخیره شد.');
@@ -82,6 +83,7 @@ class ClassesManageController extends Controller
 		if(isset($_POST['Classes']))
 		{
 			$model->attributes=$_POST['Classes'];
+			$model->formTags = $_POST['Classes']['formTags']?explode(',',$_POST['Classes']['formTags']):null;
 			if($model->save())
 			{
 				Yii::app()->user->setFlash('success' ,'<span class="icon-check"></span>&nbsp;&nbsp;اطلاعات با موفقیت ذخیره شد.');

@@ -28,15 +28,32 @@ class tagIt extends CWidget
      * @var string The attribute of the model
      */
     public $attribute = false;
+
     /**
-     * @var array of suggest data
+     * @var array Existing list items will be pre-added to the tags
      */
     public $data = array();
 
     /**
+     * @var string type of available Tags
+     *  Array Or Json
+     */
+    public $suggestType = 'array';
+
+    /**
+     * @var string suggest json get url
+     */
+    public $suggestUrl = false;
+
+    /**
      * @var array of suggest data
      */
-    public $suggest = array();
+    public $availableTags = array();
+
+    /**
+     * @var string placeholder
+     */
+    public $placeholder = 'تایپ کنید ...';
 
     /**
      * init widget
@@ -50,7 +67,7 @@ class tagIt extends CWidget
         $this->_scripts = array(
             'css'.DIRECTORY_SEPARATOR.'jquery.tagit.css',
             'css'.DIRECTORY_SEPARATOR.'tagit.ui-zendesk.css',
-            'js'.DIRECTORY_SEPARATOR.'tag-it.min.css'
+            'js'.DIRECTORY_SEPARATOR.'tag-it.min.js'
         );
         return parent::init();
     }
@@ -79,14 +96,48 @@ class tagIt extends CWidget
         else if(!$this->model && $this->attribute)
             $this->name = $this->attribute;
 
-        $script = '';
+        $script = array(
+            'allowSpaces' => true,
+            'removeConfirmation' => true,
+            'autocomplete' => array(
+                'delay'=> 0,
+                'minLength'=> 2
+            ),
+            'placeholderText' => $this->placeholder
+        );
+        if($this->suggestType && strtolower($this->suggestType) == 'json' && $this->suggestUrl && !empty($this->suggestUrl)) {
+            $script['tagSource'] = 'js:function( request, response ) {
+                var assignedTags = $("#tagIt-'.$this->id.'").tagit("assignedTags");
+                $.ajax({
+                    url: "'.$this->suggestUrl.'",
+                    data: { term:request.term ,currentTags : JSON.stringify(assignedTags)},
+                    dataType: "json",
+                    success: function( data ) {
+                        response( $.map( data, function( item ) {
+                            return {
+                                label: item.text,
+                                value: item.text
+                            }
+                        }));
+                    }
+                });
+            }
+            ';
+        } else if($this->suggestType && strtolower($this->suggestType) == 'array' && $this->availableTags) {
+            if(is_array($this->availableTags))
+                $script['availableTags'] = $this->availableTags;
+        }
         $cs->registerScript('tagIt-'.$this->id, '
-            $("#tagIt-'.$this->id.'").tagit();
+            $("#tagIt-'.$this->id.'").tagit('.CJavaScript::encode($script).');
         ');
     }
 
     public function run()
     {
         $this->registerClientScript();
+        echo CHtml::textField($this->name,
+            $this->data && is_array($this->data) ? implode(',', $this->data) : '',
+            array('id' => 'tagIt-'.$this->id)
+        );
     }
 }

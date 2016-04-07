@@ -6,6 +6,10 @@
  * The followings are the available columns in table '{{class_tag_rel}}':
  * @property string $tag_id
  * @property string $class_id
+ *
+ * The followings are the available model relations:
+ * @property Classes $class
+ * @property ClassTags $tag
  */
 class ClassTagRel extends CActiveRecord
 {
@@ -41,6 +45,8 @@ class ClassTagRel extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'tag' => array(self::BELONGS_TO, 'ClassTags', 'tag_id'),
+			'class' => array(self::BELONGS_TO, 'Classes', 'class_id')
 		);
 	}
 

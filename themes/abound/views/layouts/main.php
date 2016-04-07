@@ -5,8 +5,8 @@
     <meta charset="utf-8">
     <title><?= $this->siteName.(!empty($this->pageTitle)?' - '.$this->pageTitle:'') ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="ad ,tablo ,تابلو ,آگهی , دیوار ، شیپور">
-    <meta name="author" content="Yusef Mobasheri">
+    <meta name="description" content="">
+    <meta name="author" content="MGIran">
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -18,7 +18,6 @@
 	  Yii::app()->clientScript->registerCoreScript('jquery');
 	?>
     <!-- Fav and Touch and touch icons -->
-    <link rel="shortcut icon" href="<?php echo $baseUrl;?>/img/icons/favicon.ico">
 	<?php
 
 	  $cs->registerCssFile($baseUrl.'/css/bootstrap.min.css');
@@ -28,13 +27,10 @@
       $cs->registerCssFile($baseUrl.'/css/rtl.css');
 	  $cs->registerCssFile($baseUrl.'/css/style-blue.css');
       $cs->registerCssFile($baseUrl.'/css/font-awesome.css');
-      $cs->registerCssFile($baseUrl.'/css/jquery.tagit.css');
-      $cs->registerCssFile($baseUrl.'/css/tagit.ui-zendesk.css');
       $cs->registerCssFile($baseUrl.'/css/persian-datepicker-0.4.5.min.css');
 
       $cs->registerCoreScript('jquery.ui');
 	  $cs->registerScriptFile($baseUrl.'/js/bootstrap.min.js');
-      $cs->registerScriptFile($baseUrl.'/js/plugins/tag-it.min.js');
       $cs->registerScriptFile($baseUrl.'/js/persian-date.js');
       $cs->registerScriptFile($baseUrl.'/js/persian-datepicker-0.4.5.min.js');
       $cs->registerScriptFile($baseUrl.'/js/scripts.js');

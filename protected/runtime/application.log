@@ -16057,3 +16057,6 @@ in D:\Important\Xamppp\htdocs\Market\index.php (11)
 2016/03/01 03:38:46 [warning] [application] Failed to set unsafe attribute "file" of "Apps".
 in D:\Important\Xamppp\htdocs\Market\protected\modules\manageApps\components\BaseManageController.php (117)
 in D:\Important\Xamppp\htdocs\Market\index.php (11)
+2016/04/07 12:14:05 [warning] [application] Failed to set unsafe attribute "tags" of "Classes".
+in C:\wamp\www\Yusef\shahir\protected\modules\courses\controllers\ClassesManageController.php (60)
+in C:\wamp\www\Yusef\shahir\index.php (11)

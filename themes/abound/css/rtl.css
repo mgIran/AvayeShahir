@@ -122,6 +122,7 @@ label{
 .form{
     display: block;
     overflow: hidden;
+    padding: 0 2px;
 }
 .attrOpts{
     display: inline-block;

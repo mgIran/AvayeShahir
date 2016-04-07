@@ -14,10 +14,12 @@
  * @property string $endClassDate
  * @property string $category_id
  * @property string $course_id
+ * @property [] $formTags
  *
  * The followings are the available model relations:
  * @property Courses $course
  * @property ClassCategories $category
+ * @property ClassTags[] $tags
  */
 class Classes extends CActiveRecord
 {
@@ -29,6 +31,8 @@ class Classes extends CActiveRecord
 		return '{{classes}}';
 	}
 
+	public $formTags;
+
 	/**
 	 * @return array validation rules for model attributes.
 	 */
@@ -37,16 +41,16 @@ class Classes extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('title, category_id, course_id', 'required'),
-			array('endSignupDate','compare','compareAttribute'=>'startSignupDate','operator'=>'>','message'=>'تاریخ پایان ثبت نام باید بیشتر از تاریخ شروع ثبت نام باشد.'),
-			array('endClassDate','compare','compareAttribute'=>'startClassDate','operator'=>'>','message'=>'تاریخ پایان کلاس باید بیشتر از تاریخ شروع کلاس باشد.'),
-			array('price', 'numerical', 'integerOnly'=>true),
-			array('title', 'length', 'max'=>50),
-			array('category_id, course_id', 'length', 'max'=>10),
-			array('summary, startSignupDate, endSignupDate, startClassDate, endClassDate', 'safe'),
-			// The following rule is used by search().
-			// @todo Please remove those attributes that should not be searched.
-			array('id, title, summary, price, startSignupDate, endSignupDate, startClassDate, endClassDate, category_id, course_id', 'safe', 'on'=>'search'),
+				array('title, category_id, course_id ,formTags', 'required'),
+				array('endSignupDate', 'compare', 'compareAttribute' => 'startSignupDate', 'operator' => '>', 'message' => 'تاریخ پایان ثبت نام باید بیشتر از تاریخ شروع ثبت نام باشد.'),
+				array('endClassDate', 'compare', 'compareAttribute' => 'startClassDate', 'operator' => '>', 'message' => 'تاریخ پایان کلاس باید بیشتر از تاریخ شروع کلاس باشد.'),
+				array('price', 'numerical', 'integerOnly' => true),
+				array('title', 'length', 'max' => 50),
+				array('category_id, course_id', 'length', 'max' => 10),
+				array('summary, startSignupDate, endSignupDate, startClassDate, endClassDate', 'safe'),
+				// The following rule is used by search().
+				// @todo Please remove those attributes that should not be searched.
+				array('id, title, summary, price, startSignupDate, endSignupDate, startClassDate, endClassDate, category_id, course_id', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -58,8 +62,9 @@ class Classes extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'course' => array(self::BELONGS_TO, 'Courses', 'course_id'),
-			'category' => array(self::BELONGS_TO, 'ClassCategories', 'category_id'),
+				'course' => array(self::BELONGS_TO, 'Courses', 'course_id'),
+				'category' => array(self::BELONGS_TO, 'ClassCategories', 'category_id'),
+				'tags' => array(self::MANY_MANY, 'ClassTags', '{{class_tag_rel}}(class_id,tag_id)'),
 		);
 	}
 
@@ -69,16 +74,17 @@ class Classes extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'ID',
-			'title' => 'عنوان',
-			'summary' => 'توضیحات',
-			'price' => 'شهریه',
-			'startSignupDate' => 'تاریخ شروع ثبت نام',
-			'endSignupDate' => 'تاریخ پایان ثبت نام',
-			'startClassDate' => 'تاریخ شروع کلاس',
-			'endClassDate' => 'تاریخ پایان کلاس',
-			'category_id' => 'گروه',
-			'course_id' => 'دوره',
+				'id' => 'ID',
+				'title' => 'عنوان',
+				'summary' => 'توضیحات',
+				'price' => 'شهریه',
+				'startSignupDate' => 'تاریخ شروع ثبت نام',
+				'endSignupDate' => 'تاریخ پایان ثبت نام',
+				'startClassDate' => 'تاریخ شروع کلاس',
+				'endClassDate' => 'تاریخ پایان کلاس',
+				'category_id' => 'گروه',
+				'course_id' => 'دوره',
+				'formTags' => 'تگ ها'
 		);
 	}
 
@@ -98,22 +104,21 @@ class Classes extends CActiveRecord
 	{
 		// @todo Please modify the following code to remove attributes that should not be searched.
 
-		$criteria=new CDbCriteria;
+		$criteria = new CDbCriteria;
 
-		$criteria->compare('id',$this->id,true);
-		$criteria->compare('title',$this->title,true);
-		$criteria->compare('summary',$this->summary,true);
-		$criteria->compare('price',$this->price);
-		$criteria->compare('startSignupDate',$this->startSignupDate,true);
-		$criteria->compare('endSignupDate',$this->endSignupDate,true);
-		$criteria->compare('startClassDate',$this->startClassDate,true);
-		$criteria->compare('endClassDate',$this->endClassDate,true);
-		$criteria->compare('category_id',$this->category_id,true);
-		//var_dump($this->course_id);exit;
-		$criteria->compare('course_id',$this->course_id,true);
+		$criteria->compare('id', $this->id, true);
+		$criteria->compare('title', $this->title, true);
+		$criteria->compare('summary', $this->summary, true);
+		$criteria->compare('price', $this->price);
+		$criteria->compare('startSignupDate', $this->startSignupDate, true);
+		$criteria->compare('endSignupDate', $this->endSignupDate, true);
+		$criteria->compare('startClassDate', $this->startClassDate, true);
+		$criteria->compare('endClassDate', $this->endClassDate, true);
+		$criteria->compare('category_id', $this->category_id, true);
+		$criteria->compare('course_id', $this->course_id, true);
 
 		return new CActiveDataProvider($this, array(
-			'criteria'=>$criteria,
+				'criteria' => $criteria,
 		));
 	}
 
@@ -123,8 +128,25 @@ class Classes extends CActiveRecord
 	 * @param string $className active record class name.
 	 * @return Classes the static model class
 	 */
-	public static function model($className=__CLASS__)
+	public static function model($className = __CLASS__)
 	{
 		return parent::model($className);
+	}
+
+	protected function afterSave()
+	{
+		if(!$this->IsNewRecord)
+			ClassTagRel::model()->deleteAll('class_id='.$this->id);
+		if($this->formTags && !empty($this->formTags))
+			foreach($this->formTags as $tag) {
+				$tag = ClassTags::model()->findByAttributes(array('title'=>$tag));
+				if($tag) {
+					$tag_rel = new ClassTagRel;
+					$tag_rel->class_id = $this->id;
+					$tag_rel->tag_id = $tag->id;
+					$tag_rel->save();
+				}
+			}
+		parent::afterSave();
 	}
 }

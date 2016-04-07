@@ -80,6 +80,25 @@
 		<?php echo $form->error($model,'summary'); ?>
 	</div>
 
+	<div class="row">
+		<?php echo $form->labelEx($model,'formTags'); ?>
+		<?php
+		$this->widget("ext.tagIt.tagIt",array(
+				'model' => $model,
+				'attribute' => 'formTags',
+				'suggestType' => 'json',
+				'suggestUrl' => Yii::app()->createUrl('/courses/tags/list'),
+				'data' => $model->formTags
+		));
+		?>
+		<button data-toggle="modal" data-target="#modal" class="btn btn-success btn-round btn-inverse btn-sm">
+			<i class="icon-plus icon-1x"></i>
+			&nbsp;&nbsp;
+			افزودن تگ دلخواه
+		</button>
+		<?php echo $form->error($model,'formTags'); ?>
+	</div>
+
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'ثبت' : 'ذخیره',array('class' => 'btn btn-success')); ?>
 	</div>
@@ -88,7 +107,18 @@
 
 </div><!-- form -->
 
-
+<div class="modal fade" role="dialog" id="modal">
+	<div class="modal-dialog modal-sm	">
+		<div class="modal-content">
+			<div class="modal-body">
+				<?
+				$this->renderPartial('_tagForm',array(
+					'model' => new ClassTags()
+				)); ?>
+			</div>
+		</div>
+	</div>
+</div>
 <?
 Yii::app()->clientScript->registerScript('datesScript','
 	$(\'#startSignupDate\').persianDatepicker({

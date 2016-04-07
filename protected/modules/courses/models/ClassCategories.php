@@ -29,6 +29,7 @@ class ClassCategories extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('title','required'),
+			array('title','unique'),
 		  	array('title', 'length', 'max'=>50),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
