@@ -638,6 +638,106 @@ section.search{
     position: relative;
     z-index: 2;
 }
+.persons .person-item{
+    position: relative;
+    list-style: none;
+    color: #fff;
+    height:105px;
+}
+.persons .person-item .image{
+    width: 105px;
+    height: 105px;
+    border-radius:50%;
+    position: absolute;
+    right: 30px;
+    top: 0;
+    border: 5px solid rgba(255,255,255,0.3);
+    z-index:1;
+    overflow: hidden;
+}
+.persons .person-item .image img{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+.persons .person-item .name{
+    display: block;
+    font-size: 18pt;
+    position: absolute;
+    right: 150px;
+    top: 20px;
+    z-index:1;
+}
+.persons .person-item .job{
+    display: block;
+    font-size: 12pt;
+    opacity: 0.4;
+    position: absolute;
+    right: 150px;
+    top: 55px;
+    z-index:1;
+}
+.persons .person-item .img-overlay{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: #89a404 url("../svg/person.svg") no-repeat center / 35px;
+    opacity: 0;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    -ms-transition: all 0.5s;
+    -o-transition: all 0.5s;
+    transition: all 0.5s;
+}
+.persons .person-item .socials{
+    z-index: 3;
+}
+.persons .person-item .socials a{
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    opacity: 0;
+    z-index:3;
+}
+.persons .person-item .socials a:hover{
+    opacity: 0.5;
+}
+.persons .person-item .socials .email{
+    top: 5px;
+    right: 11px;
+    background: transparent url("../svg/email-green.svg") no-repeat center / 18px auto;
+}
+.persons .person-item .socials .facebook{
+    top: 40px;
+    right: 2px;
+    background: transparent url("../svg/facebook.svg") no-repeat center / 18px auto;
+}
+.persons .person-item .socials .twitter{
+    top: 75px;
+    right: 11px;
+    background: transparent url("../svg/twitter.svg") no-repeat center / 18px auto;
+}
+.persons .person-item .person-link{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+}
+.persons .person-item:hover .img-overlay{
+    opacity: 0.8;
+}
+.persons .person-item:hover .socials a{
+    opacity: 1;
+}
 
 
 
