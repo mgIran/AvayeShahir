@@ -67,7 +67,7 @@ body{
     padding: 0 15px;
     margin-bottom: 15px;
 }
-.button-field{
+.button-field.btn{
     background: #0b3762;
     border-radius: 2px;
     box-shadow: 0 0 5px #7f7f7f;
@@ -77,14 +77,19 @@ body{
     height: 45px;
     width: 100%;
     padding: 0 15px;
-    margin-bottom: 15px;
+    margin: 0 0 15px 0;
     font-size: 16pt;
 }
-.button-field:hover{
+.button-field.btn:hover,
+.button-field.btn:active,
+.button-field.btn:focus{
     background: #114d88;
 }
 .yekan-text{
     font-family: "BYekan" , "DejaVu Sans", "Trebuchet MS", Verdana, sans-serif;
+}
+.checkbox .checkbox-material{
+    direction: ltr;
 }
 
 
@@ -532,10 +537,106 @@ section.search{
 
 
 .signup{
-    position: relative;
     background: transparent url("../images/signup-bg.jpg") no-repeat fixed center top / cover;
-    height: 465px;
+    position: relative;
+    overflow: hidden;
+    height: 500px;
     width: 100%;
+}
+.signup .mask{
+    background: rgba(0,0,0,0.2);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+.signup .container-fluid{
+    z-index: 2;
+    position: relative;
+}
+.signup h2{
+    color: #fff;
+    margin: 50px 0;
+    line-height: 42px;
+    height: 42px;
+}
+.signup .box{
+    width: 25%;
+}
+.signup .checkbox label{
+    padding: 0;
+    color: #fff;
+}
+.signup .checkbox-material{
+    margin-left: 10px;
+    top: 5px;
+}
+.signup .checkbox .checkbox-material .check{
+    border-color: #fff;
+}
+.signup .checkbox a{
+    color: #89a404;
+}
+.signup .checkbox a:hover{
+    color: #96b404;
+}
+.signup .form-group.is-focused .checkbox label{
+    color: #fff;
+}
+.signup .checkbox input[type="checkbox"]:checked + .checkbox-material .check::before,
+.signup .checkbox input[type="checkbox"]:checked + .checkbox-material .check{
+    color: #89a404;
+    border-color: #89a404;
+}
+.signup .checkbox input[type="checkbox"]:not(:checked) + .checkbox-material::before,
+.signup .is-focused .checkbox input[type="checkbox"]:not(:checked) + .checkbox-material::before,
+.signup .checkbox input[type="checkbox"]:checked + .checkbox-material::before,
+.signup .is-focused .checkbox input[type="checkbox"]:checked + .checkbox-material::before{
+    top:-7px;
+}
+.signup .button-field{
+    margin: 0;
+}
+.signup form{
+    padding: 0;
+    margin: 0;
+    height: 215px;
+}
+#signup.signup .btn:hover,
+#signup.signup .btn:active,
+#signup.signup .btn:focus{
+    background: #114d88;
+}
+
+
+
+.persons{
+    background: #0b3762;
+    position: relative;
+    height: 580px;
+}
+.persons .bg{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+.persons .icons-set{
+    background: url("../svg/icons-sets.svg") no-repeat scroll 0 0 / auto 580px;
+    position: absolute;
+    width: 157px;
+    height: 100%;
+    opacity: 0.2;
+}
+.persons .icons-set.left{
+    left: 0;
+}
+.persons .icons-set.right{
+    right: 0;
+}
+.persons .container{
+    position: relative;
+    z-index: 2;
 }
 
 

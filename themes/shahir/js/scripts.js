@@ -15,7 +15,7 @@ $(function() {
         if(href.substr(1,href.length))
             $('html, body').animate({
                 scrollTop: ($(href).offset().top-70)
-            },1000);
+            },1000,'easeOutCubic');
     });
 
     $(window).scroll(function(){
