@@ -378,6 +378,45 @@
         </div>
     </div>
 </section>
+<section class="about">
+    <div class="container">
+        <h3 class="yekan-text">درباره پردیس</h3>
+        <div class="col-md-8 text-container">
+            <div class="text">
+                <p class="paragraph col-md-6">مرکز زبان آریانپورکه تنها دارنده مجوز از وزارت آموزش و پرورش به ایـن نام در تهران می باشد، با مطالعات و برنامه ریزی های جـامـع آمـوزشـی و بـا سـالها سابقه در برگزاری دوره های IELTS,TOEFL  تا کـنون گامهای بلند و جامعی در جهت ارایه آموزش صحیح و موثر زبان انگلیسی برداشته است .</p>
+                <p class="paragraph col-md-6">در هـمین راسـتا با ایــجاد محیط آموزشی استاندارد و بهره گیری از تکنولوژی جـدید آمـوزش زبان و استادان مجرب، با بالاترین آمار نمرات در آزمونهای فوق همواره  با آغوش باز پذیرای زبان آموزان عزیز می باشد. </p>
+            </div>
+        </div>
+        <div class="col-md-4 licenses-container">
+            <div class="col-md-6"><img src="../images/rasaneh.jpg"></div>
+            <div class="col-md-6"><img src="../images/enamad.jpg"></div>
+        </div>
+    </div>
+</section>
+<section class="map">
+    <div id="google-map"></div>
+</section>
+<footer class="footer">
+    <div class="box center-block">
+        <div class="contact-box">
+            <h4 class="yekan-text">تماس با ما</h4>
+            <form action="/contact" method="post">
+                <div class="col-md-6">
+                    <input type="text" class="text-field" placeholder="نام و نام خانوادگی">
+                </div>
+                <div class="col-md-6">
+                    <input type="text" class="text-field" placeholder="پست الکترونیکی">
+                </div>
+                <textarea class="text-field" placeholder="متن پیام"></textarea>
+                <button type="submit" class="btn button-field pull-left">ارسال</button>
+            </form>
+        </div>
+        <div class="info-box">
+            <div class="col-md-6"></div>
+            <div class="col-md-6"></div>
+        </div>
+    </div>
+</footer>
 <div id="login-modal" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -406,6 +445,7 @@
 <script type="application/javascript" src="../js/jquery.mousewheel.min.js"></script>
 <script type="application/javascript" src="../js/owl.carousel.min.js"></script>
 <script type="application/javascript" src="../js/jquery.easy-ticker.min.js"></script>
+<script type="application/javascript" src="http://maps.googleapis.com/maps/api/js"></script>
 <script type="application/javascript" src="../js/scripts.js"></script>
 <script>
     $(function(){
@@ -450,6 +490,31 @@
                 down: '.partner-down'
             }
         }).data('easyTicker');
+
+        var map;
+        var marker;
+        var myCenter=new google.maps.LatLng(34.62837015639111,50.890497923028306);
+        function initialize()
+        {
+            var mapProp = {
+                center:myCenter,
+                zoom:15,
+                scrollwheel: false
+            };
+            map = new google.maps.Map(document.getElementById('google-map'),mapProp);
+            placeMarker(myCenter ,map);
+        }
+
+        function placeMarker(location ,map) {
+
+            if(marker != undefined)
+                marker.setMap(null);
+            marker = new google.maps.Marker({
+                position: location,
+                map: map,
+            });
+        }
+        google.maps.event.addDomListener(window, 'load', initialize);
     });
 </script>
 </body>
