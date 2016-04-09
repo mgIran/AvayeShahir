@@ -613,7 +613,7 @@ section.search{
 .persons{
     background: #0b3762;
     position: relative;
-    height: 580px;
+    height: 707px;
 }
 .persons .bg{
     position: absolute;
@@ -622,9 +622,9 @@ section.search{
     z-index: 1;
 }
 .persons .icons-set{
-    background: url("../svg/icons-sets.svg") no-repeat scroll 0 0 / auto 580px;
+    background: url("../svg/icons-sets.svg") no-repeat scroll 0 0 / auto 707px;
     position: absolute;
-    width: 157px;
+    width: 191px;
     height: 100%;
     opacity: 0.2;
 }
@@ -638,11 +638,33 @@ section.search{
     position: relative;
     z-index: 2;
 }
+.persons .teachers,
+.persons .partners{
+    padding-bottom: 40px;
+    height: 581px;
+}
+.persons h3{
+    color: #fff;
+    margin: 50px 0;
+    padding-right: 30px;
+}
+.persons .slider{
+    background: transparent;
+    top: 50px;
+}
+.persons ul{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 0;
+}
 .persons .person-item{
     position: relative;
     list-style: none;
     color: #fff;
-    height:105px;
+    height:125px;
 }
 .persons .person-item .image{
     width: 105px;
@@ -705,6 +727,11 @@ section.search{
     position: absolute;
     opacity: 0;
     z-index:3;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    -ms-transition: all 0.5s;
+    -o-transition: all 0.5s;
+    transition: all 0.5s;
 }
 .persons .person-item .socials a:hover{
     opacity: 0.5;
@@ -712,24 +739,24 @@ section.search{
 .persons .person-item .socials .email{
     top: 5px;
     right: 11px;
-    background: transparent url("../svg/email-green.svg") no-repeat center / 18px auto;
+    background: transparent url("../svg/email-green.svg") no-repeat center / 15px auto;
 }
 .persons .person-item .socials .facebook{
     top: 40px;
     right: 2px;
-    background: transparent url("../svg/facebook.svg") no-repeat center / 18px auto;
+    background: transparent url("../svg/facebook.svg") no-repeat center / 15px auto;
 }
 .persons .person-item .socials .twitter{
     top: 75px;
     right: 11px;
-    background: transparent url("../svg/twitter.svg") no-repeat center / 18px auto;
+    background: transparent url("../svg/twitter.svg") no-repeat center / 15px auto;
 }
 .persons .person-item .person-link{
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
-    bottom: 0;
+    bottom: 20px;
     z-index: 2;
 }
 .persons .person-item:hover .img-overlay{
@@ -737,6 +764,69 @@ section.search{
 }
 .persons .person-item:hover .socials a{
     opacity: 1;
+}
+.persons .controls{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+.persons .controls button{
+    height: 40px;
+    width: 40px;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    border-radius: 50%;
+}
+.persons .teacher-up,
+.persons .partner-up{
+    position: absolute;
+    top: 126px;
+    right: 78px;
+}
+.persons .teacher-up .icon,
+.persons .partner-up .icon{
+    background: url("../svg/arrow-white.svg") no-repeat transparent;
+    height: 30px;
+    width: 30px;
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    opacity: 0.3;
+    -webkit-transform: translate(-50%, -50%) rotate(90deg);
+    -moz-transform: translate(-50%, -50%) rotate(90deg);
+    -ms-transform: translate(-50%, -50%) rotate(90deg);
+    -o-transform: translate(-50%, -50%) rotate(90deg);
+    transform: translate(-50%, -50%) rotate(90deg);
+}
+.persons .teacher-up:hover .icon,
+.persons .partner-up:hover .icon{
+    opacity: 0.5;
+}
+.persons .teacher-down,
+.persons .partner-down{
+    position: absolute;
+    top: 541px;
+    right: 78px;
+}
+.persons .teacher-down .icon,
+.persons .partner-down .icon{
+    background: url("../svg/arrow-white.svg") no-repeat transparent;
+    height: 30px;
+    width: 30px;
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    opacity: 0.3;
+    -webkit-transform: translate(-50%, -50%) rotate(-90deg);
+    -moz-transform: translate(-50%, -50%) rotate(-90deg);
+    -ms-transform: translate(-50%, -50%) rotate(-90deg);
+    -o-transform: translate(-50%, -50%) rotate(-90deg);
+    transform: translate(-50%, -50%) rotate(-90deg);
 }
 
 
