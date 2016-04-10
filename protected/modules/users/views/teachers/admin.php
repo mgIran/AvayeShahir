@@ -3,7 +3,6 @@
 /* @var $model Users */
 
 $this->breadcrumbs=array(
-    'کاربران'=>array('manage'),
     'مدیریت',
 );
 
@@ -11,19 +10,24 @@ $this->menu=array(
     array('label'=>'افزودن', 'url'=>array('create')),
 );
 ?>
-<? $this->renderPartial('//layouts/_flashMessage'); ?>
-<h1>مدیریت کاربران</h1>
+
+<h1>مدیریت اساتید</h1>
 
 <?php
 $this->widget('zii.widgets.grid.CGridView', array(
     'id'=>'admins-grid',
-    'dataProvider'=>$model->search(),
+    'dataProvider'=>$model->searchTeachers(),
     'filter'=>$model,
     'columns'=>array(
         'email',
         array(
             'class'=>'CButtonColumn',
-            'template' => '{update}{delete}'
+            'template' => '{update}{delete}',
+            'buttons' => array(
+                'update' => array(
+                    'url' => 'Yii::app()->createUrl("/users/teacherDetails/update/",array("id"=>$data->id))'
+                )
+            )
         ),
     ),
 )); ?>

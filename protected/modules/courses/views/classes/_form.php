@@ -63,8 +63,14 @@
 
 
 	<div class="row">
+		<?php echo $form->labelEx($model,'capacity'); ?>
+		<?php echo $form->textField($model,'capacity' ,array('placeholder' => 'نفر')); ?>
+		<?php echo $form->error($model,'capacity'); ?>
+	</div>
+
+	<div class="row">
 		<?php echo $form->labelEx($model,'price'); ?>
-		<?php echo $form->textField($model,'price'); ?>
+		<?php echo $form->textField($model,'price',array('placeholder' => 'تومان')); ?>
 		<?php echo $form->error($model,'price'); ?>
 	</div>
 
@@ -94,7 +100,7 @@
 		<button data-toggle="modal" data-target="#modal" class="btn btn-success btn-round btn-inverse btn-sm">
 			<i class="icon-plus icon-1x"></i>
 			&nbsp;&nbsp;
-			افزودن تگ دلخواه
+			افزودن برچسب دلخواه
 		</button>
 		<?php echo $form->error($model,'formTags'); ?>
 	</div>

@@ -1,6 +1,7 @@
+
 <?php
 
-class CoursesManageController extends Controller
+class TeacherDetailsController extends Controller
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -28,8 +29,8 @@ class CoursesManageController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('view','create','update','admin','delete', 'upload', 'deleteUpload'),
-				'roles'=>array('admin'),
+				  'actions'=>array('index','view','create','update','admin','delete', 'upload', 'deleteUpload'),
+				  'roles'=>array('admin'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -52,29 +53,27 @@ class CoursesManageController extends Controller
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
-	public function actionCreate()
+	public function actionCreate($id)
 	{
-		$model=new Courses;
+		$model=new TeacherDetails;
+
 
 		$tmpDIR = Yii::getPathOfAlias("webroot") . '/uploads/temp/';
 		if (!is_dir($tmpDIR))
 			mkdir($tmpDIR);
 		$tmpUrl = Yii::app()->createAbsoluteUrl('/uploads/temp/');
-		$picDIR = Yii::getPathOfAlias("webroot") . "/uploads/courses/";
-		if (!is_dir($picDIR))
-			mkdir($picDIR);
+		$avatarDIR = Yii::getPathOfAlias("webroot") . "/uploads/teachers/";
+		if (!is_dir($avatarDIR))
+			mkdir($avatarDIR);
 
-		$pic = array();
+		$avatar = array();
 
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
-
-		if(isset($_POST['Courses']))
+		if(isset($_POST['TeacherDetails']))
 		{
-			$model->attributes=$_POST['Courses'];
-			if (isset($_POST['Courses']['pic'])) {
-				$file = $_POST['Courses']['pic'];
-				$pic = array(
+			$model->attributes=$_POST['TeacherDetails'];
+			if (isset($_POST['TeacherDetails']['avatar'])) {
+				$file = $_POST['TeacherDetails']['avatar'];
+				$avatar = array(
 						'name' => $file,
 						'src' => $tmpUrl . '/' . $file,
 						'size' => filesize($tmpDIR . $file),
@@ -83,10 +82,10 @@ class CoursesManageController extends Controller
 			}
 			if($model->save())
 			{
-				if ($model->pic and file_exists($tmpDIR.$model->pic)) {
+				if ($model->avatar and file_exists($tmpDIR.$model->avatar)) {
 					$imager = new Imager();
-					$imager->resize($tmpDIR.$model->pic ,$picDIR.$model->pic,400,400);
-					unlink($tmpDIR.$model->pic);
+					$imager->resize($tmpDIR.$model->avatar ,$avatarDIR.$model->avatar,400,400);
+					unlink($tmpDIR.$model->avatar);
 				}
 				Yii::app()->user->setFlash('success' ,'<span class="icon-check"></span>&nbsp;&nbsp;اطلاعات با موفقیت ذخیره شد.');
 				$this->redirect(array('admin'));
@@ -95,8 +94,8 @@ class CoursesManageController extends Controller
 		}
 
 		$this->render('create',array(
-			'model'=>$model,
-			'pic' => $pic
+				'model'=>$model,
+				'avatar' => $avatar
 		));
 	}
 
@@ -113,26 +112,26 @@ class CoursesManageController extends Controller
 		if (!is_dir($tmpDIR))
 			mkdir($tmpDIR);
 		$tmpUrl = Yii::app()->createAbsoluteUrl('/uploads/temp/');
-		$picDIR = Yii::getPathOfAlias("webroot") . "/uploads/courses/";
-		$picUrl = Yii::app()->createAbsoluteUrl('/uploads/courses/');
+		$avatarDIR = Yii::getPathOfAlias("webroot") . "/uploads/teachers/";
+		$avatarUrl = Yii::app()->createAbsoluteUrl('/uploads/teachers/');
 
-		$pic = array();
-		if ($model->pic and file_exists($picDIR.$model->pic)) {
-			$file = $model->pic;
-			$pic = array(
-				'name' => $file,
-				'src' => $picUrl . '/' . $file,
-				'size' => filesize($picDIR . $file),
-				'serverName' => $file,
+		$avatar = array();
+		if ($model->avatar and file_exists($avatarDIR.$model->avatar)) {
+			$file = $model->avatar;
+			$avatar = array(
+					'name' => $file,
+					'src' => $avatarUrl . '/' . $file,
+					'size' => filesize($avatarDIR . $file),
+					'serverName' => $file,
 			);
 		}
 
-		if(isset($_POST['Courses']))
+		if(isset($_POST['TeacherDetails']))
 		{
-			$model->attributes=$_POST['Courses'];
-			if (isset($_POST['Courses']['pic'])) {
-				$file = $_POST['Courses']['pic'];
-				$pic = array(
+			$model->attributes=$_POST['TeacherDetails'];
+			if (isset($_POST['TeacherDetails']['avatar'])) {
+				$file = $_POST['TeacherDetails']['avatar'];
+				$avatar = array(
 						'name' => $file,
 						'src' => $tmpUrl . '/' . $file,
 						'size' => filesize($tmpDIR . $file),
@@ -141,10 +140,10 @@ class CoursesManageController extends Controller
 			}
 			if($model->save())
 			{
-				if ($model->pic and file_exists($tmpDIR.$model->pic)) {
+				if ($model->avatar and file_exists($tmpDIR.$model->avatar)) {
 					$imager = new Imager();
-					$imager->resize($tmpDIR.$model->pic ,$picDIR.$model->pic,400,400);
-					unlink($tmpDIR.$model->pic);
+					$imager->resize($tmpDIR.$model->avatar ,$avatarDIR.$model->avatar,400,400);
+					unlink($tmpDIR.$model->avatar);
 				}
 				Yii::app()->user->setFlash('success' ,'<span class="icon-check"></span>&nbsp;&nbsp;اطلاعات با موفقیت ذخیره شد.');
 				$this->redirect(array('admin'));
@@ -153,8 +152,8 @@ class CoursesManageController extends Controller
 		}
 
 		$this->render('update',array(
-			'model'=>$model,
-			'pic' => $pic
+				'model'=>$model,
+				'avatar' => $avatar
 		));
 	}
 
@@ -165,10 +164,10 @@ class CoursesManageController extends Controller
 	 */
 	public function actionDelete($id)
 	{
-		$picDIR = Yii::getPathOfAlias("webroot") . "/uploads/courses/";
+		$avatarDIR = Yii::getPathOfAlias("webroot") . "/uploads/teachers/";
 		$model = $this->loadModel($id);
-		if(file_exists($picDIR.$model->pic))
-			unlink($picDIR.$model->pic);
+		if(file_exists($avatarDIR.$model->avatar))
+			unlink($avatarDIR.$model->avatar);
 		$model->delete();
 
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
@@ -176,16 +175,23 @@ class CoursesManageController extends Controller
 			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
 	}
 
+	/**
+	 * Lists all models.
+	 */
+	public function actionIndex()
+	{
+		$this->actionAdmin();
+	}
 
 	/**
 	 * Manages all models.
 	 */
 	public function actionAdmin()
 	{
-		$model=new Courses('search');
+		$model=new TeacherDetails('search');
 		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['Courses']))
-			$model->attributes=$_GET['Courses'];
+		if(isset($_GET['TeacherDetails']))
+			$model->attributes=$_GET['TeacherDetails'];
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -196,12 +202,12 @@ class CoursesManageController extends Controller
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.
 	 * @param integer $id the ID of the model to be loaded
-	 * @return Courses the loaded model
+	 * @return TeacherDetails the loaded model
 	 * @throws CHttpException
 	 */
 	public function loadModel($id)
 	{
-		$model=Courses::model()->findByPk($id);
+		$model=TeacherDetails::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
@@ -209,17 +215,16 @@ class CoursesManageController extends Controller
 
 	/**
 	 * Performs the AJAX validation.
-	 * @param Courses $model the model to be validated
+	 * @param TeacherDetails $model the model to be validated
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='courses-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='teacher-details-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
 		}
 	}
-
 
 	public function actionUpload()
 	{
@@ -228,7 +233,7 @@ class CoursesManageController extends Controller
 		if (!is_dir($tempDir))
 			mkdir($tempDir);
 		if (isset($_FILES)) {
-			$file = $_FILES['pic'];
+			$file = $_FILES['avatar'];
 			$ext = pathinfo($file['name'], PATHINFO_EXTENSION);
 			$file['name'] = Controller::generateRandomString(5) . time();
 			while (file_exists($tempDir . DIRECTORY_SEPARATOR . $file['name']))
@@ -246,7 +251,7 @@ class CoursesManageController extends Controller
 
 	public function actionDeleteUpload()
 	{
-		$Dir = Yii::getPathOfAlias("webroot") . '/uploads/courses/';
+		$Dir = Yii::getPathOfAlias("webroot") . '/uploads/teachers/';
 
 		if (isset($_POST['fileName'])) {
 
@@ -254,10 +259,10 @@ class CoursesManageController extends Controller
 
 			$tempDir = Yii::getPathOfAlias("webroot") . '/uploads/temp/';
 
-			$model = Courses::model()->findByAttributes(array('pic' => $fileName));
+			$model = TeacherDetails::model()->findByAttributes(array('avatar' => $fileName));
 			if ($model) {
-				if (@unlink($Dir . $model->pic)) {
-					$model->updateByPk($model->id, array('pic' => null));
+				if (@unlink($Dir . $model->avatar)) {
+					$model->updateByPk($model->id, array('avatar' => null));
 					$response = ['state' => 'ok', 'msg' => $this->implodeErrors($model)];
 				} else
 					$response = ['state' => 'error', 'msg' => 'مشکل ایجاد شده است'];
@@ -270,4 +275,3 @@ class CoursesManageController extends Controller
 		}
 	}
 }
-

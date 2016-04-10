@@ -3,7 +3,7 @@
 /* @var $model Users */
 /* @var $form CActiveForm */
 ?>
-<? $this->renderPartial('//layouts/_flashMessage'); ?>
+
 <div class="form">
 
 <?php $form=$this->beginWidget('CActiveForm', array(
@@ -29,7 +29,9 @@
 	</div>
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'ثبت' : 'ذخیره', array('class' => 'btn btn-success')); ?>
+		<?php echo CHtml::submitButton('تکمیل اطلاعات',array(
+			'class' => 'btn btn-success'
+		)); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

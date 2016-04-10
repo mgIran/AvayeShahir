@@ -15,9 +15,7 @@
  * @property string $newPassword
  *
  * The followings are the available model relations:
- * @property Apps[] $apps
  * @property UserDetails $userDetails
- * @property UserDevIdRequests $userDevIdRequests
  * @property UserRoles $role
  */
 class Users extends CActiveRecord
@@ -30,6 +28,12 @@ class Users extends CActiveRecord
         return 'ym_users';
     }
 
+    public $statusLabels = array(
+        'pending'=>'در انتظار تایید',
+        'active'=>'فعال',
+        'blocked'=>'مسدود',
+        'deleted'=>'حذف شده'
+    );
     public $repeatPassword;
     public $oldPassword;
     public $newPassword;
@@ -43,14 +47,16 @@ class Users extends CActiveRecord
         // will receive user inputs.
         return array(
             array('email, password', 'required' ,'on' => 'create'),
-            array('role_id', 'default' ,'value' => 1,'on' => 'create'),
-            array('password, email', 'required' , 'on' => 'create'),
+            array('email', 'unique'),
+            array('role_id', 'default' ,'value' => 1,'on' => 'insert'),
+            array('status', 'default' ,'value' => 1,'on' => 'insert'),
+            array('password, email', 'required' , 'on' => 'insert'),
             array('email' , 'required' ,'on' => 'email'),
             array('email' , 'email'),
             array('oldPassword ,newPassword ,repeatPassword', 'required' , 'on'=>'update'),
-            array('email' , 'filter' , 'filter' => 'trim' ,'on' => 'create'),
+            array('email' , 'filter' , 'filter' => 'trim' ,'on' => 'insert'),
             array('email' , 'unique' ,'on' => 'create'),
-            array('username, password', 'length', 'max'=>100 ,'on' => 'create'),
+            array('username, password', 'length', 'max'=>100 ,'on' => 'insert'),
             array('oldPassword', 'oldPass' , 'on'=>'update'),
             array('repeatPassword', 'compare', 'compareAttribute'=>'newPassword' ,'operator'=>'==', 'message' => 'رمز های عبور همخوانی ندارند' , 'on'=>'update'),
             array('email', 'length', 'max'=>255),
@@ -123,13 +129,30 @@ class Users extends CActiveRecord
         // @todo Please modify the following code to remove attributes that should not be searched.
 
         $criteria=new CDbCriteria;
-
-        $criteria->compare('id',$this->id,true);
         $criteria->compare('username',$this->username,true);
         $criteria->compare('password',$this->password,true);
-        $criteria->compare('status',$this->status,true);
+        $criteria->compare('t.status',$this->status);
+        $criteria->compare('role_id',1);
         $criteria->addSearchCondition('role.id' , $this->roleId );
         $criteria->with = array('role');
+        $criteria->order = 'status ,t.id DESC';
+        return new CActiveDataProvider($this, array(
+            'criteria'=>$criteria,
+        ));
+    }
+
+    public function searchTeachers()
+    {
+        // @todo Please modify the following code to remove attributes that should not be searched.
+
+        $criteria=new CDbCriteria;
+        $criteria->compare('username',$this->username,true);
+        $criteria->compare('password',$this->password,true);
+        $criteria->compare('t.status',$this->status);
+        $criteria->compare('role_id',2);
+        $criteria->addSearchCondition('role.id' , $this->roleId );
+        $criteria->with = array('role');
+        $criteria->order = 'status ,t.id DESC';
         return new CActiveDataProvider($this, array(
             'criteria'=>$criteria,
         ));
@@ -159,12 +182,16 @@ class Users extends CActiveRecord
     }
 
     public function afterSave(){
-        if(parent::afterSave())
-        {
+        if($this->role_id == 1) {
             $model = new UserDetails;
             $model->user_id = $this->id;
             $model->credit = 0;
             $model->save();
+        }
+        elseif($this->role_id == 2) {
+            $model = new TeacherDetails();
+            $model->user_id = $this->id;
+            var_dump($model->save());exit;
         }
         return true;
     }

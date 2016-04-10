@@ -1,13 +1,14 @@
 <?php
 
-class UsersManageController extends Controller
+class TeachersManageController extends Controller
 {
+	const TEACHER_ROLE = 2;
+	const STATUS_ACTIVE = 2;
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
 	 */
-	public $layout='//layouts/column2';
-    public $defaultAction='admin';
+	public $layout = '//layouts/column2';
 
 	/**
 	 * @return array action filters
@@ -15,8 +16,8 @@ class UsersManageController extends Controller
 	public function filters()
 	{
 		return array(
-			'accessControl', // perform access control for CRUD operations
-			'postOnly + delete', // we only allow deletion via POST request
+				'accessControl', // perform access control for CRUD operations
+				'postOnly + delete', // we only allow deletion via POST request
 		);
 	}
 
@@ -28,13 +29,15 @@ class UsersManageController extends Controller
 	public function accessRules()
 	{
 		return array(
-			array('allow',  // allow all users to perform 'index' and 'views' actions
-				'actions'=>array('index','view','create','update','admin','delete'),
-				'roles'=>array('admin'),
-			),
-			array('deny',  // deny all users
-				'users'=>array('*'),
-			),
+				array(
+						'allow',  // allow all users to perform 'index' and 'views' actions
+						'actions' => array('index', 'view', 'create', 'admin', 'delete'),
+						'roles' => array('admin'),
+				),
+				array(
+						'deny',  // deny all users
+						'users' => array('*'),
+				),
 		);
 	}
 
@@ -44,8 +47,8 @@ class UsersManageController extends Controller
 	 */
 	public function actionView($id)
 	{
-		$this->render('view',array(
-			'model'=>$this->loadModel($id),
+		$this->render('view', array(
+				'model' => $this->loadModel($id),
 		));
 	}
 
@@ -55,20 +58,21 @@ class UsersManageController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new Users;
-		if(isset($_POST['Users']))
-		{
-			$model->attributes=$_POST['Users'];
+		$model = new Users();
+		if(isset($_POST['Users'])) {
+			$model->attributes = $_POST['Users'];
+			$model->role_id = self::TEACHER_ROLE;
+			$model->status = self::STATUS_ACTIVE;
 			if($model->save())
 			{
 				Yii::app()->user->setFlash('success' ,'<span class="icon-check"></span>&nbsp;&nbsp;اطلاعات با موفقیت ذخیره شد.');
-				$this->redirect(array('admin'));
+				$this->redirect(array('/users/teacherDetails/create/'.$model->id));
 			}else
 				Yii::app()->user->setFlash('failed' ,'در ثبت اطلاعات خطایی رخ داده است! لطفا مجددا تلاش کنید.');
 		}
 
-		$this->render('create',array(
-			'model'=>$model,
+		$this->render('create', array(
+				'model' => $model,
 		));
 	}
 
@@ -79,22 +83,7 @@ class UsersManageController extends Controller
 	 */
 	public function actionUpdate($id)
 	{
-		$model=$this->loadModel($id);
-		$model->scenario = 'changeStatus';
-		if(isset($_POST['Users']))
-		{
-			$model->attributes=$_POST['Users'];
-			if($model->save())
-			{
-				Yii::app()->user->setFlash('success' ,'<span class="icon-check"></span>&nbsp;&nbsp;اطلاعات با موفقیت ذخیره شد.');
-				$this->redirect(array('admin'));
-			}else
-				Yii::app()->user->setFlash('failed' ,'در ثبت اطلاعات خطایی رخ داده است! لطفا مجددا تلاش کنید.');
-		}
-
-		$this->render('update',array(
-			'model'=>$model,
-		));
+		$this->redirect(array('/users/teacherDetails/update/'.$id));
 	}
 
 	/**
@@ -124,13 +113,13 @@ class UsersManageController extends Controller
 	 */
 	public function actionAdmin()
 	{
-		$model=new Users('search');
+		$model = new Users('search');
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['Users']))
-			$model->attributes=$_GET['Users'];
+			$model->attributes = $_GET['Users'];
 
-		$this->render('admin',array(
-			'model'=>$model,
+		$this->render('admin', array(
+				'model' => $model,
 		));
 	}
 
@@ -143,9 +132,9 @@ class UsersManageController extends Controller
 	 */
 	public function loadModel($id)
 	{
-		$model=Users::model()->findByPk($id);
-		if($model===null)
-			throw new CHttpException(404,'The requested page does not exist.');
+		$model = Users::model()->findByPk($id);
+		if($model === null)
+			throw new CHttpException(404, 'The requested page does not exist.');
 		return $model;
 	}
 
@@ -155,8 +144,7 @@ class UsersManageController extends Controller
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='users-form')
-		{
+		if(isset($_POST['ajax']) && $_POST['ajax'] === 'users-form') {
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
 		}

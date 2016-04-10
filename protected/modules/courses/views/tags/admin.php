@@ -3,15 +3,15 @@
 /* @var $model ClassTags */
 
 $this->breadcrumbs=array(
-	'مدیریت تگ ها',
+	'مدیریت برچسب ها',
 );
 
 $this->menu=array(
-	array('label'=>'افزودن تگ', 'url'=>array('create')),
+	array('label'=>'افزودن برچسب', 'url'=>array('create')),
 );
 ?>
 <? $this->renderPartial('//layouts/_flashMessage'); ?>
-<h1>مدیریت تگ ها</h1>
+<h1>مدیریت برچسب ها</h1>
 
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'class-tags-grid',

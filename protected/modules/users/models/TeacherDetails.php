@@ -1,23 +1,27 @@
 <?php
 
 /**
- * This is the model class for table "ym_user_dev_id_requests".
+ * This is the model class for table "{{teacher_details}}".
  *
- * The followings are the available columns in table 'ym_user_dev_id_requests':
+ * The followings are the available columns in table '{{teacher_details}}':
  * @property string $user_id
- * @property string $requested_id
- *
- * The followings are the available model relations:
- * @property Users $user
+ * @property string $avatar
+ * @property string $name
+ * @property string $family
+ * @property string $grade
+ * @property string $resume
+ * @property string $social_links
+ * @property string $tell
+ * @property string $address
  */
-class UserDevIdRequests extends CActiveRecord
+class TeacherDetails extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'ym_user_dev_id_requests';
+		return '{{teacher_details}}';
 	}
 
 	/**
@@ -28,14 +32,17 @@ class UserDevIdRequests extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-            array('requested_id', 'required'),
-            array('requested_id', 'unique'),
-            //array('requested_id', 'uniqueInUserDetails'),
+			array('user_id, name, family', 'required'),
 			array('user_id', 'length', 'max'=>10),
-			array('requested_id', 'length', 'max'=>20, 'min'=>5),
+			array('avatar', 'length', 'max'=>500),
+			array('name, family', 'length', 'max'=>50),
+			array('grade', 'length', 'max'=>100),
+			array('social_links', 'length', 'max'=>2000),
+			array('tell', 'length', 'max'=>11),
+			array('resume, address', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('user_id, requested_id', 'safe', 'on'=>'search'),
+			array('user_id, avatar, name, family, grade, resume, social_links, tell, address', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -47,7 +54,6 @@ class UserDevIdRequests extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'user' => array(self::BELONGS_TO, 'Users', 'user_id'),
 		);
 	}
 
@@ -57,8 +63,15 @@ class UserDevIdRequests extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'user_id' => 'کاربر',
-			'requested_id' => 'شناسه درخواستی',
+			'user_id' => 'User',
+			'avatar' => 'آواتار',
+			'name' => 'نام',
+			'family' => 'نام خانوادگی',
+			'grade' => 'سطح تحصیلات',
+			'resume' => 'روزمه',
+			'social_links' => 'لینک های اجتماعی',
+			'tell' => 'شماره تماس',
+			'address' => 'آدرس',
 		);
 	}
 
@@ -80,35 +93,26 @@ class UserDevIdRequests extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('user_id',$this->user_id,true);
-		$criteria->compare('requested_id',$this->requested_id,true);
-
+		$criteria->compare('name',$this->name,true);
+		$criteria->compare('family',$this->family,true);
+		$criteria->compare('grade',$this->grade,true);
+		$criteria->compare('tell',$this->tell,true);
+		$criteria->compare('address',$this->address,true);
+		$criteria->order = 'id DESC';
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
 	}
 
+
 	/**
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return UserDevIdRequests the static model class
+	 * @return TeacherDetails the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
 	}
-
-    /**
-     * Check the developerID is unique in userDetails
-     */
-    public function uniqueInUserDetails($attribute,$params)
-    {
-        if(!$this->hasErrors())
-        {
-            $record = UserDetails::model()->findByAttributes( array( 'developer_id' => $this->requested_id ) );
-            if($record)
-                $this->addError($attribute, "شناسه درخواستی \"{$this->requested_id}\" در حال حاضر گرفته شده است.");
-        }
-    }
 }

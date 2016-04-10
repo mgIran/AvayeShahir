@@ -77,15 +77,24 @@ class Controller extends CController
                     )
                 ) ,
                 array(
-                    'label' => 'صفحات متنی<span class="caret"></span>' ,
+                    'label' => 'اساتید<span class="caret"></span>' ,
                     'url' => '#' ,
                     'itemOptions' => array('class' => 'dropdown' ,'tabindex' => "-1") ,
                     'linkOptions' => array('class' => 'dropdown-toggle' ,'data-toggle' => "dropdown") ,
                     'items' => array(
-                        array('label' => 'صفحات اصلی سایت' ,'url' => Yii::app()->createUrl('/pages/manage/admin/?slug=base')) ,
-                        array('label' => 'قوانین' ,'url' => Yii::app()->createUrl('/pages/manage/update/5?slug=rules')) ,
-                        array('label' => 'صفحات راهنما' ,'url' => Yii::app()->createUrl('/pages/manage/admin/?slug=guide')) ,
-                        array('label' => 'صفحات آزاد' ,'url' => Yii::app()->createUrl('/pages/manage/admin/')) ,
+                        array('label' => 'مدیریت' ,'url' => Yii::app()->createUrl('/users/teachers')) ,
+                        array('label' => 'افزودن' ,'url' => Yii::app()->createUrl('/users/teachers/create')) ,
+                    )
+                ) ,
+
+                array(
+                    'label' => 'کارمندان <span class="caret"></span>' ,
+                    'url' => '#' ,
+                    'itemOptions' => array('class' => 'dropdown' ,'tabindex' => "-1") ,
+                    'linkOptions' => array('class' => 'dropdown-toggle' ,'data-toggle' => "dropdown") ,
+                    'items' => array(
+                        array('label' => 'مدیریت' ,'url' => Yii::app()->createUrl('/personnel/manage')) ,
+                        array('label' => 'افزودن' ,'url' => Yii::app()->createUrl('/personnel/create')) ,
                     )
                 ) ,
                 array(
@@ -104,6 +113,19 @@ class Controller extends CController
                     'linkOptions' => array('class' => 'dropdown-toggle' ,'data-toggle' => "dropdown") ,
                     'items' => array(
                         array('label' => 'مدیریت' ,'url' => Yii::app()->createUrl('/users/manage')) ,
+                    )
+                ) ,
+
+                array(
+                    'label' => 'صفحات متنی<span class="caret"></span>' ,
+                    'url' => '#' ,
+                    'itemOptions' => array('class' => 'dropdown' ,'tabindex' => "-1") ,
+                    'linkOptions' => array('class' => 'dropdown-toggle' ,'data-toggle' => "dropdown") ,
+                    'items' => array(
+                        array('label' => 'صفحات اصلی سایت' ,'url' => Yii::app()->createUrl('/pages/manage/admin/?slug=base')) ,
+                        array('label' => 'قوانین' ,'url' => Yii::app()->createUrl('/pages/manage/update/5?slug=rules')) ,
+                        array('label' => 'صفحات راهنما' ,'url' => Yii::app()->createUrl('/pages/manage/admin/?slug=guide')) ,
+                        array('label' => 'صفحات آزاد' ,'url' => Yii::app()->createUrl('/pages/manage/admin/')) ,
                     )
                 ) ,
                 array(
@@ -132,14 +154,45 @@ class Controller extends CController
                     'url' => array('/admins/dashboard')
                 ) ,
                 array(
-                    'label' => 'آگهی ها <span class="caret"></span>' ,
+                    'label' => 'آموزش<span class="caret"></span>' ,
                     'url' => '#' ,
                     'itemOptions' => array('class' => 'dropdown' ,'tabindex' => "-1") ,
                     'linkOptions' => array('class' => 'dropdown-toggle' ,'data-toggle' => "dropdown") ,
                     'items' => array(
-                        array('label' => 'مدیریت آگهی ها' ,'url' => Yii::app()->createUrl('/advertises/manage/admin')) ,
-                        array('label' => 'افزودن آگهی' ,'url' => Yii::app()->createUrl('/advertises/manage/create')) ,
-                        array('label' => 'مدیریت دسته بندی های آگهی' ,'url' => Yii::app()->createUrl('/advertises/categories/admin')) ,
+                        array('label' => ' دوره ها' ,'url' => Yii::app()->createUrl('/courses/manage/admin/')) ,
+                        array('label' => ' کلاس ها' ,'url' => Yii::app()->createUrl('/courses/classes/admin/')) ,
+                        array('label' => ' گروه ها' ,'url' => Yii::app()->createUrl('/courses/categories/admin/')) ,
+                        array('label' => ' تگ ها' ,'url' => Yii::app()->createUrl('/courses/tags/admin/'))
+                    )
+                ) ,
+                array(
+                    'label' => 'اساتید<span class="caret"></span>' ,
+                    'url' => '#' ,
+                    'itemOptions' => array('class' => 'dropdown' ,'tabindex' => "-1") ,
+                    'linkOptions' => array('class' => 'dropdown-toggle' ,'data-toggle' => "dropdown") ,
+                    'items' => array(
+                        array('label' => 'مدیریت' ,'url' => Yii::app()->createUrl('/users/teachers')) ,
+                        array('label' => 'افزودن' ,'url' => Yii::app()->createUrl('/users/teachers/create')) ,
+                    )
+                ) ,
+
+                array(
+                    'label' => 'کارمندان <span class="caret"></span>' ,
+                    'url' => '#' ,
+                    'itemOptions' => array('class' => 'dropdown' ,'tabindex' => "-1") ,
+                    'linkOptions' => array('class' => 'dropdown-toggle' ,'data-toggle' => "dropdown") ,
+                    'items' => array(
+                        array('label' => 'مدیریت' ,'url' => Yii::app()->createUrl('/personnel/manage')) ,
+                        array('label' => 'افزودن' ,'url' => Yii::app()->createUrl('/personnel/create')) ,
+                    )
+                ) ,
+                array(
+                    'label' => 'کاربران <span class="caret"></span>' ,
+                    'url' => '#' ,
+                    'itemOptions' => array('class' => 'dropdown' ,'tabindex' => "-1") ,
+                    'linkOptions' => array('class' => 'dropdown-toggle' ,'data-toggle' => "dropdown") ,
+                    'items' => array(
+                        array('label' => 'مدیریت' ,'url' => Yii::app()->createUrl('/users/manage')) ,
                     )
                 ) ,
                 array(
@@ -152,15 +205,6 @@ class Controller extends CController
                         array('label' => 'قوانین' ,'url' => Yii::app()->createUrl('/pages/manage/update/5?slug=rules')) ,
                         array('label' => 'صفحات راهنما' ,'url' => Yii::app()->createUrl('/pages/manage/admin/?slug=guide')) ,
                         array('label' => 'صفحات آزاد' ,'url' => Yii::app()->createUrl('/pages/manage/admin/')) ,
-                    )
-                ) ,
-                array(
-                    'label' => 'کاربران <span class="caret"></span>' ,
-                    'url' => '#' ,
-                    'itemOptions' => array('class' => 'dropdown' ,'tabindex' => "-1") ,
-                    'linkOptions' => array('class' => 'dropdown-toggle' ,'data-toggle' => "dropdown") ,
-                    'items' => array(
-                        array('label' => 'مدیریت' ,'url' => Yii::app()->createUrl('/users/manage')) ,
                     )
                 ) ,
                 array(

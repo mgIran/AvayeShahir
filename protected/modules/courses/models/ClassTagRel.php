@@ -81,7 +81,7 @@ class ClassTagRel extends CActiveRecord
 
 		$criteria->compare('tag_id',$this->tag_id,true);
 		$criteria->compare('class_id',$this->class_id,true);
-
+		$criteria->order = 'id DESC';
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));

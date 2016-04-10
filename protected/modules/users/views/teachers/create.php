@@ -3,15 +3,15 @@
 /* @var $model Users */
 
 $this->breadcrumbs=array(
-	'مدیریت کاربران'=>array('admin'),
-	'افزودن',
+		'مدیریت اساتید'=>array('admin'),
+		'افزودن',
 );
 
 $this->menu=array(
-	array('label'=>'لیست کاربران', 'url'=>array('admin')),
+		array('label'=>'لیست اساتید', 'url'=>array('admin')),
 );
 ?>
 
-<h1>افزودن کاربر</h1>
+<h1>افزودن استاد</h1>
 
 <?php $this->renderPartial('_form', array('model'=>$model)); ?>

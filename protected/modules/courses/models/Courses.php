@@ -85,7 +85,7 @@ class Courses extends CActiveRecord
 		$criteria->compare('pic',$this->pic,true);
 		$criteria->compare('title',$this->title,true);
 		$criteria->compare('summary',$this->summary,true);
-
+		$criteria->order = 'id DESC';
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));

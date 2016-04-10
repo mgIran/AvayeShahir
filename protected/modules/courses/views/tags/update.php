@@ -3,17 +3,17 @@
 /* @var $model ClassTags */
 
 $this->breadcrumbs=array(
-	'مدیریت تگ ها'=>array('index'),
+	'مدیریت برچسب ها'=>array('index'),
 	$model->title,
 	'ویرایش',
 );
 
 $this->menu=array(
-	array('label'=>'مدیریت تگ ها', 'url'=>array('admin')),
-	array('label'=>'افزودن تگ', 'url'=>array('create')),
+	array('label'=>'مدیریت برچسب ها', 'url'=>array('admin')),
+	array('label'=>'افزودن برچسب', 'url'=>array('create')),
 );
 ?>
 
-<h1>ویرایش تگ <?php echo $model->title; ?></h1>
+<h1>ویرایش برچسب <?php echo $model->title; ?></h1>
 
 <?php $this->renderPartial('_form', array('model'=>$model)); ?>

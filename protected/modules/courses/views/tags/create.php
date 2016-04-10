@@ -3,15 +3,15 @@
 /* @var $model ClassTags */
 
 $this->breadcrumbs=array(
-	'مدیریت تگ ها'=>array('index'),
-	'افزودن تگ',
+	'مدیریت برچسب ها'=>array('index'),
+	'افزودن برچسب',
 );
 
 $this->menu=array(
-	array('label'=>'مدیریت تگ ها', 'url'=>array('admin')),
+	array('label'=>'مدیریت برچسب ها', 'url'=>array('admin')),
 );
 ?>
 
-<h1>افزودن تگ</h1>
+<h1>افزودن برچسب</h1>
 
 <?php $this->renderPartial('_form', array('model'=>$model)); ?>

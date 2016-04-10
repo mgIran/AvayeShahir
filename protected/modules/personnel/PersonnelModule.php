@@ -1,26 +1,22 @@
 <?php
 
-class UsersModule extends CWebModule
+class PersonnelModule extends CWebModule
 {
 	public function init()
 	{
-        $this->defaultController = 'manage';
 		// this method is called when the module is being created
 		// you may place code here to customize the module or the application
 
 		// import the module-level models and components
 		$this->setImport(array(
-			'users.models.*',
-			'users.components.*',
+			'personnel.models.*',
+			'personnel.components.*',
 		));
 	}
 
-    public $controllerMap = array(
-        'manage' => 'users.controllers.UsersManageController',
-        'teachers' => 'users.controllers.TeachersManageController',
-        'teacherDetails' => 'users.controllers.TeacherDetailsController',
-    );
-
+	public $controllerMap = array(
+		'manage' => 'personnel.controllers.PersonnelManageController'
+	);
 	public function beforeControllerAction($controller, $action)
 	{
 		if(parent::beforeControllerAction($controller, $action))

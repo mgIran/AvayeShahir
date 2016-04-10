@@ -16060,3 +16060,36 @@ in D:\Important\Xamppp\htdocs\Market\index.php (11)
 2016/04/07 12:14:05 [warning] [application] Failed to set unsafe attribute "tags" of "Classes".
 in C:\wamp\www\Yusef\shahir\protected\modules\courses\controllers\ClassesManageController.php (60)
 in C:\wamp\www\Yusef\shahir\index.php (11)
+2016/04/10 14:07:55 [warning] [application] Failed to set unsafe attribute "username" of "Users".
+in C:\wamp\www\Yusef\shahir\protected\modules\users\controllers\UsersManageController.php (64)
+in C:\wamp\www\Yusef\shahir\index.php (11)
+2016/04/10 14:07:55 [warning] [application] Failed to set unsafe attribute "password" of "Users".
+in C:\wamp\www\Yusef\shahir\protected\modules\users\controllers\UsersManageController.php (64)
+in C:\wamp\www\Yusef\shahir\index.php (11)
+2016/04/10 14:10:59 [warning] [application] Failed to set unsafe attribute "username" of "Users".
+in C:\wamp\www\Yusef\shahir\protected\modules\users\controllers\UsersManageController.php (62)
+in C:\wamp\www\Yusef\shahir\index.php (11)
+2016/04/10 14:10:59 [warning] [application] Failed to set unsafe attribute "password" of "Users".
+in C:\wamp\www\Yusef\shahir\protected\modules\users\controllers\UsersManageController.php (62)
+in C:\wamp\www\Yusef\shahir\index.php (11)
+2016/04/10 14:11:47 [warning] [application] Failed to set unsafe attribute "password" of "Users".
+in C:\wamp\www\Yusef\shahir\protected\modules\users\controllers\UsersManageController.php (62)
+in C:\wamp\www\Yusef\shahir\index.php (11)
+2016/04/10 14:14:27 [warning] [application] Failed to set unsafe attribute "password" of "Users".
+in C:\wamp\www\Yusef\shahir\protected\modules\users\controllers\UsersManageController.php (62)
+in C:\wamp\www\Yusef\shahir\index.php (11)
+2016/04/10 14:17:36 [warning] [application] Failed to set unsafe attribute "password" of "Users".
+in C:\wamp\www\Yusef\shahir\protected\modules\users\controllers\UsersManageController.php (62)
+in C:\wamp\www\Yusef\shahir\index.php (11)
+2016/04/10 14:39:42 [warning] [application] Failed to set unsafe attribute "password" of "Users".
+in C:\wamp\www\Yusef\shahir\protected\modules\users\controllers\UsersManageController.php (62)
+in C:\wamp\www\Yusef\shahir\index.php (11)
+2016/04/10 14:43:05 [warning] [application] Failed to set unsafe attribute "password" of "Users".
+in C:\wamp\www\Yusef\shahir\protected\modules\users\controllers\UsersManageController.php (62)
+in C:\wamp\www\Yusef\shahir\index.php (11)
+2016/04/10 14:44:13 [warning] [application] Failed to set unsafe attribute "password" of "Users".
+in C:\wamp\www\Yusef\shahir\protected\modules\users\controllers\UsersManageController.php (62)
+in C:\wamp\www\Yusef\shahir\index.php (11)
+2016/04/10 14:44:27 [warning] [application] Failed to set unsafe attribute "password" of "Users".
+in C:\wamp\www\Yusef\shahir\protected\modules\users\controllers\UsersManageController.php (62)
+in C:\wamp\www\Yusef\shahir\index.php (11)

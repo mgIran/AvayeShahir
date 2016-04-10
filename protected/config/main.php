@@ -31,6 +31,7 @@ return array(
         'setting',
         'pages',
 		'courses',
+		'personnel',
 	),
 
 	// application components

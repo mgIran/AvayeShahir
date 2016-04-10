@@ -7,6 +7,7 @@
  * @property string $id
  * @property string $title
  * @property string $summary
+ * @property integer $capacity
  * @property integer $price
  * @property string $startSignupDate
  * @property string $endSignupDate
@@ -14,11 +15,13 @@
  * @property string $endClassDate
  * @property string $category_id
  * @property string $course_id
+ * @property string $teacher_id
  * @property [] $formTags
  *
  * The followings are the available model relations:
  * @property Courses $course
  * @property ClassCategories $category
+ * @property TeacherDetails $teacher
  * @property ClassTags[] $tags
  */
 class Classes extends CActiveRecord
@@ -41,7 +44,7 @@ class Classes extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-				array('title, category_id, course_id ,formTags', 'required'),
+				array('title, category_id, course_id ,formTags ,capacity ,teacher_id', 'required'),
 				array('endSignupDate', 'compare', 'compareAttribute' => 'startSignupDate', 'operator' => '>', 'message' => 'تاریخ پایان ثبت نام باید بیشتر از تاریخ شروع ثبت نام باشد.'),
 				array('endClassDate', 'compare', 'compareAttribute' => 'startClassDate', 'operator' => '>', 'message' => 'تاریخ پایان کلاس باید بیشتر از تاریخ شروع کلاس باشد.'),
 				array('price', 'numerical', 'integerOnly' => true),
@@ -64,6 +67,7 @@ class Classes extends CActiveRecord
 		return array(
 				'course' => array(self::BELONGS_TO, 'Courses', 'course_id'),
 				'category' => array(self::BELONGS_TO, 'ClassCategories', 'category_id'),
+				'teacher' => array(self::BELONGS_TO, 'TeacherDetails', 'teacher_id'),
 				'tags' => array(self::MANY_MANY, 'ClassTags', '{{class_tag_rel}}(class_id,tag_id)'),
 		);
 	}
@@ -84,7 +88,9 @@ class Classes extends CActiveRecord
 				'endClassDate' => 'تاریخ پایان کلاس',
 				'category_id' => 'گروه',
 				'course_id' => 'دوره',
-				'formTags' => 'تگ ها'
+				'teacher_id' => 'استاد',
+				'capacity' => 'ظرفیت کلاس',
+				'formTags' => 'برچسب ها'
 		);
 	}
 
@@ -116,7 +122,8 @@ class Classes extends CActiveRecord
 		$criteria->compare('endClassDate', $this->endClassDate, true);
 		$criteria->compare('category_id', $this->category_id, true);
 		$criteria->compare('course_id', $this->course_id, true);
-
+		$criteria->compare('teacher_id', $this->teacher_id, true);
+		$criteria->order = 'id DESC';
 		return new CActiveDataProvider($this, array(
 				'criteria' => $criteria,
 		));
