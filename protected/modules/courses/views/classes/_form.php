@@ -2,6 +2,7 @@
 /* @var $this ClassesManageController */
 /* @var $model Classes */
 /* @var $form CActiveForm */
+Yii::app()->user->returnUrl = Yii::app()->request->getRequestUri();
 ?>
 <? $this->renderPartial('//layouts/_flashMessage'); ?>
 <div class="form">
@@ -31,6 +32,12 @@
 		<?php echo $form->labelEx($model,'category_id'); ?>
 		<?php echo $form->dropDownList($model,'category_id',CHtml::listData(ClassCategories::model()->findAll(),'id','title')); ?>
 		<?php echo $form->error($model,'category_id'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'teacher_id'); ?>
+		<?php echo $form->dropDownList($model,'teacher_id',CHtml::listData(Users::model()->findAll('role_id = 2'),'id','teacherDetails.fullName')); ?>
+		<?php echo $form->error($model,'teacher_id'); ?>
 	</div>
 
 	<div class="row">
@@ -85,7 +92,7 @@
 		?>
 		<?php echo $form->error($model,'summary'); ?>
 	</div>
-
+<!--
 	<div class="row">
 		<?php echo $form->labelEx($model,'formTags'); ?>
 		<?php
@@ -104,7 +111,7 @@
 		</button>
 		<?php echo $form->error($model,'formTags'); ?>
 	</div>
-
+-->
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'ثبت' : 'ذخیره',array('class' => 'btn btn-success')); ?>
 	</div>

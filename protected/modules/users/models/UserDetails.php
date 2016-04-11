@@ -10,13 +10,9 @@
  * @property string $fa_web_url
  * @property string $en_web_url
  * @property string $national_code
- * @property string $national_card_image
  * @property string $phone
  * @property string $zip_code
  * @property string $address
- * @property double $credit
- * @property string $developer_id
- * @property string $details_status
  *
  * The followings are the available model relations:
  * @property Users $user
@@ -39,20 +35,18 @@ class UserDetails extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-            array('fa_name, en_name, national_code, phone, zip_code, address, national_card_image', 'required'),
-			array('credit, national_code, phone, zip_code', 'numerical'),
+            array('fa_name, en_name, national_code, phone, zip_code, address', 'required'),
+			array('national_code, phone, zip_code', 'numerical'),
 			array('user_id, national_code, zip_code', 'length', 'max'=>10),
 			array('national_code, zip_code', 'length', 'min'=>10),
 			array('phone', 'length', 'min'=>8),
-			array('fa_name, en_name, national_card_image', 'length', 'max'=>50),
+			array('fa_name, en_name', 'length', 'max'=>50),
 			array('fa_web_url, en_web_url', 'length', 'max'=>255),
 			array('phone', 'length', 'max'=>11),
-            array('developer_id', 'length', 'max'=>20, 'min'=>5),
 			array('address', 'length', 'max'=>1000),
-            array('details_status', 'length', 'max'=>8),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('user_id, fa_name, en_name, fa_web_url, en_web_url, national_code, national_card_image, phone, zip_code, address, credit, developer_id, details_status', 'safe', 'on'=>'search'),
+			array('user_id, fa_name, en_name, fa_web_url, en_web_url, national_code, phone, zip_code, address', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -80,14 +74,9 @@ class UserDetails extends CActiveRecord
 			'fa_web_url' => 'آدرس سایت فارسی',
 			'en_web_url' => 'آدرس سایت انگلیسی',
 			'national_code' => 'کد ملی',
-			'national_card_image' => 'تصویر کارت ملی',
 			'phone' => 'تلفن',
 			'zip_code' => 'کد پستی',
 			'address' => 'نشانی دقیق پستی',
-			'credit' => 'اعتبار',
-            'developer_id' => 'شناسه توسعه دهنده',
-            'status' => 'وضعیت کاربر',
-            'details_status' => 'وضعیت اطلاعات کاربر',
 		);
 	}
 
@@ -115,13 +104,9 @@ class UserDetails extends CActiveRecord
 		$criteria->compare('fa_web_url',$this->fa_web_url,true);
 		$criteria->compare('en_web_url',$this->en_web_url,true);
 		$criteria->compare('national_code',$this->national_code,true);
-		$criteria->compare('national_card_image',$this->national_card_image,true);
 		$criteria->compare('phone',$this->phone,true);
 		$criteria->compare('zip_code',$this->zip_code,true);
 		$criteria->compare('address',$this->address,true);
-		$criteria->compare('credit',$this->credit);
-        $criteria->compare('developer_id',$this->developer_id,true);
-        $criteria->compare('details_status',$this->details_status,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

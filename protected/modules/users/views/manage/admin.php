@@ -22,6 +22,11 @@ $this->widget('zii.widgets.grid.CGridView', array(
     'columns'=>array(
         'email',
         array(
+            'header' => 'وضعیت',
+            'value' => '$data->statusLabels[$data->status]',
+            'filter' => CHtml::activeDropDownList($model,'statusFilter',$model->statusLabels,array('prompt' => 'همه'))
+        ),
+        array(
             'class'=>'CButtonColumn',
             'template' => '{update}{delete}'
         ),

@@ -10,6 +10,7 @@ class CoursesModule extends CWebModule
 		// import the module-level models and components
 		$this->setImport(array(
 			'courses.models.*',
+			'users.models.*',
 			'courses.components.*',
 		));
 	}

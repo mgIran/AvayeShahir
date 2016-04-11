@@ -3,7 +3,7 @@
 /* @var $model TeacherDetails */
 /* @var $form CActiveForm */
 ?>
-
+<? $this->renderPartial('//layouts/_flashMessage'); ?>
 <div class="form">
 
 <?php $form=$this->beginWidget('CActiveForm', array(
@@ -72,6 +72,67 @@
 	</div>
 
 	<div class="row">
+		<?php echo $form->labelEx($model,'social_links'); ?>
+		<div class="dynamic-box">
+		<?
+		if($model->social_links):
+			$social_links = CJSON::decode($model->social_links);
+			// face book & twitter links are constant
+		?>
+				<div class="dynamic-field input-group">
+					<div class="label">فیسبوک : </div>
+					<div class="input">
+						<?= CHtml::textField('TeacherDetails[social_links][0][value]',(isset($social_links[0])?$social_links[0]['value']:''),array('class'=>'form-control','placeholder'=>'آدرس لینک')); ?>
+					</div>
+				</div>
+				<div class="dynamic-field input-group">
+					<div class="label">توییتر : </div>
+					<div class="input">
+						<?= CHtml::textField('TeacherDetails[social_links][1][value]',(isset($social_links[1])?$social_links[1]['value']:''),array('class'=>'form-control','placeholder'=>'آدرس لینک')); ?>
+					</div>
+				</div>
+		<?
+			unset($social_links[0]);
+			unset($social_links[1]);
+			// any social links are dynamic
+			foreach($social_links as $key => $link):
+				?>
+				<div class="dynamic-field input-group">
+					<div class="label">
+						<?= CHtml::textField("TeacherDetails[social_links][$key][title]",$link['title'],array('class'=>'form-control')); ?>
+					</div>
+					<div class="input">
+						<?= CHtml::textField("TeacherDetails[social_links][$key][value]",$link['value'],array('class'=>'form-control')); ?>
+					</div>
+				</div>
+			<?
+			endforeach;
+		else:
+			?>
+			<div class="dynamic-field input-group">
+				<div class="label">فیسبوک : </div>
+				<div class="input">
+					<?= CHtml::textField('TeacherDetails[social_links][0][value]','',array('class'=>'form-control' ,'placeholder'=>'آدرس لینک')); ?>
+				</div>
+			</div>
+			<div class="dynamic-field input-group">
+				<div class="label">توییتر : </div>
+				<div class="input">
+					<?= CHtml::textField('TeacherDetails[social_links][1][value]','',array('class'=>'form-control','placeholder'=>'آدرس لینک')); ?>
+				</div>
+			</div>
+			<?
+		endif;
+		?>
+		</div>
+		<div class="operation-links">
+			<a class="icon icon-plus icon-2x add-dynamic-field-trigger"></a>
+			<a class="icon icon-trash remove-dynamic-field-trigger"></a>
+		</div>
+		<?php echo $form->error($model,'social_links'); ?>
+	</div>
+
+	<div class="row">
 		<?php echo $form->labelEx($model,'resume'); ?>
 		<?
 		$this->widget('ext.ckeditor.CKEditor',array(
@@ -82,13 +143,6 @@
 		<?php echo $form->error($model,'resume'); ?>
 	</div>
 
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'social_links'); ?>
-		<?php echo $form->textField($model,'social_links',array('size'=>60,'maxlength'=>2000)); ?>
-		<?php echo $form->error($model,'social_links'); ?>
-	</div>
-
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'ثبت' : 'ذخیره',array('class'=>'btn btn-success')); ?>
 	</div>
@@ -96,3 +150,27 @@
 <?php $this->endWidget(); ?>
 
 </div><!-- form -->
+<?
+Yii::app()->clientScript->registerScript('dynamic-fields','
+		var $dynamicFieldsNum = $(".dynamic-field").length;
+		$(\'.add-dynamic-field-trigger\').click(function () {
+			var box = $(this).parents(".row").find(".dynamic-box");
+			$dynamicFieldsNum++;
+			box.append("<div class=\'dynamic-field input-group\'>" +
+				"<div class=\'label\'>" +
+					"<input type=\'text\' name=\'"+"TeacherDetails[social_links]["+$dynamicFieldsNum+"][title]"+"\' class=\'form-control\' placeholder=\'عنوان شبکه اجتماعی\' >" +
+				"</div>" +
+				"<div class=\'input\'>" +
+					"<input type=\'text\' name=\'"+"TeacherDetails[social_links]["+$dynamicFieldsNum+"][value]"+"\' class=\'form-control\' placeholder=\'آدرس لینک\' >" +
+				"</div> " +
+			"</div>");
+		});
+		$(\'.remove-dynamic-field-trigger\').click(function () {
+			if($dynamicFieldsNum > 2)
+			{
+				var box = $(this).parents(".row").find(".dynamic-box");
+				box.find(".dynamic-field:last-child").remove();
+				$dynamicFieldsNum--;
+			}
+		});
+');

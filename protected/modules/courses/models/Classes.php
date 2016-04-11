@@ -44,7 +44,7 @@ class Classes extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-				array('title, category_id, course_id ,formTags ,capacity ,teacher_id', 'required'),
+				array('title, category_id, course_id ,capacity ,teacher_id', 'required'),
 				array('endSignupDate', 'compare', 'compareAttribute' => 'startSignupDate', 'operator' => '>', 'message' => 'تاریخ پایان ثبت نام باید بیشتر از تاریخ شروع ثبت نام باشد.'),
 				array('endClassDate', 'compare', 'compareAttribute' => 'startClassDate', 'operator' => '>', 'message' => 'تاریخ پایان کلاس باید بیشتر از تاریخ شروع کلاس باشد.'),
 				array('price', 'numerical', 'integerOnly' => true),
@@ -88,7 +88,7 @@ class Classes extends CActiveRecord
 				'endClassDate' => 'تاریخ پایان کلاس',
 				'category_id' => 'گروه',
 				'course_id' => 'دوره',
-				'teacher_id' => 'استاد',
+				'teacher_id' => 'مدرس',
 				'capacity' => 'ظرفیت کلاس',
 				'formTags' => 'برچسب ها'
 		);
@@ -146,12 +146,21 @@ class Classes extends CActiveRecord
 			ClassTagRel::model()->deleteAll('class_id='.$this->id);
 		if($this->formTags && !empty($this->formTags))
 			foreach($this->formTags as $tag) {
-				$tag = ClassTags::model()->findByAttributes(array('title'=>$tag));
-				if($tag) {
+				$tagModel = ClassTags::model()->findByAttributes(array('title'=>$tag));
+				if($tagModel) {
 					$tag_rel = new ClassTagRel;
 					$tag_rel->class_id = $this->id;
-					$tag_rel->tag_id = $tag->id;
-					$tag_rel->save();
+					$tag_rel->tag_id = $tagModel->id;
+					$tag_rel->save(false);
+				}else
+				{
+					$tagModel = new ClassTags;
+					$tagModel->title = $tag;
+					$tagModel->save(false);
+					$tag_rel = new ClassTagRel;
+					$tag_rel->class_id = $this->id;
+					$tag_rel->tag_id = $tagModel->id;
+					$tag_rel->save(false);
 				}
 			}
 		parent::afterSave();

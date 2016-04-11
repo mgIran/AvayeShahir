@@ -10,6 +10,8 @@ $this->breadcrumbs=array(
 $this->menu=array(
 		array('label'=>'لیست اساتید', 'url'=>array('admin')),
 );
+if(isset($_GET['return']) && $_GET['return'] == true)
+	$this->menu = array();
 ?>
 
 <h1>افزودن استاد</h1>

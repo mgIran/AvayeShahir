@@ -68,6 +68,17 @@ class PersonnelManageController extends Controller
 		if(isset($_POST['Personnel']))
 		{
 			$model->attributes=$_POST['Personnel'];
+			foreach($_POST['Personnel']['social_links'] as $key => $link)
+			{
+				if($link['value'] == '')
+					unset($_POST['Personnel']['social_links'][$key]);
+				elseif (!preg_match("~^(?:f|ht)tps?://~i",$link['value']))
+					$_POST['Personnel']['social_links'][$key]['value'] = 'http://'.$_POST['Personnel']['social_links'][$key]['value'];
+			}
+			if($_POST['Personnel']['social_links'])
+				$model->social_links = CJSON::encode($_POST['Personnel']['social_links']);
+			else
+				$model->social_links = null;
 			if (isset($_POST['Personnel']['avatar'])) {
 				$file = $_POST['Personnel']['avatar'];
 				$avatar = array(
@@ -126,6 +137,17 @@ class PersonnelManageController extends Controller
 		if(isset($_POST['Personnel']))
 		{
 			$model->attributes=$_POST['Personnel'];
+			foreach($_POST['Personnel']['social_links'] as $key => $link)
+			{
+				if($link['value'] == '')
+					unset($_POST['Personnel']['social_links'][$key]);
+				elseif (!preg_match("~^(?:f|ht)tps?://~i",$link['value']))
+					$_POST['Personnel']['social_links'][$key]['value'] = 'http://'.$_POST['Personnel']['social_links'][$key]['value'];
+			}
+			if($_POST['Personnel']['social_links'])
+				$model->social_links = CJSON::encode($_POST['Personnel']['social_links']);
+			else
+				$model->social_links = null;
 			if (isset($_POST['Personnel']['avatar'])) {
 				$file = $_POST['Personnel']['avatar'];
 				$avatar = array(

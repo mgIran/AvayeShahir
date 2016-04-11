@@ -50,56 +50,6 @@ class TeacherDetailsController extends Controller
 	}
 
 	/**
-	 * Creates a new model.
-	 * If creation is successful, the browser will be redirected to the 'view' page.
-	 */
-	public function actionCreate($id)
-	{
-		$model=new TeacherDetails;
-
-
-		$tmpDIR = Yii::getPathOfAlias("webroot") . '/uploads/temp/';
-		if (!is_dir($tmpDIR))
-			mkdir($tmpDIR);
-		$tmpUrl = Yii::app()->createAbsoluteUrl('/uploads/temp/');
-		$avatarDIR = Yii::getPathOfAlias("webroot") . "/uploads/teachers/";
-		if (!is_dir($avatarDIR))
-			mkdir($avatarDIR);
-
-		$avatar = array();
-
-		if(isset($_POST['TeacherDetails']))
-		{
-			$model->attributes=$_POST['TeacherDetails'];
-			if (isset($_POST['TeacherDetails']['avatar'])) {
-				$file = $_POST['TeacherDetails']['avatar'];
-				$avatar = array(
-						'name' => $file,
-						'src' => $tmpUrl . '/' . $file,
-						'size' => filesize($tmpDIR . $file),
-						'serverName' => $file,
-				);
-			}
-			if($model->save())
-			{
-				if ($model->avatar and file_exists($tmpDIR.$model->avatar)) {
-					$imager = new Imager();
-					$imager->resize($tmpDIR.$model->avatar ,$avatarDIR.$model->avatar,400,400);
-					unlink($tmpDIR.$model->avatar);
-				}
-				Yii::app()->user->setFlash('success' ,'<span class="icon-check"></span>&nbsp;&nbsp;اطلاعات با موفقیت ذخیره شد.');
-				$this->redirect(array('admin'));
-			}else
-				Yii::app()->user->setFlash('failed' ,'در ثبت اطلاعات خطایی رخ داده است! لطفا مجددا تلاش کنید.');
-		}
-
-		$this->render('create',array(
-				'model'=>$model,
-				'avatar' => $avatar
-		));
-	}
-
-	/**
 	 * Updates a particular model.
 	 * If update is successful, the browser will be redirected to the 'view' page.
 	 * @param integer $id the ID of the model to be updated
@@ -109,27 +59,37 @@ class TeacherDetailsController extends Controller
 		$model=$this->loadModel($id);
 
 		$tmpDIR = Yii::getPathOfAlias("webroot") . '/uploads/temp/';
-		if (!is_dir($tmpDIR))
-			mkdir($tmpDIR);
 		$tmpUrl = Yii::app()->createAbsoluteUrl('/uploads/temp/');
 		$avatarDIR = Yii::getPathOfAlias("webroot") . "/uploads/teachers/";
 		$avatarUrl = Yii::app()->createAbsoluteUrl('/uploads/teachers/');
 
 		$avatar = array();
+		$flag = true;
 		if ($model->avatar and file_exists($avatarDIR.$model->avatar)) {
 			$file = $model->avatar;
 			$avatar = array(
-					'name' => $file,
-					'src' => $avatarUrl . '/' . $file,
-					'size' => filesize($avatarDIR . $file),
-					'serverName' => $file,
+				'name' => $file,
+				'src' => $avatarUrl . '/' . $file,
+				'size' => filesize($avatarDIR . $file),
+				'serverName' => $file,
 			);
+			$flag = false;
 		}
-
 		if(isset($_POST['TeacherDetails']))
 		{
 			$model->attributes=$_POST['TeacherDetails'];
-			if (isset($_POST['TeacherDetails']['avatar'])) {
+			foreach($_POST['TeacherDetails']['social_links'] as $key => $link)
+			{
+				if($link['value'] == '')
+					unset($_POST['TeacherDetails']['social_links'][$key]);
+				elseif (!preg_match("~^(?:f|ht)tps?://~i",$link['value']))
+					$_POST['TeacherDetails']['social_links'][$key]['value'] = 'http://'.$_POST['TeacherDetails']['social_links'][$key]['value'];
+			}
+			if($_POST['TeacherDetails']['social_links'])
+				$model->social_links = CJSON::encode($_POST['TeacherDetails']['social_links']);
+			else
+				$model->social_links = null;
+			if (isset($_POST['TeacherDetails']['avatar']) && file_exists($tmpDIR.$_POST['TeacherDetails']['avatar'])) {
 				$file = $_POST['TeacherDetails']['avatar'];
 				$avatar = array(
 						'name' => $file,
@@ -137,16 +97,20 @@ class TeacherDetailsController extends Controller
 						'size' => filesize($tmpDIR . $file),
 						'serverName' => $file,
 				);
+				$flag = true;
 			}
 			if($model->save())
 			{
-				if ($model->avatar and file_exists($tmpDIR.$model->avatar)) {
+				if ($flag && $model->avatar && file_exists($tmpDIR.$model->avatar)) {
 					$imager = new Imager();
-					$imager->resize($tmpDIR.$model->avatar ,$avatarDIR.$model->avatar,400,400);
+					$imager->resize($tmpDIR.$model->avatar, $avatarDIR.$model->avatar, 400, 400);
 					unlink($tmpDIR.$model->avatar);
 				}
 				Yii::app()->user->setFlash('success' ,'<span class="icon-check"></span>&nbsp;&nbsp;اطلاعات با موفقیت ذخیره شد.');
-				$this->redirect(array('admin'));
+				if(isset($_GET['return']) && $_GET['return'] == true)
+					$this->redirect(array('/users/teachers	/admin?return=true'));
+				else
+					$this->redirect(array('/users/teachers/admin'));
 			}else
 				Yii::app()->user->setFlash('failed' ,'در ثبت اطلاعات خطایی رخ داده است! لطفا مجددا تلاش کنید.');
 		}

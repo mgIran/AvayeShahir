@@ -66,7 +66,10 @@ class TeachersManageController extends Controller
 			if($model->save())
 			{
 				Yii::app()->user->setFlash('success' ,'<span class="icon-check"></span>&nbsp;&nbsp;اطلاعات با موفقیت ذخیره شد.');
-				$this->redirect(array('/users/teacherDetails/create/'.$model->id));
+				if(isset($_GET['return']) && $_GET['return'] == true)
+					$this->redirect(array('/users/teacherDetails/update/'.$model->id.'?return=true'));
+				else
+					$this->redirect(array('/users/teacherDetails/update/'.$model->id));
 			}else
 				Yii::app()->user->setFlash('failed' ,'در ثبت اطلاعات خطایی رخ داده است! لطفا مجددا تلاش کنید.');
 		}
@@ -93,7 +96,11 @@ class TeachersManageController extends Controller
 	 */
 	public function actionDelete($id)
 	{
-		$this->loadModel($id)->delete();
+		$avatarDIR = Yii::getPathOfAlias("webroot") . "/uploads/teachers/";
+		$model = $this->loadModel($id);
+		if($model->teacherDetails->avatar && file_exists($avatarDIR.$model->teacherDetails->avatar))
+			unlink($avatarDIR.$model->teacherDetails->avatar);
+		$model->delete();
 
 		// if AJAX request (triggered by deletion via admin grid views), we should not redirect the browser
 		if(!isset($_GET['ajax']))

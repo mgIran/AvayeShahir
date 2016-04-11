@@ -9,8 +9,13 @@ $this->breadcrumbs=array(
 $this->menu=array(
     array('label'=>'افزودن', 'url'=>array('create')),
 );
-?>
 
+if(isset($_GET['return']) && $_GET['return'] == true)
+    $this->menu = array(
+        array('label'=>'بازگشت', 'url'=>Yii::app()->user->returnUrl)
+    );
+?>
+<? $this->renderPartial('//layouts/_flashMessage'); ?>
 <h1>مدیریت اساتید</h1>
 
 <?php
@@ -19,6 +24,11 @@ $this->widget('zii.widgets.grid.CGridView', array(
     'dataProvider'=>$model->searchTeachers(),
     'filter'=>$model,
     'columns'=>array(
+        array(
+            'header' => 'نام و نام خانوادگی',
+            'name' => 'teacherDetails.fullName',
+            'filter' => CHtml::activeTextField($model,'fullName')
+        ),
         'email',
         array(
             'class'=>'CButtonColumn',

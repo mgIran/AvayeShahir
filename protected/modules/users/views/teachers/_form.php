@@ -3,7 +3,7 @@
 /* @var $model Users */
 /* @var $form CActiveForm */
 ?>
-
+<? $this->renderPartial('//layouts/_flashMessage'); ?>
 <div class="form">
 
 <?php $form=$this->beginWidget('CActiveForm', array(
@@ -13,6 +13,7 @@
 	// There is a call to performAjaxValidation() commented in generated controller code.
 	// See class documentation of CActiveForm for details on this.
 	'enableAjaxValidation'=>false,
+	'action' => isset($_GET['return']) && $_GET['return'] == true ? array('/users/teachers/create?return=true'):array('/users/teachers/create')
 )); ?>
 	<?php echo $form->errorSummary($model); ?>
 

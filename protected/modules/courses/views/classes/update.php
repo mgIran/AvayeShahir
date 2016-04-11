@@ -11,6 +11,9 @@ $this->breadcrumbs=array(
 $this->menu=array(
 	array('label'=>'لیست کلاس ها', 'url'=>array('admin')),
 	array('label'=>'افزودن کلاس', 'url'=>array('create')),
+	array('label'=>'افزودن دوره', 'url'=>array('/courses/manage/create?return=true')),
+	array('label'=>'افزودن استاد', 'url'=>array('/users/teachers/create?return=true')),
+	array('label'=>'افزودن گروه', 'url'=>array('/courses/categories/create?return=true')),
 );
 ?>
 

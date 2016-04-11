@@ -32,7 +32,8 @@ class TeacherDetails extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('user_id, name, family', 'required'),
+			array('user_id', 'required' ,'on' => 'create'),
+			array('user_id, name, family', 'required' ,'on' => 'update'),
 			array('user_id', 'length', 'max'=>10),
 			array('avatar', 'length', 'max'=>500),
 			array('name, family', 'length', 'max'=>50),
@@ -54,6 +55,7 @@ class TeacherDetails extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'user' => array(self::BELONGS_TO, 'Users', 'user_id'),
 		);
 	}
 
@@ -114,5 +116,9 @@ class TeacherDetails extends CActiveRecord
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
+	}
+
+	public function getFullName(){
+		return $this->name.' '.$this->family;
 	}
 }

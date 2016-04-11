@@ -13,9 +13,11 @@
  * @property string $repeatPassword
  * @property string $oldPassword
  * @property string $newPassword
+ * @property string $fullName
  *
  * The followings are the available model relations:
  * @property UserDetails $userDetails
+ * @property TeacherDetails $teacherDetails
  * @property UserRoles $role
  */
 class Users extends CActiveRecord
@@ -34,6 +36,8 @@ class Users extends CActiveRecord
         'blocked'=>'مسدود',
         'deleted'=>'حذف شده'
     );
+    public $fullName;
+    public $statusFilter;
     public $repeatPassword;
     public $oldPassword;
     public $newPassword;
@@ -46,11 +50,10 @@ class Users extends CActiveRecord
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('email, password', 'required' ,'on' => 'create'),
+            array('password, email', 'required' , 'on' => 'insert,create'),
             array('email', 'unique'),
             array('role_id', 'default' ,'value' => 1,'on' => 'insert'),
             array('status', 'default' ,'value' => 1,'on' => 'insert'),
-            array('password, email', 'required' , 'on' => 'insert'),
             array('email' , 'required' ,'on' => 'email'),
             array('email' , 'email'),
             array('oldPassword ,newPassword ,repeatPassword', 'required' , 'on'=>'update'),
@@ -64,7 +67,7 @@ class Users extends CActiveRecord
             array('status', 'length', 'max'=>8),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
-            array('id, username, password, roleId, status', 'safe', 'on'=>'search'),
+            array('fullName ,email ,statusFilter', 'safe', 'on'=>'search,searchTeachers'),
         );
     }
 
@@ -87,9 +90,8 @@ class Users extends CActiveRecord
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
-            'apps' => array(self::HAS_MANY, 'Apps', 'developer_id'),
-            'userDetails' => array(self::HAS_ONE, 'UserDetails', 'user_id'),
-            'userDevIdRequests' => array(self::HAS_ONE, 'UserDevIdRequests', 'user_id'),
+            'userDetails' => array(self::BELONGS_TO, 'UserDetails', 'id'),
+            'teacherDetails' => array(self::BELONGS_TO, 'TeacherDetails', 'id'),
             'role' => array(self::BELONGS_TO, 'UserRoles', 'role_id'),
         );
     }
@@ -129,12 +131,9 @@ class Users extends CActiveRecord
         // @todo Please modify the following code to remove attributes that should not be searched.
 
         $criteria=new CDbCriteria;
-        $criteria->compare('username',$this->username,true);
-        $criteria->compare('password',$this->password,true);
-        $criteria->compare('t.status',$this->status);
+        $criteria->compare('email',$this->email,true);
         $criteria->compare('role_id',1);
-        $criteria->addSearchCondition('role.id' , $this->roleId );
-        $criteria->with = array('role');
+        $criteria->compare('status',$this->statusFilter,true);
         $criteria->order = 'status ,t.id DESC';
         return new CActiveDataProvider($this, array(
             'criteria'=>$criteria,
@@ -146,12 +145,11 @@ class Users extends CActiveRecord
         // @todo Please modify the following code to remove attributes that should not be searched.
 
         $criteria=new CDbCriteria;
-        $criteria->compare('username',$this->username,true);
-        $criteria->compare('password',$this->password,true);
-        $criteria->compare('t.status',$this->status);
-        $criteria->compare('role_id',2);
-        $criteria->addSearchCondition('role.id' , $this->roleId );
-        $criteria->with = array('role');
+        $criteria->compare('email',$this->email,true);
+        $criteria->addSearchCondition('teacherDetails.name',$this->fullName,true,'OR',"LIKE");
+        $criteria->addSearchCondition('teacherDetails.family',$this->fullName,true,'OR',"LIKE");
+        $criteria->with = array('teacherDetails');
+        $criteria->addCondition('role_id = 2');
         $criteria->order = 'status ,t.id DESC';
         return new CActiveDataProvider($this, array(
             'criteria'=>$criteria,
@@ -185,13 +183,12 @@ class Users extends CActiveRecord
         if($this->role_id == 1) {
             $model = new UserDetails;
             $model->user_id = $this->id;
-            $model->credit = 0;
             $model->save();
         }
         elseif($this->role_id == 2) {
             $model = new TeacherDetails();
             $model->user_id = $this->id;
-            var_dump($model->save());exit;
+            $model->save();
         }
         return true;
     }
