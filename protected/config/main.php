@@ -6,7 +6,7 @@ return array(
 	'name'=>'آوای شهیر',
     'timeZone' => 'Asia/Tehran',
     'theme' => 'abound',
-    'language' => 'fa_ir',
+    'language' => 'fa',
 	// preloading 'log' component
 	'preload'=>array('log','userCounter'),
 
@@ -15,6 +15,7 @@ return array(
         'application.vendor.*',
         'application.models.*',
 		'application.components.*',
+		'ext.EasyMultiLanguage.*',
 	),
 
 	'modules'=>array(
@@ -54,6 +55,7 @@ return array(
         ),
 		// uncomment the following to enable URLs in path-format
 		'urlManager'=>array(
+			'class'=>'EMUrlManager',
 			'urlFormat'=>'path',
             'showScriptName'=>false,
             'appendParams'=>true,
@@ -108,6 +110,9 @@ return array(
             'coreScriptPosition' => CClientScript::POS_HEAD,
             'defaultScriptFilePosition' => CClientScript::POS_END,
         ),
+		'coreMessages'=>array(
+				'basePath'=>null,
+		),
     ),
     'controllerMap' => array(
         'min' => array(
@@ -119,6 +124,11 @@ return array(
 	'params'=>array(
 		// this is used in contact page
 		'adminEmail'=>'webmaster@example.com',
-        'no-replay-email' => 'noreply@domain.com'
+        'no-replay-email' => 'noreply@domain.com',
+		'languages'=>array(
+				'fa' => 'فارسی',
+				'en' => 'English',
+		),
+		'default_language' => 'fa',
 	),
 );

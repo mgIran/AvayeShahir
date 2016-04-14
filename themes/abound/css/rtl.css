@@ -215,3 +215,13 @@ textarea{
 .operation-links > a:hover{
     color: #666;
 }
+
+#login-form input,
+#login-form .errorMessage{
+    display: block;
+}
+
+.button-column img{
+    width: 18px;
+    margin: 0 6px;
+}

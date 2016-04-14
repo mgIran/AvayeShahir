@@ -13,6 +13,7 @@
  * @property string $social_links
  * @property string $tell
  * @property string $address
+ * @property string $file
  */
 class TeacherDetails extends CActiveRecord
 {
@@ -24,6 +25,46 @@ class TeacherDetails extends CActiveRecord
 		return '{{teacher_details}}';
 	}
 
+	/**
+	 * __set
+	 *
+	 * Rewrite default setter, so we can dynamically add
+	 * new virtual attribtues such as name_en, name_de etc.
+	 *
+	 * @param string $name
+	 * @param string $value
+	 * @return string
+	 */
+
+	public function __set($name, $value)
+	{
+		if (EMHelper::WinnieThePooh($name, $this->behaviors()))
+			$this->{$name} = $value;
+		else
+			parent::__set($name, $value);
+	}
+
+
+	/**
+	 * behaviors
+	 *
+	 * @return array
+	 */
+	public function behaviors()
+	{
+		return array(
+				'EasyMultiLanguage'=>array(
+						'class' => 'ext.EasyMultiLanguage.EasyMultiLanguageBehavior',
+						// @todo Please change those attributes that should be translated.
+						'translated_attributes' => array('name','family','grade','resume','address'),
+						'admin_routes' => array('users/teacherDetails/update'),
+						//
+						'languages' => Yii::app()->params['languages'],
+						'default_language' => Yii::app()->params['default_language'],
+						'translations_table' => 'ym_translations',
+				),
+		);
+	}
 	/**
 	 * @return array validation rules for model attributes.
 	 */
@@ -40,7 +81,7 @@ class TeacherDetails extends CActiveRecord
 			array('grade', 'length', 'max'=>100),
 			array('social_links', 'length', 'max'=>2000),
 			array('tell', 'length', 'max'=>11),
-			array('resume, address', 'safe'),
+			array('resume, address, file', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('user_id, avatar, name, family, grade, resume, social_links, tell, address', 'safe', 'on'=>'search'),
@@ -66,11 +107,12 @@ class TeacherDetails extends CActiveRecord
 	{
 		return array(
 			'user_id' => 'User',
-			'avatar' => 'آواتار',
 			'name' => 'نام',
 			'family' => 'نام خانوادگی',
 			'grade' => 'سطح تحصیلات',
-			'resume' => 'روزمه',
+			'avatar' => 'آواتار',
+			'resume' => 'رزومه',
+			'file' => 'فایل رزومه',
 			'social_links' => 'لینک های اجتماعی',
 			'tell' => 'شماره تماس',
 			'address' => 'آدرس',
@@ -94,7 +136,6 @@ class TeacherDetails extends CActiveRecord
 		// @todo Please modify the following code to remove attributes that should not be searched.
 
 		$criteria=new CDbCriteria;
-
 		$criteria->compare('name',$this->name,true);
 		$criteria->compare('family',$this->family,true);
 		$criteria->compare('grade',$this->grade,true);

@@ -747,7 +747,7 @@ CREATE TABLE `ym_teacher_details` (
   `name` varchar(50) COLLATE utf8_persian_ci DEFAULT NULL COMMENT 'نام',
   `family` varchar(50) COLLATE utf8_persian_ci DEFAULT NULL COMMENT 'نام خانوادگی',
   `grade` varchar(100) COLLATE utf8_persian_ci DEFAULT NULL COMMENT 'سطح تحصیلات',
-  `resume` text COLLATE utf8_persian_ci COMMENT 'روزمه',
+  `resume` text COLLATE utf8_persian_ci COMMENT 'رزومه',
   `social_links` varchar(2000) COLLATE utf8_persian_ci DEFAULT NULL COMMENT 'لینک های اجتماعی',
   `tell` varchar(11) CHARACTER SET utf8 DEFAULT NULL COMMENT 'شماره تماس',
   `address` text COLLATE utf8_persian_ci COMMENT 'آدرس',

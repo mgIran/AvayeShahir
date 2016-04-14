@@ -2,6 +2,8 @@
 /* @var $this TeacherDetailsController */
 /* @var $model TeacherDetails */
 /* @var $form CActiveForm */
+/* @var $avatar string */
+/* @var $file string */
 ?>
 <? $this->renderPartial('//layouts/_flashMessage'); ?>
 <div class="form">
@@ -25,8 +27,8 @@
 				'name' => 'avatar',
 				'maxFiles' => 1,
 				'maxFileSize' => 1, //MB
-				'url' => Yii::app()->createUrl('/personnel/manage/upload'),
-				'deleteUrl' => Yii::app()->createUrl('/personnel/manage/deleteUpload'),
+				'url' => Yii::app()->createUrl('/users/teacherDetails/upload'),
+				'deleteUrl' => Yii::app()->createUrl('/users/teacherDetails/deleteUpload'),
 				'acceptedFiles' => 'image/jpeg , image/png',
 				'serverFiles' => $avatar,
 				'onSuccess' => '
@@ -142,7 +144,31 @@
 		?>
 		<?php echo $form->error($model,'resume'); ?>
 	</div>
-
+	<div class="row">
+		<?php echo $form->labelEx($model,'file'); ?>
+		<?php
+		$this->widget('ext.dropZoneUploader.dropZoneUploader', array(
+				'id' => 'uploaderFile',
+				'model' => $model,
+				'name' => 'file',
+				'maxFiles' => 1,
+				'maxFileSize' => 5, //MB
+				'url' => Yii::app()->createUrl('/users/teacherDetails/uploadFile'),
+				'deleteUrl' => Yii::app()->createUrl('/users/teacherDetails/deleteUploadFile'),
+				'acceptedFiles' => 'application/pdf ,application/word',
+				'serverFiles' => $file,
+				'onSuccess' => '
+				var responseObj = JSON.parse(res);
+				if(responseObj.state == "ok")
+				{
+					{serverName} = responseObj.fileName;
+				}else if(responseObj.state == "error"){
+					console.log(responseObj.msg);
+				}',
+		));
+		?>
+		<?php echo $form->error($model,'file'); ?>
+	</div>
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'ثبت' : 'ذخیره',array('class'=>'btn btn-success')); ?>
 	</div>

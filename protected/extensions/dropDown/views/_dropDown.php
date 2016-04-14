@@ -14,6 +14,10 @@
                 {
                     $hiddenValue = $selected;
                     echo $hiddenValue;
+                }elseif(in_array($selected ,array_keys($data)))
+                {
+                    $hiddenValue = $selected;
+                    echo $data[$hiddenValue];
                 }elseif($label)
                     echo $label;
                 else

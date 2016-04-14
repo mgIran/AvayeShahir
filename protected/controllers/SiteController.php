@@ -3,6 +3,7 @@
 class SiteController extends Controller
 {
     public $layout = '//layouts/public';
+
 	/**
 	 * Declares class-based actions.
 	 */
@@ -28,8 +29,11 @@ class SiteController extends Controller
 	 */
 	public function actionIndex()
 	{
-        Yii::app()->theme = 'market';
+        Yii::app()->theme = 'front-end';
+        Yii::import('courses.models.*');
+        $model = ClassCategories::model()->findByPk(11);
         $this->render('index', array(
+            'model' => $model
         ));
 	}
 
@@ -38,7 +42,7 @@ class SiteController extends Controller
 	 */
 	public function actionError()
 	{
-        Yii::app()->theme = 'market';
+        Yii::app()->theme = 'front-end';
         $this->layout = '//layouts/public';
 		if($error=Yii::app()->errorHandler->error)
 		{
@@ -123,7 +127,7 @@ class SiteController extends Controller
 	}
 
     public function actionMyFavorites(){
-        Yii::app()->theme = 'market';
+        Yii::app()->theme = 'front-end';
         $this->layout = '//layouts/public';
 
         Yii::import('advertises.models.*');
@@ -192,8 +196,8 @@ class SiteController extends Controller
     }
 
     public function actionRegister(){
-        Yii::app()->theme = 'market';
-        $this->layout = '//layouts/backgroundImage';
+        Yii::app()->theme = 'front-end';
+        $this->layout = '//layouts/public';
         Yii::import('users.models.*');
         $model = new Users('create');
         if ( isset( $_POST[ 'ajax' ] ) && $_POST[ 'ajax' ] === 'register-form' ) {
@@ -246,7 +250,7 @@ class SiteController extends Controller
 
     public function actionAbout(){
         Yii::import('pages.models.*');
-        Yii::app()->theme = 'market';
+        Yii::app()->theme = 'front-end';
         $this->layout = '//layouts/public';
         $model = Pages::model()->findByPk(2);
         $this->render('//site/pages/page',array('model' => $model));
@@ -254,7 +258,7 @@ class SiteController extends Controller
 
     public function actionContactUs(){
         Yii::import('pages.models.*');
-        Yii::app()->theme = 'market';
+        Yii::app()->theme = 'front-end';
         $this->layout = '//layouts/public';
         $model = Pages::model()->findByPk(3);
         $this->render('//site/pages/page',array('model' => $model));
@@ -263,7 +267,7 @@ class SiteController extends Controller
 
     public function actionTerms(){
         Yii::import('pages.models.*');
-        Yii::app()->theme = 'market';
+        Yii::app()->theme = 'front-end';
         $this->layout = '//layouts/public';
         $model = Pages::model()->findByPk(5);
         $this->render('//site/pages/page',array('model' => $model));
@@ -272,7 +276,7 @@ class SiteController extends Controller
 
    public function actionGuidance(){
         Yii::import('pages.models.*');
-        Yii::app()->theme = 'market';
+        Yii::app()->theme = 'front-end';
         $this->layout = '//layouts/public';
         $dataProvider = new CActiveDataProvider("Pages",array(
             'criteria' => array(

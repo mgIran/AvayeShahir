@@ -15,6 +15,7 @@
  * @property string $grade
  * @property string $tell
  * @property string $address
+ * @property string $file
  */
 class Personnel extends CActiveRecord
 {
@@ -40,7 +41,7 @@ class Personnel extends CActiveRecord
 			array('email, grade', 'length', 'max'=>100),
 			array('social_links', 'length', 'max'=>2000),
 			array('tell', 'length', 'max'=>11),
-			array('resume, address', 'safe'),
+			array('resume, address ,file', 'safe'),
 			// The following rule is used by search().
 			array('id, name, family, post, avatar, resume, email, social_links, grade', 'safe', 'on'=>'search'),
 		);
@@ -67,6 +68,7 @@ class Personnel extends CActiveRecord
 			'post' => 'سمت',
 			'avatar' => 'آواتار',
 			'resume' => 'رزومه',
+			'file' => 'فایل رزومه',
 			'email' => 'پست الکترونیک',
 			'social_links' => 'شبکه های اجتماعی',
 			'grade' => 'سطح تحصیلات',

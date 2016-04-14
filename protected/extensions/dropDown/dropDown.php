@@ -130,12 +130,13 @@ class dropDown extends CWidget
                 $script.= $ajaxFunc;
         }
 
-        if($this->onchange)
+        if(!$this->onclickAjax && $this->onchange)
         {
             $this->onchange = str_ireplace('{toggle}','$target.closest(".btn-group").children( ".dropdown-toggle" ).dropdown( "toggle" )',$this->onchange);
             $this->onchange = str_ireplace('{id}','$target.data("id")',$this->onchange);
-            $script.= $this->onchange;
-        }
+            $script.= CJavaScript::encode($this->onchange);
+        }elseif($this->onclickAjax && $this->onchange)
+            throw new CException('تنظیم همزمان رویداد onchange و onclickAjax ممکن نیست.' );
 
         $cs->registerScript( 'dropDown-' . $this->id, '
         $( "body").on( "click", "#' . $this->id . '.dropdown-menu li", function( event ) {
@@ -145,7 +146,7 @@ class dropDown extends CWidget
                 .end();
             $target.closest(".btn-group")
                 .find("#' . $this->id . '-hidden").val($target.data("id"));
-            ' . $script . '
+                ' . $script . '
                 return false;
         });'
         );

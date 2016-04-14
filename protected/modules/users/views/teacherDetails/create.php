@@ -1,6 +1,8 @@
 <?php
 /* @var $this TeacherDetailsController */
 /* @var $model TeacherDetails */
+/* @var $avatar string */
+/* @var $file string */
 
 $this->breadcrumbs=array(
 		'مدیریت اساتید'=>array('/users/teachers/admin'),
@@ -14,5 +16,4 @@ $this->menu=array(
 
 <h1>تکمیل اطلاعات</h1>
 
-<?php $this->renderPartial('_form', array('model'=>$model,
-										  'avatar' => $avatar)); ?>
+<?php $this->renderPartial('_form', array('model'=>$model,'avatar' => $avatar,'file' => $file)); ?>

@@ -32,7 +32,11 @@ class Controller extends CController
 
     public $sideRender = null;
 
-    public function beforeRender($view){
+    public function init(){
+        // for multi language
+        EMHelper::catchLanguage();
+
+        // set default meta tag values
         $this->description = Yii::app()->db->createCommand()
             ->select('value')
             ->from('ym_site_setting')
@@ -53,7 +57,7 @@ class Controller extends CController
             ->from('ym_site_setting')
             ->where('name = "default_title"')
             ->queryScalar();
-        return true;
+        parent::init();
     }
 
     public static function createAdminMenu()
@@ -122,9 +126,9 @@ class Controller extends CController
                     'itemOptions' => array('class' => 'dropdown' ,'tabindex' => "-1") ,
                     'linkOptions' => array('class' => 'dropdown-toggle' ,'data-toggle' => "dropdown") ,
                     'items' => array(
-                        array('label' => 'صفحات اصلی سایت' ,'url' => Yii::app()->createUrl('/pages/manage/admin/?slug=base')) ,
-                        array('label' => 'قوانین' ,'url' => Yii::app()->createUrl('/pages/manage/update/5?slug=rules')) ,
-                        array('label' => 'صفحات راهنما' ,'url' => Yii::app()->createUrl('/pages/manage/admin/?slug=guide')) ,
+                        array('label' => 'صفحات اصلی سایت' ,'url' => Yii::app()->createUrl('/pages/manage/admin/slug/base')) ,
+                        array('label' => 'قوانین' ,'url' => Yii::app()->createUrl('/pages/manage/update/id/5/slug/rules')) ,
+                        array('label' => 'صفحات راهنما' ,'url' => Yii::app()->createUrl('/pages/manage/admin/slug/guide')) ,
                         array('label' => 'صفحات آزاد' ,'url' => Yii::app()->createUrl('/pages/manage/admin/')) ,
                     )
                 ) ,

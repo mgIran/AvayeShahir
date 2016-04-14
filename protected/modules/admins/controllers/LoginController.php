@@ -21,10 +21,8 @@ class LoginController extends Controller
      */
     public function actionIndex()
     {
-        Yii::app()->theme = 'market';
-        $this->layout = '//layouts/backgroundImage';
         if(!Yii::app()->user->isGuest && Yii::app()->user->type === 'admin')
-            $this->redirect(array('/admins/'));
+            $this->redirect(array('/admins/dashboard'));
 
         $model = new AdminLoginForm;
         // if it is ajax validation request
@@ -38,10 +36,10 @@ class LoginController extends Controller
             $model->attributes = $_POST[ 'AdminLoginForm' ];
             // validate user input and redirect to the previous page if valid
             if ( $model->validate() && $model->login())
-                if(Yii::app()->user->returnUrl != Yii::app()->request->baseUrl.'/')
+                if(Yii::app()->user->returnUrl != Yii::app()->request->baseUrl.'/' && Yii::app()->user->returnUrl != Yii::app()->request->baseUrl.'/admins')
                     $this->redirect(Yii::app()->user->returnUrl);
                 else
-                    $this->redirect(Yii::app()->createUrl('/admins/'));
+                    $this->redirect(Yii::app()->createUrl('/admins/dashboard'));
         }
 // display the login form
         $this->render( 'index', array( 'model' => $model ) );

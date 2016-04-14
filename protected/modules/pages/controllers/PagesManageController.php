@@ -68,7 +68,7 @@ class PagesManageController extends Controller
 	 */
 	public function actionView($id)
 	{
-        Yii::app()->theme = 'market';
+        Yii::app()->theme = 'front-end';
         $this->layout = '//layouts/public';
 
         $model = $this->loadModel($id);

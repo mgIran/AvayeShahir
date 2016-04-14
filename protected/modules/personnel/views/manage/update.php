@@ -1,7 +1,10 @@
 <?php
 /* @var $this PersonnelManageController */
 /* @var $model Personnel */
+
 /* @var $avatar [] */
+/* @var $file [] */
+
 
 $this->breadcrumbs=array(
 	'کارمندان'=>array('admin'),
@@ -17,4 +20,4 @@ $this->menu=array(
 
 <h1>ویرایش کارمند <?php echo $model->name.' '.$model->family; ?></h1>
 
-<?php $this->renderPartial('_form', array('model'=>$model,'avatar' => $avatar)); ?>
+<?php $this->renderPartial('_form', array('model'=>$model,'avatar' => $avatar,'file' => $file)); ?>

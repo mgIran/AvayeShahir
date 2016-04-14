@@ -13,11 +13,11 @@
 	// There is a call to performAjaxValidation() commented in generated controller code.
 	// See class documentation of CActiveForm for details on this.
 	'enableAjaxValidation'=>false,
-)); ?>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'title'); ?>
-		<?php echo $form->textField($model,'title',array('size'=>50,'maxlength'=>50)); ?>
+));
+?>
+	<div class='row'>
+		<?php echo $form->labelEx($model,'title', array('class'=>'control-label')); ?>
+		<?php echo EMHelper::megaOgogo($model, 'title', array('class'=>'span7 pull-right')); ?>
 		<?php echo $form->error($model,'title'); ?>
 	</div>
 

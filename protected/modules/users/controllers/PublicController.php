@@ -54,8 +54,8 @@ class PublicController extends Controller
      */
     public function actionLogin()
     {
-        Yii::app()->theme = 'market';
-        $this->layout = '//layouts/backgroundImage';
+        Yii::app()->theme = 'front-end';
+        $this->layout = '//layouts/public';
         if(!Yii::app()->user->isGuest && Yii::app()->user->type === 'user')
             $this->redirect(array('/site/'));
 
@@ -93,7 +93,7 @@ class PublicController extends Controller
      */
     public function actionDashboard()
     {
-        Yii::app()->theme = 'market';
+        Yii::app()->theme = 'front-end';
         $this->layout = '//layouts/panel';
         $model=Users::model()->findByPk(Yii::app()->user->getId());
         $this->render('dashboard', array(
@@ -106,7 +106,7 @@ class PublicController extends Controller
      */
     public function actionSetting()
     {
-        Yii::app()->theme = 'market';
+        Yii::app()->theme = 'front-end';
         $this->layout = '//layouts/panel';
         $model=Users::model()->findByPk(Yii::app()->user->getId());
         $model->setScenario('update');

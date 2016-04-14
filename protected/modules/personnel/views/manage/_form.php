@@ -3,6 +3,7 @@
 /* @var $model Personnel */
 /* @var $form CActiveForm */
 /* @var $avatar string */
+/* @var $file string */
 ?>
 <? $this->renderPartial('//layouts/_flashMessage'); ?>
 <div class="form">
@@ -151,7 +152,31 @@
 		?>
 		<?php echo $form->error($model,'resume'); ?>
 	</div>
-
+	<div class="row">
+		<?php echo $form->labelEx($model,'file'); ?>
+		<?php
+		$this->widget('ext.dropZoneUploader.dropZoneUploader', array(
+			'id' => 'uploaderFile',
+			'model' => $model,
+			'name' => 'file',
+			'maxFiles' => 1,
+			'maxFileSize' => 5, //MB
+			'url' => Yii::app()->createUrl('/personnel/manage/uploadFile'),
+			'deleteUrl' => Yii::app()->createUrl('/personnel/manage/deleteUploadFile'),
+			'acceptedFiles' => 'application/pdf ,application/word',
+			'serverFiles' => $file,
+			'onSuccess' => '
+				var responseObj = JSON.parse(res);
+				if(responseObj.state == "ok")
+				{
+					{serverName} = responseObj.fileName;
+				}else if(responseObj.state == "error"){
+					console.log(responseObj.msg);
+				}',
+		));
+		?>
+		<?php echo $form->error($model,'file'); ?>
+	</div>
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'ثبت' : 'ذخیره',array('class'=>'btn btn-success')); ?>
 	</div>

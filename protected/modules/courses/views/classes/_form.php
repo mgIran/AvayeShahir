@@ -87,7 +87,8 @@ Yii::app()->user->returnUrl = Yii::app()->request->getRequestUri();
 		<?php
 		$this->widget("ext.ckeditor.CKEditor",array(
 				'model' => $model,
-				'attribute' => 'summary'
+				'attribute' => 'summary',
+				'multiLanguage' => true
 		));
 		?>
 		<?php echo $form->error($model,'summary'); ?>

@@ -19,7 +19,8 @@ class CoursesModule extends CWebModule
 		'manage' => 'courses.controllers.CoursesManageController',
 		'classes' => 'courses.controllers.ClassesManageController',
 		'categories' => 'courses.controllers.ClassCategoriesManageController',
-		'tags' => 'courses.controllers.ClassTagsManageController'
+		'tags' => 'courses.controllers.ClassTagsManageController',
+		'files' => 'courses.controllers.ClassCategoryFilesController'
 	);
 	public function beforeControllerAction($controller, $action)
 	{

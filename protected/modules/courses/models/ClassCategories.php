@@ -6,9 +6,11 @@
  * The followings are the available columns in table '{{class_categories}}':
  * @property string $id
  * @property string $title
+ * @property string $course_id
  *
  * The followings are the available model relations:
- * @property Classes[] $classes
+ * @property Courses $course
+ * @property ClassCategoryFiles[] $files
  */
 class ClassCategories extends CActiveRecord
 {
@@ -18,6 +20,47 @@ class ClassCategories extends CActiveRecord
 	public function tableName()
 	{
 		return '{{class_categories}}';
+	}
+
+	/**
+	 * __set
+	 *
+	 * Rewrite default setter, so we can dynamically add
+	 * new virtual attribtues such as name_en, name_de etc.
+	 *
+	 * @param string $name
+	 * @param string $value
+	 * @return string
+	 */
+
+	public function __set($name, $value)
+	{
+		if (EMHelper::WinnieThePooh($name, $this->behaviors()))
+			$this->{$name} = $value;
+		else
+			parent::__set($name, $value);
+	}
+
+
+	/**
+	 * behaviors
+	 *
+	 * @return array
+	 */
+	public function behaviors()
+	{
+		return array(
+			'EasyMultiLanguage'=>array(
+				'class' => 'ext.EasyMultiLanguage.EasyMultiLanguageBehavior',
+				// @todo Please change those attributes that should be translated.
+				'translated_attributes' => array('title'),
+				'admin_routes' => array('courses/categories/admin', 'courses/categories/update', 'courses/categories/create'),
+				//
+				'languages' => Yii::app()->params['languages'],
+				'default_language' => Yii::app()->params['default_language'],
+				'translations_table' => 'ym_translations',
+			),
+		);
 	}
 
 	/**
@@ -45,7 +88,9 @@ class ClassCategories extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'course' => array(self::BELONGS_TO, 'Courses', 'course_id'),
 			'classes' => array(self::HAS_MANY, 'Classes', 'category_id'),
+			'files' => array(self::HAS_MANY, 'ClassCategoryFiles', 'category_id'),
 		);
 	}
 
@@ -57,6 +102,7 @@ class ClassCategories extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'title' => 'عنوان',
+			'course_id' => 'دوره'
 		);
 	}
 

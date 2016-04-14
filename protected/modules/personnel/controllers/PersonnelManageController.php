@@ -28,7 +28,7 @@ class PersonnelManageController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','create','update','admin','delete', 'upload', 'deleteUpload'),
+				'actions'=>array('index','view','create','update','admin','delete', 'upload', 'deleteUpload', 'uploadFile', 'deleteUploadFile'),
 				'roles'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -62,8 +62,12 @@ class PersonnelManageController extends Controller
 		$avatarDIR = Yii::getPathOfAlias("webroot") . "/uploads/personnel/";
 		if (!is_dir($avatarDIR))
 			mkdir($avatarDIR);
+		$fileDIR = Yii::getPathOfAlias("webroot") . "/uploads/personnel/files/";
+		if (!is_dir($fileDIR))
+			mkdir($fileDIR);
 
 		$avatar = array();
+		$resumeFile = array();
 
 		if(isset($_POST['Personnel']))
 		{
@@ -88,12 +92,24 @@ class PersonnelManageController extends Controller
 						'serverName' => $file,
 				);
 			}
+			if (isset($_POST['Personnel']['file'])) {
+				$file = $_POST['Personnel']['file'];
+				$resumeFile = array(
+						'name' => $file,
+						'src' => $tmpUrl . '/' . $file,
+						'size' => filesize($tmpDIR . $file),
+						'serverName' => $file,
+				);
+			}
 			if($model->save())
 			{
 				if ($model->avatar and file_exists($tmpDIR.$model->avatar)) {
 					$imager = new Imager();
 					$imager->resize($tmpDIR.$model->avatar ,$avatarDIR.$model->avatar,400,400);
 					unlink($tmpDIR.$model->avatar);
+				}
+				if ($model->file and file_exists($tmpDIR.$model->file)) {
+					rename($tmpDIR.$model->file,$fileDIR.$model->file);
 				}
 				Yii::app()->user->setFlash('success' ,'<span class="icon-check"></span>&nbsp;&nbsp;اطلاعات با موفقیت ذخیره شد.');
 				$this->redirect(array('admin'));
@@ -103,7 +119,8 @@ class PersonnelManageController extends Controller
 
 		$this->render('create',array(
 			'model'=>$model,
-			'avatar' => $avatar
+			'avatar' => $avatar,
+			'file' => $resumeFile
 		));
 	}
 
@@ -122,7 +139,10 @@ class PersonnelManageController extends Controller
 		$tmpUrl = Yii::app()->createAbsoluteUrl('/uploads/temp/');
 		$avatarDIR = Yii::getPathOfAlias("webroot") . "/uploads/personnel/";
 		$avatarUrl = Yii::app()->createAbsoluteUrl('/uploads/personnel/');
+		$fileDIR = Yii::getPathOfAlias("webroot") . "/uploads/personnel/files/";
+		$fileUrl = Yii::app()->createAbsoluteUrl('/uploads/personnel/files/');
 
+		$flag = false;
 		$avatar = array();
 		if ($model->avatar and file_exists($avatarDIR.$model->avatar)) {
 			$file = $model->avatar;
@@ -130,6 +150,18 @@ class PersonnelManageController extends Controller
 					'name' => $file,
 					'src' => $avatarUrl . '/' . $file,
 					'size' => filesize($avatarDIR . $file),
+					'serverName' => $file,
+			);
+		}
+
+		$flag2 = false;
+		$resumeFile = array();
+		if ($model->file and file_exists($fileDIR.$model->file)) {
+			$file = $model->file;
+			$resumeFile = array(
+					'name' => $file,
+					'src' => $fileUrl . '/' . $file,
+					'size' => filesize($fileDIR . $file),
 					'serverName' => $file,
 			);
 		}
@@ -148,7 +180,7 @@ class PersonnelManageController extends Controller
 				$model->social_links = CJSON::encode($_POST['Personnel']['social_links']);
 			else
 				$model->social_links = null;
-			if (isset($_POST['Personnel']['avatar'])) {
+			if (isset($_POST['Personnel']['avatar'])&& file_exists($tmpDIR.$_POST['Personnel']['avatar'])) {
 				$file = $_POST['Personnel']['avatar'];
 				$avatar = array(
 						'name' => $file,
@@ -156,13 +188,28 @@ class PersonnelManageController extends Controller
 						'size' => filesize($tmpDIR . $file),
 						'serverName' => $file,
 				);
+				$flag = true;
+			}
+
+			if (isset($_POST['Personnel']['file']) && file_exists($tmpDIR.$_POST['Personnel']['file'])) {
+				$file = $_POST['Personnel']['file'];
+				$resumeFile = array(
+						'name' => $file,
+						'src' => $tmpUrl . '/' . $file,
+						'size' => filesize($tmpDIR . $file),
+						'serverName' => $file,
+				);
+				$flag2 = true;
 			}
 			if($model->save())
 			{
-				if ($model->avatar and file_exists($tmpDIR.$model->avatar)) {
+				if ($flag && $model->avatar and file_exists($tmpDIR.$model->avatar)) {
 					$imager = new Imager();
 					$imager->resize($tmpDIR.$model->avatar ,$avatarDIR.$model->avatar,400,400);
 					unlink($tmpDIR.$model->avatar);
+				}
+				if ($flag2 && $model->file and file_exists($tmpDIR.$model->file)) {
+					rename($tmpDIR.$model->file,$fileDIR.$model->file);
 				}
 				Yii::app()->user->setFlash('success' ,'<span class="icon-check"></span>&nbsp;&nbsp;اطلاعات با موفقیت ذخیره شد.');
 				$this->redirect(array('admin'));
@@ -172,7 +219,8 @@ class PersonnelManageController extends Controller
 
 		$this->render('update',array(
 			'model'=>$model,
-			'avatar' => $avatar
+			'avatar' => $avatar,
+			'file' => $resumeFile
 		));
 	}
 
@@ -184,9 +232,12 @@ class PersonnelManageController extends Controller
 	public function actionDelete($id)
 	{
 		$avatarDIR = Yii::getPathOfAlias("webroot") . "/uploads/personnel/";
+		$fileDIR = Yii::getPathOfAlias("webroot") . "/uploads/personnel/files";
 		$model = $this->loadModel($id);
-		if(file_exists($avatarDIR.$model->avatar))
+		if($model->avatar && file_exists($avatarDIR.$model->avatar))
 			unlink($avatarDIR.$model->avatar);
+		if($model->file && file_exists($fileDIR.$model->file))
+			unlink($fileDIR.$model->file);
 		$model->delete();
 
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
@@ -245,6 +296,9 @@ class PersonnelManageController extends Controller
 		}
 	}
 
+	/**
+	 * image uploader
+	 */
 	public function actionUpload()
 	{
 		$tempDir = Yii::getPathOfAlias("webroot") . '/uploads/temp';
@@ -282,6 +336,58 @@ class PersonnelManageController extends Controller
 			if ($model) {
 				if (@unlink($Dir . $model->avatar)) {
 					$model->updateByPk($model->id, array('avatar' => null));
+					$response = ['state' => 'ok', 'msg' => $this->implodeErrors($model)];
+				} else
+					$response = ['state' => 'error', 'msg' => 'مشکل ایجاد شده است'];
+			} else {
+				@unlink($tempDir . $fileName);
+				$response = ['state' => 'ok', 'msg' => 'حذف شد.'];
+			}
+			echo CJSON::encode($response);
+			Yii::app()->end();
+		}
+	}
+
+	/**
+	 * file uploader
+	 */
+	public function actionUploadFile()
+	{
+		$tempDir = Yii::getPathOfAlias("webroot") . '/uploads/temp';
+
+		if (!is_dir($tempDir))
+			mkdir($tempDir);
+		if (isset($_FILES)) {
+			$file = $_FILES['file'];
+			$ext = pathinfo($file['name'], PATHINFO_EXTENSION);
+			$file['name'] = Controller::generateRandomString(5) . time();
+			while (file_exists($tempDir . DIRECTORY_SEPARATOR . $file['name']))
+				$file['name'] = Controller::generateRandomString(5) . time();
+			$file['name'] = $file['name'] . '.' . $ext;
+			if (move_uploaded_file($file['tmp_name'], $tempDir . DIRECTORY_SEPARATOR . CHtml::encode($file['name'])))
+				$response = ['state' => 'ok', 'fileName' => CHtml::encode($file['name'])];
+			else
+				$response = ['state' => 'error', 'msg' => 'فایل آپلود نشد.'];
+		} else
+			$response = ['state' => 'error', 'msg' => 'فایلی ارسال نشده است.'];
+		echo CJSON::encode($response);
+		Yii::app()->end();
+	}
+
+	public function actionDeleteUploadFile()
+	{
+		$Dir = Yii::getPathOfAlias("webroot") . '/uploads/personnel/files/';
+
+		if (isset($_POST['fileName'])) {
+
+			$fileName = $_POST['fileName'];
+
+			$tempDir = Yii::getPathOfAlias("webroot") . '/uploads/temp/';
+
+			$model = Personnel::model()->findByAttributes(array('file' => $fileName));
+			if ($model) {
+				if (@unlink($Dir . $model->file)) {
+					$model->updateByPk($model->id, array('file' => null));
 					$response = ['state' => 'ok', 'msg' => $this->implodeErrors($model)];
 				} else
 					$response = ['state' => 'error', 'msg' => 'مشکل ایجاد شده است'];

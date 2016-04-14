@@ -9,12 +9,13 @@ class CKEditor extends CWidget
     public $htmlOptions=array();
     public $config='default';
     public $id=false;
+    public $multiLanguage = false;
 
 
     public function init()
     {
         if(!$this->id)
-            $this->id = rand(0,100);
+            $this->id = 'ck'.rand(0,100);
     }
 
     public function run()
@@ -23,13 +24,14 @@ class CKEditor extends CWidget
 
         //Yii::app()->clientScript->registerScriptFile($this->getAssetsUrl().'/ckeditor.js', CClientScript::POS_END);
         //Yii::app()->clientScript->registerScriptFile(Yii::getPathOfAlias("webroot").'/js/ckeditor.js', CClientScript::POS_END);
-        echo '<script type="application/javascript" src="'.Yii::app()->createAbsoluteUrl('/js/ckeditor/ckeditor.js').'"></script>';
+        echo '<script type="application/javascript" src="'.Yii::app()->baseUrl .'/js/ckeditor/ckeditor.js'.'"></script>';
         $this->render('view', array(
             'id' => $this->id,
             'model'=>$this->model,
             'attribute'=>$this->attribute,
             'htmlOptions'=>$this->htmlOptions,
             'config'=>$this->makeConfig(),
+            'multiLanguage' => $this->multiLanguage
         ));
     }
 

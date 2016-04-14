@@ -55,7 +55,7 @@ class ClassCategoriesManageController extends Controller
 			if($model->save())
 			{
 				Yii::app()->user->setFlash('success' ,'<span class="icon-check"></span>&nbsp;&nbsp;	اطلاعات با موفقیت ذخیره شد.');
-				$this->redirect(array('admin'));
+				$this->redirect(array('update?id='.$model->id));
 			}else
 				Yii::app()->user->setFlash('failed' ,'در ثبت اطلاعات خطایی رخ داده است! لطفا مجددا تلاش کنید.');
 		}
@@ -73,9 +73,6 @@ class ClassCategoriesManageController extends Controller
 	public function actionUpdate($id)
 	{
 		$model=$this->loadModel($id);
-
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
 
 		if(isset($_POST['ClassCategories']))
 		{
