@@ -16108,3 +16108,111 @@ in C:\wamp\www\Yusef\shahir\index.php (11)
 in C:\wamp\www\Yusef\shahir\protected\modules\users\controllers\UsersManageController.php (130)
 in C:\wamp\www\Yusef\shahir\protected\modules\users\controllers\UsersManageController.php (119)
 in C:\wamp\www\Yusef\shahir\index.php (11)
+2016/04/14 14:47:23 [warning] [application] Failed to set unsafe attribute "course_id" of "ClassCategories".
+in C:\wamp\www\Yusef\shahir\protected\modules\courses\models\ClassCategories.php (41)
+in C:\wamp\www\Yusef\shahir\protected\modules\courses\controllers\ClassCategoriesManageController.php (54)
+in C:\wamp\www\Yusef\shahir\index.php (11)
+2016/04/16 11:01:04 [warning] [application] Failed to set unsafe attribute "course_id" of "ClassCategories".
+in C:\wamp\www\Yusef\shahir\protected\modules\courses\models\ClassCategories.php (41)
+in C:\wamp\www\Yusef\shahir\protected\modules\courses\controllers\ClassCategoriesManageController.php (54)
+in C:\wamp\www\Yusef\shahir\index.php (11)
+2016/04/16 11:03:28 [warning] [application] Failed to set unsafe attribute "course_id" of "ClassCategories".
+in C:\wamp\www\Yusef\shahir\protected\modules\courses\models\ClassCategories.php (41)
+in C:\wamp\www\Yusef\shahir\protected\modules\courses\controllers\ClassCategoriesManageController.php (54)
+in C:\wamp\www\Yusef\shahir\index.php (11)
+2016/04/16 11:04:34 [warning] [application] Failed to set unsafe attribute "course_id" of "ClassCategories".
+in C:\wamp\www\Yusef\shahir\protected\modules\courses\models\ClassCategories.php (41)
+in C:\wamp\www\Yusef\shahir\protected\modules\courses\controllers\ClassCategoriesManageController.php (51)
+in C:\wamp\www\Yusef\shahir\index.php (11)
+2016/04/16 11:18:52 [warning] [application] Failed to set unsafe attribute "course_id" of "ClassCategories".
+in C:\wamp\www\Yusef\shahir\protected\modules\courses\models\ClassCategories.php (41)
+in C:\wamp\www\Yusef\shahir\protected\modules\courses\controllers\ClassCategoriesManageController.php (51)
+in C:\wamp\www\Yusef\shahir\index.php (11)
+2016/04/16 11:23:30 [warning] [application] Failed to set unsafe attribute "summary" of "ClassCategories".
+in C:\wamp\www\Yusef\shahir\protected\modules\courses\models\ClassCategories.php (41)
+in C:\wamp\www\Yusef\shahir\protected\modules\courses\controllers\ClassCategoriesManageController.php (76)
+in C:\wamp\www\Yusef\shahir\index.php (11)
+2016/04/16 11:23:30 [warning] [application] Failed to set unsafe attribute "course_id" of "ClassCategories".
+in C:\wamp\www\Yusef\shahir\protected\modules\courses\models\ClassCategories.php (41)
+in C:\wamp\www\Yusef\shahir\protected\modules\courses\controllers\ClassCategoriesManageController.php (76)
+in C:\wamp\www\Yusef\shahir\index.php (11)
+2016/04/16 11:23:50 [warning] [application] Failed to set unsafe attribute "summary" of "ClassCategories".
+in C:\wamp\www\Yusef\shahir\protected\modules\courses\models\ClassCategories.php (41)
+in C:\wamp\www\Yusef\shahir\protected\modules\courses\controllers\ClassCategoriesManageController.php (76)
+in C:\wamp\www\Yusef\shahir\index.php (11)
+2016/04/16 11:23:50 [warning] [application] Failed to set unsafe attribute "course_id" of "ClassCategories".
+in C:\wamp\www\Yusef\shahir\protected\modules\courses\models\ClassCategories.php (41)
+in C:\wamp\www\Yusef\shahir\protected\modules\courses\controllers\ClassCategoriesManageController.php (76)
+in C:\wamp\www\Yusef\shahir\index.php (11)
+2016/04/16 11:25:19 [warning] [application] Failed to set unsafe attribute "summary" of "ClassCategories".
+in C:\wamp\www\Yusef\shahir\protected\modules\courses\models\ClassCategories.php (41)
+in C:\wamp\www\Yusef\shahir\protected\modules\courses\controllers\ClassCategoriesManageController.php (77)
+in C:\wamp\www\Yusef\shahir\index.php (11)
+2016/04/16 11:25:19 [warning] [application] Failed to set unsafe attribute "course_id" of "ClassCategories".
+in C:\wamp\www\Yusef\shahir\protected\modules\courses\models\ClassCategories.php (41)
+in C:\wamp\www\Yusef\shahir\protected\modules\courses\controllers\ClassCategoriesManageController.php (77)
+in C:\wamp\www\Yusef\shahir\index.php (11)
+2016/04/16 11:25:55 [warning] [application] Failed to set unsafe attribute "summary" of "ClassCategories".
+in C:\wamp\www\Yusef\shahir\protected\modules\courses\models\ClassCategories.php (41)
+in C:\wamp\www\Yusef\shahir\protected\modules\courses\controllers\ClassCategoriesManageController.php (51)
+in C:\wamp\www\Yusef\shahir\index.php (11)
+2016/04/16 11:25:55 [warning] [application] Failed to set unsafe attribute "course_id" of "ClassCategories".
+in C:\wamp\www\Yusef\shahir\protected\modules\courses\models\ClassCategories.php (41)
+in C:\wamp\www\Yusef\shahir\protected\modules\courses\controllers\ClassCategoriesManageController.php (51)
+in C:\wamp\www\Yusef\shahir\index.php (11)
+2016/04/16 11:27:15 [warning] [application] Failed to set unsafe attribute "summary" of "ClassCategories".
+in C:\wamp\www\Yusef\shahir\protected\modules\courses\models\ClassCategories.php (41)
+in C:\wamp\www\Yusef\shahir\protected\modules\courses\controllers\ClassCategoriesManageController.php (51)
+in C:\wamp\www\Yusef\shahir\index.php (11)
+2016/04/16 11:27:15 [warning] [application] Failed to set unsafe attribute "course_id" of "ClassCategories".
+in C:\wamp\www\Yusef\shahir\protected\modules\courses\models\ClassCategories.php (41)
+in C:\wamp\www\Yusef\shahir\protected\modules\courses\controllers\ClassCategoriesManageController.php (51)
+in C:\wamp\www\Yusef\shahir\index.php (11)
+2016/04/16 11:27:30 [warning] [application] Failed to set unsafe attribute "summary" of "ClassCategories".
+in C:\wamp\www\Yusef\shahir\protected\modules\courses\models\ClassCategories.php (41)
+in C:\wamp\www\Yusef\shahir\protected\modules\courses\controllers\ClassCategoriesManageController.php (51)
+in C:\wamp\www\Yusef\shahir\index.php (11)
+2016/04/16 11:27:30 [warning] [application] Failed to set unsafe attribute "course_id" of "ClassCategories".
+in C:\wamp\www\Yusef\shahir\protected\modules\courses\models\ClassCategories.php (41)
+in C:\wamp\www\Yusef\shahir\protected\modules\courses\controllers\ClassCategoriesManageController.php (51)
+in C:\wamp\www\Yusef\shahir\index.php (11)
+2016/04/16 11:27:49 [warning] [application] Failed to set unsafe attribute "summary" of "ClassCategories".
+in C:\wamp\www\Yusef\shahir\protected\modules\courses\models\ClassCategories.php (41)
+in C:\wamp\www\Yusef\shahir\protected\modules\courses\controllers\ClassCategoriesManageController.php (51)
+in C:\wamp\www\Yusef\shahir\index.php (11)
+2016/04/16 11:27:49 [warning] [application] Failed to set unsafe attribute "course_id" of "ClassCategories".
+in C:\wamp\www\Yusef\shahir\protected\modules\courses\models\ClassCategories.php (41)
+in C:\wamp\www\Yusef\shahir\protected\modules\courses\controllers\ClassCategoriesManageController.php (51)
+in C:\wamp\www\Yusef\shahir\index.php (11)
+2016/04/16 11:28:14 [warning] [application] Failed to set unsafe attribute "summary" of "ClassCategories".
+in C:\wamp\www\Yusef\shahir\protected\modules\courses\models\ClassCategories.php (41)
+in C:\wamp\www\Yusef\shahir\protected\modules\courses\controllers\ClassCategoriesManageController.php (51)
+in C:\wamp\www\Yusef\shahir\index.php (11)
+2016/04/16 11:28:14 [warning] [application] Failed to set unsafe attribute "course_id" of "ClassCategories".
+in C:\wamp\www\Yusef\shahir\protected\modules\courses\models\ClassCategories.php (41)
+in C:\wamp\www\Yusef\shahir\protected\modules\courses\controllers\ClassCategoriesManageController.php (51)
+in C:\wamp\www\Yusef\shahir\index.php (11)
+2016/04/16 11:28:24 [warning] [application] Failed to set unsafe attribute "summary" of "ClassCategories".
+in C:\wamp\www\Yusef\shahir\protected\modules\courses\models\ClassCategories.php (41)
+in C:\wamp\www\Yusef\shahir\protected\modules\courses\controllers\ClassCategoriesManageController.php (51)
+in C:\wamp\www\Yusef\shahir\index.php (11)
+2016/04/16 11:28:24 [warning] [application] Failed to set unsafe attribute "course_id" of "ClassCategories".
+in C:\wamp\www\Yusef\shahir\protected\modules\courses\models\ClassCategories.php (41)
+in C:\wamp\www\Yusef\shahir\protected\modules\courses\controllers\ClassCategoriesManageController.php (51)
+in C:\wamp\www\Yusef\shahir\index.php (11)
+2016/04/16 11:30:06 [warning] [application] Failed to set unsafe attribute "course_id" of "ClassCategories".
+in C:\wamp\www\Yusef\shahir\protected\modules\courses\models\ClassCategories.php (42)
+in C:\wamp\www\Yusef\shahir\protected\modules\courses\controllers\ClassCategoriesManageController.php (51)
+in C:\wamp\www\Yusef\shahir\index.php (11)
+2016/04/16 11:30:15 [warning] [application] Failed to set unsafe attribute "course_id" of "ClassCategories".
+in C:\wamp\www\Yusef\shahir\protected\modules\courses\models\ClassCategories.php (42)
+in C:\wamp\www\Yusef\shahir\protected\modules\courses\controllers\ClassCategoriesManageController.php (51)
+in C:\wamp\www\Yusef\shahir\index.php (11)
+2016/04/16 11:30:26 [warning] [application] Failed to set unsafe attribute "course_id" of "ClassCategories".
+in C:\wamp\www\Yusef\shahir\protected\modules\courses\models\ClassCategories.php (42)
+in C:\wamp\www\Yusef\shahir\protected\modules\courses\controllers\ClassCategoriesManageController.php (51)
+in C:\wamp\www\Yusef\shahir\index.php (11)
+2016/04/16 11:30:33 [warning] [application] Failed to set unsafe attribute "course_id" of "ClassCategories".
+in C:\wamp\www\Yusef\shahir\protected\modules\courses\models\ClassCategories.php (42)
+in C:\wamp\www\Yusef\shahir\protected\modules\courses\controllers\ClassCategoriesManageController.php (51)
+in C:\wamp\www\Yusef\shahir\index.php (11)

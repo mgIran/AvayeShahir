@@ -7,6 +7,7 @@
  * @property string $id
  * @property string $title
  * @property string $course_id
+ * @property string $summary
  *
  * The followings are the available model relations:
  * @property Courses $course
@@ -53,7 +54,7 @@ class ClassCategories extends CActiveRecord
 			'EasyMultiLanguage'=>array(
 				'class' => 'ext.EasyMultiLanguage.EasyMultiLanguageBehavior',
 				// @todo Please change those attributes that should be translated.
-				'translated_attributes' => array('title'),
+				'translated_attributes' => array('title','summary'),
 				'admin_routes' => array('courses/categories/admin', 'courses/categories/update', 'courses/categories/create'),
 				//
 				'languages' => Yii::app()->params['languages'],
@@ -74,9 +75,10 @@ class ClassCategories extends CActiveRecord
 			array('title','required'),
 			array('title','unique'),
 		  	array('title', 'length', 'max'=>50),
+			array('summary' , 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, title', 'safe', 'on'=>'search'),
+			array('id, title ,summary', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -102,7 +104,8 @@ class ClassCategories extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'title' => 'عنوان',
-			'course_id' => 'دوره'
+			'summary' => 'توضیحات',
+			'course_id' => 'دوره موردنظر'
 		);
 	}
 

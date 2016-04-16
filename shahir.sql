@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50612
 File Encoding         : 65001
 
-Date: 2016-04-11 12:50:50
+Date: 2016-04-16 11:31:23
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -75,12 +75,11 @@ CREATE TABLE `ym_classes` (
   KEY `course_id` (`course_id`),
   CONSTRAINT `ym_classes_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `ym_class_categories` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
   CONSTRAINT `ym_classes_ibfk_2` FOREIGN KEY (`course_id`) REFERENCES `ym_courses` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
 
 -- ----------------------------
 -- Records of ym_classes
 -- ----------------------------
-INSERT INTO `ym_classes` VALUES ('9', 'ترم 1', '<p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.</p>\r\n', '50', '150000', '1458419400', '1461007800', '1461094200', '1463686200', '11', '9', '46');
 
 -- ----------------------------
 -- Table structure for ym_class_categories
@@ -89,13 +88,36 @@ DROP TABLE IF EXISTS `ym_class_categories`;
 CREATE TABLE `ym_class_categories` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(50) CHARACTER SET utf8 COLLATE utf8_persian_ci DEFAULT NULL COMMENT 'عنوان',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+  `course_id` int(11) unsigned DEFAULT NULL,
+  `summary` text,
+  PRIMARY KEY (`id`),
+  KEY `course_id` (`course_id`),
+  CONSTRAINT `ym_class_categories_ibfk_1` FOREIGN KEY (`course_id`) REFERENCES `ym_courses` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of ym_class_categories
 -- ----------------------------
-INSERT INTO `ym_class_categories` VALUES ('11', 'ترمیک');
+INSERT INTO `ym_class_categories` VALUES ('19', 'asdghh', null, 'sadf');
+
+-- ----------------------------
+-- Table structure for ym_class_category_files
+-- ----------------------------
+DROP TABLE IF EXISTS `ym_class_category_files`;
+CREATE TABLE `ym_class_category_files` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(50) COLLATE utf8_persian_ci NOT NULL COMMENT 'عنوان',
+  `path` varchar(500) COLLATE utf8_persian_ci NOT NULL COMMENT 'فایل',
+  `file_type` varchar(50) COLLATE utf8_persian_ci NOT NULL COMMENT 'نوع فایل',
+  `category_id` int(10) unsigned NOT NULL COMMENT 'گروه',
+  PRIMARY KEY (`id`),
+  KEY `category_id` (`category_id`),
+  CONSTRAINT `ym_class_category_files_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `ym_class_categories` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
+
+-- ----------------------------
+-- Records of ym_class_category_files
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for ym_class_tags
@@ -125,14 +147,13 @@ CREATE TABLE `ym_class_tag_rel` (
   `class_id` int(10) unsigned NOT NULL,
   PRIMARY KEY (`tag_id`,`class_id`),
   KEY `class_id` (`class_id`),
-  CONSTRAINT `ym_class_tag_rel_ibfk_2` FOREIGN KEY (`class_id`) REFERENCES `ym_classes` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
-  CONSTRAINT `ym_class_tag_rel_ibfk_1` FOREIGN KEY (`tag_id`) REFERENCES `ym_class_tags` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
+  CONSTRAINT `ym_class_tag_rel_ibfk_1` FOREIGN KEY (`tag_id`) REFERENCES `ym_class_tags` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  CONSTRAINT `ym_class_tag_rel_ibfk_2` FOREIGN KEY (`class_id`) REFERENCES `ym_classes` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
 
 -- ----------------------------
 -- Records of ym_class_tag_rel
 -- ----------------------------
-INSERT INTO `ym_class_tag_rel` VALUES ('29', '9');
 
 -- ----------------------------
 -- Table structure for ym_counter_save
@@ -147,11 +168,11 @@ CREATE TABLE `ym_counter_save` (
 -- ----------------------------
 -- Records of ym_counter_save
 -- ----------------------------
-INSERT INTO `ym_counter_save` VALUES ('counter', '6');
-INSERT INTO `ym_counter_save` VALUES ('day_time', '2457490');
+INSERT INTO `ym_counter_save` VALUES ('counter', '10');
+INSERT INTO `ym_counter_save` VALUES ('day_time', '2457495');
 INSERT INTO `ym_counter_save` VALUES ('max_count', '1');
 INSERT INTO `ym_counter_save` VALUES ('max_time', '1459755000');
-INSERT INTO `ym_counter_save` VALUES ('yesterday', '1');
+INSERT INTO `ym_counter_save` VALUES ('yesterday', '0');
 
 -- ----------------------------
 -- Table structure for ym_counter_users
@@ -166,7 +187,7 @@ CREATE TABLE `ym_counter_users` (
 -- ----------------------------
 -- Records of ym_counter_users
 -- ----------------------------
-INSERT INTO `ym_counter_users` VALUES ('837ec5754f503cfaaee0929fd48974e7', '1460361891');
+INSERT INTO `ym_counter_users` VALUES ('837ec5754f503cfaaee0929fd48974e7', '1460790050');
 
 -- ----------------------------
 -- Table structure for ym_courses
@@ -202,7 +223,7 @@ CREATE TABLE `ym_pages` (
   PRIMARY KEY (`id`),
   KEY `category_id` (`category_id`),
   CONSTRAINT `ym_pages_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `ym_page_categories` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of ym_pages
@@ -250,13 +271,14 @@ CREATE TABLE `ym_personnel` (
   `grade` varchar(100) COLLATE utf8_persian_ci DEFAULT NULL COMMENT 'سطح تحصیلات',
   `tell` varchar(11) COLLATE utf8_persian_ci DEFAULT NULL,
   `address` text COLLATE utf8_persian_ci,
+  `file` varchar(500) COLLATE utf8_persian_ci DEFAULT NULL COMMENT 'فایل رزومه',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
 
 -- ----------------------------
 -- Records of ym_personnel
 -- ----------------------------
-INSERT INTO `ym_personnel` VALUES ('2', 'لیندا', 'رستگار', 'مدیرعامل', null, '<p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.</p>\r\n', 'khadem@gmail.com', '{\"0\":{\"value\":\"http:\\/\\/facebook.com\\/linda\"},\"1\":{\"value\":\"http:\\/\\/twitter.com\\/linda\"},\"3\":{\"title\":\"\\u0641\\u06cc\\u0633 \\u0646\\u0645\\u0627\",\"value\":\"http:\\/\\/facenama.ir\\/linda\"}}', 'دکترای زبان انگلیسی', '09122341201', 'تهرانپارس، فلکه اول، خ امیری طائمه ( گلبزگ شرقی )، پلاک 110, واحد سه.                                      \r\n');
+INSERT INTO `ym_personnel` VALUES ('3', 'شفیع', 'رضایی', 'وکیل پایه یک', null, '<p>sadsadad</p>\r\n', 'khadem@gmail.com', '{\"0\":{\"value\":\"http:\\/\\/facebook.com\\/linda\"},\"1\":{\"value\":\"http:\\/\\/twitter.com\\/linda\"},\"3\":{\"title\":\"\\u0641\\u06cc\\u0633 \\u0646\\u0645\\u0627\",\"value\":\"http:\\/\\/facenama.ir\\/linda\"}}', 'دکترای زبان انگلیسی', '09122341201', 'asd', null);
 
 -- ----------------------------
 -- Table structure for ym_places
@@ -732,10 +754,10 @@ CREATE TABLE `ym_site_setting` (
 -- ----------------------------
 -- Records of ym_site_setting
 -- ----------------------------
-INSERT INTO `ym_site_setting` VALUES ('1', 'site_title', 'عنوان سایت', 'نیازمندی های آنلاین ');
-INSERT INTO `ym_site_setting` VALUES ('2', 'default_title', 'عنوان پیش فرض صفحات', 'تابلو ');
-INSERT INTO `ym_site_setting` VALUES ('3', 'keywords', 'کلمات کلیدی سایت', 'خرید، فروش، دست دوم، خودرو، املاک، موبایل، وسایل خانگی، تبلت، پوشاک ، نوزاد و سیسمونی، صوتی و تصویری، دوربین عکاسی فیلمبرداری، کنسول بازی، آرایشی، بهداشتی، زیبایی، جواهر، بدلیجات، ساعت، آنتیک، خدمات، آگهی، نیازمندی، استخدام،');
-INSERT INTO `ym_site_setting` VALUES ('4', 'site_description', 'شرح وبسایت', 'تابلو فضای داد و ستد آنلاین و نیازمندی های خرید و فروش اینترنتی رایگان در بخش های املاک، خودرو، وسایل خانگی، موبایل، پوشاک، آنتیک، آرایشی زیبایی بهداشتی، عکاسی و ...');
+INSERT INTO `ym_site_setting` VALUES ('1', 'site_title', 'عنوان سایت', 'موسسه زبان انگلیسی');
+INSERT INTO `ym_site_setting` VALUES ('2', 'default_title', 'عنوان پیش فرض صفحات', ' آوای شهیر');
+INSERT INTO `ym_site_setting` VALUES ('3', 'keywords', 'کلمات کلیدی سایت', '');
+INSERT INTO `ym_site_setting` VALUES ('4', 'site_description', 'شرح وبسایت', '');
 
 -- ----------------------------
 -- Table structure for ym_teacher_details
@@ -747,10 +769,11 @@ CREATE TABLE `ym_teacher_details` (
   `name` varchar(50) COLLATE utf8_persian_ci DEFAULT NULL COMMENT 'نام',
   `family` varchar(50) COLLATE utf8_persian_ci DEFAULT NULL COMMENT 'نام خانوادگی',
   `grade` varchar(100) COLLATE utf8_persian_ci DEFAULT NULL COMMENT 'سطح تحصیلات',
-  `resume` text COLLATE utf8_persian_ci COMMENT 'رزومه',
+  `resume` text COLLATE utf8_persian_ci COMMENT 'روزمه',
   `social_links` varchar(2000) COLLATE utf8_persian_ci DEFAULT NULL COMMENT 'لینک های اجتماعی',
   `tell` varchar(11) CHARACTER SET utf8 DEFAULT NULL COMMENT 'شماره تماس',
   `address` text COLLATE utf8_persian_ci COMMENT 'آدرس',
+  `file` varchar(500) COLLATE utf8_persian_ci DEFAULT NULL COMMENT 'فایل رزومه',
   PRIMARY KEY (`user_id`),
   CONSTRAINT `ym_teacher_details_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `ym_users` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
@@ -758,6 +781,7 @@ CREATE TABLE `ym_teacher_details` (
 -- ----------------------------
 -- Records of ym_teacher_details
 -- ----------------------------
+INSERT INTO `ym_teacher_details` VALUES ('29', '8LFMB1460442591.jpg', 'amin', 'mehdi', '', '', null, '', '', '8QvrX1460442698.pdf');
 
 -- ----------------------------
 -- Table structure for ym_towns
@@ -805,6 +829,30 @@ INSERT INTO `ym_towns` VALUES ('30', 'همدان');
 INSERT INTO `ym_towns` VALUES ('31', 'يزد');
 
 -- ----------------------------
+-- Table structure for ym_translations
+-- ----------------------------
+DROP TABLE IF EXISTS `ym_translations`;
+CREATE TABLE `ym_translations` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `table_name` varchar(100) NOT NULL,
+  `model_id` int(11) NOT NULL,
+  `attribute` varchar(100) NOT NULL,
+  `lang` varchar(6) NOT NULL,
+  `value` mediumtext NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `attribute` (`attribute`),
+  KEY `table_name` (`table_name`)
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of ym_translations
+-- ----------------------------
+INSERT INTO `ym_translations` VALUES ('6', '{{class_category_files}}', '1', 'title', 'en', '');
+INSERT INTO `ym_translations` VALUES ('7', '{{class_category_files}}', '2', 'title', 'en', '');
+INSERT INTO `ym_translations` VALUES ('26', '{{class_categories}}', '19', 'title', 'en', '');
+INSERT INTO `ym_translations` VALUES ('27', '{{class_categories}}', '19', 'summary', 'en', 'sadgasgsdgsdsdf');
+
+-- ----------------------------
 -- Table structure for ym_users
 -- ----------------------------
 DROP TABLE IF EXISTS `ym_users`;
@@ -818,12 +866,13 @@ CREATE TABLE `ym_users` (
   PRIMARY KEY (`id`),
   KEY `role_id` (`role_id`),
   CONSTRAINT `ym_users_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `ym_user_roles` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of ym_users
 -- ----------------------------
 INSERT INTO `ym_users` VALUES ('28', '', '$2a$12$FI5gL2sgP7dG3PTzA/a1He63Z1YGYBymn/y/kWiuKbfpiZ2ZYzTdS', 's@a.ld', '1', 'blocked');
+INSERT INTO `ym_users` VALUES ('29', '', '$2a$12$mTvN.E6tfnjQUx0zV2Ajb.XLpHxwwGASOINSqijltI/gRfZZRyF/C', 'saeed@google.com', '2', 'active');
 
 -- ----------------------------
 -- Table structure for ym_user_details

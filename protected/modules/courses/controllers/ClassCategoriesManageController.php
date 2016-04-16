@@ -46,16 +46,13 @@ class ClassCategoriesManageController extends Controller
 	{
 		$model=new ClassCategories;
 
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
-
 		if(isset($_POST['ClassCategories']))
 		{
 			$model->attributes=$_POST['ClassCategories'];
 			if($model->save())
 			{
 				Yii::app()->user->setFlash('success' ,'<span class="icon-check"></span>&nbsp;&nbsp;	اطلاعات با موفقیت ذخیره شد.');
-				$this->redirect(array('update?id='.$model->id));
+				$this->redirect(array('/courses/categories/update/id/'.$model->id.'/step/2'));
 			}else
 				Yii::app()->user->setFlash('failed' ,'در ثبت اطلاعات خطایی رخ داده است! لطفا مجددا تلاش کنید.');
 		}
@@ -87,6 +84,15 @@ class ClassCategoriesManageController extends Controller
 
 		$this->render('update',array(
 			'model'=>$model,
+			'fileModel' => new ClassCategoryFiles(),
+			'files' => new CActiveDataProvider('ClassCategoryFiles',array(
+				'criteria' => array(
+					'condition' => 'category_id = :id',
+					'params' => array(
+						':id' => $id
+					)
+				)
+			))
 		));
 	}
 
@@ -97,7 +103,14 @@ class ClassCategoriesManageController extends Controller
 	 */
 	public function actionDelete($id)
 	{
-		$this->loadModel($id)->delete();
+		$Dir = Yii::getPathOfAlias("webroot") . '/uploads/classCategoryFiles/';
+		$model = $this->loadModel($id);
+		foreach($model->files as $file)
+		{
+			if($file->path && file_exists($Dir.$file->path))
+				unlink($Dir.$file->path);
+		}
+		$model->delete();
 
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 		if(!isset($_GET['ajax']))
