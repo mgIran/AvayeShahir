@@ -22,23 +22,23 @@
 		<?php echo $form->labelEx($model,'avatar'); ?>
 		<?php
 		$this->widget('ext.dropZoneUploader.dropZoneUploader', array(
-				'id' => 'uploaderPic',
-				'model' => $model,
-				'name' => 'avatar',
-				'maxFiles' => 1,
-				'maxFileSize' => 1, //MB
-				'url' => Yii::app()->createUrl('/users/teacherDetails/upload'),
-				'deleteUrl' => Yii::app()->createUrl('/users/teacherDetails/deleteUpload'),
-				'acceptedFiles' => 'image/jpeg , image/png',
-				'serverFiles' => $avatar,
-				'onSuccess' => '
-			var responseObj = JSON.parse(res);
-			if(responseObj.state == "ok")
-			{
-				{serverName} = responseObj.fileName;
-			}else if(responseObj.state == "error"){
-				console.log(responseObj.msg);
-			}',
+			'id' => 'uploaderPic',
+			'model' => $model,
+			'name' => 'avatar',
+			'maxFiles' => 1,
+			'maxFileSize' => 1, //MB
+			'url' => Yii::app()->createUrl('/users/teacherDetails/upload'),
+			'deleteUrl' => Yii::app()->createUrl('/users/teacherDetails/deleteUpload'),
+			'acceptedFiles' => 'image/jpeg , image/png',
+			'serverFiles' => $avatar,
+			'onSuccess' => '
+				var responseObj = JSON.parse(res);
+				if(responseObj.state == "ok")
+				{
+					{serverName} = responseObj.fileName;
+				}else if(responseObj.state == "error"){
+					console.log(responseObj.msg);
+				}',
 		));
 		?>
 		<?php echo $form->error($model,'avatar'); ?>
@@ -46,19 +46,19 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'name'); ?>
-		<?php echo $form->textField($model,'name',array('size'=>50,'maxlength'=>50)); ?>
+		<?php echo EMHelper::megaOgogo($model,'name',array('size'=>50,'maxlength'=>50,'class'=>'span8 pull-right')); ?>
 		<?php echo $form->error($model,'name'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'family'); ?>
-		<?php echo $form->textField($model,'family',array('size'=>50,'maxlength'=>50)); ?>
+		<?php echo EMHelper::megaOgogo($model,'family',array('size'=>50,'maxlength'=>50,'class'=>'span8 pull-right')); ?>
 		<?php echo $form->error($model,'family'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'grade'); ?>
-		<?php echo $form->textField($model,'grade',array('size'=>50,'maxlength'=>100)); ?>
+		<?php echo EMHelper::megaOgogo($model,'grade',array('size'=>50,'maxlength'=>100,'class'=>'span8 pull-right')); ?>
 		<?php echo $form->error($model,'grade'); ?>
 	</div>
 	<div class="row">
@@ -139,7 +139,8 @@
 		<?
 		$this->widget('ext.ckeditor.CKEditor',array(
 				'model' => $model,
-				'attribute'=>'resume'
+				'attribute'=>'resume',
+				'multiLanguage' => true
 		));
 		?>
 		<?php echo $form->error($model,'resume'); ?>

@@ -46,7 +46,7 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'title'); ?>
-		<?php echo $form->textField($model,'title',array('size'=>60,'maxlength'=>50)); ?>
+		<?= EMHelper::megaOgogo($model, 'title', array('class'=>'span7 pull-right')); ?>
 		<?php echo $form->error($model,'title'); ?>
 	</div>
 
@@ -55,7 +55,8 @@
 		<?
 		$this->widget('ext.ckeditor.CKEditor',array(
 			'model' => $model,
-			'attribute'=>'summary'
+			'attribute'=>'summary',
+			'multiLanguage' => true
 		));
 		?>
 		<?php echo $form->error($model,'summary'); ?>

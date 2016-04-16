@@ -67,9 +67,9 @@ class TeachersManageController extends Controller
 			{
 				Yii::app()->user->setFlash('success' ,'<span class="icon-check"></span>&nbsp;&nbsp;اطلاعات با موفقیت ذخیره شد.');
 				if(isset($_GET['return']) && $_GET['return'] == true)
-					$this->redirect(array('/users/teacherDetails/update/'.$model->id.'?return=true'));
+					$this->redirect(array('/users/teacherDetails/update/id/'.$model->id.'/return/true'));
 				else
-					$this->redirect(array('/users/teacherDetails/update/'.$model->id));
+					$this->redirect(array('/users/teacherDetails/update/id/'.$model->id));
 			}else
 				Yii::app()->user->setFlash('failed' ,'در ثبت اطلاعات خطایی رخ داده است! لطفا مجددا تلاش کنید.');
 		}
@@ -86,7 +86,7 @@ class TeachersManageController extends Controller
 	 */
 	public function actionUpdate($id)
 	{
-		$this->redirect(array('/users/teacherDetails/update/'.$id));
+		$this->redirect(array('/users/teacherDetails/update/id/'.$id));
 	}
 
 	/**

@@ -59,7 +59,7 @@ class CoursesManageController extends Controller
 		$tmpDIR = Yii::getPathOfAlias("webroot") . '/uploads/temp/';
 		if (!is_dir($tmpDIR))
 			mkdir($tmpDIR);
-		$tmpUrl = Yii::app()->createAbsoluteUrl('/uploads/temp/');
+		$tmpUrl = Yii::app()->baseUrl .'/uploads/temp/';
 		$picDIR = Yii::getPathOfAlias("webroot") . "/uploads/courses/";
 		if (!is_dir($picDIR))
 			mkdir($picDIR);
@@ -112,9 +112,9 @@ class CoursesManageController extends Controller
 		$tmpDIR = Yii::getPathOfAlias("webroot") . '/uploads/temp/';
 		if (!is_dir($tmpDIR))
 			mkdir($tmpDIR);
-		$tmpUrl = Yii::app()->createAbsoluteUrl('/uploads/temp/');
+		$tmpUrl = Yii::app()->baseUrl .'/uploads/temp/';
 		$picDIR = Yii::getPathOfAlias("webroot") . "/uploads/courses/";
-		$picUrl = Yii::app()->createAbsoluteUrl('/uploads/courses/');
+		$picUrl = Yii::app()->baseUrl .'/uploads/courses/';
 
 		$pic = array();
 		if ($model->pic and file_exists($picDIR.$model->pic)) {

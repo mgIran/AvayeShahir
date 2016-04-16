@@ -27,6 +27,49 @@ class Personnel extends CActiveRecord
 		return '{{personnel}}';
 	}
 
+	public $fullNameFilter;
+	/**
+	 * __set
+	 *
+	 * Rewrite default setter, so we can dynamically add
+	 * new virtual attribtues such as name_en, name_de etc.
+	 *
+	 * @param string $name
+	 * @param string $value
+	 * @return string
+	 */
+
+	public function __set($name, $value)
+	{
+		if (EMHelper::WinnieThePooh($name, $this->behaviors()))
+			$this->{$name} = $value;
+		else
+			parent::__set($name, $value);
+	}
+
+
+	/**
+	 * behaviors
+	 *
+	 * @return array
+	 */
+
+	public function behaviors()
+	{
+		return array(
+				'EasyMultiLanguage' => array(
+						'class' => 'ext.EasyMultiLanguage.EasyMultiLanguageBehavior',
+						// @todo Please change those attributes that should be translated.
+						'translated_attributes' => array('name', 'family', 'post', 'resume', 'grade'),
+						// @todo Please add admin actions
+						'admin_routes' => array('personnel/manage/create', 'personnel/manage/update', 'personnel/manage/admin'),
+						//
+						'languages' => Yii::app()->params['languages'],
+						'default_language' => Yii::app()->params['default_language'],
+						'translations_table' => 'ym_translations',
+				),
+		);
+	}
 	/**
 	 * @return array validation rules for model attributes.
 	 */
@@ -43,7 +86,7 @@ class Personnel extends CActiveRecord
 			array('tell', 'length', 'max'=>11),
 			array('resume, address ,file', 'safe'),
 			// The following rule is used by search().
-			array('id, name, family, post, avatar, resume, email, social_links, grade', 'safe', 'on'=>'search'),
+			array('id, name, family, post, avatar, resume, email, social_links, grade ,fullNameFilter', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -74,6 +117,7 @@ class Personnel extends CActiveRecord
 			'grade' => 'سطح تحصیلات',
 			'tell' => 'شماره تماس',
 			'address' => 'آدرس',
+			'fullName' => 'نام کامل'
 		);
 	}
 
@@ -93,17 +137,11 @@ class Personnel extends CActiveRecord
 	{
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id,true);
-		$criteria->compare('name',$this->name,true);
-		$criteria->compare('family',$this->family,true);
+		$criteria->compare('name',$this->fullNameFilter,true,'OR');
+		$criteria->compare('family',$this->fullNameFilter,true,'OR');
 		$criteria->compare('post',$this->post,true);
-		$criteria->compare('avatar',$this->avatar,true);
-		$criteria->compare('resume',$this->resume,true);
 		$criteria->compare('email',$this->email,true);
-		$criteria->compare('social_links',$this->social_links,true);
-		$criteria->compare('grade',$this->grade,true);
 		$criteria->compare('tell',$this->tell,true);
-		$criteria->compare('address',$this->address,true);
 		$criteria->order = 'id DESC';
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -119,5 +157,9 @@ class Personnel extends CActiveRecord
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
+	}
+
+	public function getFullName(){
+		return $this->name.' '.$this->family;
 	}
 }

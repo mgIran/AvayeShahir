@@ -57,7 +57,7 @@ class ClassCategoryFiles extends CActiveRecord
 				// @todo Please change those attributes that should be translated.
 				'translated_attributes' => array('title'),
 				// @todo Please add admin actions
-				'admin_routes' => array('/courses/files/create','/courses/files/update'),
+				'admin_routes' => array('courses/files/create','courses/files/update'),
 				//
 				'languages' => Yii::app()->params['languages'],
 				'default_language' => Yii::app()->params['default_language'],
@@ -74,7 +74,7 @@ class ClassCategoryFiles extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('title, path, file_type, category_id', 'required'),
+			array('path,category_id', 'required'),
 			array('title, file_type', 'length', 'max'=>50),
 			array('path', 'length', 'max'=>500),
 			array('category_id', 'length', 'max'=>10),

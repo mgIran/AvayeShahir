@@ -44,24 +44,24 @@
 	</div>
 	<div class="row">
 		<?php echo $form->labelEx($model,'name'); ?>
-		<?php echo $form->textField($model,'name',array('size'=>50,'maxlength'=>50)); ?>
+		<?php echo EMHelper::megaOgogo($model,'name',array('size'=>50,'maxlength'=>50,'class'=>'span8 pull-right')); ?>
 		<?php echo $form->error($model,'name'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'family'); ?>
-		<?php echo $form->textField($model,'family',array('size'=>50,'maxlength'=>50)); ?>
+		<?php echo EMHelper::megaOgogo($model,'family',array('size'=>50,'maxlength'=>50,'class'=>'span8 pull-right')); ?>
 		<?php echo $form->error($model,'family'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'post'); ?>
-		<?php echo $form->textField($model,'post',array('size'=>50,'maxlength'=>50)); ?>
+		<?php echo EMHelper::megaOgogo($model,'post',array('size'=>50,'maxlength'=>50,'class'=>'span8 pull-right')); ?>
 		<?php echo $form->error($model,'post'); ?>
 	</div>
 	<div class="row">
 		<?php echo $form->labelEx($model,'grade'); ?>
-		<?php echo $form->textField($model,'grade',array('size'=>50,'maxlength'=>100)); ?>
+		<?php echo EMHelper::megaOgogo($model,'grade',array('size'=>50,'maxlength'=>100,'class'=>'span8 pull-right')); ?>
 		<?php echo $form->error($model,'grade'); ?>
 	</div>
 	<div class="row">
@@ -147,7 +147,8 @@
 		<?
 		$this->widget('ext.ckeditor.CKEditor',array(
 				'model' => $model,
-				'attribute'=>'resume'
+				'attribute'=>'resume',
+				'multiLanguage' => true
 		));
 		?>
 		<?php echo $form->error($model,'resume'); ?>

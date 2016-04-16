@@ -32,4 +32,6 @@ return array(
     'Select Language'=>'انتخاب زبان',
     'Language'=>'زبان',
     'All' => 'همه',
+    'Facebook' => 'فیسبوک',
+    'Twitter' => 'توییتر'
 );

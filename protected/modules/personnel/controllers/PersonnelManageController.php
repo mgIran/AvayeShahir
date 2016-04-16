@@ -58,7 +58,7 @@ class PersonnelManageController extends Controller
 		$tmpDIR = Yii::getPathOfAlias("webroot") . '/uploads/temp/';
 		if (!is_dir($tmpDIR))
 			mkdir($tmpDIR);
-		$tmpUrl = Yii::app()->createAbsoluteUrl('/uploads/temp/');
+		$tmpUrl = Yii::app()->baseUrl .'/uploads/temp/';
 		$avatarDIR = Yii::getPathOfAlias("webroot") . "/uploads/personnel/";
 		if (!is_dir($avatarDIR))
 			mkdir($avatarDIR);
@@ -136,11 +136,11 @@ class PersonnelManageController extends Controller
 		$tmpDIR = Yii::getPathOfAlias("webroot") . '/uploads/temp/';
 		if (!is_dir($tmpDIR))
 			mkdir($tmpDIR);
-		$tmpUrl = Yii::app()->createAbsoluteUrl('/uploads/temp/');
+		$tmpUrl = Yii::app()->baseUrl .'/uploads/temp/';
 		$avatarDIR = Yii::getPathOfAlias("webroot") . "/uploads/personnel/";
-		$avatarUrl = Yii::app()->createAbsoluteUrl('/uploads/personnel/');
+		$avatarUrl = Yii::app()->baseUrl .'/uploads/personnel/';
 		$fileDIR = Yii::getPathOfAlias("webroot") . "/uploads/personnel/files/";
-		$fileUrl = Yii::app()->createAbsoluteUrl('/uploads/personnel/files/');
+		$fileUrl = Yii::app()->baseUrl .'/uploads/personnel/files/';
 
 		$flag = false;
 		$avatar = array();

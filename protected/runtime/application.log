@@ -16216,3 +16216,11 @@ in C:\wamp\www\Yusef\shahir\index.php (11)
 in C:\wamp\www\Yusef\shahir\protected\modules\courses\models\ClassCategories.php (42)
 in C:\wamp\www\Yusef\shahir\protected\modules\courses\controllers\ClassCategoriesManageController.php (51)
 in C:\wamp\www\Yusef\shahir\index.php (11)
+2016/04/16 15:20:26 [warning] [application] Failed to set unsafe attribute "fullName" of "Personnel".
+in C:\wamp\www\Yusef\shahir\protected\modules\personnel\models\Personnel.php (46)
+in C:\wamp\www\Yusef\shahir\protected\modules\personnel\controllers\PersonnelManageController.php (264)
+in C:\wamp\www\Yusef\shahir\index.php (11)
+2016/04/16 15:20:28 [warning] [application] Failed to set unsafe attribute "fullName" of "Personnel".
+in C:\wamp\www\Yusef\shahir\protected\modules\personnel\models\Personnel.php (46)
+in C:\wamp\www\Yusef\shahir\protected\modules\personnel\controllers\PersonnelManageController.php (264)
+in C:\wamp\www\Yusef\shahir\index.php (11)

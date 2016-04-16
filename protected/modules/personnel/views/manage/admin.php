@@ -20,10 +20,14 @@ $this->menu=array(
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
 	'columns'=>array(
-		'name',
-		'family',
+		array(
+			'header' => 'نام کامل',
+			'name' => 'fullName',
+			'filter' => CHtml::activeTextField($model,'fullNameFilter')
+		),
 		'post',
 		'email',
+		'tell',
 		array(
 			'class'=>'CButtonColumn',
 		),

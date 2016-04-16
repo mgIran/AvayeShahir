@@ -6,15 +6,8 @@
         'id'=>'files-grid',
         'dataProvider'=>$files,
         'columns'=>array(
-            array(
-                'name'=>'title',
-            ),
-            array(
-                'name'=>'path',
-            ),
-            array(
-                'name'=>'file_type',
-            ),
+            'title',
+            'file_type',
             array(
                 'class'=>'CButtonColumn',
                 'template'=>'{delete}',

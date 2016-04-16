@@ -116,6 +116,7 @@ class TeacherDetails extends CActiveRecord
 			'social_links' => 'لینک های اجتماعی',
 			'tell' => 'شماره تماس',
 			'address' => 'آدرس',
+			'fullName' => 'نام کامل'
 		);
 	}
 
