@@ -31,9 +31,16 @@ class SiteController extends Controller
 	{
         Yii::app()->theme = 'front-end';
         Yii::import('courses.models.*');
-        $model = ClassCategories::model()->findByPk(11);
+        Yii::import('personnel.models.*');
+        Yii::import('users.models.*');
+
+        $courses = Courses::model()->findAll();
+        $personnel = Personnel::model()->findAll();
+        $teachers = Users::model()->findAll('role_id = 2');
         $this->render('index', array(
-            'model' => $model
+            'courses' => $courses,
+            'personnel' => $personnel,
+            'teachers' => $teachers
         ));
 	}
 
@@ -125,75 +132,6 @@ class SiteController extends Controller
 		Yii::app()->user->logout();
 		$this->redirect(Yii::app()->homeUrl);
 	}
-
-    public function actionMyFavorites(){
-        Yii::app()->theme = 'front-end';
-        $this->layout = '//layouts/public';
-
-        Yii::import('advertises.models.*');
-        Yii::import('places.models.*');
-
-        $favorites = array();
-        if(isset($_COOKIE['favorites']))
-            $favorites = CJSON::decode($_COOKIE['favorites']);
-        $criteria = new CDbCriteria;
-        $criteria->addInCondition('id' ,$favorites);
-        $criteria->addCondition('valid = 1');
-        $criteria->order = 'id DESC';
-        $dataProvider = new CActiveDataProvider("Advertises",array(
-           'criteria' => $criteria,
-            'pagination' =>array(
-                'pageSize' => 10
-            )
-        ));
-        $this->render('my_favorites',array(
-            'dataProvider' => $dataProvider
-        ));
-    }
-
-    public function actionSendLink(){
-        Yii::import('users.models.*');
-        Yii::import('advertises.models.*');
-        $model = new Users('email');
-        if(isset($_POST)) {
-            $model->email = $_POST[ 'email' ];
-            if ( $model->validate() ) {
-                $ads = Advertises::model()->findAll('user_email = :email' ,array(':email' => $model->email));
-                if($ads){
-                    $msg = '<h2 style="box-sizing:border-box;display: block;width: 100%;font-family:tahoma;background-color: #a1cf01;line-height:60px;color:#f7f7f7;font-size: 24px;text-align: right;padding-right: 50px">تابلو <span style="font-size: 14px;color:#dfdfdf">- نیازمندی های آنلاین</span></span> </h2>';
-                    $msg .= '<div style="display: inline-block;width: 100%;font-family:tahoma;">';
-                    foreach($ads as $ad){
-                        $msg .= '<div style="direction:rtl;display:block;overflow:hidden;border:1px solid #efefef;text-align: center;margin:10px 20px;padding:15px;">';
-                        $msg .= '<div style="color: #2d2d2d;font-size: 20px;text-align: right;">'.$ad->title.'</div>';
-                        $msg .= '<div style="color: #444;font-size: 13px;text-align: right;">'.$ad->summary.'</div>';
-                        $msg .= '<a style="display: inline-block;margin: 30px auto;background-color: #a1cf01;color: #fff;font-size: 16px;padding: 10px;border-radius:2px;box-shadow:0 0 3px rgba(0,0,0,0.1);text-decoration:none;" href="' . Yii::app()->createAbsoluteUrl("advertises/v/" . $ad->short_link) . '">لینک مدیریت آگهی</a>';
-                        $msg .= '</div>';
-                    }
-                    $msg .= '</div>';
-                    Yii::import('application.extensions.phpmailer.JPhpMailer');
-                    $mail = new JPhpMailer;
-                    //$mail->IsSMTP();
-                    //$mail->Host = 'smpt.163.com';
-                    //$mail->SMTPAuth = true;
-                    //$mail->Username = 'yourname@163.com';
-                    //$mail->Password = 'yourpassword';
-                    $mail->SetFrom('noreply@market.ws' ,'تابلو');
-                    $mail->Subject = 'تابلو';
-                    $mail->AltBody = 'لینک مدیریت آگهی';
-                    $mail->MsgHTML($msg);
-                    $mail->AddAddress($_POST['email']);
-                    if($mail->Send())
-                        echo CJSON::encode(array('state' => 'ok' ,'msg' => 'لینک مدیریت آگهی برای شما فرستاده شد.'));
-                    else
-                        echo CJSON::encode(array('state' => 'error' ,'msg' => 'متاسفانه در ارسال لینک اختلال ایجاد شده است .لطفا مجددا سعی نمایید'));
-                }
-                else
-                    echo CJSON::encode(array('state' => 'error' ,'msg' => 'توسط این آدرس آگهی ثبت نشده است'));
-            } else
-                echo CJSON::encode( array( 'state' => 'error', 'msg' => $this->implodeErrors($model)) );
-        }
-        Yii::app()->end();
-    }
 
     public function actionRegister(){
         Yii::app()->theme = 'front-end';

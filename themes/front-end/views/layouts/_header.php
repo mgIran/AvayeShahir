@@ -41,7 +41,7 @@
                 <li class="pull-left">
                     <span class="divider">|</span>
                 </li>
-            <li class="pull-left" data-toggle="tooltip" data-placement="bottom" title="<?= Yii::t('app','Select Language');?>">
+            <li class="pull-left" data-toggle="tooltip" data-placement="<?= Yii::app()->language=='fa'?'right':'left'; ?>" title="<?= Yii::t('app','Select Language');?>">
                 <?
                 $this->widget('ext.dropDown.dropDown', array(
                     'id' => 'select_lang',

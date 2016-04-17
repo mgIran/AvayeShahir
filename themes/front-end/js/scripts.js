@@ -1,7 +1,7 @@
 $(function() {
     $.material.init();
     $("html").niceScroll({
-        railalign:'left',
+        railalign:'right',
         rtlmode:true,
         hwacceleration:false,
         zindex:1000,
@@ -18,10 +18,15 @@ $(function() {
             },1000,'easeOutCubic');
     });
 
-    $(window).scroll(function(){
-        if($(this).scrollTop() > 100)
+    $(window).scroll(function() {
+        $("[data-toggle='tooltip']").tooltip('hide');
+        if ($(this).scrollTop() > 100)
             $("header.header").addClass('scroll-mode');
         else
             $("header.header").removeClass('scroll-mode');
+    });
+
+    $("[data-toggle='tooltip']").tooltip({
+        trigger:'hover'
     });
 });

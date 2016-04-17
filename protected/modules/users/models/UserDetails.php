@@ -5,10 +5,9 @@
  *
  * The followings are the available columns in table 'ym_user_details':
  * @property string $user_id
- * @property string $fa_name
- * @property string $en_name
- * @property string $fa_web_url
- * @property string $en_web_url
+ * @property string $name
+ * @property string $family
+ * @property string $web_url
  * @property string $national_code
  * @property string $phone
  * @property string $zip_code
@@ -24,9 +23,54 @@ class UserDetails extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'ym_user_details';
+		return '{{user_details}}';
 	}
 
+	/* @todo if project is multi language active __set & behavior functions ,otherwise remove it
+	/**
+	 * __set
+	 *
+	 * Rewrite default setter, so we can dynamically add
+	 * new virtual attribtues such as name_en, name_de etc.
+	 *
+	 * @param string $name
+	 * @param string $value
+	 * @return string
+	 */
+
+	public function __set($name, $value)
+	{
+		if (EMHelper::WinnieThePooh($name, $this->behaviors()))
+			$this->{$name} = $value;
+		else
+			parent::__set($name, $value);
+	}
+
+
+	/**
+	 * behaviors
+	 *
+	 * @return array
+	 */
+
+	public function behaviors()
+	{
+		return array(
+				'EasyMultiLanguage'=>array(
+						'class' => 'ext.EasyMultiLanguage.EasyMultiLanguageBehavior',
+						// @todo Please change those attributes that should be translated.
+						'translated_attributes' => array('name','family'),
+						// @todo Please add admin actions
+						'admin_routes' => array('users/manage/create',
+												'users/manage/update',
+												'users/manage/admin'),
+						//
+						'languages' => Yii::app()->params['languages'],
+						'default_language' => Yii::app()->params['default_language'],
+						'translations_table' => 'ym_translations',
+				),
+		);
+	}
 	/**
 	 * @return array validation rules for model attributes.
 	 */
@@ -35,18 +79,18 @@ class UserDetails extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-            array('fa_name, en_name, national_code, phone, zip_code, address', 'required'),
+            array('name, family, national_code, phone, zip_code, address', 'required'),
 			array('national_code, phone, zip_code', 'numerical'),
 			array('user_id, national_code, zip_code', 'length', 'max'=>10),
 			array('national_code, zip_code', 'length', 'min'=>10),
 			array('phone', 'length', 'min'=>8),
-			array('fa_name, en_name', 'length', 'max'=>50),
-			array('fa_web_url, en_web_url', 'length', 'max'=>255),
+			array('name, family', 'length', 'max'=>50),
+			array('web_url', 'length', 'max'=>255),
 			array('phone', 'length', 'max'=>11),
 			array('address', 'length', 'max'=>1000),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('user_id, fa_name, en_name, fa_web_url, en_web_url, national_code, phone, zip_code, address', 'safe', 'on'=>'search'),
+			array('user_id, name,family, web_url, web_url, national_code, phone, zip_code, address', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -69,10 +113,9 @@ class UserDetails extends CActiveRecord
 	{
 		return array(
 			'user_id' => 'کاربر',
-			'fa_name' => 'نام فارسی',
-			'en_name' => 'نام انگلیسی',
-			'fa_web_url' => 'آدرس سایت فارسی',
-			'en_web_url' => 'آدرس سایت انگلیسی',
+			'name' => 'نام فارسی',
+			'family' => 'نام خانوادگی',
+			'web_url' => 'آدرس سایت فارسی',
 			'national_code' => 'کد ملی',
 			'phone' => 'تلفن',
 			'zip_code' => 'کد پستی',
@@ -99,10 +142,9 @@ class UserDetails extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('user_id',$this->user_id,true);
-		$criteria->compare('fa_name',$this->fa_name,true);
-		$criteria->compare('en_name',$this->en_name,true);
-		$criteria->compare('fa_web_url',$this->fa_web_url,true);
-		$criteria->compare('en_web_url',$this->en_web_url,true);
+		$criteria->compare('name',$this->fa_name,true);
+		$criteria->compare('family',$this->en_name,true);
+		$criteria->compare('web_url',$this->fa_web_url,true);
 		$criteria->compare('national_code',$this->national_code,true);
 		$criteria->compare('phone',$this->phone,true);
 		$criteria->compare('zip_code',$this->zip_code,true);

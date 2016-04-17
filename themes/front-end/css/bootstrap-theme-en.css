@@ -8,6 +8,79 @@ body{
 [class*="col-"]{
     float: left;
 }
+.paragraph-end{
+    background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1)) repeat scroll 0 0 rgba(0, 0, 0, 0);
+    left: auto;
+    right: 0;
+}
+.courses .course-carousel .owl-controls .owl-nav .owl-next{
+    left: auto;
+    right: -5%;
+}
+.courses .course-carousel .owl-controls .owl-nav .owl-prev{
+    left: -5%;
+    right: auto;
+}
+.courses .owl-next .arrow{
+    -webkit-transform: rotate(-180deg); -moz-transform: rotate(-180deg); -ms-transform: rotate(-180deg); -o-transform: rotate(-180deg); transform: rotate(-180deg);
+}
+.courses .owl-prev .arrow{
+    -webkit-transform: rotate(0deg); -moz-transform: rotate(0deg); -ms-transform: rotate(0deg); -o-transform: rotate(0deg); transform: rotate(0deg);
+}
+.checkbox label > span:last-child {
+    margin-left:5px;
+    margin-right: 0;
+}
+.search .btn-search{
+    border-radius: 0 2px 2px 0;
+}
+.btn-input .btn.form-control span:first-child{
+    text-align: left !important;
+}
+.btn-input .btn.form-control span.my-caret{
+    left: auto ;
+    right: 40px;
+}
+.signup .checkbox-material{
+    margin-left: 0;
+    margin-right: 10px;
+}
+
+.persons .teacher-up, .persons .partner-up,
+.persons .teacher-down, .persons .partner-down
+.persons .person-item .image,
+.persons .person-item .name,
+.persons .person-item .name,
+.persons .person-item .socials .email{
+    right: auto;
+    direction: ltr;
+    text-align: left;
+    margin-right: 0;
+}
+.persons .teacher-up, .persons .partner-up,
+.persons .teacher-down, .persons .partner-down{
+    left: 78px;
+}
+.persons .teacher-up, .persons .partner-up,
+.persons .teacher-down, .persons .partner-down{
+    left: 78px;
+}
+.persons .person-item .image{
+    left: 30px;
+}
+.persons .person-item .name{
+    left: 140px;
+}
+.persons .person-item .job{
+    left: 160px;
+}
+.persons .person-item .socials .email,
+.persons .person-item .socials .twitter{
+    left:11px;
+}
+.persons .person-item .socials .facebook{
+    left: 2px;
+}
 .pull-left{
     float: right !important;
 }

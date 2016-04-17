@@ -32,7 +32,9 @@ echo CHtml::hiddenField('ClassCategoryFiles[category_id]',$model->id);
 			'acceptedFiles' => '.jpeg, .jpg, .png, .bmp,
 			 					.pdf, .docx, .doc, .ppt, .pptx, .pps, .ppsx, .xls, .xlsx,
 								.mp4, .mov, .webm, .avi, .wmv, .flv, .mkv,
-								.mp3, .m4a, .ogg, .wav, .acc, .wma, .rma',
+								.mp3, .m4a, .ogg, .wav, .acc, .wma, .rma,
+								.zip, .rar
+								',
 			'onSuccess' => '
 				var responseObj = JSON.parse(res);
 				if(responseObj.state == "ok")

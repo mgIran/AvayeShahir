@@ -24,23 +24,23 @@ class ClassCategories extends CActiveRecord
 	}
 
 	/**
- * __set
- *
- * Rewrite default setter, so we can dynamically add
- * new virtual attribtues such as name_en, name_de etc.
- *
- * @param string $name
- * @param string $value
- * @return string
- */
+	 * __set
+	 *
+	 * Rewrite default setter, so we can dynamically add
+	 * new virtual attribtues such as name_en, name_de etc.
+	 *
+	 * @param string $name
+	 * @param string $value
+	 * @return string
+	 */
 
-	public function __set($name, $value)
-	{
-		if (EMHelper::WinnieThePooh($name, $this->behaviors()))
-			$this->{$name} = $value;
-		else
-			parent::__set($name, $value);
-	}
+		public function __set($name, $value)
+		{
+			if (EMHelper::WinnieThePooh($name, $this->behaviors()))
+				$this->{$name} = $value;
+			else
+				parent::__set($name, $value);
+		}
 
 
 	/**
@@ -75,7 +75,7 @@ class ClassCategories extends CActiveRecord
 			array('title','required'),
 			array('title','unique'),
 		  	array('title', 'length', 'max'=>50),
-			array('summary' , 'safe'),
+			array('summary ,course_id' , 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, title ,summary', 'safe', 'on'=>'search'),

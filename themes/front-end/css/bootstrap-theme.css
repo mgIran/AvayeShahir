@@ -92,7 +92,9 @@ body{
     direction: ltr;
 }
 
-
+.checkbox label > span:last-child {
+    margin-right: 5px;
+}
 
 header.header{
     width: 100%;
@@ -439,6 +441,7 @@ section.search{
 
 .courses{
     position: relative;
+    padding-bottom: 80px;
 }
 .courses h3{
     color: #155ca1;
@@ -488,6 +491,8 @@ section.search{
     width: 100%;
     display: block;
     overflow: hidden;
+    padding-right: 0;
+    padding-left: 0;
 }
 .courses .course-detail > h4{
     margin: 15px 0;
@@ -680,7 +685,7 @@ section.search{
     right: 30px;
     top: 0;
     border: 5px solid rgba(255,255,255,0.3);
-    z-index:1;
+    z-index:4;
     overflow: hidden;
 }
 .persons .person-item .image img{
@@ -733,26 +738,58 @@ section.search{
     position: absolute;
     opacity: 0;
     z-index:3;
-    -webkit-transition: all 0.5s;
-    -moz-transition: all 0.5s;
-    -ms-transition: all 0.5s;
-    -o-transition: all 0.5s;
-    transition: all 0.5s;
+    top:50%;
+    right: 80px;
+    padding: 5px;
 }
-.persons .person-item .socials a:hover{
+.persons .person-item:hover .socials a{
     opacity: 0.5;
 }
 .persons .person-item .socials .email{
+    -webkit-transition: all 500ms cubic-bezier(0.330, 0.750, 0.350, 0.980);
+    -moz-transition: all 500ms cubic-bezier(0.330, 0.750, 0.350, 0.980);
+    -o-transition: all 500ms cubic-bezier(0.330, 0.750, 0.350, 0.980);
+    transition: all 500ms cubic-bezier(0.330, 0.750, 0.350, 0.980); /* custom */
+
+    -webkit-transition-timing-function: cubic-bezier(0.330, 0.750, 0.350, 0.980);
+    -moz-transition-timing-function: cubic-bezier(0.330, 0.750, 0.350, 0.980);
+    -o-transition-timing-function: cubic-bezier(0.330, 0.750, 0.350, 0.980);
+    transition-timing-function: cubic-bezier(0.330, 0.750, 0.350, 0.980); /* custom */
+}
+.persons .person-item:hover .socials .email{
     top: 5px;
     right: 11px;
     background: transparent url("../svg/email-green.svg") no-repeat center / 15px auto;
 }
 .persons .person-item .socials .facebook{
+    -webkit-transition: all 700ms cubic-bezier(0.330, 0.750, 0.350, 0.980);
+    -moz-transition: all 700ms cubic-bezier(0.330, 0.750, 0.350, 0.980);
+    -o-transition: all 700ms cubic-bezier(0.330, 0.750, 0.350, 0.980);
+    transition: all 700ms cubic-bezier(0.330, 0.750, 0.350, 0.980); /* custom */
+
+    -webkit-transition-timing-function: cubic-bezier(0.330, 0.750, 0.350, 0.980);
+    -moz-transition-timing-function: cubic-bezier(0.330, 0.750, 0.350, 0.980);
+    -o-transition-timing-function: cubic-bezier(0.330, 0.750, 0.350, 0.980);
+    transition-timing-function: cubic-bezier(0.330, 0.750, 0.350, 0.980); /* custom */
+}
+.persons .person-item:hover .socials .facebook{
     top: 40px;
     right: 2px;
     background: transparent url("../svg/facebook.svg") no-repeat center / 15px auto;
 }
-.persons .person-item .socials .twitter{
+.persons .person-item .socials .twitter {
+    -webkit-transition: all 900ms cubic-bezier(0.330, 0.750, 0.350, 0.980);
+    -moz-transition: all 900ms cubic-bezier(0.330, 0.750, 0.350, 0.980);
+    -o-transition: all 900ms cubic-bezier(0.330, 0.750, 0.350, 0.980);
+    transition: all 900ms cubic-bezier(0.330, 0.750, 0.350, 0.980); /* custom */
+
+    -webkit-transition-timing-function: cubic-bezier(0.330, 0.750, 0.350, 0.980);
+    -moz-transition-timing-function: cubic-bezier(0.330, 0.750, 0.350, 0.980);
+    -o-transition-timing-function: cubic-bezier(0.330, 0.750, 0.350, 0.980);
+    transition-timing-function: cubic-bezier(0.330, 0.750, 0.350, 0.980); /* custom */
+}
+.persons .person-item:hover .socials .twitter{
+    animation-delay: 0.4s;
     top: 75px;
     right: 11px;
     background: transparent url("../svg/twitter.svg") no-repeat center / 15px auto;
@@ -768,7 +805,7 @@ section.search{
 .persons .person-item:hover .img-overlay{
     opacity: 0.8;
 }
-.persons .person-item:hover .socials a{
+.persons .person-item .socials a:hover{
     opacity: 1;
 }
 .persons .controls{
@@ -1013,6 +1050,10 @@ section.search{
     -o-transition-timing-function: cubic-bezier(0.295, 0.795, 0.500, 1.000);
     transition-timing-function: cubic-bezier(0.295, 0.795, 0.500, 1.000); /* custom */
 }
+.header.scroll-mode .btn-input .dropdown-menu{
+    background-color: rgba(11, 55, 98, 0.75);
+    -webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2); -moz-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2); box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+}
 
 .header .btn-input .dropdown-menu > li > a{
     padding: 8px 16px;
@@ -1071,4 +1112,7 @@ section.search{
 }
 .search .dropdown-menu li >a:hover{
     background-color: transparent !important;
+}
+.owl-carousel .owl-controls .owl-nav [class*="owl-"].disabled {
+    opacity: 0.2;
 }

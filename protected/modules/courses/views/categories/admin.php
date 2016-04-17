@@ -20,6 +20,10 @@ $this->menu=array(
 	'columns'=>array(
 		'title',
 		array(
+			'header' => 'دوره',
+			'name' => 'course.title',
+		),
+		array(
 			'class'=>'CButtonColumn',
 			'template' => '{update}{delete}'
 		),

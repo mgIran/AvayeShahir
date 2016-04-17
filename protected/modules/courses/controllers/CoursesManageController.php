@@ -130,7 +130,7 @@ class CoursesManageController extends Controller
 		if(isset($_POST['Courses']))
 		{
 			$model->attributes=$_POST['Courses'];
-			if (isset($_POST['Courses']['pic'])) {
+			if (isset($_POST['Courses']['pic']) and file_exists($tmpDIR.$_POST['Courses']['pic'])) {
 				$file = $_POST['Courses']['pic'];
 				$pic = array(
 						'name' => $file,

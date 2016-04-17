@@ -11,6 +11,7 @@ return array(
     'Dashboard' => 'داشبورد',
     'Log Out' => 'خروج',
     'Login to Account' => 'ورود به حساب کاربری',
+    'Sign Up Account' => 'ساخت حساب کاربری',
     'Email' => 'پست الکترونیکی',
     'Password' => 'کلمه عبور',
     'Forgot Password?' => 'کلمه عبور خود را فراموش کرده اید؟',
@@ -33,5 +34,9 @@ return array(
     'Language'=>'زبان',
     'All' => 'همه',
     'Facebook' => 'فیسبوک',
-    'Twitter' => 'توییتر'
+    'Twitter' => 'توییتر',
+    'Course Details' => 'شرح کلی دوره و کلاس های مربوطه',
+    'Details' => 'جزییات',
+    'Education Courses' => 'دوره های آموزشی',
+    'I agree to the Yahoo <a href="'.Yii::app()->baseUrl."/terms".'">Terms and Privacy' => 'با <a href="'.Yii::app()->baseUrl."/terms".'">شرایط و قوانین</a> سایت موافقم.',
 );

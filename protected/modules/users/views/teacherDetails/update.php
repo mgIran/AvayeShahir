@@ -5,7 +5,7 @@
 /* @var $file string */
 
 $this->breadcrumbs=array(
-		'مدیریت اساتید'=>array('admin'),
+		'مدیریت اساتید'=>array('/users/teachers/admin'),
 		$model->name .' ' .$model->family,
 		'تکمیل اطلاعات',
 );
