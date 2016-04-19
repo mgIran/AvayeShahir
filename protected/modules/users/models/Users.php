@@ -42,6 +42,7 @@ class Users extends CActiveRecord
     public $oldPassword;
     public $newPassword;
     public $roleId;
+    public $agreeTerms;
     /**
      * @return array validation rules for model attributes.
      */
@@ -50,16 +51,16 @@ class Users extends CActiveRecord
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('password, email', 'required' , 'on' => 'insert,create'),
+            array('password, email', 'required' , 'on' => 'insert,agreeTerms'),
+            array('agreeTerms', 'compare' ,'compareValue'=>1,'operator'=>'==', 'message'=>Yii::t('app' ,'You Rejected the Terms and Policies') , 'on' => 'agreeTerms'),
             array('email', 'unique'),
-            array('role_id', 'default' ,'value' => 1,'on' => 'insert'),
-            array('status', 'default' ,'value' => 1,'on' => 'insert'),
+            array('role_id', 'default' ,'value' => 1,'on' => 'insert,agreeTerms'),
+            array('status', 'default' ,'value' => 1,'on' => 'insert,agreeTerms'),
             array('email' , 'required' ,'on' => 'email'),
             array('email' , 'email'),
             array('oldPassword ,newPassword ,repeatPassword', 'required' , 'on'=>'update'),
-            array('email' , 'filter' , 'filter' => 'trim' ,'on' => 'insert'),
-            array('email' , 'unique' ,'on' => 'create'),
-            array('username, password', 'length', 'max'=>100 ,'on' => 'insert'),
+            array('email' , 'filter' , 'filter' => 'trim' ,'on' => 'insert,agreeTerms'),
+            array('username, password', 'length', 'max'=>100 ,'on' => 'insert,agreeTerms'),
             array('oldPassword', 'oldPass' , 'on'=>'update'),
             array('repeatPassword', 'compare', 'compareAttribute'=>'newPassword' ,'operator'=>'==', 'message' => 'رمز های عبور همخوانی ندارند' , 'on'=>'update'),
             array('email', 'length', 'max'=>255),
@@ -103,13 +104,13 @@ class Users extends CActiveRecord
     {
         return array(
             'id' => 'ID',
-            'username' => 'نام کاربری',
-            'password' => 'کلمه عبور',
+            'username' =>Yii::t('app','Username'),
+            'password' => Yii::t('app','Password'),
+            'email' => Yii::t('app','Email'),
             'role_id' => 'نقش',
-            'email' => 'پست الکترونیک',
-            'repeatPassword' => 'تکرار کلمه عبور',
-            'oldPassword' => 'کلمه عبور فعلی',
-            'newPassword' => 'کلمه عبور جدید',
+            'repeatPassword' => Yii::t('app','Repeat Password'),
+            'oldPassword' => Yii::t('app','Current Password'),
+            'newPassword' => Yii::t('app','New Password'),
             'status' => 'وضعیت کاربر',
         );
     }

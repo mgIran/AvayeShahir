@@ -2,11 +2,23 @@ body{
     direction: ltr;
     text-align: left;
 }
+.dropdown-menu{
+    right: auto;
+    left: 0;
+}
+.dropdown-menu > li,
+.dropdown-menu > li a{
+    text-align: left;
+}
 .header .nav > li{
     float: left;
 }
 [class*="col-"]{
     float: left;
+}
+
+.header.scroll-mode .nav{
+    right: 0;
 }
 .paragraph-end{
     background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1)) repeat scroll 0 0 rgba(0, 0, 0, 0);
@@ -80,6 +92,20 @@ body{
 }
 .persons .person-item .socials .facebook{
     left: 2px;
+}
+.footer .contact-box .col-lg-6,
+.footer .contact-box .col-md-6{
+    padding:0 7px;
+}
+.footer .contact-box .col-lg-6:first-child,
+.footer .contact-box .col-md-6:first-child{
+    padding-left:0;
+    padding-right:7px;
+}
+.footer .contact-box .col-lg-6:nth-child(2),
+.footer .contact-box .col-md-6:nth-child(2){
+    padding-left:7px;
+    padding-right:0;
 }
 .pull-left{
     float: right !important;

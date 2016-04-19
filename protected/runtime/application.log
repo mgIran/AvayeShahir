@@ -16224,3 +16224,51 @@ in C:\wamp\www\Yusef\shahir\index.php (11)
 in C:\wamp\www\Yusef\shahir\protected\modules\personnel\models\Personnel.php (46)
 in C:\wamp\www\Yusef\shahir\protected\modules\personnel\controllers\PersonnelManageController.php (264)
 in C:\wamp\www\Yusef\shahir\index.php (11)
+2016/04/18 11:43:43 [warning] [application] Failed to set unsafe attribute "ajax" of "UserLoginForm".
+in C:\wamp\www\Yusef\shahir\protected\modules\users\controllers\PublicController.php (71)
+in C:\wamp\www\Yusef\shahir\index.php (11)
+2016/04/18 11:44:06 [warning] [application] Failed to set unsafe attribute "ajax" of "UserLoginForm".
+in C:\wamp\www\Yusef\shahir\protected\modules\users\controllers\PublicController.php (71)
+in C:\wamp\www\Yusef\shahir\index.php (11)
+2016/04/18 11:45:23 [warning] [application] Failed to set unsafe attribute "ajax" of "UserLoginForm".
+in C:\wamp\www\Yusef\shahir\protected\modules\users\controllers\PublicController.php (71)
+in C:\wamp\www\Yusef\shahir\index.php (11)
+2016/04/19 09:09:32 [warning] [application] Failed to set unsafe attribute "agreeTerms" of "Users".
+in C:\wamp\www\Yusef\shahir\protected\modules\users\controllers\PublicController.php (100)
+in C:\wamp\www\Yusef\shahir\index.php (11)
+2016/04/19 09:09:37 [warning] [application] Failed to set unsafe attribute "agreeTerms" of "Users".
+in C:\wamp\www\Yusef\shahir\protected\modules\users\controllers\PublicController.php (100)
+in C:\wamp\www\Yusef\shahir\index.php (11)
+2016/04/19 09:09:37 [warning] [application] Failed to set unsafe attribute "agreeTerms" of "Users".
+in C:\wamp\www\Yusef\shahir\protected\modules\users\controllers\PublicController.php (107)
+in C:\wamp\www\Yusef\shahir\index.php (11)
+2016/04/19 09:12:12 [warning] [application] Failed to set unsafe attribute "agreeTerms" of "Users".
+in C:\wamp\www\Yusef\shahir\protected\modules\users\controllers\PublicController.php (100)
+in C:\wamp\www\Yusef\shahir\index.php (11)
+2016/04/19 09:14:52 [warning] [application] Failed to set unsafe attribute "agreeTerms" of "Users".
+in C:\wamp\www\Yusef\shahir\protected\modules\users\controllers\PublicController.php (100)
+in C:\wamp\www\Yusef\shahir\index.php (11)
+2016/04/19 09:15:01 [warning] [application] Failed to set unsafe attribute "agreeTerms" of "Users".
+in C:\wamp\www\Yusef\shahir\protected\modules\users\controllers\PublicController.php (100)
+in C:\wamp\www\Yusef\shahir\index.php (11)
+2016/04/19 09:15:07 [warning] [application] Failed to set unsafe attribute "agreeTerms" of "Users".
+in C:\wamp\www\Yusef\shahir\protected\modules\users\controllers\PublicController.php (100)
+in C:\wamp\www\Yusef\shahir\index.php (11)
+2016/04/19 09:18:04 [warning] [application] Failed to set unsafe attribute "agreeTerms" of "Users".
+in C:\wamp\www\Yusef\shahir\protected\modules\users\controllers\PublicController.php (100)
+in C:\wamp\www\Yusef\shahir\index.php (11)
+2016/04/19 09:18:47 [warning] [application] Failed to set unsafe attribute "agreeTerms" of "Users".
+in C:\wamp\www\Yusef\shahir\protected\modules\users\controllers\PublicController.php (100)
+in C:\wamp\www\Yusef\shahir\index.php (11)
+2016/04/19 09:18:48 [warning] [application] Failed to set unsafe attribute "agreeTerms" of "Users".
+in C:\wamp\www\Yusef\shahir\protected\modules\users\controllers\PublicController.php (107)
+in C:\wamp\www\Yusef\shahir\index.php (11)
+2016/04/19 09:19:49 [warning] [application] Failed to set unsafe attribute "password" of "Users".
+in C:\wamp\www\Yusef\shahir\protected\modules\users\controllers\PublicController.php (100)
+in C:\wamp\www\Yusef\shahir\index.php (11)
+2016/04/19 09:20:11 [warning] [application] Failed to set unsafe attribute "password" of "Users".
+in C:\wamp\www\Yusef\shahir\protected\modules\users\controllers\PublicController.php (100)
+in C:\wamp\www\Yusef\shahir\index.php (11)
+2016/04/19 09:20:12 [warning] [application] Failed to set unsafe attribute "password" of "Users".
+in C:\wamp\www\Yusef\shahir\protected\modules\users\controllers\PublicController.php (107)
+in C:\wamp\www\Yusef\shahir\index.php (11)

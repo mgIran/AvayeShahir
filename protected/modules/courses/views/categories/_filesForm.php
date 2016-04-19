@@ -18,6 +18,18 @@
 ));
 echo CHtml::hiddenField('ClassCategoryFiles[category_id]',$model->id);
 ?>
+
+	<div class='row'>
+		<?php echo $form->labelEx($fileModel,'title', array('class'=>'control-label')); ?>
+		<?php echo EMHelper::megaOgogo($fileModel, 'title',array('class'=> 'span7 pull-right')); ?>
+		<?php echo $form->error($fileModel,'title'); ?>
+	</div>
+	<div class='row'>
+		<?php echo $form->labelEx($fileModel,'summary', array('class'=>'control-label')); ?>
+		<?php echo EMHelper::megaOgogo($fileModel, 'summary',array('class'=> 'span7 pull-right'),'textarea'); ?>
+		<?php echo $form->error($fileModel,'summary'); ?>
+	</div>
+
 	<div class='row'>
 		<?php echo $form->labelEx($fileModel,'path', array('class'=>'control-label')); ?>
 		<?php
@@ -48,12 +60,6 @@ echo CHtml::hiddenField('ClassCategoryFiles[category_id]',$model->id);
 		Yii::app()->clientScript->registerCss('dropZone','.dropzone.single{width:100%}');
 		?>
 		<?php echo $form->error($fileModel,'path'); ?>
-	</div>
-
-	<div class='row'>
-		<?php echo $form->labelEx($fileModel,'title', array('class'=>'control-label')); ?>
-		<?php echo EMHelper::megaOgogo($fileModel, 'title',array('class'=> 'span7 pull-right')); ?>
-		<?php echo $form->error($fileModel,'title'); ?>
 	</div>
 
 	<div class="row buttons">

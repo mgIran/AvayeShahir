@@ -49,7 +49,7 @@ class ClassCategoryFilesController extends Controller
 		$model = new ClassCategoryFiles();
 		if(isset($_POST['ClassCategoryFiles'])) {
 			$model->attributes = $_POST['ClassCategoryFiles'];
-			$model->file_type = $ext = pathinfo($_POST['ClassCategoryFiles']['path'], PATHINFO_EXTENSION);
+			$model->file_type = pathinfo($_POST['ClassCategoryFiles']['path'], PATHINFO_EXTENSION);
 			if($model->save()) {
 				Yii::app()->user->setFlash('success', '<span class="icon-check"></span>&nbsp;&nbsp;اطلاعات با موفقیت ذخیره شد.');
 				$this->redirect(array('/courses/categories/update/id/'.$model->category_id.'/step/2'));

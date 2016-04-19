@@ -39,9 +39,9 @@ class UserLoginForm extends CFormModel
 	{
 		return array(
             'username' => 'نام کاربری',
-            'password' => 'رمز عبور',
+			'password' => Yii::t('app','Password'),
+			'email' => Yii::t('app','Email'),
 			'rememberMe'=>'مرا بخاطر بسپار',
-            'email' => 'پست الکترونیک'
 		);
 	}
 
@@ -55,7 +55,7 @@ class UserLoginForm extends CFormModel
 		{
 			$this->_identity = new UserIdentity($this->email,$this->password);
 			if(!$this->_identity->authenticate())
-				$this->addError($attribute,'پست الکترونیک یا رمز عبور اشتباه است .');
+				$this->addError($attribute,Yii::t('app' ,'Username or Password is Invalid.'));
 		}
 	}
 

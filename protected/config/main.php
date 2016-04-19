@@ -33,6 +33,7 @@ return array(
         'pages',
 		'courses',
 		'personnel',
+		'map',
 	),
 
 	// application components
@@ -60,12 +61,9 @@ return array(
             'showScriptName'=>false,
             'appendParams'=>true,
 			'rules'=>array(
-                'logout' => 'users/public/logout',
-                'login' => 'users/public/login',
-                'dashboard' => 'users/public/dashboard',
-                'register' => 'site/register',
-                'terms' => 'site/terms',
-                'guidance' => 'site/guidance',
+				'<action:(login|logout|register|dashboard)>/<trash:(.*)>' => 'users/public/<action>',
+                'terms/<trash:(.*)>' => 'site/terms',
+                'guidance/<trash:(.*)>' => 'site/guidance',
                 'teachers/<id:\d+>/<title:(.*)>' => 'users/teachers/view',
                 '<module:\w+>/<controller:\w+>'=>'<module>/<controller>/index',
                 '<controller:\w+>/<id:\d+>/<title:(.*)>'=>'<controller>/view',
@@ -125,7 +123,7 @@ return array(
 	'params'=>array(
 		// this is used in contact page
 		'adminEmail'=>'webmaster@example.com',
-        'no-replay-email' => 'noreply@domain.com',
+        'no-reply-email' => 'noreply@domain.com',
 		'languages'=>array(
 				'fa' => 'فارسی',
 				'en' => 'English',

@@ -3,6 +3,7 @@
 /* @var $personnel Personnel[] */
 /* @var $teachers Users[] */
 /* @var $form CActiveForm */
+/* @var $aboutText Pages */
 $baseUrl = Yii::app()->theme->baseUrl;
 Yii::app()->clientScript->registerScriptFile($baseUrl.'/js/jquery.mousewheel.min.js');
 Yii::app()->clientScript->registerScriptFile($baseUrl.'/js/jquery.easy-ticker.min.js');
@@ -38,7 +39,7 @@ Yii::app()->clientScript->registerScript("easyTicker-scripts","
 
 ?>
 
-<section class="courses">
+<section class="courses" id="courses">
     <div class="container">
         <h3 class="yekan-text"><?= Yii::t('app' ,'Education Courses') ?></h3>
         <div class="course-carousel">
@@ -132,37 +133,60 @@ Yii::app()->clientScript->registerScript("easyTicker-scripts","
 </section>
 <section class="signup" id="signup">
     <div class="mask"></div>
+    <?= $this->renderPartial("//layouts/_loading");?>
     <div class="container-fluid">
         <h2 class="yekan-text text-center"><?= Yii::t('app','Sign Up Account') ?></h2>
 
         <?php
-        $signUpModel = new Users();
+        $signUpModel = new Users('agreeTerms');
         $form=$this->beginWidget('CActiveForm', array(
-            'id'=>'index-signup-form',
+            'id'=>'register-form',
             'enableAjaxValidation'=>false,
             'enableClientValidation'=>true,
-            'action' => array('/signup'),
+            'clientOptions'=>array(
+                'validateOnSubmit'=>true,
+                'afterValidate' => 'js:function(form ,data ,hasError){
+                    if(!hasError)
+                    {
+                        var form = $("#register-form");
+                        var loading = $(".signup .loading-container");
+                        var url = \''.Yii::app()->createUrl('/register').'\';
+                        submitAjaxForm(form ,url ,loading ,"if(html.state == \'ok\') location.reload();");
+                    }
+                }'
+            ),
             'htmlOptions' => array(
                 'class' => 'form-group'
             )
-        )); ?>
+        ));
+        echo CHtml::hiddenField('ajax','register-form');
+        ?>
             <div class="center-block box">
-                <?php echo $form->emailField($signUpModel,'email' ,array(
-                    'placeholder' => Yii::t('app','Email'),
-                    'class' => 'text-field'
-                )); ?>
-                <?php echo $form->passwordField($signUpModel,'password',array(
-                    'placeholder' => Yii::t('app','Password'),
-                    'class' => 'text-field'
-                )); ?>
-
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox">
-                        <span>
-                            <?= Yii::t('app' ,'I agree to the Yahoo <a href="'.Yii::app()->baseUrl."/terms".'">Terms and Privacy')?>
-                        </span>
-                    </label>
+                <?= $this->renderPartial("//layouts/_flashMessage");?>
+                <div class="relative">
+                    <?php echo $form->emailField($signUpModel,'email' ,array(
+                        'placeholder' => Yii::t('app','Email'),
+                        'class' => 'text-field'
+                    ));
+                    echo $form->error($signUpModel,'email');?>
+                </div>
+                <div class="relative">
+                    <?php echo $form->passwordField($signUpModel,'password',array(
+                        'placeholder' => Yii::t('app','Password'),
+                        'class' => 'text-field'
+                    ));
+                    echo $form->error($signUpModel,'password');?>
+                </div>
+                <div class="relative">
+                    <div class="checkbox">
+                        <label>
+                            <?= $form->checkBox($signUpModel,'agreeTerms'); ?>
+                            <span>
+                                <?= Yii::t('app' ,'I agree with the <a href="'.Yii::app()->baseUrl."/terms".'">Terms and Policies</a>')?>
+                            </span>
+                        </label>
+                    </div>
+                    <? echo $form->error($signUpModel,'agreeTerms');?>
                 </div>
                 <?= CHtml::submitButton(Yii::t('app','Sign Up'),array('class'=>"button-field btn")); ?>
             </div>
@@ -178,7 +202,7 @@ Yii::app()->clientScript->registerScript("easyTicker-scripts","
         <?php
         if($personnel) {
             ?>
-            <div class="col-md-6 teachers" id="staff">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12  partners" id="staff">
                 <h3 class="yekan-text"><?= Yii::t('app', 'Staff') ?></h3>
 
                 <div class="slider">
@@ -219,7 +243,7 @@ Yii::app()->clientScript->registerScript("easyTicker-scripts","
         <?php
         if($teachers) {
             ?>
-            <div class="col-md-6 partners">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 teachers" id="teachers">
                 <h3 class="yekan-text"><?= Yii::t('app', 'Teachers') ?></h3>
 
                 <div class="slider">
@@ -259,18 +283,45 @@ Yii::app()->clientScript->registerScript("easyTicker-scripts","
         ?>
     </div>
 </section>
-<section class="about">
+<section class="about" id="about">
     <div class="container">
-        <h3 class="yekan-text">درباره پردیس</h3>
-        <div class="col-md-8 text-container">
+        <h3 class="yekan-text"><?= Yii::t('app','About Avaye Shahir') ?></h3>
+        <div class="<?= Yii::app()->language == 'fa'?'col-md-8':'col-md-12'; ?> text-container">
             <div class="text">
-                <p class="paragraph col-md-6">مرکز زبان آریانپورکه تنها دارنده مجوز از وزارت آموزش و پرورش به ایـن نام در تهران می باشد، با مطالعات و برنامه ریزی های جـامـع آمـوزشـی و بـا سـالها سابقه در برگزاری دوره های IELTS,TOEFL  تا کـنون گامهای بلند و جامعی در جهت ارایه آموزش صحیح و موثر زبان انگلیسی برداشته است .</p>
-                <p class="paragraph col-md-6">در هـمین راسـتا با ایــجاد محیط آموزشی استاندارد و بهره گیری از تکنولوژی جـدید آمـوزش زبان و استادان مجرب، با بالاترین آمار نمرات در آزمونهای فوق همواره  با آغوش باز پذیرای زبان آموزان عزیز می باشد. </p>
+                <?
+                $text = strip_tags($aboutText->summary);
+                $length = mb_strlen($text,'utf8');
+                if($length > 480) {
+                    $length = ceil($length / 2);
+                    $words = explode(" ", $text);
+                    $c = count($words);
+                    $l = 0;
+                    $colOutput = '';
+                    for($i = 1; $i <= 2; $i++) {
+                        $new_string = "";
+                        $colOutput .= "<p class=\"paragraph col-md-6\">";
+                        for($g = $l; $g < $c; $g++) {
+                            if(mb_strlen($new_string,'utf8') <= $length || $i == 2)
+                                $new_string .= $words[$g]." ";
+                            else {
+                                $l = $g;
+                                break;
+                            }
+                        }
+                        $colOutput .= $new_string;
+                        $colOutput .= "</p>";
+                    }
+                    echo $colOutput;
+                }else {
+                    echo "<p class=\"paragraph col-md-6\">".$text."</p>";
+                    echo "<p class=\"paragraph col-md-6\"></p>";
+                }
+                ?>
             </div>
         </div>
-        <div class="col-md-4 licenses-container">
-            <div class="col-md-6"><img src="../images/rasaneh.jpg"></div>
-            <div class="col-md-6"><img src="../images/enamad.jpg"></div>
+        <div class="<?= Yii::app()->language == 'fa'?'col-md-4':'hidden'; ?> licenses-container">
+            <div class="col-md-6"><img src="<?= Yii::app()->theme->baseUrl .'/images/rasaneh.jpg';?>"></div>
+            <div class="col-md-6"><img src="<?= Yii::app()->theme->baseUrl .'/images/enamad.jpg'; ?>"></div>
         </div>
     </div>
 </section>

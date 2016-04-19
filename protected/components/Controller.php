@@ -31,6 +31,24 @@ class Controller extends CController
     public $pageTitle;
 
     public $sideRender = null;
+    /**
+     * Declares class-based actions.
+     */
+    public function actions()
+    {
+        return array(
+            // captcha action renders the CAPTCHA image displayed on the contact page
+            'captcha'=>array(
+                'class'=>'CCaptchaAction',
+                'backColor'=>0xFFFFFF,
+            ),
+            // page action renders "static" pages stored under 'protected/views/site/pages'
+            // They can be accessed via: index.php?r=site/page&views=FileName
+            'page'=>array(
+                'class'=>'CViewAction',
+            ),
+        );
+    }
 
     public function init(){
         // for multi language
@@ -99,6 +117,16 @@ class Controller extends CController
                     'items' => array(
                         array('label' => 'مدیریت' ,'url' => Yii::app()->createUrl('/personnel/manage')) ,
                         array('label' => 'افزودن' ,'url' => Yii::app()->createUrl('/personnel/manage/create')) ,
+                    )
+                ) ,
+
+                array(
+                    'label' => 'گوگل ارث<span class="caret"></span>' ,
+                    'url' => '#' ,
+                    'itemOptions' => array('class' => 'dropdown' ,'tabindex' => "-1") ,
+                    'linkOptions' => array('class' => 'dropdown-toggle' ,'data-toggle' => "dropdown") ,
+                    'items' => array(
+                        array('label' => 'مدیریت' ,'url' => Yii::app()->createUrl('/map/manage/update')) ,
                     )
                 ) ,
                 array(

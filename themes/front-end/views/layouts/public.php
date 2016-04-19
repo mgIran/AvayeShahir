@@ -47,7 +47,7 @@
     $cs->registerScriptFile($baseUrl.'/js/scripts.js');
     ?>
 </head>
-<body>
+<body id="top">
     <?= $this->renderPartial('//layouts/_header'); ?>
     <?= $this->renderPartial('//layouts/_banner'); ?>
     <?= $this->renderPartial('//layouts/_search_box'); ?>

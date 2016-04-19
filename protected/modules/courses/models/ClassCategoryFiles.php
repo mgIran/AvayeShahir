@@ -8,6 +8,7 @@
  * @property string $title
  * @property string $path
  * @property string $file_type
+ * @property string $summary
  * @property string $category_id
  *
  * The followings are the available model relations:
@@ -55,7 +56,7 @@ class ClassCategoryFiles extends CActiveRecord
 			'EasyMultiLanguage'=>array(
 				'class' => 'ext.EasyMultiLanguage.EasyMultiLanguageBehavior',
 				// @todo Please change those attributes that should be translated.
-				'translated_attributes' => array('title'),
+				'translated_attributes' => array('title' ,'summary'),
 				// @todo Please add admin actions
 				'admin_routes' => array('courses/files/create','courses/files/update'),
 				//
@@ -78,6 +79,7 @@ class ClassCategoryFiles extends CActiveRecord
 			array('title, file_type', 'length', 'max'=>50),
 			array('path', 'length', 'max'=>500),
 			array('category_id', 'length', 'max'=>10),
+			array('summary', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, title, category_id', 'safe'),
@@ -101,20 +103,13 @@ class ClassCategoryFiles extends CActiveRecord
 	 */
 	public function attributeLabels()
 	{
-		/* @todo if you want admin control panel be multi language active this lines ,otherwise remove it
-		return array(
-	'id'=>Yii::t('app','id'),
-	'title'=>Yii::t('app','title'),
-	'path'=>Yii::t('app','path'),
-	'file_type'=>Yii::t('app','file_type'),
-	'category_id'=>Yii::t('app','category_id'),
-		);*/
 		return array(
 					'id' => 'ID',
 					'title' => 'عنوان',
 					'path' => 'فایل',
 					'file_type' => 'نوع فایل',
 					'category_id' => 'گروه',
+					'summary' => 'توضیح',
 				);
 	}
 

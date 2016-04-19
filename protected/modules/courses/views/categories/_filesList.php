@@ -7,6 +7,7 @@
         'dataProvider'=>$files,
         'columns'=>array(
             'title',
+            'summary',
             'file_type',
             array(
                 'class'=>'CButtonColumn',

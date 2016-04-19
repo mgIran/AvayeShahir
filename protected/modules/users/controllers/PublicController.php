@@ -25,7 +25,7 @@ class PublicController extends Controller
                 'users' => array('@'),
             ),
             array('allow',  // allow all users to perform 'index' and 'views' actions
-                'actions'=>array('login'),
+                'actions'=>array('login' ,'register','captcha'),
                 'users' => array('*'),
                 //'roles'=>array('admin','validator'),
             ),
@@ -61,23 +61,96 @@ class PublicController extends Controller
 
         $model = new UserLoginForm;
         // if it is ajax validation request
-        if ( isset( $_POST[ 'ajax' ] ) && $_POST[ 'ajax' ] === 'login-form' ) {
-            echo CActiveForm::validate( $model );
-            Yii::app()->end();
+        if(isset($_POST['ajax']) && $_POST['ajax'] === 'login-form') {
+            $errors = CActiveForm::validate($model);
+            if(CJSON::decode($errors)) {
+                echo $errors;
+                Yii::app()->end();
+            }
         }
 
-        // collect user input data
-        if ( isset( $_POST[ 'UserLoginForm' ] ) ) {
-            $model->attributes = $_POST[ 'UserLoginForm' ];
-            // validate user input and redirect to the previous page if valid
-            if ( $model->validate() && $model->login())
-                if(Yii::app()->user->returnUrl != Yii::app()->request->baseUrl.'/')
-                    $this->redirect(Yii::app()->user->returnUrl);
-                else
-                    $this->redirect($this->createUrl('/dashboard'));
+        if(isset($_POST['UserLoginForm'])) {
+            $model->attributes = $_POST['UserLoginForm'];
+            if($model->validate() && $model->login()) {
+                if(isset($_POST['ajax'])) {
+                    echo CJSON::encode(array('state' => 'ok'));
+                    Yii::app()->end();
+                } else {
+                    if(Yii::app()->user->returnUrl != Yii::app()->request->baseUrl.'/')
+                        $this->redirect(Yii::app()->user->returnUrl);
+                    else
+                        $this->redirect($this->createAbsoluteUrl('//'));
+                }
+            } else
+                if(isset($_POST['ajax'])) {
+                    echo CJSON::encode(array('state' => 'error'));
+                    Yii::app()->end();
+                } else
+                    $this->redirect($this->createAbsoluteUrl('//'));
         }
-        // display the login form
-        $this->render( 'login', array( 'model' => $model ) );
+        $this->render('login', array('model' => $model));
+    }
+
+    public function actionRegister()
+    {
+        Yii::app()->theme = 'front-end';
+        $this->layout = '//layouts/public';
+        $model = new Users('agreeTerms');
+        if(isset($_POST['ajax']) && $_POST['ajax'] === 'register-form') {
+            $errors = CActiveForm::validate($model);
+            if(CJSON::decode($errors)) {
+                echo $errors;
+                Yii::app()->end();
+            }
+        }
+        if(isset($_POST['Users'])) {
+            $model->attributes = $_POST['Users'];
+            if($model->save()) {
+                $msg = '<h2 style="box-sizing:border-box;display: block;width: 100%;font-family:tahoma;background-color: #a1cf01;line-height:60px;color:#f7f7f7;font-size: 24px;text-align: right;padding-right: 50px">آوای شهیر<span style="font-size: 14px;color:#dfdfdf">- موسسه زبان</span></span> </h2>';
+                $msg .= '<div style="display: inline-block;width: 100%;font-family:tahoma;">';
+                $msg .= '<div style="direction:rtl;display:block;overflow:hidden;border:1px solid #efefef;text-align: center;margin:10px 20px;padding:15px;">';
+                $msg .= '<div style="color: #2d2d2d;font-size: 20px;text-align: right;">ثبت نام با موفقیت انجام شد.</div>';
+                $msg .= '<div style="color: #444;font-size: 13px;text-align: right;">';
+                $msg .= '<p>نام کاربری (پست الکترونیک) : '.$model->email.'</p>';
+                $msg .= '<p>رمز عبور : '.$_POST['Users']['password'].'</p>';
+                $msg .= '</div>';
+                $msg .= '</div>';
+                $msg .= '</div>';
+                Yii::import('application.extensions.phpmailer.JPhpMailer');
+                $mail = new JPhpMailer;
+                //$mail->IsSMTP();
+                //$mail->Host = 'smpt.163.com';
+                //$mail->SMTPAuth = true;
+                //$mail->Username = 'yourname@163.com';
+                //$mail->Password = 'yourpassword';
+                $mail->SetFrom(Yii::app()->params['no-reply-email'], Yii::app()->name);
+                $mail->Subject = 'ثبت نام در '.Yii::app()->name;
+                $mail->MsgHTML($msg);
+                $mail->AddAddress($model->email);
+                $mail->Send();
+                $msg = 'ثبت نام با موفقیت انجام شد.';
+
+                Yii::app()->user->setFlash('success' ,$msg);
+                if(isset($_POST['ajax'])) {
+                    echo CJSON::encode(array('state' => 'ok'));
+                    Yii::app()->end();
+                } else {
+                    if(Yii::app()->user->returnUrl != Yii::app()->request->baseUrl.'/')
+                        $this->redirect(Yii::app()->user->returnUrl);
+                    else
+                        $this->redirect(Yii::app()->createAbsoluteUrl('//'));
+                }
+            }
+            else {
+                Yii::app()->user->setFlash('failed' ,'متاسفانه ثبت نام با مشکل مواجه است\r\n لطفا مجددا تلاش کنید.');
+                if(isset($_POST['ajax'])) {
+                    echo CJSON::encode(array('state' => 'error'));
+                    Yii::app()->end();
+                } else
+                    $this->redirect($this->createAbsoluteUrl('//'));
+            }
+        }
+        $this->render('register', array('model' => $model));
     }
 
     /**
@@ -85,7 +158,7 @@ class PublicController extends Controller
      */
     public function actionLogout() {
         Yii::app()->user->logout(false);
-        $this->redirect(array('/users/login'));
+        $this->redirect(array('/'));
     }
 
     /**
@@ -94,7 +167,7 @@ class PublicController extends Controller
     public function actionDashboard()
     {
         Yii::app()->theme = 'front-end';
-        $this->layout = '//layouts/panel';
+        $this->layout = '//layouts/public';
         $model=Users::model()->findByPk(Yii::app()->user->getId());
         $this->render('dashboard', array(
             'model'=>$model,

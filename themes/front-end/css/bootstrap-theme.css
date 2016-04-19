@@ -46,6 +46,77 @@ html{
 body{
     background: #fff;
 }
+/*********************** LOADING **********************/
+.loading-container{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: none;
+    z-index: 10;
+}
+.loading-container .overly{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10;
+    background: rgba(0,0,0,0.7);
+    display: block;
+    opacity: 1;
+}
+.loading-container .spinner {
+    margin: 0 auto;
+    width: 70px;
+    text-align: center;
+    z-index: 11;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+}
+
+.loading-container .spinner > div {
+    width: 13px;
+    height: 13px;
+    background-color: #fff;
+
+    border-radius: 100%;
+    display: inline-block;
+    -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+    animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+}
+
+.loading-container .spinner .bounce1 {
+    -webkit-animation-delay: -0.32s;
+    animation-delay: -0.32s;
+}
+
+.loading-container .spinner .bounce2 {
+    -webkit-animation-delay: -0.16s;
+    animation-delay: -0.16s;
+}
+
+@-webkit-keyframes sk-bouncedelay {
+    0%, 80%, 100% { -webkit-transform: scale(0) }
+    40% { -webkit-transform: scale(1.0) }
+}
+
+@keyframes sk-bouncedelay {
+    0%, 80%, 100% {
+        -webkit-transform: scale(0);
+        transform: scale(0);
+    } 40% {
+          -webkit-transform: scale(1.0);
+          transform: scale(1.0);
+      }
+}
+/*****************************************************/
 .paragraph-end{
     background: linear-gradient(to left, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1)) repeat scroll 0 0 rgba(0, 0, 0, 0);
     bottom: 0;
@@ -65,7 +136,7 @@ body{
     height: 45px;
     width: 100%;
     padding: 0 15px;
-    margin-bottom: 15px;
+    margin-top: 15px;
 }
 .button-field.btn{
     background: #0b3762;
@@ -77,7 +148,7 @@ body{
     height: 45px;
     width: 100%;
     padding: 0 15px;
-    margin: 0 0 15px 0;
+    margin:15px 0;
     font-size: 16pt;
 }
 .button-field.btn:hover,
@@ -310,7 +381,7 @@ header.header.scroll-mode{
     transform: translate(-50%, -50%);
 }
 #login-modal h3{
-    margin-bottom: 30px;
+    margin-bottom: 15px;
 }
 #login-modal .email{
     background: #fff url("../svg/email.svg") no-repeat scroll 15px center / 25px auto;
@@ -323,7 +394,7 @@ header.header.scroll-mode{
 #login-modal .button-field{
     background: #89a404;
     color: #fff;
-    margin: 0 0 15px;
+    margin:15px 0;
 }
 #login-modal .button-field:hover{
     background: #96b404;
@@ -373,6 +444,7 @@ section.search{
 .search .text-field{
     box-shadow: 0 0 5px #f2f2f2;
     margin-bottom: 0;
+    margin-top: 0;
 }
 .search .dropdown-toggle.btn{
     width: 100%;
@@ -623,8 +695,9 @@ section.search{
 
 .persons{
     background: #0b3762;
+    display: block;
+    overflow: hidden;
     position: relative;
-    height: 707px;
 }
 .persons .bg{
     position: absolute;
@@ -873,12 +946,13 @@ section.search{
 }
 
 
-
 .about{
-    height: 350px;
     position: relative;
     display: block;
     overflow: hidden;
+}
+.about > .container{
+    padding: 20px 0 80px;
 }
 .about h3{
     height: 40px;
@@ -938,10 +1012,18 @@ section.search{
     -moz-box-shadow: 0 0 5px #c4c4c4;
     box-shadow: 0 0 5px #c4c4c4;
     width:100%;
-    height:400px;
+    min-height:400px;
+    display: block;
+    overflow: hidden;
     position: relative;
     top:-100px;
     padding:0 80px;
+}
+.footer .contact-box > form{
+    margin: 0;
+}
+.footer .contact-box > form > div{
+    margin-bottom: 15px;
 }
 .footer .contact-box h4{
     height:80px;
@@ -949,18 +1031,22 @@ section.search{
     margin:0;
     color: #155ca1;;
 }
+.footer .contact-box .col-lg-6,
 .footer .contact-box .col-md-6{
     padding:0 7px;
 }
+.footer .contact-box .col-lg-6:first-child,
 .footer .contact-box .col-md-6:first-child{
     padding-right:0;
 }
+.footer .contact-box .col-lg-6:nth-child(2),
 .footer .contact-box .col-md-6:nth-child(2){
     padding-left:0;
 }
 .footer .contact-box .button-field.btn{
     background: #89a404;
     width: 200px;
+    margin-bottom: 15px;
 }
 .footer .contact-box .button-field.btn:hover,
 .footer .contact-box .button-field.btn:focus,
@@ -972,6 +1058,8 @@ section.search{
     -webkit-box-shadow: 0 0 5px #dadada;
     -moz-box-shadow: 0 0 5px #dadada;
     box-shadow: 0 0 5px #dadada;
+    margin-top: 0;
+    margin-bottom: 0;
 }
 .footer .contact-box textarea.text-field{
     resize: none;
@@ -1057,6 +1145,7 @@ section.search{
 
 .header .btn-input .dropdown-menu > li > a{
     padding: 8px 16px;
+    color: #fff;
 }
 
 .header .btn-input .btn.form-control.wd {
@@ -1115,4 +1204,57 @@ section.search{
 }
 .owl-carousel .owl-controls .owl-nav [class*="owl-"].disabled {
     opacity: 0.2;
+}
+.alert.alert-success,
+.alert.alert-danger{
+    border-radius: 2px;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
+    color: rgba(255, 255, 255,1) ;
+    opacity: 0.8;
+    padding: 10px 15px;
+}
+.signup .errorMessage:after{
+    content: " ";
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-right:10px solid #fff;
+}
+.signup .errorMessage{
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    color: #d9534f;
+    display: inline-block;
+    font-size: 16px;
+    left: 100%;
+    line-height: 35px;
+    margin-left: 25px;
+    margin-top: -10px;
+    padding: 0 20px;
+    position: absolute;
+    text-align: left;
+    top: 50%;
+    white-space: nowrap;
+}
+.footer .errorMessage{
+    color: #d9534f;
+    font-size: 16px;
+}
+.errorMessage{
+    color: #fbca3e;
+    font-size: 16px;
+}
+.captcha{
+    margin-bottom: 15px;
+}
+.captcha img{
+    height: 45px;
+    margin-left: 15px;
+}
+.relative{
+    display: block;
+    position: relative;
 }

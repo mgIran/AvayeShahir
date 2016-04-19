@@ -8,6 +8,7 @@ $this->breadcrumbs=array(
 );
 $this->menu=array(
 	array('label'=>'لیست گروه بندی کلاس ها', 'url'=>array('admin')),
+	array('label'=>'افزودن دوره جدید', 'url'=>array('/courses/manage/create')),
 );
 if(isset($_GET['return']) && $_GET['return'] == true)
 	$this->menu = array(
