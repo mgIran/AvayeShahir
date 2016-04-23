@@ -52,7 +52,9 @@
     <?= $this->renderPartial('//layouts/_banner'); ?>
     <?= $this->renderPartial('//layouts/_search_box'); ?>
     <?= $content ?>
-    <?= $this->renderPartial('//layouts/_map'); ?>
+    <section class="map">
+        <?= $this->renderPartial('//layouts/_map'); ?>
+    </section>
     <?= $this->renderPartial('//layouts/_footer'); ?>
 </body>
 </html>

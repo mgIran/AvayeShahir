@@ -1,21 +1,22 @@
 <?php
 
 /**
- * This is the model class for table "{{class_category_files}}".
+ * This is the model class for table "{{class_category_file_links}}".
  *
- * The followings are the available columns in table '{{class_category_files}}':
+ * The followings are the available columns in table '{{class_category_file_links}}':
  * @property string $id
  * @property string $title
- * @property string $path
- * @property string $file_type
  * @property string $summary
+ * @property string $link
+ * @property string $file_type
  * @property string $category_id
  *
  * The followings are the available model relations:
  * @property ClassCategories $category
  */
-class ClassCategoryFiles extends CActiveRecord
+class ClassCategoryFileLinks extends CActiveRecord
 {
+
 	private $_types = array(
 			'jpeg','jpg','png','bmp','pdf',	'docx','doc','ppt','pptx','pps',
 			'ppsx','xls','xlsx','mp4','mov','webm','avi','wmv','flv','mkv',
@@ -26,9 +27,10 @@ class ClassCategoryFiles extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return '{{class_category_files}}';
+		return '{{class_category_file_links}}';
 	}
 
+	/* @todo if project is multi language active __set & behavior functions ,otherwise remove it
 	/**
 	* __set
 	*
@@ -58,20 +60,19 @@ class ClassCategoryFiles extends CActiveRecord
 	public function behaviors()
 	{
 		return array(
-			'EasyMultiLanguage'=>array(
-				'class' => 'ext.EasyMultiLanguage.EasyMultiLanguageBehavior',
-				// @todo Please change those attributes that should be translated.
-				'translated_attributes' => array('title' ,'summary'),
-				// @todo Please add admin actions
-				'admin_routes' => array('courses/files/create','courses/files/update'),
-				//
-				'languages' => Yii::app()->params['languages'],
-				'default_language' => Yii::app()->params['default_language'],
-				'translations_table' => 'ym_translations',
-			),
+				'EasyMultiLanguage'=>array(
+						'class' => 'ext.EasyMultiLanguage.EasyMultiLanguageBehavior',
+						// @todo Please change those attributes that should be translated.
+						'translated_attributes' => array('title' ,'summary'),
+						// @todo Please add admin actions
+						'admin_routes' => array('courses/links/create','courses/links/update'),
+						//
+						'languages' => Yii::app()->params['languages'],
+						'default_language' => Yii::app()->params['default_language'],
+						'translations_table' => 'ym_translations',
+				),
 		);
 	}
-
 
 	/**
 	 * @return array validation rules for model attributes.
@@ -81,15 +82,16 @@ class ClassCategoryFiles extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('path,category_id', 'required'),
+			array('title, link, file_type, category_id', 'required'),
 			array('title, file_type', 'length', 'max'=>50),
-			array('path', 'length', 'max'=>500),
+			array('link', 'length', 'max'=>500),
 			array('category_id', 'length', 'max'=>10),
 			//array('file_type', 'checkFileType'),
 			array('summary', 'safe'),
+
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, title, category_id', 'safe'),
+			array('id, title, summary, link, file_type, category_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -98,7 +100,6 @@ class ClassCategoryFiles extends CActiveRecord
 		if (!in_array($this->$attribute,$this->_types))
 			$this->addError($attribute, 'نوع فایل مورد نظر مجاز نیست.');
 	}
-
 	/**
 	 * @return array relational rules.
 	 */
@@ -119,18 +120,48 @@ class ClassCategoryFiles extends CActiveRecord
 		return array(
 					'id' => 'ID',
 					'title' => 'عنوان',
-					'path' => 'فایل',
+					'summary' => 'توضیحات',
+					'link' => 'لینک فایل',
 					'file_type' => 'نوع فایل',
 					'category_id' => 'گروه',
-					'summary' => 'توضیح',
 				);
+	}
+
+	/**
+	 * Retrieves a list of models based on the current search/filter conditions.
+	 *
+	 * Typical usecase:
+	 * - Initialize the model fields with values from filter form.
+	 * - Execute this method to get CActiveDataProvider instance which will filter
+	 * models according to data in model fields.
+	 * - Pass data provider to CGridView, CListView or any similar widget.
+	 *
+	 * @return CActiveDataProvider the data provider that can return the models
+	 * based on the search/filter conditions.
+	 */
+	public function search()
+	{
+		// @todo Please modify the following code to remove attributes that should not be searched.
+
+		$criteria=new CDbCriteria;
+
+		$criteria->compare('id',$this->id,true);
+		$criteria->compare('title',$this->title,true);
+		$criteria->compare('summary',$this->summary,true);
+		$criteria->compare('link',$this->link,true);
+		$criteria->compare('file_type',$this->file_type,true);
+		$criteria->compare('category_id',$this->category_id,true);
+
+		return new CActiveDataProvider($this, array(
+			'criteria'=>$criteria,
+		));
 	}
 
 	/**
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return ClassCategoryFiles the static model class
+	 * @return ClassCategoryFileLinks the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{

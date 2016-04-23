@@ -133,17 +133,21 @@ $action = $this->action->id;
                         )
                     ));
                     echo CHtml::hiddenField('ajax','login-form'); ?>
-                    <?php echo $formL->emailField($loginModel,'email' ,array(
-                        'placeholder' => Yii::t('app','Email'),
-                        'class' => 'text-field email'
-                    ));
-                    echo $formL->error($loginModel,'email'); ?>
-                    <?php echo $formL->passwordField($loginModel,'password',array(
-                        'placeholder' => Yii::t('app','Password'),
-                        'class' => 'text-field password'
-                    ));
-                    echo $formL->error($loginModel,'password');
-                    ?>
+                    <div class="relative">
+                        <?php echo $formL->emailField($loginModel,'email' ,array(
+                            'placeholder' => Yii::t('app','Email'),
+                            'class' => 'text-field email'
+                        ));
+                        echo $formL->error($loginModel,'email',array('class'=>'errorMessage tip')); ?>
+                    </div>
+                    <div class="relative">
+                        <?php echo $formL->passwordField($loginModel,'password',array(
+                            'placeholder' => Yii::t('app','Password'),
+                            'class' => 'text-field password'
+                        ));
+                        echo $formL->error($loginModel,'password',array('class'=>'errorMessage tip'));
+                        ?>
+                    </div>
                     <?= CHtml::submitButton(Yii::t('app','Login'),array('class'=>"button-field btn")); ?>
                     <br>
                         <span><?= Yii::t('app','Are You New?');?></span>&nbsp;<a href="#signup" data-dismiss="modal"><?= Yii::t('app','Sign Up.');?></a>

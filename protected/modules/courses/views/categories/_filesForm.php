@@ -8,17 +8,25 @@
 <div class="form">
 
 <?php $form=$this->beginWidget('CActiveForm', array(
-	'id'=>'class-categories-form',
+	'id'=>'upload-categories-form',
 	'enableAjaxValidation'=>false,
 	'enableClientValidation'=>true,
 	'clientOptions' => array(
-		'validateOnSubmit' => true
+		'validateOnSubmit' => true,
+		'afterValidate' => 'js:function(form ,data ,hasError){
+			if(!hasError)
+			{
+				var form = $("#upload-categories-form");
+				var loading = $("#upload-categories-form .loading-container");
+				var url = \''.Yii::app()->createUrl('/courses/files/create').'\';
+				submitAjaxForm(form ,url ,loading ,"if(typeof html.url == \'undefined\') location.reload(); else window.location=html.url;");
+			}
+		}'
 	),
-	'action' => array('/courses/files/create')
 ));
 echo CHtml::hiddenField('ClassCategoryFiles[category_id]',$model->id);
 ?>
-
+	<?= $this->renderPartial("//layouts/_loading");?>
 	<div class='row'>
 		<?php echo $form->labelEx($fileModel,'title', array('class'=>'control-label')); ?>
 		<?php echo EMHelper::megaOgogo($fileModel, 'title',array('class'=> 'span7 pull-right')); ?>

@@ -1,23 +1,23 @@
 <?
-/* @var $files CActiveDataProvider */
+/* @var $fileLinks CActiveDataProvider */
 ?>
 <div class="row">
     <?php $this->widget('zii.widgets.grid.CGridView', array(
-        'id'=>'files-grid',
-        'dataProvider'=>$files,
+        'id'=>'links-grid',
+        'dataProvider'=>$fileLinks,
         'columns'=>array(
             'title',
             'summary',
-            'file_type',
+            'link',
             array(
                 'class'=>'CButtonColumn',
                 'template'=>'{update}{delete}',
                 'buttons'=>array(
                     'delete'=>array(
-                        'url'=>'Yii::app()->createUrl("/courses/files/delete/id/".$data->id)'
+                        'url'=>'Yii::app()->createUrl("/courses/links/delete/id/".$data->id)'
                     ),
                     'update'=>array(
-                        'url'=>'Yii::app()->createUrl("/courses/files/update/id/".$data->id)',
+                        'url'=>'Yii::app()->createUrl("/courses/links/update/id/".$data->id)',
                     ),
                 ),
             ),

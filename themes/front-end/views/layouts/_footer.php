@@ -1,7 +1,7 @@
 <footer class="footer" id="contact">
     <div class="box center-block">
         <div class="contact-box">
-            <h4 class="yekan-text">تماس با ما</h4>
+            <h4 class="yekan-text"><?= Yii::t('app','Contact Us') ?></h4>
             <?php $this->renderPartial("//layouts/_flashMessage",array('prefix'=>'footer-'));?>
             <?php
             /* @var $form CActiveForm */

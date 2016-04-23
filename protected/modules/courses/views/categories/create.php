@@ -19,7 +19,8 @@ if(isset($_GET['return']) && $_GET['return'] == true)
 <h1>افزودن گروه</h1>
 <ul class="nav nav-tabs">
 	<li class="active"><a data-toggle="tab" href="#general">عمومی</a></li>
-	<li class="disabled"><a href="#">فایل ها</a></li>
+	<li class="disabled"><a href="#">آپلود فایل</a></li>
+	<li class="disabled"><a href="#">لینک فایل</a></li>
 </ul>
 
 <div class="tab-content">

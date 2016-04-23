@@ -93,6 +93,29 @@ body{
 .persons .person-item .socials .facebook{
     left: 2px;
 }
+.about .text-container{
+    padding-left: 0;
+}
+.about .text .paragraph:first-child{
+    padding-left: 0;
+    padding-right: 30px;
+}
+.errorMessage.tip{
+    right:auto;
+    left: 100%;
+    line-height: 35px;
+    margin-left: 25px;
+    margin-right: auto;
+    margin-top: -10px;
+    padding: 0 20px;
+    position: absolute;
+}
+.errorMessage.tip::after{
+    right: auto;
+    left: -9px;
+    border-left:none;
+    border-right:10px solid #fff;
+}
 .footer .contact-box .col-lg-6,
 .footer .contact-box .col-md-6{
     padding:0 7px;

@@ -168,14 +168,14 @@ Yii::app()->clientScript->registerScript("easyTicker-scripts","
                         'placeholder' => Yii::t('app','Email'),
                         'class' => 'text-field'
                     ));
-                    echo $form->error($signUpModel,'email');?>
+                    echo $form->error($signUpModel,'email',array('class'=>'errorMessage tip'));?>
                 </div>
                 <div class="relative">
                     <?php echo $form->passwordField($signUpModel,'password',array(
                         'placeholder' => Yii::t('app','Password'),
                         'class' => 'text-field'
                     ));
-                    echo $form->error($signUpModel,'password');?>
+                    echo $form->error($signUpModel,'password',array('class'=>'errorMessage tip'));?>
                 </div>
                 <div class="relative">
                     <div class="checkbox">
@@ -185,8 +185,8 @@ Yii::app()->clientScript->registerScript("easyTicker-scripts","
                                 <?= Yii::t('app' ,'I agree with the <a href="'.Yii::app()->baseUrl."/terms".'">Terms and Policies</a>')?>
                             </span>
                         </label>
+                        <? echo $form->error($signUpModel,'agreeTerms',array('class'=>'errorMessage tip'));?>
                     </div>
-                    <? echo $form->error($signUpModel,'agreeTerms');?>
                 </div>
                 <?= CHtml::submitButton(Yii::t('app','Sign Up'),array('class'=>"button-field btn")); ?>
             </div>

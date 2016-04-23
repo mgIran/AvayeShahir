@@ -35,6 +35,4 @@ if($map_model) {
 	google.maps.event.addDomListener(window, 'load', initialize);");
 }
 ?>
-<section class="map">
-    <div id="google-map"></div>
-</section>
+<div id="google-map"></div>

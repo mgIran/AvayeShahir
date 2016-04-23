@@ -37,6 +37,9 @@ class ContactForm extends CFormModel
 	{
 		return array(
 			'verifyCode'=>Yii::t('app','Verification Code'),
+			'name'=>Yii::t('app','Name'),
+			'email'=>Yii::t('app','Email'),
+			'body'=>Yii::t('app','Message Body'),
 		);
 	}
 }

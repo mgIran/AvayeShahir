@@ -51,14 +51,63 @@ class ClassCategoryFilesController extends Controller
 			$model->attributes = $_POST['ClassCategoryFiles'];
 			$model->file_type = pathinfo($_POST['ClassCategoryFiles']['path'], PATHINFO_EXTENSION);
 			if($model->save()) {
-				Yii::app()->user->setFlash('success', '<span class="icon-check"></span>&nbsp;&nbsp;اطلاعات با موفقیت ذخیره شد.');
-				$this->redirect(array('/courses/categories/update/id/'.$model->category_id.'/step/2'));
+				Yii::app()->user->setFlash('upload-success', '<span class="icon-check"></span>&nbsp;&nbsp;اطلاعات با موفقیت ذخیره شد.');
+				$response = ['state' => 'ok','url'=>Yii::app()->createUrl('/courses/categories/update/id/'.$model->category_id.'/step/2')];
 			} else
 			{
-				Yii::app()->user->setFlash('failed', 'در ثبت اطلاعات خطایی رخ داده است! لطفا مجددا تلاش کنید.');
-				$this->redirect(array('/courses/categories/update/id/'.$model->category_id.'/step/2'));
+				Yii::app()->user->setFlash('upload-failed', 'در ثبت اطلاعات خطایی رخ داده است! لطفا مجددا تلاش کنید.');
+				$response = ['state' => 'error','url'=>Yii::app()->createUrl('/courses/categories/update/id/'.$model->category_id.'/step/2')];
 			}
+			echo CJSON::encode($response);
+			Yii::app()->end();
 		}
+	}
+
+	public function actionUpdate($id)
+	{
+		$model = ClassCategoryFiles::model()->findByPk((int)$id);
+		$tmpDIR = Yii::getPathOfAlias("webroot").'/uploads/temp/';
+		if(!is_dir($tmpDIR))
+			mkdir($tmpDIR);
+		$tmpUrl = Yii::app()->baseUrl.'/uploads/temp/';
+		$fileDIR = Yii::getPathOfAlias("webroot")."/uploads/classCategoryFiles/";
+		$fileUrl = Yii::app()->baseUrl.'/uploads/classCategoryFiles/';
+
+		$fileArr = array();
+		if($model->path and file_exists($fileDIR.$model->path)) {
+			$file = $model->path;
+			$fileArr = array(
+				'name' => $file,
+				'src' => $fileUrl.'/'.$file,
+				'size' => filesize($fileDIR.$file),
+				'serverName' => $file,
+			);
+		}
+		if(isset($_POST['ClassCategoryFiles'])) {
+			$model->attributes = $_POST['ClassCategoryFiles'];
+			$model->file_type = pathinfo($_POST['ClassCategoryFiles']['path'], PATHINFO_EXTENSION);
+			if(isset($_POST['ClassCategoryFiles']['path']) and file_exists($tmpDIR.$_POST['ClassCategoryFiles']['path'])) {
+				$file = $_POST['ClassCategoryFiles']['path'];
+				$fileArr = array(
+					'name' => $file,
+					'src' => $tmpUrl.'/'.$file,
+					'size' => filesize($tmpDIR.$file),
+					'serverName' => $file,
+				);
+			}
+			if($model->save()) {
+				if($model->path and file_exists($tmpDIR.$model->path)) {
+					rename($tmpDIR.$model->path, $fileDIR.$model->path);
+				}
+				Yii::app()->user->setFlash('upload-success', '<span class="icon-check"></span>&nbsp;&nbsp;اطلاعات با موفقیت ذخیره شد.');
+			} else
+				Yii::app()->user->setFlash('upload-failed', 'در ثبت اطلاعات خطایی رخ داده است! لطفا مجددا تلاش کنید.');
+			$this->redirect(array('/courses/categories/update/id/'.$model->category_id.'/step/2'));
+		}
+		$this->render('update', array(
+			'model' => $model,
+			'file' => $fileArr
+		));
 	}
 
 	public function actionUpload()
@@ -97,7 +146,7 @@ class ClassCategoryFilesController extends Controller
 			$model = ClassCategoryFiles::model()->findByAttributes(array('path' => $fileName));
 			if ($model) {
 				if (@unlink($Dir . $model->path)) {
-					$model->delete();
+					$model->updateByPk($model->id,array('path'=>null));
 					$response = ['state' => 'ok', 'msg' => $this->implodeErrors($model)];
 				} else
 					$response = ['state' => 'error', 'msg' => 'مشکل ایجاد شده است'];
@@ -116,11 +165,11 @@ class ClassCategoryFilesController extends Controller
 		if($model->path && file_exists($Dir.$model->path))
 			unlink($Dir.$model->path);
 		if($model->delete()) {
-			Yii::app()->user->setFlash('success', '<span class="icon-check"></span>&nbsp;&nbsp;اطلاعات با موفقیت ذخیره شد.');
+			Yii::app()->user->setFlash('upload-success', '<span class="icon-check"></span>&nbsp;&nbsp;اطلاعات با موفقیت ذخیره شد.');
 			$this->redirect(array('/courses/categories/update/id/'.$model->category_id.'/step/2'));
 		} else
 		{
-			Yii::app()->user->setFlash('failed', 'در ثبت اطلاعات خطایی رخ داده است! لطفا مجددا تلاش کنید.');
+			Yii::app()->user->setFlash('upload-failed', 'در ثبت اطلاعات خطایی رخ داده است! لطفا مجددا تلاش کنید.');
 			$this->redirect(array('/courses/categories/update/id/'.$model->category_id.'/step/2'));
 		}
 	}

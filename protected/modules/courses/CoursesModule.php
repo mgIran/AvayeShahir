@@ -20,7 +20,8 @@ class CoursesModule extends CWebModule
 		'classes' => 'courses.controllers.ClassesManageController',
 		'categories' => 'courses.controllers.ClassCategoriesManageController',
 		'tags' => 'courses.controllers.ClassTagsManageController',
-		'files' => 'courses.controllers.ClassCategoryFilesController'
+		'files' => 'courses.controllers.ClassCategoryFilesController',
+		'links' => 'courses.controllers.ClassCategoryFileLinksController'
 	);
 	public function beforeControllerAction($controller, $action)
 	{

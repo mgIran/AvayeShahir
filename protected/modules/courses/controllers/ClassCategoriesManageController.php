@@ -92,7 +92,16 @@ class ClassCategoriesManageController extends Controller
 						':id' => $id
 					)
 				)
-			))
+			)),
+			'fileLinkModel' => new ClassCategoryFileLinks(),
+			'fileLinks' => new CActiveDataProvider('ClassCategoryFileLinks',array(
+				'criteria' => array(
+					'condition' => 'category_id = :id',
+					'params' => array(
+						':id' => $id
+					)
+				)
+			)),
 		));
 	}
 

@@ -159,6 +159,9 @@ body{
 .yekan-text{
     font-family: "BYekan" , "DejaVu Sans", "Trebuchet MS", Verdana, sans-serif;
 }
+.checkbox{
+    padding-top: 11px;
+}
 .checkbox .checkbox-material{
     direction: ltr;
 }
@@ -258,7 +261,7 @@ header.header.scroll-mode{
     top: 0;
     width: 100%;
     z-index: 1;
-    background: url("../images/introduction-bg.jpg") fixed;
+    background: url("../images/banner.jpg") fixed;
     background-size: cover;
 }
 .introduction .mask{
@@ -583,7 +586,7 @@ section.search{
     display: block;
     overflow: hidden;
     text-align: justify;
-    color: #b5b5b5;
+    color: #333;
     font-size: 13pt;
 }
 .courses .course-detail > p.text .paragraph-end{
@@ -967,7 +970,7 @@ section.search{
     height: 150px;
 }
 .about .text .paragraph{
-    color: #a1a1a1;
+    color: #333;
     text-align: justify;
     padding-right: 0;
     margin: 0;
@@ -1118,11 +1121,11 @@ section.search{
 }
 .header .btn-input .dropdown-menu{
     display: inline-block;
-    overflow: hidden;
+    visibility: hidden;
     width: 100%;
     text-align: right;
-    max-height: 400px;
-    overflow-y: visible;
+    max-height: 0;
+    overflow: hidden;
     background-color: rgba(255,255,255,0.1);
     box-shadow: none;
     font-size: 12px;
@@ -1167,6 +1170,8 @@ section.search{
 }
 .header .btn-input.open .dropdown-menu{
     opacity: 1;
+    max-height: 400px;
+    visibility: visible;
 }
 .header .btn-input .btn.form-control.wd:hover ,
 .header .btn-input .btn.form-control.wd:active,
@@ -1213,38 +1218,63 @@ section.search{
     opacity: 0.8;
     padding: 10px 15px;
 }
-.signup .errorMessage:after{
-    content: " ";
-    position: absolute;
-    width: 0;
-    height: 0;
-    border-top: 10px solid transparent;
-    border-bottom: 10px solid transparent;
-    border-right:10px solid #fff;
-}
-.signup .errorMessage{
+.errorMessage.tip{
     background-color: #fff;
     border-radius: 5px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-    color: #d9534f;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    color: #ff545b;
     display: inline-block;
     font-size: 16px;
-    left: 100%;
+    right: 100%;
     line-height: 35px;
-    margin-left: 25px;
+    margin-right: 25px;
     margin-top: -10px;
     padding: 0 20px;
     position: absolute;
     text-align: left;
     top: 50%;
     white-space: nowrap;
+    opacity: 0;
+    -webkit-transition: opacity 0.2s ease-in-out; -moz-transition: opacity 0.2s ease-in-out; -ms-transition: opacity 0.2s ease-in-out; -o-transition: opacity 0.2s ease-in-out; transition: opacity 0.2s ease-in-out;
+}
+.error .errorMessage.tip{
+    opacity: 1;
+    animation: shake 0.82s cubic-bezier(.36,.07,.19,.97);
+}
+.errorMessage.tip::after{
+    content: '';
+    position: absolute;
+    right: -9px;
+    margin-top: -9px;
+    top: 50%;
+    z-index: 1;
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left:10px solid #fff;
+    clear: both;
+}
+
+@keyframes shake {
+    10%, 90% {
+        transform: translate3d(-1px, 0, 0);
+    }
+
+    20%, 80% {
+        transform: translate3d(1px, 0, 0);
+    }
+
+    30%, 50%, 70% {
+        transform: translate3d(-2px, 0, 0);
+    }
+
+    40%, 60% {
+        transform: translate3d(2px, 0, 0);
+    }
 }
 .footer .errorMessage{
     color: #d9534f;
-    font-size: 16px;
-}
-.errorMessage{
-    color: #fbca3e;
     font-size: 16px;
 }
 .captcha{
