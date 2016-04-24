@@ -35,7 +35,7 @@ class SimpleImage {
 
    }
 
-   function save($filename, $image_type=IMAGETYPE_JPEG, $compression=75, $permissions=null) {
+   function save($filename, $image_type=IMAGETYPE_JPEG, $compression=90, $permissions=null) {
 
  
 	  $image_type=$this->image_type;

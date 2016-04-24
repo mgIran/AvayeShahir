@@ -118,17 +118,17 @@ class PublicController extends Controller
                 $msg .= '</div>';
                 Yii::import('application.extensions.phpmailer.JPhpMailer');
                 $mail = new JPhpMailer;
-                //$mail->IsSMTP();
-                //$mail->Host = 'smpt.163.com';
-                //$mail->SMTPAuth = true;
-                //$mail->Username = 'yourname@163.com';
-                //$mail->Password = 'yourpassword';
+                $mail->IsSMTP();
+                $mail->Host = 'smpt.163.com';
+                $mail->SMTPAuth = true;
+                $mail->Username = 'yourname@163.com';
+                $mail->Password = 'yourpassword';
                 $mail->SetFrom(Yii::app()->params['no-reply-email'], Yii::app()->name);
                 $mail->Subject = 'ثبت نام در '.Yii::app()->name;
                 $mail->MsgHTML($msg);
                 $mail->AddAddress($model->email);
-                $mail->Send();
-                $msg = 'ثبت نام با موفقیت انجام شد.';
+                //$mail->Send();
+                $msg = Yii::t('app','Registration was successful.');
 
                 Yii::app()->user->setFlash('success' ,$msg);
                 if(isset($_POST['ajax'])) {
@@ -142,7 +142,8 @@ class PublicController extends Controller
                 }
             }
             else {
-                Yii::app()->user->setFlash('failed' ,'متاسفانه ثبت نام با مشکل مواجه است\r\n لطفا مجددا تلاش کنید.');
+                $msg = Yii::t('app','Registration Failed!!!Please try again.');
+                Yii::app()->user->setFlash('failed' ,$msg);
                 if(isset($_POST['ajax'])) {
                     echo CJSON::encode(array('state' => 'error'));
                     Yii::app()->end();

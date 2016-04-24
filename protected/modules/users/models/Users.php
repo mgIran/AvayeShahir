@@ -31,10 +31,10 @@ class Users extends CActiveRecord
     }
 
     public $statusLabels = array(
-        'pending'=>'در انتظار تایید',
-        'active'=>'فعال',
-        'blocked'=>'مسدود',
-        'deleted'=>'حذف شده'
+        'pending' => 'در انتظار تایید',
+        'active' => 'فعال',
+        'blocked' => 'مسدود',
+        'deleted' => 'حذف شده'
     );
     public $fullName;
     public $statusFilter;
@@ -43,6 +43,8 @@ class Users extends CActiveRecord
     public $newPassword;
     public $roleId;
     public $agreeTerms;
+    public $phone;
+
     /**
      * @return array validation rules for model attributes.
      */
@@ -51,36 +53,37 @@ class Users extends CActiveRecord
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('password, email', 'required' , 'on' => 'insert,agreeTerms'),
-            array('agreeTerms', 'compare' ,'compareValue'=>1,'operator'=>'==', 'message'=>Yii::t('app' ,'You Rejected the Terms and Policies') , 'on' => 'agreeTerms'),
+            array('password, email', 'required', 'on' => 'insert,agreeTerms'),
+            array('agreeTerms', 'compare', 'compareValue' => 1, 'operator' => '==', 'message' => Yii::t('app', 'You Rejected the Terms and Policies'), 'on' => 'agreeTerms'),
             array('email', 'unique'),
-            array('role_id', 'default' ,'value' => 1,'on' => 'insert,agreeTerms'),
-            array('status', 'default' ,'value' => 1,'on' => 'insert,agreeTerms'),
-            array('email' , 'required' ,'on' => 'email'),
-            array('email' , 'email'),
-            array('oldPassword ,newPassword ,repeatPassword', 'required' , 'on'=>'update'),
-            array('email' , 'filter' , 'filter' => 'trim' ,'on' => 'insert,agreeTerms'),
-            array('username, password', 'length', 'max'=>100 ,'on' => 'insert,agreeTerms'),
-            array('oldPassword', 'oldPass' , 'on'=>'update'),
-            array('repeatPassword', 'compare', 'compareAttribute'=>'newPassword' ,'operator'=>'==', 'message' => 'رمز های عبور همخوانی ندارند' , 'on'=>'update'),
-            array('email', 'length', 'max'=>255),
-            array('role_id', 'length', 'max'=>10),
-            array('status', 'length', 'max'=>8),
+            array('role_id', 'default', 'value' => 1, 'on' => 'insert,agreeTerms'),
+            array('status', 'default', 'value' => 1, 'on' => 'insert,agreeTerms'),
+            array('email', 'required', 'on' => 'email'),
+            array('email', 'email'),
+            array('oldPassword ,newPassword ,repeatPassword', 'required', 'on' => 'update'),
+            array('email', 'filter', 'filter' => 'trim', 'on' => 'insert,agreeTerms'),
+            array('username, password', 'length', 'max' => 100, 'on' => 'insert,agreeTerms'),
+            array('oldPassword', 'oldPass', 'on' => 'update'),
+            array('repeatPassword', 'compare', 'compareAttribute' => 'newPassword', 'operator' => '==', 'message' => 'رمز های عبور همخوانی ندارند', 'on' => 'update'),
+            array('email', 'length', 'max' => 255),
+            array('role_id', 'length', 'max' => 10),
+            array('status', 'length', 'max' => 8),
+            array('phone', 'length', 'min' => 11, 'on' => 'agreeTerms'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
-            array('fullName ,email ,statusFilter', 'safe', 'on'=>'search,searchTeachers'),
+            array('fullName ,email ,statusFilter,phone', 'safe', 'on' => 'search,searchTeachers'),
         );
     }
 
     /**
      * Check this username is exist in database or not
      */
-    public function oldPass($attribute,$params)
+    public function oldPass($attribute, $params)
     {
         $bCrypt = new bCrypt();
-        $record = Users::model()->findByAttributes( array( 'email' => $this->email ) );
-        if ( !$bCrypt->verify( $this->$attribute, $record->password ) )
-            $this->addError( $attribute, 'رمز عبور فعلی اشتباه است' );
+        $record = Users::model()->findByAttributes(array('email' => $this->email));
+        if(!$bCrypt->verify($this->$attribute, $record->password))
+            $this->addError($attribute, 'رمز عبور فعلی اشتباه است');
     }
 
     /**
@@ -104,13 +107,14 @@ class Users extends CActiveRecord
     {
         return array(
             'id' => 'ID',
-            'username' =>Yii::t('app','Username'),
-            'password' => Yii::t('app','Password'),
-            'email' => Yii::t('app','Email'),
+            'username' => Yii::t('app', 'Username'),
+            'password' => Yii::t('app', 'Password'),
+            'email' => Yii::t('app', 'Email'),
+            'phone' => Yii::t('app', 'Phone'),
             'role_id' => 'نقش',
-            'repeatPassword' => Yii::t('app','Repeat Password'),
-            'oldPassword' => Yii::t('app','Current Password'),
-            'newPassword' => Yii::t('app','New Password'),
+            'repeatPassword' => Yii::t('app', 'Repeat Password'),
+            'oldPassword' => Yii::t('app', 'Current Password'),
+            'newPassword' => Yii::t('app', 'New Password'),
             'status' => 'وضعیت کاربر',
         );
     }
@@ -131,13 +135,15 @@ class Users extends CActiveRecord
     {
         // @todo Please modify the following code to remove attributes that should not be searched.
 
-        $criteria=new CDbCriteria;
-        $criteria->compare('email',$this->email,true);
-        $criteria->compare('role_id',1);
-        $criteria->compare('status',$this->statusFilter,true);
+        $criteria = new CDbCriteria;
+        $criteria->compare('email', $this->email, true);
+        $criteria->compare('role_id', 1);
+        $criteria->compare('status', $this->statusFilter, true);
         $criteria->order = 'status ,t.id DESC';
+        $criteria->addSearchCondition('userDetails.phone',$this->phone);
+        $criteria->with = array('userDetails');
         return new CActiveDataProvider($this, array(
-            'criteria'=>$criteria,
+            'criteria' => $criteria,
         ));
     }
 
@@ -145,15 +151,15 @@ class Users extends CActiveRecord
     {
         // @todo Please modify the following code to remove attributes that should not be searched.
 
-        $criteria=new CDbCriteria;
-        $criteria->compare('email',$this->email,true);
-        $criteria->addSearchCondition('teacherDetails.name',$this->fullName,true,'OR',"LIKE");
-        $criteria->addSearchCondition('teacherDetails.family',$this->fullName,true,'OR',"LIKE");
+        $criteria = new CDbCriteria;
+        $criteria->compare('email', $this->email, true);
+        $criteria->addSearchCondition('teacherDetails.name', $this->fullName, true, 'OR', "LIKE");
+        $criteria->addSearchCondition('teacherDetails.family', $this->fullName, true, 'OR', "LIKE");
         $criteria->with = array('teacherDetails');
         $criteria->addCondition('role_id = 2');
         $criteria->order = 'status ,t.id DESC';
         return new CActiveDataProvider($this, array(
-            'criteria'=>$criteria,
+            'criteria' => $criteria,
         ));
     }
 
@@ -163,7 +169,7 @@ class Users extends CActiveRecord
      * @param string $className active record class name.
      * @return Users the static model class
      */
-    public static function model($className=__CLASS__)
+    public static function model($className = __CLASS__)
     {
         return parent::model($className);
     }
@@ -180,16 +186,19 @@ class Users extends CActiveRecord
         return $enc->hash($value);
     }
 
-    public function afterSave(){
-        if($this->role_id == 1) {
-            $model = new UserDetails;
-            $model->user_id = $this->id;
-            $model->save();
-        }
-        elseif($this->role_id == 2) {
-            $model = new TeacherDetails();
-            $model->user_id = $this->id;
-            $model->save();
+    public function afterSave()
+    {
+        if($this->isNewRecord) {
+            if($this->role_id == 1) {
+                $model = new UserDetails;
+                $model->user_id = $this->id;
+                $model->phone = $this->phone && !empty($this->phone) ? $this->phone : null;
+                $model->save(false);
+            } elseif($this->role_id == 2) {
+                $model = new TeacherDetails();
+                $model->user_id = $this->id;
+                $model->save(false);
+            }
         }
         return true;
     }

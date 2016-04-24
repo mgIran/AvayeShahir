@@ -3,7 +3,7 @@
     <div class="logo"></div>
     <h2><?= Yii::t('app','Learn English with us ...')?></h2>
     <div class="chevron">
-        <a class="mover" href="#main">
+        <a class="mover scroll-link" href="#main">
             <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 245.059 245.059" xml:space="preserve">
                 <g>
                     <path d="M217.774,121.224l-95.252,84.224l-95.22-84.224c-6.229-6.229-16.368-6.229-22.597,0

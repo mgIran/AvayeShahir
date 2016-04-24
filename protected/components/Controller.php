@@ -227,10 +227,12 @@ class Controller extends CController
             return number_format($size,1). ' KB';
         }
         elseif($size < 1024*1024*1024){
-            $size = (float)$size/1024;
-            return number_format($size,1). ' KB';
+            $size = (float)$size/(1024*1024);
+            return number_format($size,1). ' MB';
+        }else
+        {
+            $size = (float)$size/(1024*1024*1024);
+            return number_format($size,1). ' MB';
         }
-
-
     }
 }

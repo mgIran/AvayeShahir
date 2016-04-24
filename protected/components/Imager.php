@@ -4,40 +4,40 @@ class Imager
 {
     public function createThumbnail($imagePath, $width, $height, $faceDetection = true, $outputDirection = null)
     {
-        if (!file_exists($imagePath))
+        if(!file_exists($imagePath))
             throw new Exception("Image doesn't exists.");
 
-        if ($outputDirection == null)
+        if($outputDirection == null)
             $outputDirection = $imagePath;
 
-        if ($faceDetection) {
+        if($faceDetection) {
             $imagePath = $this->resize($imagePath, $outputDirection, $width, $height);
             $detector = new FaceDetector('detection.dat');
             $detector->faceDetect($imagePath);
             $face = $detector->getFace();
 
-            if (!is_null($face)) {
+            if(!is_null($face)) {
                 $imageInfo = getimagesize($imagePath);
 
-                if ($imageInfo[0] > $imageInfo[1]) {
-                    if ($face['w'] < $width || $face['w'] == $width) {
+                if($imageInfo[0] > $imageInfo[1]) {
+                    if($face['w'] < $width || $face['w'] == $width) {
                         $coordinate = $face['x'] - (($width - $face['w']) / 2);
                         $x = ($coordinate < 0) ? 0 : $coordinate;
-                        if (($x + $width) > $imageInfo[0])
+                        if(($x + $width) > $imageInfo[0])
                             $x = $imageInfo[0] - $width;
                         $y = 0;
                         $this->crop($imagePath, $width, $height, 100, $x, $y);
-                    } elseif ($face['w'] > $width)
+                    } elseif($face['w'] > $width)
                         $this->crop($imagePath, $width, $height);
-                } elseif ($imageInfo[0] < $imageInfo[1]) {
-                    if ($face['w'] < $width || $face['w'] == $width) {
+                } elseif($imageInfo[0] < $imageInfo[1]) {
+                    if($face['w'] < $width || $face['w'] == $width) {
                         $x = 0;
                         $coordinate = $face['y'] - (($height - $face['w']) / 2);
                         $y = ($coordinate < 0) ? 0 : $coordinate;
-                        if (($y + $height) > $imageInfo[1])
+                        if(($y + $height) > $imageInfo[1])
                             $y = $imageInfo[1] - $height;
                         $this->crop($imagePath, $width, $height, 100, $x, $y);
-                    } elseif ($face['w'] > $width)
+                    } elseif($face['w'] > $width)
                         $this->crop($imagePath, $width, $height);
                 } else
                     $this->crop($imagePath, $width, $height);
@@ -58,10 +58,14 @@ class Imager
         $imageWidth = $simpleImage->getWidth();
         $imageHeight = $simpleImage->getHeight();
 
+        if($imageWidth < $width || $imageHeight < $height) {
+            copy($imagePath, $outputDirection);
+            return $outputDirection;
+        }
         //resize image to crop size
-        if ($imageWidth < $imageHeight)
+        if($imageWidth < $imageHeight)
             $simpleImage->resizeToWidth($width);
-        elseif ($imageHeight < $imageWidth)
+        elseif($imageHeight < $imageWidth)
             $simpleImage->resizeToHeight($height);
         else {
             $simpleImage->resizeToWidth($width);
@@ -83,16 +87,16 @@ class Imager
         $imageHeight = $simpleImage->getHeight();
 
         //resize image to crop size
-        if ($imageWidth < $imageHeight) {
-            if (is_null($x) && is_null($y)) {
+        if($imageWidth < $imageHeight) {
+            if(is_null($x) && is_null($y)) {
                 $srcX = 0;
                 $srcY = $simpleImage->getHeight() / 2 - ($height / 2);
             } else {
                 $srcX = $x;
                 $srcY = $y;
             }
-        } elseif ($imageHeight < $imageWidth) {
-            if (is_null($x) && is_null($y)) {
+        } elseif($imageHeight < $imageWidth) {
+            if(is_null($x) && is_null($y)) {
                 $srcX = $simpleImage->getWidth() / 2 - ($width / 2);
                 $srcY = 0;
             } else {
@@ -108,7 +112,7 @@ class Imager
         $imageInfo = getimagesize($imagePath);
         $imageType = $imageInfo[2];
 
-        if ($imageType == IMAGETYPE_PNG) {
+        if($imageType == IMAGETYPE_PNG) {
             $thumb = imagecreatetruecolor($width, $height);
             imagealphablending($thumb, false);
             imagesavealpha($thumb, true);
@@ -118,7 +122,7 @@ class Imager
                 $dstW, $dstH, $dstW, $dstH);
             sleep(1);
             imagepng($thumb, $imagePath, 9);
-        } elseif ($imageType == IMAGETYPE_GIF) {
+        } elseif($imageType == IMAGETYPE_GIF) {
             $thumb = imagecreatetruecolor($width, $height);
             imagealphablending($thumb, false);
             imagesavealpha($thumb, true);
@@ -132,7 +136,8 @@ class Imager
             $img_r = imagecreatefromjpeg($imagePath);
             $dst_r = imagecreatetruecolor($dstW, $dstH);
             imagecopyresampled($dst_r, $img_r, 0, 0, $srcX, $srcY, $dstW, $dstH, $dstW, $dstH);
-            while (!file_exists($imagePath)) ;
+            while(!file_exists($imagePath))
+                ;
 
             sleep(1);
             imagejpeg($dst_r, $imagePath, $quality);
@@ -143,7 +148,7 @@ class Imager
     {
         $simpleImage = new SimpleImage();
         $simpleImage->load($imagePath);
-        $info=array();
+        $info = array();
         $info['width'] = $simpleImage->getWidth();
         $info['height'] = $simpleImage->getHeight();
         return $info;

@@ -43,6 +43,8 @@ class CoursesManageController extends Controller
 	 */
 	public function actionView($id)
 	{
+		Yii::app()->theme = 'front-end';
+		$this->layout = '//layouts/inner';
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
 		));
@@ -85,7 +87,7 @@ class CoursesManageController extends Controller
 			{
 				if ($model->pic and file_exists($tmpDIR.$model->pic)) {
 					$imager = new Imager();
-					$imager->resize($tmpDIR.$model->pic ,$picDIR.$model->pic,400,400);
+					$imager->resize($tmpDIR.$model->pic ,$picDIR.$model->pic,600,600);
 					unlink($tmpDIR.$model->pic);
 				}
 				Yii::app()->user->setFlash('success' ,'<span class="icon-check"></span>&nbsp;&nbsp;اطلاعات با موفقیت ذخیره شد.');
@@ -143,7 +145,7 @@ class CoursesManageController extends Controller
 			{
 				if ($model->pic and file_exists($tmpDIR.$model->pic)) {
 					$imager = new Imager();
-					$imager->resize($tmpDIR.$model->pic ,$picDIR.$model->pic,400,400);
+					$imager->resize($tmpDIR.$model->pic ,$picDIR.$model->pic,600,600);
 					unlink($tmpDIR.$model->pic);
 				}
 				Yii::app()->user->setFlash('success' ,'<span class="icon-check"></span>&nbsp;&nbsp;اطلاعات با موفقیت ذخیره شد.');

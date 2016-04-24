@@ -11,7 +11,9 @@
  *
  * The followings are the available model relations:
  * @property Courses $course
+ * @property Classes[] $classes
  * @property ClassCategoryFiles[] $files
+ * @property ClassCategoryFileLinks[] $links
  */
 class ClassCategories extends CActiveRecord
 {
@@ -74,7 +76,7 @@ class ClassCategories extends CActiveRecord
 		return array(
 			array('title ,course_id','required'),
 			array('title','unique'),
-		  	array('title', 'length', 'max'=>50),
+		  	array('title', 'length', 'max'=>255),
 			array('summary ,course_id' , 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
@@ -91,8 +93,9 @@ class ClassCategories extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'course' => array(self::BELONGS_TO, 'Courses', 'course_id'),
-			'classes' => array(self::HAS_MANY, 'Classes', 'category_id'),
-			'files' => array(self::HAS_MANY, 'ClassCategoryFiles', 'category_id'),
+			'classes' => array(self::HAS_MANY, 'Classes', 'category_id', 'order'=>'id DESC'),
+			'files' => array(self::HAS_MANY, 'ClassCategoryFiles', 'category_id' , 'order'=>'id DESC'),
+			'links' => array(self::HAS_MANY, 'ClassCategoryFileLinks', 'category_id' , 'order'=>'id DESC'),
 		);
 	}
 

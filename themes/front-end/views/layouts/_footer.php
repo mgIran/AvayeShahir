@@ -1,6 +1,6 @@
-<footer class="footer" id="contact">
+<footer class="footer" >
     <div class="box center-block">
-        <div class="contact-box">
+        <div class="contact-box" id="contact">
             <h4 class="yekan-text"><?= Yii::t('app','Contact Us') ?></h4>
             <?php $this->renderPartial("//layouts/_flashMessage",array('prefix'=>'footer-'));?>
             <?php
@@ -70,8 +70,7 @@
             $this->endWidget(); ?>
         </div>
         <div class="info-box">
-            <div class="col-md-6"></div>
-            <div class="col-md-6"></div>
+            <p class="copyright">همهٔ حقوق برای موسسه پردیس آوای شهیر محفوظ است. ©‏ <?= JalaliDate::date('Y',time()) ?> </p>
         </div>
     </div>
 </footer>

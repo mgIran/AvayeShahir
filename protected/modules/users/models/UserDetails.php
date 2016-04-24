@@ -79,11 +79,12 @@ class UserDetails extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-            array('name, family, national_code, phone, zip_code, address', 'required'),
+			array('user_id', 'required', 'on' => 'insert'),
+			array('name, family, national_code, phone, zip_code, address', 'required', 'on' => 'update'),
 			array('national_code, phone, zip_code', 'numerical'),
-			array('user_id, national_code, zip_code', 'length', 'max'=>10),
-			array('national_code, zip_code', 'length', 'min'=>10),
-			array('phone', 'length', 'min'=>8),
+			array('user_id, national_code, zip_code', 'length', 'max'=>10 , 'on' => 'update'),
+			array('national_code, zip_code', 'length', 'min'=>10 , 'on' => 'update'),
+			array('phone', 'length', 'min'=>11 , 'on' => 'update'),
 			array('name, family', 'length', 'max'=>50),
 			array('web_url', 'length', 'max'=>255),
 			array('phone', 'length', 'max'=>11),

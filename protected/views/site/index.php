@@ -113,13 +113,13 @@ Yii::app()->clientScript->registerScript("easyTicker-scripts","
                             <img src="<?= Yii::app()->baseUrl.'/uploads/courses/'.$course->pic; ?>" alt="<?= $course->title ?>">
                         </div>
                         <div class="course-detail container-fluid">
-                            <h4><a href="<?= Yii::app()->createAbsoluteUrl('/courses/'.$course->id.'/'.urlencode($course->title)); ?>"><?= $course->title ?></a></h4>
+                            <h4><a href="<?= Yii::app()->createUrl('/courses/'.$course->id.'/'.urlencode($course->title)); ?>"><?= $course->title ?></a></h4>
 
                             <p class="text">
-                                <?= CHtml::encode(strip_tags($course->summary)) ?>
+                                <?= strip_tags($course->summary) ?>
                                 <span class="paragraph-end"></span>
                             </p>
-                            <a href="<?= Yii::app()->createAbsoluteUrl('/courses/'.$course->id.'/'.urlencode($course->title)); ?>"
+                            <a href="<?= Yii::app()->createUrl('/courses/'.$course->id.'/'.urlencode($course->title)); ?>"
                                data-toggle="tooltip" data-placement="<?= Yii::app()->language == 'fa'?'right':'left';?>" title="<?= Yii::t('app','Course Details') ?>"
                                class="btn pull-left"><?= Yii::t('app','Details')?></a>
                         </div>
@@ -176,6 +176,14 @@ Yii::app()->clientScript->registerScript("easyTicker-scripts","
                         'class' => 'text-field'
                     ));
                     echo $form->error($signUpModel,'password',array('class'=>'errorMessage tip'));?>
+                </div>
+                <div class="relative">
+                    <?php echo $form->telField($signUpModel,'phone',array(
+                        'placeholder' => Yii::t('app','Phone'),
+                        'class' => 'text-field',
+                        'max-length' => 11
+                    ));
+                    echo $form->error($signUpModel,'phone',array('class'=>'errorMessage tip'));?>
                 </div>
                 <div class="relative">
                     <div class="checkbox">
@@ -254,7 +262,17 @@ Yii::app()->clientScript->registerScript("easyTicker-scripts","
                             ?>
                             <li class="person-item">
                                 <div class="image">
-                                    <img src="<?= Yii::app()->baseUrl.$teacher->teacherDetails->avatar ?>" alt="<?= CHtml::encode($teacher->teacherDetails->getFullName()) ?>">
+                                    <?
+                                    if($teacher->teacherDetails->avatar):
+                                    ?>
+                                        <img src="<?= Yii::app()->baseUrl.'/uploads/teachers/'.$teacher->teacherDetails->avatar ?>" alt="<?= CHtml::encode($teacher->teacherDetails->getFullName()) ?>">
+                                    <?
+                                    else:
+                                    ?>
+                                        <div class="img-default"></div>
+                                    <?
+                                    endif;
+                                    ?>
 
                                     <div class="img-overlay"></div>
                                 </div>

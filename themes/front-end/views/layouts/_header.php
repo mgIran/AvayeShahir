@@ -15,24 +15,24 @@ $action = $this->action->id;
         </div>
         <ul class="nav">
             <li>
-                <a href="<?= $menuID == 'site' && $action == 'index'?'#top':Yii::app()->baseUrl.'#top'; ?>" title="<?= Yii::t('app','Home');?>">
+                <a class="scroll-link" href="<?= $menuID == 'site' && $action == 'index'?'#top':Yii::app()->baseUrl.'#top'; ?>" title="<?= Yii::t('app','Home');?>">
                     <?= Yii::t('app','Home');?>
                 </a>
             </li>
             <li>
-                <a href="<?= $menuID == 'site' && $action == 'index'?'#courses':Yii::app()->baseUrl.'#courses'; ?>" title="<?= Yii::t('app','Courses');?>"><?= Yii::t('app','Courses');?></a>
+                <a class="scroll-link" href="<?= $menuID == 'site' && $action == 'index'?'#courses':Yii::app()->baseUrl.'#courses'; ?>" title="<?= Yii::t('app','Courses');?>"><?= Yii::t('app','Courses');?></a>
             </li>
             <li>
-                <a href="<?= $menuID == 'site' && $action == 'index'?'#staff':Yii::app()->baseUrl.'#staff'; ?>" title="<?= Yii::t('app','Staff');?>"><?= Yii::t('app','Staff');?></a>
+                <a class="scroll-link" href="<?= $menuID == 'site' && $action == 'index'?'#staff':Yii::app()->baseUrl.'#staff'; ?>" title="<?= Yii::t('app','Staff');?>"><?= Yii::t('app','Staff');?></a>
             </li>
             <li>
-                <a href="<?= $menuID == 'site' && $action == 'index'?'#teachers':Yii::app()->baseUrl.'#teachers'; ?>" title="<?= Yii::t('app','Teachers');?>"><?= Yii::t('app','Teachers');?></a>
+                <a class="scroll-link" href="<?= $menuID == 'site' && $action == 'index'?'#teachers':Yii::app()->baseUrl.'#teachers'; ?>" title="<?= Yii::t('app','Teachers');?>"><?= Yii::t('app','Teachers');?></a>
             </li>
             <li>
-                <a href="<?= $menuID == 'site' && $action == 'index'?'#about':Yii::app()->createUrl('about'); ?>" title="<?= Yii::t('app','About Us');?>"><?= Yii::t('app','About Us');?></a>
+                <a class="scroll-link" href="<?= $menuID == 'site' && $action == 'index'?'#about':Yii::app()->createUrl('about'); ?>" title="<?= Yii::t('app','About Us');?>"><?= Yii::t('app','About Us');?></a>
             </li>
             <li>
-                <a href="#contact" title="<?= Yii::t('app','Contact Us');?>"><?= Yii::t('app','Contact Us');?></a>
+                <a class="scroll-link" href="#contact" title="<?= Yii::t('app','Contact Us');?>"><?= Yii::t('app','Contact Us');?></a>
             </li>
             <?
             if(Yii::app()->user->isGuest ||  Yii::app()->user->type == 'admin'):

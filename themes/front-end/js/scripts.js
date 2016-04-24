@@ -3,16 +3,14 @@ $(function() {
     if($(window).scrollTop() > 100)
         $("header.header").addClass('scroll-mode');
 
-    $("html").niceScroll({
-        railalign:'right',
-        rtlmode:true,
-        hwacceleration:false,
-        zindex:1000,
-        cursorcolor:'rgba(0,0,0,0.4)',
-        cursorborder:'none'
-    });
+    // fade out alert messages
+    setInterval(function(){
+        $(".alert").fadeTo(500, 0).slideUp(500, function(){
+            $(this).remove();
+        });
+    }, 5000);
 
-    $("body").on("click" ,"[href^='#']",function(e) {
+    $("body").on("click" ,".scroll-link[href^='#']",function(e) {
         e.preventDefault();
         var href = $(this).attr('href');
         if(href.substr(1,href.length))

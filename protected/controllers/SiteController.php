@@ -137,7 +137,7 @@ class SiteController extends Controller
     public function actionTerms(){
         Yii::import('pages.models.*');
         Yii::app()->theme = 'front-end';
-        $this->layout = '//layouts/public';
+        $this->layout = '//layouts/inner';
         $model = Pages::model()->findByPk(5);
         $this->render('//site/pages/page',array('model' => $model));
     }

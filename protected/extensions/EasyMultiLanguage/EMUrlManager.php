@@ -62,6 +62,10 @@ class EMUrlManager extends CUrlManager
 
                         $params['_language'] = Yii::app()->language;
                 }
+                /*if(substr($route,0,1) === '/')
+                        $route = Yii::app()->language.$route;
+                else
+                        $route = Yii::app()->language.'/'.$route;*/
                 return parent::createUrl($route, $params, $ampersand);
         }
 }

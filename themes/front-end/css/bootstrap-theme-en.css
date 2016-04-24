@@ -100,6 +100,38 @@ body{
     padding-left: 0;
     padding-right: 30px;
 }
+.page-content.courses .files li{
+    background: #fff url("../svg/attachment.svg") no-repeat scroll left 20px center / 18px auto;
+    padding-right: 0;
+    padding-left: 60px;
+    border-right: none;
+    border-left: 3px solid #ef5350;
+}
+.page-content.courses .files li{
+    padding-right: 0;
+    padding-left: 60px;
+}
+.page-content.courses .collapse-header{
+    text-align: left;
+}
+.page-content.courses .arrow-white{
+    right: 15px;
+    left: auto;
+    -webkit-transform: rotate(-90deg); -moz-transform: rotate(-90deg); -ms-transform: rotate(-90deg); -o-transform: rotate(-90deg); transform: rotate(-90deg);
+}
+.page-content.courses .collapsed .arrow-white{
+    -webkit-transform: rotate(0deg); -moz-transform: rotate(0deg); -ms-transform: rotate(0deg); -o-transform: rotate(0deg); transform: rotate(0deg);
+}
+.page-content.courses .files .extension,
+.page-content.courses .files .download,
+.page-content.courses .files .download i,
+.page-content.courses .files .download span{
+    float: right;
+}
+.page-content.courses .files .download span.size{
+    border-right: 1px solid #fff;
+    border-left: none;
+}
 .errorMessage.tip{
     right:auto;
     left: 100%;
@@ -135,4 +167,7 @@ body{
 }
 .pull-right{
     float: left !important;
+}
+.close{
+    float: right;
 }

@@ -185,18 +185,17 @@ class Classes extends CActiveRecord
 
 	protected function afterSave()
 	{
-		if(!$this->IsNewRecord)
-			ClassTagRel::model()->deleteAll('class_id='.$this->id);
-		if($this->formTags && !empty($this->formTags))
+		if($this->formTags && !empty($this->formTags)) {
+			if(!$this->IsNewRecord)
+				ClassTagRel::model()->deleteAll('class_id='.$this->id);
 			foreach($this->formTags as $tag) {
-				$tagModel = ClassTags::model()->findByAttributes(array('title'=>$tag));
+				$tagModel = ClassTags::model()->findByAttributes(array('title' => $tag));
 				if($tagModel) {
 					$tag_rel = new ClassTagRel;
 					$tag_rel->class_id = $this->id;
 					$tag_rel->tag_id = $tagModel->id;
 					$tag_rel->save(false);
-				}else
-				{
+				} else {
 					$tagModel = new ClassTags;
 					$tagModel->title = $tag;
 					$tagModel->save(false);
@@ -206,6 +205,7 @@ class Classes extends CActiveRecord
 					$tag_rel->save(false);
 				}
 			}
+		}
 		parent::afterSave();
 	}
 }

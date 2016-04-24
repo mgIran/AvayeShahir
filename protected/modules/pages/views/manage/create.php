@@ -10,7 +10,7 @@ if($this->categorySlug == 'guide')
 {
 
     $this->menu=array(
-        array('label'=>'مدیریت', 'url'=>array('manage/admin/?slug=guide')),
+        array('label'=>'مدیریت', 'url'=>array('manage/admin/slug/guide')),
     );
     $pageType = 'راهنما';
 }

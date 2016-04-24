@@ -137,7 +137,7 @@ class TeacherDetailsController extends Controller
 				}
 				Yii::app()->user->setFlash('success' ,'<span class="icon-check"></span>&nbsp;&nbsp;اطلاعات با موفقیت ذخیره شد.');
 				if(isset($_GET['return']) && $_GET['return'] == true)
-					$this->redirect(array('/users/teachers	/admin?return=true'));
+					$this->redirect(array('/users/teachers/admin?return=true'));
 				else
 					$this->redirect(array('/users/teachers/admin'));
 			}else

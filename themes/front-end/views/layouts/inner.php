@@ -43,15 +43,14 @@
     $cs->registerScriptFile($baseUrl.'/js/bootstrap.min.js');
     $cs->registerScriptFile($baseUrl.'/js/material.min.js');
     $cs->registerScriptFile($baseUrl.'/js/ripples.min.js');
-    $cs->registerScriptFile($baseUrl.'/js/jquery.nicescroll.min.js');
     $cs->registerScriptFile($baseUrl.'/js/scripts.js');
     ?>
 </head>
-<body id="top">
+<body id="top" class="inner-page">
 <?= $this->renderPartial('//layouts/_header'); ?>
-<?= $this->renderPartial('//layouts/_banner'); ?>
-<?= $this->renderPartial('//layouts/_search_box'); ?>
-<?= $content ?>
+<section class="inner-page-content">
+    <?= $content ?>
+</section>
 <?= $this->renderPartial('//layouts/_innerFooter'); ?>
 </body>
 </html>
