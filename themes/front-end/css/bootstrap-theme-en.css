@@ -1,6 +1,7 @@
 body{
     direction: ltr;
     text-align: left;
+    font-family: Roboto,sans-serif;
 }
 .dropdown-menu{
     right: auto;
@@ -17,8 +18,12 @@ body{
     float: left;
 }
 
-.header.scroll-mode .nav{
+.header.scroll-mode .nav,
+.inner-page .header .nav{
     right: 0;
+}
+.nav-tabs > li{
+    float: left;
 }
 .paragraph-end{
     background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1)) repeat scroll 0 0 rgba(0, 0, 0, 0);

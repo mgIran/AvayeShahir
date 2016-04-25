@@ -64,7 +64,7 @@ body{
     right: 0;
     bottom: 0;
     z-index: 10;
-    background: rgba(0,0,0,0.7);
+    background: rgba(255,255,255,0.7);
     display: block;
     opacity: 1;
 }
@@ -85,7 +85,7 @@ body{
 .loading-container .spinner > div {
     width: 13px;
     height: 13px;
-    background-color: #fff;
+    background-color: #505050;
 
     border-radius: 100%;
     display: inline-block;
@@ -1286,7 +1286,7 @@ section.search{
         transform: translate3d(2px, 0, 0);
     }
 }
-.footer .errorMessage{
+.errorMessage{
     color: #d9534f;
     font-size: 16px;
 }
@@ -1443,20 +1443,20 @@ section.search{
     margin-top: 100px;
 }
 .page-content.courses .group-item{
-    margin-bottom: 1px;
+    margin-bottom: 4px;
+    box-shadow: 0 0 2px rgba(0,0,0,0.2);
     margin-top: 0;
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
-    box-shadow: none;
 }
 .page-content.courses .collapse-header{
     background: #0b3762;
+    border-radius: 2px;
     height:50px;
     line-height:50px;
     color: #fff;
     text-align: right;
     padding: 0 15px;
-    border-radius: 0;
     width: 100%;
     margin: 0;
     position: relative;
@@ -1609,6 +1609,14 @@ section.search{
     overflow: hidden;
     padding: 10px 0;
 }
+.page-content.courses .classes .tr.tr-collapse{
+    padding:0;
+    background-color: rgba(0,0,0,0.07);
+    color: rgba(94, 106, 118,0.90);
+}
+.page-content.courses .classes .tr.tr-collapse .td{
+    padding: 10px 0;
+}
 .page-content.courses .classes .tr:not(.thead):hover{
     background: #dfe5ea;
 }
@@ -1629,4 +1637,33 @@ section.search{
 
 .close{
     margin-top: 4px;
+}
+.nav.nav-tabs{
+    background-color: #96b404;
+}
+.nav.nav-tabs > li{
+    margin-bottom: 0;
+}
+.nav.nav-tabs > li >a{
+    margin-bottom: 1px;
+    margin-right: 0;
+    color: #fff !important;
+}
+.nav.nav-tabs > li:hover{
+    background-color: #8da41a;
+}
+.nav.nav-tabs > li:focus,
+.nav.nav-tabs > li.active,
+.nav.nav-tabs > li:active{
+    background-color: #a0bb1d;
+}
+.btn.btn-success:not(.btn-raised), .input-group-btn .btn.btn-success:not(.btn-raised){
+    color: #96b404;
+}
+.form-group.is-focused .form-control {
+    background-image: linear-gradient(#a0bb1d, #a0bb1d), linear-gradient(#d2d2d2, #d2d2d2);
+    background-size: 100% 2px, 100% 1px;
+    box-shadow: none;
+    outline: 0 none;
+    transition-duration: 0.3s;
 }

@@ -159,6 +159,9 @@ Yii::app()->clientScript->registerScript("easyTicker-scripts","
                 'class' => 'form-group'
             )
         ));
+        Yii::app()->clientScript->registerScript('registerForm','
+            document.getElementById("register-form").reset();
+        ');
         echo CHtml::hiddenField('ajax','register-form');
         ?>
             <div class="center-block box">

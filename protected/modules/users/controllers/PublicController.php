@@ -21,7 +21,7 @@ class PublicController extends Controller
     {
         return array(
             array('allow',  // allow all users to perform 'index' and 'views' actions
-                'actions'=>array('dashboard','logout','setting'),
+                'actions'=>array('dashboard','logout','setting','update'),
                 'users' => array('@'),
             ),
             array('allow',  // allow all users to perform 'index' and 'views' actions
@@ -168,7 +168,7 @@ class PublicController extends Controller
     public function actionDashboard()
     {
         Yii::app()->theme = 'front-end';
-        $this->layout = '//layouts/public';
+        $this->layout = '//layouts/inner';
         $model=Users::model()->findByPk(Yii::app()->user->getId());
         $this->render('dashboard', array(
             'model'=>$model,
@@ -185,7 +185,13 @@ class PublicController extends Controller
         $model=Users::model()->findByPk(Yii::app()->user->getId());
         $model->setScenario('update');
 
-        $this->performAjaxValidation($model);
+        if(isset($_POST['ajax']) && $_POST['ajax'] === 'change-pass-form') {
+            $errors = CActiveForm::validate($model);
+            if(CJSON::decode($errors)) {
+                echo $errors;
+                Yii::app()->end();
+            }
+        }
 
         if(isset($_POST['Users']))
         {
@@ -195,11 +201,26 @@ class PublicController extends Controller
                 $model->password=$_POST['Users']['newPassword'];
                 if($model->save())
                 {
-                    Yii::app()->user->setFlash('success' , 'اطلاعات با موفقیت ثبت شد.');
-                    $this->redirect($this->createUrl('/dashboard'));
+                    Yii::app()->user->setFlash('setting-success' , Yii::t('app','Operation was successful.'));
+                    if(isset($_POST['ajax']) && $_POST['ajax'] === 'change-pass-form')
+                    {
+                        echo CJSON::encode(['state' => 'ok' ,'url' => Yii::app()->createUrl('/dashboard/tab/setting')]);
+                        Yii::app()->end();
+                    }
+                    else
+                        $this->redirect($this->createUrl('/dashboard'));
                 }
                 else
-                    Yii::app()->user->setFlash('fail' , 'در ثبت اطلاعات خطایی رخ داده است! لطفا مجددا تلاش کنید.');
+                {
+                    Yii::app()->user->setFlash('setting-failed' , Yii::t('app','An error occurred in data recording! Please try again.'));
+                    if(isset($_POST['ajax']) && $_POST['ajax'] === 'change-pass-form')
+                    {
+                        echo CJSON::encode(['state' => 'error']);
+                        Yii::app()->end();
+                    }
+                    else
+                        $this->redirect($this->createUrl('/dashboard'));
+                }
             }
         }
 
@@ -208,6 +229,41 @@ class PublicController extends Controller
         ));
     }
 
+    /**
+     * Update Details
+     */
+    public function actionUpdate()
+    {
+        Yii::app()->theme = 'front-end';
+        $this->layout = '//layouts/panel';
+        $model = UserDetails::model()->findByPk(Yii::app()->user->getId());
+        if(isset($_POST['ajax']) && $_POST['ajax'] === 'user-details-form') {
+            $errors = CActiveForm::validate($model);
+            if(CJSON::decode($errors)) {
+                echo $errors;
+                Yii::app()->end();
+            }
+        }
+
+        if(isset($_POST['UserDetails'])) {
+            $model->attributes = $_POST['UserDetails'];
+            if($model->save()) {
+                Yii::app()->user->setFlash('general-success', Yii::t('app', 'Operation was successful.'));
+                if(isset($_POST['ajax']) && $_POST['ajax'] === 'user-details-form') {
+                    echo CJSON::encode(['state' => 'ok']);
+                    Yii::app()->end();
+                } else
+                    $this->redirect($this->createUrl('/dashboard'));
+            } else {
+                Yii::app()->user->setFlash('general-failed', Yii::t('app', 'An error occurred in data recording! Please try again.'));
+                if(isset($_POST['ajax']) && $_POST['ajax'] === 'user-details-form') {
+                    echo CJSON::encode(['state' => 'error']);
+                    Yii::app()->end();
+                } else
+                    $this->redirect($this->createUrl('/dashboard'));
+            }
+        }
+    }
     /**
      * Performs the AJAX validation.
      * @param Apps $model the model to be validated

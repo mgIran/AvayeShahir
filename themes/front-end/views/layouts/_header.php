@@ -38,7 +38,7 @@ $action = $this->action->id;
             if(Yii::app()->user->isGuest ||  Yii::app()->user->type == 'admin'):
                 ?>
                 <li class="pull-left wide">
-                    <a class="wide" href="#signup"
+                    <a class="wide scroll-link" href="#signup"
                        title="<?= Yii::t('app', 'Sign Up'); ?>"><?= Yii::t('app', 'Sign Up'); ?></a>
                 </li>
                 <li class="pull-left">

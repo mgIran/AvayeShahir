@@ -8,7 +8,7 @@ $(function() {
         $(".alert").fadeTo(500, 0).slideUp(500, function(){
             $(this).remove();
         });
-    }, 5000);
+    }, 10000);
 
     $("body").on("click" ,".scroll-link[href^='#']",function(e) {
         e.preventDefault();

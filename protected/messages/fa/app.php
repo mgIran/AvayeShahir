@@ -62,6 +62,15 @@ return array(
     'Toman' => 'تومان',
     'Register' => 'ثبت نام',
     'Registration was successful.' => 'ثبت نام با موفقیت انجام شد.',
+    'Operation was successful.' => 'عملیات با موفقیت انجام شد.',
     'Registration Failed!!!Please try again.' => 'متاسفانه ثبت نام با مشکل مواجه است\r\n لطفا مجددا تلاش کنید.',
+    'An error occurred in data recording! Please try again.' => 'در ثبت اطلاعات خطایی رخ داده است! لطفا مجددا تلاش کنید.',
+    'User ID' => 'شناسه کاربر',
+    'Web Url' => 'آدرس سایت',
+    'National Code' => 'کد ملی',
+    'Zip Code' => 'کد پستی',
+    'Change Password' => 'تغییر کلمه عبور',
+    'Save' => 'ذخیره',
+    'User Details' => 'اطلاعات فردی',
 
 );

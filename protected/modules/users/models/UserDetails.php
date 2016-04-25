@@ -80,7 +80,7 @@ class UserDetails extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('user_id', 'required', 'on' => 'insert'),
-			array('name, family, national_code, phone, zip_code, address', 'required', 'on' => 'update'),
+			array('name, family, phone', 'required', 'on' => 'update'),
 			array('national_code, phone, zip_code', 'numerical'),
 			array('user_id, national_code, zip_code', 'length', 'max'=>10 , 'on' => 'update'),
 			array('national_code, zip_code', 'length', 'min'=>10 , 'on' => 'update'),
@@ -88,7 +88,6 @@ class UserDetails extends CActiveRecord
 			array('name, family', 'length', 'max'=>50),
 			array('web_url', 'length', 'max'=>255),
 			array('phone', 'length', 'max'=>11),
-			array('address', 'length', 'max'=>1000),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('user_id, name,family, web_url, web_url, national_code, phone, zip_code, address', 'safe', 'on'=>'search'),
@@ -113,14 +112,14 @@ class UserDetails extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'user_id' => 'کاربر',
-			'name' => 'نام فارسی',
-			'family' => 'نام خانوادگی',
-			'web_url' => 'آدرس سایت فارسی',
-			'national_code' => 'کد ملی',
-			'phone' => 'تلفن',
-			'zip_code' => 'کد پستی',
-			'address' => 'نشانی دقیق پستی',
+			'user_id' => Yii::t('app','User ID'),
+			'name' => Yii::t('app','Name'),
+			'family' => Yii::t('app','Family'),
+			'web_url' => Yii::t('app','Web Url'),
+			'national_code' => Yii::t('app','National Code'),
+			'phone' => Yii::t('app','Phone'),
+			'zip_code' => Yii::t('app','Zip Code'),
+			'address' => Yii::t('app','Address'),
 		);
 	}
 

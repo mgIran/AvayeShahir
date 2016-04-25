@@ -3,54 +3,53 @@
 /* @var $model Users */
 /* @var $form CActiveForm */
 ?>
+<?php $this->renderPartial('//layouts/_flashMessage',array('prefix'=>'setting-'))?>
 
-<?php if(Yii::app()->user->hasFlash('success')):?>
-    <div class="alert alert-success fade in">
-        <button class="close close-sm" type="button" data-dismiss="alert"><i class="icon-remove"></i></button>
-        <?php echo Yii::app()->user->getFlash('success');?>
+<div class="form change-pass">
+    <?php $this->renderPartial('//layouts/_loading')?>
+    <?php $form=$this->beginWidget('CActiveForm', array(
+        'id'=>'change-pass-form',
+        'focus'=>array($model,'oldPassword'),
+        'enableAjaxValidation'=>false,
+        'enableClientValidation'=>true,
+        'clientOptions' => array(
+            'validateOnSubmit' => true,
+            'afterValidate' => 'js:function(form ,data ,hasError){
+                if(!hasError)
+                {
+                    var form = $("#change-pass-form");
+                    var loading = $(".change-pass .loading-container");
+                    var url = \''.Yii::app()->createUrl('/users/public/setting').'\';
+                    submitAjaxForm(form ,url ,loading ,"if(typeof html.url == \'undefined\') location.reload(); else window.location=html.url;");
+                }
+            }'
+        )
+    ));
+    echo CHtml::hiddenField('ajax','change-pass-form');
+    Yii::app()->clientScript->registerScript('resetPanelForm','
+        document.getElementById("change-pass-form").reset();
+    ');
+    ?>
+
+    <div class="form-group">
+        <?php echo $form->passwordField($model,'oldPassword',array('placeholder'=>$model->getAttributeLabel('oldPassword').' *','class'=>'form-control','maxlength'=>100)); ?>
+        <?php echo $form->error($model,'oldPassword'); ?>
     </div>
-<?php elseif(Yii::app()->user->hasFlash('fail')):?>
-    <div class="alert alert-danger fade in">
-        <button class="close close-sm" type="button" data-dismiss="alert"><i class="icon-remove"></i></button>
-        <?php echo Yii::app()->user->getFlash('fail');?>
+
+    <div class="form-group">
+        <?php echo $form->passwordField($model,'newPassword',array('placeholder'=>$model->getAttributeLabel('newPassword').' *','class'=>'form-control','maxlength'=>100)); ?>
+        <?php echo $form->error($model,'newPassword'); ?>
     </div>
-<?php endif;?>
 
-<div class="col-md-6">
-    <div class="form">
+    <div class="form-group">
+        <?php echo $form->passwordField($model,'repeatPassword',array('placeholder'=>$model->getAttributeLabel('repeatPassword').' *','class'=>'form-control','maxlength'=>100)); ?>
+        <?php echo $form->error($model,'repeatPassword'); ?>
+    </div>
 
-        <?php $form=$this->beginWidget('CActiveForm', array(
-            'id'=>'users-form',
-            'action' => Yii::app()->createUrl('/users/public/setting'),
-            // Please note: When you enable ajax validation, make sure the corresponding
-            // controller action is handling ajax validation correctly.
-            // There is a call to performAjaxValidation() commented in generated controller code.
-            // See class documentation of CActiveForm for details on this.
-            'enableAjaxValidation'=>true,
-        )); ?>
+    <div class="buttons">
+        <?php echo CHtml::submitButton(Yii::t('app','Change Password'),array('class'=>'btn btn-lg btn-success')); ?>
+    </div>
 
-        <?php echo $form->errorSummary($model); ?>
+    <?php $this->endWidget(); ?>
 
-        <div class="form-group">
-            <?php echo $form->passwordField($model,'oldPassword',array('placeholder'=>$model->getAttributeLabel('oldPassword').' *','class'=>'form-control','maxlength'=>100)); ?>
-            <?php echo $form->error($model,'oldPassword'); ?>
-        </div>
-
-        <div class="form-group">
-            <?php echo $form->passwordField($model,'newPassword',array('placeholder'=>$model->getAttributeLabel('newPassword').' *','class'=>'form-control','maxlength'=>100)); ?>
-            <?php echo $form->error($model,'newPassword'); ?>
-        </div>
-
-        <div class="form-group">
-            <?php echo $form->passwordField($model,'repeatPassword',array('placeholder'=>$model->getAttributeLabel('repeatPassword').' *','class'=>'form-control','maxlength'=>100)); ?>
-            <?php echo $form->error($model,'repeatPassword'); ?>
-        </div>
-
-        <div class="buttons">
-            <?php echo CHtml::submitButton('تغییر کلمه عبور',array('class'=>'btn btn-success')); ?>
-        </div>
-
-        <?php $this->endWidget(); ?>
-
-    </div><!-- form -->
-</div>
+</div><!-- form -->

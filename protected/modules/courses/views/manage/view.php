@@ -133,7 +133,7 @@ $fileDir = Yii::getPathOfAlias("webroot").'/uploads/classCategoryFiles/';
 										<?
 										if($class->summary && !empty($class->summary)):
 										?>
-											<div class="tr collapse" id="class-collapse-<?= $key ?>">
+											<div class="tr collapse tr-collapse" id="class-collapse-<?= $key ?>">
 												<div class="col-md-12 td"><?= $class->summary ?></div>
 											</div>
 										<?

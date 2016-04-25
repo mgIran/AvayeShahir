@@ -28,8 +28,12 @@ class CoursesManageController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('view','create','update','admin','delete', 'upload', 'deleteUpload'),
+				'actions'=>array('create','update','admin','delete', 'upload', 'deleteUpload'),
 				'roles'=>array('admin'),
+			),
+			array('allow',
+				'actions'=>array('view'),
+				'users'=>array('*'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
