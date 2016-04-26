@@ -53,7 +53,7 @@ echo CHtml::hiddenField('ClassCategoryFileLinks[category_id]',$model->id);
 
 	<div class='row'>
 		<?php echo $form->labelEx($fileLinkModel,'link', array('class'=>'control-label')); ?>
-		<?php echo $form->textField($fileLinkModel,'link')?>
+		<?php echo $form->textField($fileLinkModel,'link', array('style'=>'width:70%'))?>
 		<?php echo $form->error($fileLinkModel,'link'); ?>
 	</div>
 
