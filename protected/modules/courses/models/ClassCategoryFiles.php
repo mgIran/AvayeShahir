@@ -82,7 +82,8 @@ class ClassCategoryFiles extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('path,category_id', 'required'),
-			array('title, file_type', 'length', 'max'=>50),
+			array('title', 'length', 'max'=>255),
+			array('file_type', 'length', 'max'=>50),
 			array('path', 'length', 'max'=>500),
 			array('category_id', 'length', 'max'=>10),
 			//array('file_type', 'checkFileType'),
