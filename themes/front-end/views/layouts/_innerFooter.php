@@ -4,11 +4,13 @@
             <div class="col-md-4">
                 <p>
                     <i class="map-point"></i>
-                    <span></span>
+                    <span>تهران.<br>
+ تهرانپارس، فلکه اول، خ امیری طائمه ( گلبزگ شرقی )، پلاک 110, واحد سه.
+</span>
                 </p>
                 <p>
                     <i class="phone"></i>
-                    <span></span>
+                    <span class="phone-number">021 323352525 - 021 23655822</span>
                 </p>
                 <p>
                     <i class="email"></i>

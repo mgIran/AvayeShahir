@@ -12,6 +12,11 @@ $(function() {
 
     $("body").on("click" ,".scroll-link[href^='#']",function(e) {
         e.preventDefault();
+        if($(window).width() < 768)
+        {
+            $('.navTrigger').removeClass("clicked").find('.lines').removeClass("close");
+            $("html,body").removeClass("overflow");
+        }
         var href = $(this).attr('href');
         if(href.substr(1,href.length))
             $('html, body').animate({
@@ -29,6 +34,12 @@ $(function() {
 
     $("[data-toggle='tooltip']").tooltip({
         trigger:'hover'
+    });
+
+    $("body").on('click','.navTrigger',function(){
+        $(this).toggleClass("clicked");
+        $(this).find('.lines').toggleClass("close");
+        $("html,body").toggleClass("overflow");
     });
 });
 

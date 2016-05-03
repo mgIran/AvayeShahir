@@ -58,32 +58,44 @@ Yii::app()->clientScript->registerScript("easyTicker-scripts","
                         0 : {
                             items:1,
                             nav : false,
-                            margin :10
+                            margin :15,
+                            dots : true,
+                            stagePadding : 15
                         },
-                        769 :{
+                        459 :{
                             items:2,
                             nav : true,
-                            margin :10
+                            margin :10,
+                            dots : false,
+                            stagePadding : 0
                         },
                         1025 :{
                             items:2,
                             nav : true,
-                            margin :40
+                            margin :40,
+                            dots : false,
+                            stagePadding : 0
                         },
                         1201 :{
                             items:3,
                             nav : true,
-                            margin :10
+                            margin :10,
+                            dots : false,
+                            stagePadding : 0
                         },
                         1401 :{
                             items:3,
                             nav : true,
-                            margin :40
+                            margin :40,
+                            dots : false,
+                            stagePadding : 0
                         },
                         1601 :{
                             items:4,
                             nav : true,
-                            margin :10
+                            margin :10,
+                            dots : false,
+                            stagePadding : 0
                         },
                     },
                     onTranslated: $(this).on('translated.owl.carousel', function(e) {
@@ -213,7 +225,7 @@ Yii::app()->clientScript->registerScript("easyTicker-scripts","
         <?php
         if($personnel) {
             ?>
-            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12  partners" id="staff">
+            <div class="<?= $teachers?'':'center-block' ?> col-lg-6 col-md-6 col-sm-12 col-xs-12  partners" id="staff">
                 <h3 class="yekan-text"><?= Yii::t('app', 'Staff') ?></h3>
 
                 <div class="slider">
@@ -244,8 +256,8 @@ Yii::app()->clientScript->registerScript("easyTicker-scripts","
                     </ul>
                 </div>
                 <div class="controls">
-                    <button class="teacher-up btn"><i class="icon"></i></button>
-                    <button class="teacher-down btn"><i class="icon"></i></button>
+                    <button class="partner-up btn"><i class="icon"></i></button>
+                    <button class="partner-down btn"><i class="icon"></i></button>
                 </div>
             </div>
             <?
@@ -254,7 +266,7 @@ Yii::app()->clientScript->registerScript("easyTicker-scripts","
         <?php
         if($teachers) {
             ?>
-            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 teachers" id="teachers">
+            <div class="<?= $personnel?'':'center-block' ?> col-lg-6 col-md-6 col-sm-12 col-xs-12 teachers" id="teachers">
                 <h3 class="yekan-text"><?= Yii::t('app', 'Teachers') ?></h3>
 
                 <div class="slider">
@@ -295,8 +307,8 @@ Yii::app()->clientScript->registerScript("easyTicker-scripts","
                     </ul>
                 </div>
                 <div class="controls">
-                    <button class="partner-up btn"><i class="icon"></i></button>
-                    <button class="partner-down btn"><i class="icon"></i></button>
+                    <button class="teacher-up btn"><i class="icon"></i></button>
+                    <button class="teacher-down btn"><i class="icon"></i></button>
                 </div>
             </div>
             <?
@@ -307,7 +319,7 @@ Yii::app()->clientScript->registerScript("easyTicker-scripts","
 <section class="about" id="about">
     <div class="container">
         <h3 class="yekan-text"><?= Yii::t('app','About Avaye Shahir') ?></h3>
-        <div class="<?= Yii::app()->language == 'fa'?'col-md-8':'col-md-12'; ?> text-container">
+        <div class="<?= Yii::app()->language == 'fa'?'col-lg-8 col-md-8 col-sm-8 col-xs-12':'col-lg-12 col-md-12 col-sm-12 col-xs-12'; ?> text-container">
             <div class="text">
                 <?
                 $text = strip_tags($aboutText->summary);
@@ -320,7 +332,7 @@ Yii::app()->clientScript->registerScript("easyTicker-scripts","
                     $colOutput = '';
                     for($i = 1; $i <= 2; $i++) {
                         $new_string = "";
-                        $colOutput .= "<p class=\"paragraph col-md-6\">";
+                        $colOutput .= "<p class=\"paragraph col-lg-6 col-md-6 col-sm-6 col-xs-12\">";
                         for($g = $l; $g < $c; $g++) {
                             if(mb_strlen($new_string,'utf8') <= $length || $i == 2)
                                 $new_string .= $words[$g]." ";
@@ -334,13 +346,13 @@ Yii::app()->clientScript->registerScript("easyTicker-scripts","
                     }
                     echo $colOutput;
                 }else {
-                    echo "<p class=\"paragraph col-md-6\">".$text."</p>";
-                    echo "<p class=\"paragraph col-md-6\"></p>";
+                    echo "<p class=\"paragraph col-lg-6 col-md-6 col-sm-6 col-xs-12\">".$text."</p>";
+                    echo "<p class=\"paragraph col-lg-6 col-md-6 col-sm-6 col-xs-12\"></p>";
                 }
                 ?>
             </div>
         </div>
-        <div class="<?= Yii::app()->language == 'fa'?'col-md-4':'hidden'; ?> licenses-container">
+        <div class="<?= Yii::app()->language == 'fa'?'col-lg-4 col-md-4 col-sm-4 col-xs-12':'hidden'; ?> licenses-container">
             <div class="col-md-6"><img src="<?= Yii::app()->theme->baseUrl .'/images/rasaneh.jpg';?>"></div>
             <div class="col-md-6"><img src="<?= Yii::app()->theme->baseUrl .'/images/enamad.jpg'; ?>"></div>
         </div>

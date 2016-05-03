@@ -9,6 +9,9 @@ $action = $this->action->id;
 ?>
 <header class="header">
     <div class="navbar container">
+        <span class="navTrigger">
+            <span class="lines"></span>
+        </span>
         <div class="<?= Yii::app()->language == 'fa'?'logo':'hidden'; ?>" title="<?= $this->siteName ?>">
             <h1><?= $this->siteName ?></h1>
             <h2><?= $this->pageTitle ?></h2>

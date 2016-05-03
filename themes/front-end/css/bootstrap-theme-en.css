@@ -63,6 +63,11 @@ body{
     margin-right: 10px;
 }
 
+.owl-dots {
+    text-align: left;
+    left: 30px;
+    right: 0;
+}
 .persons .teacher-up, .persons .partner-up,
 .persons .teacher-down, .persons .partner-down
 .persons .person-item .image,
@@ -152,6 +157,12 @@ body{
     left: -9px;
     border-left:none;
     border-right:10px solid #fff;
+}
+.errorMessage.tip::before{
+    right: auto;
+    left: -10px;
+    border-left:none;
+    border-right:10px solid #888;
 }
 .footer .contact-box .col-lg-6,
 .footer .contact-box .col-md-6{
