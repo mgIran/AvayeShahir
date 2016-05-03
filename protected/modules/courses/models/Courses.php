@@ -8,6 +8,7 @@
  * @property string $title
  * @property string $pic
  * @property string $summary
+ * @property string $order
  *
  * The followings are the available model relations:
  * @property Classes[] $classes
@@ -101,6 +102,7 @@ class Courses extends CActiveRecord
 			'title' => 'عنوان',
 			'pic' => 'تصویر',
 			'summary' => 'توضیحات',
+			'order' => 'ترتیب',
 		);
 	}
 

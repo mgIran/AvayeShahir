@@ -16,6 +16,7 @@
  * @property string $category_id
  * @property string $course_id
  * @property string $teacher_id
+ * @property string $order
  * @property [] $formTags
  *
  * The followings are the available model relations:
@@ -121,19 +122,20 @@ class Classes extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-				'id' => 'ID',
-				'title' => 'عنوان',
-				'summary' => 'توضیحات',
-				'price' => 'شهریه',
-				'startSignupDate' => 'تاریخ شروع ثبت نام',
-				'endSignupDate' => 'تاریخ پایان ثبت نام',
-				'startClassDate' => 'تاریخ شروع کلاس',
-				'endClassDate' => 'تاریخ پایان کلاس',
-				'category_id' => 'گروه',
-				'course_id' => 'دوره',
-				'teacher_id' => 'مدرس',
-				'capacity' => 'ظرفیت کلاس',
-				'formTags' => 'برچسب ها'
+			'id' => 'ID',
+			'title' => 'عنوان',
+			'summary' => 'توضیحات',
+			'price' => 'شهریه',
+			'startSignupDate' => 'تاریخ شروع ثبت نام',
+			'endSignupDate' => 'تاریخ پایان ثبت نام',
+			'startClassDate' => 'تاریخ شروع کلاس',
+			'endClassDate' => 'تاریخ پایان کلاس',
+			'category_id' => 'گروه',
+			'course_id' => 'دوره',
+			'teacher_id' => 'مدرس',
+			'capacity' => 'ظرفیت کلاس',
+			'formTags' => 'برچسب ها',
+			'order' => 'ترتیب',
 		);
 	}
 
@@ -166,7 +168,6 @@ class Classes extends CActiveRecord
 		$criteria->compare('category_id', $this->category_id, true);
 		$criteria->compare('course_id', $this->course_id, true);
 		$criteria->compare('teacher_id', $this->teacher_id, true);
-		$criteria->order = 'id DESC';
 		return new CActiveDataProvider($this, array(
 				'criteria' => $criteria,
 		));

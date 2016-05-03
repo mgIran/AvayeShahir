@@ -16,6 +16,7 @@ return array(
         'application.models.*',
 		'application.components.*',
 		'ext.EasyMultiLanguage.*',
+		'ext.yiiSortableModel.models.*',
 	),
 
 	'modules'=>array(

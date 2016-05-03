@@ -28,7 +28,7 @@ class ClassCategoriesManageController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','create','update','admin','delete'),
+				'actions'=>array('index','create','update','admin','delete','order'),
 				'roles'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -37,6 +37,14 @@ class ClassCategoriesManageController extends Controller
 		);
 	}
 
+	public function actions()
+	{
+		return array(
+			'order' => array(
+				'class' => 'ext.yiiSortableModel.actions.AjaxSortingAction',
+			),
+		);
+	}
 
 	/**
 	 * Creates a new model.

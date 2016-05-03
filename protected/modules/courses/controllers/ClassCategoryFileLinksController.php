@@ -21,12 +21,21 @@ class ClassCategoryFileLinksController extends Controller
 		return array(
 			array(
 				'allow',  // allow all users to perform 'index' and 'view' actions
-				'actions' => array('create', 'update', 'delete'),
+				'actions' => array('create', 'update', 'delete','order'),
 				'roles' => array('admin'),
 			),
 			array(
 				'deny',  // deny all users
 				'users' => array('*'),
+			),
+		);
+	}
+
+	public function actions()
+	{
+		return array(
+			'order' => array(
+				'class' => 'ext.yiiSortableModel.actions.AjaxSortingAction',
 			),
 		);
 	}

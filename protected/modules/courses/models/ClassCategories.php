@@ -8,6 +8,7 @@
  * @property string $title
  * @property string $course_id
  * @property string $summary
+ * @property string $order
  *
  * The followings are the available model relations:
  * @property Courses $course
@@ -108,7 +109,8 @@ class ClassCategories extends CActiveRecord
 			'id' => 'ID',
 			'title' => 'عنوان',
 			'summary' => 'توضیحات',
-			'course_id' => 'دوره موردنظر'
+			'course_id' => 'دوره موردنظر',
+			'order' => 'ترتیب',
 		);
 	}
 
@@ -132,7 +134,6 @@ class ClassCategories extends CActiveRecord
 
 		$criteria->compare('id',$this->id,true);
 		$criteria->compare('title',$this->title,true);
-		$criteria->order = 'id DESC';
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));

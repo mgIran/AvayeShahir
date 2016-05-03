@@ -2,7 +2,10 @@
 /* @var $files CActiveDataProvider */
 ?>
 <div class="row">
-    <?php $this->widget('zii.widgets.grid.CGridView', array(
+    <?php $this->widget('ext.yiiSortableModel.widgets.SortableCGridView', array(
+        'orderField' => 'order',
+        'idField' => 'id',
+        'orderUrl' => '/courses/files/order',
         'id'=>'files-grid',
         'dataProvider'=>$files,
         'columns'=>array(

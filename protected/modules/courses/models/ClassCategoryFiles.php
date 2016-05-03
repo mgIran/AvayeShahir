@@ -10,6 +10,7 @@
  * @property string $file_type
  * @property string $summary
  * @property string $category_id
+ * @property string $order
  *
  * The followings are the available model relations:
  * @property ClassCategories $category
@@ -118,13 +119,14 @@ class ClassCategoryFiles extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-					'id' => 'ID',
-					'title' => 'عنوان',
-					'path' => 'فایل',
-					'file_type' => 'نوع فایل',
-					'category_id' => 'گروه',
-					'summary' => 'توضیح',
-				);
+			'id' => 'ID',
+			'title' => 'عنوان',
+			'path' => 'فایل',
+			'file_type' => 'نوع فایل',
+			'category_id' => 'گروه',
+			'summary' => 'توضیح',
+			'order' => 'ترتیب',
+		);
 	}
 
 	/**

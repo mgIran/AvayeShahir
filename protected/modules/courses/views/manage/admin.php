@@ -13,9 +13,12 @@ $this->menu=array(
 <? $this->renderPartial('//layouts/_flashMessage'); ?>
 <h1>مدیریت دوره ها</h1>
 
-<?php $this->widget('zii.widgets.grid.CGridView', array(
-	'id'=>'courses-grid',
+<?php $this->widget('ext.yiiSortableModel.widgets.SortableCGridView', array(
 	'dataProvider'=>$model->search(),
+	'orderField' => 'order',
+	'idField' => 'id',
+	'orderUrl' => 'order',
+	'id'=>'courses-grid',
 	'filter'=>$model,
 	'columns'=>array(
 		'title',
