@@ -65,7 +65,7 @@ function submitAjaxForm(form ,url ,loading ,callback) {
                 loading.hide();
             if (typeof html === "object" && typeof html.state === 'undefined') {
                 $.each(html, function (key, value) {
-                    $("#" + key + "_em_").show().html(value.toString());
+                    $("#" + key + "_em_").show().html(value.toString()).parent().removeClass('success').addClass('error');
                 });
             }else
                 eval(callback);

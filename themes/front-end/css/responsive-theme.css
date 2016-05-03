@@ -17,6 +17,19 @@
         text-overflow: ellipsis;
         white-space: nowrap;
     }
+    .header.scroll-mode .nav,
+    .inner-page .header .nav{
+        right: 90px;
+    }
+    .header .nav > li > a{
+        padding: 10px !important;
+    }
+    .inner-page .nav > li > a{
+        padding: 10px !important;
+    }
+    .signup .box{
+        width: 60%;
+    }
 }
 @media (max-width: 767px) {
     span.navTrigger{

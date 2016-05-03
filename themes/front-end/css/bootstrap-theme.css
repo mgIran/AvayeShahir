@@ -1766,3 +1766,6 @@ span.navTrigger {
 .owl-dots .owl-dot.active > span{
     opacity: 1;
 }
+.center-block{
+    float: none !important;
+}
