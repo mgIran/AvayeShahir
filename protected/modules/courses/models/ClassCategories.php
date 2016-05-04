@@ -94,9 +94,9 @@ class ClassCategories extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'course' => array(self::BELONGS_TO, 'Courses', 'course_id'),
-			'classes' => array(self::HAS_MANY, 'Classes', 'category_id', 'order'=>'id DESC'),
-			'files' => array(self::HAS_MANY, 'ClassCategoryFiles', 'category_id' , 'order'=>'id DESC'),
-			'links' => array(self::HAS_MANY, 'ClassCategoryFileLinks', 'category_id' , 'order'=>'id DESC'),
+			'classes' => array(self::HAS_MANY, 'Classes', 'category_id','order'=>'order ASC'),
+			'files' => array(self::HAS_MANY, 'ClassCategoryFiles', 'category_id' ,'order'=>'order ASC'),
+			'links' => array(self::HAS_MANY, 'ClassCategoryFileLinks', 'category_id' ,'order'=>'order ASC'),
 		);
 	}
 
