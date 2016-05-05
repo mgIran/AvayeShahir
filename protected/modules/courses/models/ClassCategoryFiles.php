@@ -121,10 +121,12 @@ class ClassCategoryFiles extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'title' => 'عنوان',
+			'title_en' => 'عنوان انگلیسی',
+			'summary' => 'توضیحات',
+			'summary_en' => 'توضیحات انگلیسی',
 			'path' => 'فایل',
 			'file_type' => 'نوع فایل',
 			'category_id' => 'گروه',
-			'summary' => 'توضیح',
 			'order' => 'ترتیب',
 		);
 	}

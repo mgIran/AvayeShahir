@@ -22,6 +22,7 @@ $this->menu=array(
 	'filter'=>$model,
 	'columns'=>array(
 		'title',
+		'title_en',
 		array(
 			'header' => 'دوره',
 			'name' => 'course.title',
@@ -32,20 +33,3 @@ $this->menu=array(
 		),
 	),
 )); ?>
-
-<?php /*$this->widget('zii.widgets.grid.CGridView', array(
-	'id'=>'class-categories-grid',
-	'dataProvider'=>$model->search(),
-	'filter'=>$model,
-	'columns'=>array(
-		'title',
-		array(
-			'header' => 'دوره',
-			'name' => 'course.title',
-		),
-		array(
-			'class'=>'CButtonColumn',
-			'template' => '{update}{delete}'
-		),
-	),
-)); */?>

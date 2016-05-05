@@ -157,12 +157,11 @@ class EasyMultiLanguageBehavior extends CActiveRecordBehavior
                                         ->select('id')
                                         ->from($this->translations_table)
                                         ->where("
-                                                table_name = '{$this->owner->tableName()}' AND 
+                                                table_name = '".str_ireplace(array('{','}'),array('\{','\}'),$this->owner->tableName())."' AND 
                                                 model_id = '{$this->owner->primaryKey}' AND 
                                                 attribute = '{$attr}' AND 
                                                 lang = '{$lang}'
                                         ")->queryRow();
-
                                 if ($this->owner->isNewRecord OR ($isMulitlangTableExists === false) )
                                 {
                                         Yii::app()->db->createCommand()->
@@ -176,9 +175,8 @@ class EasyMultiLanguageBehavior extends CActiveRecordBehavior
                                 }
                                 else 
                                 {
-
-                                        Yii::app()->db->createCommand()->
-                                                update($this->translations_table, 
+                                        $s=Yii::app()->db->createCommand()->
+                                                update($this->translations_table,
                                                         array(
                                                                 'value' => $value,
                                                         ), 
@@ -205,8 +203,8 @@ class EasyMultiLanguageBehavior extends CActiveRecordBehavior
         {
                 Yii::app()->db->createCommand()
                         ->delete($this->translations_table, '(table_name = :table_name) AND (model_id = :model_id)', array(
-                                'table_name' => $this->owner->tableName(),
-                                'model_id'   => $this->owner->primaryKey,
+                        'table_name' => $this->owner->tableName(),
+                        'model_id'   => $this->owner->primaryKey,
                         ));
         }
 

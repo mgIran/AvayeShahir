@@ -122,7 +122,9 @@ class ClassCategoryFileLinks extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'title' => 'عنوان',
+			'title_en' => 'عنوان انگلیسی',
 			'summary' => 'توضیحات',
+			'summary_en' => 'توضیحات انگلیسی',
 			'link' => 'لینک فایل',
 			'file_type' => 'نوع فایل',
 			'category_id' => 'گروه',

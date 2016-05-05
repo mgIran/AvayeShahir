@@ -159,10 +159,9 @@ class EMHelper
                 // We don't need "name_ru" if Russian is our default language
                 unset($emBehavior['languages'][$emBehavior['default_language']]);
                 $languages = array_keys($emBehavior['languages']);
-
                 foreach ($languages as $lang) 
                 {
-                        if ( in_array( basename($name, '_'.$lang), $emBehavior['translated_attributes'] ) ) 
+                        if ( in_array( basename($name, '_'.$lang), $emBehavior['translated_attributes'] ) )
                         {
                                 return true;
                         }
