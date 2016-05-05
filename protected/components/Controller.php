@@ -232,7 +232,7 @@ class Controller extends CController
         }else
         {
             $size = (float)$size/(1024*1024*1024);
-            return number_format($size,1). ' MB';
+            return number_format($size,1). ' GB';
         }
     }
 }
