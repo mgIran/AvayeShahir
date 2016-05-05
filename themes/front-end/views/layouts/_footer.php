@@ -74,8 +74,8 @@
         <div class="info-box">
             <div class="col-md-6">
                 <p>
-                    <i class="map-point"></i>
-                    <span>تهران.<br>
+                    <i class="map-point"></i><span>
+                        تهران.
  تهرانپارس، فلکه اول، خ امیری طائمه ( گلبزگ شرقی )، پلاک 110, واحد سه.
 </span>
                 </p>

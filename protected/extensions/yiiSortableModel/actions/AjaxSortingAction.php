@@ -27,6 +27,7 @@
 
 class AjaxSortingAction extends CAction
 {
+   const SCENARIO = 'sort_order_change';
    public function run()
    {
       if (isset($_POST))
@@ -43,6 +44,7 @@ class AjaxSortingAction extends CAction
             for ($i = $prev + 1;$i <= $new; $i++)
             {
                $entry = $model->findByAttributes(array($order_field => $i));
+               $entry->scenario = self::SCENARIO;
                $entry->{$order_field} = $entry->{$order_field} - 1;
                $entry->update([$order_field]);
             }
@@ -52,12 +54,14 @@ class AjaxSortingAction extends CAction
             for ($i = $prev - 1;$i >= $new; $i--)
             {
                $entry = $model->findByAttributes(array($order_field => $i));
+               $entry->scenario = self::SCENARIO;
                $entry->{$order_field} = $entry->{$order_field} + 1;
                $entry->update([$order_field]);
             }
          }
          /*dragged entry order is changed at last, to not interfere during the changing orders loop*/
          $dragged_entry->{$order_field} = $new;
+         $dragged_entry->scenario = self::SCENARIO;
          $dragged_entry->update([$order_field]);
       }
    }

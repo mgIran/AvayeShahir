@@ -451,6 +451,23 @@ section.search{
     margin-bottom: 0;
     margin-top: 0;
 }
+.search .btn-input{
+    display: inline-block;
+}
+.search .btn-input > ul{
+    opacity: 0;
+    visibility: hidden;
+    display: block;
+    -webkit-transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+    -moz-transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+    -ms-transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+    -o-transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+.search .btn-input.open > ul{
+    opacity: 1;
+    visibility: visible;
+}
 .search .dropdown-toggle.btn{
     width: 100%;
     border: none;
@@ -898,7 +915,7 @@ section.search{
 }
 .persons .controls{
     position: absolute;
-    top: 0;
+    top: -50px;
     left: 0;
     right: 0;
     bottom: 0;
@@ -1474,6 +1491,11 @@ section.search{
     width: 100%;
     margin: 0;
     position: relative;
+    -webkit-transform: none !important;
+    -moz-transform: none !important;
+    -ms-transform: none !important;
+    -o-transform: none !important;
+    transform: none !important;
 }
 .page-content.courses .collapse-header:hover,
 .page-content.courses .collapse-header:focus,

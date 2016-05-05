@@ -32,6 +32,10 @@
     }
 }
 @media (max-width: 767px) {
+    .header.scroll-mode .btn-input .dropdown-menu
+    {
+        background-color: inherit;
+    }
     span.navTrigger{
         display: flex;
         height: 45px;
@@ -195,6 +199,13 @@
     }
     .page-content.courses .collapse-header{
         height: auto;
+        padding-left: 20px;
+        position: relative;
+    }
+    .page-content.courses .arrow-white{
+        top: 50%;
+        margin-top: -10px;
+        left: 5px;
     }
     .page-content.courses .collapse-header span{
         white-space: normal;
