@@ -1,6 +1,7 @@
 <footer class="footer" >
     <div class="box center-block">
         <div class="contact-box" id="contact">
+            <?= $this->renderPartial('//layouts/_loading'); ?>
             <h4 class="yekan-text"><?= Yii::t('app','Contact Us') ?></h4>
             <?php $this->renderPartial("//layouts/_flashMessage",array('prefix'=>'footer-'));?>
             <?php
@@ -75,17 +76,16 @@
             <div class="col-md-6">
                 <p>
                     <i class="map-point"></i><span>
-                        تهران.
- تهرانپارس، فلکه اول، خ امیری طائمه ( گلبزگ شرقی )، پلاک 110, واحد سه.
+                        تهران: خیابان شهید بهشتی، خ سرفراز (قائم مقام فراهانی) کوچه دهم، پلاک 9، واحد 1
 </span>
                 </p>
                 <p>
                     <i class="phone"></i>
-                    <span class="phone-number">021 323352525 - 021 23655822</span>
+                    <span class="phone-number">021 8873092 - 021 88736661 - 021 88502049</span>
                 </p>
                 <p>
                     <i class="email"></i>
-                    <span>info@avayeshar.com</span>
+                    <span>pardis@avayeshahir.com</span>
                 </p>
             </div>
             <div class="col-md-6">
@@ -94,6 +94,7 @@
                     <a href="#" class="social-media facebook"></a>
                     <a href="#" class="social-media twitter"></a>
                     <a href="#" class="social-media google-plus"></a>
+                    <a href="" class="social-media telegram"></a>
                 </p>
                 <p class="copyright">همهٔ حقوق برای موسسه پردیس آوای شهیر محفوظ است. ©‏ <?= JalaliDate::date('Y',time()) ?> </p>
             </div>

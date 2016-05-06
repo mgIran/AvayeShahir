@@ -39,11 +39,13 @@ class SiteController extends Controller
 		$personnel = Personnel::model()->findAll();
 		$teachers = Users::model()->findAll('role_id = 2');
 		$aboutText = Pages::model()->findByPk(12);
+		$termsText = Pages::model()->findByPk(5);
 		$this->render('index' ,array(
 			'courses' => $courses ,
 			'personnel' => $personnel ,
 			'teachers' => $teachers ,
-			'aboutText' => $aboutText
+			'aboutText' => $aboutText,
+			'termsText' => $termsText,
 		));
 	}
 
@@ -73,6 +75,7 @@ class SiteController extends Controller
 			if($model->validate()){
 				Yii::import('application.extensions.phpmailer.JPhpMailer');
 				$mail = new JPhpMailer;
+				$mail->ContentType = 'html';
 				$mail->SetFrom(Yii::app()->params['no-reply-email'] ,Yii::app()->name);
 				$mail->Subject = 'پیام از وبسایت ' . Yii::app()->name;
 				$msg = '<h2 style="box-sizing:border-box;display: block;width: 100%;font-family:tahoma;background-color: #a1cf01;line-height:60px;color:#f7f7f7;font-size: 24px;text-align: right;padding-right: 50px">آوای شهیر<span style="font-size: 14px;color:#dfdfdf">- موسسه زبان</span></span> </h2>';
@@ -90,10 +93,11 @@ class SiteController extends Controller
 				$mail->MsgHTML($msg);
 				Yii::import('admins.models.Admins');
 				$admins = Admins::model()->findAll();
-				foreach($admins as $admin){
-					$mail->AddCC($admin->email ,$admin->username);
-				}
-				if(1){ //$mail->send()
+//				foreach($admins as $admin){
+//					$mail->AddCC($admin->email ,$admin->username);
+//				}
+				$mail->AddAddress("yusef.mobasheri@gmail.com");
+				if($mail->send()){
 					Yii::app()->user->setFlash('footer-success' ,'پیام شما با موفقیت ارسال شد.');
 					if(isset($_POST['ajax'])){
 						echo CJSON::encode(array('state' => 'ok'));

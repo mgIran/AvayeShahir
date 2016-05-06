@@ -1491,11 +1491,7 @@ section.search{
     width: 100%;
     margin: 0;
     position: relative;
-    -webkit-transform: none !important;
-    -moz-transform: none !important;
-    -ms-transform: none !important;
-    -o-transform: none !important;
-    transform: none !important;
+    text-transform: none !important;
 }
 .page-content.courses .collapse-header:hover,
 .page-content.courses .collapse-header:focus,
@@ -1790,4 +1786,45 @@ span.navTrigger {
 }
 .center-block{
     float: none !important;
+}
+.phone-number{
+    direction: ltr !important;
+}
+
+.category-show .tooltip-inner{
+    min-width: 100% !important;
+    max-width: 800px !important;
+}
+
+#terms-modal.modal{
+    background-color: rgba(0,0,0,0.7)
+}
+#terms-modal .modal-dialog{
+    width: 800px;
+    max-width: 100%;
+}
+#terms-modal .modal-content{
+    border: none;
+    border-radius: 0;
+}
+#terms-modal .modal-header{
+    border: none;
+    z-index: 2;
+    position: relative;
+}
+#terms-modal .modal-body{
+    padding-bottom: 44px;
+}
+#terms-modal .modal-header .close{
+    color: #2a2a2a;
+    font-size: 40px;
+    line-height: 20px;
+    margin: 0;
+    padding: 0;
+    border-radius: 50%;
+    background: transparent;
+    opacity: 0.5;
+}
+#terms-modal .modal-header .close:hover{
+    opacity: 0.8;
 }

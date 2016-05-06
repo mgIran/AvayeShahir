@@ -50,7 +50,7 @@ return array(
     'Verification Code' => 'کد امنیتی',
     'Message Body' => 'متن پیام',
     'Send' => 'ارسال',
-    'I agree with the <a href="'.Yii::app()->baseUrl."/terms".'">Terms and Policies</a>' => 'با <a href="'.Yii::app()->baseUrl."/terms".'">شرایط و قوانین</a> سایت موافقم.',
+    'I agree with the <a data-toggle="modal" data-target="#terms-modal" href="#">Terms and Policies</a>' => 'با <a data-toggle="modal" data-target="#terms-modal" href="#">شرایط و قوانین</a> سایت موافقم.',
     'Files' => 'فایل ها',
     'Direct Links' => 'لینک مستقیم',
     'Mirror Links' => 'لینک غیر مستقیم',

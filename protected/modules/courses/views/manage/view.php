@@ -30,7 +30,7 @@ $fileDir = Yii::getPathOfAlias("webroot").'/uploads/classCategoryFiles/';
 		<?
 		if($model->categories):
 		?>
-		<div class="groups-container panel-group" id="collapse-parent">
+		<div class="groups-container panel-group category-show" id="collapse-parent">
 			<?
 			foreach($model->categories as $key => $category):
 			?>
@@ -57,7 +57,7 @@ $fileDir = Yii::getPathOfAlias("webroot").'/uploads/classCategoryFiles/';
 							foreach($category->files as $file):
 								if($file->path and file_exists($fileDir.$file->path)):
 							?>
-								<li>
+								<li data-toggle="tooltip" data-placement="top" title="<?= $file->summary ?>">
 									<a href="<?= $fileUrl.$file->path ?>"></a>
 									<span><?= $file->title ?></span>
 									<span class="extension"><?= strtoupper($file->file_type) ?></span>
@@ -84,7 +84,7 @@ $fileDir = Yii::getPathOfAlias("webroot").'/uploads/classCategoryFiles/';
 							foreach($category->links as $fileLink):
 								if($fileLink->link):
 							?>
-								<li>
+								<li data-toggle="tooltip" data-placement="top" title="<?= $file->summary ?>">
 									<a target="_blank" rel="nofollow" href="<?= $fileLink->link ?>"></a>
 									<span><?= $fileLink->title ?></span>
 									<span class="extension"><?= strtoupper($fileLink->file_type) ?></span>

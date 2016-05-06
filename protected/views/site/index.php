@@ -122,7 +122,9 @@ Yii::app()->clientScript->registerScript("easyTicker-scripts","
                     ?>
                     <div class="course">
                         <div class="course-pic" data-toggle="tooltip" data-placement="top" title="<?= $course->title ?>">
-                            <img src="<?= Yii::app()->baseUrl.'/uploads/courses/'.$course->pic; ?>" alt="<?= $course->title ?>">
+                            <a href="<?= Yii::app()->createUrl('/courses/'.$course->id.'/'.urlencode($course->title)); ?>">
+                                <img src="<?= Yii::app()->baseUrl.'/uploads/courses/'.$course->pic; ?>" alt="<?= $course->title ?>">
+                            </a>
                         </div>
                         <div class="course-detail container-fluid">
                             <h4><a href="<?= Yii::app()->createUrl('/courses/'.$course->id.'/'.urlencode($course->title)); ?>"><?= $course->title ?></a></h4>
@@ -205,7 +207,7 @@ Yii::app()->clientScript->registerScript("easyTicker-scripts","
                         <label>
                             <?= $form->checkBox($signUpModel,'agreeTerms'); ?>
                             <span>
-                                <?= Yii::t('app' ,'I agree with the <a href="'.Yii::app()->baseUrl."/terms".'">Terms and Policies</a>')?>
+                                <?= Yii::t('app' ,'I agree with the <a data-toggle="modal" data-target="#terms-modal" href="#">Terms and Policies</a>')?>
                             </span>
                         </label>
                         <? echo $form->error($signUpModel,'agreeTerms',array('class'=>'errorMessage tip'));?>
@@ -322,9 +324,11 @@ Yii::app()->clientScript->registerScript("easyTicker-scripts","
         <div class="<?= Yii::app()->language == 'fa'?'col-lg-8 col-md-8 col-sm-8 col-xs-12':'col-lg-12 col-md-12 col-sm-12 col-xs-12'; ?> text-container">
             <div class="text">
                 <?
+                $aboutText->summary = str_ireplace('<br />','#br#',$aboutText->summary);
                 $text = strip_tags($aboutText->summary);
+                $text = str_ireplace('#br#','<br>',$text);
                 $length = mb_strlen($text,'utf8');
-                if($length > 480) {
+                if($length > 280) {
                     $length = ceil($length / 2);
                     $words = explode(" ", $text);
                     $c = count($words);
@@ -358,3 +362,20 @@ Yii::app()->clientScript->registerScript("easyTicker-scripts","
         </div>
     </div>
 </section>
+
+<!-- Modal -->
+<div id="terms-modal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <?= $termsText->summary ?>
+            </div>
+        </div>
+
+    </div>
+</div>

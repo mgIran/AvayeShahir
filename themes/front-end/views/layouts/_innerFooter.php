@@ -4,17 +4,16 @@
             <div class="col-md-4">
                 <p>
                     <i class="map-point"></i>
-                    <span>تهران.<br>
- تهرانپارس، فلکه اول، خ امیری طائمه ( گلبزگ شرقی )، پلاک 110, واحد سه.
+                    <span>تهران: خیابان شهید بهشتی، خ سرفراز (قائم مقام فراهانی) کوچه دهم، پلاک 9، واحد 1
 </span>
                 </p>
                 <p>
                     <i class="phone"></i>
-                    <span class="phone-number">021 323352525 - 021 23655822</span>
+                    <span class="phone-number">021 8873092 - 021 88736661 - 021 88502049</span>
                 </p>
                 <p>
                     <i class="email"></i>
-                    <span>info@avayeshar.com</span>
+                    <span>pardis@avayeshahir.com</span>
                 </p>
             </div>
             <div class="col-md-4">

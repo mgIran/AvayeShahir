@@ -35,6 +35,10 @@ $(function() {
     $("[data-toggle='tooltip']").tooltip({
         trigger:'hover'
     });
+    $(".category [data-toggle='tooltip']").tooltip({
+        trigger:'hover',
+        template : '<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner large"></div></div>'
+    });
 
     $("body").on('click','.navTrigger',function(){
         $(this).toggleClass("clicked");
