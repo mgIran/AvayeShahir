@@ -92,13 +92,12 @@ class Classes extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('title, category_id, course_id ,capacity ,teacher_id', 'required'),
-			array('price,sessions,startClassTime ,endClassTime', 'numerical', 'integerOnly' => true),
+			array('price,sessions', 'numerical', 'integerOnly' => true),
 			array('endSignupDate', 'compare', 'compareAttribute' => 'startSignupDate', 'operator' => '>', 'message' => 'تاریخ پایان ثبت نام باید بیشتر از تاریخ شروع ثبت نام باشد.'),
 			array('endClassDate', 'compare', 'compareAttribute' => 'startClassDate', 'operator' => '>', 'message' => 'تاریخ پایان کلاس باید بیشتر از تاریخ شروع کلاس باشد.'),
-			array('endClassTime', 'compare', 'compareAttribute' => 'startClassTime', 'operator' => '>', 'message' => 'ساعت پایان کلاس باید بیشتر از ساعت شروع کلاس باشد.'),
 			array('title', 'length', 'max' => 50),
 			array('category_id, course_id', 'length', 'max' => 10),
-			array('summary, startSignupDate, endSignupDate, startClassDate, endClassDate', 'safe'),
+			array('summary, startSignupDate, endSignupDate, startClassDate, endClassDate,startClassTime,endClassTime', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, title, summary, price, startSignupDate, endSignupDate, startClassDate, endClassDate, category_id, course_id', 'safe', 'on' => 'search'),
