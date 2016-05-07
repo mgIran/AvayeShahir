@@ -31,8 +31,13 @@ class TeachersManageController extends Controller
 		return array(
 				array(
 						'allow',  // allow all users to perform 'index' and 'views' actions
-						'actions' => array('index', 'view', 'create', 'admin', 'delete'),
+						'actions' => array('index', 'create', 'admin', 'delete'),
 						'roles' => array('admin'),
+				),
+				array(
+						'allow',  // allow all users to perform 'index' and 'views' actions
+						'actions' => array('view'),
+						'users' => array('*'),
 				),
 				array(
 						'deny',  // deny all users
@@ -47,6 +52,8 @@ class TeachersManageController extends Controller
 	 */
 	public function actionView($id)
 	{
+		Yii::app()->theme = 'front-end';
+		$this->layout = '//layouts/inner';
 		$this->render('view', array(
 				'model' => $this->loadModel($id),
 		));

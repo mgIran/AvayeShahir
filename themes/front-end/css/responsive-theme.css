@@ -185,6 +185,7 @@
         padding-left: 10px;
         line-height: 28px;
     }
+    .page-content.courses .files .file,
     .page-content.courses .files li{
         display: inline-block;
         height: auto;
@@ -221,6 +222,7 @@
 }
 @media (max-width: 400px) {
 
+    .page-content.courses .files .file,
     .page-content.courses .files li{
         padding:0 5px !important;
         background-image: none !important;

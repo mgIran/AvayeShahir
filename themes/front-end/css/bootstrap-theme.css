@@ -1444,6 +1444,32 @@ section.search{
     height: 120px;
     margin: 0;
 }
+.page-title-container.courses.personnel-page-header{
+    padding: 0 0 10px 0!important;
+    overflow: hidden;
+    height: auto;
+}
+.page-title-container.courses.personnel-page-header h2{
+    line-height:60px ;
+    height:60px ;
+}
+.page-title-container.courses.personnel-page-header .details{
+    color: #fff;
+    position: relative;
+    z-index: 2;
+}
+
+.page-title-container.courses.personnel-page-header .details span:last-of-type{
+    margin: 0 10px;
+}
+.page-title-container.courses.personnel-page-header .details span:first-of-type{
+    color: #fff;
+    font-size: 19px;
+}
+.page-title-container.courses.personnel-page-header .details span{
+    font-size: 18px;
+    color: #ddd;
+}
 .page-title-container.courses{
     background: url("../images/courses-bg.jpg") transparent no-repeat center / cover;
 }
@@ -1534,10 +1560,10 @@ section.search{
 .page-content.courses .panel-collapse .text{
     color: #10395a;
 }
-.page-content.courses .panel-collapse .files{
+.page-content.courses .files{
     margin-top: 25px;
 }
-.page-content.courses .panel-collapse .files h3{
+.page-content.courses .files h3{
     color: #5b7991;
     font-family: 'BYekan';
     margin: 0;
@@ -1548,6 +1574,10 @@ section.search{
     margin: 15px 0;
     padding:0;
 }
+.page-content.courses .files .file{
+    margin-bottom: 50px !important;
+}
+.page-content.courses .files .file,
 .page-content.courses .files li{
     list-style: none;
     background: #fff url('../svg/attachment.svg') no-repeat right 20px center / 18px auto;
@@ -1564,6 +1594,7 @@ section.search{
     box-shadow: 0 0 8px #d4dee8;
     -webkit-transition: all 0.5s ease-in-out; -moz-transition: all 0.5s ease-in-out; -ms-transition: all 0.5s ease-in-out; -o-transition: all 0.5s ease-in-out; transition: all 0.5s ease-in-out;
 }
+.page-content.courses .files .file > a,
 .page-content.courses .files li > a{
     position: absolute;
     top:0;
@@ -1573,6 +1604,7 @@ section.search{
     z-index: 1;
     display: block;
 }
+.page-content.courses .files .file:hover,
 .page-content.courses .files li:hover{
     background-color: #f7fbff;
 }
@@ -1596,6 +1628,7 @@ section.search{
     -webkit-transition: all 0.5s linear; -moz-transition: all 0.5s linear; -ms-transition: all 0.5s linear; -o-transition: all 0.5s linear; transition: all 0.5s linear;
 }
 
+.page-content.courses .files .file:hover .download,
 .page-content.courses .files li:hover .download{
     background: #ef5350;
 }
@@ -1606,6 +1639,7 @@ section.search{
     height:20px;
     float: left;
 }
+.page-content.courses .files .file:hover .download i,
 .page-content.courses .files li:hover .download i{
     background: url("../svg/download-white.svg") no-repeat center / auto 25px;
 }

@@ -238,7 +238,7 @@ Yii::app()->clientScript->registerScript("easyTicker-scripts","
                             ?>
                         <li class="person-item">
                             <div class="image">
-                                <img src="<?= Yii::app()->baseUrl.$person->avatar ?>" alt="<?= CHtml::encode($person->fullName) ?>">
+                                <img src="<?= Yii::app()->baseUrl.'/uploads/teachers/'.$person->avatar ?>" alt="<?= CHtml::encode($person->fullName) ?>">
 
                                 <div class="img-overlay"></div>
                             </div>
@@ -279,6 +279,7 @@ Yii::app()->clientScript->registerScript("easyTicker-scripts","
                             ?>
                             <li class="person-item">
                                 <div class="image">
+                                    <a href="<?= Yii::app()->createUrl('/teachers/'.$teacher->id.'/'.urlencode($teacher->teacherDetails->getFullName())) ?>" class="person-link"></a>
                                     <?
                                     if($teacher->teacherDetails->avatar):
                                     ?>

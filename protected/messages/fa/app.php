@@ -31,6 +31,8 @@ return array(
     'Avatar' => 'آواتار',
     'Resume' => 'رزومه',
     'File' => 'فایل رزومه',
+    'Resume File' => 'فایل رزومه',
+    'Download Resume File' => 'دانلود فایل رزومه',
     'Social Links' => 'لینک های اجتماعی',
     'Tell' => 'شماره تماس',
     'Phone' => 'شماره تماس',
