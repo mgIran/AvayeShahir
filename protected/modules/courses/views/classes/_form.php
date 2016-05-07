@@ -33,7 +33,7 @@ Yii::app()->user->returnUrl = Yii::app()->request->getRequestUri();
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'category_id'); ?>
-		<?php echo $form->dropDownList($model,'category_id',!$model->isNewRecord && $model->course_id?CHtml::listData(ClassCategories::model()->findAll('course_id = ?',array($model->course_id)),'id','title'):[],array(
+		<?php echo $form->dropDownList($model,'category_id',$model->course_id?CHtml::listData(ClassCategories::model()->findAll('course_id = ?',array($model->course_id)),'id','title'):[],array(
             'prompt' => '-',
             'id' => 'category_id'
         )); ?>

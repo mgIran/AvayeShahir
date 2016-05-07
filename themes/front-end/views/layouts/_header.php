@@ -25,9 +25,9 @@ $action = $this->action->id;
             <li>
                 <a class="scroll-link" href="<?= $menuID == 'site' && $action == 'index'?'#courses':Yii::app()->baseUrl.'#courses'; ?>" title="<?= Yii::t('app','Courses');?>"><?= Yii::t('app','Courses');?></a>
             </li>
-            <li>
-                <a class="scroll-link" href="<?= $menuID == 'site' && $action == 'index'?'#staff':Yii::app()->baseUrl.'#staff'; ?>" title="<?= Yii::t('app','Staff');?>"><?= Yii::t('app','Staff');?></a>
-            </li>
+<!--            <li>-->
+<!--                <a class="scroll-link" href="--><?//= $menuID == 'site' && $action == 'index'?'#staff':Yii::app()->baseUrl.'#staff'; ?><!--" title="--><?//= Yii::t('app','Staff');?><!--">--><?//= Yii::t('app','Staff');?><!--</a>-->
+<!--            </li>-->
             <li>
                 <a class="scroll-link" href="<?= $menuID == 'site' && $action == 'index'?'#teachers':Yii::app()->baseUrl.'#teachers'; ?>" title="<?= Yii::t('app','Teachers');?>"><?= Yii::t('app','Teachers');?></a>
             </li>
