@@ -28,7 +28,7 @@ class ClassesManageController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','create','update','admin','delete','order'),
+				'actions'=>array('index','view','create','update','admin','delete','order','getCategories'),
 				'roles'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -66,8 +66,7 @@ class ClassesManageController extends Controller
 		if(isset($_POST['Classes']))
 		{
 			$model->attributes=$_POST['Classes'];
-			$model->formTags = $_POST['Classes']['formTags']?explode(',',$_POST['Classes']['formTags']):null;
-
+			$model->formTags = isset($_POST['Classes']['formTags'])?explode(',',$_POST['Classes']['formTags']):null;
 			if($model->save())
 			{
 				Yii::app()->user->setFlash('success' ,'<span class="icon-check"></span>&nbsp;&nbsp;اطلاعات با موفقیت ذخیره شد.');
@@ -92,7 +91,7 @@ class ClassesManageController extends Controller
 		if(isset($_POST['Classes']))
 		{
 			$model->attributes=$_POST['Classes'];
-			$model->formTags = $_POST['Classes']['formTags']?explode(',',$_POST['Classes']['formTags']):null;
+			$model->formTags = isset($_POST['Classes']['formTags'])?explode(',',$_POST['Classes']['formTags']):null;
 			if($model->save())
 			{
 				Yii::app()->user->setFlash('success' ,'<span class="icon-check"></span>&nbsp;&nbsp;اطلاعات با موفقیت ذخیره شد.');
@@ -169,5 +168,14 @@ class ClassesManageController extends Controller
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
 		}
+	}
+
+	public function actionGetCategories($id){
+		$categories = ClassCategories::model()->findAll('course_id = ?',array($id));
+		foreach($categories as $category)
+		{
+			echo '<option value="'.$category->id.'">'.$category->title.'</option>';
+		}
+		Yii::app()->end();
 	}
 }

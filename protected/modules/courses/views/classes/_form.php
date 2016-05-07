@@ -6,7 +6,7 @@ Yii::app()->user->returnUrl = Yii::app()->request->getRequestUri();
 ?>
 <? $this->renderPartial('//layouts/_flashMessage'); ?>
 <div class="form">
-
+<? $this->renderPartial("//layouts/_loading") ?>
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'classes-form',
 	// Please note: When you enable ajax validation, make sure the corresponding
@@ -24,19 +24,27 @@ Yii::app()->user->returnUrl = Yii::app()->request->getRequestUri();
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'course_id'); ?>
-		<?php echo $form->dropDownList($model,'course_id',CHtml::listData(Courses::model()->findAll(),'id','title')); ?>
+		<?php echo $form->dropDownList($model,'course_id',CHtml::listData(Courses::model()->findAll(),'id','title'),array(
+            'prompt' => '-',
+            'id' => 'course_id'
+        )); ?>
 		<?php echo $form->error($model,'course_id'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'category_id'); ?>
-		<?php echo $form->dropDownList($model,'category_id',CHtml::listData(ClassCategories::model()->findAll(),'id','title')); ?>
+		<?php echo $form->dropDownList($model,'category_id',!$model->isNewRecord && $model->course_id?CHtml::listData(ClassCategories::model()->findAll('course_id = ?',array($model->course_id)),'id','title'):[],array(
+            'prompt' => '-',
+            'id' => 'category_id'
+        )); ?>
 		<?php echo $form->error($model,'category_id'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'teacher_id'); ?>
-		<?php echo $form->dropDownList($model,'teacher_id',CHtml::listData(Users::model()->findAll('role_id = 2'),'id','teacherDetails.fullName')); ?>
+		<?php echo $form->dropDownList($model,'teacher_id',CHtml::listData(Users::model()->findAll('role_id = 2'),'id','teacherDetails.fullName'),array(
+            'prompt' => '-',
+        )); ?>
 		<?php echo $form->error($model,'teacher_id'); ?>
 	</div>
 
@@ -68,6 +76,24 @@ Yii::app()->user->returnUrl = Yii::app()->request->getRequestUri();
 		<?php echo $form->error($model,'endClassDate'); ?>
 	</div>
 
+	<div class="row">
+		<?php echo $form->labelEx($model,'startClassTime'); ?>
+        <?php echo $form->textField($model,'startClassTime'); ?>
+		<?php echo $form->error($model,'startClassTime'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'endClassTime'); ?>
+		<?php echo $form->textField($model,'endClassTime'); ?>
+		<?php echo $form->error($model,'endClassTime'); ?>
+	</div>
+
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'sessions'); ?>
+		<?php echo $form->textField($model,'sessions' ,array('placeholder' => 'جلسه')); ?>
+		<?php echo $form->error($model,'sessions'); ?>
+	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'capacity'); ?>
@@ -140,7 +166,8 @@ Yii::app()->clientScript->registerScript('datesScript','
         altFormat: \'X\',
         observer: true,
         format: \'DD MMMM YYYY\',
-        persianDigit: false
+        autoClose:true,
+        persianDigit: false,
     });
 
 
@@ -149,6 +176,7 @@ Yii::app()->clientScript->registerScript('datesScript','
         altFormat: \'X\',
         observer: true,
         format: \'DD MMMM YYYY\',
+        autoClose:true,
         persianDigit: false
     });
 
@@ -157,6 +185,7 @@ Yii::app()->clientScript->registerScript('datesScript','
         altFormat: \'X\',
         observer: true,
         format: \'DD MMMM YYYY\',
+        autoClose:true,
         persianDigit: false
     });
 
@@ -165,9 +194,11 @@ Yii::app()->clientScript->registerScript('datesScript','
         altFormat: \'X\',
         observer: true,
         format: \'DD MMMM YYYY\',
+        autoClose:true,
         persianDigit: false
     });
 ');
+
 $ss = !empty($model->startSignupDate)?explode('/',JalaliDate::date("Y/m/d",$model->startSignupDate,false)):explode('/',JalaliDate::date("Y/m/d",time(),false));
 $es = !empty($model->endSignupDate)?explode('/',JalaliDate::date("Y/m/d",$model->endSignupDate,false)):explode('/',JalaliDate::date("Y/m/d",time(),false));
 $sc = !empty($model->startClassDate)?explode('/',JalaliDate::date("Y/m/d",$model->startClassDate,false)):explode('/',JalaliDate::date("Y/m/d",time(),false));
@@ -177,4 +208,23 @@ Yii::app()->clientScript->registerScript('dateSets', '
 	$("#endSignupDate").persianDatepicker("setDate",['.$es[0].','.$es[1].','.$es[2].']);
 	$("#startClassDate").persianDatepicker("setDate",['.$sc[0].','.$sc[1].','.$sc[2].']);
 	$("#endClassDate").persianDatepicker("setDate",['.$ec[0].','.$ec[1].','.$ec[2].']);
+');
+
+Yii::app()->clientScript->registerScript('getCategories', '
+	$("#course_id").change(function(){
+	    var $course_id = $(this).val();
+	    $.ajax({
+	        url : "'.Yii::app()->createUrl('/courses/classes/getCategories').'",
+	        type : "GET",
+	        dataType : "html",
+	        data : {id : $course_id},
+	        beforeSend : function(){
+	            $(".form .loading-container").show();
+	        },
+	        success : function(html){
+    	        $(".form .loading-container").hide();
+    	        $("#category_id").html(html);
+	        }
+	    });
+	});
 ');

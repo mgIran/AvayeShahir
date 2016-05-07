@@ -17,6 +17,9 @@
  * @property string $course_id
  * @property string $teacher_id
  * @property string $order
+ * @property string $sessions
+ * @property string $startClassTime
+ * @property string $endClassTime
  * @property [] $formTags
  *
  * The followings are the available model relations:
@@ -66,17 +69,17 @@ class Classes extends CActiveRecord
 	public function behaviors()
 	{
 		return array(
-				'EasyMultiLanguage'=>array(
-						'class' => 'ext.EasyMultiLanguage.EasyMultiLanguageBehavior',
-						// @todo Please change those attributes that should be translated.
-						'translated_attributes' => array('title','summary'),
-						// @todo Please add admin actions
-						'admin_routes' => array('courses/classes/create','courses/classes/update','courses/classes/admin'),
-						//
-						'languages' => Yii::app()->params['languages'],
-						'default_language' => Yii::app()->params['default_language'],
-						'translations_table' => 'ym_translations',
-				),
+			'EasyMultiLanguage'=>array(
+				'class' => 'ext.EasyMultiLanguage.EasyMultiLanguageBehavior',
+				// @todo Please change those attributes that should be translated.
+				'translated_attributes' => array('title','summary'),
+				// @todo Please add admin actions
+				'admin_routes' => array('courses/classes/create','courses/classes/update','courses/classes/admin'),
+				//
+				'languages' => Yii::app()->params['languages'],
+				'default_language' => Yii::app()->params['default_language'],
+				'translations_table' => 'ym_translations',
+			),
 		);
 	}
 
@@ -88,16 +91,17 @@ class Classes extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-				array('title, category_id, course_id ,capacity ,teacher_id', 'required'),
-				array('endSignupDate', 'compare', 'compareAttribute' => 'startSignupDate', 'operator' => '>', 'message' => 'تاریخ پایان ثبت نام باید بیشتر از تاریخ شروع ثبت نام باشد.'),
-				array('endClassDate', 'compare', 'compareAttribute' => 'startClassDate', 'operator' => '>', 'message' => 'تاریخ پایان کلاس باید بیشتر از تاریخ شروع کلاس باشد.'),
-				array('price', 'numerical', 'integerOnly' => true),
-				array('title', 'length', 'max' => 50),
-				array('category_id, course_id', 'length', 'max' => 10),
-				array('summary, startSignupDate, endSignupDate, startClassDate, endClassDate', 'safe'),
-				// The following rule is used by search().
-				// @todo Please remove those attributes that should not be searched.
-				array('id, title, summary, price, startSignupDate, endSignupDate, startClassDate, endClassDate, category_id, course_id', 'safe', 'on' => 'search'),
+			array('title, category_id, course_id ,capacity ,teacher_id', 'required'),
+			array('price,sessions,startClassTime ,endClassTime', 'numerical', 'integerOnly' => true),
+			array('endSignupDate', 'compare', 'compareAttribute' => 'startSignupDate', 'operator' => '>', 'message' => 'تاریخ پایان ثبت نام باید بیشتر از تاریخ شروع ثبت نام باشد.'),
+			array('endClassDate', 'compare', 'compareAttribute' => 'startClassDate', 'operator' => '>', 'message' => 'تاریخ پایان کلاس باید بیشتر از تاریخ شروع کلاس باشد.'),
+			array('endClassTime', 'compare', 'compareAttribute' => 'startClassTime', 'operator' => '>', 'message' => 'ساعت پایان کلاس باید بیشتر از ساعت شروع کلاس باشد.'),
+			array('title', 'length', 'max' => 50),
+			array('category_id, course_id', 'length', 'max' => 10),
+			array('summary, startSignupDate, endSignupDate, startClassDate, endClassDate', 'safe'),
+			// The following rule is used by search().
+			// @todo Please remove those attributes that should not be searched.
+			array('id, title, summary, price, startSignupDate, endSignupDate, startClassDate, endClassDate, category_id, course_id', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -130,12 +134,15 @@ class Classes extends CActiveRecord
 			'endSignupDate' => 'تاریخ پایان ثبت نام',
 			'startClassDate' => 'تاریخ شروع کلاس',
 			'endClassDate' => 'تاریخ پایان کلاس',
+			'startClassTime' => 'ساعت شروع کلاس',
+			'endClassTime' => 'ساعت پایان کلاس',
 			'category_id' => 'گروه',
 			'course_id' => 'دوره',
 			'teacher_id' => 'مدرس',
 			'capacity' => 'ظرفیت کلاس',
 			'formTags' => 'برچسب ها',
 			'order' => 'ترتیب',
+			'sessions' => 'تعداد جلسات',
 		);
 	}
 

@@ -44,6 +44,7 @@ $this->menu=array(
 		),
 		array(
 			'class'=>'CButtonColumn',
+			'template' => '{update}{delete}'
 		),
 	),
 )); ?>

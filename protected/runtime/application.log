@@ -16272,3 +16272,23 @@ in C:\wamp\www\Yusef\shahir\index.php (11)
 2016/04/19 09:20:12 [warning] [application] Failed to set unsafe attribute "password" of "Users".
 in C:\wamp\www\Yusef\shahir\protected\modules\users\controllers\PublicController.php (107)
 in C:\wamp\www\Yusef\shahir\index.php (11)
+2016/05/07 10:09:09 [warning] [application] Failed to set unsafe attribute "startClassTime" of "Classes".
+in C:\wamp\www\Yusef\shahir\protected\modules\courses\models\Classes.php (59)
+in C:\wamp\www\Yusef\shahir\protected\modules\courses\controllers\ClassesManageController.php (68)
+in C:\wamp\www\Yusef\shahir\index.php (11)
+2016/05/07 10:10:29 [warning] [application] Failed to set unsafe attribute "startClassTime" of "Classes".
+in C:\wamp\www\Yusef\shahir\protected\modules\courses\models\Classes.php (59)
+in C:\wamp\www\Yusef\shahir\protected\modules\courses\controllers\ClassesManageController.php (68)
+in C:\wamp\www\Yusef\shahir\index.php (11)
+2016/05/07 10:10:59 [warning] [application] Failed to set unsafe attribute "startClassTime" of "Classes".
+in C:\wamp\www\Yusef\shahir\protected\modules\courses\models\Classes.php (59)
+in C:\wamp\www\Yusef\shahir\protected\modules\courses\controllers\ClassesManageController.php (68)
+in C:\wamp\www\Yusef\shahir\index.php (11)
+2016/05/07 10:11:41 [warning] [application] Failed to set unsafe attribute "startClassTime" of "Classes".
+in C:\wamp\www\Yusef\shahir\protected\modules\courses\models\Classes.php (59)
+in C:\wamp\www\Yusef\shahir\protected\modules\courses\controllers\ClassesManageController.php (68)
+in C:\wamp\www\Yusef\shahir\index.php (11)
+2016/05/07 10:13:10 [warning] [application] Failed to set unsafe attribute "startClassTime" of "Classes".
+in C:\wamp\www\Yusef\shahir\protected\modules\courses\models\Classes.php (59)
+in C:\wamp\www\Yusef\shahir\protected\modules\courses\controllers\ClassesManageController.php (68)
+in C:\wamp\www\Yusef\shahir\index.php (11)
