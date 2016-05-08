@@ -978,6 +978,17 @@ section.search{
 }
 
 
+.message-box{
+    position: relative;
+    display: block;
+    overflow: hidden;
+}
+.message-box > .container{
+    padding: 30px 0;
+}
+.message-box > .container .message{
+    margin: 0;
+}
 .about{
     position: relative;
     display: block;

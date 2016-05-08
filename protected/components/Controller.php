@@ -31,6 +31,7 @@ class Controller extends CController
     public $pageTitle;
 
     public $sideRender = null;
+    public $message = null;
     /**
      * Declares class-based actions.
      */
@@ -167,6 +168,7 @@ class Controller extends CController
                     'linkOptions' => array('class' => 'dropdown-toggle' ,'data-toggle' => "dropdown") ,
                     'items' => array(
                         array('label' => 'عمومی' ,'url' => Yii::app()->createUrl('/setting/siteSettingManage/changeSetting')) ,
+                        array('label' => 'پیام وبسایت' ,'url' => Yii::app()->createUrl('/setting/siteSettingManage/siteMessage')) ,
                     )
                 ) ,
                 array(

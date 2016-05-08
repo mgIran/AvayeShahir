@@ -34,6 +34,12 @@ class SiteController extends Controller
 		Yii::import('personnel.models.*');
 		Yii::import('users.models.*');
 		Yii::import('pages.models.*');
+		Yii::import('setting.models.*');
+		if(SiteSetting::model()->findByAttributes(array('name'=>'message_state'))->value == 1)
+			if(Yii::app()->language == 'fa')
+				$this->message = CHtml::encode(SiteSetting::model()->findByAttributes(array('name'=>'message'))->value);
+			else
+				$this->message = CHtml::encode(SiteSetting::model()->findByAttributes(array('name'=>'message_en'))->value);
 
 		$courses = Courses::model()->findAll();
 		$personnel = Personnel::model()->findAll();
@@ -93,10 +99,9 @@ class SiteController extends Controller
 				$mail->MsgHTML($msg);
 				Yii::import('admins.models.Admins');
 				$admins = Admins::model()->findAll();
-//				foreach($admins as $admin){
-//					$mail->AddCC($admin->email ,$admin->username);
-//				}
-				$mail->AddAddress("yusef.mobasheri@gmail.com");
+				foreach($admins as $admin){
+					$mail->AddCC($admin->email ,$admin->username);
+				}
 				if($mail->send()){
 					Yii::app()->user->setFlash('footer-success' ,'پیام شما با موفقیت ارسال شد.');
 					if(isset($_POST['ajax'])){

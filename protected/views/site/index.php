@@ -38,7 +38,20 @@ Yii::app()->clientScript->registerScript("easyTicker-scripts","
         }).data('easyTicker');");
 
 ?>
-
+<?
+if($this->message):
+?>
+<section class="message-box">
+    <div class="container">
+        <div class="alert alert-success message fade in">
+            <button class="close close-sm" type="button" data-dismiss="alert"><i class="icon-remove"></i></button>
+            <?= $this->message ?>
+        </div>
+    </div>
+</section>
+<?php
+endif;
+?>
 <section class="courses" id="courses">
     <div class="container">
         <h3 class="yekan-text"><?= Yii::t('app' ,'Education Courses') ?></h3>

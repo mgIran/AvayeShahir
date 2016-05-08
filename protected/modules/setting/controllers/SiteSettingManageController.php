@@ -28,7 +28,7 @@ class SiteSettingManageController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('changeSetting'),
+				'actions'=>array('changeSetting','siteMessage'),
                 'roles'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -44,23 +44,36 @@ class SiteSettingManageController extends Controller
         if(isset($_POST['SiteSetting'])){
             foreach($_POST['SiteSetting'] as $name => $value)
             {
-                if($name=='buy_credit_options')
-                {
-                    $value=explode(',', $value);
-                    $field = SiteSetting::model()->findByAttributes(array('name'=>$name));
-                    SiteSetting::model()->updateByPk($field->id,array('value'=>CJSON::encode($value)));
-                }
-                else
-                {
-                    $field = SiteSetting::model()->findByAttributes(array('name'=>$name));
-                    SiteSetting::model()->updateByPk($field->id,array('value'=>$value));
-                }
+                $field = SiteSetting::model()->findByAttributes(array('name'=>$name));
+				SiteSetting::model()->updateByPk($field->id,array('value'=>$value));
             }
             Yii::app()->user->setFlash('success' , 'اطلاعات با موفقیت ثبت شد.');
             $this->refresh();
         }
         $model = SiteSetting::model()->findAll();
         $this->render('_general',array(
+            'model'=>$model
+        ));
+    }
+
+	/**
+	 * Change site setting
+	 */
+    public function actionSiteMessage(){
+		$model = SiteSetting::model()->findAll(array(
+			'condition' => 'name = "message" OR name = "message_en" OR name = "message_state"',
+			'order' => 'id'
+		));
+        if(isset($_POST['SiteSetting'])){
+			foreach($_POST['SiteSetting'] as $name => $value)
+			{
+				$field = SiteSetting::model()->findByAttributes(array('name'=>$name));
+				SiteSetting::model()->updateByPk($field->id,array('value'=>$value));
+			}
+            Yii::app()->user->setFlash('success' , 'اطلاعات با موفقیت ثبت شد.');
+            $this->refresh();
+        }
+        $this->render('_message',array(
             'model'=>$model
         ));
     }
