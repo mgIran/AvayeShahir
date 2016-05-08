@@ -10,23 +10,10 @@ $this->breadcrumbs=array(
 $this->menu=array(
 	array('label'=>'افزودن', 'url'=>array('create')),
 );
-
-Yii::app()->clientScript->registerScript('search', "
-$('.search-button').click(function(){
-	$('.search-form').toggle();
-	return false;
-});
-$('.search-form form').submit(function(){
-	$('#admins-grid').yiiGridView('update', {
-		data: $(this).serialize()
-	});
-	return false;
-});
-");
 ?>
 
 <h1>مدیریت مدیران</h1>
-
+<? $this->renderPartial('//layouts/_flashMessage'); ?>
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'admins-grid',
 	'dataProvider'=>$model->search(),

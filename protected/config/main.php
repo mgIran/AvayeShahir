@@ -77,6 +77,8 @@ return array(
                 '<module:\w+>/<controller:\w+>/<action:\w+>/<id:\d+>'=>'<module>/<controller>/<action>/view',
                 '<module:\w+>/<controller:\w+>/<action:\w+>'=>'<module>/<controller>/<action>',
                 '<module:\w+>/<controller:\w+>/<id:\d+>'=>'<module>/<controller>/view',
+				'<module:\w+>/<title:(.*)>/<id:\d+>/*'=>'<module>/manage/view',
+				'<module:\w+>/<title:(.*)>/<id:\d+>'=>'<module>/manage/view',
             ),
 		),
 

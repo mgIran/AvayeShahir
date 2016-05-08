@@ -1877,3 +1877,29 @@ span.navTrigger {
 #terms-modal .modal-header .close:hover{
     opacity: 0.8;
 }
+
+.search-result .row{
+    margin-bottom: 25px;
+}
+.search-result .row a{
+    font-size: 18px;
+    color: #2196f3;
+    margin-bottom: 10px;
+}
+.search-result .row a:hover,
+.search-result .row a:focus{
+    text-decoration: underline !important;
+}
+.search-result .row .description{
+    font-size: 14px;
+    color: #888;
+    position: relative;
+    display: block;
+    overflow: hidden;
+    max-height: 80px;
+    line-height: 27px;
+}
+.search-result .row .description .paragraph-end{
+    height: 27px;
+    width: 20%;
+}

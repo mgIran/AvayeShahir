@@ -192,31 +192,70 @@ class SiteController extends Controller
 		$model = new SearchForm();
 		if(isset($_POST['SearchForm']))
 		{
-			$criteria = new CDbCriteria();
 			$model->attributes = $_POST['SearchForm'];
 			//var_dump($model->attributes);exit;
-			//$criteria->addCondition('title')
 			$words = explode(' ',$model->text);
 			switch($model->type)
 			{
 				case 'courses':
+					Yii::app()->getModule('courses');
+					$criteria = new CDbCriteria();
+					$criteria->compare('title',$model->text,true,'OR');
+					$criteria->compare('summary',$model->text,true,'OR');
+					$criteria->distinct = true;
+					$criteria->select = 'id,title,summary';
+					$courses_h = Courses::model()->findAll($criteria);
+					$criteria = new CDbCriteria();
+					foreach($words as $word)
+					{
+						$criteria->compare('title',$word,true,'OR');
+						$criteria->compare('summary',$word,true,'OR');
+					}
+					$criteria->distinct = true;
+					$criteria->select = 'id,title,summary';
+					$courses_l = Courses::model()->findAll($criteria);
+					$courses = CMap::mergeArray($courses_h,$courses_l);
+					$x=array();
+					foreach($courses as $key=>$course)
+					{
+						if(!in_array($course->id,$x))
+							array_push($x,$course->id);
+						else
+							unset($courses[$key]);
+					}
+					$title = 'دوره ها';
 					break;
 				case 'personnel':
+					Yii::app()->getModule('personnel');
+					$criteria = new CDbCriteria();
+					$criteria->compare('name',$model->text,true,'OR');
+					$criteria->compare('family',$model->text,true,'OR');
+					$courses = Personnel::model()->findAll($criteria);
+					$title = 'کارکنان';
 					break;
 				case 'teachers':
+					Yii::app()->getModule('users');
+					$criteria = new CDbCriteria();
+					$criteria->compare('name',$model->text,true,'OR');
+					$criteria->compare('family',$model->text,true,'OR');
+					$courses = userDetails::model()->findAll($criteria);
+					$title = 'اساتید';
 					break;
 				case 'all':
 				default:
+					//$criteria->addCondition('title');
 					break;
 			}
 
 		}
-		Yii::import('pages.models.*');
-		$model = new Pages();
-		$model->title = 'پیام وبسایت';
-		$model->summary = 'با عرض پوزش این بخش هنوز تکمیل نشده است.';
-		$this->render('pages/page',array(
-			'model' => $model
+//		Yii::import('pages.models.*');
+//		$model = new Pages();
+//		$model->title = 'پیام وبسایت';
+//		$model->summary = 'با عرض پوزش این بخش هنوز تکمیل نشده است.';
+		$this->render('_searchResult',array(
+			'model' => $model,
+			'title' => $title,
+			'courses' => $courses
 		));
 	}
 }

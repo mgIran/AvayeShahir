@@ -4,18 +4,18 @@
 /* @var $form CActiveForm */
 Yii::app()->clientScript->registerScript('resetForm','document.getElementById("admins-form").reset();');
 ?>
-
+<? $this->renderPartial('//layouts/_flashMessage'); ?>
 <div class="form">
 
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'admins-form',
-	'enableAjaxValidation'=>true,
+	'enableAjaxValidation'=>false,
+	'enableClientValidation'=>true,
+    'clientOptions' => array(
+        'validateOnSubmit' => true
+    )
 
 )); ?>
-    <div class="message"></div>
-	<p class="note">فیلد های دارای <span class="required">*</span> الزامی هستند .</p>
-
-	<?php echo $form->errorSummary($model); ?>
 
 	<div class="row form-group">
 		<?php echo $form->labelEx($model,'username' ,array('class'=>'col-lg-2 control-label')); ?>
@@ -65,25 +65,7 @@ Yii::app()->clientScript->registerScript('resetForm','document.getElementById("a
     </div>
 
 	<div class="row form-group buttons">
-		<?php echo CHtml::ajaxButton($model->isNewRecord ? 'افزودن' : 'ویرایش',
-            $model->isNewRecord ? Yii::app()->createUrl("/admins/manage/create"):Yii::app()->createUrl("/admins/manage/update/id/$model->id"),
-            array(
-                'type' => 'POST',
-                'data' => 'js: $("#admins-form").serialize()',
-                'dataType' => 'json',
-                'success' => 'function(data){
-                    $("html ,body").animate({
-                        scrollTop: $("body").offset().top
-                    },"fast");
-                    if(data.result == "success"){
-                        $(".message").html("<div class=\'alert alert-block alert-success fade in\'><button class=\'close close-sm\' type=\'button\' data-dismiss=\'alert\'><i class=\'icon-remove\'></i></button>"+data.msg+"</div>");
-                    }
-                    else if(data.result == "failed")
-                        $(".message").html("<div class=\'alert alert-block alert-danger fade in\'><button class=\'close close-sm\' type=\'button\' data-dismiss=\'alert\'><i class=\'icon-remove\'></i></button>"+data.msg+"</div>");
-                }',
-            ),
-            array('class'=>'btn btn-success')
-        ); ?>
+        <?php echo CHtml::submitButton($model->isNewRecord ? 'ثبت' : 'ذخیره', array('class' => 'btn btn-success')); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

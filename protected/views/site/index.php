@@ -135,18 +135,18 @@ endif;
                     ?>
                     <div class="course">
                         <div class="course-pic" data-toggle="tooltip" data-placement="top" title="<?= $course->title ?>">
-                            <a href="<?= Yii::app()->createUrl('/courses/'.$course->id.'/'.urlencode($course->title)); ?>">
+                            <a href="<?= Yii::app()->createUrl('/courses/'.urlencode($course->title).'/'.$course->id); ?>">
                                 <img src="<?= Yii::app()->baseUrl.'/uploads/courses/'.$course->pic; ?>" alt="<?= $course->title ?>">
                             </a>
                         </div>
                         <div class="course-detail container-fluid">
-                            <h4><a href="<?= Yii::app()->createUrl('/courses/'.$course->id.'/'.urlencode($course->title)); ?>"><?= $course->title ?></a></h4>
+                            <h4><a href="<?= Yii::app()->createUrl('/courses/'.urlencode($course->title).'/'.$course->id); ?>"><?= $course->title ?></a></h4>
 
                             <p class="text">
                                 <?= strip_tags($course->summary) ?>
                                 <span class="paragraph-end"></span>
                             </p>
-                            <a href="<?= Yii::app()->createUrl('/courses/'.$course->id.'/'.urlencode($course->title)); ?>"
+                            <a href="<?= Yii::app()->createUrl('/courses/'.urlencode($course->title).'/'.$course->id); ?>"
                                data-toggle="tooltip" data-placement="<?= Yii::app()->language == 'fa'?'right':'left';?>" title="<?= Yii::t('app','Course Details') ?>"
                                class="btn pull-left"><?= Yii::t('app','Details')?></a>
                         </div>

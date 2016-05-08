@@ -59,16 +59,15 @@ class AdminsManageController extends Controller
         $this->pageTitle = 'افزودن مدیر جدید';
 		$model=new Admins('create');
 
-		// Uncomment the following line if AJAX validation is needed
-		$this->performAjaxValidation($model);
-
 		if(isset($_POST['Admins'])) {
             $model->attributes = $_POST[ 'Admins' ];
             if ( $model->save() )
-                echo json_encode( ['result' => 'success','msg' => 'با موفقیت انجام شد' ]);
+			{
+				Yii::app()->user->setFlash('success','با موفقیت انجام شد');
+				$this->redirect(array('admin'));
+			}
             else
-                echo json_encode( ['result' => 'failed','msg' => $this->implodeErrors($model) ]);
-            Yii::app()->end();
+				Yii::app()->user->setFlash('failed','درخواست با خطا مواجه است. لطفا مجددا سعی نمایید.');
         }
 
 		$this->render('create',array(
@@ -87,22 +86,21 @@ class AdminsManageController extends Controller
         $this->pageTitle = 'ویرایش مدیر';
         $model = $this->loadModel( $id );
         $model->setScenario('update');
-        // Uncomment the following line if AJAX validation is needed
-
-        $this->performAjaxValidation( $model );
 
         if ( isset( $_POST[ 'Admins' ] ) ) {
             $model->attributes = $_POST[ 'Admins' ];
             if($model->validate() ) {
                 $model->password = $_POST[ 'Admins' ][ 'newPassword' ];
-                if ( $model->save() )
-                    echo json_encode( [ 'result' => 'success', 'msg' => 'با موفقیت انجام شد' ] );
-                else
-                    echo json_encode( [ 'result' => 'failed', 'msg' => 'متاسفانه مشکلی رخ داده است!' ] );
+				if ( $model->save() )
+				{
+					Yii::app()->user->setFlash('success','با موفقیت انجام شد');
+					$this->redirect(array('admin'));
+				}
+				else
+					Yii::app()->user->setFlash('failed','درخواست با خطا مواجه است. لطفا مجددا سعی نمایید.');
             }
             else
-                echo json_encode( [ 'result' => 'failed', 'msg' => $this->implodeErrors($model)] );
-            Yii::app()->end();
+				Yii::app()->user->setFlash('failed','درخواست با خطا مواجه است. لطفا مجددا سعی نمایید.');
         }
 
         $this->render( 'update', array(
