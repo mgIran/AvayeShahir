@@ -13,6 +13,7 @@
  * @property string $endSignupDate
  * @property string $startClassDate
  * @property string $endClassDate
+ * @property string $classDays
  * @property string $category_id
  * @property string $course_id
  * @property string $teacher_id
@@ -28,7 +29,7 @@
  * @property TeacherDetails $teacher
  * @property ClassTags[] $tags
  */
-class Classes extends CActiveRecord
+class Classes extends SortableCActiveRecord
 {
 	/**
 	 * @return string the associated database table name
@@ -97,9 +98,7 @@ class Classes extends CActiveRecord
 			array('endClassDate', 'compare', 'compareAttribute' => 'startClassDate', 'operator' => '>', 'message' => 'تاریخ پایان کلاس باید بیشتر از تاریخ شروع کلاس باشد.'),
 			array('title', 'length', 'max' => 50),
 			array('category_id, course_id', 'length', 'max' => 10),
-			array('summary, startSignupDate, endSignupDate, startClassDate, endClassDate,startClassTime,endClassTime', 'safe'),
-			// The following rule is used by search().
-			// @todo Please remove those attributes that should not be searched.
+			array('summary, startSignupDate, endSignupDate, startClassDate, endClassDate,startClassTime,endClassTime,classDays', 'safe'),
 			array('id, title, summary, price, startSignupDate, endSignupDate, startClassDate, endClassDate, category_id, course_id', 'safe', 'on' => 'search'),
 		);
 	}
@@ -112,10 +111,10 @@ class Classes extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-				'course' => array(self::BELONGS_TO, 'Courses', 'course_id'),
-				'category' => array(self::BELONGS_TO, 'ClassCategories', 'category_id'),
-				'teacher' => array(self::BELONGS_TO, 'TeacherDetails', 'teacher_id'),
-				'tags' => array(self::MANY_MANY, 'ClassTags', '{{class_tag_rel}}(class_id,tag_id)'),
+			'course' => array(self::BELONGS_TO, 'Courses', 'course_id'),
+			'category' => array(self::BELONGS_TO, 'ClassCategories', 'category_id'),
+			'teacher' => array(self::BELONGS_TO, 'TeacherDetails', 'teacher_id'),
+			'tags' => array(self::MANY_MANY, 'ClassTags', '{{class_tag_rel}}(class_id,tag_id)'),
 		);
 	}
 
@@ -133,6 +132,7 @@ class Classes extends CActiveRecord
 			'endSignupDate' => 'تاریخ پایان ثبت نام',
 			'startClassDate' => 'تاریخ شروع کلاس',
 			'endClassDate' => 'تاریخ پایان کلاس',
+			'classDays' => 'روز های برگزاری کلاس',
 			'startClassTime' => 'ساعت شروع کلاس',
 			'endClassTime' => 'ساعت پایان کلاس',
 			'category_id' => 'گروه',
@@ -214,5 +214,26 @@ class Classes extends CActiveRecord
 			}
 		}
 		parent::afterSave();
+	}
+
+	protected function beforeSave()
+	{
+		if($this->classDays && !empty($this->classDays))
+		{
+			$this->classDays = array_filter($this->classDays,function($v){
+				if(in_array($v ,array(
+						'شنبه',
+						'یکشنبه',
+						'دوشنبه',
+						'سه شنبه',
+						'چهارشنبه',
+						'پنجشنبه',
+						'جمعه'
+				)))
+					return $v;
+			});
+			$this->classDays = implode(',',$this->classDays);
+		}
+		return parent::beforeSave();
 	}
 }

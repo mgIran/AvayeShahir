@@ -149,11 +149,11 @@ class EasyMultiLanguageBehavior extends CActiveRecordBehavior
                         ->select('id')
                         ->from($this->translations_table)
                         ->where("
-                                                table_name = '" . str_ireplace(array('{' ,'}') ,array('\{' ,'\}') ,$this->owner->tableName()) . "' AND 
-                                                model_id = '{$this->owner->primaryKey}' AND 
-                                                attribute = '{$attr}' AND 
-                                                lang = '{$lang}'
-                                        ")->queryRow();
+                                table_name = '" . str_ireplace(array('{' ,'}') ,array('\{' ,'\}') ,$this->owner->tableName()) . "' AND
+                                model_id = '{$this->owner->primaryKey}' AND
+                                attribute = '{$attr}' AND
+                                lang = '{$lang}'
+                        ")->queryRow();
                     if($this->owner->isNewRecord OR ($isMulitlangTableExists === false)){
                         Yii::app()->db->createCommand()->
                         insert($this->translations_table ,array(

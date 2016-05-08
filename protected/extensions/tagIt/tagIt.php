@@ -56,6 +56,11 @@ class tagIt extends CWidget
     public $placeholder = 'تایپ کنید ...';
 
     /**
+     * @var string autoComplete minLength
+     */
+    public $minLength = 2;
+
+    /**
      * init widget
      */
     public function init()
@@ -101,7 +106,7 @@ class tagIt extends CWidget
             'removeConfirmation' => true,
             'autocomplete' => array(
                 'delay'=> 0,
-                'minLength'=> 2
+                'minLength'=> $this->minLength
             ),
             'placeholderText' => $this->placeholder
         );

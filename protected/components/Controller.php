@@ -2,6 +2,8 @@
 /**
  * Controller is the customized base controller class.
  * All controller classes for this application should extend from this base class.
+ *
+ * @property SearchForm $searchModel
  */
 class Controller extends CController
 {
@@ -30,6 +32,7 @@ class Controller extends CController
     public $siteName;
     public $pageTitle;
 
+    public $searchModel;
     public $sideRender = null;
     /**
      * Declares class-based actions.

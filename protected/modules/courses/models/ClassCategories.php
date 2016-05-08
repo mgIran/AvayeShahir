@@ -16,7 +16,7 @@
  * @property ClassCategoryFiles[] $files
  * @property ClassCategoryFileLinks[] $links
  */
-class ClassCategories extends CActiveRecord
+class ClassCategories extends SortableCActiveRecord
 {
 	/**
 	 * @return string the associated database table name
@@ -134,6 +134,7 @@ class ClassCategories extends CActiveRecord
 
 		$criteria->compare('id',$this->id,true);
 		$criteria->compare('title',$this->title,true);
+		$criteria->compare('course_id', $this->course_id, true);
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));

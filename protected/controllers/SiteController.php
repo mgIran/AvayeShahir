@@ -35,7 +35,11 @@ class SiteController extends Controller
 		Yii::import('users.models.*');
 		Yii::import('pages.models.*');
 
-		$courses = Courses::model()->findAll();
+		$this->searchModel = new SearchForm();
+
+		$criteria = new CDbCriteria();
+		$criteria->order = 't.order';
+		$courses = Courses::model()->findAll($criteria);
 		$personnel = Personnel::model()->findAll();
 		$teachers = Users::model()->findAll('role_id = 2');
 		$aboutText = Pages::model()->findByPk(12);
@@ -176,43 +180,38 @@ class SiteController extends Controller
 		$this->render('//site/pages/guidance' ,array('dataProvider' => $dataProvider ,'dataProvider2' => $dataProvider2));
 	}
 
-	public function actionSort()
+	public function actionSearch()
 	{
-		Yii::import('courses.models.*');
-		$i = 1;
-		$model = ClassCategoryFileLinks::model()->findAll();
-		if(!$model[0]->order)
-			foreach($model as $c){
-				$c->order = $i++;
-				$c->update(false);
+		$this->layout = '//layouts/inner';
+		Yii::app()->theme = 'front-end';
+		$model = new SearchForm();
+		if(isset($_POST['SearchForm']))
+		{
+			$criteria = new CDbCriteria();
+			$model->attributes = $_POST['SearchForm'];
+			//var_dump($model->attributes);exit;
+			//$criteria->addCondition('title')
+			$words = explode(' ',$model->text);
+			switch($model->type)
+			{
+				case 'courses':
+					break;
+				case 'personnel':
+					break;
+				case 'teachers':
+					break;
+				case 'all':
+				default:
+					break;
 			}
-		$i = 1;
-		$model = ClassCategoryFiles::model()->findAll();
-		if(!$model[0]->order)
-			foreach($model as $c){
-				$c->order = $i++;
-				$c->update(false);
-			}
-		$i = 1;
-		$model = ClassCategories::model()->findAll();
-		if(!$model[0]->order)
-			foreach($model as $c){
-				$c->order = $i++;
-				$c->update(false);
-			}
-		$i = 1;
-		$model = Classes::model()->findAll();
-		if(!$model[0]->order)
-			foreach($model as $c){
-				$c->order = $i++;
-				$c->update(false);
-			}
-		$i = 1;
-		$model = Courses::model()->findAll();
-		if(!$model[0]->order)
-			foreach($model as $c){
-				$c->order = $i++;
-				$c->update(false);
-			}
+
+		}
+		Yii::import('pages.models.*');
+		$model = new Pages();
+		$model->title = 'پیام وبسایت';
+		$model->summary = 'با عرض پوزش این بخش هنوز تکمیل نشده است.';
+		$this->render('pages/page',array(
+			'model' => $model
+		));
 	}
 }

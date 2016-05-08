@@ -15,7 +15,7 @@
  * The followings are the available model relations:
  * @property ClassCategories $category
  */
-class ClassCategoryFiles extends CActiveRecord
+class ClassCategoryFiles extends SortableCActiveRecord
 {
 	private $_types = array(
 			'jpeg','jpg','png','bmp','pdf',	'docx','doc','ppt','pptx','pps',
