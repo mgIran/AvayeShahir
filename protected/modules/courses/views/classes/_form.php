@@ -88,6 +88,28 @@ Yii::app()->user->returnUrl = Yii::app()->request->getRequestUri();
 		<?php echo $form->error($model,'endClassTime'); ?>
 	</div>
 
+    <div class="row">
+		<?php echo $form->labelEx($model,'classDays'); ?>
+		<?php
+        $this->widget("ext.tagIt.tagIt",array(
+            'model' => $model,
+            'attribute' => 'classDays',
+            'minLength' =>1,
+            'availableTags' => array(
+                'شنبه',
+                                'یکشنبه',
+                                'دوشنبه',
+                                'سه شنبه',
+                                'چهارشنبه',
+                                'پنجشنبه',
+                                'جمعه'
+            ),
+            'data' => $model->classDays
+        ));
+        ?>
+		<?php echo $form->error($model,'classDays'); ?>
+	</div>
+
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'sessions'); ?>

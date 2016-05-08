@@ -1,19 +1,14 @@
-<?php
-/* @var $this SiteController */
-/* @var $error array */
-
-$this->pageTitle= Yii::app()->name . ' - '.$model->title;
-$this->breadcrumbs=array(
-    $model->title=>array(''),
-);
+<?
+/* @var $model Pages */
 ?>
-<div class="page rtl col-lg-12 col-md-12 col-sm-12 col-xs-12 index " >
-    <div class="panel-body">
-        <h2 class="page-header">
-            <?= $model->title; ?>
-        </h2>
-        <div class="content">
-            <?= $model->summary; ?>
-        </div>
+<div class="page-title-container courses">
+    <div class="mask"></div>
+    <div class="container">
+        <h2><?= $model->title ?></h2>
+    </div>
+</div>
+<div class="page-content courses">
+    <div class="container">
+        <?= $model->summary ?>
     </div>
 </div>

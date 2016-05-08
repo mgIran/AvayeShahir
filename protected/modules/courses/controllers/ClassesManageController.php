@@ -67,6 +67,7 @@ class ClassesManageController extends Controller
 		{
 			$model->attributes=$_POST['Classes'];
 			$model->formTags = isset($_POST['Classes']['formTags'])?explode(',',$_POST['Classes']['formTags']):null;
+			$model->classDays = isset($_POST['Classes']['classDays'])?explode(',',$_POST['Classes']['classDays']):null;
 			if($model->save())
 			{
 				Yii::app()->user->setFlash('success' ,'<span class="icon-check"></span>&nbsp;&nbsp;اطلاعات با موفقیت ذخیره شد.');
@@ -88,10 +89,13 @@ class ClassesManageController extends Controller
 	public function actionUpdate($id)
 	{
 		$model=$this->loadModel($id);
+		$model->formTags = $model->formTags?explode(',',$model->formTags):null;
+		$model->classDays = $model->classDays?explode(',',$model->classDays):null;
 		if(isset($_POST['Classes']))
 		{
 			$model->attributes=$_POST['Classes'];
 			$model->formTags = isset($_POST['Classes']['formTags'])?explode(',',$_POST['Classes']['formTags']):null;
+			$model->classDays = isset($_POST['Classes']['classDays'])?explode(',',$_POST['Classes']['classDays']):null;
 			if($model->save())
 			{
 				Yii::app()->user->setFlash('success' ,'<span class="icon-check"></span>&nbsp;&nbsp;اطلاعات با موفقیت ذخیره شد.');

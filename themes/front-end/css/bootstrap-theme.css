@@ -130,7 +130,7 @@ body{
 .text-field{
     background: #fff;
     border-radius: 2px;
-    box-shadow: 0 0 5px #7f7f7f;
+    box-shadow: 0 0 5px rgba(0,0,0,0.5);
     color: #36628d;
     border: none;
     line-height: 45px;
@@ -142,7 +142,7 @@ body{
 .button-field.btn{
     background: #0b3762;
     border-radius: 2px;
-    box-shadow: 0 0 5px #7f7f7f;
+    box-shadow: 0 0 5px rgba(0,0,0,0.5);
     color: #fff;
     border: none;
     line-height: 45px;
@@ -185,7 +185,7 @@ header.header{
 }
 header.header.scroll-mode{
     background: #0b3762;
-    box-shadow: 0 0 20px rgba(0,0,0,0.7);
+    box-shadow: 0 0 7px rgba(0,0,0,0.7);
 }
 .header .container{
     border: none;
@@ -333,6 +333,9 @@ header.header.scroll-mode{
     display: block;
     margin-bottom: 0;
     opacity: 1;
+}
+#login-modal{
+    padding: 0 !important;
 }
 #login-modal .modal-dialog{
     margin: 0;
@@ -1490,6 +1493,7 @@ section.search{
 }
 .inner-page .page-content.courses{
     margin-top: 50px;
+    min-height: 300px;
 }
 .page-content.courses .basic-information{
     overflow: hidden;

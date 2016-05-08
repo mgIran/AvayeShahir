@@ -24,8 +24,14 @@ $this->menu=array(
 		'title',
 		'title_en',
 		array(
-			'header' => 'دوره',
-			'name' => 'course.title',
+				'header' => 'دوره',
+				'value' => '$data->course->title',
+				'filter' => CHtml::activeDropDownList($model,'course_id',
+						CHtml::listData(Courses::model()->findAll(),'id' ,'title'),
+						array(
+								'prompt' => 'همه'
+						)
+				)
 		),
 		array(
 			'class'=>'CButtonColumn',

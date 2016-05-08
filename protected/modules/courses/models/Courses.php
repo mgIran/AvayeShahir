@@ -14,7 +14,7 @@
  * @property Classes[] $classes
  * @property ClassCategories[] $categories
  */
-class Courses extends CActiveRecord
+class Courses extends SortableCActiveRecord
 {
 	/**
 	 * @return string the associated database table name
@@ -128,6 +128,7 @@ class Courses extends CActiveRecord
 		$criteria->compare('pic',$this->pic,true);
 		$criteria->compare('title',$this->title,true);
 		$criteria->compare('summary',$this->summary,true);
+		$criteria->order = 't.order';
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
