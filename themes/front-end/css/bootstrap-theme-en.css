@@ -200,3 +200,8 @@ body{
 .close{
     float: right;
 }
+
+.message-box .message .close{
+    left: auto;
+    right: 15px;
+}

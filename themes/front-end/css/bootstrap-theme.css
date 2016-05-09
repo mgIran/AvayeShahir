@@ -987,10 +987,26 @@ section.search{
     overflow: hidden;
 }
 .message-box > .container{
-    padding: 30px 0;
+    margin: 0 auto;
+    padding: 0;
 }
-.message-box > .container .message{
-    margin: 0;
+.message-box .message{
+    margin: 30px 15px;
+    border-radius: 2px;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+    color: #2a2a2a;
+    font-size: 20px;
+    opacity: 0.8;
+    padding: 10px 15px;
+    position: relative;
+    white-space: pre-line;
+    background-color: rgba(61, 90, 254, 0.38);
+    border: 1px solid rgba(61, 90, 254, 0.5);
+}
+.message-box .message .close{
+    position: absolute;
+    top: 10px;
+    left: 15px;
 }
 .about{
     position: relative;

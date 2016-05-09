@@ -35,8 +35,19 @@
     .inner-page .nav > li > a{
         padding: 10px !important;
     }
+    .footer .box,
     .signup .box{
         width: 60%;
+    }
+    .footer .contact-box{
+        padding: 0 30px;
+        top: -50px;
+    }
+    .footer .contact-box .captcha{
+        margin-top: 15px;
+    }
+    .footer .contact-box form div.col-sm-12.col-xs-12{
+        padding: 0 !important;
     }
 }
 @media (max-width: 767px) {
