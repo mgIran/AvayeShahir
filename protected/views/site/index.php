@@ -231,6 +231,112 @@ endif;
         <?php $this->endWidget(); ?>
     </div>
 </section>
+<section class="courses" id="courses">
+    <div class="container">
+        <h3 class="yekan-text"><?= Yii::t('app' ,'Education Courses') ?></h3>
+        <div class="course-carousel">
+            <?
+            if($classes) :
+                Yii::app()->clientScript->registerScriptFile($baseUrl.'/js/owl.carousel.min.js');
+                Yii::app()->clientScript->registerScript("owl-carousel-script","
+                $('.classes-carousel').owlCarousel({
+                    ".(Yii::app()->language == 'fa'?'rtl:true,':'')."
+                    navText:['<span class=\"arrow\"></span>','<span class=\"arrow\"></span>'],
+                    navClass: ['owl-prev disabled','owl-next'],
+                    callbacks: true,
+                    info: true,
+                    margin:30,
+                    responsive : {
+                        0 : {
+                            items:1,
+                            nav : false,
+                            margin :15,
+                            dots : true,
+                            stagePadding : 15
+                        },
+                        459 :{
+                            items:2,
+                            nav : true,
+                            margin :10,
+                            dots : false,
+                            stagePadding : 0
+                        },
+                        1025 :{
+                            items:2,
+                            nav : true,
+                            margin :40,
+                            dots : false,
+                            stagePadding : 0
+                        },
+                        1201 :{
+                            items:3,
+                            nav : true,
+                            margin :10,
+                            dots : false,
+                            stagePadding : 0
+                        },
+                        1401 :{
+                            items:3,
+                            nav : true,
+                            margin :40,
+                            dots : false,
+                            stagePadding : 0
+                        },
+                        1601 :{
+                            items:4,
+                            nav : true,
+                            margin :10,
+                            dots : false,
+                            stagePadding : 0
+                        },
+                    },
+                    onTranslated: $(this).on('translated.owl.carousel', function(e) {
+                        var items_per_page = e.page.size;
+                        var nav_container = $(\".owl-nav\");
+                        var item_index = e.item.index;
+                        var item_count = e.item.count;
+                        var last_vis_item_index = items_per_page + item_index;
+                        if(last_vis_item_index === item_count){
+                            $(nav_container).find('div:last').addClass('disabled');
+                        }
+                        else{
+                            $(nav_container).find('div:last').removeClass('disabled');
+                        }
+                        if(item_index != 0){
+                            $(nav_container).find('div:first').removeClass('disabled');
+                        }
+                        else{
+                            $(nav_container).find('div:first').addClass('disabled');
+                        }
+                    }),
+                });");
+                foreach($courses as $course):
+                    ?>
+                    <div class="course">
+                        <div class="course-pic" data-toggle="tooltip" data-placement="top" title="<?= $course->title ?>">
+                            <a href="<?= Yii::app()->createUrl('/courses/'.urlencode($course->title).'/'.$course->id); ?>">
+                                <img src="<?= Yii::app()->baseUrl.'/uploads/courses/'.$course->pic; ?>" alt="<?= $course->title ?>">
+                            </a>
+                        </div>
+                        <div class="course-detail container-fluid">
+                            <h4><a href="<?= Yii::app()->createUrl('/courses/'.urlencode($course->title).'/'.$course->id); ?>"><?= $course->title ?></a></h4>
+
+                            <p class="text">
+                                <?= strip_tags($course->summary) ?>
+                                <span class="paragraph-end"></span>
+                            </p>
+                            <a href="<?= Yii::app()->createUrl('/courses/'.urlencode($course->title).'/'.$course->id); ?>"
+                               data-toggle="tooltip" data-placement="<?= Yii::app()->language == 'fa'?'right':'left';?>" title="<?= Yii::t('app','Course Details') ?>"
+                               class="btn pull-left"><?= Yii::t('app','Details')?></a>
+                        </div>
+                    </div>
+                    <?
+                endforeach;
+            endif;
+            ?>
+        </div>
+    </div>
+</section>
 <section class="persons">
     <div class="bg">
         <div class="icons-set left"></div>

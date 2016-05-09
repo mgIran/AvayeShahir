@@ -81,7 +81,7 @@
                 </p>
                 <p>
                     <i class="phone"></i>
-                    <span class="phone-number">021 88730902 - 021 88502049</span>
+                    <span class="phone-number">021 88730902 - 021 88736668 - 021 88502049</span>
                 </p>
                 <p>
                     <i class="email"></i>
