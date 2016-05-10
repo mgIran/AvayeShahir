@@ -79,6 +79,7 @@ class Controller extends CController
             ->from('ym_site_setting')
             ->where('name = "default_title"')
             ->queryScalar();
+        $this->searchModel = new SearchForm();
         parent::init();
     }
 

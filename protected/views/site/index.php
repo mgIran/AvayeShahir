@@ -1,5 +1,6 @@
 <?
 /* @var $courses Courses[] */
+/* @var $classes Classes[] */
 /* @var $personnel Personnel[] */
 /* @var $teachers Users[] */
 /* @var $form CActiveForm */
@@ -110,7 +111,7 @@ endif;
                     },
                     onTranslated: $(this).on('translated.owl.carousel', function(e) {
                         var items_per_page = e.page.size;
-                        var nav_container = $(\".owl-nav\");
+                        var nav_container = $('.course-carousel .owl-nav');
                         var item_index = e.item.index;
                         var item_count = e.item.count;
                         var last_vis_item_index = items_per_page + item_index;
@@ -226,6 +227,177 @@ endif;
                 <?= CHtml::submitButton(Yii::t('app','Sign Up'),array('class'=>"button-field btn")); ?>
             </div>
         <?php $this->endWidget(); ?>
+    </div>
+</section>
+
+<section class="classes" id="classes">
+    <div class="container">
+        <h3 class="yekan-text"><?= Yii::t('app' ,'Offered Classes') ?></h3>
+        <div class="classes-carousel">
+            <?
+            if($classes) :
+                Yii::app()->clientScript->registerScript("owl-carousel-class-script","
+                $('.classes-carousel').owlCarousel({
+                    ".(Yii::app()->language == 'fa'?'rtl:true,':'')."
+                    navText:['<span class=\"arrow\"></span>','<span class=\"arrow\"></span>'],
+                    navClass: ['owl-prev disabled','owl-next'],
+                    callbacks: true,
+                    info: true,
+                    margin:30,
+                    responsive : {
+                        0 : {
+                            items:1,
+                            nav : false,
+                            margin :15,
+                            dots : true,
+                            stagePadding : 15
+                        },
+                        459 :{
+                            items:2,
+                            nav : true,
+                            margin :10,
+                            dots : false,
+                            stagePadding : 0
+                        },
+                        1025 :{
+                            items:2,
+                            nav : true,
+                            margin :40,
+                            dots : false,
+                            stagePadding : 0
+                        },
+                        1201 :{
+                            items:3,
+                            nav : true,
+                            margin :10,
+                            dots : false,
+                            stagePadding : 0
+                        },
+                        1401 :{
+                            items:3,
+                            nav : true,
+                            margin :0,
+                            dots : false,
+                            stagePadding : 0
+                        },
+                        1601 :{
+                            items:4,
+                            nav : true,
+                            margin :0,
+                            dots : false,
+                            stagePadding : 0
+                        },
+                    },
+                    onTranslated: $(this).on('translated.owl.carousel', function(e) {
+                        var items_per_page = e.page.size;
+                        var nav_container = $('.classes-carousel .owl-nav');
+                        var item_index = e.item.index;
+                        var item_count = e.item.count;
+                        var last_vis_item_index = items_per_page + item_index;
+                        //$('.classes-carousel').find('.active').not('').removeClass
+                        if(last_vis_item_index === item_count){
+                            $(nav_container).find('div:last').addClass('disabled');
+                        }
+                        else{
+                            $(nav_container).find('div:last').removeClass('disabled');
+                        }
+                        if(item_index != 0){
+                            $(nav_container).find('div:first').removeClass('disabled');
+                        }
+                        else{
+                            $(nav_container).find('div:first').addClass('disabled');
+                        }
+                    }),
+                });");
+                foreach($classes as $class):
+                    ?>
+                    <div class="class">
+                        <div class="inner">
+                            <div class="top-box">
+<!--                                <a href="--><?//= Yii::app()->createUrl('/courses/classes/'.urlencode($class->title).'/'.$class->id); ?><!--">-->
+                                <a href="#">
+                                    <h4 data-toggle="tooltip" data-placement="top" title="<?= $class->title ?>"><?= $class->title ?></h4>
+                                </a>
+                                <div class="full text-lg">
+                                    <span>
+                                        <?= Yii::t('app','Tuition') ?>&nbsp;:&nbsp;
+                                    </span>
+                                    <span>
+                                        <?
+                                        echo Yii::app()->language=='fa'?Controller::parseNumbers(number_format($class->price)).'&nbsp;<span class="currency">'.Yii::t('app',"Toman").'</span>' : number_format($class->price).'&nbsp;<span class="currency">'.Yii::t('app',"Toman").'</span>';
+                                        ?>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="class-detail container-fluid">
+                                <div class="full">
+                                    <span><?= Yii::t('app','Course') ?>&nbsp;:&nbsp;</span>
+                                    <a href="<?= Yii::app()->createUrl('/courses/'.urlencode($class->course->title).'/'.$class->course->id); ?>">
+                                        <?php echo $class->course->title ?>
+                                    </a>
+                                </div>
+                                <div class="full">
+                                    <span><?= Yii::t('app','Department') ?>&nbsp;:&nbsp;</span>
+                                    <a href="<?= Yii::app()->createUrl('/courses/'.urlencode($class->course->title).'/'.$class->course->id); ?>">
+                                        <?php echo $class->category->title ?>
+                                    </a>
+                                </div>
+                                <div class="full">
+                                        <span><?= Yii::t('app','Start Sign Up') ?>&nbsp;:&nbsp;</span><span><?php echo Yii::app()->language=='fa'?Controller::parseNumbers(JalaliDate::date("Y/m/d",$class->startSignupDate)):date("Y/m/d",$class->startSignupDate); ?></span><span>&nbsp;&nbsp;&nbsp;<?= Yii::t('app','to') ?>&nbsp;&nbsp;&nbsp;</span><span><?php echo Yii::app()->language=='fa'?Controller::parseNumbers(JalaliDate::date("Y/m/d",$class->endSignupDate)):date("Y/m/d",$class->endSignupDate) ?></span>
+                                </div>
+                                <div class="full">
+                                        <span><?= Yii::t('app','Start Class') ?>&nbsp;:&nbsp;</span><span><?php echo Yii::app()->language=='fa'?Controller::parseNumbers(JalaliDate::date("Y/m/d",$class->startClassDate)):date("Y/m/d",$class->startClassDate) ?></span><span>&nbsp;&nbsp;&nbsp;<?= Yii::t('app','to') ?>&nbsp;&nbsp;&nbsp;</span><span><?php echo Yii::app()->language=='fa'?Controller::parseNumbers(JalaliDate::date("Y/m/d",$class->endClassDate)):date("Y/m/d",$class->endClassDate) ?></span>
+                                </div>
+                                <div class="full">
+                                    <span>
+                                    <?= Yii::t('app','Class Days') ?>&nbsp;:&nbsp;
+                                    </span>
+                                    <span>
+                                        <?
+                                        $days = explode(',',$class->classDays);
+                                        foreach($days as $key => $day)
+                                        {
+                                            $days[$key] = JalaliDate::getDayName($day ,Yii::app()->language);
+                                        }
+                                        if(Yii::app()->language == 'fa')
+                                            echo implode(' ، ',$days);
+                                        else
+                                            echo implode(' , ',$days);
+                                        ?>
+                                    </span>
+                                </div>
+                                <div class="full">
+                                    <span>
+                                        <?= Yii::t('app','Class Hours') ?>&nbsp;:&nbsp;
+                                    </span>
+                                    <span>
+                                        <?
+                                        echo (Yii::app()->language=='fa'?' از '.Controller::parseNumbers($class->startClassTime):' from '.$class->startClassTime).
+                                            (Yii::app()->language=='fa'?' تا '.Controller::parseNumbers($class->endClassTime):' to '.$class->endClassTime);
+                                        ?>
+                                    </span>
+                                </div>
+                                <div class="full">
+                                    <span>
+                                        <?= Yii::t('app','Teacher') ?>&nbsp;:&nbsp;
+                                    </span>
+                                    <span>
+                                        <?= $class->teacher->getFullName() ?>
+                                    </span>
+                                </div>
+                                <div class="text-center">
+                                    <a href="#"
+                                       class="btn" readonly="true" disabled="true" onclick="return false;"><?= Yii::t('app','Register')?>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <?
+                endforeach;
+            endif;
+            ?>
+        </div>
     </div>
 </section>
 <section class="persons">

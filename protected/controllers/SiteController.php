@@ -40,9 +40,6 @@ class SiteController extends Controller
 				$this->message = CHtml::encode(SiteSetting::model()->findByAttributes(array('name'=>'message'))->value);
 			else
 				$this->message = CHtml::encode(SiteSetting::model()->findByAttributes(array('name'=>'message_en'))->value);
-
-		$this->searchModel = new SearchForm();
-
 		$criteria = new CDbCriteria();
 		$criteria->order = 't.order';
 		$courses = Courses::model()->findAll($criteria);
@@ -50,8 +47,10 @@ class SiteController extends Controller
 		$teachers = Users::model()->findAll('role_id = 2');
 		$aboutText = Pages::model()->findByPk(12);
 		$termsText = Pages::model()->findByPk(5);
+		$classes = Classes::model()->findAll($criteria);
 		$this->render('index' ,array(
 			'courses' => $courses ,
+			'classes' => $classes ,
 			'personnel' => $personnel ,
 			'teachers' => $teachers ,
 			'aboutText' => $aboutText,

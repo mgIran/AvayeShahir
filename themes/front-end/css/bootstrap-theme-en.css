@@ -30,17 +30,21 @@ body{
     left: auto;
     right: 0;
 }
+section.classes .classes-carousel .owl-controls .owl-nav .owl-next,
 .courses .course-carousel .owl-controls .owl-nav .owl-next{
     left: auto;
     right: -5%;
 }
+section.classes .classes-carousel .owl-nav .owl-prev,
 .courses .course-carousel .owl-controls .owl-nav .owl-prev{
     left: -5%;
     right: auto;
 }
+section.classes .owl-next .arrow,
 .courses .owl-next .arrow{
     -webkit-transform: rotate(-180deg); -moz-transform: rotate(-180deg); -ms-transform: rotate(-180deg); -o-transform: rotate(-180deg); transform: rotate(-180deg);
 }
+section.classes .owl-prev .arrow,
 .courses .owl-prev .arrow{
     -webkit-transform: rotate(0deg); -moz-transform: rotate(0deg); -ms-transform: rotate(0deg); -o-transform: rotate(0deg); transform: rotate(0deg);
 }
@@ -204,4 +208,9 @@ body{
 .message-box .message .close{
     left: auto;
     right: 15px;
+}
+
+.class .inner,
+.class .top-box{
+    text-align: left;
 }

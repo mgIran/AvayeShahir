@@ -2,6 +2,7 @@
 return array(
     'Home' => 'صحفه اصلی',
     'Courses' => 'دوره ها',
+    'Course' => 'دوره',
     'Staff' => 'کارمندان',
     'Teachers' => 'اساتید',
     'Teacher' => 'مدرس',
@@ -74,5 +75,13 @@ return array(
     'Change Password' => 'تغییر کلمه عبور',
     'Save' => 'ذخیره',
     'User Details' => 'اطلاعات فردی',
-
+    'Offered Classes' => 'کلاس های ارائه شده',
+    'Start Sign Up' => 'شروع ثبت نام',
+    'End Sign Up' => 'پایان ثبت نام',
+    'Start Class' => 'شروع کلاس',
+    'End Class' => 'پایان کلاس',
+    'Department' => 'بخش',
+    'Class Days' => 'روزهای برگزاری کلاس',
+    'Class Hours' => 'ساعت برگزاری کلاس',
+    'to' => 'الی',
 );
