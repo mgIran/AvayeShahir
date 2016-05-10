@@ -88,5 +88,6 @@ return array(
     'up to' => 'تا',
     'Registration' => 'ثبت نام',
     'Start & End of the Course' => 'شروع و پایان دوره',
-    'Instructor' => 'مدرس'
+    'Instructor' => 'مدرس',
+    'Sessions' => 'تعداد جلسات'
 );

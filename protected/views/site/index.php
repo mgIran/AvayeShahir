@@ -250,14 +250,14 @@ endif;
                             nav : false,
                             margin :15,
                             dots : true,
-                            stagePadding : 15
+                            stagePadding : 0
                         },
                         459 :{
                             items:1,
                             nav : true,
-                            margin :10,
+                            margin :50,
                             dots : false,
-                            stagePadding : 0
+                            stagePadding : 50
                         },
                         768 :{
                             items:1,
@@ -339,6 +339,15 @@ endif;
                                         <?php echo $class->category->title ?>
                                     </a>
                                 </div>
+
+                                <div class="full">
+                                    <span>
+                                        <?= Yii::t('app','Instructor') ?>:&nbsp;
+                                    </span>
+                                    <span>
+                                        <?= $class->teacher->getFullName() ?>
+                                    </span>
+                                </div>
                                 <div class="full">
                                         <span><?= Yii::t('app','Registration') ?>:</span><br><?= Yii::t('app','from') ?>&nbsp;<span><?php echo Yii::app()->language=='fa'?Controller::parseNumbers(JalaliDate::date("Y/m/d",$class->startSignupDate)):date("Y/m/d",$class->startSignupDate); ?></span>&nbsp;<?= Yii::t('app','up to') ?>&nbsp;<span><?php echo Yii::app()->language=='fa'?Controller::parseNumbers(JalaliDate::date("Y/m/d",$class->endSignupDate)):date("Y/m/d",$class->endSignupDate) ?></span>
                                 </div>
@@ -376,10 +385,10 @@ endif;
                                 </div>
                                 <div class="full">
                                     <span>
-                                        <?= Yii::t('app','Instructor') ?>:&nbsp;
+                                        <?= Yii::t('app','Sessions') ?>:&nbsp;
                                     </span>
                                     <span>
-                                        <?= $class->teacher->getFullName() ?>
+                                        <?= Yii::app()->language=='fa'?Controller::parseNumbers($class->sessions).'&nbsp;&nbsp;جلسه':$class->sessions ?>
                                     </span>
                                 </div>
                                 <div class="full text-lg">
