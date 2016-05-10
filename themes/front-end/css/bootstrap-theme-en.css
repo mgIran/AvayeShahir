@@ -1,8 +1,54 @@
-body{
+@font-face{font-family:Circular;src:url('https://sp-bootstrap.global.ssl.fastly.net/7.3.0/fonts/circular-light.woff2') format('woff2'),url('https://sp-bootstrap.global.ssl.fastly.net/7.3.0/fonts/circular-light.woff') format('woff');font-weight:300;font-style:normal}@font-face{font-family:Circular;src:url('https://sp-bootstrap.global.ssl.fastly.net/7.3.0/fonts/circular-book.woff2') format('woff2'),url('https://sp-bootstrap.global.ssl.fastly.net/7.3.0/fonts/circular-book.woff') format('woff');font-weight:400;font-style:normal}@font-face{font-family:Circular;src:url('https://sp-bootstrap.global.ssl.fastly.net/7.3.0/fonts/circular-medium.woff2') format('woff2'),url('https://sp-bootstrap.global.ssl.fastly.net/7.3.0/fonts/circular-medium.woff') format('woff');font-weight:500;font-style:normal}@font-face{font-family:Circular;src:url('https://sp-bootstrap.global.ssl.fastly.net/7.3.0/fonts/circular-bold.woff2') format('woff2'),url('https://sp-bootstrap.global.ssl.fastly.net/7.3.0/fonts/circular-bold.woff') format('woff');font-weight:700;font-style:normal}@font-face{font-family:Circular;src:url('https://sp-bootstrap.global.ssl.fastly.net/7.3.0/fonts/circular-black.woff2') format('woff2'),url('https://sp-bootstrap.global.ssl.fastly.net/7.3.0/fonts/circular-black.woff') format('woff');font-weight:900;font-style:normal}
+body {
     direction: ltr;
     text-align: left;
-    font-family: Roboto,sans-serif;
+    font-family: Circular, Helvetica, Arial, sans-serif;
 }
+/*}*/
+/**, .h1, .h2, .h3, .h4, body, h1, h2, h3, h4, h5, h6{*/
+    /*font-family: Circular,Helvetica,Arial,sans-serif;*/
+/*}*/
+
+/*.header .nav >li a,*/
+/*.footer h4,*/
+/*.button-field.btn{*/
+    /*font-size: 13pt;*/
+/*}*/
+
+/*.footer .copyright,*/
+/*.courses .course-detail .btn{*/
+    /*font-size: 11pt;*/
+/*}*/
+/*.persons .person-item .name{*/
+    /*font-size: 14pt;*/
+/*}*/
+
+/*.persons .person-item .job{*/
+    /*font-size: 10pt;*/
+/*}*/
+
+/*.message-box .message{*/
+    /*font-size: 16px;*/
+/*}*/
+/*.header .btn-input .dropdown-menu {*/
+    /*font-size: 12px;*/
+/*}*/
+/*.header .btn-input .btn.form-control.wd {*/
+    /*font-size: 13pt;*/
+/*}*/
+/*.errorMessage.tip,.errorMessage{*/
+    /*font-size: 12px;*/
+/*}*/
+/*.courses .course-detail > p.text{*/
+    /*font-size: 14px;*/
+/*}*/
+/*.class .inner {*/
+    /*font-size: 12px;*/
+/*}*/
+
+/*.courses .course-detail > h4 a{*/
+    /*font-size: 16px;*/
+/*}*/
 .dropdown-menu{
     right: auto;
     left: 0;
