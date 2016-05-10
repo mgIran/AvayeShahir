@@ -1413,6 +1413,7 @@ section.classes .owl-carousel .owl-controls .owl-nav [class*="owl-"].disabled ,
 .footer h4{
     font-size: 16pt;
     margin: 0 0 20px 0;
+    color: #fff;
 }
 .footer .social-media{
     float: right;
@@ -1429,6 +1430,9 @@ section.classes .owl-carousel .owl-controls .owl-nav [class*="owl-"].disabled ,
 }
 .footer .social-media.google-plus{
     background: #fff url("../svg/google-footer.svg") no-repeat center / 30px auto;
+}
+.footer .social-media.telegram{
+    background: #fff url("../svg/telegram.svg") no-repeat center / 30px auto;
 }
 .footer .copyright{
     clear: both;

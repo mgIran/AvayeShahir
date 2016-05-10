@@ -4,7 +4,7 @@
             <div class="col-md-4">
                 <p>
                     <i class="map-point"></i>
-                    <span>تهران: خیابان شهید بهشتی، خ سرافراز (قائم مقام فراهانی) کوچه دهم، پلاک 9، واحد 1
+                    <span>تهران: خیابان شهید بهشتی، خ سرافراز (قائم مقام فراهانی)، کوچه دهم، پلاک 9، واحد 1
 </span>
                 </p>
                 <p>
@@ -19,9 +19,10 @@
             <div class="col-md-4">
                 <h4>ما را دنبال کنید</h4>
                 <p>
-                    <a href="#" class="social-media facebook"></a>
-                    <a href="#" class="social-media twitter"></a>
-                    <a href="#" class="social-media google-plus"></a>
+<!--                    <a href="#"  target="_blank" class="social-media facebook"></a>-->
+<!--                    <a href="#" class="social-media twitter" target="_blank"></a>-->
+<!--                    <a href="#" class="social-media google-plus" target="_blank"></a>-->
+                    <a href="https://telegram.me/pardiseavayeshahir" target="_blank" class="social-media telegram"></a>
                 </p>
                 <p class="copyright">همهٔ حقوق برای موسسه پردیس آوای شهیر محفوظ است. ©‏ <?= JalaliDate::date('Y',time()) ?> </p>
             </div>
