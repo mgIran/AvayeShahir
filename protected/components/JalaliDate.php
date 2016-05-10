@@ -636,9 +636,9 @@ class JalaliDate
             'جمعه' => 'Friday'
         );
         if($lang == 'fa')
-            return $day;
+            return $day.' ها';
         else
-            return $days[$day];
+            return $days[$day].'s';
     }
 
 }

@@ -84,4 +84,9 @@ return array(
     'Class Days' => 'روزهای برگزاری کلاس',
     'Class Hours' => 'ساعت برگزاری کلاس',
     'to' => 'الی',
+    'from' => 'از',
+    'up to' => 'تا',
+    'Registration' => 'ثبت نام',
+    'Start & End of the Course' => 'شروع و پایان دوره',
+    'Instructor' => 'مدرس'
 );
