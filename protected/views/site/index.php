@@ -44,7 +44,7 @@ if($this->message):
 ?>
 <section class="message-box">
     <div class="container">
-        <div class="alert fade in message"><button class="close close-sm" type="button" data-dismiss="alert"><i class="icon-remove"></i></button><?= $this->message ?></div>
+        <div class="alert fade in message"><button class="close close-sm" type="button" data-dismiss="alert"><i class="icon-remove"></i></button><?= Yii::app()->language == 'fa'?Controller::parseNumbers($this->message):$this->message ?></div>
     </div>
 </section>
 <?php
