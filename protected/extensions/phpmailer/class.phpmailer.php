@@ -793,7 +793,6 @@ class PHPMailer {
 
         $tls = ($this->SMTPSecure == 'tls');
         $ssl = ($this->SMTPSecure == 'ssl');
-
         if ($this->smtp->Connect(($ssl ? 'ssl://':'').$host, $port, $this->Timeout)) {
 
           $hello = ($this->Helo != '' ? $this->Helo : $this->ServerHostname());

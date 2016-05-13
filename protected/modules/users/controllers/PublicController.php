@@ -119,14 +119,17 @@ class PublicController extends Controller
                 Yii::import('application.extensions.phpmailer.JPhpMailer');
                 $mail = new JPhpMailer;
                 $mail->IsSMTP();
-                $mail->Host = 'smpt.163.com';
+                $mail->Host = 'mail.avayeshahir.com';
                 $mail->SMTPAuth = true;
-                $mail->Username = 'yourname@163.com';
-                $mail->Password = 'yourpassword';
-                $mail->SetFrom(Yii::app()->params['no-reply-email'], Yii::app()->name);
-                $mail->Subject = 'ثبت نام در '.Yii::app()->name;
-                $mail->MsgHTML($msg);
+                $mail->Username = 'noreply@avayeshahir.com';
+                $mail->Password = '!@khadem1395';
+                $mail->Port = 587;
+                $mail->isHTML(true);
+                $mail->SetFrom('noreply@avayeshahir.com', Yii::app()->name);
                 $mail->AddAddress($model->email);
+                $mail->Subject = 'ثبت نام در '.Yii::app()->name;
+                $mail->AltBody = '';
+                $mail->Body = $msg;
                 //$mail->Send();
                 $msg = Yii::t('app','Registration was successful.');
 

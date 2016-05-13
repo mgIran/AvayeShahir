@@ -196,6 +196,7 @@ class EasyMultiLanguageBehavior extends CActiveRecordBehavior
                 'table_name' => $this->owner->tableName() ,
                 'model_id' => $this->owner->primaryKey ,
             ));
+        parent::afterDelete($event);
     }
 
     /**

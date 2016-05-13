@@ -30,6 +30,7 @@ class AjaxSortingAction extends CAction
    const SCENARIO = 'sort_order_change';
    public function run()
    {
+      Yii::app()->language = 'fa';
       if (isset($_POST))
       {
          $order_field = $_POST['order_field'];

@@ -27,6 +27,7 @@
  */
 class SortableCActiveRecord extends CActiveRecord
 {
+   const SCENARIO = 'sort_order_change';
    /**
     * @var string the field name in the database table which stores the order for the record. This should be a positive integer field. Defaults to 'order'
     */
@@ -76,9 +77,9 @@ class SortableCActiveRecord extends CActiveRecord
       ));
       foreach ($following_records as $record) {
          $record->{$this->orderField}--;
+         $record->scenario = self::SCENARIO;
          $record->update();
       }
-
       return parent::afterDelete();
    }
 }

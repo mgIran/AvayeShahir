@@ -27,6 +27,7 @@
  */
 class SortableCActiveRecordBehavior extends CActiveRecordBehavior
 {
+   const SCENARIO = 'sort_order_change';
    /**
     * @var string the field name in the database table which stores the order for the record. This should be a positive integer field. Defaults to 'order'
     */
@@ -71,6 +72,7 @@ class SortableCActiveRecordBehavior extends CActiveRecordBehavior
       ));
       foreach ($following_records as $record) {
          $record->{$this->orderField}--;
+         $record->scnario = self::SCENARIO;
          $record->update();
       }
 

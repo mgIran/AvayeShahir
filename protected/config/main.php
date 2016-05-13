@@ -127,8 +127,8 @@ return array(
 	// using Yii::app()->params['paramName']
 	'params'=>array(
 		// this is used in contact page
-		'adminEmail'=>'webmaster@example.com',
-        'no-reply-email' => 'noreply@domain.com',
+		'adminEmail'=>'pardis@avayeshahir.com',
+        'no-reply-email' => 'noreply@avayeshahir.com',
 		'languages'=>array(
 				'fa' => 'فارسی',
 				'en' => 'English',
