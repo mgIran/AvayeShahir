@@ -74,7 +74,8 @@ class Comment extends CActiveRecord {
     /**
      * @return string the associated database table name
      */
-    public function tableName() {
+    public function tableName()
+    {
         return '{{comments}}';
     }
 
@@ -208,7 +209,7 @@ class Comment extends CActiveRecord {
         {
             $captchaValidator = new CCaptchaValidator();
             $captchaValidator->caseSensitive = false;
-            $captchaValidator->captchaAction = Yii::app()->urlManager->createUrl(CommentsModule::CAPTCHA_ACTION_ROUTE);
+            $captchaValidator->captchaAction = CommentsModule::CAPTCHA_ACTION_ROUTE;
             $captchaValidator->allowEmpty = !CCaptcha::checkRequirements();
             $captchaValidator->attributes = array('verifyCode');
             $captchaValidator->validate($this);
@@ -397,7 +398,7 @@ class Comment extends CActiveRecord {
             $routeData = array();
             foreach($config['pageUrl']['data'] as $routeVar=>$modelProperty)
                 $routeData[$routeVar] = $ownerModel->$modelProperty;
-            return Yii::app()->urlManager->createUrl($config['pageUrl']['route'], $routeData)."#comment-$this->comment_id";
+            return Yii::app()->createUrl($config['pageUrl']['route'], $routeData)."#comment-$this->comment_id";
         }
         return null;
     }

@@ -17,6 +17,7 @@ return array(
 		'application.components.*',
 		'ext.EasyMultiLanguage.*',
 		'ext.yiiSortableModel.models.*',
+		'application.modules.users.models.*',
 	),
 
 	'modules'=>array(
@@ -35,6 +36,43 @@ return array(
 		'courses',
 		'personnel',
 		'map',
+		'comments'=>array(
+			//you may override default config for all connecting models
+			'defaultModelConfig' => array(
+				//only registered users can post comments
+				'registeredOnly' => true,
+				'useCaptcha' => true,
+				//allow comment tree
+				'allowSubcommenting' => true,
+				//display comments after moderation
+				'premoderate' => true,
+				//action for postig comment
+				'postCommentAction' => '/comments/comment/postComment',
+				//super user condition(display comment list in admin view and automoderate comments)
+				'isSuperuser'=>'Yii::app()->user->checkAccess("moderate")',
+				//order direction for comments
+				'orderComments'=>'DESC',
+			),
+			//the models for commenting
+			'commentableModels'=>array(
+				//model with individual settings
+				'Site'=>array(
+					'registeredOnly'=>false,
+					'useCaptcha'=>false,
+					//config for create link to view model page(page with comments)
+					'pageUrl'=>array(
+						'route'=>'site/feedback',
+						//'data'=>array('id'=>'id'),
+					),
+				),
+			),
+			//config for user models, which is used in application
+			'userConfig'=>array(
+				'class'=>'Users',
+				'nameProperty'=>'userDetails.name',
+				'emailProperty'=>'email',
+			),
+		),
 	),
 
 	// application components
@@ -66,10 +104,10 @@ return array(
 				'guidance' => 'site/guidance',
 				'teachers/<id:\d+>/<title:(.*)>' => 'users/teachers/view',
 				'<action:(login|logout|register|dashboard)>/<trash:(.*)>' => 'users/public/<action>',
-				'<module:\w+>/<controller:\w+>'=>'<module>/<controller>/index',
                 '<module:\w+>/<id:\d+>/<title:(.*)>'=>'<module>/manage/view',
-                '<module:\w+>/<id:\d+>'=>'<module>/manage/view',
-                '<module:\w+>/<controller:\w+>/<id:\d+>/<title:\w+>'=>'<module>/<controller>/view',
+				'<module:\w+>/<id:\d+>'=>'<module>/manage/view',
+				'<module:\w+>/<controller:\w+>'=>'<module>/<controller>/index',
+				'<module:\w+>/<controller:\w+>/<id:\d+>/<title:\w+>'=>'<module>/<controller>/view',
 				'<controller:\w+>/<id:\d+>/<title:(.*)>'=>'<controller>/view',
                 '<controller:\w+>/<id:\d+>'=>'<controller>/view',
                 '<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',

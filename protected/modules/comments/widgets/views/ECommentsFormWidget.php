@@ -6,10 +6,9 @@
 
 <div class="form">
 <?php $form=$this->beginWidget('CActiveForm', array(
-        'action'=>Yii::app()->urlManager->createUrl($this->postCommentAction),
+        'action'=>Yii::app()->createUrl($this->postCommentAction),
         'id'=>$this->id,
 )); ?>
-    <?php echo $form->errorSummary($newComment); ?>
     <?php 
         echo $form->hiddenField($newComment, 'owner_name'); 
         echo $form->hiddenField($newComment, 'owner_id'); 
@@ -39,16 +38,13 @@
             <?php echo $form->labelEx($newComment,'verifyCode'); ?>
             <div>
                 <?php $this->widget('CCaptcha', array(
-                    'captchaAction'=>Yii::app()->urlManager->createUrl(CommentsModule::CAPTCHA_ACTION_ROUTE),
+                    'captchaAction'=>CommentsModule::CAPTCHA_ACTION_ROUTE,
                 )); ?>
                 <?php echo $form->textField($newComment,'verifyCode'); ?>
                 
             </div>
             <div class="hint">
-                <?php echo Yii::t('CommentsModule.msg', '
-                    Please enter the letters as they are shown in the image above.
-                    <br/>Letters are not case-sensitive.
-                ');?>
+                <?php echo Yii::t('CommentsModule.msg', 'Please enter the letters as they are shown in the image above.<br/>Letters are not case-sensitive.');?>
             </div>
             <?php echo $form->error($newComment, 'verifyCode'); ?>
         </div>

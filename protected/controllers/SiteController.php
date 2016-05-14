@@ -268,4 +268,12 @@ class SiteController extends Controller
 			'courses' => $courses
 		));
 	}
+
+	public function actionFeedback(){
+		Yii::import('pages.models.*');
+		Yii::app()->theme = 'front-end';
+		$this->layout = '//layouts/inner';
+		$model = Pages::model()->findByPk(5);
+		$this->render('//site/pages/page' ,array('model' => $model,'comment'=>true));
+	}
 }

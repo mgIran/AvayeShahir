@@ -60,7 +60,7 @@
             });
         });
     };
-        
+
     $.fn.commentsList.defaults = {
         dialogTitle: 'Add comment',
         deleteConfirmString: 'Delete this comment?',
@@ -68,9 +68,9 @@
         postButton: 'Add comment',
         cancelButton: 'Cancel'
     };
-        
+
     $.fn.commentsList.settings = {};
-        
+
     $.fn.commentsList.initDialog = function(id){
         var $dialog = $('#addCommentDialog-'+id);
         $dialog.data('widgetID', id);
@@ -98,7 +98,7 @@
             ]
         });
     }
-        
+
     $.fn.commentsList.postComment = function($dialog){
         var $form = $("form", $dialog);
         $.post(

@@ -15,17 +15,17 @@ class CommentsModule extends CWebModule
         /*
          * captcha action route
          */
-        const CAPTCHA_ACTION_ROUTE = 'comments/comment/captcha';
+        const CAPTCHA_ACTION_ROUTE = '/comments/comment/captcha';
         
         /*
          * delete comment action route
          */
-        const DELETE_ACTION_ROUTE = 'comments/comment/delete';
+        const DELETE_ACTION_ROUTE = '/comments/comment/delete';
         
         /*
          * approve comment action route
          */
-        const APPROVE_ACTION_ROUTE = 'comments/comment/approve';
+        const APPROVE_ACTION_ROUTE = '/comments/comment/approve';
         
         /**
          * Commentable models
@@ -58,7 +58,7 @@ class CommentsModule extends CWebModule
             //display comments after moderation
             'premoderate' => false,
             //action for postig comment
-            'postCommentAction' => 'comments/comment/postComment',
+            'postCommentAction' => '/comments/comment/postComment',
             //super user condition(display comment list in admin view and automoderate comments)
             'isSuperuser'=>'false',
             //order direction for comments
@@ -70,10 +70,15 @@ class CommentsModule extends CWebModule
 	public function init()
 	{
 		// import the module-level models and components
-		$this->setImport(array(
-			'comments.models.*',
-			'comments.components.*',
-		));
+        $imports = array(
+            'comments.models.*',
+            'comments.components.*',
+        );
+
+        foreach($this->commentableModels as $key => $config)
+            if(isset($config['module']))
+                $imports[] = $config['module'].'.models.*';
+        $this->setImport($imports);
 	}
         
         /*
