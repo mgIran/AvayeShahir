@@ -548,22 +548,26 @@ section.search{
     display: inline-block;
     width: 100%;
 }
-section.classes .owl-controls .owl-nav [class*="owl-"]{
-    position: absolute;
-    top:50%;
-    margin-top: -22.5px;
-    color: #b0b0b0;
-}
 .courses .course-carousel .owl-controls .owl-nav [class*="owl-"]{
     position: absolute;
     top:0;
     margin-top: 72px;
     color: #b0b0b0;
 }
+
+.gallery-carousel .owl-controls .owl-nav [class*="owl-"],
+section.classes .owl-controls .owl-nav [class*="owl-"]{
+    position: absolute;
+    top:50%;
+    margin-top: -22.5px;
+    color: #b0b0b0;
+}
+.gallery-carousel .owl-controls .owl-nav .owl-next,
 section.classes .owl-controls .owl-nav .owl-next,
 .courses .course-carousel .owl-controls .owl-nav .owl-next{
     left: -5%;
 }
+.gallery-carousel .owl-controls .owl-nav .owl-prev,
 section.classes .owl-controls .owl-nav .owl-prev,
 .courses .course-carousel .owl-controls .owl-nav .owl-prev{
     right: -5%;
@@ -1275,6 +1279,7 @@ section.classes .owl-prev .arrow,
 .search .dropdown-menu li >a:hover{
     background-color: transparent !important;
 }
+.gallery-carousel .owl-controls .owl-nav [class*="owl-"].disabled ,
 section.classes .owl-carousel .owl-controls .owl-nav [class*="owl-"].disabled ,
 .owl-carousel .owl-controls .owl-nav [class*="owl-"].disabled {
     opacity: 0.2;
@@ -2024,4 +2029,58 @@ section.classes h3{
 .currency{
     color: #ff6437 !important;
     font-size: 18px !important;
+}
+.page-title-container.gallery.courses{
+    background: url("../images/gallery-bg.jpg");
+}
+.gallery-carousel .owl-dots{
+    bottom: -50px !important;
+    text-align: center !important;
+}
+.gallery-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 2px;
+}
+.gallery-item .gallery-detail{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-color: rgba(0,0,0,0.5);
+    color: #fff;
+    z-index: 2;
+    overflow: hidden;
+    padding: 0;
+}
+.gallery-item .blur-mask{
+    display: block;
+    width: 100%;
+    height: 100%;
+    filter:blur(5px);
+    -ms-filter:blur(5px);
+    -webkit-filter:blur(5px);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    position: absolute;
+    right: 0;
+    top:0;
+    z-index: 1;
+}
+.gallery-item .gallery-detail-inner{
+    position: relative;
+    z-index:2;
+    background-color: rgba(0,0,0,0.5);
+    display: block;
+    overflow: hidden;
+    padding:0 30px;
+}
+.gallery-item .gallery-detail h2{
+    margin: 10px 0;font-size: 20px;
+}
+.gallery-item .gallery-detail .text{
+    margin: 5px 0 10px;
+    color: #dfdfdf;
+    font-size: 16px;
 }

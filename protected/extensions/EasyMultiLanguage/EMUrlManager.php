@@ -60,11 +60,11 @@ class EMUrlManager extends CUrlManager
                                 Yii::app()->language = Yii::app()->request->cookies['_language']->value;
                         }
 
-//                        if(substr($route,0,1) === '/')
-//                                $route = Yii::app()->language.$route;
-//                        else
-//                                $route = Yii::app()->language.'/'.$route;
-                        $params['_language'] = Yii::app()->language;
+                        if(substr($route,0,1) === '/')
+                                $route = Yii::app()->language.$route;
+                        else
+                                $route = Yii::app()->language.'/'.$route;
+//                        $params['_language'] = Yii::app()->language;
                 }
                 return parent::createUrl($route, $params, $ampersand);
         }

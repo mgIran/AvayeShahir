@@ -126,6 +126,25 @@ class Controller extends CController
                 ) ,
 
                 array(
+                    'label' => 'گالری تصاویر<span class="caret"></span>' ,
+                    'url' => '#' ,
+                    'itemOptions' => array('class' => 'dropdown' ,'tabindex' => "-1") ,
+                    'linkOptions' => array('class' => 'dropdown-toggle' ,'data-toggle' => "dropdown") ,
+                    'items' => array(
+                        array('label' => 'مدیریت' ,'url' => Yii::app()->createUrl('/gallery/manage/admin')) ,
+                        array('label' => 'افزودن' ,'url' => Yii::app()->createUrl('/gallery/manage/create')) ,
+                    )
+                ) ,
+//                array(
+//                    'label' => 'نظرات<span class="caret"></span>' ,
+//                    'url' => '#' ,
+//                    'itemOptions' => array('class' => 'dropdown' ,'tabindex' => "-1") ,
+//                    'linkOptions' => array('class' => 'dropdown-toggle' ,'data-toggle' => "dropdown") ,
+//                    'items' => array(
+//                        array('label' => 'مدیریت' ,'url' => Yii::app()->createUrl('/comments/comment/admin')) ,
+//                    )
+//                ) ,
+                array(
                     'label' => 'گوگل ارث<span class="caret"></span>' ,
                     'url' => '#' ,
                     'itemOptions' => array('class' => 'dropdown' ,'tabindex' => "-1") ,

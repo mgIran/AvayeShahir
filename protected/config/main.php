@@ -36,6 +36,7 @@ return array(
 		'courses',
 		'personnel',
 		'map',
+		'gallery',
 		'comments'=>array(
 			//you may override default config for all connecting models
 			'defaultModelConfig' => array(
@@ -103,7 +104,7 @@ return array(
                 'terms' => 'site/terms',
 				'guidance' => 'site/guidance',
 				'teachers/<id:\d+>/<title:(.*)>' => 'users/teachers/view',
-				'<action:(login|logout|register|dashboard)>/<trash:(.*)>' => 'users/public/<action>',
+				'<action:(login|logout|register|dashboard)>' => 'users/public/<action>',
                 '<module:\w+>/<id:\d+>/<title:(.*)>'=>'<module>/manage/view',
 				'<module:\w+>/<id:\d+>'=>'<module>/manage/view',
 				'<module:\w+>/<controller:\w+>'=>'<module>/<controller>/index',

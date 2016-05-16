@@ -21,7 +21,7 @@ class EMHelper
          * @param array $htmlOptions 
          * @param string $fieldType - "textField" or "textArea" 
          *
-         * @return html
+         * @return string
          */
         public static function megaOgogo($model, $attribute, $htmlOptions = array(), $fieldType = 'textField')
         {
@@ -70,7 +70,7 @@ class EMHelper
          * @param array $htmlOptions 
          * @param string $fieldType - "textField" or "textArea" 
          *
-         * @return html
+         * @return string
          */
         public static function multiInput($model, $attribute, $htmlOptions = array(), $fieldType = 'textField')
         {

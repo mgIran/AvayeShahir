@@ -1,0 +1,32 @@
+<?php
+
+class GalleryModule extends CWebModule
+{
+	public function init()
+	{
+		$this->defaultController = 'manage';
+		// this method is called when the module is being created
+		// you may place code here to customize the module or the application
+
+		// import the module-level models and components
+		$this->setImport(array(
+			'gallery.models.*',
+			'gallery.components.*',
+		));
+	}
+
+	public $controllerMap = array(
+		'manage' => 'gallery.controllers.GalleryManageController',
+	);
+	public function beforeControllerAction($controller, $action)
+	{
+		if(parent::beforeControllerAction($controller, $action))
+		{
+			// this method is called before any module controller action is performed
+			// you may place customized code here
+			return true;
+		}
+		else
+			return false;
+	}
+}

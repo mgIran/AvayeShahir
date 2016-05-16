@@ -38,7 +38,7 @@ $action = $this->action->id;
                 <a class="scroll-link" href="<?= $menuID == 'site' && $action == 'index'?'#about':Yii::app()->createUrl('about'); ?>" title="<?= Yii::t('app','About Us');?>"><?= Yii::t('app','About Us');?></a>
             </li>
             <li>
-                <a class="scroll-link" href="#contact" title="<?= Yii::t('app','Contact Us');?>"><?= Yii::t('app','Contact Us');?></a>
+                <a class="scroll-link" href="<?= $menuID == 'site' && $action == 'index'?'#contact':Yii::app()->baseUrl.'#contact'; ?>" title="<?= Yii::t('app','Contact Us');?>"><?= Yii::t('app','Contact Us');?></a>
             </li>
             <?
             if(Yii::app()->user->isGuest ||  Yii::app()->user->type == 'admin'):
@@ -156,7 +156,7 @@ $action = $this->action->id;
                     </div>
                     <?= CHtml::submitButton(Yii::t('app','Login'),array('class'=>"button-field btn")); ?>
                     <br>
-                        <span><?= Yii::t('app','Are You New?');?></span>&nbsp;<a href="#signup" data-dismiss="modal"><?= Yii::t('app','Sign Up.');?></a>
+                        <span><?= Yii::t('app','Are You New?');?></span>&nbsp;<a class="<?= $menuID == 'site' && $action == 'index'?'scroll-link':''; ?>" href="<?= $menuID == 'site' && $action == 'index'?'#signup':Yii::app()->baseUrl.'#signup'; ?>" <?= $menuID == 'site' && $action == 'index'?'data-dismiss="modal"':'' ?>><?= Yii::t('app','Sign Up.');?></a>
                     <? $this->endWidget(); ?>
                 </div>
             </div>
