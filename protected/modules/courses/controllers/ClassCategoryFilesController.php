@@ -121,18 +121,23 @@ class ClassCategoryFilesController extends Controller
 
 	public function actionUpload()
 	{
-		$tempDir = Yii::getPathOfAlias("webroot") . '/uploads/classCategoryFiles/';
+		$Dir = Yii::getPathOfAlias("webroot") . '/uploads/classCategoryFiles/';
 
-		if (!is_dir($tempDir))
-			mkdir($tempDir);
+		if (!is_dir($Dir))
+			mkdir($Dir);
 		if (isset($_FILES)) {
 			$file = $_FILES['path'];
 			$ext = pathinfo($file['name'], PATHINFO_EXTENSION);
-			$file['name'] = Controller::generateRandomString(5) . time();
-			while (file_exists($tempDir . DIRECTORY_SEPARATOR . $file['name']))
-				$file['name'] = Controller::generateRandomString(5) . time();
+			$file['name'] = str_ireplace('.'.$ext,'',$file['name']);
+			$i=1;
+			if(file_exists($Dir . DIRECTORY_SEPARATOR . $file['name']. '.' . $ext))
+			{
+				while(file_exists($Dir . DIRECTORY_SEPARATOR . $file['name'].'-'.$i. '.' . $ext))
+					$i++;
+				$file['name'] = $file['name'].'-'.$i;
+			}
 			$file['name'] = $file['name'] . '.' . $ext;
-			if (move_uploaded_file($file['tmp_name'], $tempDir . DIRECTORY_SEPARATOR . CHtml::encode($file['name'])))
+			if (move_uploaded_file($file['tmp_name'], $Dir . DIRECTORY_SEPARATOR . CHtml::encode($file['name'])))
 				$response = ['state' => 'ok', 'fileName' => CHtml::encode($file['name'])];
 			else
 				$response = ['state' => 'error', 'msg' => 'فایل آپلود نشد.'];
