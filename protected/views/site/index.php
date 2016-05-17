@@ -554,6 +554,11 @@ endif;
                 }
                 ?>
             </div>
+            <div class="row">
+                <a class="btn btn-info btn-lg" href="<?= Yii::app()->createUrl('/gallery'); ?>">
+                    <?= Yii::t('app' ,'Pictures Gallery') ?>
+                </a>
+            </div>
         </div>
         <div class="<?= Yii::app()->language == 'fa'?'col-lg-4 col-md-4 col-sm-4 col-xs-12':'hidden'; ?> licenses-container">
             <div class="col-md-6"><img src="<?= Yii::app()->theme->baseUrl .'/images/rasaneh.jpg';?>"></div>

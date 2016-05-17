@@ -60,7 +60,7 @@ class GalleryManageController extends Controller
 		$models = Gallery::model()->findAll();
 		$this->render('index',array(
 			'models' => $models,
-			'title' => 'تصاویر موسسه'
+			'title' => Yii::t('app','Pictures Gallery')
 		));
 	}
 

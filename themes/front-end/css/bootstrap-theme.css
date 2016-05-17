@@ -1079,20 +1079,20 @@ section.classes .owl-prev .arrow,
     position: relative;
 }
 .footer .box{
-    width:50%;
-}
-.footer .contact-box{
-    background: #e5e9ed;
+    width:100%;
+    overflow: hidden;
     -webkit-box-shadow: 0 0 5px rgba(0,0,0,0.3);
     -moz-box-shadow: 0 0 5px rgba(0,0,0,0.3);
     box-shadow: 0 0 5px rgba(0,0,0,0.3);
-    width:100%;
+}
+.footer .contact-box{
+    background: #e5e9ed;
+    width:40%;
     min-height:400px;
     display: block;
     overflow: hidden;
-    position: relative;
-    top:-100px;
-    padding:0 80px;
+    float: left;
+    padding:0 30px;
 }
 .footer .contact-box > form{
     margin: 0;
@@ -1381,6 +1381,7 @@ section.classes .owl-carousel .owl-controls .owl-nav [class*="owl-"].disabled ,
     display: block;
     overflow: hidden;
     position: relative;
+    padding: 50px 30px;
 }
 .inner-page .footer .info-box{
     padding-top: 0;
@@ -2032,6 +2033,9 @@ section.classes h3{
 }
 .page-title-container.gallery.courses{
     background: url("../images/gallery-bg.jpg");
+}
+.page-title-container.gallery.courses .mask{
+    background-color: rgba(0, 0, 0, 0.2);
 }
 .gallery-carousel .owl-dots{
     bottom: -50px !important;

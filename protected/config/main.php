@@ -103,6 +103,7 @@ return array(
 			'rules'=>array(
                 'terms' => 'site/terms',
 				'guidance' => 'site/guidance',
+				'gallery' => 'gallery/manage/index',
 				'teachers/<id:\d+>/<title:(.*)>' => 'users/teachers/view',
 				'<action:(login|logout|register|dashboard)>' => 'users/public/<action>',
                 '<module:\w+>/<id:\d+>/<title:(.*)>'=>'<module>/manage/view',

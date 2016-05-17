@@ -7,9 +7,6 @@
     .introduction h2{
         font-size: 3em;
     }
-    .footer .box{
-        width: 70%;
-    }
     .signup .box{
         width: 400px;
     }
@@ -38,7 +35,6 @@
     .inner-page .nav > li > a{
         padding: 10px !important;
     }
-    .footer .box,
     .signup .box{
         width: 60%;
     }
@@ -135,7 +131,6 @@
         top: 10px;
         right: 10px;
     }
-    .footer .box,
     .signup .box{
         width: 100%;
         padding: 0 15px;
@@ -172,9 +167,10 @@
     .about .text .paragraph{
         padding: 0 15px !important;
     }
-    .footer .contact-box{
+    .footer .contact-box,
+    .footer .info-box{
         padding: 0 15px;
-        top: -50px;
+        width: 100%;
     }
     .footer .contact-box .captcha{
         margin-top: 15px;

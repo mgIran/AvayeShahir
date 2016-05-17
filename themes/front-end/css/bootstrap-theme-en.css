@@ -230,7 +230,19 @@ section.classes .owl-prev .arrow,
     padding-left:7px;
     padding-right:0;
 }
-
+.footer .map-point,
+.footer .phone,
+.footer .email,
+.footer .social-media{
+    float: left;
+}
+.footer .social-media{
+    margin-left: 0;
+    margin-right: 10px;
+}
+.footer .info-box p span{
+    float: right;
+}
 .page-title-container.courses.personnel-page-header .details span:first-of-type{
     font-weight: 600;
     color: #fff;

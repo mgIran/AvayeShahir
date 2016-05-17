@@ -89,5 +89,8 @@ return array(
     'Registration' => 'ثبت نام',
     'Start & End of the Course' => 'شروع و پایان دوره',
     'Instructor' => 'مدرس',
-    'Sessions' => 'تعداد جلسات'
+    'Sessions' => 'تعداد جلسات',
+    'Gallery' => 'تصاویر موسسه',
+    'All Rights Reserved By Pardis Avaye Shahir. ©‏' => 'همهٔ حقوق برای موسسه پردیس آوای شهیر محفوظ است. ©‏ ',
+    'Pictures Gallery' => 'گالری تصاویر'
 );

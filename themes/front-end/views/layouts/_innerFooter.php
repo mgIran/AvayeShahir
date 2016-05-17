@@ -17,14 +17,14 @@
                 </p>
             </div>
             <div class="col-md-4">
-                <h4>ما را دنبال کنید</h4>
+                <h4><?= Yii::t('app','Follow Us') ?></h4>
                 <p>
 <!--                    <a href="#"  target="_blank" class="social-media facebook"></a>-->
 <!--                    <a href="#" class="social-media twitter" target="_blank"></a>-->
 <!--                    <a href="#" class="social-media google-plus" target="_blank"></a>-->
                     <a href="https://telegram.me/pardiseavayeshahir" target="_blank" class="social-media telegram"></a>
                 </p>
-                <p class="copyright">همهٔ حقوق برای موسسه پردیس آوای شهیر محفوظ است. ©‏ <?= JalaliDate::date('Y',time()) ?> </p>
+                <p class="copyright"><?= Yii::t('app','All Rights Reserved By Pardis Avaye Shahir. ©‏') ?>&nbsp;<?= Yii::app()->language=='fa'?JalaliDate::date('Y',time()):date('Y',time()); ?></p>
             </div>
             <div class="col-md-4">
                 <?= $this->renderPartial('//layouts/_map'); ?>
