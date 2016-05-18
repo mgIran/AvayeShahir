@@ -12,9 +12,7 @@
  * @version 1.0
  * @package Comments module
  */
-Yii::import('zii.widgets.jui.CJuiWidget');
-
-class ECommentsBaseWidget extends CJuiWidget
+class ECommentsBaseWidget extends CWidget
 {       
         /**
          * @var model for displaying comments

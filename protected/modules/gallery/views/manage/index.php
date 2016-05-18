@@ -20,7 +20,6 @@
                     ".(Yii::app()->language == 'fa'?'rtl:true,':'')."
                     navText:['<span class=\"arrow\"></span>','<span class=\"arrow\"></span>'],
                     nav:true,
-                    loop:true,
                     autoHeight : true,
                     animateIn: 'fadeIn',
                     animateOut: 'fadeOut',

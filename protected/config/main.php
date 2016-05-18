@@ -57,13 +57,16 @@ return array(
 			//the models for commenting
 			'commentableModels'=>array(
 				//model with individual settings
-				'Site'=>array(
-					'registeredOnly'=>false,
+				'Pages'=>array(
+					'registeredOnly'=>true,
 					'useCaptcha'=>false,
+					'premoderate' => false,
+					'orderComments'=>'DESC',
 					//config for create link to view model page(page with comments)
+					'module' => 'pages',
 					'pageUrl'=>array(
-						'route'=>'site/feedback',
-						//'data'=>array('id'=>'id'),
+						'route'=>'pages/manage/view',
+						'data'=>array('id'=>'id'),
 					),
 				),
 			),

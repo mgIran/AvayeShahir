@@ -122,7 +122,7 @@ class GalleryManageController extends Controller
 			$file = $model->file_name;
 			$image = array(
 				'name' => $file,
-				'src' => $fileUrl.'/'.$file,
+				'src' => $fileUrl.$file,
 				'size' => filesize($fileDIR.$file),
 				'serverName' => $file,
 			);
@@ -133,7 +133,7 @@ class GalleryManageController extends Controller
 				$file = $_POST['Gallery']['file_name'];
 				$image = array(
 					'name' => $file,
-					'src' => $tmpUrl.'/'.$file,
+					'src' => $tmpUrl.$file,
 					'size' => filesize($tmpDIR.$file),
 					'serverName' => $file,
 				);

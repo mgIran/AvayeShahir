@@ -74,46 +74,6 @@
     $.fn.commentsList.initDialog = function(id){
         var $dialog = $('#addCommentDialog-'+id);
         $dialog.data('widgetID', id);
-        $dialog.dialog({
-            'title':$.fn.commentsList.settings[id]['dialogTitle'],
-            'autoOpen':false,
-            'width':'auto',
-            'height':'auto',
-            'resizable':false,
-            'modal':true,
-            'buttons':[
-                {
-                    text: $.fn.commentsList.settings[id]['postButton'],
-                    click: function(){
-                        $.fn.commentsList.postComment($(this));
-                    }
-                },
-                {
-                    text: $.fn.commentsList.settings[id]['cancelButton'],
-                    click: function(){
-                        $(this).dialog("close");
-                        return false;
-                    }
-                }
-            ]
-        });
-    }
-
-    $.fn.commentsList.postComment = function($dialog){
-        var $form = $("form", $dialog);
-        $.post(
-            $form.attr("action"),
-            $form.serialize()
-            ).success(function(data){
-            data = $.parseJSON(data);
-            $dialog.html(data["form"]);
-            if(data["code"] == "success")
-            {
-                var id = $dialog.data('widgetID');
-                $('#'+id).html($(data["list"]).html());
-                $dialog.dialog("close");
-            }
-        });
-    }
+    };
 
 })(jQuery);

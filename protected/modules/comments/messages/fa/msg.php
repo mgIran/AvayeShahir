@@ -33,5 +33,7 @@ return array(
     'Approved'=>'تایید شده',
     'Deleted'=>'حذف شده',
     'Link'=>'لینک',
+    'Reply'=>'پاسخ',
+    'Sign Up.'=> 'ثبت نام کنید.',
 );
 ?>

@@ -3,8 +3,8 @@
         <?php foreach($comments as $comment):?>
             <li id="comment-<?php echo $comment->comment_id; ?>">
                 <div class="comment-header">
-                    <?php echo $comment->userName;?>
-                    <?php echo Yii::app()->dateFormatter->formatDateTime($comment->create_time);?>
+                    <span class="comment-name"><?php echo $comment->userName;?></span>
+                    <span class="comment-date"><?php echo Yii::app()->dateFormatter->formatDateTime($comment->create_time);?></span>
                 </div>
                 <?php if($this->adminMode === true):?>
                     <div class="admin-panel">
@@ -23,7 +23,7 @@
                 <?php
                     if($this->allowSubcommenting === true && ($this->registeredOnly === false || Yii::app()->user->isGuest === false))
                     {
-                        echo CHtml::link(Yii::t('CommentsModule.msg', 'Add comment'), '#', array('rel'=>$comment->comment_id, 'class'=>'add-comment'));
+                        echo CHtml::link(Yii::t('CommentsModule.msg', 'Reply'), '#', array('rel'=>$comment->comment_id, 'class'=>'add-comment'));
                     }
                 ?>
             </li>

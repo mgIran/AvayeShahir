@@ -44,7 +44,8 @@ $action = $this->action->id;
             if(Yii::app()->user->isGuest ||  Yii::app()->user->type == 'admin'):
                 ?>
                 <li class="pull-left wide">
-                    <a class="wide scroll-link" href="<?= $menuID == 'site' && $action == 'index'?'#signup':Yii::app()->baseUrl.'#signup'; ?>"
+                    <a class="wide <?= $menuID == 'site' && $action == 'index'?'scroll-link':''; ?>" href="#signup"
+                            <?= $menuID == 'site' && $action == 'index'?'':'data-toggle="modal" data-target="#signup-modal"'; ?>
                        title="<?= Yii::t('app', 'Sign Up'); ?>"><?= Yii::t('app', 'Sign Up'); ?></a>
                 </li>
                 <li class="pull-left">

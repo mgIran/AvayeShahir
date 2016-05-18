@@ -117,15 +117,15 @@ class CommentController extends Controller
 			$result = array();
 			if($comment->save()){
 				$result['code'] = 'success';
-				$this->beginClip("list");
-				$this->widget('comments.widgets.ECommentsListWidget' ,array(
-					'model' => $comment->ownerModel ,
-					'showPopupForm' => false ,
-				));
-				$this->endClip();
 				$this->beginClip('form');
 				$this->widget('comments.widgets.ECommentsFormWidget' ,array(
 					'model' => $comment->ownerModel ,
+				));
+				$this->endClip();
+				$this->beginClip("list");
+				$this->widget('comments.widgets.ECommentsListWidget' ,array(
+					'model' => $comment->ownerModel ,
+					'showPopupForm' => true ,
 				));
 				$this->endClip();
 				$result['list'] = $this->clips['list'];

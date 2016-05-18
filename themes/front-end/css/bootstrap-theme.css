@@ -333,14 +333,17 @@ header.header.scroll-mode{
     margin-bottom: 0;
     opacity: 1;
 }
+#signup-modal,
 #login-modal{
     padding: 0 !important;
 }
+#signup-modal .modal-dialog,
 #login-modal .modal-dialog{
     margin: 0;
     width: 100%;
     height: 100%;
 }
+#signup-modal .modal-content,
 #login-modal .modal-content{
     box-shadow: none;
     border: none;
@@ -349,11 +352,13 @@ header.header.scroll-mode{
     background: #0b3762;
     color: #fff;
 }
+#signup-modal .modal-header,
 #login-modal .modal-header{
     border: none;
     z-index: 2;
     position: relative;
 }
+#signup-modal .modal-header .close,
 #login-modal .modal-header .close{
     color: #fff;
     font-size: 80px;
@@ -364,9 +369,11 @@ header.header.scroll-mode{
     background: transparent;
     opacity: 0.3;
 }
+#signup-modal  .modal-header .close:hover,
 #login-modal .modal-header .close:hover{
     opacity: 0.45;
 }
+#signup-modal .modal-body,
 #login-modal .modal-body{
     top: 0;
     left: 0;
@@ -375,9 +382,9 @@ header.header.scroll-mode{
     position: absolute;
     z-index: 1;
 }
+#signup-modal .box,
 #login-modal .box{
     width: 25%;
-    height: 300px;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -387,31 +394,46 @@ header.header.scroll-mode{
     -o-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
 }
+#signup-modal h3,
 #login-modal h3{
     margin-bottom: 15px;
 }
+#signup-modal .email,
 #login-modal .email{
     background: #fff url("../svg/email.svg") no-repeat scroll 15px center / 25px auto;
     padding: 0 15px 0 55px;
 }
+#signup-modal .password,
 #login-modal .password{
     background: #fff url("../svg/password.svg") no-repeat scroll 15px center / 25px auto;
     padding: 0 15px 0 55px;
 }
+#signup-modal .button-field,
 #login-modal .button-field{
     background: #89a404;
     color: #fff;
     margin:15px 0;
 }
+#signup-modal .button-field:hover,
 #login-modal .button-field:hover{
     background: #96b404;
 }
+#signup-modal a,
 #login-modal a{
     color: #809cb6;
 }
+#signup-modal a:hover,
 #login-modal a:hover{
     opacity: 0.5;
 }
+#signup-modal .checkbox span{
+    color: #fff;
+}
+#signup-modal .checkbox .checkbox-material .check{
+    border-color: #fff;
+}
+
+#signup-modal.modal.fade .modal-dialog ,
 #login-modal.modal.fade .modal-dialog {
     -webkit-transform: scale(0.8);
     -moz-transform: scale(0.8);
@@ -422,6 +444,7 @@ header.header.scroll-mode{
     -moz-transition: all 0.3s;
     transition: all 0.3s;
 }
+#signup-modal.modal.fade.in .modal-dialog ,
 #login-modal.modal.fade.in .modal-dialog {
     -webkit-transform: scale(1);
     -moz-transform: scale(1);
@@ -684,35 +707,47 @@ section.classes .owl-prev .arrow,
 .signup .box{
     width: 25%;
 }
+#signup-modal .checkbox label,
 .signup .checkbox label{
     padding: 0;
     color: #fff;
 }
+#signup-modal .checkbox-material,
 .signup .checkbox-material{
     margin-left: 10px;
     top: 5px;
 }
+#signup-modal .checkbox .checkbox-material .check,
 .signup .checkbox .checkbox-material .check{
     border-color: #fff;
 }
+#signup-modal .checkbox a,
 .signup .checkbox a{
     color: #89a404;
 }
+#signup-modal .checkbox a:hover,
 .signup .checkbox a:hover{
     color: #96b404;
 }
+#signup-modal .form-group.is-focused .checkbox label,
 .signup .form-group.is-focused .checkbox label{
     color: #fff;
 }
 .signup .checkbox input[type="checkbox"]:checked + .checkbox-material .check::before,
-.signup .checkbox input[type="checkbox"]:checked + .checkbox-material .check{
+.signup .checkbox input[type="checkbox"]:checked + .checkbox-material .check,
+#signup-modal .checkbox input[type="checkbox"]:checked + .checkbox-material .check::before,
+#signup-modal .checkbox input[type="checkbox"]:checked + .checkbox-material .check{
     color: #89a404;
     border-color: #89a404;
 }
 .signup .checkbox input[type="checkbox"]:not(:checked) + .checkbox-material::before,
+#signup-modal .checkbox input[type="checkbox"]:not(:checked) + .checkbox-material::before,
 .signup .is-focused .checkbox input[type="checkbox"]:not(:checked) + .checkbox-material::before,
+#signup-modal .is-focused .checkbox input[type="checkbox"]:not(:checked) + .checkbox-material::before,
 .signup .checkbox input[type="checkbox"]:checked + .checkbox-material::before,
-.signup .is-focused .checkbox input[type="checkbox"]:checked + .checkbox-material::before{
+#signup-modal .checkbox input[type="checkbox"]:checked + .checkbox-material::before,
+.signup .is-focused .checkbox input[type="checkbox"]:checked + .checkbox-material::before,
+#signup-modal .is-focused .checkbox input[type="checkbox"]:checked + .checkbox-material::before{
     top:-7px;
 }
 .signup .button-field{
@@ -2087,4 +2122,36 @@ section.classes h3{
     margin: 5px 0 10px;
     color: #dfdfdf;
     font-size: 16px;
+}
+
+.comment-form{
+    display: block;
+    overflow: hidden;
+    border-top:6px solid #0b3762;
+    width: 40%;
+    margin: 0 auto;
+    float: none;
+    padding:0 30px;
+}
+.comment-form .form-group a{
+    font-size: 22px;
+    color: #60b3d5;
+}
+.comment-form .form-group label {
+    vertical-align: top;
+    font-size: 22px;
+    color: #444;
+}
+.comment-form .form-group .hint{
+    vertical-align: top;
+    font-size: 18px;
+    color: #999;
+}
+.comment-form .form-group .form-control{
+    font-size: 20px;
+
+}
+.comment-form .form-group .btn{
+    font-size: 20px;
+
 }
