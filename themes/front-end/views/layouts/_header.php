@@ -35,7 +35,7 @@ $action = $this->action->id;
                 <a class="scroll-link" href="<?= $menuID == 'site' && $action == 'index'?'#teachers':Yii::app()->baseUrl.'#teachers'; ?>" title="<?= Yii::t('app','Teachers');?>"><?= Yii::t('app','Teachers');?></a>
             </li>
             <li>
-                <a class="scroll-link" href="<?= $menuID == 'site' && $action == 'index'?'#about':Yii::app()->createUrl('about'); ?>" title="<?= Yii::t('app','About Us');?>"><?= Yii::t('app','About Us');?></a>
+                <a class="scroll-link" href="<?= $menuID == 'site' && $action == 'index'?'#about':Yii::app()->createUrl('/about'); ?>" title="<?= Yii::t('app','About Us');?>"><?= Yii::t('app','About Us');?></a>
             </li>
             <li>
                 <a class="scroll-link" href="<?= $menuID == 'site' && $action == 'index'?'#contact':Yii::app()->baseUrl.'#contact'; ?>" title="<?= Yii::t('app','Contact Us');?>"><?= Yii::t('app','Contact Us');?></a>
@@ -44,8 +44,7 @@ $action = $this->action->id;
             if(Yii::app()->user->isGuest ||  Yii::app()->user->type == 'admin'):
                 ?>
                 <li class="pull-left wide">
-                    <a class="wide <?= $menuID == 'site' && $action == 'index'?'scroll-link':''; ?>" href="#signup"
-                            <?= $menuID == 'site' && $action == 'index'?'':'data-toggle="modal" data-target="#signup-modal"'; ?>
+                    <a class="wide <?= $menuID == 'site' && $action == 'index'?'scroll-link':''; ?>" href="<?= $menuID == 'site' && $action == 'index'?'#signup':Yii::app()->baseUrl.'#signup'; ?>"
                        title="<?= Yii::t('app', 'Sign Up'); ?>"><?= Yii::t('app', 'Sign Up'); ?></a>
                 </li>
                 <li class="pull-left">

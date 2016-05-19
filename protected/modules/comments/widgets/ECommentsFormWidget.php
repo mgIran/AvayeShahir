@@ -31,7 +31,10 @@ class ECommentsFormWidget extends ECommentsBaseWidget
             }
             else 
             {
-                echo '<strong>'.Yii::t('CommentsModule.msg', 'You cannot add a new comment').'</strong>';
+                echo Yii::t('CommentsModule.msg', 'For add new comment should be signed up.');
+                echo '<a data-toggle="modal" href="#login-modal">'.Yii::t('CommentsModule.msg', 'Log In').'</a>';
+                echo '&nbsp;'.Yii::t('CommentsModule.msg','or').'&nbsp;';
+                echo '<a target="_blank" href="'.Yii::app()->baseUrl.'/#signup'.'">'.Yii::t('CommentsModule.msg', 'Sign Up.').'</a>';
             }
 	}
 }

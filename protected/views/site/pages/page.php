@@ -10,13 +10,18 @@
 </div>
 <div class="page-content courses">
     <div class="container">
-        <?= $model->summary ?>
-        <hr>
         <?php
-        if($comment)
+        if($model->summary)
+            echo $model->summary
+        ?>
+        <?php
+        if($comment) {
+            if($model->summary)
+                echo '<hr>';
             $this->widget('comments.widgets.ECommentsListWidget', array(
                 'model' => $model,
             ));
+        }
         ?>
     </div>
 </div>

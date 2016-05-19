@@ -2123,15 +2123,30 @@ section.classes h3{
     color: #dfdfdf;
     font-size: 16px;
 }
-
-.comment-form{
-    display: block;
-    overflow: hidden;
-    border-top:6px solid #0b3762;
-    width: 40%;
+.comment-widget{
+    width: 700px;
     margin: 0 auto;
+}
+.comment-widget h3{
+    border-top:4px solid #e1e3e8;
+    line-height: 44px;
+}
+.comment-widget h3 > span{
+    border-top:4px solid #13aaf1;
+    font-size: 22px;
+    color: #333;
+    display: inline-block;
+    margin-top: -4px;
+    padding: 0 15px;
+    font-family: "BYekan","Adobe Arabic";
+}
+.comment-form{
     float: none;
-    padding:0 30px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+.comment-form .form-group{
+    margin-top: 15px;
 }
 .comment-form .form-group a{
     font-size: 22px;
@@ -2142,16 +2157,30 @@ section.classes h3{
     font-size: 22px;
     color: #444;
 }
+.form-group .form-control::-moz-placeholder,
+.form-group .form-control::-webkit-input-placeholder,
+.form-group .form-control:-ms-input-placeholder,
+.form-group .form-control:-moz-placeholder,
+.form-group .form-control{
+    font-size: 18px !important;
+    line-height: 35px;
+}
 .comment-form .form-group .hint{
     vertical-align: top;
     font-size: 18px;
     color: #999;
 }
-.comment-form .form-group .form-control{
-    font-size: 20px;
-
-}
 .comment-form .form-group .btn{
     font-size: 20px;
-
+}
+.comment-widget a{
+    color: #419bf1;
+}
+.captcha-box{
+    left: 15px;
+    position: absolute;
+    top: -15px;
+}
+.captcha-box + input{
+    padding-left: 235px;
 }

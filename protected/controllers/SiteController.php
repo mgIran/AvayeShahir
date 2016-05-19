@@ -273,7 +273,7 @@ class SiteController extends Controller
 		Yii::import('pages.models.*');
 		Yii::app()->theme = 'front-end';
 		$this->layout = '//layouts/inner';
-		$model = Pages::model()->findByPk(5);
+		$model = Pages::model()->findByPk(2);
 		$this->render('//site/pages/page' ,array('model' => $model,'comment'=>true));
 	}
 }

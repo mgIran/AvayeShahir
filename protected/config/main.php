@@ -58,8 +58,8 @@ return array(
 			'commentableModels'=>array(
 				//model with individual settings
 				'Pages'=>array(
-					'registeredOnly'=>true,
-					'useCaptcha'=>false,
+					'registeredOnly'=>false,
+					'useCaptcha'=>true,
 					'premoderate' => false,
 					'orderComments'=>'DESC',
 					//config for create link to view model page(page with comments)

@@ -597,26 +597,30 @@ class JalaliDate
     public static function differenceTime($time)
     {
         if(time() - $time < 60)
-            $str = 'چند لحظه پیش';
+            $str = Yii::t('jalali','some time ago');
         elseif(time() - $time < 15 * 60)
-            $str = 'دقایقی پیش';
+            $str = Yii::t('jalali','a few minutes ago');
         elseif(time() - $time < 30 * 60)
-            $str = 'یه ربع پیش';
+            $str = Yii::t('jalali','a quarter ago');
         elseif(time() - $time < 60 * 60)
-            $str = 'نیم ساعت پیش';
+            $str = Yii::t('jalali','half-hour ago');
         elseif(time() - $time < 24 * 60 * 60) {
             $hour = (int)JalaliDate::gDate("H") - (int)JalaliDate::gDate("H", $time);
-            $str = self::convertNumbers(abs($hour)).' ساعت پیش';
+            if(abs($hour) == 1)
+                $str = Yii::t('jalali','one hour ago');
+            elseif(abs($hour)>1)
+                $str = self::convertNumbers(abs($hour)).' '.Yii::t('jalali','hours ago');
         } elseif(time() - $time < 2 * 24 * 60 * 60) {
             $str = 'دیروز';
-        } elseif(time() - $time < 3 * 24 * 60 * 60) {
-            $str = 'پریروز';
         } elseif(time() - $time < 30 * 24 * 60 * 60) {
             $day = (time() - $time) / (24 * 60 * 60);
-            $str = self::convertNumbers(abs(floor($day))).' روز پیش';
+            $str = self::convertNumbers(abs(floor($day))).' '.Yii::t('jalali','days ago');;
         } elseif(time() - $time > 30 * 24 * 60 * 60) {
             $month = (time() - $time) / (30 * 24 * 60 * 60);
-            $str = self::convertNumbers(abs(floor($month))).' ماه پیش';
+            if(abs(floor($month)) == 1)
+                $str = Yii::t('jalali','one month ago');
+            elseif(abs(floor($month))>1)
+                $str = self::convertNumbers(abs(floor($month))).' '.Yii::t('jalali','months ago');
         }
         return $str;
     }

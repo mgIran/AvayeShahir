@@ -1,6 +1,6 @@
 <?php 
 /**
- * @var Comment model
+ * @var $newComment Comment
  */
 ?>
 
@@ -15,33 +15,31 @@
         echo $form->hiddenField($newComment, 'parent_comment_id', array('class'=>'parent_comment_id'));
     ?>
     <?php if(Yii::app()->user->isGuest == true):?>
-        <div class="form-group">
-            <?php echo $form->labelEx($newComment, 'user_name'); ?>
-            <?php echo $form->textField($newComment,'user_name', array('size'=>40 ,'class'=>'form-control')); ?>
+        <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+            <?php echo $form->textField($newComment,'user_name', array('size'=>40 ,'class'=>'form-control','placeholder' => $newComment->getAttributeLabel('user_name'))); ?>
             <?php echo $form->error($newComment,'user_name'); ?>
         </div>
-        <div class="form-group">
-            <?php echo $form->labelEx($newComment, 'user_email'); ?>
-            <?php echo $form->textField($newComment,'user_email', array('size'=>40,'class'=>'form-control')); ?>
+        <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+            <?php echo $form->textField($newComment,'user_email', array('size'=>40,'class'=>'form-control','placeholder' => $newComment->getAttributeLabel('user_email'))); ?>
             <?php echo $form->error($newComment,'user_email'); ?>
         </div>
     <?php endif; ?>
 
-    <div class="form-group">
-        <?php echo $form->labelEx($newComment, 'comment_text'); ?>
-        <?php echo $form->textArea($newComment, 'comment_text', array('cols' => 60, 'rows' => 5,'class'=>'form-control')); ?>
+    <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <?php echo $form->textArea($newComment, 'comment_text', array('cols' => 60, 'rows' => 5,'class'=>'form-control','placeholder' => $newComment->getAttributeLabel('comment_text'))); ?>
         <?php echo $form->error($newComment, 'comment_text'); ?>
     </div>
 
     <?php if($this->useCaptcha === true && extension_loaded('gd')): ?>
-        <div class="form-group">
-            <?php echo $form->labelEx($newComment,'verifyCode'); ?>
+        <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div>
-                <?php $this->widget('CCaptcha', array(
-                    'captchaAction'=>CommentsModule::CAPTCHA_ACTION_ROUTE,
-                    'showRefreshButton' => true
-                )); ?>
-                <?php echo $form->textField($newComment,'verifyCode',array('class' => 'form-control')); ?>
+                <div class="captcha-box">
+                    <?php $this->widget('CCaptcha', array(
+                        'captchaAction'=>CommentsModule::CAPTCHA_ACTION_ROUTE,
+                        'showRefreshButton' => true
+                    )); ?>
+                </div>
+                <?php echo $form->textField($newComment,'verifyCode',array('class' => 'form-control','placeholder' => $newComment->getAttributeLabel('verifyCode'))); ?>
                 
             </div>
             <div class="hint">
@@ -51,7 +49,7 @@
         </div>
     <?php endif; ?>
 
-    <div class="form-group">
+    <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <?php echo CHtml::ajaxSubmitButton(Yii::t('CommentsModule.msg','Add comment'),Yii::app()->createUrl($this->postCommentAction),array(
                 'data' => 'js:$("#'.$this->id.'").serialize()',
                 'type' => 'POST',
@@ -64,7 +62,7 @@
                         list.html($(data.list).html());
                     }
                 }'
-            ),array('class'=> 'btn btn-info'));
+            ),array('class'=> 'btn btn-success pull-left'));
         ?>
     </div>
 <?php $this->endWidget(); ?>

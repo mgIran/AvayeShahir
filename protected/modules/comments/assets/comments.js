@@ -52,7 +52,7 @@
             .delegate('.add-comment', 'click', function(){
                 var id = $($(this).parents('.comment-widget')[0]).attr("id");
                 $dialog = $("#addCommentDialog-"+id);
-                var commentID = $(this).attr('rel');
+                var commentID = $(this).data('comment-id');
                 if(commentID)
                     $('.parent_comment_id', $dialog).val(commentID);
                 $dialog.dialog("open");
