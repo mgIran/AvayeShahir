@@ -17,8 +17,7 @@ root {
 }
 
 .comments-list .admin-panel{
-    border: solid 1px grey;
-    padding: 5px;
+    display: inline-block;
 }
 
 .comments-list .comments-list{
@@ -70,6 +69,9 @@ root {
     margin: 0 auto;
     width: 100%;
     height: 100%;
+}
+.comments-list li a{
+    font-size: 16px;
 }
 .comments-list li .comment-avatar .default-comment-avatar{
     background: url("user.svg") no-repeat scroll center center transparent;

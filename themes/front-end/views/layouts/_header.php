@@ -7,6 +7,7 @@ else
     $menuID = $this->ID;
 $action = $this->action->id;
 ?>
+
 <header class="header">
     <div class="navbar container">
         <span class="navTrigger">

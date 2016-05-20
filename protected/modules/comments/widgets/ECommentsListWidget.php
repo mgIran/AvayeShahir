@@ -53,11 +53,11 @@ class ECommentsListWidget extends ECommentsBaseWidget
                 'newComment' => $newComment,
             ));
             $options = CJavaScript::encode(array(
-                'dialogTitle' => Yii::t('CommentsModule.msg', 'Add comment'),
-                'deleteConfirmString' => Yii::t('CommentsModule.msg', 'Delete this comment?'),
-                'approveConfirmString' => Yii::t('CommentsModule.msg', 'Approve this comment?'),
-                'postButton' => Yii::t('CommentsModule.msg', 'Add comment'),
-                'cancelButton' => Yii::t('CommentsModule.msg', 'Cancel'),
+                'dialogTitle' => Yii::t($this->_config['translationCategory'], 'Add '.$this->_config['moduleObjectName']),
+                'deleteConfirmString' => Yii::t($this->_config['translationCategory'], 'Delete this '.$this->_config['moduleObjectName'].'?'),
+                'approveConfirmString' => Yii::t($this->_config['translationCategory'], 'Approve this '.$this->_config['moduleObjectName'].'?'),
+                'postButton' => Yii::t($this->_config['translationCategory'], 'Add '.$this->_config['moduleObjectName']),
+                'cancelButton' => Yii::t($this->_config['translationCategory'], 'Cancel'),
             ));
             $js = "jQuery('#{$this->id}').commentsList($options);";
             Yii::app()->getClientScript()->registerScript(__CLASS__.'#'.$this->id, $js);

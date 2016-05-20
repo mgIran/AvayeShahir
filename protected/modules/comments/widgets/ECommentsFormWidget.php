@@ -31,10 +31,10 @@ class ECommentsFormWidget extends ECommentsBaseWidget
             }
             else 
             {
-                echo Yii::t('CommentsModule.msg', 'For add new comment should be signed up.');
-                echo '<a data-toggle="modal" href="#login-modal">'.Yii::t('CommentsModule.msg', 'Log In').'</a>';
-                echo '&nbsp;'.Yii::t('CommentsModule.msg','or').'&nbsp;';
-                echo '<a target="_blank" href="'.Yii::app()->baseUrl.'/#signup'.'">'.Yii::t('CommentsModule.msg', 'Sign Up.').'</a>';
+                echo Yii::t($this->_config['translationCategory'], 'For add new '.$this->_config['moduleObjectName'].' should be signed up.');
+                echo '<a data-toggle="modal" href="#login-modal">'.Yii::t($this->_config['translationCategory'], 'Log In').'</a>';
+                echo '&nbsp;'.Yii::t($this->_config['translationCategory'],'or').'&nbsp;';
+                echo '<a target="_blank" href="'.Yii::app()->baseUrl.'/#signup'.'">'.Yii::t($this->_config['translationCategory'], 'Sign Up.').'</a>';
             }
 	}
 }

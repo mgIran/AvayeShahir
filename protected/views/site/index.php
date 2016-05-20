@@ -554,9 +554,12 @@ endif;
                 }
                 ?>
             </div>
-            <div class="row">
-                <a class="btn btn-info btn-lg" href="<?= Yii::app()->createUrl('/gallery'); ?>">
+            <div class="form-group">
+                <a class="btn btn-info btn-raised" href="<?= Yii::app()->createUrl('/gallery'); ?>">
                     <?= Yii::t('app' ,'Pictures Gallery') ?>
+                </a>
+                <a class="btn btn-success btn-raised" href="<?= Yii::app()->createUrl('/contactAdmin'); ?>">
+                    <?= Yii::t('app' ,'Contact Admin') ?>
                 </a>
             </div>
         </div>

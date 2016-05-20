@@ -53,13 +53,14 @@ return array(
 				'isSuperuser'=>'Yii::app()->user->checkAccess("moderate")',
 				//order direction for comments
 				'orderComments'=>'DESC',
+				'showEmail' => false
 			),
 			//the models for commenting
 			'commentableModels'=>array(
 				//model with individual settings
 				'Pages'=>array(
-					'registeredOnly'=>false,
-					'useCaptcha'=>true,
+					'registeredOnly'=>true,
+					'useCaptcha'=>false,
 					'premoderate' => false,
 					'orderComments'=>'DESC',
 					//config for create link to view model page(page with comments)
@@ -68,6 +69,10 @@ return array(
 						'route'=>'pages/manage/view',
 						'data'=>array('id'=>'id'),
 					),
+					// change translation file path
+					'translationCategory' => 'offlineChat',
+					// for labels translation ,this name should be lower case string
+					'moduleObjectName' => 'message'
 				),
 			),
 			//config for user models, which is used in application
@@ -105,6 +110,7 @@ return array(
             'appendParams'=>true,
 			'rules'=>array(
                 'terms' => 'site/terms',
+                'contactAdmin' => 'site/contactAdmin',
 				'guidance' => 'site/guidance',
 				'gallery' => 'gallery/manage/index',
 				'teachers/<id:\d+>/<title:(.*)>' => 'users/teachers/view',

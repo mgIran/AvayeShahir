@@ -131,18 +131,18 @@ class Comment extends CActiveRecord {
      */
     public function attributeLabels() {
         return array(
-            'owner_name' => Yii::t('CommentsModule.msg', 'Commented object'),
-            'owner_id' => Yii::t('CommentsModule.msg', 'Commented object\'s ID'),
+            'owner_name' => Yii::t($this->config['translationCategory'], 'Model'),
+            'owner_id' => Yii::t($this->config['translationCategory'], 'Model\'s ID'),
             /*'comment_id' => 'Comment',
             'parent_comment_id' => 'Parent Comment',
             'creator_id' => 'Creator',*/
-            'user_name' => Yii::t('CommentsModule.msg', 'User Name'),
-            'user_email' => Yii::t('CommentsModule.msg', 'User Email'),
-            'comment_text' => Yii::t('CommentsModule.msg', 'Comment Text'),
-            'create_time' => Yii::t('CommentsModule.msg', 'Create Time'),
-            'update_time' => Yii::t('CommentsModule.msg', 'Update Time'),
-            'status' => Yii::t('CommentsModule.msg', 'Status'),
-            'verifyCode' => Yii::t('CommentsModule.msg', 'Verification Code'),
+            'user_name' => Yii::t($this->config['translationCategory'], 'User Name'),
+            'user_email' => Yii::t($this->config['translationCategory'], 'User Email'),
+            'comment_text' => Yii::t($this->config['translationCategory'], ucfirst($this->config['moduleObjectName']).' Text'),
+            'create_time' => Yii::t($this->config['translationCategory'], 'Create Time'),
+            'update_time' => Yii::t($this->config['translationCategory'], 'Update Time'),
+            'status' => Yii::t($this->config['translationCategory'], 'Status'),
+            'verifyCode' => Yii::t($this->config['translationCategory'], 'Verification Code'),
         );
     }
 
@@ -190,7 +190,7 @@ class Comment extends CActiveRecord {
         if(count($this->config) === 0)
         {
             if($attribute === 'owner_name')
-                $this->addError ($attribute, Yii::t('CommentsModule.msg', 'This item cann\'t be commentable'));
+                $this->addError ($attribute, Yii::t($this->_config['translationCategory'], 'This item cann\'t be commentable'));
                 return;
         }
         //if only registered users can post comments
@@ -309,7 +309,9 @@ class Comment extends CActiveRecord {
                 $userName .= $this->user->$userConfig['emailProperty'];
         }
         else {
-            $userName = $this->user_name . '(' . $this->user_email . ')';
+            $userName = $this->user_name;
+            if($this->config['showEmail'])
+                $userName .= '(' . $this->user_email . ')';
         }
         return $userName;
     }
@@ -413,7 +415,7 @@ class Comment extends CActiveRecord {
     public function getTextStatus()
     {
         $this->status = $this->status === null ? 0 : $this->status;
-        return Yii::t('CommentsModule.msg', $this->_statuses[$this->status]);
+        return Yii::t($this->_config['translationCategory'], $this->_statuses[$this->status]);
     }
     
     /**

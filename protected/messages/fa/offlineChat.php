@@ -1,9 +1,4 @@
 <?php
-
-/*
- * @version 1.0
- * @package Comments module
- */
 return array(
     'Comments'=>'نظرات',
     'delete'=>'حذف',
@@ -25,8 +20,8 @@ return array(
     'Cancel'=>'انصراف',
     'Manage Comments'=>'مدیریت نظرات',
     'Manage'=>'مدیریت',
-    'Model'=>'ماژول',
-    'Model\'s ID'=>'شناسه ماژول',
+    'Commented object'=>'شئ نظر',
+    'Commented object\'s ID'=>'شناسه نظر',
     'New'=>'جدید',
     'Approved'=>'تایید شده',
     'Deleted'=>'حذف شده',
@@ -38,6 +33,21 @@ return array(
     'For add new comment should be signed up.' => 'برای ارسال پیام باید عضو سایت باشید.',
     'or' => 'یا',
     'Add Your Comment' => 'نظر خود را ثبت کنید',
+    'Send Comment' => 'ارسال نظر',
     'Comments List' => 'لیست نظرات',
+    // translate for message moduleObjectName
+    'Messages'=>'پیام ها',
+    'You cannot add a new message'=>'متاسفانه شما نمی توانید پیام بدهید.',
+    'No messages'=>'پیامی یافت نشد.',
+    'Message Text'=>'پیام',
+    'Add message'=>'ثبت',
+    'Delete this message?'=>'این پیام را حذف می کنید؟',
+    'Approve this message?'=>'این پیام تایید شود؟',
+    'Manage Messages'=>'مدیریت پیام ها',
+    'Model'=>'ماژول',
+    'Model\'s ID'=>'شناسه ماژول',
+    'For add new message should be signed up.' => 'برای ارسال پیام باید عضو سایت باشید.',
+    'Add Your Message' => 'پیام خود را ثبت کنید',
+    'Send Message' => 'ارسال پیام',
+    'Messages List' => 'لیست پیام ها',
 );
-?>

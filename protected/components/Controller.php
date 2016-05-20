@@ -57,7 +57,9 @@ class Controller extends CController
     public function init(){
         // for multi language
         EMHelper::catchLanguage();
-
+        Yii::app()->clientScript->registerScript('js-requirement','
+            var baseUrl = "'.Yii::app()->baseUrl.'";
+        ',CClientScript::POS_HEAD);
         // set default meta tag values
         $this->description = Yii::app()->db->createCommand()
             ->select('value')

@@ -93,5 +93,6 @@ return array(
     'Gallery' => 'تصاویر موسسه',
     'All Rights Reserved By Pardis Avaye Shahir. ©‏' => 'همهٔ حقوق برای موسسه پردیس آوای شهیر محفوظ است. ©‏ ',
     'Pictures Gallery' => 'گالری تصاویر',
-    'Follow Us' => 'ما را دنبال کنید.'
+    'Follow Us' => 'ما را دنبال کنید.',
+    'Contact Admin' => 'ارتباط با ادمین'
 );

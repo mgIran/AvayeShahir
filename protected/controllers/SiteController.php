@@ -269,7 +269,7 @@ class SiteController extends Controller
 		));
 	}
 
-	public function actionFeedback(){
+	public function actionContactAdmin(){
 		Yii::import('pages.models.*');
 		Yii::app()->theme = 'front-end';
 		$this->layout = '//layouts/inner';

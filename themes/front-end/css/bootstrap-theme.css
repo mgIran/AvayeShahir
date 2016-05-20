@@ -2184,3 +2184,40 @@ section.classes h3{
 .captcha-box + input{
     padding-left: 235px;
 }
+.chat{
+    position: fixed;
+    right:0;
+    border-radius: 2px 0 0 2px;
+    background-color: #fff;
+    -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+    -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+    top: 150px;
+    display: inline-block;
+    padding: 5px;
+}
+.svg.svg-chat{
+    position: fixed;
+    right:0;
+    border-radius: 2px 0 0 2px;
+    background-color: #fff;
+    -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+    -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+    top: 150px;
+    display: inline-block;
+    padding: 5px;
+}
+
+.comment-date{
+    color: #aaa;
+    display: inline-block;
+    font-size: 16px;
+}
+.comment-name{
+    display: inline-block;
+    margin-left: 15px;
+}
+.btn{
+    font-size: 18px !important;
+}

@@ -36,7 +36,7 @@
             })
             .delegate('.approve', 'click', function(){
                 var id = $($(this).parents('.comment-widget')[0]).attr("id");
-                if(confirm($.fn.commentsList.settings[id]['deleteConfirmString']))
+                if(confirm($.fn.commentsList.settings[id]['approveConfirmString']))
                 {
                     $.post($(this).attr('href'))
                     .success(function(data){
@@ -51,12 +51,10 @@
             })
             .delegate('.add-comment', 'click', function(){
                 var id = $($(this).parents('.comment-widget')[0]).attr("id");
-                $dialog = $("#addCommentDialog-"+id);
+                $dialog = $(this).parents('li');
                 var commentID = $(this).data('comment-id');
                 if(commentID)
                     $('.parent_comment_id', $dialog).val(commentID);
-                $dialog.dialog("open");
-                return false;
             });
         });
     };
@@ -75,5 +73,25 @@
         var $dialog = $('#addCommentDialog-'+id);
         $dialog.data('widgetID', id);
     };
+
+    $('body').on('click' ,'.comment-submit-form',function (e) {
+        e.preventDefault();
+        var $this = $(this);
+        var $form = $this.parents('form');
+        $.ajax({
+            url : baseUrl+'/comments/comment/postComment',
+            data : $form.serialize(),
+            type : "POST",
+            dataType : "json",
+            success : function(data){
+                $form.html(data.form);
+                if(data.code == "success")
+                {
+                    var list = $form.parents('.comment-widget');
+                    list.html($(data.list).html());
+                }
+            }
+        });
+    });
 
 })(jQuery);

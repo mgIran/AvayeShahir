@@ -64,7 +64,10 @@ class CommentsModule extends CWebModule
             //order direction for comments
             'orderComments'=>'DESC',
             //settings for comments page url
-            'pageUrl'=>null
+            'pageUrl'=>null ,
+            'translationCategory' => 'CommentsModule.msg',
+            'moduleObjectName' => 'comment',
+            'showEmail' => true
         );
     
 	public function init()

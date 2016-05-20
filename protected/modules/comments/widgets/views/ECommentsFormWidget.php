@@ -43,26 +43,15 @@
                 
             </div>
             <div class="hint">
-                <?php echo Yii::t('CommentsModule.msg', 'Please enter the letters as they are shown in the image above.<br/>Letters are not case-sensitive.');?>
+                <?php echo Yii::t($this->_config['translationCategory'], 'Please enter the letters as they are shown in the image above.<br/>Letters are not case-sensitive.');?>
             </div>
             <?php echo $form->error($newComment, 'verifyCode'); ?>
         </div>
     <?php endif; ?>
 
     <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <?php echo CHtml::ajaxSubmitButton(Yii::t('CommentsModule.msg','Add comment'),Yii::app()->createUrl($this->postCommentAction),array(
-                'data' => 'js:$("#'.$this->id.'").serialize()',
-                'type' => 'POST',
-                'dataType' => 'json',
-                'success' => 'js:function(data){
-                    $("#'.$this->id.'").html(data.form);
-                    if(data.code == "success")
-                    {
-                        var list = $("#'.$this->id.'").parents(\'.comment-widget\');
-                        list.html($(data.list).html());
-                    }
-                }'
-            ),array('class'=> 'btn btn-success pull-left'));
+        <?php echo CHtml::link(Yii::t($this->_config['translationCategory'],'Add '.$this->_config['moduleObjectName']),Yii::app()->createUrl($this->postCommentAction),
+            array('class'=> 'btn btn-success pull-left comment-submit-form'));
         ?>
     </div>
 <?php $this->endWidget(); ?>
