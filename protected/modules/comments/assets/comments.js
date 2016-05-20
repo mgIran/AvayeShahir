@@ -83,7 +83,11 @@
             data : $form.serialize(),
             type : "POST",
             dataType : "json",
+            beforeSend : function () {
+                $form.parents('.comment-widget').find('.loading-container').show();
+            },
             success : function(data){
+                $form.parents('.comment-widget').find('.loading-container').hide();
                 $form.html(data.form);
                 if(data.code == "success")
                 {

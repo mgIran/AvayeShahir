@@ -50,4 +50,5 @@ return array(
     'Add Your Message' => 'پیام خود را ثبت کنید',
     'Send Message' => 'ارسال پیام',
     'Messages List' => 'لیست پیام ها',
+    'Admin' => 'مدیر'
 );

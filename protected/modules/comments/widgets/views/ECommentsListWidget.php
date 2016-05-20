@@ -1,14 +1,17 @@
-<div class="comment-widget" id="<?php echo $this->id?>">
+<div class="comment-widget <?= Yii::app()->language != 'fa'?'en':'' ?>" id="<?php echo $this->id?>">
 <?php
     if($this->showPopupForm === true)
     {
         if($this->registeredOnly === false || Yii::app()->user->isGuest === false)
         {
+            echo '<div class="comment-form-outer">';
+            Yii::app()->controller->renderPartial('//layouts/_loading');
             echo '<h3><span>'.Yii::t($this->_config['translationCategory'], 'Send '.ucfirst($this->_config['moduleObjectName'])).'</span></h3>';
             echo "<div class='comment-form' id=\"addCommentDialog-$this->id\">";
             $this->widget('comments.widgets.ECommentsFormWidget', array(
                 'model' => $this->model,
             ));
+            echo "</div>";
             echo "</div>";
         }
     }

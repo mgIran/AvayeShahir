@@ -310,6 +310,8 @@ class Comment extends CActiveRecord {
         }
         else {
             $userName = $this->user_name;
+            if($userName == 'Admin')
+                $userName = Yii::t($this->config['translationCategory'],'Admin');
             if($this->config['showEmail'])
                 $userName .= '(' . $this->user_email . ')';
         }
@@ -453,6 +455,8 @@ class Comment extends CActiveRecord {
         //if current user is superuser, then automoderate comment and it's new comment
         if($this->isNewRecord === true && $this->evaluateExpression($this->config['isSuperuser']) === true)
             $this->status = self::STATUS_APPROWED;
+        if(!Yii::app()->user->isGuest && Yii::app()->user->type == 'admin')
+            $this->user_name = 'Admin';
         return parent::beforeSave();
     }
 
