@@ -42,7 +42,7 @@ Yii::app()->clientScript->registerScript("easyTicker-scripts","
 <?
 if($this->message):
 ?>
-<section class="message-box">
+<section class="message-box" id="main">
     <div class="container">
         <div class="alert fade in message"><button class="close close-sm" type="button" data-dismiss="alert"><i class="icon-remove"></i></button><?= Yii::app()->language == 'fa'?Controller::parseNumbers($this->message):$this->message ?></div>
     </div>
