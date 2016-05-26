@@ -18,8 +18,8 @@
     if($this->registeredOnly === true && Yii::app()->user->isGuest === true)
     {
         // @todo change login and signup links
-        echo Yii::t($this->_config['translationCategory'], 'For add new '.$this->_config['moduleObjectName'].' should be signed up.');
-        echo '<a data-toggle="modal" href="#login-modal">'.Yii::t($this->_config['translationCategory'], 'Log In').'</a>';
+        echo Yii::t($this->_config['translationCategory'], 'To add any '.$this->_config['moduleObjectName'].', you should sign up first.');
+        echo '&nbsp;<a data-toggle="modal" href="#login-modal">'.Yii::t($this->_config['translationCategory'], 'Log In').'</a>';
         echo '&nbsp;'.Yii::t($this->_config['translationCategory'],'or').'&nbsp;';
         echo '<a target="_blank" href="'.Yii::app()->baseUrl.'/#signup'.'">'.Yii::t($this->_config['translationCategory'], 'Sign Up.').'</a>';
     }

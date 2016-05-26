@@ -10,10 +10,13 @@
  * @property string $email
  * @property string $role_id
  * @property string $status
+ * @property string $verification_token
+ * @property integer $change_password_request_count
  * @property string $repeatPassword
  * @property string $oldPassword
  * @property string $newPassword
  * @property string $fullName
+ * @property string $create_date
  *
  * The followings are the available model relations:
  * @property UserDetails $userDetails
@@ -55,23 +58,25 @@ class Users extends CActiveRecord
         return array(
             array('password, email', 'required', 'on' => 'insert,agreeTerms'),
             array('agreeTerms', 'compare', 'compareValue' => 1, 'operator' => '==', 'message' => Yii::t('app', 'You Rejected the Terms and Policies'), 'on' => 'agreeTerms'),
-            array('email', 'unique'),
+            array('email', 'unique','on' => 'insert,create'),
+            array('change_password_request_count', 'numerical', 'integerOnly'=>true),
             array('role_id', 'default', 'value' => 1, 'on' => 'insert,agreeTerms'),
             array('status', 'default', 'value' => 1, 'on' => 'insert,agreeTerms'),
             array('email', 'required', 'on' => 'email'),
             array('email', 'email'),
             array('oldPassword ,newPassword ,repeatPassword', 'required', 'on' => 'update'),
             array('email', 'filter', 'filter' => 'trim', 'on' => 'insert,agreeTerms'),
-            array('username, password', 'length', 'max' => 100, 'on' => 'insert,agreeTerms'),
+            array('username, password, verification_token', 'length', 'max' => 100, 'on' => 'insert,agreeTerms'),
             array('oldPassword', 'oldPass', 'on' => 'update'),
             array('repeatPassword', 'compare', 'compareAttribute' => 'newPassword', 'operator' => '==', 'message' => 'رمز های عبور همخوانی ندارند', 'on' => 'update'),
             array('email', 'length', 'max' => 255),
             array('role_id', 'length', 'max' => 10),
             array('status', 'length', 'max' => 8),
             array('phone', 'length', 'min' => 11, 'on' => 'agreeTerms'),
+            array('create_date', 'length', 'max'=>20),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
-            array('fullName ,email ,statusFilter,phone', 'safe', 'on' => 'search,searchTeachers'),
+            array('fullName ,email ,statusFilter,phone, create_date, verification_token, change_password_request_count', 'safe', 'on' => 'search,searchTeachers'),
         );
     }
 
@@ -116,6 +121,8 @@ class Users extends CActiveRecord
             'oldPassword' => Yii::t('app', 'Current Password'),
             'newPassword' => Yii::t('app', 'New Password'),
             'status' => 'وضعیت کاربر',
+            'verification_token' => 'Verification Token',
+            'change_password_request_count' => 'تعداد درخواست تغییر کلمه عبور',
         );
     }
 

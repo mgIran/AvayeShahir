@@ -35,7 +35,7 @@ return array(
     'Sign Up.'=> 'ثبت نام کنید.',
     'Are You New?' => 'تازه وارد هستید؟',
     'Log In' => 'وارد شوید',
-    'For add new comment should be signed up.' => 'برای ارسال پیام باید عضو سایت باشید.',
+    'To add any comment, you should sign up first.' => 'برای ارسال نظر باید عضو سایت باشید.',
     'or' => 'یا',
     'Add Your Comment' => 'نظر خود را ثبت کنید',
     'Comments List' => 'لیست نظرات',

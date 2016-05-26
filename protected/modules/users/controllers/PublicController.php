@@ -25,7 +25,7 @@ class PublicController extends Controller
                 'users' => array('@'),
             ),
             array('allow',  // allow all users to perform 'index' and 'views' actions
-                'actions'=>array('login' ,'register','captcha'),
+                  'actions'=>array('register','login','verify','forgetPassword','changePassword','captcha'),
                 'users' => array('*'),
                 //'roles'=>array('admin','validator'),
             ),
@@ -57,7 +57,7 @@ class PublicController extends Controller
         Yii::app()->theme = 'front-end';
         $this->layout = '//layouts/public';
         if(!Yii::app()->user->isGuest && Yii::app()->user->type === 'user')
-            $this->redirect(array('/site/'));
+            $this->redirect(Yii::app()->baseUrl);
 
         $model = new UserLoginForm;
         // if it is ajax validation request
@@ -105,8 +105,14 @@ class PublicController extends Controller
         }
         if(isset($_POST['Users'])) {
             $model->attributes = $_POST['Users'];
+            $model->status = 'active';
+            $model->create_date=time();
             if($model->save()) {
-                $msg = '<h2 style="box-sizing:border-box;display: block;width: 100%;font-family:tahoma;background-color: #a1cf01;line-height:60px;color:#f7f7f7;font-size: 24px;text-align: right;padding-right: 50px">آوای شهیر<span style="font-size: 14px;color:#dfdfdf">- موسسه زبان</span></span> </h2>';
+                // verfication Email send
+//                $token=md5($model->id.'#'.$model->password.'#'.$model->email.'#'.$model->create_date);
+//                $model->updateByPk($model->id, array('verification_token'=>$token));
+
+                $msg = '<div style="display: block;width: 100%;"><h2 style="box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;display: block;width: 100%;font-family:tahoma;background-color: #0b3762;line-height:60px;color:#f7f7f7;font-size: 24px;text-align: right;padding-right: 50px">آوای شهیر<span style="font-size: 14px;color:#dfdfdf">- بخش ثبت نام</span></span> </h2></div>';
                 $msg .= '<div style="display: inline-block;width: 100%;font-family:tahoma;">';
                 $msg .= '<div style="direction:rtl;display:block;overflow:hidden;border:1px solid #efefef;text-align: center;margin:10px 20px;padding:15px;">';
                 $msg .= '<div style="color: #2d2d2d;font-size: 20px;text-align: right;">ثبت نام با موفقیت انجام شد.</div>';
@@ -121,16 +127,17 @@ class PublicController extends Controller
                 $mail->IsSMTP();
                 $mail->Host = 'mail.avayeshahir.com';
                 $mail->SMTPAuth = true;
+                $mail->SMTPSecure = 'ssl';
                 $mail->Username = 'noreply@avayeshahir.com';
-                $mail->Password = '!@khadem1395';
-                $mail->Port = 587;
+                $mail->Password = '!@avayeshahir1395';
+                $mail->Port = 465;
                 $mail->isHTML(true);
                 $mail->SetFrom('noreply@avayeshahir.com', Yii::app()->name);
                 $mail->AddAddress($model->email);
                 $mail->Subject = 'ثبت نام در '.Yii::app()->name;
                 $mail->AltBody = '';
                 $mail->Body = $msg;
-                //$mail->Send();
+                $mail->Send();
                 $msg = Yii::t('app','Registration was successful.');
 
                 Yii::app()->user->setFlash('success' ,$msg);
@@ -278,5 +285,181 @@ class PublicController extends Controller
             echo CActiveForm::validate($model);
             Yii::app()->end();
         }
+    }
+
+
+    /**
+     * Verify email
+     */
+    public function actionVerify()
+    {
+        if(!Yii::app()->user->isGuest and Yii::app()->user->type!='admin')
+            $this->redirect($this->createAbsoluteUrl('//'));
+        else if(!Yii::app()->user->isGuest and Yii::app()->user->type =='admin')
+            Yii::app()->user->logout(false);
+
+        $token=Yii::app()->request->getQuery('token');
+        $model=Users::model()->find('verification_token=:token', array(':token'=>$token));
+        if($model)
+        {
+            if($model->status=='pending')
+            {
+                if(time() <= $model->create_date+259200)
+                {
+                    $model->updateByPk($model->id, array('status'=>'active'));
+                    Yii::app()->user->setFlash('success' , 'حساب کاربری شما فعال گردید.');
+                    $this->redirect($this->createUrl('/login'));
+                }
+                else
+                {
+                    Yii::app()->user->setFlash('failed' , 'لینک فعال سازی منقضی شده و نامعتبر می باشد. لطفا مجددا ثبت نام کنید.');
+                    $this->redirect($this->createUrl('/register'));
+                }
+            }
+            elseif($model->status=='active')
+            {
+                Yii::app()->user->setFlash('failed' , 'این حساب کاربری قبلا فعال شده است.');
+                $this->redirect($this->createUrl('/login'));
+            }
+            else
+            {
+                Yii::app()->user->setFlash('failed' , 'امکان فعال سازی این کاربر وجود ندارد. لطفا مجددا ثبت نام کنید.');
+                $this->redirect($this->createUrl('/register'));
+            }
+        }
+        else
+        {
+            Yii::app()->user->setFlash('failed' , 'لینک فعال سازی نامعتبر می باشد.');
+            $this->redirect($this->createUrl('/register'));
+        }
+    }
+
+    /**
+     * Forget password
+     */
+    public function actionForgetPassword()
+    {
+        Yii::app()->theme = 'front-end';
+        $this->layout = '//layouts/inner';
+        if(!Yii::app()->user->isGuest and Yii::app()->user->type!='admin')
+            $this->redirect($this->createAbsoluteUrl('//'));
+        else if(!Yii::app()->user->isGuest and Yii::app()->user->type =='admin')
+            Yii::app()->user->logout(false);
+
+        if(isset($_POST['email']))
+        {
+            $model=Users::model()->findByAttributes(array('email'=>$_POST['email']));
+            if($model)
+            {
+                if($model->status=='active')
+                {
+                    if($model->change_password_request_count!=3)
+                    {
+                        $token=md5($model->id.'#'.$model->password.'#'.$model->email.'#'.$model->create_date.'#'.time());
+                        $count=intval($model->change_password_request_count);
+                        $model->updateByPk($model->id, array('verification_token'=>$token, 'change_password_request_count'=>$count+1));
+                        $message = '<div style="color: #2d2d2d;font-size: 14px;text-align: right;">با سلام<br>بنا به درخواست شما جهت تغییر کلمه عبور لینک زیر خدمتتان ارسال گردیده است.</div>';
+                        $message .= '<div style="text-align: right;font-size: 9pt;">';
+                        $message .= '<a href="'.Yii::app()->getBaseUrl(true).'/users/public/changePassword/token/'.$token.'">'.Yii::app()->getBaseUrl(true).'/users/public/changePassword/token/'.$token.'</a>';
+                        $message .= '</div>';
+                        $message .= '<div style="font-size: 8pt;color: #888;text-align: right;">اگر شخص دیگری غیر از شما این درخواست را صادر نموده است، یا شما کلمه عبور خود را به یاد آورده‌اید و دیگر نیازی به تغییر آن ندارید، کلمه عبور قبلی/موجود شما همچنان فعال می‌باشد و می توانید از طریق <a href="'.((strpos($_SERVER['SERVER_PROTOCOL'], 'https'))?'https://':'http://').$_SERVER['HTTP_HOST'].'/">این صفحه</a> وارد حساب کاربری خود شوید.</div>';
+                        $result = Mailer::mail($model->email, 'درخواست تغییر کلمه عبور در '.Yii::app()->name, $message, Yii::app()->params['no-reply-email'],array(
+                            'Host' => 'mail.avayeshahir.com',
+                            'Port' => 465,
+                            'Secure' => 'ssl',
+                            'Username' => 'noreply@avayeshahir.com',
+                            'Password' => '!@avayeshahir1395',
+                        ));
+                        if($result)
+                            echo CJSON::encode(array(
+                                'hasError'=>false,
+                                'message'=>'لینک تغییر کلمه عبور به '.$model->email.' ارسال شد.'
+                            ));
+                        else
+                            echo CJSON::encode(array(
+                                'hasError'=>true,
+                                'message'=>'در انجام عملیات خطایی رخ داده است لطفا مجددا تلاش کنید.'
+                            ));
+                    }
+                    else
+                        echo CJSON::encode(array(
+                            'hasError'=>true,
+                            'message'=>'بیش از 3 بار نمی توانید درخواست تغییر کلمه عبور بدهید.'
+                        ));
+                }
+                elseif($model->status=='pending')
+                    echo CJSON::encode(array(
+                        'hasError'=>true,
+                        'message'=>'این حساب کاربری هنوز فعال نشده است.'
+                    ));
+                elseif($model->status=='blocked')
+                    echo CJSON::encode(array(
+                        'hasError'=>true,
+                        'message'=>'این حساب کاربری مسدود می باشد.'
+                    ));
+                elseif($model->status=='deleted')
+                    echo CJSON::encode(array(
+                        'hasError'=>true,
+                        'message'=>'این حساب کاربری حذف شده است.'
+                    ));
+            }
+            else
+                echo CJSON::encode(array(
+                    'hasError'=>true,
+                    'message'=>'پست الکترونیکی وارد شده اشتباه است.'
+                ));
+            Yii::app()->end();
+        }
+
+        $this->render('forget_password');
+    }
+
+    /**
+     * Change password
+     */
+    public function actionChangePassword()
+    {
+        Yii::app()->theme = 'front-end';
+        $this->layout = '//layouts/inner';
+        if(!Yii::app()->user->isGuest and Yii::app()->user->type!='admin')
+            $this->redirect($this->createAbsoluteUrl('//'));
+        else if(!Yii::app()->user->isGuest and Yii::app()->user->type =='admin')
+            Yii::app()->user->logout(false);
+
+        $token=Yii::app()->request->getQuery('token');
+        $model=Users::model()->find('verification_token=:token', array(':token'=>$token));
+        if($model) {
+            $model->password = null;
+            if(!$model)
+                $this->redirect($this->createAbsoluteUrl('//'));
+            elseif($model->change_password_request_count == 0)
+                $this->redirect($this->createAbsoluteUrl('//'));
+
+            $model->setScenario('change_password');
+            $this->performAjaxValidation($model);
+
+            if($model->status == 'active') {
+
+                if(isset($_POST['Users'])) {
+                    $model->password = $_POST['Users']['password'];
+                    $model->repeatPassword = $_POST['Users']['repeatPassword'];
+                    $model->verification_token = null;
+                    $model->change_password_request_count = 0;
+                    if($model->save()) {
+                        Yii::app()->user->setFlash('success', 'کلمه عبور با موفقیت تغییر یافت.');
+                        $this->refresh();
+                    } else
+                        Yii::app()->user->setFlash('failed', 'در انجام عملیات خطایی رخ داده است لطفا مجددا تلاش کنید.');
+                }
+
+                $this->render('change_password', array(
+                    'model' => $model
+                ));
+            } else
+                $this->redirect($this->createAbsoluteUrl('//'));
+        }
+        $this->render('change_password', array(
+            'model' => $model
+        ));
     }
 }

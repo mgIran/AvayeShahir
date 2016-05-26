@@ -16292,3 +16292,59 @@ in C:\wamp\www\Yusef\shahir\index.php (11)
 in C:\wamp\www\Yusef\shahir\protected\modules\courses\models\Classes.php (59)
 in C:\wamp\www\Yusef\shahir\protected\modules\courses\controllers\ClassesManageController.php (68)
 in C:\wamp\www\Yusef\shahir\index.php (11)
+2016/05/26 12:44:50 [warning] [application] Failed to set unsafe attribute "password" of "Users".
+in C:\wamp\www\Yusef\shahir\protected\modules\users\controllers\PublicController.php (285)
+in C:\wamp\www\Yusef\shahir\protected\modules\users\controllers\PublicController.php (436)
+in C:\wamp\www\Yusef\shahir\index.php (11)
+2016/05/26 12:44:50 [warning] [application] Failed to set unsafe attribute "repeatPassword" of "Users".
+in C:\wamp\www\Yusef\shahir\protected\modules\users\controllers\PublicController.php (285)
+in C:\wamp\www\Yusef\shahir\protected\modules\users\controllers\PublicController.php (436)
+in C:\wamp\www\Yusef\shahir\index.php (11)
+2016/05/26 12:45:10 [warning] [application] Failed to set unsafe attribute "password" of "Users".
+in C:\wamp\www\Yusef\shahir\protected\modules\users\controllers\PublicController.php (285)
+in C:\wamp\www\Yusef\shahir\protected\modules\users\controllers\PublicController.php (436)
+in C:\wamp\www\Yusef\shahir\index.php (11)
+2016/05/26 12:45:10 [warning] [application] Failed to set unsafe attribute "repeatPassword" of "Users".
+in C:\wamp\www\Yusef\shahir\protected\modules\users\controllers\PublicController.php (285)
+in C:\wamp\www\Yusef\shahir\protected\modules\users\controllers\PublicController.php (436)
+in C:\wamp\www\Yusef\shahir\index.php (11)
+2016/05/26 12:45:44 [warning] [application] Failed to set unsafe attribute "password" of "Users".
+in C:\wamp\www\Yusef\shahir\protected\modules\users\controllers\PublicController.php (285)
+in C:\wamp\www\Yusef\shahir\protected\modules\users\controllers\PublicController.php (436)
+in C:\wamp\www\Yusef\shahir\index.php (11)
+2016/05/26 12:45:44 [warning] [application] Failed to set unsafe attribute "repeatPassword" of "Users".
+in C:\wamp\www\Yusef\shahir\protected\modules\users\controllers\PublicController.php (285)
+in C:\wamp\www\Yusef\shahir\protected\modules\users\controllers\PublicController.php (436)
+in C:\wamp\www\Yusef\shahir\index.php (11)
+2016/05/26 12:48:27 [warning] [application] Failed to set unsafe attribute "password" of "Users".
+in C:\wamp\www\Yusef\shahir\protected\modules\users\controllers\PublicController.php (285)
+in C:\wamp\www\Yusef\shahir\protected\modules\users\controllers\PublicController.php (436)
+in C:\wamp\www\Yusef\shahir\index.php (11)
+2016/05/26 12:48:27 [warning] [application] Failed to set unsafe attribute "repeatPassword" of "Users".
+in C:\wamp\www\Yusef\shahir\protected\modules\users\controllers\PublicController.php (285)
+in C:\wamp\www\Yusef\shahir\protected\modules\users\controllers\PublicController.php (436)
+in C:\wamp\www\Yusef\shahir\index.php (11)
+2016/05/26 12:48:27 [warning] [application] Failed to set unsafe attribute "password" of "Users".
+in C:\wamp\www\Yusef\shahir\protected\modules\users\controllers\PublicController.php (285)
+in C:\wamp\www\Yusef\shahir\protected\modules\users\controllers\PublicController.php (436)
+in C:\wamp\www\Yusef\shahir\index.php (11)
+2016/05/26 12:48:27 [warning] [application] Failed to set unsafe attribute "repeatPassword" of "Users".
+in C:\wamp\www\Yusef\shahir\protected\modules\users\controllers\PublicController.php (285)
+in C:\wamp\www\Yusef\shahir\protected\modules\users\controllers\PublicController.php (436)
+in C:\wamp\www\Yusef\shahir\index.php (11)
+2016/05/26 12:49:44 [warning] [application] Failed to set unsafe attribute "password" of "Users".
+in C:\wamp\www\Yusef\shahir\protected\modules\users\controllers\PublicController.php (285)
+in C:\wamp\www\Yusef\shahir\protected\modules\users\controllers\PublicController.php (436)
+in C:\wamp\www\Yusef\shahir\index.php (11)
+2016/05/26 12:49:44 [warning] [application] Failed to set unsafe attribute "repeatPassword" of "Users".
+in C:\wamp\www\Yusef\shahir\protected\modules\users\controllers\PublicController.php (285)
+in C:\wamp\www\Yusef\shahir\protected\modules\users\controllers\PublicController.php (436)
+in C:\wamp\www\Yusef\shahir\index.php (11)
+2016/05/26 12:49:45 [warning] [application] Failed to set unsafe attribute "password" of "Users".
+in C:\wamp\www\Yusef\shahir\protected\modules\users\controllers\PublicController.php (285)
+in C:\wamp\www\Yusef\shahir\protected\modules\users\controllers\PublicController.php (436)
+in C:\wamp\www\Yusef\shahir\index.php (11)
+2016/05/26 12:49:45 [warning] [application] Failed to set unsafe attribute "repeatPassword" of "Users".
+in C:\wamp\www\Yusef\shahir\protected\modules\users\controllers\PublicController.php (285)
+in C:\wamp\www\Yusef\shahir\protected\modules\users\controllers\PublicController.php (436)
+in C:\wamp\www\Yusef\shahir\index.php (11)

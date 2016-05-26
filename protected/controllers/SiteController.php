@@ -84,7 +84,7 @@ class SiteController extends Controller
 			if($model->validate()){
 				Yii::import('application.extensions.phpmailer.JPhpMailer');
 				$mail = new JPhpMailer;
-				$msg = '<h2 style="box-sizing:border-box;display: block;width: 100%;font-family:tahoma;background-color: #a1cf01;line-height:60px;color:#f7f7f7;font-size: 24px;text-align: right;padding-right: 50px">آوای شهیر<span style="font-size: 14px;color:#dfdfdf">- موسسه زبان</span></span> </h2>';
+				$msg = '<div style="display: block;width: 100%;"><h2 style="-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;display: block;width: 100%;font-family:tahoma;background-color: #0b3762;line-height:60px;color:#f7f7f7;font-size: 24px;text-align: right;padding-right: 50px">آوای شهیر<span style="font-size: 14px;color:#dfdfdf">- بخش تماس با ما</span></span> </h2></div>';
 				$msg .= '<div style="display: inline-block;width: 100%;font-family:tahoma;">';
 				$msg .= '<div style="direction:rtl;display:block;overflow:hidden;border:1px solid #efefef;text-align: center;margin:10px 20px;padding:15px;">';
 				$msg .= '<div style="color: #2d2d2d;font-size: 20px;text-align: right;"></div>';
@@ -97,24 +97,24 @@ class SiteController extends Controller
 				$msg .= '</div>';
 				$msg .= '</div>';
 				$mail->ContentType = 'html';
-				$mail->Subject = 'پیام از وبسایت ' . Yii::app()->name;
+				$mail->Subject = 'پیام از بخش تماس با ما وبسایت ' . Yii::app()->name;
 				$mail->IsSMTP();
 				$mail->Host = 'mail.avayeshahir.com';
 				$mail->SMTPAuth = true;
+				$mail->SMTPSecure = 'ssl';
 				$mail->Username = 'noreply@avayeshahir.com';
-				$mail->Password = '!@khadem1395';
-				$mail->Port = 587;
+				$mail->Password = '!@avayeshahir1395';
+				$mail->Port = 465;
 				$mail->isHTML(true);
 				$mail->SetFrom('noreply@avayeshahir.com', Yii::app()->name);
-				//$mail->AddAddress($model->email);
 				$mail->AltBody = '';
 				$mail->Body = $msg;
 				Yii::import('admins.models.Admins');
 				$admins = Admins::model()->findAll();
-//				foreach($admins as $admin){
-//					$mail->AddCC($admin->email ,$admin->username);
-//				}
-				//$mail->AddCC(Yii::app()->params['adminEmail'],'pardis');
+				foreach($admins as $admin){
+					$mail->AddCC($admin->email ,$admin->username);
+				}
+				$mail->AddCC(Yii::app()->params['adminEmail']);
 				$mail->AddAddress('yusef.mobasheri@gmail.com');
 				if($mail->send()){
 					Yii::app()->user->setFlash('footer-success' ,'پیام شما با موفقیت ارسال شد.');
@@ -128,7 +128,7 @@ class SiteController extends Controller
 							$this->refresh();
 					}
 				}else{
-					Yii::app()->user->setFlash('footer-failed' ,'متاسفانه ثبت نام با مشکل مواجه است\r\n لطفا مجددا تلاش کنید.');
+					Yii::app()->user->setFlash('footer-failed' ,'متاسفانه ارسال پیام با مشکل مواجه است. لطفا مجددا تلاش کنید.');
 					if(isset($_POST['ajax'])){
 						echo CJSON::encode(array('state' => 'error'));
 						Yii::app()->end();
@@ -269,7 +269,7 @@ class SiteController extends Controller
 		));
 	}
 
-	public function actionContactAdmin(){
+	public function actionForum(){
 		Yii::import('pages.models.*');
 		Yii::app()->theme = 'front-end';
 		$this->layout = '//layouts/inner';

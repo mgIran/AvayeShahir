@@ -521,51 +521,53 @@ endif;
     <div class="container">
         <h3 class="yekan-text"><?= Yii::t('app','About Avaye Shahir') ?></h3>
         <div class="<?= Yii::app()->language == 'fa'?'col-lg-8 col-md-8 col-sm-8 col-xs-12':'col-lg-12 col-md-12 col-sm-12 col-xs-12'; ?> text-container">
-            <div class="text">
-                <?
-                $aboutText->summary = str_ireplace('<br />','#br#',$aboutText->summary);
-                $text = strip_tags($aboutText->summary);
-                $text = str_ireplace('#br#','<br>',$text);
-                $length = mb_strlen($text,'utf8');
-                if($length > 280) {
-                    $length = ceil($length / 2);
-                    $words = explode(" ", $text);
-                    $c = count($words);
-                    $l = 0;
-                    $colOutput = '';
-                    for($i = 1; $i <= 2; $i++) {
-                        $new_string = "";
-                        $colOutput .= "<p class=\"paragraph col-lg-6 col-md-6 col-sm-6 col-xs-12\">";
-                        for($g = $l; $g < $c; $g++) {
-                            if(mb_strlen($new_string,'utf8') <= $length || $i == 2)
-                                $new_string .= $words[$g]." ";
-                            else {
-                                $l = $g;
-                                break;
-                            }
-                        }
-                        $colOutput .= $new_string;
-                        $colOutput .= "</p>";
-                    }
-                    echo $colOutput;
-                }else {
-                    echo "<p class=\"paragraph col-lg-6 col-md-6 col-sm-6 col-xs-12\">".$text."</p>";
-                    echo "<p class=\"paragraph col-lg-6 col-md-6 col-sm-6 col-xs-12\"></p>";
-                }
-                ?>
+                <div class="text form-group">
+<!--                --><?//
+//                $aboutText->summary = str_ireplace('<br />','#br#',$aboutText->summary);
+//                $text = strip_tags($aboutText->summary);
+//                $text = str_ireplace('#br#','<br>',$text);
+//                $length = mb_strlen($text,'utf8');
+//                if($length > 280) {
+//                    $length = ceil($length / 2);
+//                    $words = explode(" ", $text);
+//                    $c = count($words);
+//                    $l = 0;
+//                    $colOutput = '';
+//                    for($i = 1; $i <= 2; $i++) {
+//                        $new_string = "";
+//                        $colOutput .= "<p class=\"paragraph col-lg-6 col-md-6 col-sm-6 col-xs-12\">";
+//                        for($g = $l; $g < $c; $g++) {
+//                            if(mb_strlen($new_string,'utf8') <= $length || $i == 2)
+//                                $new_string .= $words[$g]." ";
+//                            else {
+//                                $l = $g;
+//                                break;
+//                            }
+//                        }
+//                        $colOutput .= $new_string;
+//                        $colOutput .= "</p>";
+//                    }
+//                    echo $colOutput;
+//                }else {
+//                    echo "<p class=\"paragraph col-lg-6 col-md-6 col-sm-6 col-xs-12\">".$text."</p>";
+//                    echo "<p class=\"paragraph col-lg-6 col-md-6 col-sm-6 col-xs-12\"></p>";
+//                }
+//                ?>
+                <?= $aboutText->summary  ?>
             </div>
-            <div class="form-group">
-                <a class="btn btn-info btn-raised" href="<?= Yii::app()->createUrl('/gallery'); ?>">
-                    <?= Yii::t('app' ,'Pictures Gallery') ?>
-                </a>
-                <a class="btn btn-success btn-raised" href="<?= Yii::app()->createUrl('/contactAdmin'); ?>">
-                    <?= Yii::t('app' ,'Contact Admin') ?>
-                </a>
-            </div>
+
         </div>
         <div class="<?= Yii::app()->language == 'fa'?'col-lg-4 col-md-4 col-sm-4 col-xs-12':'hidden'; ?> licenses-container">
             <div class="col-md-6"><img src="<?= Yii::app()->theme->baseUrl .'/images/rasaneh.jpg';?>"></div>
             <div class="col-md-6"><img src="<?= Yii::app()->theme->baseUrl .'/images/enamad.jpg'; ?>"></div>
+            <div class="col-md-12">
+                <a class="btn btn-info btn-raised" href="<?= Yii::app()->createUrl('/gallery'); ?>">
+                    <?= Yii::t('app' ,'Pictures Gallery') ?>
+                </a>
+                <a class="btn btn-success btn-raised" href="<?= Yii::app()->createUrl('/forum'); ?>">
+                    <?= Yii::t('app' ,'Forum') ?>
+                </a>
+            </div>
         </div>
     </div>
 </section>
