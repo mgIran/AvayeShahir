@@ -84,10 +84,10 @@
             type : "POST",
             dataType : "json",
             beforeSend : function () {
-                $form.parents('.comment-widget').find('.loading-container').show();
+                $form.parents('.comment-form-outer').find('.loading-container').show();
             },
             success : function(data){
-                $form.parents('.comment-widget').find('.loading-container').hide();
+                $form.parents('.comment-form-outer').find('.loading-container').hide();
                 $form.html(data.form);
                 if(data.code == "success")
                 {

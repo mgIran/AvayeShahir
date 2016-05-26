@@ -24,7 +24,7 @@
 <!--                    <a href="#" class="social-media google-plus" target="_blank"></a>-->
                     <a href="https://telegram.me/pardiseavayeshahir" target="_blank" class="social-media telegram"></a>
                 </p>
-                <p class="copyright"><?= Yii::t('app','All Rights Reserved By Pardis Avaye Shahir. ©‏') ?>&nbsp;<?= Yii::app()->language=='fa'?JalaliDate::date('Y',time()):date('Y',time()); ?></p>
+                <p class="copyright"><?= Yii::t('app','All Rights Reserved By Pardis Avaye Shahir. ©‏') ?>&nbsp;<?= Yii::app()->language=='fa'?'1394':'2016'; ?></p>
             </div>
             <div class="col-md-4">
                 <?= $this->renderPartial('//layouts/_map'); ?>

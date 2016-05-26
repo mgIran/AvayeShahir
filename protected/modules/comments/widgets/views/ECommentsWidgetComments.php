@@ -17,6 +17,19 @@
                 <div>
                     <?php echo CHtml::encode($comment->comment_text);?>
                 </div>
+
+                <?php if($this->adminMode === true):?>
+                    <div class="admin-panel">
+                        <?php if($this->_config['premoderate'] === true && ($comment->status === null || $comment->status == Comment::STATUS_NOT_APPROWED)) {
+                            echo CHtml::link(Yii::t($this->_config['translationCategory'], 'approve'), Yii::app()->urlManager->createUrl(
+                                CommentsModule::APPROVE_ACTION_ROUTE, array('id'=>$comment->comment_id)
+                            ), array('class'=>'btn btn-success approve'));
+                        }?>
+                        <?php echo CHtml::link(Yii::t($this->_config['translationCategory'], 'delete'), Yii::app()->urlManager->createUrl(
+                            CommentsModule::DELETE_ACTION_ROUTE, array('id'=>$comment->comment_id)
+                        ), array('class'=>'btn btn-danger delete'));?>
+                    </div>
+                <?php endif; ?>
                 <?php
                     if($this->allowSubcommenting === true && ($this->registeredOnly === false || Yii::app()->user->isGuest === false))
                     {
@@ -34,18 +47,6 @@
                         echo "</div>";
                     }
                 ?>
-                <?php if($this->adminMode === true):?>
-                    <div class="admin-panel">
-                        <?php if($this->_config['premoderate'] === true && ($comment->status === null || $comment->status == Comment::STATUS_NOT_APPROWED)) {
-                            echo CHtml::link(Yii::t($this->_config['translationCategory'], 'approve'), Yii::app()->urlManager->createUrl(
-                                CommentsModule::APPROVE_ACTION_ROUTE, array('id'=>$comment->comment_id)
-                            ), array('class'=>'btn btn-success approve'));
-                        }?>
-                        <?php echo CHtml::link(Yii::t($this->_config['translationCategory'], 'delete'), Yii::app()->urlManager->createUrl(
-                            CommentsModule::DELETE_ACTION_ROUTE, array('id'=>$comment->comment_id)
-                        ), array('class'=>'btn btn-danger delete'));?>
-                    </div>
-                <?php endif; ?>
                 <?php if(count($comment->childs) > 0 && $this->allowSubcommenting === true) $this->render('ECommentsWidgetComments', array('comments' => $comment->childs));?>
             </li>
         <?php endforeach;?>

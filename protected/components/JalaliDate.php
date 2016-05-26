@@ -605,11 +605,11 @@ class JalaliDate
         elseif(time() - $time < 60 * 60)
             $str = Yii::t('jalali','half-hour ago');
         elseif(time() - $time < 24 * 60 * 60) {
-            $hour = (int)JalaliDate::gDate("H") - (int)JalaliDate::gDate("H", $time);
-            if(abs($hour) == 1)
+            $hour = (time() - $time) / (60 * 60);
+            if(abs(floor($hour)) == 1)
                 $str = Yii::t('jalali','one hour ago');
             elseif(abs($hour)>1)
-                $str = self::convertNumbers(abs($hour)).' '.Yii::t('jalali','hours ago');
+                $str = self::convertNumbers(abs(floor($hour))).' '.Yii::t('jalali','hours ago');
         } elseif(time() - $time < 2 * 24 * 60 * 60) {
             $str = 'دیروز';
         } elseif(time() - $time < 30 * 24 * 60 * 60) {

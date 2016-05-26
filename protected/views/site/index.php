@@ -560,6 +560,8 @@ endif;
         <div class="<?= Yii::app()->language == 'fa'?'col-lg-4 col-md-4 col-sm-4 col-xs-12':'hidden'; ?> licenses-container">
             <div class="col-md-6"><img src="<?= Yii::app()->theme->baseUrl .'/images/rasaneh.jpg';?>"></div>
             <div class="col-md-6"><img src="<?= Yii::app()->theme->baseUrl .'/images/enamad.jpg'; ?>"></div>
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="col-md-12">
                 <a class="btn btn-info btn-raised" href="<?= Yii::app()->createUrl('/gallery'); ?>">
                     <?= Yii::t('app' ,'Pictures Gallery') ?>

@@ -26,14 +26,30 @@ root {
 
 .en .comments-list .comments-list{
     padding-left: 90px;
+    padding-right: 0;
 }
 
 .comments-list li{
-    background: #fff;
+    background: #fdfdfd;
     overflow: hidden;
+    border: 1px solid #e0e0e0;
+    padding: 30px;
+    border-bottom: none;
+    -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+}
+.comments-list li:first-of-type{
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+}
+.comments-list li:last-of-type{
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+    border-bottom: 1px solid #e0e0e0;
 }
 .comments-list li:nth-child(2n){
-    background: #f3f3f3;
+    background: #f5f5f5;
 }
 .comments-list li .comment-header{
     margin: 15px 0;
