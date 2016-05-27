@@ -7,7 +7,9 @@
 root { 
     display: block;
 }
-
+.comment-widget{
+    max-width: 100%;
+}
 .comments-list{
     list-style-type: none;
     padding: 0;
@@ -21,11 +23,11 @@ root {
 }
 
 .comments-list .comments-list{
-    padding-right: 90px;
+    padding-right: 45px;
 }
 
 .en .comments-list .comments-list{
-    padding-left: 90px;
+    padding-left: 45px;
     padding-right: 0;
 }
 
@@ -66,7 +68,7 @@ root {
 .comments-list li .comment-avatar{
     display: inline-block;
     float: right;
-    margin: 15px;
+    margin: 0 0 15px 15px;
     border-radius: 50%;
     overflow: hidden;
     position: relative;
@@ -107,4 +109,34 @@ root {
 }
 .comment-form-outer{
     position: relative;
+}
+
+
+@media (min-width: 768px) and (max-width: 991px){
+    .comments-list .comments-list{
+        padding-right: 30px;
+    }
+    .en .comments-list .comments-list{
+        padding-left: 30px;
+        padding-right: 0;
+    }
+    .comments-list li{
+        padding: 15px;
+    }
+}
+
+@media (max-width: 767px){
+    .comments-list .comments-list{
+        padding-right: 0;
+    }
+    .en .comments-list .comments-list{
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .comments-list li .comment-avatar{
+        display: none;
+    }
+    .comments-list li{
+        padding: 10px;
+    }
 }

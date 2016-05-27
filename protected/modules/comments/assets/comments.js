@@ -79,7 +79,7 @@
         var $this = $(this);
         var $form = $this.parents('form');
         $.ajax({
-            url : baseUrl+'/comments/comment/postComment',
+            url : $this.attr("href"),
             data : $form.serialize(),
             type : "POST",
             dataType : "json",
@@ -96,6 +96,7 @@
                 }
             }
         });
+        return false;
     });
-
+    //
 })(jQuery);

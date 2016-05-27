@@ -6,7 +6,6 @@
 
 <div class="form">
 <?php $form=$this->beginWidget('CActiveForm', array(
-        'action'=>Yii::app()->createUrl($this->postCommentAction),
         'id'=>$this->id,
 )); ?>
     <?php 
