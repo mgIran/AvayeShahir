@@ -20,7 +20,7 @@
         }else {
             ?>
             <h3><?= Yii::t('app', 'Payment Details') ?></h3>
-            <div class="table">
+            <div class="table payment">
                 <div class="tr">
                     <div class="td"><?= Yii::t('app', 'Title') ?></div>
                     <div class="td"><?= $class->title ?></div>

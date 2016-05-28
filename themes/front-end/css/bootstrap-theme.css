@@ -2216,14 +2216,14 @@ section.classes h3{
 .btn{
     font-size: 18px !important;
 }
-.tr{
+.payment .tr{
     display: table-row;
     border-bottom: 2px solid #444;
 }
-.tr:nth-child(odd){
+.payment .tr:nth-child(odd){
     background-color: rgba(10, 106, 161, 0.09);
 }
-.td{
+.payment .td{
     display: table-cell;
     width: 1%;
     padding:7.5px 15px;
@@ -2231,15 +2231,15 @@ section.classes h3{
 .blue-link{
     color: #419bf1;
 }
-.td a{
+.payment .td a{
     color: #89a404;
 }
 .blue-link:hover,
 .blue-link:focus{
     color: rgba(69, 164, 255, 0.95);
 }
-.td a:hover,
-.td a:focus{
+.payment .td a:hover,
+.payment .td a:focus{
     color: #9bba05;
 }
 
