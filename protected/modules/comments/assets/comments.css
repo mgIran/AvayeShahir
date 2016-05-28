@@ -37,9 +37,6 @@ root {
     border: 1px solid #e0e0e0;
     padding: 30px;
     border-bottom: none;
-    -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
-    -moz-box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
-    box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
 }
 .comments-list li:first-of-type{
     border-top-left-radius: 2px;
@@ -106,6 +103,11 @@ root {
     position: relative;
     right: 0px;
     left: 0;
+}
+.comments-list .comment-header + div{
+    direction: ltr;
+    text-align: left;
+    white-space: pre-line;
 }
 .comment-form-outer{
     position: relative;

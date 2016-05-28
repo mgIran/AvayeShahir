@@ -58,7 +58,7 @@ class Users extends CActiveRecord
         return array(
             array('password, email', 'required', 'on' => 'insert,agreeTerms'),
             array('agreeTerms', 'compare', 'compareValue' => 1, 'operator' => '==', 'message' => Yii::t('app', 'You Rejected the Terms and Policies'), 'on' => 'agreeTerms'),
-            array('email', 'unique','on' => 'insert,create'),
+            array('email', 'unique','on' => 'insert,create,agreeTerms'),
             array('change_password_request_count', 'numerical', 'integerOnly'=>true),
             array('role_id', 'default', 'value' => 1, 'on' => 'insert,agreeTerms'),
             array('status', 'default', 'value' => 1, 'on' => 'insert,agreeTerms'),

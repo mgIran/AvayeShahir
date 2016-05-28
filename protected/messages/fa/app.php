@@ -97,4 +97,16 @@ return array(
     'Forum' => 'بخش تبادل نظر',
     'Forget Password' => 'فراموشی کلمه عبور',
     'Recover Password' => 'بازیابی کلمه عبور',
+    'Register in Class' => 'ثبت نام در کلاس',
+    'Payment' => 'پرداخت',
+    'Tuition Fee' => 'مبلغ قابل پرداخت',
+    'Payment Details' => 'اطلاعات پرداخت',
+    'Log In' => 'وارد شوید',
+    'or' => 'یا',
+    'To enroll in this class, you should first become a member.' => 'برای ثبت نام در کلاس، ابتدا باید عضو شوید.',
+    'You have already registered in this class.' => 'شما قبلا در این کلاس ثبت نام کرده اید.',
+    'Sorry! This class is fully enrolled.' => 'با عرض پوزش! ظرفیت این کلاس تکمیل شده است.',
+    'Please accept our apologies. The deadline for registration has passed.' => 'با عرض پوزش! زمان ثبت نام این کلاس تمام شده است.',
+    'Please accept our apologies. The registration has not started yet.' => 'با عرض پوزش! مهلت ثبت نام هنوز شروع نشده است.',
+    'Back' => 'بازگشت'
 );

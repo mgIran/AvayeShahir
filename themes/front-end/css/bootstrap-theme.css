@@ -2061,10 +2061,6 @@ section.classes h3{
     font-size: 24px;
     color: #1467b7 !important;
 }
-.currency{
-    color: #ff6437 !important;
-    font-size: 18px !important;
-}
 .page-title-container.gallery.courses{
     background: url("../images/gallery-bg.jpg");
 }
@@ -2123,7 +2119,7 @@ section.classes h3{
     font-size: 16px;
 }
 .comment-widget{
-    width: 100%;
+    width: 800px;
     margin: 0 auto;
 }
 .comment-widget h3{
@@ -2219,4 +2215,34 @@ section.classes h3{
 }
 .btn{
     font-size: 18px !important;
+}
+.tr{
+    display: table-row;
+    border-bottom: 2px solid #444;
+}
+.tr:nth-child(odd){
+    background-color: rgba(10, 106, 161, 0.09);
+}
+.td{
+    display: table-cell;
+    width: 1%;
+    padding:7.5px 15px;
+}
+.blue-link{
+    color: #419bf1;
+}
+.td a{
+    color: #89a404;
+}
+.blue-link:hover,
+.blue-link:focus{
+    color: rgba(69, 164, 255, 0.95);
+}
+.td a:hover,
+.td a:focus{
+    color: #9bba05;
+}
+
+.btn-lg{
+    font-size: 24px !important;
 }
