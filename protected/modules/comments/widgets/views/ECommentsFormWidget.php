@@ -49,8 +49,8 @@
     <?php endif; ?>
 
     <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <?php echo CHtml::link(Yii::t($this->_config['translationCategory'],'Add '.$this->_config['moduleObjectName']),Yii::app()->createUrl($this->postCommentAction),
-            array('class'=> 'btn btn-success pull-left comment-submit-form'));
+        <?php echo CHtml::button(Yii::t($this->_config['translationCategory'],'Add '.$this->_config['moduleObjectName']),
+            array('data-url'=>Yii::app()->createAbsoluteUrl($this->postCommentAction),'class'=> 'btn btn-success pull-left comment-submit-form-btn'));
         ?>
     </div>
 <?php $this->endWidget(); ?>

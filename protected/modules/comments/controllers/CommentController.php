@@ -114,6 +114,20 @@ class CommentController extends Controller
 		if(isset($_POST['Comment']) && Yii::app()->request->isAjaxRequest){
 			$comment = new Comment();
 			$comment->attributes = $_POST['Comment'];
+			$criteria = new CDbCriteria;
+
+			$criteria->compare('owner_name', $comment->owner_name, true);
+			$criteria->compare('owner_id', $comment->owner_id);
+			$criteria->compare('parent_comment_id', $comment->parent_comment_id);
+			$criteria->compare('creator_id', $comment->creator_id);
+			$criteria->compare('user_name', $comment->user_name, false);
+			$criteria->compare('user_email', $comment->user_email, false);
+			$criteria->compare('comment_text', $comment->comment_text, false);
+			$criteria->addCondition('create_time>:time');
+			$criteria->params[':time'] =  time()-15;
+			$model = Comment::model()->find($criteria);
+			if($model)
+				Yii::app()->end();
 			$result = array();
 			if($comment->save()){
 				$result['code'] = 'success';

@@ -74,12 +74,14 @@
         $dialog.data('widgetID', id);
     };
 
-    $('body').on('click' ,'.comment-submit-form',function (e) {
-        e.preventDefault();
-        var $this = $(this);
+    $('body').on('click' ,'.comment-submit-form-btn',function (e) {
+        $.fn.commentsList.postComment($(this));
+    });
+
+    $.fn.commentsList.postComment = function($this){
         var $form = $this.parents('form');
         $.ajax({
-            url : $this.attr("href"),
+            url : $this.data("url"),
             data : $form.serialize(),
             type : "POST",
             dataType : "json",
@@ -96,7 +98,6 @@
                 }
             }
         });
-        return false;
-    });
+    };
     //
 })(jQuery);

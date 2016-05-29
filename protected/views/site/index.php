@@ -402,8 +402,8 @@ endif;
                                     </span>
                                 </div>
                                 <div class="text-center">
-                                    <a href="#"
-                                       class="btn" readonly="true" disabled="true" onclick="return false;"><?= Yii::t('app','Register')?>
+                                    <a href="<?= Yii::app()->createUrl('/courses/register/'.$class->id) ?>"
+                                       class="btn" ><?= Yii::t('app','Register')?>
                                     </a>
                                 </div>
                             </div>

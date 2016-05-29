@@ -4,6 +4,7 @@ class ClassRegisterController extends Controller
 {
     public $layout='//layouts/inner';
 
+    private $merchant = '-6194e8aa-0589-11e6-9b18-005056a205be';
     /**
      * @return array action filters
      */
@@ -22,6 +23,10 @@ class ClassRegisterController extends Controller
     public function accessRules()
     {
         return array(
+            array('allow',  // allow all users to perform 'index' and 'views' actions
+                'actions'=>array('admin'),
+                'roles' => array('admin'),
+            ),
             array('allow',  // allow all users to perform 'index' and 'views' actions
                 'actions'=>array('index','bill','verify'),
                 'users' => array('*'),
@@ -95,7 +100,7 @@ class ClassRegisterController extends Controller
                 $model->class_id = $id;
                 $model->user_id = Yii::app()->user->getId();
                 $model->amount = $class->price;
-                $model->description = 'پرداخت شهریه جهت ثبت نام در کلاس '.$class->title;  // Required
+                $model->description = 'پرداخت شهریه جهت ثبت نام در دوره '.$class->course->title.'، کلاس '.$class->title;  // Required
                 $model->date = time();
                 if($model->save()) {
                     $flag = true;
@@ -104,7 +109,7 @@ class ClassRegisterController extends Controller
             }
             if($flag){
                 // Redirect to payment gateway
-                $MerchantID = '6194e8aa-0589-11e6-9b18-005056a205be';  //Required
+                $MerchantID = $this->merchant;  //Required
                 $Amount = intval($lastTransaction->amount); //Amount will be based on Toman  - Required
                 $Description = $lastTransaction->description;  // Required
                 $Email = $user->email; // Optional
@@ -143,7 +148,7 @@ class ClassRegisterController extends Controller
 //        $this->layout='//layouts/inner';
 //        $model=UserTransactions::model()->findByAttributes(array('user_id'=>Yii::app()->user->getId(), 'status'=>'unpaid'));
 //        $userClassRel = new UserClassRel();
-//        $MerchantID = '6194e8aa-0589-11e6-9b18-005056a205be';
+//        $MerchantID = $this->merchant;
 //        $Amount = $model->amount; //Amount will be based on Toman
 //        $Authority = $_GET['Authority'];
 //
@@ -199,5 +204,34 @@ class ClassRegisterController extends Controller
 //            'model'=>$model,
 //            'userDetails'=>$userDetails,
 //        ));
+    }
+
+    public function actionAdmin(){
+        Yii::app()->theme = 'abound';
+        $this->layout = '//layouts/column1';
+        $classIds = Yii::app()->db->createCommand()
+            ->selectDistinct('class_id')
+            ->from('{{user_transactions}}')
+            ->where('status = "paid"')
+            ->order('class_id DESC')
+            ->queryColumn();
+        $classTransactions = array();
+        foreach($classIds as $id)
+        {
+            $class = Classes::model()->findByPk($id);
+            $dataProvider = new CActiveDataProvider('UserTransactions',array(
+                'criteria' => array(
+                    'condition' => 'class_id = :class_id AND status = "paid"',
+                    'params' => array(':class_id'=>$id)
+                ),
+                'pagination' => false
+            ));
+            $classTransactions[$id]['dataProvider'] = $dataProvider;
+            $classTransactions[$id]['class'] = $class;
+        }
+        $this->render('admin',array(
+            'courses' => Courses::model()->findAll(),
+            'classTransactions' => $classTransactions
+        ));
     }
 }

@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50612
 File Encoding         : 65001
 
-Date: 2016-05-12 15:04:26
+Date: 2016-05-29 14:35:27
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -80,15 +80,13 @@ CREATE TABLE `ym_classes` (
   KEY `course_id` (`course_id`),
   CONSTRAINT `ym_classes_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `ym_class_categories` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
   CONSTRAINT `ym_classes_ibfk_2` FOREIGN KEY (`course_id`) REFERENCES `ym_courses` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
 
 -- ----------------------------
 -- Records of ym_classes
 -- ----------------------------
-INSERT INTO `ym_classes` VALUES ('1', 'اسپیکینگ تافل آی بی تی گروه 1', '<p dir=\"RTL\">دردوره اسپیکینگ تافل آی بی تی، علاوه بر معرفی هر 6 صورت سوال این بخش و تکنیک های مورد نیاز، تلاش خواهد شد که دانش زبانی داوطلبین هم بهتر شود. در ضمن <u><strong>مهارت نت برداری</strong></u> که یکی از اصلی ترین مهارت های تافل آی بی تی است نیز با دقت و ظرافت تدریس خواهد شد.&nbsp;با برگزاری این دوره ها، امیدواریم که بتوانیم سهم کوچکی در بالا بردن سطح علمی دانشجویان عزیزمان داشته باشیم و راه را برای پیشرفت های آتی آنها هموار سازیم.</p>\r\n\r\n<p dir=\"RTL\">با آرزوی بهروزی همه عزیزان</p>\r\n\r\n<p dir=\"RTL\">مدرس تافل موسسه پردیس آوای شهیر</p>\r\n\r\n<p><span dir=\"RTL\">امیر خادم المله</span></p>\r\n', '20', '250000', '1462822200', '1463427000', '1463513400', '1466537400', '21', '13', '33', '0', null, '12', '16', 'دوشنبه,سه شنبه');
-INSERT INTO `ym_classes` VALUES ('2', 'رایتینگ تافل آی بی تی گروه 1', '<p dir=\"RTL\" style=\"text-align:justify\">دوره های آموزش تافل که قرار است در موسسه &nbsp;پردیس آوای شهیر برگزار شود با دوره هایی که در دانشگاه شریف برگزار میکنم تفاوت دارد. در این دوره ها، علاوه بر نمونه هایی که در طول دوره تصحیح میگردند،&nbsp;دو نمونه از رایتینگ های هر داوطلب به طور رایگان در طول ترم تصحیح میگردد که تاثیر به سزایی در نمره تافل آنها خواهد داشت.&nbsp;در انتهای هر دوره نیز، بنا به نیاز زبان آموزان، یک گارکاه چند ساعته برگزار خواهد شد که در آن صرفا نمونه رایتینگ هر یک از داوطلبین برسی شده ونکات کلیدی و نهایی به آنها آموخته میشود. با برگزاری این دوره ها، امیدواریم که بتوانیم سهم کوچکی در بالا بردن سطح علمی دانشجویان عزیزمان داشته باشیم و راه را برای پیشرفت های آتی آنها هموار سازیم.</p>\r\n\r\n<p dir=\"RTL\">با آرزوی بهروزی همه عزیزان</p>\r\n\r\n<p dir=\"RTL\">مدرس تافل موسسه پردیس آوای شهیر</p>\r\n\r\n<p><span dir=\"RTL\">امیر خادم المله</span></p>\r\n', '25', '400000', '1462822200', '1463427000', '1463599800', '1469647800', '22', '13', '33', '1', null, '10', '14', 'دوشنبه,سه شنبه');
-INSERT INTO `ym_classes` VALUES ('3', 'رایتینگ تافل آی بی تی گروه 2', '<p dir=\"RTL\" style=\"text-align: justify;\">دوره های آموزش تافل که قرار است در موسسه &nbsp;پردیس آوای شهیر برگزار شود با دوره هایی که در دانشگاه شریف برگزار میکنم تفاوت دارد. در این دوره ها، علاوه بر نمونه هایی که در طول دوره تصحیح میگردند،&nbsp;دو نمونه از رایتینگ های هر داوطلب به طور رایگان در طول ترم تصحیح میگردد که تاثیر به سزایی در نمره تافل آنها خواهد داشت.&nbsp;در انتهای هر دوره نیز، بنا به نیاز زبان آموزان، یک گارکاه چند ساعته برگزار خواهد شد که در آن صرفا نمونه رایتینگ هر یک از داوطلبین برسی شده ونکات کلیدی و نهایی به آنها آموخته میشود. با برگزاری این دوره ها، امیدواریم که بتوانیم سهم کوچکی در بالا بردن سطح علمی دانشجویان عزیزمان داشته باشیم و راه را برای پیشرفت های آتی آنها هموار سازیم.</p>\r\n\r\n<p dir=\"RTL\">با آرزوی بهروزی همه عزیزان</p>\r\n\r\n<p dir=\"RTL\">مدرس تافل موسسه پردیس آوای شهیر</p>\r\n\r\n<p><span dir=\"RTL\">امیر خادم المله</span></p>\r\n', '25', '400000', '1462822200', '1463427000', '1463599800', '1469647800', '22', '13', '33', '2', null, '16', '18', 'دوشنبه,سه شنبه');
-INSERT INTO `ym_classes` VALUES ('4', 'اسپیکینگ تافل آی بی تی گروه 2', '<p dir=\"RTL\">دردوره اسپیکینگ تافل آی بی تی، علاوه بر معرفی هر 6 صورت سوال این بخش و تکنیک های مورد نیاز، تلاش خواهد شد که دانش زبانی داوطلبین هم بهتر شود. در ضمن <u><strong>مهارت نت برداری</strong></u> که یکی از اصلی ترین مهارت های تافل آی بی تی است نیز با دقت و ظرافت تدریس خواهد شد.&nbsp;با برگزاری این دوره ها، امیدواریم که بتوانیم سهم کوچکی در بالا بردن سطح علمی دانشجویان عزیزمان داشته باشیم و راه را برای پیشرفت های آتی آنها هموار سازیم.</p>\r\n\r\n<p dir=\"RTL\">با آرزوی بهروزی همه عزیزان</p>\r\n\r\n<p dir=\"RTL\">مدرس تافل موسسه پردیس آوای شهیر</p>\r\n\r\n<p>امیر خادم المله</p>\r\n', '20', '250000', '1462822200', '1463427000', '1463513400', '1466537400', '21', '13', '33', '3', '', '13', '16', 'دوشنبه,سه شنبه');
+INSERT INTO `ym_classes` VALUES ('5', 'ترم زوج', '', '3', '350000', '1464307400', '1465155000', '1465327800', '1465759800', '33', '18', '35', '1', '10', '10:30', '5.30', 'شنبه');
+INSERT INTO `ym_classes` VALUES ('6', 'asd', '', '25', '500000', '1465155000', '1466278200', '1465155000', '1466019000', '34', '15', '35', '2', '', '', '', '');
 
 -- ----------------------------
 -- Table structure for ym_class_categories
@@ -199,7 +197,7 @@ CREATE TABLE `ym_class_category_file_links` (
   PRIMARY KEY (`id`),
   KEY `category_id` (`category_id`),
   CONSTRAINT `ym_class_category_file_links_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `ym_class_categories` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=70 DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
 
 -- ----------------------------
 -- Records of ym_class_category_file_links
@@ -288,41 +286,34 @@ CREATE TABLE `ym_class_tag_rel` (
 -- ----------------------------
 DROP TABLE IF EXISTS `ym_comments`;
 CREATE TABLE `ym_comments` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `model_name` varchar(255) COLLATE utf8_persian_ci DEFAULT NULL,
-  `model_id` int(10) unsigned DEFAULT NULL,
-  `author` varchar(255) COLLATE utf8_persian_ci DEFAULT NULL COMMENT 'نویسنده',
-  `author_email` varchar(255) COLLATE utf8_persian_ci DEFAULT NULL COMMENT 'پست الکترونیک',
-  `author_ip` varchar(45) COLLATE utf8_persian_ci DEFAULT NULL COMMENT 'IP',
-  `content` text COLLATE utf8_persian_ci COMMENT 'متن پیام',
-  `date` varchar(20) COLLATE utf8_persian_ci DEFAULT NULL COMMENT 'تاریخ',
-  `status` enum('pending','accept','deleted') COLLATE utf8_persian_ci DEFAULT NULL COMMENT 'وضعیت',
-  `parent_id` int(10) unsigned DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `parent_id` (`parent_id`),
-  CONSTRAINT `ym_comments_ibfk_1` FOREIGN KEY (`parent_id`) REFERENCES `ym_comments` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
+  `owner_name` varchar(50) COLLATE utf8_persian_ci NOT NULL,
+  `owner_id` int(12) NOT NULL,
+  `comment_id` int(12) NOT NULL AUTO_INCREMENT,
+  `parent_comment_id` int(12) DEFAULT NULL,
+  `creator_id` int(12) DEFAULT NULL,
+  `user_name` varchar(128) COLLATE utf8_persian_ci DEFAULT NULL,
+  `user_email` varchar(128) COLLATE utf8_persian_ci DEFAULT NULL,
+  `comment_text` text COLLATE utf8_persian_ci,
+  `create_time` int(11) DEFAULT NULL,
+  `update_time` int(11) DEFAULT NULL,
+  `status` int(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`comment_id`),
+  KEY `owner_name` (`owner_name`,`owner_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
 
 -- ----------------------------
 -- Records of ym_comments
 -- ----------------------------
-
--- ----------------------------
--- Table structure for ym_comment_likes
--- ----------------------------
-DROP TABLE IF EXISTS `ym_comment_likes`;
-CREATE TABLE `ym_comment_likes` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `comment_id` int(10) unsigned NOT NULL,
-  `ip` varchar(45) COLLATE utf8_persian_ci NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `comment_id` (`comment_id`),
-  CONSTRAINT `ym_comment_likes_ibfk_1` FOREIGN KEY (`comment_id`) REFERENCES `ym_comments` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
-
--- ----------------------------
--- Records of ym_comment_likes
--- ----------------------------
+INSERT INTO `ym_comments` VALUES ('Pages', '2', '44', null, '34', null, null, 'test', '1464501796', null, '0');
+INSERT INTO `ym_comments` VALUES ('Pages', '2', '45', null, '34', null, null, 'سلام خدنمشس سشیبد شسیب شسیلشسیب شسیبشسئیبمنشسیئ بمسی بم مشمسی ب', '1464501842', null, '0');
+INSERT INTO `ym_comments` VALUES ('Pages', '2', '46', '45', '34', null, null, 'شسیلشسیلشسیب', '1464501848', null, '0');
+INSERT INTO `ym_comments` VALUES ('Pages', '2', '47', null, '34', null, null, 'سیلشسل', '1464501853', null, '0');
+INSERT INTO `ym_comments` VALUES ('Pages', '2', '48', null, '34', null, null, 'sdfasdf', '1464502171', null, '0');
+INSERT INTO `ym_comments` VALUES ('Pages', '2', '49', null, '34', null, null, 'sadgsdg', '1464503306', null, '0');
+INSERT INTO `ym_comments` VALUES ('Pages', '2', '50', null, '34', null, null, 'testttttttt', '1464503444', null, '0');
+INSERT INTO `ym_comments` VALUES ('Pages', '2', '51', null, '34', null, null, 'efggasdgfdg', '1464503451', null, '0');
+INSERT INTO `ym_comments` VALUES ('Pages', '2', '52', null, '34', null, null, 'tere', '1464503464', null, '0');
+INSERT INTO `ym_comments` VALUES ('Pages', '2', '53', null, '34', null, null, 'asdgsdgsdgasf', '1464503479', null, '0');
 
 -- ----------------------------
 -- Table structure for ym_counter_save
@@ -337,11 +328,11 @@ CREATE TABLE `ym_counter_save` (
 -- ----------------------------
 -- Records of ym_counter_save
 -- ----------------------------
-INSERT INTO `ym_counter_save` VALUES ('counter', '124');
-INSERT INTO `ym_counter_save` VALUES ('day_time', '2457521');
+INSERT INTO `ym_counter_save` VALUES ('counter', '132');
+INSERT INTO `ym_counter_save` VALUES ('day_time', '2457538');
 INSERT INTO `ym_counter_save` VALUES ('max_count', '18');
 INSERT INTO `ym_counter_save` VALUES ('max_time', '1462519800');
-INSERT INTO `ym_counter_save` VALUES ('yesterday', '0');
+INSERT INTO `ym_counter_save` VALUES ('yesterday', '1');
 
 -- ----------------------------
 -- Table structure for ym_counter_users
@@ -356,7 +347,7 @@ CREATE TABLE `ym_counter_users` (
 -- ----------------------------
 -- Records of ym_counter_users
 -- ----------------------------
-INSERT INTO `ym_counter_users` VALUES ('837ec5754f503cfaaee0929fd48974e7', '1463036305');
+INSERT INTO `ym_counter_users` VALUES ('837ec5754f503cfaaee0929fd48974e7', '1464516086');
 
 -- ----------------------------
 -- Table structure for ym_courses
@@ -369,16 +360,35 @@ CREATE TABLE `ym_courses` (
   `summary` text COLLATE utf8_persian_ci NOT NULL COMMENT 'توضیحات',
   `order` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
 
 -- ----------------------------
 -- Records of ym_courses
 -- ----------------------------
-INSERT INTO `ym_courses` VALUES ('13', 'تافل آی بی تی', 'ys60w1461190889.png', '<p>دوره تافل آی بی تی موسسه آوای شهیر زیر نظر&nbsp;امیر خادم،&nbsp;با رویکردی متفاوت از اغلب مراکز دیگر، برگزار میگردد<span dir=\"LTR\">.</span></p>\r\n', '1');
+INSERT INTO `ym_courses` VALUES ('13', 'تافل آی بی تی', 'ys60w1461190889.png', '<p>دوره تافل آی بی تی موسسه آوای شهیر زیر نظر&nbsp;امیر خادم،&nbsp;با رویکردی متفاوت از اغلب مراکز دیگر، برگزار میگردد<span dir=\"LTR\">.</span></p>\r\n', '3');
 INSERT INTO `ym_courses` VALUES ('15', 'آیلتس', 'VtRG01462256706.jpg', '<p dir=\"RTL\" style=\"text-align:justify\">دوره های آموزش آیلتس&nbsp;موسسه پردیس آوای شهیر نیز مانند دوره های&nbsp;تافل آن&nbsp;تفاوت های چشمگیری&nbsp;دارد با دوره هایی که خود اینجانب، امیر خادم، سابقا برگزار میکردم و دوره هایی که موسسات دیگر برگزار میکنند.&nbsp;اول اینکه در این دوره ها تخفیف های ویژه ای&nbsp;برای&nbsp;دانشجویان عزیز در نظر گرفته شده &ndash; که بخشی از آن در سایت نت برگ ارائه خواهد شد &ndash; که شرایط ثبت نام را برای آنها ایده آل میکند. دوم اینکه، برعکس تمام موسسات، دو نمونه از رایتینگ های هر داوطلب به طور رایگان در طول ترم تصحیح میگردد که تاثیر به سزایی در نمره آیلتس آنها خواهد داشت. سوم اینکه در انتهای هر دوره، بنا به نیاز زبان آموزان، یک گارکاه چند ساعته برگزار خواهد شد که در آن صرفا نمونه رایتینگ هر یک از داوطلبین برسی شده ونکات کلیدی و نهایی به آنها آموخته میشود. با برگزاری این دوره ها، امیدواریم که بتوانیم سهم کوچکی در بالا بردن سطح علمی دانشجویان عزیزمان داشته باشیم و راه را برای پیشرفت های آتی آنها هموار سازیم.</p>\r\n\r\n<p dir=\"RTL\" style=\"text-align:justify\">با آرزوی بهروزی همه عزیزان</p>\r\n\r\n<p dir=\"RTL\">مدیر&nbsp;موسسه پردیس آوای شهیر</p>\r\n\r\n<p><span dir=\"RTL\">امیر خادم المله</span></p>\r\n', '2');
-INSERT INTO `ym_courses` VALUES ('16', 'جی آر ای', 'Jrx8T1461469114.jpg', '<p>کتاب ها و منابعی که برای امتحان جی آر ای ارائه شده اند بسیاراند، ولی با خواندن این منابع گلچین شده میتوانید نمره دلخواهتان را بگیرید.</p>\r\n\r\n<p>با آرزوی موفقیت شما</p>\r\n\r\n<p>امیر خادم: مدیر موسسه پردیس آوای شهیر</p>\r\n', '3');
+INSERT INTO `ym_courses` VALUES ('16', 'جی آر ای', 'Jrx8T1461469114.jpg', '<p>کتاب ها و منابعی که برای امتحان جی آر ای ارائه شده اند بسیاراند، ولی با خواندن این منابع گلچین شده میتوانید نمره دلخواهتان را بگیرید.</p>\r\n\r\n<p>با آرزوی موفقیت شما</p>\r\n\r\n<p>امیر خادم: مدیر موسسه پردیس آوای شهیر</p>\r\n', '4');
 INSERT INTO `ym_courses` VALUES ('17', 'جی ام ای تی (جی مت)', 'pPOIC1462256630.jpg', '<p>این منابع از بهترین منابع امتحان&nbsp;جی ام ای تی (جی مت) هستند که امیدواریم برایتان سودمند باشند.&nbsp;</p>\r\n\r\n<p>امیر خادم</p>\r\n', '5');
-INSERT INTO `ym_courses` VALUES ('18', 'تافل دکتری', 'e3OsE1461392230.jpg', '<p>امتحان تافل دکتری، که برای دانشجویان دکتری در ایران برگزار میگردد،&nbsp;همان امتحان تافل پی بی تی است با این تفاوت که بخش رایتینگ ندارد. بنابراین، خواندن این منابع برای یک نمره خوب کافی است.</p>\r\n', '4');
+INSERT INTO `ym_courses` VALUES ('18', 'تافل دکتری', 'e3OsE1461392230.jpg', '<p>امتحان تافل دکتری، که برای دانشجویان دکتری در ایران برگزار میگردد،&nbsp;همان امتحان تافل پی بی تی است با این تفاوت که بخش رایتینگ ندارد. بنابراین، خواندن این منابع برای یک نمره خوب کافی است.</p>\r\n', '1');
+
+-- ----------------------------
+-- Table structure for ym_gallery
+-- ----------------------------
+DROP TABLE IF EXISTS `ym_gallery`;
+CREATE TABLE `ym_gallery` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(200) COLLATE utf8_persian_ci DEFAULT NULL COMMENT 'عنوان',
+  `desc` varchar(1024) COLLATE utf8_persian_ci DEFAULT NULL COMMENT 'توضیحات',
+  `file_name` varchar(200) COLLATE utf8_persian_ci NOT NULL COMMENT 'آدرس فایل',
+  `order` int(10) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
+
+-- ----------------------------
+-- Records of ym_gallery
+-- ----------------------------
+INSERT INTO `ym_gallery` VALUES ('20', 'سالن کنفرانس', 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.', '9f6gl1463392725.jpg', '1');
+INSERT INTO `ym_gallery` VALUES ('21', 'ساختمان اصلی', 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.', 'tdXI41463392606.png', '2');
 
 -- ----------------------------
 -- Table structure for ym_google_maps
@@ -415,10 +425,10 @@ CREATE TABLE `ym_pages` (
 -- ----------------------------
 -- Records of ym_pages
 -- ----------------------------
-INSERT INTO `ym_pages` VALUES ('2', 'درباره ما', '<p><span dir=\"RTL\">موسسه پردیس آوای شهیر یک موسسه علمی-فرهنگی است که در سال 1394 تاسیس شده و که در زمینه های فرهنگی وهنری به طور عام و آموزش زبان انگلیسی به طور خاص فعالیت خود را آغاز کرده و تلاش میکند تا خدماتی نو و خلاقانه را که درخور مردم عزیز ایران است را ارايه کند.</span>&nbsp;<br />\r\n<span dir=\"RTL\">به امید بهروزی شما</span>&nbsp;<br />\r\n<span dir=\"RTL\">مدیر موسسه آوای شهیر:&nbsp;امیر خادم المله</span></p>\r\n', '4');
+INSERT INTO `ym_pages` VALUES ('2', 'ارتباط با ادمین', null, '4');
 INSERT INTO `ym_pages` VALUES ('3', 'تماس با ما', '<p>sadf</p>\r\n', '4');
 INSERT INTO `ym_pages` VALUES ('5', 'قوانین و مقررات', '<p dir=\"RTL\"><strong>قوانین و مقررات موسسه آوای شهیر</strong></p>\r\n\r\n<ol>\r\n	<li dir=\"RTL\">رعایت شئونات اسلامی،&nbsp;قوانین، و مقررات جمهوری اسلامی ایران و همچنین مقررات موسسه الزامی میباشد<span dir=\"LTR\">.</span></li>\r\n	<li dir=\"RTL\">رعایت ادب در فضای مجازی چه در سایت چه در تلگرام الزامی می باشد<span dir=\"LTR\">.</span></li>\r\n	<li dir=\"RTL\">هیچ یک از اساتید، کارمندان، و مراجعین حق ندارند مسائل سیاسی را در محیط آموزشگاه و یا در فضای سایبری موسسه مطرح کند.</li>\r\n	<li dir=\"RTL\">شهریه به هیچ عنوان مسترد نمی گردد<span dir=\"LTR\">.</span></li>\r\n	<li dir=\"RTL\">همراه داشتن فیش ثبت نام برای اولین حضور سر کلاس&nbsp;الزامی می باشد<span dir=\"LTR\">.</span></li>\r\n	<li dir=\"RTL\">تغییر روز و ساعت کلاس امکان پذیر نمی باشد مگر با موافقت کتبی کلیه دانشجویان و استاد و تایید موسسه<span dir=\"LTR\">.</span></li>\r\n	<li dir=\"RTL\">استفاده از تلفن همراه در طول مدت کلاس ممنوع می باشد<span dir=\"LTR\">.</span></li>\r\n	<li dir=\"RTL\">توضیحات مندرجه در مورد هر دوره را با دقت مطالعه نموده و متناسب با این توضیحات ثبت نام فرمایید<span dir=\"LTR\">.</span></li>\r\n	<li dir=\"RTL\">اطلاعیه ها و دستورالعمل هایی که&nbsp;در سایت و یا از طریق تلگرام در اختیارتان قرار میگیرد&nbsp;را بدقت مطالعه فرمایید<span dir=\"LTR\">.</span></li>\r\n	<li dir=\"RTL\">آوای شهیر هرگز اطلاعات شما را بصورت تلفنی یا از طریق پیامک درخواست نخواهد کرد. درصورتیکه فردی با این عنوان اطلاعات شما را درخواست نمود، موارد را به مدیریت گزارش فرمایید<span dir=\"LTR\">.</span></li>\r\n	<li dir=\"RTL\"><span dir=\"RTL\">هرگونه مورد نامناسبی</span>&nbsp;<span dir=\"RTL\">در فضای کلاس و موسسه را بلافاصله به مدیریت گزارش فرمایید</span>.</li>\r\n</ol>\r\n', '1');
-INSERT INTO `ym_pages` VALUES ('12', 'درباره ما-صحفه اصلی', '<p>موسسه پردیس آوای شهیر یک موسسه علمی-فرهنگی است که در سال 1394 تاسیس شده و که در زمینه های فرهنگی وهنری به طور عام و آموزش زبان انگلیسی به طور خاص فعالیت خود را آغاز کرده و تلاش میکند تا خدماتی نو و خلاقانه را که درخور مردم عزیز ایران است را ارايه کند.<br />\r\nبه امید بهروزی شما<br />\r\nمدیر موسسه آوای شهیر: امیر خادم المله</p>\r\n', '4');
+INSERT INTO `ym_pages` VALUES ('12', 'درباره ما', '<p>موسسه پردیس آوای شهیر یک موسسه علمی-فرهنگی است که در سال 1394 تاسیس شده و که در زمینه های فرهنگی وهنری به طور عام و آموزش زبان انگلیسی به طور خاص فعالیت خود را آغاز کرده و تلاش میکند تا خدماتی نو و خلاقانه را که درخور مردم عزیز ایران است را ارايه کند.<br />\r\nبه امید بهروزی شما<br />\r\nمدیر موسسه آوای شهیر: امیر خادم المله</p>\r\n', '4');
 INSERT INTO `ym_pages` VALUES ('13', 'سلام', '<p>سشیکمئبمسشئبئکم سشنمبئکشسمنئی سشنئب کنمشسئ</p>\r\n', '2');
 INSERT INTO `ym_pages` VALUES ('14', 'راهنما', '<p>ستیدبمشسکدئیب</p>\r\n', '2');
 
@@ -970,7 +980,7 @@ CREATE TABLE `ym_teacher_details` (
 -- ----------------------------
 -- Records of ym_teacher_details
 -- ----------------------------
-INSERT INTO `ym_teacher_details` VALUES ('33', null, 'یوسف', 'مبشری', null, null, null, null, null, null);
+INSERT INTO `ym_teacher_details` VALUES ('35', 'f4ypH1464409597.png', 'علی', 'غفاریان', 'کارشناسی ارشد زبان انگلیسی', '', '[{\"value\":\"http:\\/\\/facebook.com\\/ali\"},{\"value\":\"http:\\/\\/www.twitter.com\\/me\"}]', '09125383080', '', '3jpgJ1464409694.pdf');
 
 -- ----------------------------
 -- Table structure for ym_towns
@@ -1031,7 +1041,7 @@ CREATE TABLE `ym_translations` (
   PRIMARY KEY (`id`),
   KEY `attribute` (`attribute`),
   KEY `table_name` (`table_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=1706 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1763 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of ym_translations
@@ -1290,6 +1300,29 @@ INSERT INTO `ym_translations` VALUES ('1696', '{{class_categories}}', '38', 'tit
 INSERT INTO `ym_translations` VALUES ('1697', '{{class_categories}}', '38', 'summary', 'en', '');
 INSERT INTO `ym_translations` VALUES ('1700', '{{classes}}', '7', 'title', 'en', '');
 INSERT INTO `ym_translations` VALUES ('1701', '{{classes}}', '7', 'summary', 'en', '');
+INSERT INTO `ym_translations` VALUES ('1702', '{{gallery}}', '1', 'title', 'en', 'Conference');
+INSERT INTO `ym_translations` VALUES ('1703', '{{gallery}}', '1', 'desc', 'en', '');
+INSERT INTO `ym_translations` VALUES ('1740', '{{gallery}}', '20', 'title', 'en', 'Conference');
+INSERT INTO `ym_translations` VALUES ('1741', '{{gallery}}', '20', 'desc', 'en', 'Lorem ipsum dolor sit amet, vis posse tantas ea. Vix an amet vero probo. An per phaedrum inimicus eloquentiam, ea veniam causae honestatis eam, deseruisse constituam complectitur vix te. Ut animal voluptaria qui. At solum cetero sea, ex possim indoctum suscipiantur mei.\r\n\r\nHis ea posse dicat maiestatis, liber consetetur scriptorem eam no. Eu accusam blandit praesent est, ad his recusabo ocurreret voluptatibus, solum pertinax et his. Mei at modo nihil quodsi. Quo ad veri nihil detraxit. Duis comprehensam eos ad, an per ancillae tacimates theophrastus, putant mollis ea cum.\r\n');
+INSERT INTO `ym_translations` VALUES ('1742', '{{gallery}}', '21', 'title', 'en', 'Base Construction');
+INSERT INTO `ym_translations` VALUES ('1743', '{{gallery}}', '21', 'desc', 'en', 'Lorem ipsum dolor sit amet, vis posse tantas ea. Vix an amet vero probo. An per phaedrum inimicus eloquentiam, ea veniam causae honestatis eam, deseruisse constituam complectitur vix te. Ut animal voluptaria qui. At solum cetero sea, ex possim indoctum suscipiantur mei.\r\n\r\nHis ea posse dicat maiestatis, liber consetetur scriptorem eam no. Eu accusam blandit praesent est, ad his recusabo ocurreret voluptatibus, solum pertinax et his. Mei at modo nihil quodsi. Quo ad veri nihil detraxit. Duis comprehensam eos ad, an per ancillae tacimates theophrastus, putant mollis ea cum.\r\n');
+INSERT INTO `ym_translations` VALUES ('1744', '{{user_details}}', '34', 'name', 'en', '');
+INSERT INTO `ym_translations` VALUES ('1745', '{{user_details}}', '34', 'family', 'en', '');
+INSERT INTO `ym_translations` VALUES ('1748', '{{teacher_details}}', '35', 'name', 'en', 'Ali');
+INSERT INTO `ym_translations` VALUES ('1749', '{{teacher_details}}', '35', 'family', 'en', 'Qaffarian');
+INSERT INTO `ym_translations` VALUES ('1750', '{{teacher_details}}', '35', 'grade', 'en', 'MBA');
+INSERT INTO `ym_translations` VALUES ('1751', '{{teacher_details}}', '35', 'resume', 'en', '');
+INSERT INTO `ym_translations` VALUES ('1752', '{{teacher_details}}', '35', 'address', 'en', '');
+INSERT INTO `ym_translations` VALUES ('1753', '{{classes}}', '5', 'title', 'en', 'Even Term');
+INSERT INTO `ym_translations` VALUES ('1754', '{{classes}}', '5', 'summary', 'en', '');
+INSERT INTO `ym_translations` VALUES ('1755', '{{user_details}}', '36', 'name', 'en', '');
+INSERT INTO `ym_translations` VALUES ('1756', '{{user_details}}', '36', 'family', 'en', '');
+INSERT INTO `ym_translations` VALUES ('1757', '{{user_details}}', '37', 'name', 'en', '');
+INSERT INTO `ym_translations` VALUES ('1758', '{{user_details}}', '37', 'family', 'en', '');
+INSERT INTO `ym_translations` VALUES ('1759', '{{user_details}}', '38', 'name', 'en', '');
+INSERT INTO `ym_translations` VALUES ('1760', '{{user_details}}', '38', 'family', 'en', '');
+INSERT INTO `ym_translations` VALUES ('1761', '{{classes}}', '6', 'title', 'en', 'سشسیل');
+INSERT INTO `ym_translations` VALUES ('1762', '{{classes}}', '6', 'summary', 'en', '');
 
 -- ----------------------------
 -- Table structure for ym_users
@@ -1302,15 +1335,20 @@ CREATE TABLE `ym_users` (
   `email` varchar(255) NOT NULL COMMENT 'پست الکترونیک',
   `role_id` int(10) unsigned DEFAULT NULL,
   `status` enum('pending','active','blocked','deleted') DEFAULT 'pending',
+  `verification_token` varchar(100) DEFAULT NULL,
+  `change_password_request_count` int(1) DEFAULT '0',
+  `create_date` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `role_id` (`role_id`),
   CONSTRAINT `ym_users_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `ym_user_roles` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of ym_users
 -- ----------------------------
-INSERT INTO `ym_users` VALUES ('33', '', 'asdf', 'yu', '2', 'active');
+INSERT INTO `ym_users` VALUES ('34', '', '$2a$12$SAxsWeA0yfz28s8ldX4.8OZpwkw2D8qhZaimkVzL0yQN.XC3xvmAW', 'yusef.mobasheri@gmail.com', '1', 'active', null, '0', null);
+INSERT INTO `ym_users` VALUES ('35', '', '$2a$12$l3kDJVXy1CPRCtIKfPpSde5Y/11XAxk1zmgCUbrVIDfCvrPLU8Mgq', 'saeed@google.com', '2', 'active', null, '0', null);
+INSERT INTO `ym_users` VALUES ('38', '', '$2a$12$gFPGhhW5NbCg1wN5QobrUOcVtGe2Rxlw6i/pGl7joUIxCqgsrDvzy', 'saeed@google.coms', '1', 'active', null, '0', '1464424540');
 
 -- ----------------------------
 -- Table structure for ym_user_details
@@ -1333,6 +1371,8 @@ CREATE TABLE `ym_user_details` (
 -- ----------------------------
 -- Records of ym_user_details
 -- ----------------------------
+INSERT INTO `ym_user_details` VALUES ('34', 'یوسف', 'مبشری', null, null, null, null, null);
+INSERT INTO `ym_user_details` VALUES ('38', 'رضا', null, null, null, null, null, null);
 
 -- ----------------------------
 -- Table structure for ym_user_roles
@@ -1350,3 +1390,28 @@ CREATE TABLE `ym_user_roles` (
 -- ----------------------------
 INSERT INTO `ym_user_roles` VALUES ('1', 'کاربر معمولی', 'user');
 INSERT INTO `ym_user_roles` VALUES ('2', 'استاد', 'teacher');
+
+-- ----------------------------
+-- Table structure for ym_user_transactions
+-- ----------------------------
+DROP TABLE IF EXISTS `ym_user_transactions`;
+CREATE TABLE `ym_user_transactions` (
+  `class_id` int(10) unsigned NOT NULL COMMENT 'شناسه',
+  `user_id` int(10) unsigned NOT NULL COMMENT 'کاربر',
+  `amount` varchar(10) DEFAULT NULL COMMENT 'مقدار',
+  `date` varchar(20) DEFAULT NULL COMMENT 'تاریخ',
+  `status` enum('unpaid','paid') DEFAULT 'unpaid' COMMENT 'وضعیت',
+  `token` varchar(50) DEFAULT NULL COMMENT 'کد رهگیری',
+  `description` varchar(200) CHARACTER SET utf8 COLLATE utf8_persian_ci DEFAULT NULL COMMENT 'توضیحات',
+  PRIMARY KEY (`class_id`,`user_id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `ym_user_transactions_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `ym_users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `ym_user_transactions_ibfk_1` FOREIGN KEY (`class_id`) REFERENCES `ym_classes` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of ym_user_transactions
+-- ----------------------------
+INSERT INTO `ym_user_transactions` VALUES ('5', '34', '350000', '1464505749', 'paid', 'S6GB9sg97s77GS7D', 'پرداخت شهریه جهت ثبت نام در دوره تافل دکتری، کلاس ترم زوج');
+INSERT INTO `ym_user_transactions` VALUES ('5', '38', '350000', '1464427313', 'paid', 'S6GB9sg97s77GS7G', 'پرداخت شهریه جهت ثبت نام در کلاس ترم زوج');
+INSERT INTO `ym_user_transactions` VALUES ('6', '34', '500000', '1464427313', 'paid', 'S6GB9sg97s74GS7G', null);

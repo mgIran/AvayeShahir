@@ -35,7 +35,27 @@ class DashboardController extends Controller
 
 	public function actionIndex()
     {
-		$this->render('index');
+        $criteria = new CDbCriteria();
+        $criteria->addCondition('status = "paid"');
+        $transactionsPaid = new CActiveDataProvider('UserTransactions',array(
+            'criteria' => $criteria
+        ));
+
+        $criteria = new CDbCriteria();
+        $criteria->addCondition('status = "unpaid"');
+        $transactionsUnPaid =new CActiveDataProvider('UserTransactions',array(
+            'criteria' => $criteria
+        ));
+        $totalTransactionsPaidAmount =Yii::app()->db->createCommand()
+            ->select('SUM(amount) AS sum')
+            ->from('{{user_transactions}}')
+            ->where('status="paid"')
+            ->queryScalar();
+		$this->render('index',array(
+            'transactionsPaid' => $transactionsPaid,
+            'transactionsUnPaid' => $transactionsUnPaid,
+            'totalTransactionsPaidAmount' => $totalTransactionsPaidAmount
+        ));
 	}
 
 }

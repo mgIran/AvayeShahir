@@ -14,6 +14,7 @@
  *
  * The followings are the available model relations:
  * @property Users $user
+ * @property Classes $class
  */
 class UserTransactions extends CActiveRecord
 {
