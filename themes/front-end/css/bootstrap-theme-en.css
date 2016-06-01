@@ -276,3 +276,10 @@ section.classes .owl-prev .arrow,
 .btn{
     font-size: 16px !important;
 }
+
+.report > [class*="col-"] > [class*="col-"]:first-of-type {
+    border-radius: 4px 0 0 4px;
+}
+.report > [class*="col-"] > [class*="col-"]:last-of-type{
+    border-radius:0 4px 4px 0;
+}

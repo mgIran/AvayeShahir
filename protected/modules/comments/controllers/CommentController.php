@@ -124,7 +124,7 @@ class CommentController extends Controller
 			$criteria->compare('user_email', $comment->user_email, false);
 			$criteria->compare('comment_text', $comment->comment_text, false);
 			$criteria->addCondition('create_time>:time');
-			$criteria->params[':time'] =  time()-15;
+			$criteria->params[':time'] =  time()-30;
 			$model = Comment::model()->find($criteria);
 			if($model)
 				Yii::app()->end();

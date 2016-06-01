@@ -9,6 +9,7 @@
  * @property string $pic
  * @property string $summary
  * @property string $order
+ * @property string $seen
  *
  * The followings are the available model relations:
  * @property Classes[] $classes
@@ -73,6 +74,7 @@ class Courses extends SortableCActiveRecord
 		return array(
 			array('title, pic, summary', 'required'),
 			array('pic', 'length', 'max'=>200),
+			array('seen', 'default', 'value'=>0),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('title, pic, summary', 'safe', 'on'=>'search'),

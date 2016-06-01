@@ -58,8 +58,12 @@ class CoursesManageController extends Controller
 	{
 		Yii::app()->theme = 'front-end';
 		$this->layout = '//layouts/inner';
+		$model = $this->loadModel($id);
+		$model->seen++;
+		$model->scenario = 'sort_order_change';
+		$model->update();
 		$this->render('view',array(
-			'model'=>$this->loadModel($id),
+			'model'=>$model,
 		));
 	}
 

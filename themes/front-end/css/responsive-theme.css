@@ -14,6 +14,10 @@
     .class .inner {
         padding: 0 70px;
     }
+
+    .report > [class*="col-"]{
+        padding: 0 5px;
+    }
 }
 @media (min-width: 768px) and (max-width: 991px)
 {
@@ -231,6 +235,26 @@
     }
     .page-content.courses .collapse-header span{
         white-space: normal;
+    }
+
+    .persons .person-item .socials a{
+        opacity: 0.5;
+    }
+    .persons .person-item .socials .email{
+        top: 5px;
+        right: 11px;
+        background: transparent url("../svg/email-green.svg") no-repeat center / 15px auto;
+    }
+    .persons .person-item .socials .facebook{
+        top: 40px;
+        right: 2px;
+        background: transparent url("../svg/facebook.svg") no-repeat center / 15px auto;
+    }
+    .persons .person-item .socials .twitter{
+        animation-delay: 0.4s;
+        top: 75px;
+        right: 11px;
+        background: transparent url("../svg/twitter.svg") no-repeat center / 15px auto;
     }
 }
 @media (max-width: 400px) {

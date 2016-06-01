@@ -108,5 +108,9 @@ return array(
     'Sorry! This class is fully enrolled.' => 'با عرض پوزش! ظرفیت این کلاس تکمیل شده است.',
     'Please accept our apologies. The deadline for registration has passed.' => 'با عرض پوزش! زمان ثبت نام این کلاس تمام شده است.',
     'Please accept our apologies. The registration has not started yet.' => 'با عرض پوزش! مهلت ثبت نام هنوز شروع نشده است.',
-    'Back' => 'بازگشت'
+    'Back' => 'بازگشت',
+    'Visits Today' => 'بازدید امروز',
+    'Visits Yesterday' => 'بازدید دیروز',
+    'All Visits' => 'کل بازدید ها',
+    'Online Visitors' => 'افراد آنلاین',
 );

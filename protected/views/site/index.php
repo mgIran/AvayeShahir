@@ -7,37 +7,6 @@
 /* @var $aboutText Pages */
 $baseUrl = Yii::app()->theme->baseUrl;
 Yii::app()->clientScript->registerScriptFile($baseUrl.'/js/jquery.mousewheel.min.js');
-Yii::app()->clientScript->registerScriptFile($baseUrl.'/js/jquery.easy-ticker.min.js');
-
-Yii::app()->clientScript->registerScript("easyTicker-scripts","
-        $('.persons .teachers .slider').easyTicker({
-            direction: 'down',
-            easing: 'swing',
-            speed: 'slow',
-            interval: 10000,
-            height: 355,
-            visible: 1,
-            mousePause: 1,
-            controls: {
-                up: '.teacher-up',
-                down: '.teacher-down'
-            }
-        }).data('easyTicker');
-
-        $('.persons .partners .slider').easyTicker({
-            direction: 'down',
-            easing: 'swing',
-            speed: 'slow',
-            interval: 10000,
-            height: 355,
-            visible: 1,
-            mousePause: 1,
-            controls: {
-                up: '.partner-up',
-                down: '.partner-down'
-            }
-        }).data('easyTicker');");
-
 ?>
 <?
 if($this->message):
@@ -424,40 +393,35 @@ endif;
     <div class="container">
         <?php
         if($personnel) {
+
             ?>
             <div class="<?= $teachers?'':'center-block' ?> col-lg-6 col-md-6 col-sm-8 col-xs-12  partners" id="staff">
                 <h3 class="yekan-text"><?= Yii::t('app', 'Staff') ?></h3>
 
                 <div class="slider">
-                    <ul>
-                        <?php
-                        foreach($personnel as $person):
-                        $socialLinks = CJSON::decode($person->social_links);
-                            ?>
-                        <li class="person-item">
-                            <div class="image">
-                                <img src="<?= Yii::app()->baseUrl.'/uploads/teachers/'.$person->avatar ?>" alt="<?= CHtml::encode($person->fullName) ?>">
-
-                                <div class="img-overlay"></div>
-                            </div>
-                            <span class="name"><?= CHtml::encode($person->fullName) ?></span>
-                            <span class="job"><?= CHtml::encode($person->grade) ?></span>
-
-                            <div class="socials">
-                                <a href="<?= $person->email ?>" class="email" title="<?= Yii::t('app','Email') ?>"></a>
-                                <a href="<?= $socialLinks[0]['value'] ?>" class="facebook" title="<?= Yii::t('app','Facebook') ?>"></a>
-                                <a href="<?= $socialLinks[1]['value'] ?>" class="twitter" title="<?= Yii::t('app','Twitter') ?>"></a>
-                            </div>
-                            <a href="<?= Yii::app()->createUrl('/personnel/'.$person->id.'/'.urlencode($person->getFullName())) ?>" class="person-link" title="<?= CHtml::encode($person->fullName) ?>"></a>
-                        </li>
-                        <?php
-                        endforeach;
+                    <?php
+                    foreach($personnel as $person):
+                    $socialLinks = CJSON::decode($person->social_links);
                         ?>
-                    </ul>
-                </div>
-                <div class="controls">
-                    <button class="partner-up btn"><i class="icon"></i></button>
-                    <button class="partner-down btn"><i class="icon"></i></button>
+                    <div class="person-item">
+                        <div class="image">
+                            <img src="<?= Yii::app()->baseUrl.'/uploads/teachers/'.$person->avatar ?>" alt="<?= CHtml::encode($person->fullName) ?>">
+
+                            <div class="img-overlay"></div>
+                        </div>
+                        <span class="name"><?= CHtml::encode($person->fullName) ?></span>
+                        <span class="job"><?= CHtml::encode($person->grade) ?></span>
+
+                        <div class="socials">
+                            <a href="<?= $person->email ?>" class="email" title="<?= Yii::t('app','Email') ?>"></a>
+                            <a href="<?= $socialLinks[0]['value'] ?>" class="facebook" title="<?= Yii::t('app','Facebook') ?>"></a>
+                            <a href="<?= $socialLinks[1]['value'] ?>" class="twitter" title="<?= Yii::t('app','Twitter') ?>"></a>
+                        </div>
+                        <a href="<?= Yii::app()->createUrl('/personnel/'.$person->id.'/'.urlencode($person->getFullName())) ?>" class="person-link" title="<?= CHtml::encode($person->fullName) ?>"></a>
+                    </div>
+                    <?php
+                    endforeach;
+                    ?>
                 </div>
             </div>
             <?
@@ -465,51 +429,125 @@ endif;
         ?>
         <?php
         if($teachers) {
+            Yii::app()->clientScript->registerScript("owl-carousel-class-script","
+                $('.teacher-carousel').owlCarousel({
+                    ".(Yii::app()->language == 'fa'?'rtl:true,':'')."
+                    navText:['<span class=\"arrow\"></span>','<span class=\"arrow\"></span>'],
+                    navClass: ['owl-prev disabled','owl-next'],
+                    callbacks: true,
+                    info: true,
+                    margin:30,
+                    responsive : {
+                        0 : {
+                            items:1,
+                            nav : false,
+                            margin :15,
+                            dots : true,
+                            stagePadding : 0
+                        },
+                        459 :{
+                            items:1,
+                            nav : true,
+                            margin :50,
+                            dots : false,
+                            stagePadding : 50
+                        },
+                        768 :{
+                            items:1,
+                            nav : true,
+                            margin :10,
+                            dots : false,
+                            stagePadding : 0
+                        },
+                        1025 :{
+                            items:2,
+                            nav : true,
+                            margin :40,
+                            dots : false,
+                            stagePadding : 0
+                        },
+                        1201 :{
+                            items:2,
+                            nav : true,
+                            margin :10,
+                            dots : false,
+                            stagePadding : 0
+                        },
+                        1401 :{
+                            items:2,
+                            nav : true,
+                            margin :0,
+                            dots : false,
+                            stagePadding : 0
+                        },
+                        1601 :{
+                            items:2,
+                            nav : true,
+                            margin :0,
+                            dots : false,
+                            stagePadding : 0
+                        },
+                    },
+                    onTranslated: $(this).on('translated.owl.carousel', function(e) {
+                        var items_per_page = e.page.size;
+                        var nav_container = $('.classes-carousel .owl-nav');
+                        var item_index = e.item.index;
+                        var item_count = e.item.count;
+                        var last_vis_item_index = items_per_page + item_index;
+                        //$('.classes-carousel').find('.active').not('').removeClass
+                        if(last_vis_item_index === item_count){
+                            $(nav_container).find('div:last').addClass('disabled');
+                        }
+                        else{
+                            $(nav_container).find('div:last').removeClass('disabled');
+                        }
+                        if(item_index != 0){
+                            $(nav_container).find('div:first').removeClass('disabled');
+                        }
+                        else{
+                            $(nav_container).find('div:first').addClass('disabled');
+                        }
+                    }),
+                });");
             ?>
-            <div class="<?= $personnel?'':'center-block' ?> col-lg-6 col-md-6 col-sm-8 col-xs-12 teachers" id="teachers">
+            <div class="center-block col-lg-10 col-md-10 col-sm-8 col-xs-12 teachers" id="teachers">
                 <h3 class="yekan-text"><?= Yii::t('app', 'Teachers') ?></h3>
 
-                <div class="slider">
-                    <ul>
-                        <?php
-                        foreach($teachers as $teacher):
-                            $socialLinks = CJSON::decode($teacher->teacherDetails->social_links);
-                            ?>
-                            <li class="person-item">
-                                <div class="image">
-                                    <a href="<?= Yii::app()->createUrl('/teachers/'.$teacher->id.'/'.urlencode($teacher->teacherDetails->getFullName())) ?>" class="person-link"></a>
-                                    <?
-                                    if($teacher->teacherDetails->avatar):
-                                    ?>
-                                        <img src="<?= Yii::app()->baseUrl.'/uploads/teachers/'.$teacher->teacherDetails->avatar ?>" alt="<?= CHtml::encode($teacher->teacherDetails->getFullName()) ?>">
-                                    <?
-                                    else:
-                                    ?>
-                                        <div class="img-default"></div>
-                                    <?
-                                    endif;
-                                    ?>
-
-                                    <div class="img-overlay"></div>
-                                </div>
-                                <span class="name"><?= CHtml::encode($teacher->teacherDetails->getFullName()) ?></span>
-                                <span class="job"><?= CHtml::encode($teacher->teacherDetails->grade) ?></span>
-
-                                <div class="socials">
-                                    <a href="<?= $teacher->email ?>" class="email" title="<?= Yii::t('app','Email') ?>"></a>
-                                    <a href="<?= $socialLinks[0]['value'] ?>" class="facebook" title="<?= Yii::t('app','Facebook') ?>"></a>
-                                    <a href="<?= $socialLinks[1]['value'] ?>" class="twitter" title="<?= Yii::t('app','Twitter') ?>"></a>
-                                </div>
-                                <a href="<?= Yii::app()->createUrl('/teachers/'.$teacher->id.'/'.urlencode($teacher->teacherDetails->getFullName())) ?>" class="person-link" title="<?= CHtml::encode($teacher->teacherDetails->getFullName()) ?>"></a>
-                            </li>
-                            <?php
-                        endforeach;
+                <div class="teacher-carousel slider">
+                    <?php
+                    foreach($teachers as $teacher):
+                        $socialLinks = CJSON::decode($teacher->teacherDetails->social_links);
                         ?>
-                    </ul>
-                </div>
-                <div class="controls">
-                    <button class="teacher-up btn"><i class="icon"></i></button>
-                    <button class="teacher-down btn"><i class="icon"></i></button>
+                        <div class="person-item">
+                            <div class="image">
+                                <a href="<?= Yii::app()->createUrl('/teachers/'.$teacher->id.'/'.urlencode($teacher->teacherDetails->getFullName())) ?>" class="person-link"></a>
+                                <?
+                                if($teacher->teacherDetails->avatar):
+                                ?>
+                                    <img src="<?= Yii::app()->baseUrl.'/uploads/teachers/'.$teacher->teacherDetails->avatar ?>" alt="<?= CHtml::encode($teacher->teacherDetails->getFullName()) ?>">
+                                <?
+                                else:
+                                ?>
+                                    <div class="img-default"></div>
+                                <?
+                                endif;
+                                ?>
+
+                                <div class="img-overlay"></div>
+                            </div>
+                            <span class="name"><?= CHtml::encode($teacher->teacherDetails->getFullName()) ?></span>
+                            <span class="job"><?= CHtml::encode($teacher->teacherDetails->grade) ?></span>
+
+                            <div class="socials">
+                                <a href="<?= $teacher->email ?>" class="email" title="<?= Yii::t('app','Email') ?>"></a>
+                                <a href="<?= $socialLinks[0]['value'] ?>" class="facebook" title="<?= Yii::t('app','Facebook') ?>"></a>
+                                <a href="<?= $socialLinks[1]['value'] ?>" class="twitter" title="<?= Yii::t('app','Twitter') ?>"></a>
+                            </div>
+                            <a href="<?= Yii::app()->createUrl('/teachers/'.$teacher->id.'/'.urlencode($teacher->teacherDetails->getFullName())) ?>" class="person-link" title="<?= CHtml::encode($teacher->teacherDetails->getFullName()) ?>"></a>
+                        </div>
+                        <?php
+                    endforeach;
+                    ?>
                 </div>
             </div>
             <?
