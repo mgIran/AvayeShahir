@@ -358,8 +358,8 @@ header.header.scroll-mode{
     z-index: 2;
     position: relative;
 }
-#signup-modal .modal-header .close,
-#login-modal .modal-header .close{
+#signup-modal .close,
+#login-modal .close{
     color: #fff;
     font-size: 80px;
     line-height: 40px;
@@ -369,8 +369,8 @@ header.header.scroll-mode{
     background: transparent;
     opacity: 0.3;
 }
-#signup-modal  .modal-header .close:hover,
-#login-modal .modal-header .close:hover{
+#signup-modal .close:hover,
+#login-modal .close:hover{
     opacity: 0.45;
 }
 #signup-modal .modal-body,
@@ -708,36 +708,30 @@ section.classes .owl-prev .arrow,
 .signup .box{
     width: 25%;
 }
-#signup-modal .checkbox label,
-.signup .checkbox label{
+.checkbox label{
     padding: 0;
     color: #fff;
 }
-#signup-modal .checkbox-material,
-.signup .checkbox-material{
+.checkbox-material{
     margin-left: 10px;
     top: 5px;
 }
-#signup-modal .checkbox .checkbox-material .check,
-.signup .checkbox .checkbox-material .check{
+.checkbox .checkbox-material .check{
     border-color: #fff;
 }
 #signup-modal .checkbox a,
 .signup .checkbox a{
     color: #89a404;
 }
-#signup-modal .checkbox a:hover,
-.signup .checkbox a:hover{
+.checkbox a:hover,
+.checkbox a:hover{
     color: #96b404;
 }
-#signup-modal .form-group.is-focused .checkbox label,
-.signup .form-group.is-focused .checkbox label{
+.form-group.is-focused .checkbox label{
     color: #fff;
 }
-.signup .checkbox input[type="checkbox"]:checked + .checkbox-material .check::before,
-.signup .checkbox input[type="checkbox"]:checked + .checkbox-material .check,
-#signup-modal .checkbox input[type="checkbox"]:checked + .checkbox-material .check::before,
-#signup-modal .checkbox input[type="checkbox"]:checked + .checkbox-material .check{
+.checkbox input[type="checkbox"]:checked + .checkbox-material .check::before,
+.checkbox input[type="checkbox"]:checked + .checkbox-material .check{
     color: #89a404;
     border-color: #89a404;
 }
@@ -852,6 +846,7 @@ section.classes .owl-prev .arrow,
     position: absolute;
     right: 150px;
     top: 20px;
+    white-space:nowrap;
     z-index:1;
 }
 .persons .person-item .job{
@@ -861,6 +856,7 @@ section.classes .owl-prev .arrow,
     position: absolute;
     right: 150px;
     top: 55px;
+    white-space:nowrap;
     z-index:1;
 }
 .persons .person-item .img-overlay{
@@ -1070,6 +1066,9 @@ section.classes .owl-prev .arrow,
     line-height: 40px;
     color: #155ca1;
     margin: 30px 0;
+}
+.about p{
+    text-align: justify;
 }
 .about .text-container{
     padding-right: 0;

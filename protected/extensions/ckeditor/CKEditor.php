@@ -20,10 +20,6 @@ class CKEditor extends CWidget
 
     public function run()
     {
-        //if(Yii::getPathOfAlias('CKEditor') === false) Yii::setPathOfAlias('CKEditor', realpath(dirname(__FILE__) . '/..'));
-
-        //Yii::app()->clientScript->registerScriptFile($this->getAssetsUrl().'/ckeditor.js', CClientScript::POS_END);
-        //Yii::app()->clientScript->registerScriptFile(Yii::getPathOfAlias("webroot").'/js/ckeditor.js', CClientScript::POS_END);
         echo '<script type="application/javascript" src="'.Yii::app()->baseUrl .'/js/ckeditor/ckeditor.js'.'"></script>';
         $this->htmlOptions = CMap::mergeArray($this->htmlOptions,array('id'=>$this->id));
         $this->render('view', array(

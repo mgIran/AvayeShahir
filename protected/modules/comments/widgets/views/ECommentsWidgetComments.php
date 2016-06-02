@@ -14,9 +14,9 @@
                     <span class="comment-name"><?php echo $comment->userName;?></span>
                     <span class="comment-date"><?php echo JalaliDate::differenceTime($comment->create_time);?></span>
                 </div>
-                <div>
-                    <?php echo CHtml::encode($comment->comment_text);?>
-                </div>
+                <p dir="auto">
+                    <?php echo $comment->comment_text;?>
+                </p>
 
                 <?php if($this->adminMode === true):?>
                     <div class="admin-panel">

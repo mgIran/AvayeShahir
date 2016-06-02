@@ -112,11 +112,9 @@ $action = $this->action->id;
     <div class="modal-dialog">
         <?= $this->renderPartial("//layouts/_loading");?>
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-body">
                 <button type="button" class="close" data-dismiss="modal">
                     &times;</button>
-            </div>
-            <div class="modal-body">
                 <div class="center-block box">
                     <h3><?= Yii::t('app','Login to Account');?></h3>
                     <?php
@@ -155,6 +153,16 @@ $action = $this->action->id;
                         ));
                         echo $formL->error($loginModel,'password',array('class'=>'errorMessage tip'));
                         ?>
+                    </div>
+                    <div class="relative">
+                        <div class="checkbox">
+                            <label>
+                                <?= $formL->checkBox($loginModel,'rememberMe'); ?>
+                                <span>
+                                <?= Yii::t('app' ,'Remember Me')?>
+                            </span>
+                            </label>
+                        </div>
                     </div>
                     <?= CHtml::submitButton(Yii::t('app','Login'),array('class'=>"button-field btn")); ?>
                     <br>

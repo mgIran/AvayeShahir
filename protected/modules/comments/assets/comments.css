@@ -98,15 +98,12 @@ root {
     float: left;
 }
 
-.comments-list .comment-header,
-.comments-list .comment-header + div{
+.comments-list .comment-header{
     position: relative;
     right: 0px;
     left: 0;
 }
 .comments-list .comment-header + div{
-    direction: ltr;
-    text-align: left;
     white-space: pre-line;
 }
 .comment-form-outer{
