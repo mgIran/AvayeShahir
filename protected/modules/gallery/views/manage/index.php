@@ -16,6 +16,7 @@
                 Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/owl.carousel.min.js');
                 Yii::app()->clientScript->registerCssFile(Yii::app()->theme->baseUrl.'/css/animate.min.css');
                 Yii::app()->clientScript->registerScript("owl-carousel-script","
+                $(window).load(function(){
                 $('.gallery-carousel').owlCarousel({
                     ".(Yii::app()->language == 'fa'?'rtl:true,':'')."
                     navText:['<span class=\"arrow\"></span>','<span class=\"arrow\"></span>'],
@@ -24,8 +25,19 @@
                     animateIn: 'fadeIn',
                     animateOut: 'fadeOut',
                     items:1,
-                    margin:50,
-                    stagePadding:50,
+                    responsive:{
+                        0:{
+                           nav:false,
+                            margin:0,
+                            stagePadding:0,
+                        },
+                        768:{
+                            nav:true,
+                            margin:50,
+                            stagePadding:50,
+                        }
+                    }
+                });
                 });");
                 foreach($models as $model):
                     ?>

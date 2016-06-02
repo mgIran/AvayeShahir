@@ -25,6 +25,7 @@ class CKEditor extends CWidget
         //Yii::app()->clientScript->registerScriptFile($this->getAssetsUrl().'/ckeditor.js', CClientScript::POS_END);
         //Yii::app()->clientScript->registerScriptFile(Yii::getPathOfAlias("webroot").'/js/ckeditor.js', CClientScript::POS_END);
         echo '<script type="application/javascript" src="'.Yii::app()->baseUrl .'/js/ckeditor/ckeditor.js'.'"></script>';
+        $this->htmlOptions = CMap::mergeArray($this->htmlOptions,array('id'=>$this->id));
         $this->render('view', array(
             'id' => $this->id,
             'model'=>$this->model,
@@ -52,6 +53,8 @@ class CKEditor extends CWidget
             return 'custom_config.js';
         elseif($this->config == 'basic')
             return 'basic_config.js';
+        elseif($this->config == 'user')
+            return 'user_config.js';
         /*elseif(is_array($this->config))
         {
             $config='';

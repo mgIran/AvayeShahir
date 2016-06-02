@@ -256,6 +256,17 @@
         right: 11px;
         background: transparent url("../svg/twitter.svg") no-repeat center / 15px auto;
     }
+    .gallery-item .gallery-detail
+    {
+        position: relative;
+        bottom: auto;
+    }
+    .gallery-item{
+        display: block;
+    }
+    .gallery-item .blur-mask{
+        display: none;
+    }
 }
 @media (max-width: 400px) {
 

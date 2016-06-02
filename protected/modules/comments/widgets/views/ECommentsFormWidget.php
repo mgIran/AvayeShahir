@@ -25,7 +25,16 @@
     <?php endif; ?>
 
     <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <?php echo $form->textArea($newComment, 'comment_text', array('cols' => 60, 'rows' => 5,'class'=>'form-control','placeholder' => $newComment->getAttributeLabel('comment_text'))); ?>
+        <?php
+        $this->widget('ext.ckeditor.CKEditor',array(
+            'id' => 'ckeditor-'.rand(0,1000),
+            'model' => $newComment,
+            'attribute'=>'comment_text',
+            'config' => 'user',
+            'multiLanguage' => false
+        ));
+        ?>
+        <?php //echo $form->textArea($newComment, 'comment_text', array('cols' => 60, 'rows' => 5,'class'=>'form-control','placeholder' => $newComment->getAttributeLabel('comment_text'))); ?>
         <?php echo $form->error($newComment, 'comment_text'); ?>
     </div>
 
