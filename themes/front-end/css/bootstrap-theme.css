@@ -358,8 +358,8 @@ header.header.scroll-mode{
     z-index: 2;
     position: relative;
 }
-#signup-modal .close,
-#login-modal .close{
+#signup-modal .modal-header .close,
+#login-modal .modal-header .close{
     color: #fff;
     font-size: 80px;
     line-height: 40px;
@@ -369,8 +369,8 @@ header.header.scroll-mode{
     background: transparent;
     opacity: 0.3;
 }
-#signup-modal .close:hover,
-#login-modal .close:hover{
+#signup-modal  .modal-header .close:hover,
+#login-modal .modal-header .close:hover{
     opacity: 0.45;
 }
 #signup-modal .modal-body,
@@ -708,15 +708,17 @@ section.classes .owl-prev .arrow,
 .signup .box{
     width: 25%;
 }
-.checkbox label{
+#signup-modal .checkbox label, .checkbox label{
     padding: 0;
     color: #fff;
 }
-.checkbox-material{
+#signup-modal .checkbox-material,
+.signup .checkbox-material{
     margin-left: 10px;
     top: 5px;
 }
-.checkbox .checkbox-material .check{
+#signup-modal .checkbox .checkbox-material .check,
+.signup .checkbox .checkbox-material .check{
     border-color: #fff;
 }
 #signup-modal .checkbox a,
@@ -846,7 +848,6 @@ section.classes .owl-prev .arrow,
     position: absolute;
     right: 150px;
     top: 20px;
-    white-space:nowrap;
     z-index:1;
 }
 .persons .person-item .job{
@@ -856,7 +857,6 @@ section.classes .owl-prev .arrow,
     position: absolute;
     right: 150px;
     top: 55px;
-    white-space:nowrap;
     z-index:1;
 }
 .persons .person-item .img-overlay{
@@ -1066,9 +1066,6 @@ section.classes .owl-prev .arrow,
     line-height: 40px;
     color: #155ca1;
     margin: 30px 0;
-}
-.about p{
-    text-align: justify;
 }
 .about .text-container{
     padding-right: 0;

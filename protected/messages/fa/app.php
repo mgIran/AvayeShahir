@@ -114,5 +114,6 @@ return array(
     'All Visits' => 'کل بازدید ها',
     'Online Visitors' => 'افراد آنلاین',
     'Remember Me' => 'مرا به خاطر بسپار',
-    'Visit Statistics' => 'آمار بازدید'
+    'Visit Statistics' => 'آمار بازدید',
+    'Views' => 'بازدید',
 );

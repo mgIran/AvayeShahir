@@ -3,10 +3,15 @@
 $fileUrl = Yii::app()->baseUrl.'/uploads/classCategoryFiles/';
 $fileDir = Yii::getPathOfAlias("webroot").'/uploads/classCategoryFiles/';
 ?>
-<div class="page-title-container courses">
+<div class="page-title-container courses personnel-page-header ">
 	<div class="mask"></div>
 	<div class="container">
 		<h2><?= $model->title ?></h2>
+		<div class="details">
+			<span><?= Yii::t('app','Views') ?></span>
+			<span><?= $model->seen ?></span>
+			<span class="svg svg-eye pull-right"></span>
+		</div>
 	</div>
 </div>
 <div class="page-content courses">
