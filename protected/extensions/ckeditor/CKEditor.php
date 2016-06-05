@@ -21,7 +21,6 @@ class CKEditor extends CWidget
     public function run()
     {
         echo '<script type="application/javascript" src="'.Yii::app()->baseUrl .'/js/ckeditor/ckeditor.js'.'"></script>';
-        $this->htmlOptions = CMap::mergeArray($this->htmlOptions,array('id'=>$this->id));
         $this->render('view', array(
             'id' => $this->id,
             'model'=>$this->model,
