@@ -93,42 +93,42 @@
                 <div class="report">
 
                     <span class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <span class="col-md-9">
+                        <span class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
                             <?= Yii::t('app','Online Visitors') ?>
                         </span>
-                        <span class="col-md-3">
+                        <span class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
                             <?php echo Yii::app()->language=='fa'?Controller::parseNumbers(Yii::app()->userCounter->getOnline()):Yii::app()->userCounter->getOnline(); ?>
                         </span>
                     </span>
                     <span class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <span class="col-md-9">
+                        <span class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
                             <?= Yii::t('app','Visits Today') ?>
                         </span>
-                        <span class="col-md-3">
+                        <span class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
                             <?php echo Yii::app()->language=='fa'?Controller::parseNumbers(Yii::app()->userCounter->getToday()):Yii::app()->userCounter->getToday(); ?>
                         </span>
                     </span>
                     <span class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <span class="col-md-9">
+                        <span class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
                             <?= Yii::t('app','Visits Yesterday') ?>
                         </span>
-                        <span class="col-md-3">
+                        <span class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
                             <?php echo Yii::app()->language=='fa'?Controller::parseNumbers(Yii::app()->userCounter->getYesterday()):Yii::app()->userCounter->getYesterday(); ?>
                         </span>
                     </span>
-<!--                    <span class="col-lg-12 col-md-12 col-sm-12 col-xs-12">-->
-<!--                        <span class="col-md-9">-->
-<!--                            --><?//= Yii::t('app','Maximal Visits') ?>
-<!--                        </span>-->
-<!--                        <span class="col-md-3">-->
-<!--                            --><?php //echo Yii::app()->language=='fa'?Controller::parseNumbers(Yii::app()->userCounter->getTotal()):Yii::app()->userCounter->getMaximal(); ?>
-<!--                        </span>-->
-<!--                    </span>-->
+                    <!--                    <span class="col-lg-12 col-md-12 col-sm-12 col-xs-12">-->
+                    <!--                        <span class="col-md-9">-->
+                    <!--                            --><?//= Yii::t('app','Maximal Visits') ?>
+                    <!--                        </span>-->
+                    <!--                        <span class="col-md-3">-->
+                    <!--                            --><?php //echo Yii::app()->language=='fa'?Controller::parseNumbers(Yii::app()->userCounter->getTotal()):Yii::app()->userCounter->getMaximal(); ?>
+                    <!--                        </span>-->
+                    <!--                    </span>-->
                     <span class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <span class="col-md-9">
+                        <span class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
                             <?= Yii::t('app','All Visits') ?>
                         </span>
-                        <span class="col-md-3">
+                        <span class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
                             <?php echo Yii::app()->language=='fa'?Controller::parseNumbers(Yii::app()->userCounter->getTotal()):Yii::app()->userCounter->getTotal(); ?>
                         </span>
                     </span>

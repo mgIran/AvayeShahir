@@ -8,16 +8,16 @@
 $baseUrl = Yii::app()->theme->baseUrl;
 Yii::app()->clientScript->registerScriptFile($baseUrl.'/js/jquery.mousewheel.min.js');
 ?>
-<?
-if($this->message):
-?>
-<section class="message-box" id="main">
-    <div class="container">
-        <div class="alert fade in message"><button class="close close-sm" type="button" data-dismiss="alert"><i class="icon-remove"></i></button><?= Yii::app()->language == 'fa'?Controller::parseNumbers($this->message):$this->message ?></div>
-    </div>
-</section>
+<?//
+//if($this->message):
+//?>
+<!--<section class="message-box" id="main">-->
+<!--    <div class="container">-->
+<!--        <div class="alert fade in message"><button class="close close-sm" type="button" data-dismiss="alert"><i class="icon-remove"></i></button>--><?//= Yii::app()->language == 'fa'?Controller::parseNumbers($this->message):$this->message ?><!--</div>-->
+<!--    </div>-->
+<!--</section>-->
 <?php
-endif;
+//endif;
 ?>
 <section class="courses" id="courses">
     <div class="container">

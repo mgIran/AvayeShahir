@@ -17,18 +17,55 @@
                 </p>
             </div>
             <div class="col-md-4">
-                <h4><?= Yii::t('app','Follow Us') ?></h4>
-                <p>
-<!--                    <a href="#"  target="_blank" class="social-media facebook"></a>-->
-<!--                    <a href="#" class="social-media twitter" target="_blank"></a>-->
-<!--                    <a href="#" class="social-media google-plus" target="_blank"></a>-->
-                    <a href="https://telegram.me/pardiseavayeshahir" target="_blank" class="social-media telegram"></a>
-                </p>
-                <p class="copyright"><?= Yii::t('app','All Rights Reserved By Pardis Avaye Shahir. ©‏') ?>&nbsp;<?= Yii::app()->language=='fa'?'1394':'2016'; ?></p>
+                <h4>آمار بازدید</h4>
+                <div class="report">
+
+                    <span class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <span class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                            <?= Yii::t('app','Online Visitors') ?>
+                        </span>
+                        <span class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                            <?php echo Yii::app()->language=='fa'?Controller::parseNumbers(Yii::app()->userCounter->getOnline()):Yii::app()->userCounter->getOnline(); ?>
+                        </span>
+                    </span>
+                    <span class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <span class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                            <?= Yii::t('app','Visits Today') ?>
+                        </span>
+                        <span class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                            <?php echo Yii::app()->language=='fa'?Controller::parseNumbers(Yii::app()->userCounter->getToday()):Yii::app()->userCounter->getToday(); ?>
+                        </span>
+                    </span>
+                    <span class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <span class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                            <?= Yii::t('app','Visits Yesterday') ?>
+                        </span>
+                        <span class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                            <?php echo Yii::app()->language=='fa'?Controller::parseNumbers(Yii::app()->userCounter->getYesterday()):Yii::app()->userCounter->getYesterday(); ?>
+                        </span>
+                    </span>
+                    <!--                    <span class="col-lg-12 col-md-12 col-sm-12 col-xs-12">-->
+                    <!--                        <span class="col-md-9">-->
+                    <!--                            --><?//= Yii::t('app','Maximal Visits') ?>
+                    <!--                        </span>-->
+                    <!--                        <span class="col-md-3">-->
+                    <!--                            --><?php //echo Yii::app()->language=='fa'?Controller::parseNumbers(Yii::app()->userCounter->getTotal()):Yii::app()->userCounter->getMaximal(); ?>
+                    <!--                        </span>-->
+                    <!--                    </span>-->
+                    <span class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <span class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                            <?= Yii::t('app','All Visits') ?>
+                        </span>
+                        <span class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                            <?php echo Yii::app()->language=='fa'?Controller::parseNumbers(Yii::app()->userCounter->getTotal()):Yii::app()->userCounter->getTotal(); ?>
+                        </span>
+                    </span>
+                </div>
             </div>
             <div class="col-md-4">
                 <?= $this->renderPartial('//layouts/_map'); ?>
             </div>
+            <p class="copyright"><?= Yii::t('app','All Rights Reserved By Pardis Avaye Shahir. ©‏') ?>&nbsp;<?= Yii::app()->language=='fa'?'1394':'2016'; ?></p>
         </div>
     </div>
 </footer>
