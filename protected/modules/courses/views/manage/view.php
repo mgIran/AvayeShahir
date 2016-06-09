@@ -115,25 +115,27 @@ $fileDir = Yii::getPathOfAlias("webroot").'/uploads/classCategoryFiles/';
 								<h3><?= Yii::t('app','Classes'); ?></h3>
 								<div class="table text-center">
 									<div class="tr thead">
-										<div class="col-md-2 td"><?= Yii::t('app','Title'); ?></div>
-										<div class="col-md-2 td"><?= Yii::t('app','Start of Registration'); ?></div>
-										<div class="col-md-2 td"><?= Yii::t('app','Registration deadline'); ?></div>
-										<div class="col-md-2 td"><?= Yii::t('app','Teacher'); ?></div>
-										<div class="col-md-2 td"><?= Yii::t('app','Tuition'); ?>
+										<div class="col-lg-2 col-md-2 col-xs-2 col-sm-2 col-xs-2 td"><?= Yii::t('app','Title'); ?></div>
+										<div class="col-lg-2 col-md-2 col-xs-2 col-sm-2 col-xs-2 td"><?= Yii::t('app','Start of Registration'); ?></div>
+										<div class="col-lg-2 col-md-2 col-xs-2 col-sm-2 col-xs-2 td"><?= Yii::t('app','Registration deadline'); ?></div>
+										<div class="col-lg-2 col-md-2 col-xs-2 col-sm-2 col-xs-2 td"><?= Yii::t('app','Class Hours'); ?></div>
+										<div class="col-lg-1 col-md-1 col-xs-1 col-sm-1 col-xs-1 td"><?= Yii::t('app','Teacher'); ?></div>
+										<div class="col-lg-1 col-md-1 col-xs-1 col-sm-1 col-xs-1 td"><?= Yii::t('app','Tuition'); ?>
 											<span class="mini-label">(<?= Yii::t('app','Toman') ?>)</span>
 										</div>
-										<div class="col-md-2 td"></div>
+										<div class="col-lg-2 col-md-2 col-xs-2 col-sm-2 col-xs-2 td"></div>
 									</div>
 									<?
 									foreach($category->classes as $key => $class):
 									?>
 										<div class="tr" <?= $class->summary && !empty($class->summary)?'data-toggle="collapse" data-target="#class-collapse-'.$key.'"':''; ?>>
-											<div class="col-md-2 td"><?= $class->title ?></div>
-											<div class="col-md-2 td"><?= Yii::app()->language == 'fa' ?JalaliDate::date("Y/m/d",$class->startSignupDate):date("Y/m/d",$class->startSignupDate); ?></div>
-											<div class="col-md-2 td"><?= Yii::app()->language == 'fa' ?JalaliDate::date("Y/m/d",$class->endSignupDate):date("Y/m/d",$class->endSignupDate); ?></div>
-											<div class="col-md-2 td"><?= $class->teacher->getFullName() ?></div>
-											<div class="col-md-2 td"><?= Yii::app()->language == 'fa' ? Controller::parseNumbers(number_format($class->price)):number_format($class->price); ?></div>
-											<div class="col-md-2 td"><a href="#" class="disabled"><?= Yii::t('app','Register') ?></a></div>
+											<div class="col-lg-2 col-md-2 col-xs-2 col-sm-2 col-xs-2 td"><?= $class->title ?></div>
+											<div class="col-lg-2 col-md-2 col-xs-2 col-sm-2 col-xs-2 td"><?= Yii::app()->language == 'fa' ?JalaliDate::date("Y/m/d",$class->startSignupDate):date("Y/m/d",$class->startSignupDate); ?></div>
+											<div class="col-lg-2 col-md-2 col-xs-2 col-sm-2 col-xs-2 td"><?= Yii::app()->language == 'fa' ?JalaliDate::date("Y/m/d",$class->endSignupDate):date("Y/m/d",$class->endSignupDate); ?></div>
+											<div class="col-lg-2 col-md-2 col-xs-2 col-sm-2 col-xs-2 td"><?= (Yii::app()->language == 'fa' ?Controller::parseNumbers($class->startClassTime):$class->startClassTime).' '.Yii::t('app','up to').' '.(Yii::app()->language == 'fa' ?Controller::parseNumbers($class->endClassTime):$class->endClassTime) ?></div>
+											<div class="col-lg-1 col-md-1 col-xs-1 col-sm-1 col-xs-1 td"><?= $class->teacher->getFullName() ?></div>
+											<div class="col-lg-1 col-md-1 col-xs-1 col-sm-1 col-xs-1 td"><?= Yii::app()->language == 'fa' ? Controller::parseNumbers(number_format($class->price)):number_format($class->price); ?></div>
+											<div class="col-lg-2 col-md-2 col-xs-2 col-sm-2 col-xs-2 td"><a href="#" class="disabled"><?= Yii::t('app','Register') ?></a></div>
 										</div>
 										<?
 										if($class->summary && !empty($class->summary)):
