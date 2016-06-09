@@ -708,8 +708,7 @@ section.classes .owl-prev .arrow,
 .signup .box{
     width: 25%;
 }
-#signup-modal .checkbox label,
-.signup .checkbox label{
+#signup-modal .checkbox label, .checkbox label{
     padding: 0;
     color: #fff;
 }
@@ -726,18 +725,15 @@ section.classes .owl-prev .arrow,
 .signup .checkbox a{
     color: #89a404;
 }
-#signup-modal .checkbox a:hover,
-.signup .checkbox a:hover{
+.checkbox a:hover,
+.checkbox a:hover{
     color: #96b404;
 }
-#signup-modal .form-group.is-focused .checkbox label,
-.signup .form-group.is-focused .checkbox label{
+.form-group.is-focused .checkbox label{
     color: #fff;
 }
-.signup .checkbox input[type="checkbox"]:checked + .checkbox-material .check::before,
-.signup .checkbox input[type="checkbox"]:checked + .checkbox-material .check,
-#signup-modal .checkbox input[type="checkbox"]:checked + .checkbox-material .check::before,
-#signup-modal .checkbox input[type="checkbox"]:checked + .checkbox-material .check{
+.checkbox input[type="checkbox"]:checked + .checkbox-material .check::before,
+.checkbox input[type="checkbox"]:checked + .checkbox-material .check{
     color: #89a404;
     border-color: #89a404;
 }

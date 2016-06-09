@@ -14,9 +14,9 @@
                     <span class="comment-name"><?php echo $comment->userName;?></span>
                     <span class="comment-date"><?php echo JalaliDate::differenceTime($comment->create_time);?></span>
                 </div>
-                <div>
-                    <?php echo CHtml::encode($comment->comment_text);?>
-                </div>
+                <p dir="auto">
+                    <?php echo $comment->comment_text;?>
+                </p>
 
                 <?php if($this->adminMode === true):?>
                     <div class="admin-panel">
@@ -53,5 +53,37 @@
     </ul>
 <?php else:?>
     <p><?php echo Yii::t($this->_config['translationCategory'], 'No '.$this->_config['moduleObjectName'].'s');?></p>
-<?php endif; ?>
+<?php endif;
+?>
+<script>
+function checkRtl( character ) {
+    var RTL = ['ا','ب','پ','ت','س','ج','چ','ح','خ','د','ذ','ر','ز','ژ','س','ش','ص','ض','ط','ظ','ع','غ','ف','ق','ک','گ','ل','م','ن','و','ه','ی'];
+    return RTL.indexOf( character ) > -1;
+}
+
+function checkChar( character ) {
+    if (character.match(/\s/) || character.match(/[0-9-!@#$%^&()_+|~=`{}\[\]:";\'<>?,.\/]/))
+        return true;
+    else
+        return false;
+}
+var pTags = $(".comments-list").find("p");
+pTags.each(function(){
+    var firstChar = $(this).text().trim().substr(2,1);
+    console.log(firstChar);
+    var $i=3;
+    while(checkChar(firstChar) && $i < $(this).text().trim().length)
+    {
+        firstChar = $(this).text().trim().substr($i,1);
+        console.log(firstChar);
+        $i++;
+    }
+    console.log(checkRtl(firstChar));
+    if( checkRtl(firstChar) ) {
+        $(this).removeClass("ltr").addClass("rtl");
+    } else {
+        $(this).removeClass("rtl").addClass("ltr");
+    }
+});
+</script>
 
