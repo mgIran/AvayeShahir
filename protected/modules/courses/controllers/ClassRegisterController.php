@@ -4,7 +4,7 @@ class ClassRegisterController extends Controller
 {
     public $layout='//layouts/inner';
 
-    private $merchant = '-6194e8aa-0589-11e6-9b18-005056a205be';
+    private $merchant = '';
     /**
      * @return array action filters
      */

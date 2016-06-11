@@ -374,6 +374,18 @@ Yii::app()->clientScript->registerScriptFile($baseUrl.'/js/jquery.mousewheel.min
         </div>
     </div>
 </section>
+<?
+if($this->message):
+?>
+<section class="message-box">
+    <div class="container">
+        <div class="alert fade in message"><button class="close close-sm" type="button" data-dismiss="alert"><i class="icon-remove"></i></button><?= $this->message ?></div>
+    </div>
+</section>
+<?php
+endif;
+?>
+
 <section class="persons">
     <div class="bg">
         <div class="icons-set left"></div>
@@ -600,17 +612,6 @@ Yii::app()->clientScript->registerScriptFile($baseUrl.'/js/jquery.mousewheel.min
         </div>
     </div>
 </section>
-<?//
-//if($this->message):
-//?>
-<!--<section class="message-box">-->
-<!--    <div class="container">-->
-<!--        <div class="alert fade in message"><button class="close close-sm" type="button" data-dismiss="alert"><i class="icon-remove"></i></button></div>-->
-<!--    </div>-->
-<!--</section>-->
-<?php
-//endif;
-//?>
 <!-- Modal -->
 <div id="terms-modal" class="modal fade" role="dialog">
     <div class="modal-dialog">
@@ -622,28 +623,6 @@ Yii::app()->clientScript->registerScriptFile($baseUrl.'/js/jquery.mousewheel.min
             </div>
             <div class="modal-body">
                 <?= $termsText->summary ?>
-            </div>
-        </div>
-
-    </div>
-</div>
-<!-- Modal site message -->
-<a href="#message-modal" data-toggle="modal" class="hidden" id="message-box-btn"></a>
-<?
-Yii::app()->clientScript->registerScript('message-box','
-    $("#message-box-btn").click();
-');
-?>
-<div id="message-modal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-            <div class="modal-body">
-                <?= Yii::app()->language == 'fa'?Controller::parseNumbers($this->message):$this->message ?>
             </div>
         </div>
 
