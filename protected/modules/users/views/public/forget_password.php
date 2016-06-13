@@ -22,7 +22,7 @@
                         'id'=>'forget-password-form',
                         'class' => 'form-group'
                     ));?>
-                    <div class="alert alert-success hidden" id="message"></div>
+                    <div class="alert alert-success hidden message" id="message"></div>
                     <div class="form-group">
                         <?php echo CHtml::emailField('email' ,'' ,array(
                             'placeholder' => Yii::t('app','Email'),
@@ -36,16 +36,16 @@
                             'dataType'=>'JSON',
                             'data'=>"js:$('#forget-password-form').serialize()",
                             'beforeSend'=>"js:function(){
-                    $('#message').addClass('hidden');
-                    $('.loading-container').fadeIn();
-                }",
+                                $('#message').addClass('hidden');
+                                $('.loading-container').fadeIn();
+                            }",
                             'success'=>"js:function(data){
-                    if(data.hasError)
-                        $('#message').removeClass('alert-success').addClass('alert-danger message visible').text(data.message).removeClass('hidden');
-                    else
-                        $('#message').removeClass('alert-danger').addClass('alert-success message visible').text(data.message).removeClass('hidden');
-                    $('.loading-container').fadeOut();
-                }"
+                                if(data.hasError)
+                                    $('#message').removeClass('alert-success').addClass('alert-danger message visible').text(data.message).removeClass('hidden');
+                                else
+                                    $('#message').removeClass('alert-danger').addClass('alert-success message visible').text(data.message).removeClass('hidden');
+                                $('.loading-container').fadeOut();
+                            }"
                         ), array('class'=>'btn btn-success'));?>
                     </div>
                     <?php CHtml::endForm(); ?>
