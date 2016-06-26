@@ -59,6 +59,9 @@ class CoursesManageController extends Controller
 		Yii::app()->theme = 'front-end';
 		$this->layout = '//layouts/inner';
 		$model = $this->loadModel($id);
+		$this->keywords = $model->getKeywords();
+		$this->description = substr(strip_tags($model->summary),0,160);
+		$this->pageTitle = $model->title;
 		Yii::app()->db->createCommand()->update('{{courses}}',array('seen'=>((int)$model->seen+1)),'id = :id',array(":id"=>$model->id));
 		$this->render('view',array(
 			'model'=>$model,
@@ -144,6 +147,10 @@ class CoursesManageController extends Controller
 				'serverName' => $file,
 			);
 		}
+
+		foreach($model->tags as $tag)
+			array_push($model->formTags,$tag->title);
+
 		if(isset($_POST['Courses']))
 		{
 			$model->attributes=$_POST['Courses'];

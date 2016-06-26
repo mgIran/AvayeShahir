@@ -1,4 +1,5 @@
 <?
+/* @var $this CoursesManageController */
 /* @var $model Courses */
 $fileUrl = Yii::app()->baseUrl.'/uploads/classCategoryFiles/';
 $fileDir = Yii::getPathOfAlias("webroot").'/uploads/classCategoryFiles/';
@@ -28,7 +29,7 @@ $fileDir = Yii::getPathOfAlias("webroot").'/uploads/classCategoryFiles/';
 					?>
 				</div>
 			</div>
-			<div class="col-md-8">
+			<div class="col-md-8 text-justify">
 				<?= $model->summary; ?>
 			</div>
 		</div>

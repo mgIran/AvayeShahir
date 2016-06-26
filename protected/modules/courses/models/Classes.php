@@ -39,7 +39,7 @@ class Classes extends SortableCActiveRecord
 		return '{{classes}}';
 	}
 
-	public $formTags;
+	public $formTags=[];
 
 	/**
 	 * __set
@@ -237,9 +237,4 @@ class Classes extends SortableCActiveRecord
 		return parent::beforeSave();
 	}
 
-	public function afterFind(){
-		$this->formTags = [];
-		foreach($this->tags as $tag)
-			array_push($this->formTags,$tag->title);
-	}
 }

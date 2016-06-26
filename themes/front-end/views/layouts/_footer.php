@@ -89,7 +89,7 @@
                 </p>
             </div>
             <div class="col-md-6">
-                <h4>آمار بازدید</h4>
+                <h4><?= Yii::t('app','Visit Statistics') ?></h4>
                 <div class="report">
 
                     <span class="col-lg-12 col-md-12 col-sm-12 col-xs-12">

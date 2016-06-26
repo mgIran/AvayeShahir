@@ -16372,3 +16372,7 @@ in E:\Wamp-Important\wamp\www\Yusef\shahir\index.php (11)
 in E:\Wamp-Important\wamp\www\Yusef\shahir\protected\modules\courses\models\Courses.php (48)
 in E:\Wamp-Important\wamp\www\Yusef\shahir\protected\modules\courses\controllers\CoursesManageController.php (149)
 in E:\Wamp-Important\wamp\www\Yusef\shahir\index.php (11)
+2016/06/26 11:15:30 [warning] [application] Failed to set unsafe attribute "formTags" of "Courses".
+in E:\Wamp-Important\wamp\www\Yusef\shahir\protected\modules\courses\models\Courses.php (48)
+in E:\Wamp-Important\wamp\www\Yusef\shahir\protected\modules\courses\controllers\CoursesManageController.php (151)
+in E:\Wamp-Important\wamp\www\Yusef\shahir\index.php (11)

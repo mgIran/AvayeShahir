@@ -27,7 +27,7 @@ class Courses extends SortableCActiveRecord
 		return '{{courses}}';
 	}
 
-	public $formTags;
+	public $formTags=[];
 
 	/**
 	 * __set
@@ -180,9 +180,9 @@ class Courses extends SortableCActiveRecord
 		parent::afterSave();
 	}
 
-	public function afterFind(){
-		$this->formTags = [];
-		foreach($this->tags as $tag)
-			array_push($this->formTags,$tag->title);
+	public function getKeywords()
+	{
+		$tags = CHtml::listData($this->tags,'title','title');
+		return implode(',',$tags);
 	}
 }

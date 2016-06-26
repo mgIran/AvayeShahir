@@ -87,37 +87,37 @@
     </div>
 </div>
 
-
-<div class="panel panel-warning col-lg-12 col-md-12 col-sm-12 col-xs-12">
-    <div class="panel-heading">
-        تراکنش های انجام نشده
-    </div>
-    <div class="panel-body">
-        <p>
-            <?php
-            $this->widget('zii.widgets.grid.CGridView',array(
-                'id' => 'unpaid-grid-view',
-                'dataProvider' => $transactionsUnPaid,
-                'columns'=>array(
-                    array(
-                        'header'=>'کاربر',
-                        'value'=>'$data->user->userDetails->name?$data->user->userDetails->name." ".$data->user->userDetails->family:$data->user->email',
-                    ),
-                    array(
-                        'header'=>'مبلغ تراکنش',
-                        'value'=>'number_format($data->amount)." تومان"',
-                    ),
-                    array(
-                        'header'=>'تاریخ',
-                        'value'=>'JalaliDate::date("Y/m/d ساعت H:i:s",$data->date)',
-                    ),
-                    array(
-                        'header'=>'توضیحات تراکنش',
-                        'value'=>'$data->description',
-                    )
-                )
-            ));
-            ?>
-        </p>
-    </div>
-</div>
+<!---->
+<!--<div class="panel panel-warning col-lg-12 col-md-12 col-sm-12 col-xs-12">-->
+<!--    <div class="panel-heading">-->
+<!--        تراکنش های انجام نشده-->
+<!--    </div>-->
+<!--    <div class="panel-body">-->
+<!--        <p>-->
+<!--            --><?php
+//            $this->widget('zii.widgets.grid.CGridView',array(
+//                'id' => 'unpaid-grid-view',
+//                'dataProvider' => $transactionsUnPaid,
+//                'columns'=>array(
+//                    array(
+//                        'header'=>'کاربر',
+//                        'value'=>'$data->user->userDetails->name?$data->user->userDetails->name." ".$data->user->userDetails->family:$data->user->email',
+//                    ),
+//                    array(
+//                        'header'=>'مبلغ تراکنش',
+//                        'value'=>'number_format($data->amount)." تومان"',
+//                    ),
+//                    array(
+//                        'header'=>'تاریخ',
+//                        'value'=>'JalaliDate::date("Y/m/d ساعت H:i:s",$data->date)',
+//                    ),
+//                    array(
+//                        'header'=>'توضیحات تراکنش',
+//                        'value'=>'$data->description',
+//                    )
+//                )
+//            ));
+//            ?>
+<!--        </p>-->
+<!--    </div>-->
+<!--</div>-->
