@@ -64,7 +64,7 @@ class ClassCategoryFiles extends SortableCActiveRecord
 				// @todo Please change those attributes that should be translated.
 				'translated_attributes' => array('title' ,'summary'),
 				// @todo Please add admin actions
-				'admin_routes' => array('courses/files/create','courses/files/update','courses/files/admin','courses/categories/update'),
+				'admin_routes' => array('courses/files/create','courses/files/update','courses/files/admin','courses/files/delete','courses/categories/update'),
 				//
 				'languages' => Yii::app()->params['languages'],
 				'default_language' => Yii::app()->params['default_language'],

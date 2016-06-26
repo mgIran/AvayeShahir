@@ -3,8 +3,10 @@ class Mailer {
 
     /**
      * Send mail
+     * @params $attachment string
+     * @params $SMTP []
      */
-    public static function mail($to, $subject, $message, $from ,$SMTP = array())
+    public static function mail($to, $subject, $message, $from ,$SMTP = array() ,$attachment=NULL)
     {
         $mail_theme=Yii::app()->params['mailTheme'];
         $message=str_replace('{MessageBody}', $message, $mail_theme);
@@ -24,6 +26,8 @@ class Mailer {
         $mail->Subject=$subject;
         $mail->MsgHTML($message);
         $mail->AddAddress($to);
+        if($attachment)
+            $mail->AddAttachment($attachment);
         return $mail->Send();
     }
 }

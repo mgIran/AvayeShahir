@@ -141,7 +141,7 @@ Yii::app()->user->returnUrl = Yii::app()->request->getRequestUri();
 		?>
 		<?php echo $form->error($model,'summary'); ?>
 	</div>
-<!--
+
 	<div class="row">
 		<?php echo $form->labelEx($model,'formTags'); ?>
 		<?php
@@ -160,7 +160,7 @@ Yii::app()->user->returnUrl = Yii::app()->request->getRequestUri();
 		</button>
 		<?php echo $form->error($model,'formTags'); ?>
 	</div>
--->
+
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'ثبت' : 'ذخیره',array('class' => 'btn btn-success')); ?>
 	</div>

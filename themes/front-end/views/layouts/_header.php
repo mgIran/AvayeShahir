@@ -9,7 +9,7 @@ $action = $this->action->id;
 ?>
 
 <header class="header">
-    <a href="https://telegram.me/pardiseavayeshahir" target="_blank" class="telegram"></a>
+    <a href="https://telegram.me/joinchat/AoBISDw1SSONszrnxjb8wQ" target="_blank" class="telegram"></a>
     <a href="<?= Yii::app()->createUrl('/forum') ?>" class="forum-icon"></a>
     <div class="navbar container">
         <span class="navTrigger">

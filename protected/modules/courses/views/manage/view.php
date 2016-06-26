@@ -109,7 +109,7 @@ $fileDir = Yii::getPathOfAlias("webroot").'/uploads/classCategoryFiles/';
 					</div>
 
 						<?
-						if($category->classes):
+						if($category->getValidClasses()):
 						?>
 							<div class="classes">
 								<h3><?= Yii::t('app','Classes'); ?></h3>
@@ -126,7 +126,7 @@ $fileDir = Yii::getPathOfAlias("webroot").'/uploads/classCategoryFiles/';
 										<div class="col-lg-2 col-md-2 col-xs-2 col-sm-2 col-xs-2 td"></div>
 									</div>
 									<?
-									foreach($category->classes as $key => $class):
+									foreach($category->getValidClasses() as $key => $class):
 									?>
 										<div class="tr" <?= $class->summary && !empty($class->summary)?'data-toggle="collapse" data-target="#class-collapse-'.$key.'"':''; ?>>
 											<div class="col-lg-2 col-md-2 col-xs-2 col-sm-2 col-xs-2 td"><?= $class->title ?></div>
@@ -135,7 +135,11 @@ $fileDir = Yii::getPathOfAlias("webroot").'/uploads/classCategoryFiles/';
 											<div class="col-lg-2 col-md-2 col-xs-2 col-sm-2 col-xs-2 td"><?= (Yii::app()->language == 'fa' ?Controller::parseNumbers($class->startClassTime):$class->startClassTime).' '.Yii::t('app','up to').' '.(Yii::app()->language == 'fa' ?Controller::parseNumbers($class->endClassTime):$class->endClassTime) ?></div>
 											<div class="col-lg-1 col-md-1 col-xs-1 col-sm-1 col-xs-1 td"><?= $class->teacher->getFullName() ?></div>
 											<div class="col-lg-1 col-md-1 col-xs-1 col-sm-1 col-xs-1 td"><?= Yii::app()->language == 'fa' ? Controller::parseNumbers(number_format($class->price)):number_format($class->price); ?></div>
-											<div class="col-lg-2 col-md-2 col-xs-2 col-sm-2 col-xs-2 td"><a href="#" class="disabled"><?= Yii::t('app','Register') ?></a></div>
+											<div class="col-lg-2 col-md-2 col-xs-2 col-sm-2 col-xs-2 td">
+												<a href="<?= Yii::app()->createUrl('/courses/register/'.$class->id) ?>"
+												   class="btn" ><?= Yii::t('app','Register')?>
+												</a>
+											</div>
 										</div>
 										<?
 										if($class->summary && !empty($class->summary)):

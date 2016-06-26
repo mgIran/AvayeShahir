@@ -75,7 +75,7 @@ class Classes extends SortableCActiveRecord
 				// @todo Please change those attributes that should be translated.
 				'translated_attributes' => array('title','summary'),
 				// @todo Please add admin actions
-				'admin_routes' => array('courses/classes/create','courses/classes/update','courses/classes/admin'),
+				'admin_routes' => array('courses/classes/create','courses/classes/update','courses/classes/delete','courses/classes/admin'),
 				//
 				'languages' => Yii::app()->params['languages'],
 				'default_language' => Yii::app()->params['default_language'],
@@ -235,5 +235,11 @@ class Classes extends SortableCActiveRecord
 			$this->classDays = implode(',',$this->classDays);
 		}
 		return parent::beforeSave();
+	}
+
+	public function afterFind(){
+		$this->formTags = [];
+		foreach($this->tags as $tag)
+			array_push($this->formTags,$tag->title);
 	}
 }

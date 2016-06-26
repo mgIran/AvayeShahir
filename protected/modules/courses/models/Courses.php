@@ -10,10 +10,12 @@
  * @property string $summary
  * @property string $order
  * @property string $seen
+ * @property [] $formTags
  *
  * The followings are the available model relations:
  * @property Classes[] $classes
  * @property ClassCategories[] $categories
+ * @property ClassTags[] $tags
  */
 class Courses extends SortableCActiveRecord
 {
@@ -24,6 +26,9 @@ class Courses extends SortableCActiveRecord
 	{
 		return '{{courses}}';
 	}
+
+	public $formTags;
+
 	/**
 	 * __set
 	 *
@@ -56,7 +61,7 @@ class Courses extends SortableCActiveRecord
 				'class' => 'ext.EasyMultiLanguage.EasyMultiLanguageBehavior',
 				// @todo Please change those attributes that should be translated.
 				'translated_attributes' => array('title','summary'),
-				'admin_routes' => array('courses/manage/admin', 'courses/manage/update', 'courses/manage/create'),
+				'admin_routes' => array('courses/manage/admin', 'courses/manage/update', 'courses/manage/create', 'courses/manage/delete'),
 				//
 				'languages' => Yii::app()->params['languages'],
 				'default_language' => Yii::app()->params['default_language'],
@@ -91,6 +96,7 @@ class Courses extends SortableCActiveRecord
 		return array(
 			'classes' => array(self::HAS_MANY, 'Classes', 'course_id','order'=>'classes.order'),
 			'categories' => array(self::HAS_MANY, 'ClassCategories', 'course_id','order'=>'categories.order'),
+			'tags' => array(self::MANY_MANY, 'ClassTags', '{{course_tag_rel}}(course_id,tag_id)'),
 		);
 	}
 
@@ -105,6 +111,7 @@ class Courses extends SortableCActiveRecord
 			'pic' => 'تصویر',
 			'summary' => 'توضیحات',
 			'order' => 'ترتیب',
+			'formTags' => 'برچسب ها',
 		);
 	}
 
@@ -145,5 +152,37 @@ class Courses extends SortableCActiveRecord
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
+	}
+
+	protected function afterSave()
+	{
+		if($this->formTags && !empty($this->formTags)) {
+			if(!$this->IsNewRecord)
+				CourseTagRel::model()->deleteAll('course_id='.$this->id);
+			foreach($this->formTags as $tag) {
+				$tagModel = ClassTags::model()->findByAttributes(array('title' => $tag));
+				if($tagModel) {
+					$tag_rel = new CourseTagRel();
+					$tag_rel->course_id = $this->id;
+					$tag_rel->tag_id = $tagModel->id;
+					$tag_rel->save(false);
+				} else {
+					$tagModel = new ClassTags;
+					$tagModel->title = $tag;
+					$tagModel->save(false);
+					$tag_rel = new CourseTagRel();
+					$tag_rel->course_id = $this->id;
+					$tag_rel->tag_id = $tagModel->id;
+					$tag_rel->save(false);
+				}
+			}
+		}
+		parent::afterSave();
+	}
+
+	public function afterFind(){
+		$this->formTags = [];
+		foreach($this->tags as $tag)
+			array_push($this->formTags,$tag->title);
 	}
 }

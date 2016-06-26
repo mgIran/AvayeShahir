@@ -100,9 +100,9 @@ class Controller extends CController
                     'linkOptions' => array('class' => 'dropdown-toggle' ,'data-toggle' => "dropdown") ,
                     'items' => array(
                         array('label' => ' دوره ها' ,'url' => Yii::app()->createUrl('/courses/manage/admin/')) ,
-                        array('label' => ' کلاس ها' ,'url' => Yii::app()->createUrl('/courses/classes/admin/')) ,
                         array('label' => ' گروه ها' ,'url' => Yii::app()->createUrl('/courses/categories/admin/')) ,
-                        array('label' => ' تگ ها' ,'url' => Yii::app()->createUrl('/courses/tags/admin/'))
+                        array('label' => ' کلاس ها' ,'url' => Yii::app()->createUrl('/courses/classes/admin/')) ,
+                        array('label' => 'کلمات کلیدی' ,'url' => Yii::app()->createUrl('/courses/tags/admin/'))
                     )
                 ) ,
                 array(

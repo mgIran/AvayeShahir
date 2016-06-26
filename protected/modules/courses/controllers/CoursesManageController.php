@@ -98,6 +98,7 @@ class CoursesManageController extends Controller
 						'serverName' => $file,
 				);
 			}
+			$model->formTags = isset($_POST['Courses']['formTags'])?explode(',',$_POST['Courses']['formTags']):null;
 			if($model->save())
 			{
 				if ($model->pic and file_exists($tmpDIR.$model->pic)) {
@@ -143,7 +144,6 @@ class CoursesManageController extends Controller
 				'serverName' => $file,
 			);
 		}
-
 		if(isset($_POST['Courses']))
 		{
 			$model->attributes=$_POST['Courses'];
@@ -156,6 +156,7 @@ class CoursesManageController extends Controller
 						'serverName' => $file,
 				);
 			}
+			$model->formTags = isset($_POST['Courses']['formTags'])?explode(',',$_POST['Courses']['formTags']):null;
 			if($model->save())
 			{
 				if ($model->pic and file_exists($tmpDIR.$model->pic)) {

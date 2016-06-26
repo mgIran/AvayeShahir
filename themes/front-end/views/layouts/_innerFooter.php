@@ -65,7 +65,7 @@
             <div class="col-md-4">
                 <?= $this->renderPartial('//layouts/_map'); ?>
             </div>
-            <p class="copyright"><?= Yii::t('app','All Rights Reserved By Pardis Avaye Shahir. ©‏') ?>&nbsp;<?= Yii::app()->language=='fa'?'1394':'2016'; ?></p>
+            <p class="copyright"><?= Yii::t('app','All Rights Reserved By Pardis-e Avaye Shahir. ©‏') ?>&nbsp;<?= Yii::app()->language=='fa'?'1394':'2016'; ?></p>
         </div>
     </div>
 </footer>

@@ -50,6 +50,7 @@
                         <?= $class->teacher->getFullName() ?>
                     </div>
                 </div>
+
                 <div class="tr">
                     <div class="td"><?= Yii::t('app', 'Start & End of the Course') ?></div>
                     <div class="td">

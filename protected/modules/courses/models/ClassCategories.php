@@ -58,7 +58,7 @@ class ClassCategories extends SortableCActiveRecord
 						'class' => 'ext.EasyMultiLanguage.EasyMultiLanguageBehavior',
 						// @todo Please change those attributes that should be translated.
 						'translated_attributes' => array('title','summary'),
-						'admin_routes' => array('courses/categories/admin', 'courses/categories/update', 'courses/categories/create'),
+						'admin_routes' => array('courses/categories/admin', 'courses/categories/update', 'courses/categories/delete', 'courses/categories/create'),
 						//
 						'languages' => Yii::app()->params['languages'],
 						'default_language' => Yii::app()->params['default_language'],
@@ -149,5 +149,14 @@ class ClassCategories extends SortableCActiveRecord
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
+	}
+
+	public function getValidClasses(){
+		$criteria = new CDbCriteria();
+		$criteria->addCondition('category_id = :category');
+		$criteria->addCondition('endSignupDate > :now');
+		$criteria->params[':now'] = time();
+		$criteria->params[':category'] = $this->id;
+		return Classes::model()->findAll($criteria);
 	}
 }

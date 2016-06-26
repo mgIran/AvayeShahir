@@ -91,7 +91,7 @@ return array(
     'Instructor' => 'مدرس',
     'Sessions' => 'تعداد جلسات',
     'Gallery' => 'تصاویر موسسه',
-    'All Rights Reserved By Pardis Avaye Shahir. ©‏' => 'همهٔ حقوق برای موسسه پردیس آوای شهیر محفوظ است. ©‏ ',
+    'All Rights Reserved By Pardis-e Avaye Shahir. ©‏' => 'همهٔ حقوق برای موسسه پردیس آوای شهیر محفوظ است. ©‏ ',
     'Pictures Gallery' => 'گالری تصاویر',
     'Follow Us' => 'ما را دنبال کنید.',
     'Forum' => 'بخش تبادل نظر',
