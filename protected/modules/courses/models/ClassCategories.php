@@ -9,12 +9,14 @@
  * @property string $course_id
  * @property string $summary
  * @property string $order
+ * @property [] $formTags
  *
  * The followings are the available model relations:
  * @property Courses $course
  * @property Classes[] $classes
  * @property ClassCategoryFiles[] $files
  * @property ClassCategoryFileLinks[] $links
+ * @property ClassTags[] $tags
  */
 class ClassCategories extends SortableCActiveRecord
 {
@@ -25,6 +27,8 @@ class ClassCategories extends SortableCActiveRecord
 	{
 		return '{{class_categories}}';
 	}
+
+	public $formTags=[];
 
 	/**
 	 * __set
@@ -79,6 +83,7 @@ class ClassCategories extends SortableCActiveRecord
 			array('title','unique'),
 		  	array('title', 'length', 'max'=>255),
 			array('summary ,course_id' , 'safe'),
+			array('formTags', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, title ,summary', 'safe', 'on'=>'search'),
@@ -97,6 +102,7 @@ class ClassCategories extends SortableCActiveRecord
 			'classes' => array(self::HAS_MANY, 'Classes', 'category_id', 'order'=>'classes.order'),
 			'files' => array(self::HAS_MANY, 'ClassCategoryFiles', 'category_id' , 'order'=>'files.order'),
 			'links' => array(self::HAS_MANY, 'ClassCategoryFileLinks', 'category_id' , 'order'=>'links.order'),
+			'tags' => array(self::MANY_MANY, 'ClassTags', '{{category_tag_rel}}(category_id,tag_id)'),
 		);
 	}
 
@@ -111,6 +117,7 @@ class ClassCategories extends SortableCActiveRecord
 			'summary' => 'توضیحات',
 			'course_id' => 'دوره موردنظر',
 			'order' => 'ترتیب',
+			'formTags' => 'برچسب ها',
 		);
 	}
 
@@ -158,5 +165,38 @@ class ClassCategories extends SortableCActiveRecord
 		$criteria->params[':now'] = time();
 		$criteria->params[':category'] = $this->id;
 		return Classes::model()->findAll($criteria);
+	}
+
+
+	protected function afterSave()
+	{
+		if($this->formTags && !empty($this->formTags)) {
+			if(!$this->isNewRecord)
+				CategoryTagRel::model()->deleteAll('category_id='.$this->id);
+			foreach($this->formTags as $tag) {
+				$tagModel = ClassTags::model()->findByAttributes(array('title' => $tag));
+				if($tagModel) {
+					$tag_rel = new CategoryTagRel();
+					$tag_rel->category_id = $this->id;
+					$tag_rel->tag_id = $tagModel->id;
+					$tag_rel->save(false);
+				} else {
+					$tagModel = new ClassTags;
+					$tagModel->title = $tag;
+					$tagModel->save(false);
+					$tag_rel = new CategoryTagRel();
+					$tag_rel->category_id = $this->id;
+					$tag_rel->tag_id = $tagModel->id;
+					$tag_rel->save(false);
+				}
+			}
+		}
+		parent::afterSave();
+	}
+
+	public function getKeywords()
+	{
+		$tags = CHtml::listData($this->tags,'title','title');
+		return implode(',',$tags);
 	}
 }

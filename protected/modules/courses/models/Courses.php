@@ -80,6 +80,7 @@ class Courses extends SortableCActiveRecord
 			array('title, pic, summary', 'required'),
 			array('pic', 'length', 'max'=>200),
 			array('seen', 'default', 'value'=>0),
+			array('formTags', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('title, pic, summary', 'safe', 'on'=>'search'),
@@ -184,5 +185,16 @@ class Courses extends SortableCActiveRecord
 	{
 		$tags = CHtml::listData($this->tags,'title','title');
 		return implode(',',$tags);
+	}
+
+	public function getCategoriesKeywords()
+	{
+		$allTags = array();
+		foreach($this->categories as $category) {
+			$tags = CHtml::listData($category->tags, 'title', 'title');
+			if($tags)
+				$allTags = CMap::mergeArray($allTags, $tags);
+		}
+		return implode(',', $allTags);
 	}
 }

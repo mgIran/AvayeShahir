@@ -59,7 +59,7 @@ class CoursesManageController extends Controller
 		Yii::app()->theme = 'front-end';
 		$this->layout = '//layouts/inner';
 		$model = $this->loadModel($id);
-		$this->keywords = $model->getKeywords();
+		$this->keywords = $model->getKeywords().','.$model->getCategoriesKeywords();
 		$this->description = substr(strip_tags($model->summary),0,160);
 		$this->pageTitle = $model->title;
 		Yii::app()->db->createCommand()->update('{{courses}}',array('seen'=>((int)$model->seen+1)),'id = :id',array(":id"=>$model->id));

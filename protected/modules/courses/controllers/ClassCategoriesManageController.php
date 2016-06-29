@@ -57,6 +57,7 @@ class ClassCategoriesManageController extends Controller
 		if(isset($_POST['ClassCategories']))
 		{
 			$model->attributes=$_POST['ClassCategories'];
+			$model->formTags = isset($_POST['ClassCategories']['formTags'])?explode(',',$_POST['ClassCategories']['formTags']):null;
 			if($model->save())
 			{
 				Yii::app()->user->setFlash('success' ,'<span class="icon-check"></span>&nbsp;&nbsp;	اطلاعات با موفقیت ذخیره شد.');
@@ -79,9 +80,13 @@ class ClassCategoriesManageController extends Controller
 	{
 		$model=$this->loadModel($id);
 
+		foreach($model->tags as $tag)
+			array_push($model->formTags,$tag->title);
+
 		if(isset($_POST['ClassCategories']))
 		{
 			$model->attributes=$_POST['ClassCategories'];
+			$model->formTags = isset($_POST['ClassCategories']['formTags'])?explode(',',$_POST['ClassCategories']['formTags']):null;
 			if($model->save())
 			{
 				Yii::app()->user->setFlash('success' ,'<span class="icon-check"></span>&nbsp;&nbsp;اطلاعات با موفقیت ذخیره شد.');
