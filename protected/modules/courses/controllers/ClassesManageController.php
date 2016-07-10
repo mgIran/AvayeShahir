@@ -89,8 +89,9 @@ class ClassesManageController extends Controller
 	public function actionUpdate($id)
 	{
 		$model=$this->loadModel($id);
-		foreach($model->tags as $tag)
-			array_push($model->formTags,$tag->title);
+		if($model->tags)
+			foreach($model->tags as $tag)
+				array_push($model->formTags,$tag->title);
 		$model->classDays = $model->classDays?explode(',',$model->classDays):null;
 		if(isset($_POST['Classes']))
 		{

@@ -129,6 +129,15 @@ Yii::app()->user->returnUrl = Yii::app()->request->getRequestUri();
 		<?php echo $form->error($model,'price'); ?>
 	</div>
 
+	<div class="row">
+		<?php echo $form->labelEx($model,'status'); ?>
+		<?php echo $form->dropDownList($model,'status',array(
+				0=>'غیرفعال',
+				1=>'فعال'
+		),array('placeholder' => 'وضعیت')); ?>
+		<?php echo $form->error($model,'status'); ?>
+	</div>
+
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'summary'); ?>

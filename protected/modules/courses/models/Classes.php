@@ -21,6 +21,7 @@
  * @property string $sessions
  * @property string $startClassTime
  * @property string $endClassTime
+ * @property string $status
  * @property [] $formTags
  *
  * The followings are the available model relations:
@@ -98,7 +99,7 @@ class Classes extends SortableCActiveRecord
 			array('endClassDate', 'compare', 'compareAttribute' => 'startClassDate', 'operator' => '>', 'message' => 'تاریخ پایان کلاس باید بیشتر از تاریخ شروع کلاس باشد.'),
 			array('title', 'length', 'max' => 50),
 			array('category_id, course_id', 'length', 'max' => 10),
-			array('summary, startSignupDate, endSignupDate, startClassDate, endClassDate,startClassTime,endClassTime,classDays', 'safe'),
+			array('status, summary, startSignupDate, endSignupDate, startClassDate, endClassDate,startClassTime,endClassTime,classDays', 'safe'),
 			array('id, title, summary, price, startSignupDate, endSignupDate, startClassDate, endClassDate, category_id, course_id', 'safe', 'on' => 'search'),
 		);
 	}
@@ -142,6 +143,7 @@ class Classes extends SortableCActiveRecord
 			'formTags' => 'برچسب ها',
 			'order' => 'ترتیب',
 			'sessions' => 'تعداد جلسات',
+			'status' => 'وضعیت',
 		);
 	}
 

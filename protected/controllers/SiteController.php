@@ -47,7 +47,8 @@ class SiteController extends Controller
 		$teachers = Users::model()->findAll('role_id = 2');
 		$aboutText = Pages::model()->findByPk(12);
 		$termsText = Pages::model()->findByPk(5);
-		$criteria->addCondition('endSignupDate > :now');
+		$criteria->addCondition('endSignupDate >= :now');
+		$criteria->addCondition('t.status = 1');
 		$criteria->params[':now'] = time();
 		$classes = Classes::model()->findAll($criteria);
 		$this->render('index' ,array(

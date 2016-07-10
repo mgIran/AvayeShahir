@@ -275,6 +275,8 @@ Yii::app()->clientScript->registerScriptFile($baseUrl.'/js/jquery.mousewheel.min
                     }),
                 });");
                 foreach($classes as $class):
+//                    $capacity = UserTransactions::model()->countByAttributes(array('status'=>'paid','class_id' => $class->id));
+//                    if($capacity <= $class->capacity)
                     ?>
                     <div class="class">
                         <div class="inner">
