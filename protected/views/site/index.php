@@ -440,6 +440,8 @@ endif;
                     callbacks: true,
                     info: true,
                     margin:30,
+                    autoplay:true,
+                    autoplayTimeout:5000,
                     responsive : {
                         0 : {
                             items:1,
@@ -561,7 +563,7 @@ endif;
 <section class="about" id="about">
     <div class="container">
         <h3 class="yekan-text"><?= Yii::t('app','About Avaye Shahir') ?></h3>
-        <div class="<?= Yii::app()->language == 'fa'?'col-lg-8 col-md-8 col-sm-8 col-xs-12':'col-lg-12 col-md-12 col-sm-12 col-xs-12'; ?> text-container">
+        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 text-container">
                 <div class="text form-group">
 <!--                --><?//
 //                $aboutText->summary = str_ireplace('<br />','#br#',$aboutText->summary);
@@ -598,9 +600,9 @@ endif;
             </div>
 
         </div>
-        <div class="<?= Yii::app()->language == 'fa'?'col-lg-4 col-md-4 col-sm-4 col-xs-12':'hidden'; ?> licenses-container">
-            <div class="col-md-6"><img src="<?= Yii::app()->theme->baseUrl .'/images/rasaneh.jpg';?>"></div>
-            <div class="col-md-6"><img src="<?= Yii::app()->theme->baseUrl .'/images/enamad.jpg'; ?>"></div>
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 licenses-container">
+<!--            <div class="col-md-6"><img src="--><?//= Yii::app()->theme->baseUrl .'/images/rasaneh.jpg';?><!--"></div>-->
+            <div class="col-md-12"><img id='nbpegwmdgwmdgwmdsgui' style='cursor:pointer' onclick='window.open("http://trustseal.enamad.ir/Verify.aspx?id=29990&p=wkynjzpgjzpgjzpgdrfs", "Popup","toolbar=no, location=no, statusbar=no, menubar=no, scrollbars=1, resizable=0, width=580, height=600, top=30")' alt='' src='http://trustseal.enamad.ir/logo.aspx?id=29990&p=qesgzpfvzpfvzpfvgthv'/></div>
         </div>
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="col-md-12">
