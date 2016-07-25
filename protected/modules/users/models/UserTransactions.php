@@ -9,8 +9,12 @@
  * @property string $amount
  * @property string $date
  * @property string $status
- * @property string $token
  * @property string $description
+ * @property string $order_id
+ * @property string $ref_id
+ * @property string $res_code
+ * @property string $sale_reference_id
+ * @property string $settle
  *
  * The followings are the available model relations:
  * @property Users $user
@@ -34,15 +38,19 @@ class UserTransactions extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('user_id, class_id', 'required'),
-			array('user_id, amount', 'length', 'max'=>10),
-			array('date', 'length', 'max'=>20),
-			array('status', 'length', 'max'=>6),
-			array('token', 'length', 'max'=>50),
-			array('description', 'length', 'max'=>200),
-			// The following rule is used by search().
-			// @todo Please remove those attributes that should not be searched.
-			array('class_id, user_id, amount, date, status, token, description', 'safe', 'on'=>'search'),
+				array('user_id, class_id', 'required'),
+				array('order_id', 'unique'),
+				array('settle', 'default' ,'value' => 0),
+				array('user_id, amount', 'length', 'max' => 10),
+				array('order_id', 'length', 'max' => 12),
+				array('date', 'length', 'max' => 20),
+				array('status', 'length', 'max' => 6),
+				array('res_code', 'length', 'max' => 5),
+				array('sale_reference_id, ref_id', 'length', 'max' => 50),
+				array('description', 'length', 'max' => 200),
+				// The following rule is used by search().
+				// @todo Please remove those attributes that should not be searched.
+				array('class_id, user_id, amount, date, status, sale_reference_id, description, order_id, ref_id, settle', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -54,8 +62,8 @@ class UserTransactions extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'user' => array(self::BELONGS_TO, 'Users', 'user_id'),
-			'class' => array(self::BELONGS_TO, 'Classes', 'class_id'),
+				'user' => array(self::BELONGS_TO, 'Users', 'user_id'),
+				'class' => array(self::BELONGS_TO, 'Classes', 'class_id'),
 		);
 	}
 
@@ -65,13 +73,14 @@ class UserTransactions extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'class_id' => 'کلاس',
-			'user_id' => 'کاربر',
-			'amount' => 'مقدار',
-			'date' => 'تاریخ',
-			'status' => 'وضعیت',
-			'token' => 'کد رهگیری',
-			'description' => 'توضیحات',
+				'class_id' => 'کلاس',
+				'user_id' => 'کاربر',
+				'amount' => 'مقدار',
+				'date' => 'تاریخ',
+				'status' => 'وضعیت',
+				'sale_reference_id' => 'کد رهگیری تراکنش',
+				'description' => 'توضیحات',
+				'order_id' => 'شماره فاکتور',
 		);
 	}
 
@@ -91,18 +100,20 @@ class UserTransactions extends CActiveRecord
 	{
 		// @todo Please modify the following code to remove attributes that should not be searched.
 
-		$criteria=new CDbCriteria;
+		$criteria = new CDbCriteria;
 
-		$criteria->compare('class_id',$this->id,true);
-		$criteria->compare('user_id',$this->user_id,true);
-		$criteria->compare('amount',$this->amount,true);
-		$criteria->compare('date',$this->date,true);
-		$criteria->compare('status',$this->status,true);
-		$criteria->compare('token',$this->token,true);
-		$criteria->compare('description',$this->description,true);
+		$criteria->compare('class_id', $this->class_id, true);
+		$criteria->compare('user_id', $this->user_id, true);
+		$criteria->compare('amount', $this->amount, true);
+		$criteria->compare('date', $this->date, true);
+		$criteria->compare('status', $this->status, true);
+		$criteria->compare('sale_reference_id', $this->sale_reference_id);
+		$criteria->compare('description', $this->description, true);
+		$criteria->compare('order_id', $this->order_id);
+		$criteria->compare('settle', $this->settle);
 
 		return new CActiveDataProvider($this, array(
-			'criteria'=>$criteria,
+				'criteria' => $criteria,
 		));
 	}
 
@@ -112,8 +123,34 @@ class UserTransactions extends CActiveRecord
 	 * @param string $className active record class name.
 	 * @return UserTransactions the static model class
 	 */
-	public static function model($className=__CLASS__)
+	public static function model($className = __CLASS__)
 	{
 		return parent::model($className);
+	}
+
+	protected function beforeSave()
+	{
+		if(parent::beforeSave()) {
+			if($this->isNewRecord) {
+				$this->newOrderId();
+			}
+			return true;
+		}
+		else
+			return false;
+	}
+
+	/**
+	 * create unique order id for any transaction
+	 */
+	public function newOrderId(){
+		$lastOrderId = Yii::app()->db->createCommand()
+				->select("MAX(order_id) as max")
+				->from("ym_user_transactions")
+				->queryScalar();
+		if($lastOrderId)
+			$this->order_id = (int)$lastOrderId + 1;
+		else
+			$this->order_id = 1100;
 	}
 }

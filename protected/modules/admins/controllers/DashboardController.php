@@ -35,11 +35,11 @@ class DashboardController extends Controller
 
 	public function actionIndex()
     {
-        $criteria = new CDbCriteria();
-        $criteria->addCondition('status = "paid"');
-        $transactionsPaid = new CActiveDataProvider('UserTransactions',array(
-            'criteria' => $criteria
-        ));
+        $transactionsPaid=new UserTransactions('search');
+        $transactionsPaid->unsetAttributes();
+        $transactionsPaid->status = 'paid';
+        if(isset($_GET['UserTransactions']))
+            $transactionsPaid->attributes=$_GET['UserTransactions'];
 
         $criteria = new CDbCriteria();
         $criteria->addCondition('status = "unpaid"');
@@ -52,7 +52,7 @@ class DashboardController extends Controller
             ->where('status="paid"')
             ->queryScalar();
 		$this->render('index',array(
-            'transactionsPaid' => $transactionsPaid,
+            'transactionsPaid' => $transactionsPaid->search(),
             'transactionsUnPaid' => $transactionsUnPaid,
             'totalTransactionsPaidAmount' => $totalTransactionsPaidAmount
         ));

@@ -59,6 +59,7 @@
             $this->widget('zii.widgets.grid.CGridView',array(
                 'id' => 'paid-grid-view',
                 'dataProvider' => $transactionsPaid,
+                'filter' => new UserTransactions(),
                 'columns'=>array(
                     array(
                         'header'=>'کاربر',
@@ -72,10 +73,7 @@
                         'header'=>'تاریخ',
                         'value'=>'JalaliDate::date("Y/m/d ساعت H:i:s",$data->date)',
                     ),
-                    array(
-                        'header'=>'کد رهگیری',
-                        'value'=>'$data->token',
-                    ),
+                    'sale_reference_id',
                     array(
                         'header'=>'توضیحات تراکنش',
                         'value'=>'$data->description',

@@ -166,6 +166,12 @@ return array(
 		'coreMessages'=>array(
 				'basePath'=>null,
 		),
+		'Payment' => array(
+				'class'=> 'ext.MellatPayment.MellatPayment',
+				'terminalId' => '2034929',
+				'userName' => 'avay988',
+				'userPassword' => '90233241',
+		),
     ),
     'controllerMap' => array(
         'min' => array(
