@@ -40,7 +40,7 @@
             ثبت نام جدید: <?php echo $transactionsPaid->totalItemCount ?><br />
         </p>
         <p>
-            <a class="btn btn-info" href="<?= Yii::app()->createUrl('/courses/register/admin') ?>">مشاهده جزییات</a>
+            <a class="btn btn-info" href="<?= $this->createUrl('/courses/register/admin') ?>">مشاهده جزییات</a>
         </p>
     </div>
 </div>

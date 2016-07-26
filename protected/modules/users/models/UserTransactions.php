@@ -111,7 +111,7 @@ class UserTransactions extends CActiveRecord
 		$criteria->compare('description', $this->description, true);
 		$criteria->compare('order_id', $this->order_id);
 		$criteria->compare('settle', $this->settle);
-
+		$criteria->addCondition('status = "paid"');
 		return new CActiveDataProvider($this, array(
 				'criteria' => $criteria,
 		));

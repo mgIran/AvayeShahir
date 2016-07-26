@@ -37,20 +37,21 @@ class DashboardController extends Controller
     {
         $transactionsPaid=new UserTransactions('search');
         $transactionsPaid->unsetAttributes();
-        $transactionsPaid->status = 'paid';
         if(isset($_GET['UserTransactions']))
             $transactionsPaid->attributes=$_GET['UserTransactions'];
-
+        $transactionsPaid->status = 'paid';
         $criteria = new CDbCriteria();
         $criteria->addCondition('status = "unpaid"');
         $transactionsUnPaid =new CActiveDataProvider('UserTransactions',array(
             'criteria' => $criteria
         ));
+
         $totalTransactionsPaidAmount =Yii::app()->db->createCommand()
             ->select('SUM(amount) AS sum')
             ->from('{{user_transactions}}')
             ->where('status="paid"')
             ->queryScalar();
+
 		$this->render('index',array(
             'transactionsPaid' => $transactionsPaid->search(),
             'transactionsUnPaid' => $transactionsUnPaid,

@@ -24,7 +24,7 @@ class ClassRegisterController extends Controller
     {
         return array(
             array('allow',  // allow all users to perform 'index' and 'views' actions
-                'actions'=>array('admin'),
+                'actions'=>array('admin','inquiry'),
                 'roles' => array('admin'),
             ),
             array('allow',  // allow all users to perform 'index' and 'views' actions
@@ -142,11 +142,13 @@ class ClassRegisterController extends Controller
         }
         if($result != NULL) {
             $RecourceCode = (!is_array($result) ? $result : $result['responseCode']);
-            $model->status = 'paid';
-            // Settle Payment
-            $settle = Yii::app()->Payment->SettleRequest( $model->order_id, $_POST['SaleOrderId'], $_POST['SaleReferenceId']);
-            if($settle)
-                $model->settle = 1;
+            if($RecourceCode == 0) {
+                $model->status = 'paid';
+                // Settle Payment
+                $settle = Yii::app()->Payment->SettleRequest($model->order_id, $_POST['SaleOrderId'], $_POST['SaleReferenceId']);
+                if($settle)
+                    $model->settle = 1;
+            }
         } else {
             $RecourceCode = $_POST['ResCode'];
         }
@@ -159,12 +161,15 @@ class ClassRegisterController extends Controller
         ));
     }
 
-    public function actionInquiry()
+    public function actionInquiry($id)
     {
-        $order_Id ='';
-        $SaleOrderId ='';
-        $SaleReferenceId = '';
-        Yii::app()->Payment->InquiryRequest( $order_Id, $SaleOrderId, $SaleReferenceId);
+        $model = UserTransactions::model()->findByAttributes(array('order_id' => $id));
+        if($model)
+        {
+            $result = Yii::app()->Payment->InquiryRequest( $model->order_id, $model->order_id, $model->sale_reference_id);
+            var_dump($result);exit;
+        }else
+            echo 'Model is not found';
     }
 
     public function actionAdmin(){

@@ -48,7 +48,7 @@ $(".tab-content .tab-pane:first-child").addClass("in active");
                 ),
                 array(
                     'header' => 'کد رهگیری تراکنش',
-                    'value' => '$data->token',
+                    'value' => '$data->sale_reference_id',
                 ),
                 array(
                     'header' => 'شماره تماس',
