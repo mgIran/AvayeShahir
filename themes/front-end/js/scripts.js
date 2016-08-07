@@ -1,8 +1,5 @@
 $(function() {
     $.material.init();
-    if($(window).scrollTop() > 100)
-        $("header.header").addClass('scroll-mode');
-
     // fade out alert messages
     setInterval(function(){
         $(".alert:not(.message)").fadeTo(500, 0).slideUp(500, function(){
@@ -24,13 +21,6 @@ $(function() {
             },1000,'easeOutCubic');
     });
 
-    $(window).scroll(function() {
-        $("[data-toggle='tooltip']").tooltip('hide');
-        if ($(this).scrollTop() > 100)
-            $("header.header").addClass('scroll-mode');
-        else
-            $("header.header").removeClass('scroll-mode');
-    });
 
     $("[data-toggle='tooltip']").tooltip({
         trigger:'hover'

@@ -176,3 +176,14 @@ $action = $this->action->id;
         </div>
     </div>
 </div>
+
+<?
+Yii::app()->clientScript->registerScript('scroll-mode',"if($(window).scrollTop() > 100)
+        $(\"header.header\").addClass('scroll-mode');
+    $(window).scroll(function() {
+        if ($(this).scrollTop() > 100)
+            $(\"header.header\").addClass('scroll-mode');
+        else
+            $(\"header.header\").removeClass('scroll-mode');
+        $(\"[data-toggle='tooltip']\").tooltip('hide');
+    });",CClientScript::POS_HEAD);
