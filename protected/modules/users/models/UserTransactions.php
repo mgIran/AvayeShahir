@@ -102,16 +102,13 @@ class UserTransactions extends CActiveRecord
 
 		$criteria = new CDbCriteria;
 
-		$criteria->compare('class_id', $this->class_id, true);
-		$criteria->compare('user_id', $this->user_id, true);
+		$criteria->compare('class_id', $this->class_id);
+		$criteria->compare('user_id', $this->user_id);
 		$criteria->compare('amount', $this->amount, true);
 		$criteria->compare('date', $this->date, true);
-		$criteria->compare('status', $this->status, true);
+		$criteria->compare('status', $this->status);
 		$criteria->compare('sale_reference_id', $this->sale_reference_id);
-		$criteria->compare('description', $this->description, true);
-		$criteria->compare('order_id', $this->order_id);
-		$criteria->compare('settle', $this->settle);
-		$criteria->addCondition('status = "paid"');
+		$criteria->order = 'date DESC';
 		return new CActiveDataProvider($this, array(
 				'criteria' => $criteria,
 		));

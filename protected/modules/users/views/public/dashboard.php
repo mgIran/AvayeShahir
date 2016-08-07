@@ -1,6 +1,8 @@
 <?php
 /* @var $this PublicController */
 /* @var $model Users */
+/* @var $transactions CActiveDataProvider */
+/* @var $totalTransactionsAmount string */
 
 if(isset($_GET['tab']) && !empty($_GET['tab']))
     $tab = $_GET['tab'];
@@ -14,13 +16,16 @@ if(isset($_GET['tab']) && !empty($_GET['tab']))
 <div class="page-content courses">
 
     <div class="container">
-        <div class="col-lg-8 col-md-8 col-sm-10 col-xs-12 col-lg-pull-2 col-md-pull-2 col-sm-pull-1 col-lg-push-2 col-md-push-2 col-sm-push-1">
+        <div class="col-lg-8 col-md-8 col-sm-10 col-xs-12 <?= Yii::app()->language == 'fa'?'col-lg-push-2 col-md-push-2 col-sm-push-1':'col-lg-pull-2 col-md-pull-2 col-sm-pull-1' ?>">
             <ul class="nav nav-tabs">
                 <li class="<?= isset($tab)?'':'active'; ?>">
                     <a data-toggle="tab" href="#general-tab"><?= Yii::t('app','User Details')?></a>
                 </li>
                 <li class="<?= isset($tab) && $tab == 'setting' ?'active':''; ?>">
                     <a data-toggle="tab" href="#setting-tab"><?= Yii::t('app','Change Password')?></a>
+                </li>
+                <li class="<?= isset($tab) && $tab == 'transactions' ?'active':''; ?>">
+                    <a data-toggle="tab" href="#transactions-tab"><?= Yii::t('app','Transactions')?></a>
                 </li>
             </ul>
 
@@ -33,6 +38,12 @@ if(isset($_GET['tab']) && !empty($_GET['tab']))
                 <div id="setting-tab" class="tab-pane fade <?= isset($tab) && $tab == 'setting' ?'active in':''; ?>">
                     <?php $this->renderPartial('_setting',array(
                         'model'=>$model,
+                    ))?>
+                </div>
+                <div id="transactions-tab" class="tab-pane fade <?= isset($tab) && $tab == 'transactions' ?'active in':''; ?>">
+                    <?php $this->renderPartial('_transactions',array(
+                        'model'=>$model,
+                        'dataProvider'=>$transactions,
                     ))?>
                 </div>
             </div>

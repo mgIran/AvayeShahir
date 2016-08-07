@@ -116,9 +116,13 @@ return array(
     'Remember Me' => 'مرا به خاطر بسپار',
     'Visit Statistics' => 'آمار بازدید',
     'Views' => 'بازدید',
+    'Transactions'=>'تراکنش ها',
     'Transaction Details'=>'اطلاعات تراکنش',
     'Transaction Status'=>'وضعیت تراکنش',
     'Tracking Code'=>'کد رهگیری',
     'Order Id'=>'شماره فاکتور',
     'Bank Gateway Message'=>'پیغام در گاه بانک',
+    'Amount' => 'مبلغ',
+    'Date' => 'تاریخ',
+    'Description' => 'توضیحات'
 );

@@ -180,8 +180,21 @@ class PublicController extends Controller
         Yii::app()->theme = 'front-end';
         $this->layout = '//layouts/inner';
         $model=Users::model()->findByPk(Yii::app()->user->getId());
+
+        $transactions=new UserTransactions('search');
+        $transactions->status = 'paid';
+        $transactions->user_id = Yii::app()->user->getId();
+
+        $totalTransactionsAmount =Yii::app()->db->createCommand()
+            ->select('SUM(amount) AS sum')
+            ->from('{{user_transactions}}')
+            ->where('status="paid"')
+            ->queryScalar();
+
         $this->render('dashboard', array(
             'model'=>$model,
+            'transactions' => $transactions->search(),
+            'totalTransactionsAmount' => $totalTransactionsAmount
         ));
     }
 

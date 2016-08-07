@@ -169,6 +169,7 @@ body{
 
 .checkbox label > span:last-child {
     margin-right: 5px;
+    color: #fff;
 }
 
 header.header{
@@ -429,7 +430,7 @@ header.header.scroll-mode{
 #signup-modal .checkbox span{
     color: #fff;
 }
-#signup-modal .checkbox .checkbox-material .check{
+.checkbox .checkbox-material .check{
     border-color: #fff;
 }
 
@@ -2293,4 +2294,19 @@ section.classes h3{
     right:80px;
     z-index: 100;
     background:url("../svg/forum.svg") no-repeat scroll center /30px rgba(150,150,150,0.15);
+}
+.tab-content{
+    min-height: 600px;
+}
+.thead{
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 5px;
+    display: block;
+    overflow: hidden;
+}
+.tbody .tr{
+    border-bottom: 1px solid #eee;
+    display: block;
+    overflow: hidden;
+    background-color: rgba(160, 187, 29, 0.11);
 }
