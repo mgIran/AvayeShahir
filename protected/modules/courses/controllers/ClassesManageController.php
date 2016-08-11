@@ -192,7 +192,7 @@ class ClassesManageController extends Controller
 
 		if(isset($_POST['UserTransactions'])) {
 			$class = Classes::model()->findByPk($_POST['UserTransactions']['class_id']);
-			$lastTransaction = UserTransactions::model()->findByAttributes(array('user_id'=>Yii::app()->user->getId(),'class_id' => $class->id));
+			$lastTransaction = UserTransactions::model()->findByAttributes(array('user_id'=>$_POST['UserTransactions']['user_id'],'class_id' => $class->id));
 			if($lastTransaction && $lastTransaction->status == 'paid')
 			{
 				Yii::app()->user->setFlash("failed",'این کاربر قبلا در این کلاس ثبت نام کرده است.');
@@ -208,7 +208,7 @@ class ClassesManageController extends Controller
 			$model->status = 'paid';
 			$model->verbal = 1;
 			if($model->save()) {
-				Yii::app()->user->setFlash("success",'ثبت نام باموفقیت انجام شد.<br><strong>کد رهگیری: 516545316</strong>');
+				Yii::app()->user->setFlash("success",'ثبت نام باموفقیت انجام شد.');
 				$this->refresh();
 			}
 		}

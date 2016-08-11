@@ -2009,6 +2009,7 @@ section.classes h3{
     margin-bottom: 25px;
     text-align: right;
     border-bottom: 1px solid #ddd;
+    position: relative;
 }
 .class .top-box h4{
     color: rgba(88, 142, 180, 1);
@@ -2309,4 +2310,8 @@ section.classes h3{
     display: block;
     overflow: hidden;
     background-color: rgba(160, 187, 29, 0.11);
+}
+.remain-capacity{
+    position: absolute;
+    right:0;
 }

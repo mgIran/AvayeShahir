@@ -283,3 +283,9 @@ section.classes .owl-prev .arrow,
 .report > [class*="col-"] > [class*="col-"]:last-of-type{
     border-radius:0 4px 4px 0;
 }
+
+.remain-capacity{
+    position: absolute;
+    right:auto;
+    left: 0;
+}

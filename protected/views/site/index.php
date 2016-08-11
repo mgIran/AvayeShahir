@@ -275,16 +275,14 @@ Yii::app()->clientScript->registerScriptFile($baseUrl.'/js/jquery.mousewheel.min
                     }),
                 });");
                 foreach($classes as $class):
-//                    $capacity = UserTransactions::model()->countByAttributes(array('status'=>'paid','class_id' => $class->id));
-//                    if($capacity <= $class->capacity)
                     ?>
                     <div class="class">
                         <div class="inner">
                             <div class="top-box">
-<!--                                <a href="--><?//= Yii::app()->createUrl('/courses/classes/'.urlencode($class->title).'/'.$class->id); ?><!--">-->
                                 <a href="#">
                                     <h4 data-toggle="tooltip" data-placement="top" title="<?= $class->title ?>"><?= $class->title ?></h4>
                                 </a>
+                                <div class="text-danger remain-capacity"><?= Yii::t('app','Remaining Capacity').': '.$class->remainingCapacity ?></div>
                             </div>
                             <div class="class-detail container-fluid">
                                 <div class="full">
