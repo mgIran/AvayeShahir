@@ -8,6 +8,7 @@ $this->breadcrumbs=array(
 
 $this->menu=array(
 	array('label'=>'افزودن کلاس', 'url'=>array('create')),
+	array('label'=>'ثبت نام حضوری در کلاس', 'url'=>array('classRegister')),
 );
 ?>
 <? $this->renderPartial('//layouts/_flashMessage'); ?>

@@ -22,6 +22,8 @@
  * @property string $startClassTime
  * @property string $endClassTime
  * @property string $status
+ * @property string $remainingCapacity
+ * @property string $titleWithCapacity
  * @property [] $formTags
  *
  * The followings are the available model relations:
@@ -29,6 +31,8 @@
  * @property ClassCategories $category
  * @property TeacherDetails $teacher
  * @property ClassTags[] $tags
+ * @property UserTransactions[] $registers
+ * @property UserTransactions[] $paidRegisters
  */
 class Classes extends SortableCActiveRecord
 {
@@ -115,6 +119,8 @@ class Classes extends SortableCActiveRecord
 			'course' => array(self::BELONGS_TO, 'Courses', 'course_id'),
 			'category' => array(self::BELONGS_TO, 'ClassCategories', 'category_id'),
 			'teacher' => array(self::BELONGS_TO, 'TeacherDetails', 'teacher_id'),
+			'registers' => array(self::HAS_MANY, 'UserTransactions', 'class_id'),
+			'paidRegisters' => array(self::HAS_MANY, 'UserTransactions', 'class_id','on' => 'paidRegisters.status = "paid" AND paidRegisters.date >= startSignupDate'),
 			'tags' => array(self::MANY_MANY, 'ClassTags', '{{class_tag_rel}}(class_id,tag_id)'),
 		);
 	}
@@ -239,4 +245,29 @@ class Classes extends SortableCActiveRecord
 		return parent::beforeSave();
 	}
 
+	public static function getValidClasses(){
+		$criteria = new CDbCriteria();
+		$criteria->addCondition('endSignupDate >= :now');
+		$criteria->addCondition('t.status = 1');
+		$criteria->with[] = 'paidRegisters';
+		$criteria->group = 't.id';
+		$criteria->having = 'paidRegisters.user_id IS NULL OR COUNT(paidRegisters.user_id) < t.capacity';
+		$criteria->params[':now'] = time();
+		$criteria->order = 't.order';
+		return $criteria;
+	}
+
+	public function getTitleWithCapacity(){
+		return $this->title.' ('.Yii::t('app','Remaining Capacity').': '.$this->remainingCapacity.')';
+	}
+
+	public function getRemainingCapacity(){
+		$criteria = new CDbCriteria();
+		$criteria->addCondition('status = "paid"');
+		$criteria->addCondition('class_id = :c');
+		$criteria->addCondition('date >= :date');
+		$criteria->params[':c'] = $this->id;
+		$criteria->params[':date'] = $this->startSignupDate;
+		return abs(UserTransactions::model()->count($criteria) - $this->capacity);
+	}
 }

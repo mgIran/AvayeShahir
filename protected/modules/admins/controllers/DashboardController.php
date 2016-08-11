@@ -40,6 +40,7 @@ class DashboardController extends Controller
         if(isset($_GET['UserTransactions']))
             $transactionsPaid->attributes=$_GET['UserTransactions'];
         $transactionsPaid->status = 'paid';
+
         $criteria = new CDbCriteria();
         $criteria->addCondition('status = "unpaid"');
         $transactionsUnPaid =new CActiveDataProvider('UserTransactions',array(

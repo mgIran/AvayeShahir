@@ -29,7 +29,7 @@ class UsersManageController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'views' actions
-				'actions'=>array('index','view','create','update','admin','delete'),
+				'actions'=>array('index','view','create','createUser','update','admin','delete'),
 				'roles'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -70,6 +70,34 @@ class UsersManageController extends Controller
 		$this->render('create',array(
 			'model'=>$model,
 		));
+	}
+
+	/**
+	 * Creates a new model.
+	 * If creation is successful, the browser will be redirected to the 'views' page.
+	 */
+	public function actionCreateUser()
+	{
+		$model=new Users('ajaxInsert');
+
+		if(isset($_POST['ajax']) && $_POST['ajax'] === 'users-ajax-form') {
+			$errors = CActiveForm::validate($model);
+			if(CJSON::decode($errors)) {
+				echo $errors;
+				Yii::app()->end();
+			}
+		}
+		if(isset($_POST['Users']))
+		{
+			$model->attributes=$_POST['Users'];
+			$model->status = 2;
+			if($model->save())
+			{
+				echo CJSON::encode(array('state' => 'ok'));
+			}else
+				echo CJSON::encode(array('state' => 'error'));
+		}
+		Yii::app()->end();
 	}
 
 	/**

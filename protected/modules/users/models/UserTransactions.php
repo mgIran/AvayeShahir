@@ -15,6 +15,7 @@
  * @property string $res_code
  * @property string $sale_reference_id
  * @property string $settle
+ * @property string $verbal
  *
  * The followings are the available model relations:
  * @property Users $user
@@ -29,6 +30,12 @@ class UserTransactions extends CActiveRecord
 	{
 		return 'ym_user_transactions';
 	}
+
+	public $verbalLabels=array(
+		0 => 'ثبت نام اینترنتی',
+		1 => 'ثبت نام حضوری'
+	);
+	public $verbalFilter;
 
 	/**
 	 * @return array validation rules for model attributes.
@@ -50,7 +57,7 @@ class UserTransactions extends CActiveRecord
 				array('description', 'length', 'max' => 200),
 				// The following rule is used by search().
 				// @todo Please remove those attributes that should not be searched.
-				array('class_id, user_id, amount, date, status, sale_reference_id, description, order_id, ref_id, settle', 'safe', 'on' => 'search'),
+				array('class_id, verbalFilter, user_id, amount, date, status, sale_reference_id, description, order_id, ref_id, settle', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -81,6 +88,7 @@ class UserTransactions extends CActiveRecord
 				'sale_reference_id' => 'کد رهگیری تراکنش',
 				'description' => 'توضیحات',
 				'order_id' => 'شماره فاکتور',
+				'verbal' => 'نوع ثبت نام',
 		);
 	}
 
@@ -108,6 +116,7 @@ class UserTransactions extends CActiveRecord
 		$criteria->compare('date', $this->date, true);
 		$criteria->compare('status', $this->status);
 		$criteria->compare('sale_reference_id', $this->sale_reference_id);
+		$criteria->compare('verbal', $this->verbalFilter);
 		$criteria->order = 'date DESC';
 		return new CActiveDataProvider($this, array(
 				'criteria' => $criteria,

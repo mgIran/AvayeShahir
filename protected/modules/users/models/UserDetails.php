@@ -165,4 +165,8 @@ class UserDetails extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+
+	public function getFullName(){
+		return ($this->name OR $this->family)?$this->name.' '.$this->family:$this->user->email;
+	}
 }

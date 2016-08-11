@@ -124,5 +124,6 @@ return array(
     'Bank Gateway Message'=>'پیغام در گاه بانک',
     'Amount' => 'مبلغ',
     'Date' => 'تاریخ',
-    'Description' => 'توضیحات'
+    'Description' => 'توضیحات',
+    'Remaining Capacity' => 'ظرفیت مانده'
 );

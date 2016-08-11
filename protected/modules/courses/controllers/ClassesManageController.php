@@ -6,7 +6,7 @@ class ClassesManageController extends Controller
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
 	 */
-	public $layout='//layouts/column2';
+	public $layout = '//layouts/column2';
 
 	/**
 	 * @return array action filters
@@ -14,8 +14,8 @@ class ClassesManageController extends Controller
 	public function filters()
 	{
 		return array(
-			'accessControl', // perform access control for CRUD operations
-			'postOnly + delete', // we only allow deletion via POST request
+				'accessControl', // perform access control for CRUD operations
+				'postOnly + delete', // we only allow deletion via POST request
 		);
 	}
 
@@ -27,32 +27,35 @@ class ClassesManageController extends Controller
 	public function accessRules()
 	{
 		return array(
-			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','create','update','admin','delete','order','getCategories'),
-				'roles'=>array('admin'),
-			),
-			array('deny',  // deny all users
-				'users'=>array('*'),
-			),
+				array(
+						'allow',  // allow all users to perform 'index' and 'view' actions
+						'actions' => array('index', 'classRegister', 'view', 'create', 'update', 'admin', 'delete', 'order', 'getCategories'),
+						'roles' => array('admin'),
+				),
+				array(
+						'deny',  // deny all users
+						'users' => array('*'),
+				),
 		);
 	}
 
 	public function actions()
 	{
 		return array(
-			'order' => array(
-				'class' => 'ext.yiiSortableModel.actions.AjaxSortingAction',
-			),
+				'order' => array(
+						'class' => 'ext.yiiSortableModel.actions.AjaxSortingAction',
+				),
 		);
 	}
+
 	/**
 	 * Displays a particular model.
 	 * @param integer $id the ID of the model to be displayed
 	 */
 	public function actionView($id)
 	{
-		$this->render('view',array(
-			'model'=>$this->loadModel($id),
+		$this->render('view', array(
+				'model' => $this->loadModel($id),
 		));
 	}
 
@@ -62,22 +65,20 @@ class ClassesManageController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new Classes;
-		if(isset($_POST['Classes']))
-		{
-			$model->attributes=$_POST['Classes'];
-			$model->formTags = isset($_POST['Classes']['formTags'])?explode(',',$_POST['Classes']['formTags']):null;
-			$model->classDays = isset($_POST['Classes']['classDays'])?explode(',',$_POST['Classes']['classDays']):null;
-			if($model->save())
-			{
-				Yii::app()->user->setFlash('success' ,'<span class="icon-check"></span>&nbsp;&nbsp;اطلاعات با موفقیت ذخیره شد.');
+		$model = new Classes;
+		if(isset($_POST['Classes'])) {
+			$model->attributes = $_POST['Classes'];
+			$model->formTags = isset($_POST['Classes']['formTags']) ? explode(',', $_POST['Classes']['formTags']) : null;
+			$model->classDays = isset($_POST['Classes']['classDays']) ? explode(',', $_POST['Classes']['classDays']) : null;
+			if($model->save()) {
+				Yii::app()->user->setFlash('success', '<span class="icon-check"></span>&nbsp;&nbsp;اطلاعات با موفقیت ذخیره شد.');
 				$this->redirect(array('admin'));
-			}else
-				Yii::app()->user->setFlash('failed' ,'در ثبت اطلاعات خطایی رخ داده است! لطفا مجددا تلاش کنید.');
+			} else
+				Yii::app()->user->setFlash('failed', 'در ثبت اطلاعات خطایی رخ داده است! لطفا مجددا تلاش کنید.');
 		}
 
-		$this->render('create',array(
-			'model'=>$model,
+		$this->render('create', array(
+				'model' => $model,
 		));
 	}
 
@@ -88,26 +89,24 @@ class ClassesManageController extends Controller
 	 */
 	public function actionUpdate($id)
 	{
-		$model=$this->loadModel($id);
+		$model = $this->loadModel($id);
 		if($model->tags)
 			foreach($model->tags as $tag)
-				array_push($model->formTags,$tag->title);
-		$model->classDays = $model->classDays?explode(',',$model->classDays):null;
-		if(isset($_POST['Classes']))
-		{
-			$model->attributes=$_POST['Classes'];
-			$model->formTags = isset($_POST['Classes']['formTags'])?explode(',',$_POST['Classes']['formTags']):null;
-			$model->classDays = isset($_POST['Classes']['classDays'])?explode(',',$_POST['Classes']['classDays']):null;
-			if($model->save())
-			{
-				Yii::app()->user->setFlash('success' ,'<span class="icon-check"></span>&nbsp;&nbsp;اطلاعات با موفقیت ذخیره شد.');
+				array_push($model->formTags, $tag->title);
+		$model->classDays = $model->classDays ? explode(',', $model->classDays) : null;
+		if(isset($_POST['Classes'])) {
+			$model->attributes = $_POST['Classes'];
+			$model->formTags = isset($_POST['Classes']['formTags']) ? explode(',', $_POST['Classes']['formTags']) : null;
+			$model->classDays = isset($_POST['Classes']['classDays']) ? explode(',', $_POST['Classes']['classDays']) : null;
+			if($model->save()) {
+				Yii::app()->user->setFlash('success', '<span class="icon-check"></span>&nbsp;&nbsp;اطلاعات با موفقیت ذخیره شد.');
 				$this->redirect(array('admin'));
-			}else
-				Yii::app()->user->setFlash('failed' ,'در ثبت اطلاعات خطایی رخ داده است! لطفا مجددا تلاش کنید.');
+			} else
+				Yii::app()->user->setFlash('failed', 'در ثبت اطلاعات خطایی رخ داده است! لطفا مجددا تلاش کنید.');
 		}
 
-		$this->render('update',array(
-			'model'=>$model,
+		$this->render('update', array(
+				'model' => $model,
 		));
 	}
 
@@ -138,13 +137,13 @@ class ClassesManageController extends Controller
 	 */
 	public function actionAdmin()
 	{
-		$model=new Classes('search');
+		$model = new Classes('search');
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['Classes']))
-			$model->attributes=$_GET['Classes'];
+			$model->attributes = $_GET['Classes'];
 
-		$this->render('admin',array(
-			'model'=>$model,
+		$this->render('admin', array(
+				'model' => $model,
 		));
 	}
 
@@ -157,9 +156,9 @@ class ClassesManageController extends Controller
 	 */
 	public function loadModel($id)
 	{
-		$model=Classes::model()->findByPk($id);
-		if($model===null)
-			throw new CHttpException(404,'The requested page does not exist.');
+		$model = Classes::model()->findByPk($id);
+		if($model === null)
+			throw new CHttpException(404, 'The requested page does not exist.');
 		return $model;
 	}
 
@@ -169,19 +168,54 @@ class ClassesManageController extends Controller
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='classes-form')
-		{
+		if(isset($_POST['ajax']) && $_POST['ajax'] === 'classes-form') {
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
 		}
 	}
 
-	public function actionGetCategories($id){
-		$categories = ClassCategories::model()->findAll('course_id = ?',array($id));
-		foreach($categories as $category)
-		{
+	public function actionGetCategories($id)
+	{
+		$categories = ClassCategories::model()->findAll('course_id = ?', array($id));
+		foreach($categories as $category) {
 			echo '<option value="'.$category->id.'">'.$category->title.'</option>';
 		}
 		Yii::app()->end();
+	}
+
+	public function actionClassRegister()
+	{
+		$model = new UserTransactions();
+
+		$criteria = $criteria = Classes::getValidClasses();
+		$validClasses = Classes::model()->findAll($criteria);
+
+		if(isset($_POST['UserTransactions'])) {
+			$class = Classes::model()->findByPk($_POST['UserTransactions']['class_id']);
+			$lastTransaction = UserTransactions::model()->findByAttributes(array('user_id'=>Yii::app()->user->getId(),'class_id' => $class->id));
+			if($lastTransaction && $lastTransaction->status == 'paid')
+			{
+				Yii::app()->user->setFlash("failed",'این کاربر قبلا در این کلاس ثبت نام کرده است.');
+				$this->refresh();
+			}elseif($lastTransaction && $lastTransaction->status == 'unpaid')
+				$lastTransaction->delete();
+			$model = new UserTransactions();
+			$model->class_id = $class->id;
+			$model->user_id = $_POST['UserTransactions']['user_id'];
+			$model->amount = $class->price;
+			$model->description = 'پرداخت شهریه جهت ثبت نام در دوره '.$class->course->title.'، کلاس '.$class->title;  // Required
+			$model->date = time();
+			$model->status = 'paid';
+			$model->verbal = 1;
+			if($model->save()) {
+				Yii::app()->user->setFlash("success",'ثبت نام باموفقیت انجام شد.<br><strong>کد رهگیری: 516545316</strong>');
+				$this->refresh();
+			}
+		}
+
+		$this->render('register', array(
+				'model' => $model,
+				'validClasses' => $validClasses
+		));
 	}
 }

@@ -53,13 +53,14 @@
         <h5>
             مجموع کل پرداختی ها: <?= Controller::parseNumbers(number_format($totalTransactionsPaidAmount)); ?> تومان
         </h5>
-
+        <a class="btn btn-success" href="<?= $this->createUrl('/courses/classes/classRegister') ?>">ثبت نام حضوری</a>
         <p>
             <?php
+            $model = new UserTransactions();
             $this->widget('zii.widgets.grid.CGridView',array(
                 'id' => 'paid-grid-view',
                 'dataProvider' => $transactionsPaid,
-                'filter' => new UserTransactions(),
+                'filter' => $model,
                 'columns'=>array(
                     array(
                         'header'=>'کاربر',
@@ -77,6 +78,11 @@
                     array(
                         'header'=>'توضیحات تراکنش',
                         'value'=>'$data->description',
+                    ),
+                    array(
+                        'name'=>'verbal',
+                        'value'=>'$data->verbalLabels[$data->verbal]',
+                        'filter' => CHtml::activeDropDownList($model ,'verbalFilter',$model->verbalLabels,array('prompt' => '-'))
                     )
                 )
             ));

@@ -17,11 +17,15 @@
  * @property string $newPassword
  * @property string $fullName
  * @property string $create_date
+ * @property string $name
+ * @property string $family
+ * @property string $phone
  *
  * The followings are the available model relations:
  * @property UserDetails $userDetails
  * @property TeacherDetails $teacherDetails
  * @property UserRoles $role
+ * @property UserTransactions $register
  */
 class Users extends CActiveRecord
 {
@@ -48,6 +52,9 @@ class Users extends CActiveRecord
     public $agreeTerms;
     public $phone;
 
+    public $name;
+    public $family;
+
     /**
      * @return array validation rules for model attributes.
      */
@@ -56,23 +63,26 @@ class Users extends CActiveRecord
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('password, email', 'required', 'on' => 'insert,agreeTerms'),
+            array('password, email', 'required', 'on' => 'insert,agreeTerms,ajaxInsert'),
+            array('name, family, phone', 'required', 'on' => 'ajaxInsert'),
             array('agreeTerms', 'compare', 'compareValue' => 1, 'operator' => '==', 'message' => Yii::t('app', 'You Rejected the Terms and Policies'), 'on' => 'agreeTerms'),
-            array('email', 'unique','on' => 'insert,create,agreeTerms'),
+            array('email', 'unique','on' => 'insert,create,agreeTerms,ajaxInsert'),
             array('change_password_request_count', 'numerical', 'integerOnly'=>true),
-            array('role_id', 'default', 'value' => 1, 'on' => 'insert,agreeTerms'),
+            array('role_id', 'default', 'value' => 1, 'on' => 'insert,agreeTerms,ajaxInsert'),
             array('status', 'default', 'value' => 1, 'on' => 'insert,agreeTerms'),
+            array('status', 'default', 'value' => 2, 'on' => 'ajaxInsert'),
             array('email', 'required', 'on' => 'email'),
             array('email', 'email'),
             array('oldPassword ,newPassword ,repeatPassword', 'required', 'on' => 'update'),
-            array('email', 'filter', 'filter' => 'trim', 'on' => 'insert,agreeTerms'),
+            array('email', 'filter', 'filter' => 'trim', 'on' => 'insert,agreeTerms,ajaxInsert'),
             array('username, password, verification_token', 'length', 'max' => 100, 'on' => 'insert,agreeTerms'),
             array('oldPassword', 'oldPass', 'on' => 'update'),
             array('repeatPassword', 'compare', 'compareAttribute' => 'newPassword', 'operator' => '==', 'message' => 'رمز های عبور همخوانی ندارند', 'on' => 'update'),
             array('email', 'length', 'max' => 255),
             array('role_id', 'length', 'max' => 10),
             array('status', 'length', 'max' => 8),
-            array('phone', 'length', 'min' => 11, 'on' => 'agreeTerms'),
+            array('phone', 'length', 'min' => 11, 'on' => 'agreeTerms,ajaxInsert'),
+            array('name, family', 'length', 'max'=>50, 'on' => 'ajaxInsert'),
             array('create_date', 'length', 'max'=>20),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
@@ -102,6 +112,7 @@ class Users extends CActiveRecord
             'userDetails' => array(self::BELONGS_TO, 'UserDetails', 'id'),
             'teacherDetails' => array(self::BELONGS_TO, 'TeacherDetails', 'id'),
             'role' => array(self::BELONGS_TO, 'UserRoles', 'role_id'),
+            'register' => array(self::HAS_ONE, 'UserTransactions', 'user_id' ,'on' => 'register.status = "paid"'),
         );
     }
 
@@ -123,6 +134,8 @@ class Users extends CActiveRecord
             'status' => 'وضعیت کاربر',
             'verification_token' => 'Verification Token',
             'change_password_request_count' => 'تعداد درخواست تغییر کلمه عبور',
+            'name' => 'نام',
+            'family' => 'نام خانوادگی',
         );
     }
 
@@ -199,6 +212,8 @@ class Users extends CActiveRecord
             if($this->role_id == 1) {
                 $model = new UserDetails;
                 $model->user_id = $this->id;
+                $model->name = $this->name && !empty($this->name) ? $this->name : null;
+                $model->family = $this->family && !empty($this->family) ? $this->family : null;
                 $model->phone = $this->phone && !empty($this->phone) ? $this->phone : null;
                 $model->save(false);
             } elseif($this->role_id == 2) {

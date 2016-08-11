@@ -2,7 +2,7 @@
 /* @var $classTransactions UserTransactions[] */
 /* @var $this CoursesManageController */
 /* @var $courses Courses[] */
-
+$model = new UserTransactions();
 $this->breadcrumbs=array(
     'گزارش ثبت نام کاربران',
 );
@@ -32,6 +32,7 @@ $(".tab-content .tab-pane:first-child").addClass("in active");
         $this->widget('zii.widgets.grid.CGridView', array(
             'dataProvider' => $transaction['dataProvider'],
             'template' => '{items}',
+//            'filter' => $model,
             'columns' => array(
                 array(
                     'header' => 'کاربر',
@@ -47,7 +48,7 @@ $(".tab-content .tab-pane:first-child").addClass("in active");
                     'value' => 'JalaliDate::date("Y/m/d ساعت H:i:s",$data->date)',
                 ),
                 array(
-                    'header' => 'کد رهگیری تراکنش',
+                    'name' => 'sale_reference_id',
                     'value' => '$data->sale_reference_id',
                 ),
                 array(
@@ -66,6 +67,11 @@ $(".tab-content .tab-pane:first-child").addClass("in active");
                     'header' => 'آدرس',
                     'value' => '$data->user->userDetails->address',
                 ),
+                array(
+                    'name'=>'verbal',
+                    'value'=>'$data->verbalLabels[$data->verbal]',
+                    'filter' => CHtml::activeDropDownList($model ,'verbalFilter',$model->verbalLabels,array('prompt' => '-'))
+                )
             )
         ));
         echo '</div>';

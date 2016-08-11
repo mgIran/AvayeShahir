@@ -58,8 +58,7 @@ class ClassRegisterController extends Controller
         $lastTransaction = UserTransactions::model()->findByAttributes(array('user_id'=>Yii::app()->user->getId(),'class_id' => $id));
         if($lastTransaction && $lastTransaction->status == 'paid')
             $message = Yii::t('app','You have already registered in this class.');
-        $capacity = UserTransactions::model()->countByAttributes(array('status'=>'paid','class_id' => $id));
-        if($capacity >= $class->capacity)
+        if(!$class->remainingCapacity)
             $message = Yii::t('app','Sorry! This class is fully enrolled.');
         if(time() < $class->startSignupDate)
             $message = Yii::t('app','Please accept our apologies. The registration has not started yet.');
@@ -83,8 +82,7 @@ class ClassRegisterController extends Controller
             $class = Classes::model()->findByPk($id);
             if(!$class)
                 $this->redirect(Yii::app()->baseUrl);
-            $capacity = UserTransactions::model()->countByAttributes(array('status'=>'paid','class_id' => $id));
-            if($capacity >= $class->capacity)
+            if(!$class->remainingCapacity)
                 $this->redirect($this->createUrl('/courses/register/'.$id));
             if(time() < $class->startSignupDate)
                 $this->redirect($this->createUrl('/courses/register/'.$id));
@@ -94,8 +92,17 @@ class ClassRegisterController extends Controller
             if($lastTransaction && $lastTransaction->status == 'unpaid')
             {
                 $flag = true;
-                $lastTransaction->newOrderId();
-                $lastTransaction->update();
+                $lastTransaction->delete();
+                $model = new UserTransactions();
+                $model->class_id = $id;
+                $model->user_id = Yii::app()->user->getId();
+                $model->amount = $class->price;
+                $model->description = 'پرداخت شهریه جهت ثبت نام در دوره '.$class->course->title.'، کلاس '.$class->title;  // Required
+                $model->date = time();
+                if($model->save()) {
+                    $flag = true;
+                    $lastTransaction = $model;
+                }
             }
             elseif($lastTransaction && $lastTransaction->status == 'paid')
                 $flag = false;
