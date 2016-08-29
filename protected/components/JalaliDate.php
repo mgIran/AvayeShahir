@@ -632,7 +632,7 @@ class JalaliDate
     {
         $days = array(
             'شنبه' => 'Saturday',
-            '' => 'Sunday',
+            'یکشنبه' => 'Sunday',
             'دوشنبه' => 'Monday',
             'سه شنبه' => 'Tuesday',
             'چهارشنبه' => 'Wednesday',
