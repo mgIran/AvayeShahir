@@ -16,7 +16,7 @@ if(isset($_GET['tab']) && !empty($_GET['tab']))
 <div class="page-content courses">
 
     <div class="container">
-        <div class="col-lg-8 col-md-8 col-sm-10 col-xs-12 <?= Yii::app()->language == 'fa'?'col-lg-push-2 col-md-push-2 col-sm-push-1':'col-lg-pull-2 col-md-pull-2 col-sm-pull-1' ?>">
+        <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 <?= Yii::app()->language == 'fa'?'col-lg-push-1 col-md-push-1':'col-lg-pull-1 col-md-pull-1' ?>">
             <ul class="nav nav-tabs">
                 <li class="<?= isset($tab)?'':'active'; ?>">
                     <a data-toggle="tab" href="#general-tab"><?= Yii::t('app','User Details')?></a>
@@ -25,7 +25,7 @@ if(isset($_GET['tab']) && !empty($_GET['tab']))
                     <a data-toggle="tab" href="#setting-tab"><?= Yii::t('app','Change Password')?></a>
                 </li>
                 <li class="<?= isset($tab) && $tab == 'transactions' ?'active':''; ?>">
-                    <a data-toggle="tab" href="#transactions-tab"><?= Yii::t('app','Transactions')?></a>
+                    <a data-toggle="tab" href="#transactions-tab"><?= Yii::t('app','Transactions And Registers')?></a>
                 </li>
             </ul>
 

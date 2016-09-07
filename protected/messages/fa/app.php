@@ -117,6 +117,7 @@ return array(
     'Visit Statistics' => 'آمار بازدید',
     'Views' => 'بازدید',
     'Transactions'=>'تراکنش ها',
+    'Transactions And Registers'=>'تراکنش ها و ثبت نام ها',
     'Transaction Details'=>'اطلاعات تراکنش',
     'Transaction Status'=>'وضعیت تراکنش',
     'Tracking Code'=>'کد رهگیری',

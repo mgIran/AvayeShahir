@@ -159,4 +159,13 @@ class UserTransactions extends CActiveRecord
 		else
 			$this->order_id = 1100;
 	}
+
+	public function getHtmlAmount()
+	{
+		if ($this->amount != 0)
+			$html = Yii::app()->language == 'fa' ? Controller::parseNumbers(number_format($this->amount)) . Yii::t('app', "Toman") : number_format($this->amount) . Yii::t('app', "Toman");
+		else
+			$html = Yii::t('app', "Free");
+		return $html;
+	}
 }

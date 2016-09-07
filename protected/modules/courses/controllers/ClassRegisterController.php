@@ -88,50 +88,61 @@ class ClassRegisterController extends Controller
                 $this->redirect($this->createUrl('/courses/register/'.$id));
             if(time() > $class->endSignupDate)
                 $this->redirect($this->createUrl('/courses/register/'.$id));
-            $lastTransaction = UserTransactions::model()->findByAttributes(array('user_id'=>Yii::app()->user->getId(),'class_id' => $id));
-            if($lastTransaction && $lastTransaction->status == 'unpaid')
+            if($class->price != 0) {
+                $lastTransaction = UserTransactions::model()->findByAttributes(array('user_id' => Yii::app()->user->getId(), 'class_id' => $id));
+                if ($lastTransaction && $lastTransaction->status == 'unpaid') {
+                    $flag = true;
+                    $lastTransaction->delete();
+                    $model = new UserTransactions();
+                    $model->class_id = $id;
+                    $model->user_id = Yii::app()->user->getId();
+                    $model->amount = $class->price;
+                    $model->description = 'پرداخت شهریه جهت ثبت نام در دوره ' . $class->course->title . '، کلاس ' . $class->title;  // Required
+                    $model->date = time();
+                    if ($model->save()) {
+                        $flag = true;
+                        $lastTransaction = $model;
+                    }
+                } elseif ($lastTransaction && $lastTransaction->status == 'paid')
+                    $flag = false;
+                else {
+                    // Save payment
+                    $model = new UserTransactions();
+                    $model->class_id = $id;
+                    $model->user_id = Yii::app()->user->getId();
+                    $model->amount = $class->price;
+                    $model->description = 'پرداخت شهریه جهت ثبت نام در دوره ' . $class->course->title . '، کلاس ' . $class->title;  // Required
+                    $model->date = time();
+                    if ($model->save()) {
+                        $flag = true;
+                        $lastTransaction = $model;
+                    }
+                }
+                if ($flag) {
+                    $Amount = intval($lastTransaction->amount) * 10; //Amount will be based on Toman  - Required
+                    $CallbackURL = Yii::app()->getBaseUrl(true) . '/courses/register/verify';  // Required
+                    $result = Yii::app()->Payment->PayRequest($Amount, $lastTransaction->order_id, $CallbackURL);
+                    if (!$result['error']) {
+                        $lastTransaction->ref_id = $result['responseCode'];
+                        $lastTransaction->update();
+                        $this->render('ext.MellatPayment.views._redirect', array('ReferenceId' => $result['responseCode']));
+                    } else {
+                        echo '<meta charset="utf-8">';
+                        echo 'ERR: ' . Yii::app()->Payment->getResponseText($result['responseCode']);
+                    }
+                }
+            }else
             {
-                $flag = true;
-                $lastTransaction->delete();
                 $model = new UserTransactions();
                 $model->class_id = $id;
                 $model->user_id = Yii::app()->user->getId();
-                $model->amount = $class->price;
-                $model->description = 'پرداخت شهریه جهت ثبت نام در دوره '.$class->course->title.'، کلاس '.$class->title;  // Required
+                $model->amount = 0;
+                $model->description = 'ثبت نام در دوره '.$class->course->title.'، کلاس '.$class->title;  // Required
                 $model->date = time();
-                if($model->save()) {
-                    $flag = true;
-                    $lastTransaction = $model;
-                }
-            }
-            elseif($lastTransaction && $lastTransaction->status == 'paid')
-                $flag = false;
-            else {
-                // Save payment
-                $model = new UserTransactions();
-                $model->class_id = $id;
-                $model->user_id = Yii::app()->user->getId();
-                $model->amount = $class->price;
-                $model->description = 'پرداخت شهریه جهت ثبت نام در دوره '.$class->course->title.'، کلاس '.$class->title;  // Required
-                $model->date = time();
-                if($model->save()) {
-                    $flag = true;
-                    $lastTransaction = $model;
-                }
-            }
-            if($flag){
-                $Amount = intval($lastTransaction->amount) * 10; //Amount will be based on Toman  - Required
-                $CallbackURL = Yii::app()->getBaseUrl(true).'/courses/register/verify';  // Required
-                $result = Yii::app()->Payment->PayRequest( $Amount, $lastTransaction->order_id , $CallbackURL);
-                if(!$result['error']){
-                    $lastTransaction->ref_id = $result['responseCode'];
-                    $lastTransaction->update();
-                    $this->render('ext.MellatPayment.views._redirect',array('ReferenceId'=>$result['responseCode']));
-                }else
-                {
-                    echo '<meta charset="utf-8">';
-                    echo 'ERR: ' . Yii::app()->Payment->getResponseText($result['responseCode']);
-                }
+                $model->status = 'paid';
+                $model->settle = 1;
+                $model->save();
+                $this->render('free_register');
             }
         }
         else

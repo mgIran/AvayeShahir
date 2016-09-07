@@ -12,11 +12,14 @@
 <div class="page-content courses">
     <div class="container">
         <?php
-        if($message)
-        {
-            echo $message;
-            echo '<br>';
-            echo '<a class="btn btn-info" href="'.Yii::app()->baseUrl.'">'.Yii::t('app','Back').'</a>';
+        if($message) {
+            ?>
+            <h3><?= $message ?></h3>
+            <div class="form-group">
+                <a class="btn btn-info"
+                   href="<?= Yii::app()->createAbsoluteUrl('//') ?>"><?= Yii::t('app', 'Back') ?></a>
+            </div>
+            <?php
         }else {
             ?>
             <h3><?= Yii::t('app', 'Payment Details') ?></h3>
@@ -102,7 +105,7 @@
                     </div>
                     <div class="td">
                         <?
-                        echo Yii::app()->language == 'fa' ? Controller::parseNumbers(number_format($class->price)).'&nbsp;<span class="currency">'.Yii::t('app', "Toman").'</span>' : number_format($class->price).'&nbsp;<span class="currency">'.Yii::t('app', "Toman").'</span>';
+                        echo $class->getHtmlPrice();
                         ?>
                     </div>
                 </div>
@@ -110,7 +113,7 @@
             <?php echo CHtml::beginForm(Yii::app()->createUrl('/courses/register/bill/'.$class->id)); ?>
             <?php echo CHtml::hiddenField('pay', ''); ?>
             <div class="buttons">
-                <?php echo CHtml::submitButton(Yii::t('app', 'Payment'), array('class' => 'btn btn-success btn-lg pull-left')); ?>
+                <?php echo CHtml::submitButton($class->price!=0?Yii::t('app', 'Payment'):Yii::t('app', 'Register'), array('class' => 'btn btn-success btn-lg pull-left')); ?>
             </div>
 
             <?php echo CHtml::endForm(); ?>

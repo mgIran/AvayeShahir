@@ -285,20 +285,20 @@ Yii::app()->clientScript->registerScriptFile($baseUrl.'/js/jquery.mousewheel.min
                                 <div class="text-danger remain-capacity"><?= Yii::t('app','Remaining Capacity').': '.$class->remainingCapacity ?></div>
                             </div>
                             <div class="class-detail container-fluid">
-                                <div class="full">
+                                <div class="full text-nowrap">
                                     <span><?= Yii::t('app','Course') ?>:&nbsp;</span>
                                     <a href="<?= Yii::app()->createUrl('/courses/'.urlencode($class->course->title).'/'.$class->course->id); ?>">
                                         <?php echo $class->course->title ?>
                                     </a>
                                 </div>
-                                <div class="full">
+                                <div class="full text-nowrap">
                                     <span><?= Yii::t('app','Department') ?>:&nbsp;</span>
                                     <a href="<?= Yii::app()->createUrl('/courses/'.urlencode($class->course->title).'/'.$class->course->id); ?>">
                                         <?php echo $class->category->title ?>
                                     </a>
                                 </div>
 
-                                <div class="full">
+                                <div class="full text-nowrap">
                                     <span>
                                         <?= Yii::t('app','Instructor') ?>:&nbsp;
                                     </span>

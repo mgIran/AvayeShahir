@@ -35,16 +35,18 @@ class DashboardController extends Controller
 
 	public function actionIndex()
     {
-        $transactionsPaid=new UserTransactions('search');
-        $transactionsPaid->unsetAttributes();
+        $transactionsModel=new UserTransactions('search');
+        $transactionsModel->unsetAttributes();
         if(isset($_GET['UserTransactions']))
-            $transactionsPaid->attributes=$_GET['UserTransactions'];
-        $transactionsPaid->status = 'paid';
-
-        $criteria = new CDbCriteria();
-        $criteria->addCondition('status = "unpaid"');
-        $transactionsUnPaid =new CActiveDataProvider('UserTransactions',array(
-            'criteria' => $criteria
+            $transactionsModel->attributes=$_GET['UserTransactions'];
+        $criteria = new CDbCriteria;
+        $criteria->addCondition('amount <> 0');
+        $criteria->addCondition('status = "paid"');
+        $criteria->compare('sale_reference_id', $transactionsModel->sale_reference_id);
+        $criteria->compare('verbal', $transactionsModel->verbalFilter);
+        $criteria->order = 'date DESC';
+        $transactionsPaid = new CActiveDataProvider($transactionsModel, array(
+            'criteria' => $criteria,
         ));
 
         $totalTransactionsPaidAmount =Yii::app()->db->createCommand()
@@ -54,8 +56,7 @@ class DashboardController extends Controller
             ->queryScalar();
 
 		$this->render('index',array(
-            'transactionsPaid' => $transactionsPaid->search(),
-            'transactionsUnPaid' => $transactionsUnPaid,
+            'transactionsPaid' => $transactionsPaid,
             'totalTransactionsPaidAmount' => $totalTransactionsPaidAmount
         ));
 	}
