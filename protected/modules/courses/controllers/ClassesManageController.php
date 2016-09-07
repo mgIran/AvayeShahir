@@ -70,6 +70,7 @@ class ClassesManageController extends Controller
 			$model->attributes = $_POST['Classes'];
 			$model->formTags = isset($_POST['Classes']['formTags']) ? explode(',', $_POST['Classes']['formTags']) : null;
 			$model->classDays = isset($_POST['Classes']['classDays']) ? explode(',', $_POST['Classes']['classDays']) : null;
+			$model->price = isset($_POST['Classes']['price']) ? $_POST['Classes']['price'] : 0;
 			if($model->save()) {
 				Yii::app()->user->setFlash('success', '<span class="icon-check"></span>&nbsp;&nbsp;اطلاعات با موفقیت ذخیره شد.');
 				$this->redirect(array('admin'));
@@ -98,6 +99,7 @@ class ClassesManageController extends Controller
 			$model->attributes = $_POST['Classes'];
 			$model->formTags = isset($_POST['Classes']['formTags']) ? explode(',', $_POST['Classes']['formTags']) : null;
 			$model->classDays = isset($_POST['Classes']['classDays']) ? explode(',', $_POST['Classes']['classDays']) : null;
+			$model->price = isset($_POST['Classes']['price']) ? $_POST['Classes']['price'] : 0;
 			if($model->save()) {
 				Yii::app()->user->setFlash('success', '<span class="icon-check"></span>&nbsp;&nbsp;اطلاعات با موفقیت ذخیره شد.');
 				$this->redirect(array('admin'));

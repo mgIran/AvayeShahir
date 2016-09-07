@@ -125,5 +125,6 @@ return array(
     'Amount' => 'مبلغ',
     'Date' => 'تاریخ',
     'Description' => 'توضیحات',
-    'Remaining Capacity' => 'ظرفیت مانده'
+    'Remaining Capacity' => 'ظرفیت مانده',
+    'Free' => 'رایگان'
 );

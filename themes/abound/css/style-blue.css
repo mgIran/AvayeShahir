@@ -77,3 +77,10 @@ ul.yiiPager .selected a {
   text-shadow:#CCCCCC 0 0 0;
   font-weight:bold;
 }
+input[type='text']:disabled,
+textarea:disabled,
+input[type='password']:disabled,
+input[type='tel']:disabled
+{
+  background-color: #dadada;
+}

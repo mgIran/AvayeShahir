@@ -127,6 +127,27 @@ Yii::app()->user->returnUrl = Yii::app()->request->getRequestUri();
 		<?php echo $form->labelEx($model,'price'); ?>
 		<?php echo $form->textField($model,'price',array('placeholder' => 'تومان')); ?>
 		<?php echo $form->error($model,'price'); ?>
+<!--	</div>-->
+<!--	<div class="row">-->
+		<?php
+		echo CHtml::checkBox('free',false,array('style'=>'margin:0 15px -2px 5px'));
+		echo CHtml::label('رایگان','free');
+		Yii::app()->clientScript->registerScript('free-input','
+		console.log($("#Classes_price").val());
+			if($("#Classes_price").val() == 0)
+			{
+				$("#Classes_price").attr("disabled",true).val("رایگان");
+				$("#free").attr("checked",true);
+			}
+			$("body").on("click","#free",function(){
+				var $this = $(this);
+				if($this.is(":checked"))
+					$("#Classes_price").attr("disabled",true).val("رایگان");	
+				else
+					$("#Classes_price").attr("disabled",false).val("");
+			});
+		');
+		?>
 	</div>
 
 	<div class="row">

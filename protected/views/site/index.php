@@ -355,7 +355,7 @@ Yii::app()->clientScript->registerScriptFile($baseUrl.'/js/jquery.mousewheel.min
                                     </span>
                                     <span>
                                         <?
-                                        echo Yii::app()->language=='fa'?Controller::parseNumbers(number_format($class->price)).'&nbsp;<span class="currency">'.Yii::t('app',"Toman").'</span>' : number_format($class->price).'&nbsp;<span class="currency">'.Yii::t('app',"Toman").'</span>';
+                                        echo $class->htmlPrice;
                                         ?>
                                     </span>
                                 </div>

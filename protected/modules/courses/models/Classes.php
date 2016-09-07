@@ -44,7 +44,7 @@ class Classes extends SortableCActiveRecord
 		return '{{classes}}';
 	}
 
-	public $formTags=[];
+	public $formTags = [];
 
 	/**
 	 * __set
@@ -75,12 +75,12 @@ class Classes extends SortableCActiveRecord
 	public function behaviors()
 	{
 		return array(
-			'EasyMultiLanguage'=>array(
+			'EasyMultiLanguage' => array(
 				'class' => 'ext.EasyMultiLanguage.EasyMultiLanguageBehavior',
 				// @todo Please change those attributes that should be translated.
-				'translated_attributes' => array('title','summary'),
+				'translated_attributes' => array('title', 'summary'),
 				// @todo Please add admin actions
-				'admin_routes' => array('courses/classes/create','courses/classes/update','courses/classes/delete','courses/classes/admin'),
+				'admin_routes' => array('courses/classes/create', 'courses/classes/update', 'courses/classes/delete', 'courses/classes/admin'),
 				//
 				'languages' => Yii::app()->params['languages'],
 				'default_language' => Yii::app()->params['default_language'],
@@ -97,7 +97,8 @@ class Classes extends SortableCActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('title, price, category_id, course_id ,capacity ,teacher_id', 'required'),
+			array('title, category_id, course_id ,capacity ,teacher_id', 'required'),
+			array('price', 'default', 'value' => 0),
 			array('price,sessions', 'numerical', 'integerOnly' => true),
 			array('endSignupDate', 'compare', 'compareAttribute' => 'startSignupDate', 'operator' => '>', 'message' => 'تاریخ پایان ثبت نام باید بیشتر از تاریخ شروع ثبت نام باشد.'),
 			array('endClassDate', 'compare', 'compareAttribute' => 'startClassDate', 'operator' => '>', 'message' => 'تاریخ پایان کلاس باید بیشتر از تاریخ شروع کلاس باشد.'),
@@ -120,7 +121,7 @@ class Classes extends SortableCActiveRecord
 			'category' => array(self::BELONGS_TO, 'ClassCategories', 'category_id'),
 			'teacher' => array(self::BELONGS_TO, 'TeacherDetails', 'teacher_id'),
 			'registers' => array(self::HAS_MANY, 'UserTransactions', 'class_id'),
-			'paidRegisters' => array(self::HAS_MANY, 'UserTransactions', 'class_id','on' => 'paidRegisters.status = "paid" AND paidRegisters.date >= startSignupDate'),
+			'paidRegisters' => array(self::HAS_MANY, 'UserTransactions', 'class_id', 'on' => 'paidRegisters.status = "paid" AND paidRegisters.date >= startSignupDate'),
 			'tags' => array(self::MANY_MANY, 'ClassTags', '{{class_tag_rel}}(class_id,tag_id)'),
 		);
 	}
@@ -183,7 +184,7 @@ class Classes extends SortableCActiveRecord
 		$criteria->compare('course_id', $this->course_id, true);
 		$criteria->compare('teacher_id', $this->teacher_id, true);
 		return new CActiveDataProvider($this, array(
-				'criteria' => $criteria,
+			'criteria' => $criteria,
 		));
 	}
 
@@ -200,12 +201,12 @@ class Classes extends SortableCActiveRecord
 
 	protected function afterSave()
 	{
-		if($this->formTags && !empty($this->formTags)) {
-			if(!$this->IsNewRecord)
-				ClassTagRel::model()->deleteAll('class_id='.$this->id);
-			foreach($this->formTags as $tag) {
+		if ($this->formTags && !empty($this->formTags)) {
+			if (!$this->IsNewRecord)
+				ClassTagRel::model()->deleteAll('class_id=' . $this->id);
+			foreach ($this->formTags as $tag) {
 				$tagModel = ClassTags::model()->findByAttributes(array('title' => $tag));
-				if($tagModel) {
+				if ($tagModel) {
 					$tag_rel = new ClassTagRel;
 					$tag_rel->class_id = $this->id;
 					$tag_rel->tag_id = $tagModel->id;
@@ -226,26 +227,26 @@ class Classes extends SortableCActiveRecord
 
 	protected function beforeSave()
 	{
-		if($this->classDays && !empty($this->classDays))
-		{
-			$this->classDays = array_filter($this->classDays,function($v){
-				if(in_array($v ,array(
-						'شنبه',
-						'یکشنبه',
-						'دوشنبه',
-						'سه شنبه',
-						'چهارشنبه',
-						'پنجشنبه',
-						'جمعه'
+		if ($this->classDays && !empty($this->classDays)) {
+			$this->classDays = array_filter($this->classDays, function ($v) {
+				if (in_array($v, array(
+					'شنبه',
+					'یکشنبه',
+					'دوشنبه',
+					'سه شنبه',
+					'چهارشنبه',
+					'پنجشنبه',
+					'جمعه'
 				)))
 					return $v;
 			});
-			$this->classDays = implode(',',$this->classDays);
+			$this->classDays = implode(',', $this->classDays);
 		}
 		return parent::beforeSave();
 	}
 
-	public static function getValidClasses(){
+	public static function getValidClasses()
+	{
 		$criteria = new CDbCriteria();
 		$criteria->addCondition('endSignupDate >= :now');
 		$criteria->addCondition('t.status = 1');
@@ -257,11 +258,13 @@ class Classes extends SortableCActiveRecord
 		return $criteria;
 	}
 
-	public function getTitleWithCapacity(){
-		return $this->title.' ('.Yii::t('app','Remaining Capacity').': '.$this->remainingCapacity.')';
+	public function getTitleWithCapacity()
+	{
+		return $this->title . ' (' . Yii::t('app', 'Remaining Capacity') . ': ' . $this->remainingCapacity . ')';
 	}
 
-	public function getRemainingCapacity(){
+	public function getRemainingCapacity()
+	{
 		$criteria = new CDbCriteria();
 		$criteria->addCondition('status = "paid"');
 		$criteria->addCondition('class_id = :c');
@@ -269,5 +272,18 @@ class Classes extends SortableCActiveRecord
 		$criteria->params[':c'] = $this->id;
 		$criteria->params[':date'] = $this->startSignupDate;
 		return abs(UserTransactions::model()->count($criteria) - $this->capacity);
+	}
+
+	/**
+	 * Get html Price Tags
+	 * @return string
+	 */
+	public function getHtmlPrice()
+	{
+		if ($this->price != 0)
+			$html = Yii::app()->language == 'fa' ? Controller::parseNumbers(number_format($this->price)) . '&nbsp;<span class="currency">' . Yii::t('app', "Toman") . '</span>' : number_format($this->price) . '&nbsp;<span class="currency">' . Yii::t('app', "Toman") . '</span>';
+		else
+			$html = Yii::t('app', "Free");
+		return $html;
 	}
 }
