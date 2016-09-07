@@ -440,6 +440,7 @@ endif;
                     margin:30,
                     autoplay:true,
                     autoplayTimeout:5000,
+                    dots:true,
                     responsive : {
                         0 : {
                             items:1,
