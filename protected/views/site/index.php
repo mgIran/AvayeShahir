@@ -395,42 +395,42 @@ endif;
         <?php
         if($personnel) {
 
-            ?>
-            <div class="<?= $teachers?'':'center-block' ?> col-lg-6 col-md-6 col-sm-8 col-xs-12  partners" id="staff">
-                <h3 class="yekan-text"><?= Yii::t('app', 'Staff') ?></h3>
-
-                <div class="slider">
-                    <?php
-                    foreach($personnel as $person):
-                    $socialLinks = CJSON::decode($person->social_links);
-                        ?>
-                    <div class="person-item">
-                        <div class="image">
-                            <img src="<?= Yii::app()->baseUrl.'/uploads/teachers/'.$person->avatar ?>" alt="<?= CHtml::encode($person->fullName) ?>">
-
-                            <div class="img-overlay"></div>
-                        </div>
-                        <span class="name"><?= CHtml::encode($person->fullName) ?></span>
-                        <span class="job"><?= CHtml::encode($person->grade) ?></span>
-
-                        <div class="socials">
-                            <a href="<?= $person->email ?>" class="email" title="<?= Yii::t('app','Email') ?>"></a>
-                            <a href="<?= $socialLinks[0]['value'] ?>" class="facebook" title="<?= Yii::t('app','Facebook') ?>"></a>
-                            <a href="<?= $socialLinks[1]['value'] ?>" class="twitter" title="<?= Yii::t('app','Twitter') ?>"></a>
-                        </div>
-                        <a href="<?= Yii::app()->createUrl('/personnel/'.$person->id.'/'.urlencode($person->getFullName())) ?>" class="person-link" title="<?= CHtml::encode($person->fullName) ?>"></a>
-                    </div>
-                    <?php
-                    endforeach;
-                    ?>
-                </div>
-            </div>
-            <?
+//            ?>
+<!--            <div class="--><?//= $teachers?'':'center-block' ?><!-- col-lg-6 col-md-6 col-sm-8 col-xs-12  partners" id="staff">-->
+<!--                <h3 class="yekan-text">--><?//= Yii::t('app', 'Staff') ?><!--</h3>-->
+<!---->
+<!--                <div class="slider">-->
+<!--                    --><?php
+//                    foreach($personnel as $person):
+//                    $socialLinks = CJSON::decode($person->social_links);
+//                        ?>
+<!--                    <div class="person-item">-->
+<!--                        <div class="image">-->
+<!--                            <img src="--><?//= Yii::app()->baseUrl.'/uploads/teachers/'.$person->avatar ?><!--" alt="--><?//= CHtml::encode($person->fullName) ?><!--">-->
+<!---->
+<!--                            <div class="img-overlay"></div>-->
+<!--                        </div>-->
+<!--                        <span class="name">--><?//= CHtml::encode($person->fullName) ?><!--</span>-->
+<!--                        <span class="job">--><?//= CHtml::encode($person->grade) ?><!--</span>-->
+<!---->
+<!--                        <div class="socials">-->
+<!--                            <a href="--><?//= $person->email ?><!--" class="email" title="--><?//= Yii::t('app','Email') ?><!--"></a>-->
+<!--                            <a href="--><?//= $socialLinks[0]['value'] ?><!--" class="facebook" title="--><?//= Yii::t('app','Facebook') ?><!--"></a>-->
+<!--                            <a href="--><?//= $socialLinks[1]['value'] ?><!--" class="twitter" title="--><?//= Yii::t('app','Twitter') ?><!--"></a>-->
+<!--                        </div>-->
+<!--                        <a href="--><?//= Yii::app()->createUrl('/personnel/'.$person->id.'/'.urlencode($person->getFullName())) ?><!--" class="person-link" title="--><?//= CHtml::encode($person->fullName) ?><!--"></a>-->
+<!--                    </div>-->
+<!--                    --><?php
+//                    endforeach;
+//                    ?>
+<!--                </div>-->
+<!--            </div>-->
+<!--            --><?//
         }
         ?>
         <?php
         if($teachers) {
-            Yii::app()->clientScript->registerScript("owl-carousel-class-script","
+            Yii::app()->clientScript->registerScript("owl-carousel-teacher-script","
                 $('.teacher-carousel').owlCarousel({
                     ".(Yii::app()->language == 'fa'?'rtl:true,':'')."
                     navText:['<span class=\"arrow\"></span>','<span class=\"arrow\"></span>'],

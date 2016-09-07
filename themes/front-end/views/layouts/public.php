@@ -47,6 +47,7 @@
     ?>
 </head>
 <body id="top">
+    <?= $this->renderPartial('//layouts/_page_loading'); ?>
     <?= $this->renderPartial('//layouts/_header'); ?>
     <?= $this->renderPartial('//layouts/_banner'); ?>
     <?= $this->renderPartial('//layouts/_search_box'); ?>

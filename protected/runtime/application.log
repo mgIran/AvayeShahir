@@ -16424,3 +16424,15 @@ in E:\Wamp-Important\wamp\www\Yusef\shahir\index.php (11)
 in E:\Wamp-Important\wamp\www\Yusef\shahir\protected\modules\courses\models\Classes.php (61)
 in E:\Wamp-Important\wamp\www\Yusef\shahir\protected\modules\courses\controllers\ClassesManageController.php (98)
 in E:\Wamp-Important\wamp\www\Yusef\shahir\index.php (11)
+2016/07/24 10:34:00 [warning] [application] Failed to set unsafe attribute "formTags" of "Classes".
+in E:\Wamp-Important\wamp\www\Yusef\shahir\protected\modules\courses\models\Classes.php (61)
+in E:\Wamp-Important\wamp\www\Yusef\shahir\protected\modules\courses\controllers\ClassesManageController.php (98)
+in E:\Wamp-Important\wamp\www\Yusef\shahir\index.php (11)
+2016/09/07 12:24:10 [warning] [application] Failed to set unsafe attribute "formTags" of "Classes".
+in E:\wamp\www\yusef\shahir\protected\modules\courses\models\Classes.php (65)
+in E:\wamp\www\yusef\shahir\protected\modules\courses\controllers\ClassesManageController.php (98)
+in E:\wamp\www\yusef\shahir\index.php (11)
+2016/09/07 12:25:10 [warning] [application] Failed to set unsafe attribute "formTags" of "Classes".
+in E:\wamp\www\yusef\shahir\protected\modules\courses\models\Classes.php (65)
+in E:\wamp\www\yusef\shahir\protected\modules\courses\controllers\ClassesManageController.php (98)
+in E:\wamp\www\yusef\shahir\index.php (11)

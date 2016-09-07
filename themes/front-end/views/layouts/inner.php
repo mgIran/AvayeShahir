@@ -48,6 +48,7 @@
     ?>
 </head>
 <body id="top" class="inner-page">
+<?= $this->renderPartial('//layouts/_page_loading'); ?>
 <?= $this->renderPartial('//layouts/_header'); ?>
 <section class="inner-page-content">
     <?= $content ?>
