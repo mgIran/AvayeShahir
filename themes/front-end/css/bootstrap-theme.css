@@ -253,7 +253,12 @@ header.header.scroll-mode{
     background-color: transparent;
 }
 
-
+.classes .nav li{
+    display: inline-block;
+}
+.classes .owl-stage{
+    width: 100% !important;
+}
 
 .introduction{
     display: block;

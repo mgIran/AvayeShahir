@@ -35,11 +35,11 @@ class SiteController extends Controller
 		Yii::import('users.models.*');
 		Yii::import('pages.models.*');
 		Yii::import('setting.models.*');
-		if(SiteSetting::model()->findByAttributes(array('name'=>'message_state'))->value == 1)
+		if(SiteSetting::model()->findByAttributes(array('name' => 'message_state'))->value == 1)
 			if(Yii::app()->language == 'fa')
-				$this->message = CHtml::encode(SiteSetting::model()->findByAttributes(array('name'=>'message'))->value);
+				$this->message = CHtml::encode(SiteSetting::model()->findByAttributes(array('name' => 'message'))->value);
 			else
-				$this->message = CHtml::encode(SiteSetting::model()->findByAttributes(array('name'=>'message_en'))->value);
+				$this->message = CHtml::encode(SiteSetting::model()->findByAttributes(array('name' => 'message_en'))->value);
 		$criteria = new CDbCriteria();
 		$criteria->order = 't.order';
 		$courses = Courses::model()->findAll($criteria);
@@ -48,15 +48,23 @@ class SiteController extends Controller
 		$aboutText = Pages::model()->findByPk(12);
 		$termsText = Pages::model()->findByPk(5);
 
-		$criteria = $criteria = Classes::getValidClasses();
-		$classes = Classes::model()->findAll($criteria);
+		$classes = array();
+		foreach(Courses::model()->findAll() as $course){
+			$criteria = Classes::getValidClasses($course->id);
+			$criteria->order = 'startSignupDate DESC,t.order';
+			$objects = Classes::model()->findAll($criteria);
+			if($objects){
+				$classes[$course->id]['title'] = $course->title;
+				$classes[$course->id]['objects'] = Classes::model()->findAll($criteria);
+			}
+		}
 		$this->render('index' ,array(
 			'courses' => $courses ,
 			'classes' => $classes ,
 			'personnel' => $personnel ,
 			'teachers' => $teachers ,
-			'aboutText' => $aboutText,
-			'termsText' => $termsText,
+			'aboutText' => $aboutText ,
+			'termsText' => $termsText ,
 		));
 	}
 

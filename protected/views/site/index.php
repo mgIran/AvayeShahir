@@ -187,15 +187,132 @@ Yii::app()->clientScript->registerScriptFile($baseUrl.'/js/jquery.mousewheel.min
         <?php $this->endWidget(); ?>
     </div>
 </section>
-
+<?
+if($classes) :
+?>
 <section class="classes" id="classes">
     <div class="container">
         <h3 class="yekan-text"><?= Yii::t('app' ,'Offered Classes') ?></h3>
-        <div class="classes-carousel">
-            <?
-            if($classes) :
-                Yii::app()->clientScript->registerScript("owl-carousel-class-script","
-                $('.classes-carousel').owlCarousel({
+        <ul class="nav">
+            <?php
+            foreach($classes as $course_id => $array):
+            ?>
+            <li><a data-target='#classes-tab-<?= $course_id ?>' data-toggle="tab" ><?= $array['title'] ?></a></li>
+            <?php
+            endforeach;
+            ?>
+        </ul>
+        <div class="tab-content">
+        <?
+        foreach($classes as $course_id => $array):
+            ?>
+            <div id="classes-tab-<?= $course_id ?>" class="tab-pane fade">
+                <h3><?= $array['title'] ?></h3>
+                <div class="classes-carousel">
+                <?
+                foreach($array['objects'] as $class):
+                ?>
+                <div class="class">
+                    <div class="inner">
+                        <div class="top-box">
+                            <a href="#">
+                                <h4 data-toggle="tooltip" data-placement="top" title="<?= $class->title ?>"><?= $class->title ?></h4>
+                            </a>
+                            <div class="text-danger remain-capacity"><?= Yii::t('app','Remaining Capacity').': '.$class->remainingCapacity ?></div>
+                        </div>
+                        <div class="class-detail container-fluid">
+                            <div class="full text-nowrap">
+                                <span><?= Yii::t('app','Course') ?>:&nbsp;</span>
+                                <a href="<?= Yii::app()->createUrl('/courses/'.urlencode($class->course->title).'/'.$class->course->id); ?>">
+                                    <?php echo $class->course->title ?>
+                                </a>
+                            </div>
+                            <div class="full text-nowrap">
+                                <span><?= Yii::t('app','Department') ?>:&nbsp;</span>
+                                <a href="<?= Yii::app()->createUrl('/courses/'.urlencode($class->course->title).'/'.$class->course->id); ?>">
+                                    <?php echo $class->category->title ?>
+                                </a>
+                            </div>
+
+                            <div class="full text-nowrap">
+                                <span>
+                                    <?= Yii::t('app','Instructor') ?>:&nbsp;
+                                </span>
+                                <span>
+                                    <?= $class->teacher->getFullName() ?>
+                                </span>
+                            </div>
+                            <div class="full">
+                                    <span><?= Yii::t('app','Registration') ?>:</span><br><?= Yii::t('app','from') ?>&nbsp;<span><?php echo Yii::app()->language=='fa'?Controller::parseNumbers(JalaliDate::date("Y/m/d",$class->startSignupDate)):date("Y/m/d",$class->startSignupDate); ?></span>&nbsp;<?= Yii::t('app','up to') ?>&nbsp;<span><?php echo Yii::app()->language=='fa'?Controller::parseNumbers(JalaliDate::date("Y/m/d",$class->endSignupDate)):date("Y/m/d",$class->endSignupDate) ?></span>
+                            </div>
+                            <div class="full">
+                                    <span><?= Yii::t('app','Start & End of the Course') ?>:</span><br><?= Yii::t('app','from') ?>&nbsp;<span><?php echo Yii::app()->language=='fa'?Controller::parseNumbers(JalaliDate::date("Y/m/d",$class->startClassDate)):date("Y/m/d",$class->startClassDate) ?></span><span>&nbsp;<?= Yii::t('app','to') ?>&nbsp;</span><span><?php echo Yii::app()->language=='fa'?Controller::parseNumbers(JalaliDate::date("Y/m/d",$class->endClassDate)):date("Y/m/d",$class->endClassDate) ?></span>
+                            </div>
+                            <div class="full">
+                                <span>
+                                <?= Yii::t('app','Class Days') ?>:&nbsp;
+                                </span>
+                                <span>
+                                    <?
+                                    $days = explode(',',$class->classDays);
+                                    foreach($days as $key => $day)
+                                    {
+                                        $days[$key] = JalaliDate::getDayName($day ,Yii::app()->language);
+                                    }
+                                    if(Yii::app()->language == 'fa')
+                                        echo implode(' ، ',$days);
+                                    else
+                                        echo implode(' , ',$days);
+                                    ?>
+                                </span>
+                            </div>
+                            <div class="full">
+                                <span>
+                                    <?= Yii::t('app','Class Hours') ?>:&nbsp;
+                                </span>
+                                <span>
+                                    <?
+                                    echo (Yii::app()->language=='fa'?' از '.Controller::parseNumbers($class->startClassTime):' from '.$class->startClassTime).
+                                        (Yii::app()->language=='fa'?' تا '.Controller::parseNumbers($class->endClassTime):' to '.$class->endClassTime);
+                                    ?>
+                                </span>
+                            </div>
+                            <div class="full">
+                                <span>
+                                    <?= Yii::t('app','Sessions') ?>:&nbsp;
+                                </span>
+                                <span>
+                                    <?= Yii::app()->language=='fa'?Controller::parseNumbers($class->sessions).'&nbsp;&nbsp;جلسه':$class->sessions ?>
+                                </span>
+                            </div>
+                            <div class="full text-lg">
+                                <span>
+                                    <?= Yii::t('app','Tuition') ?>:&nbsp;
+                                </span>
+                                <span>
+                                    <?
+                                    echo $class->htmlPrice;
+                                    ?>
+                                </span>
+                            </div>
+                            <div class="text-center">
+                                <a href="<?= Yii::app()->createUrl('/courses/register/'.$class->id) ?>"
+                                   class="btn" ><?= Yii::t('app','Register')?>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <?
+                endforeach;
+                ?>
+                </div>
+            </div>
+        <?
+        endforeach;
+        Yii::app()->clientScript->registerScript("owl-carousel-class-script","
+                var owlClasses =  $('.classes-carousel');
+                owlClasses.owlCarousel({
                     ".(Yii::app()->language == 'fa'?'rtl:true,':'')."
                     navText:['<span class=\"arrow\"></span>','<span class=\"arrow\"></span>'],
                     navClass: ['owl-prev disabled','owl-next'],
@@ -273,107 +390,18 @@ Yii::app()->clientScript->registerScriptFile($baseUrl.'/js/jquery.mousewheel.min
                             $(nav_container).find('div:first').addClass('disabled');
                         }
                     }),
-                });");
-                foreach($classes as $class):
-                    ?>
-                    <div class="class">
-                        <div class="inner">
-                            <div class="top-box">
-                                <a href="#">
-                                    <h4 data-toggle="tooltip" data-placement="top" title="<?= $class->title ?>"><?= $class->title ?></h4>
-                                </a>
-                                <div class="text-danger remain-capacity"><?= Yii::t('app','Remaining Capacity').': '.$class->remainingCapacity ?></div>
-                            </div>
-                            <div class="class-detail container-fluid">
-                                <div class="full text-nowrap">
-                                    <span><?= Yii::t('app','Course') ?>:&nbsp;</span>
-                                    <a href="<?= Yii::app()->createUrl('/courses/'.urlencode($class->course->title).'/'.$class->course->id); ?>">
-                                        <?php echo $class->course->title ?>
-                                    </a>
-                                </div>
-                                <div class="full text-nowrap">
-                                    <span><?= Yii::t('app','Department') ?>:&nbsp;</span>
-                                    <a href="<?= Yii::app()->createUrl('/courses/'.urlencode($class->course->title).'/'.$class->course->id); ?>">
-                                        <?php echo $class->category->title ?>
-                                    </a>
-                                </div>
-
-                                <div class="full text-nowrap">
-                                    <span>
-                                        <?= Yii::t('app','Instructor') ?>:&nbsp;
-                                    </span>
-                                    <span>
-                                        <?= $class->teacher->getFullName() ?>
-                                    </span>
-                                </div>
-                                <div class="full">
-                                        <span><?= Yii::t('app','Registration') ?>:</span><br><?= Yii::t('app','from') ?>&nbsp;<span><?php echo Yii::app()->language=='fa'?Controller::parseNumbers(JalaliDate::date("Y/m/d",$class->startSignupDate)):date("Y/m/d",$class->startSignupDate); ?></span>&nbsp;<?= Yii::t('app','up to') ?>&nbsp;<span><?php echo Yii::app()->language=='fa'?Controller::parseNumbers(JalaliDate::date("Y/m/d",$class->endSignupDate)):date("Y/m/d",$class->endSignupDate) ?></span>
-                                </div>
-                                <div class="full">
-                                        <span><?= Yii::t('app','Start & End of the Course') ?>:</span><br><?= Yii::t('app','from') ?>&nbsp;<span><?php echo Yii::app()->language=='fa'?Controller::parseNumbers(JalaliDate::date("Y/m/d",$class->startClassDate)):date("Y/m/d",$class->startClassDate) ?></span><span>&nbsp;<?= Yii::t('app','to') ?>&nbsp;</span><span><?php echo Yii::app()->language=='fa'?Controller::parseNumbers(JalaliDate::date("Y/m/d",$class->endClassDate)):date("Y/m/d",$class->endClassDate) ?></span>
-                                </div>
-                                <div class="full">
-                                    <span>
-                                    <?= Yii::t('app','Class Days') ?>:&nbsp;
-                                    </span>
-                                    <span>
-                                        <?
-                                        $days = explode(',',$class->classDays);
-                                        foreach($days as $key => $day)
-                                        {
-                                            $days[$key] = JalaliDate::getDayName($day ,Yii::app()->language);
-                                        }
-                                        if(Yii::app()->language == 'fa')
-                                            echo implode(' ، ',$days);
-                                        else
-                                            echo implode(' , ',$days);
-                                        ?>
-                                    </span>
-                                </div>
-                                <div class="full">
-                                    <span>
-                                        <?= Yii::t('app','Class Hours') ?>:&nbsp;
-                                    </span>
-                                    <span>
-                                        <?
-                                        echo (Yii::app()->language=='fa'?' از '.Controller::parseNumbers($class->startClassTime):' from '.$class->startClassTime).
-                                            (Yii::app()->language=='fa'?' تا '.Controller::parseNumbers($class->endClassTime):' to '.$class->endClassTime);
-                                        ?>
-                                    </span>
-                                </div>
-                                <div class="full">
-                                    <span>
-                                        <?= Yii::t('app','Sessions') ?>:&nbsp;
-                                    </span>
-                                    <span>
-                                        <?= Yii::app()->language=='fa'?Controller::parseNumbers($class->sessions).'&nbsp;&nbsp;جلسه':$class->sessions ?>
-                                    </span>
-                                </div>
-                                <div class="full text-lg">
-                                    <span>
-                                        <?= Yii::t('app','Tuition') ?>:&nbsp;
-                                    </span>
-                                    <span>
-                                        <?
-                                        echo $class->htmlPrice;
-                                        ?>
-                                    </span>
-                                </div>
-                                <div class="text-center">
-                                    <a href="<?= Yii::app()->createUrl('/courses/register/'.$class->id) ?>"
-                                       class="btn" ><?= Yii::t('app','Register')?>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <?
-                endforeach;
-            endif;
-            ?>
+                });
+                $('.classes .nav a').on('shown.bs.tab', function(event){
+                    owlClasses.trigger('refresh.owl.carousel');
+                });
+                ");
+        ?>
         </div>
     </div>
 </section>
+<?
+endif;
+?>
 <?
 if($this->message):
 ?>

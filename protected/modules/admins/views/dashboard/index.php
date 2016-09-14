@@ -40,7 +40,7 @@
             ثبت نام جدید: <?php echo $transactionsPaid->totalItemCount ?><br />
         </p>
         <p>
-            <a class="btn btn-info" href="<?= $this->createUrl('/courses/register/admin') ?>">مشاهده جزییات</a>
+            <a class="btn btn-info" href="<?= $this->createUrl('/courses/register/admin') ?>">مشاهده لیست کامل</a>
         </p>
     </div>
 </div>
@@ -54,6 +54,7 @@
             مجموع کل پرداختی ها: <?= Controller::parseNumbers(number_format($totalTransactionsPaidAmount)); ?> تومان
         </h5>
         <a class="btn btn-success" href="<?= $this->createUrl('/courses/classes/classRegister') ?>">ثبت نام حضوری</a>
+        <a class="btn btn-info" href="<?= $this->createUrl('/courses/register/admin') ?>">مشاهده لیست کامل ثبت نام ها</a>
         <p>
             <?php
             $model = new UserTransactions();
@@ -68,7 +69,7 @@
                     ),
                     array(
                         'header'=>'مبلغ تراکنش',
-                        'value'=>'Controller::parseNumbers(number_format($data->amount))." تومان"',
+                        'value'=>'$data->amount?Controller::parseNumbers(number_format($data->amount))." تومان":"رایگان"',
                     ),
                     array(
                         'header'=>'تاریخ',

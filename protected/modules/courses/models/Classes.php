@@ -245,9 +245,13 @@ class Classes extends SortableCActiveRecord
 		return parent::beforeSave();
 	}
 
-	public static function getValidClasses()
+	public static function getValidClasses($course_id=null,$category_id=null)
 	{
 		$criteria = new CDbCriteria();
+		if($course_id)
+			$criteria->compare('t.course_id',$course_id);
+		if($category_id)
+			$criteria->compare('t.category_id',$category_id);
 		$criteria->addCondition('endSignupDate >= :now');
 		$criteria->addCondition('t.status = 1');
 		$criteria->with[] = 'paidRegisters';

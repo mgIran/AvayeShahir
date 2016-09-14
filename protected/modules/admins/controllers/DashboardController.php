@@ -40,7 +40,6 @@ class DashboardController extends Controller
         if(isset($_GET['UserTransactions']))
             $transactionsModel->attributes=$_GET['UserTransactions'];
         $criteria = new CDbCriteria;
-        $criteria->addCondition('amount <> 0');
         $criteria->addCondition('status = "paid"');
         $criteria->compare('sale_reference_id', $transactionsModel->sale_reference_id);
         $criteria->compare('verbal', $transactionsModel->verbalFilter);

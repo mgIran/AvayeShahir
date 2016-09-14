@@ -206,7 +206,8 @@ class ClassRegisterController extends Controller
             $dataProvider = new CActiveDataProvider('UserTransactions',array(
                 'criteria' => array(
                     'condition' => 'class_id = :class_id AND status = "paid"',
-                    'params' => array(':class_id'=>$id)
+                    'params' => array(':class_id'=>$id),
+                    'order' => 'date DESC'
                 ),
                 'pagination' => false
             ));
