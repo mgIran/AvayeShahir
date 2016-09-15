@@ -390,7 +390,9 @@ if($classes) :
                             }
                         }),
                     };
-//                $('.classes .nav li:first-of-type a').tab('show');
+                $('.classes .nav li:first-of-type').addClass('active');
+                $('.classes .tab-content .tab-pane:first-of-type').addClass('in active');
+                $('.classes .tab-content .tab-pane:first-of-type .classes-carousel').owlCarousel(options);
                 $('.classes .nav a').on('shown.bs.tab',function(){
                     var thisTag = $(this);
                     var thisTabId = thisTag.data('target');

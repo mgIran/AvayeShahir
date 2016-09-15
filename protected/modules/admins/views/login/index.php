@@ -7,6 +7,9 @@
     <h1>
         ورود به مدیریت
     </h1>
+    <script>
+        $("#yw0_button").click();
+    </script>
     <div class="form">
         <?php
         $form=$this->beginWidget('CActiveForm', array(
@@ -25,14 +28,24 @@
             <?php echo $form->passwordField($model,'password',array('class'=>'transition','placeholder'=>'رمز عبور')); ?>
             <?php echo $form->error($model,'password'); ?>
         </div>
+        <?php if ($model->scenario == 'withCaptcha' && CCaptcha::checkRequirements()): ?>
+            <div class="row form-group">
+                <?php echo $form->labelEx($model, 'verifyCode'); ?>
+                <div>
+                    <?php $this->widget('CCaptcha'); ?>
+                    <?php echo $form->textField($model, 'verifyCode'); ?>
+                </div>
+                <?php echo $form->error($model, 'verifyCode'); ?>
+            </div>
+        <?php endif; ?>
         <div class="row form-group">
             <?php echo CHtml::submitButton('ورود',array('class' => 'btn btn-success')); ?>
         </div>
         <?php $this->endWidget(); ?>
         <p>
-            <a href="#" class="forget-link">
-                رمز عبور خود را فراموش کرده اید؟
-            </a>
+<!--            <a href="#" class="forget-link">-->
+<!--                رمز عبور خود را فراموش کرده اید؟-->
+<!--            </a>-->
         </p>
     </div>
 </div>

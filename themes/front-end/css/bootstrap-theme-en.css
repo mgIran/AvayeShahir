@@ -289,3 +289,6 @@ section.classes .owl-prev .arrow,
     right:auto;
     left: 0;
 }
+.classes .nav > li {
+    float: left;
+}

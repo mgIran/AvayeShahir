@@ -92,13 +92,14 @@ class ClassRegisterController extends Controller
                 $lastTransaction = UserTransactions::model()->findByAttributes(array('user_id' => Yii::app()->user->getId(), 'class_id' => $id));
                 if ($lastTransaction && $lastTransaction->status == 'unpaid') {
                     $flag = true;
-                    $lastTransaction->delete();
                     $model = new UserTransactions();
                     $model->class_id = $id;
                     $model->user_id = Yii::app()->user->getId();
                     $model->amount = $class->price;
                     $model->description = 'پرداخت شهریه جهت ثبت نام در دوره ' . $class->course->title . '، کلاس ' . $class->title;  // Required
                     $model->date = time();
+                    $model->order_id=(int)$lastTransaction->order_id+1;
+                    $lastTransaction->delete();
                     if ($model->save()) {
                         $flag = true;
                         $lastTransaction = $model;

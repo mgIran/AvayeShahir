@@ -154,10 +154,15 @@ class UserTransactions extends CActiveRecord
 				->select("MAX(order_id) as max")
 				->from("ym_user_transactions")
 				->queryScalar();
-		if($lastOrderId)
+		if($this->order_id && $this->order_id <= $lastOrderId)
 			$this->order_id = (int)$lastOrderId + 1;
-		else
-			$this->order_id = 1100;
+		elseif(!$this->order_id)
+		{
+			if($lastOrderId)
+				$this->order_id = (int)$lastOrderId + 1;
+			else
+				$this->order_id = 1100;
+		}
 	}
 
 	public function getHtmlAmount()
