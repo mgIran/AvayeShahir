@@ -14,13 +14,36 @@
     .class .inner {
         padding: 0 70px;
     }
-
     .report > [class*="col-"]{
         padding: 0 5px;
     }
 }
+@media (min-width: 992px) and (max-width: 1023px)
+{
+    .gallery-carousel .owl-controls .owl-nav .owl-prev,
+    section.classes .owl-controls .owl-nav .owl-prev,
+    .courses .course-carousel .owl-controls .owl-nav .owl-prev{
+        right:-1%;
+    }
+    .gallery-carousel .owl-controls .owl-nav .owl-next,
+    section.classes .owl-controls .owl-nav .owl-next,
+    .courses .course-carousel .owl-controls .owl-nav .owl-next{
+        left: -1%;
+    }
+}
 @media (min-width: 768px) and (max-width: 991px)
 {
+
+    .gallery-carousel .owl-controls .owl-nav .owl-prev,
+    section.classes .owl-controls .owl-nav .owl-prev,
+    .courses .course-carousel .owl-controls .owl-nav .owl-prev{
+        right:-2%;
+    }
+    .gallery-carousel .owl-controls .owl-nav .owl-next,
+    section.classes .owl-controls .owl-nav .owl-next,
+    .courses .course-carousel .owl-controls .owl-nav .owl-next{
+        left: -2%;
+    }
     .page-content.courses .files li > span:first-of-type{
         display: block;
         left: 160px;

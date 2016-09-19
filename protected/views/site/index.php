@@ -330,38 +330,45 @@ if($classes) :
                                 items:1,
                                 nav : true,
                                 margin :50,
-                                dots : false,
+                                dots : true,
                                 stagePadding : 50
                             },
                             768 :{
                                 items:1,
                                 nav : true,
-                                margin :10,
+                                margin :100,
                                 dots : false,
-                                stagePadding : 0
+                                stagePadding : 100
                             },
-                            1025 :{
+                            992 :{
                                 items:2,
                                 nav : true,
-                                margin :40,
+                                margin :50,
                                 dots : false,
-                                stagePadding : 0
+                                stagePadding : 50
                             },
-                            1201 :{
+                            1024 :{
+                                items:2,
+                                nav : true,
+                                margin :15,
+                                dots : false,
+                                stagePadding : 15
+                            },
+                            1200 :{
                                 items:3,
                                 nav : true,
                                 margin :10,
                                 dots : false,
                                 stagePadding : 0
                             },
-                            1401 :{
+                            1400 :{
                                 items:3,
                                 nav : true,
                                 margin :0,
                                 dots : false,
                                 stagePadding : 0
                             },
-                            1601 :{
+                            1920 :{
                                 items:4,
                                 nav : true,
                                 margin :0,

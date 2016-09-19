@@ -579,10 +579,15 @@ section.search{
     color: #b0b0b0;
 }
 
-.gallery-carousel .owl-controls .owl-nav [class*="owl-"],
-section.classes .owl-controls .owl-nav [class*="owl-"]{
+.gallery-carousel .owl-controls .owl-nav [class*="owl-"]{
     position: absolute;
     top:50%;
+    margin-top: -22.5px;
+    color: #b0b0b0;
+}
+section.classes .owl-controls .owl-nav [class*="owl-"]{
+    position: absolute;
+    top:20%;
     margin-top: -22.5px;
     color: #b0b0b0;
 }
@@ -668,7 +673,7 @@ section.classes .arrow,
     height: 45px;
     width: 45px;
     display: block;
-    opacity: 0.25;
+    opacity: 0.75;
 }
 section.classes .owl-prev .arrow,
 .courses .owl-prev .arrow{
@@ -1880,6 +1885,23 @@ span.navTrigger {
     z-index:10;
     -webkit-transition: all 0.5s linear; -moz-transition: all 0.5s linear; -ms-transition: all 0.5s linear; -o-transition: all 0.5s linear; transition: all 0.5s linear;
     -webkit-transition-delay: 6s; -moz-transition-delay: 6s; -ms-transition-delay: 6s; -o-transition-delay: 6s; transition-delay: 6s;
+}
+.classes .owl-dots {
+    text-align: center;
+    right: 0;
+}
+.classes .owl-dots .owl-dot span{
+    width: 6px;
+    height: 6px;
+    margin: 2px 4px;
+    background-color: #444;
+}
+.classes .owl-dots .owl-dot.active span,
+.classes .owl-dots .owl-dot:hover span{
+    width: 10px;
+    height: 10px;
+    margin: 0 4px;
+    background-color: #96b404;
 }
 .owl-dots .owl-dot {
     display: inline-block;

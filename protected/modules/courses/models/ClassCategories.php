@@ -160,10 +160,7 @@ class ClassCategories extends SortableCActiveRecord
 
 	public function getValidClasses(){
 		$criteria = new CDbCriteria();
-		$criteria->addCondition('category_id = :category');
-		$criteria->addCondition('endSignupDate > :now');
-		$criteria->params[':now'] = time();
-		$criteria->params[':category'] = $this->id;
+		$criteria = Classes::getValidClasses($this->course_id,$this->id);
 		return Classes::model()->findAll($criteria);
 	}
 
