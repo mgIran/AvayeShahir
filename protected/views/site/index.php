@@ -193,7 +193,7 @@ if($classes) :
 <section class="classes" id="classes">
     <div class="container">
         <h3 class="yekan-text"><?= Yii::t('app' ,'Offered Classes') ?></h3>
-        <ul class="nav col-lg-4 col-md-4 col-sm-4 col-xs-4">
+        <ul class="nav col-lg-4 col-md-4 col-sm-4 col-xs-12">
             <?php
             foreach($classes as $course_id => $array):
             ?>
@@ -202,7 +202,7 @@ if($classes) :
             endforeach;
             ?>
         </ul>
-        <div class="tab-content col-lg-8 col-md-8 col-sm-8 col-xs-8">
+        <div class="tab-content col-lg-8 col-md-8 col-sm-8 col-xs-12">
         <?
         foreach($classes as $course_id => $array):
             ?>
@@ -336,9 +336,9 @@ if($classes) :
                             768 :{
                                 items:1,
                                 nav : true,
-                                margin :100,
+                                margin :50,
                                 dots : false,
-                                stagePadding : 100
+                                stagePadding : 50
                             },
                             992 :{
                                 items:1,

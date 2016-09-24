@@ -2438,6 +2438,7 @@ section.classes h3{
     display: block;
     background-color: #dfdfdf;
     position: relative;
+    width: 100%;
 }
 .classes .nav > li.active a{
     background-color: rgba(10, 36, 106, 0.55);
@@ -2457,6 +2458,10 @@ section.classes h3{
     position: absolute;
     right: 100%;
     top: 50%;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
     transform: translateY(-50%);
     width: 0;
     z-index: 2;

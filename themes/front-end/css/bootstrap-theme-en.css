@@ -292,3 +292,31 @@ section.classes .owl-prev .arrow,
 .classes .nav > li {
     float: left;
 }
+.classes .nav {
+    float: left;
+    padding-left: 0;
+    padding-right: 50px;
+}
+.classes .tab-content {
+    float: left;
+}
+.classes .nav li.active::before {
+    border-bottom: 10px solid transparent;
+    border-right:none;
+    border-left: 12px solid #6a799f;
+    border-top: 10px solid transparent;
+    content: " ";
+    display: inline-block;
+    height: 0;
+    position: absolute;
+    right: auto;
+    left: 100%;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+    width: 0;
+    z-index: 2;
+}

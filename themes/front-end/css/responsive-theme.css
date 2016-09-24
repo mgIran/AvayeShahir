@@ -79,6 +79,10 @@
     }
 }
 @media (max-width: 767px) {
+    .owl-dots {
+        left: 0;
+        right: 0;
+    }
     .header.scroll-mode .btn-input .dropdown-menu
     {
         background-color: inherit;
