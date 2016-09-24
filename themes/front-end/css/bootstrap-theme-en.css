@@ -118,24 +118,13 @@ section.classes .owl-prev .arrow,
     left: 30px;
     right: 0;
 }
-.persons .teacher-up, .persons .partner-up,
-.persons .teacher-down, .persons .partner-down
 .persons .person-item .image,
-.persons .person-item .name,
 .persons .person-item .name,
 .persons .person-item .socials .email{
     right: auto;
     direction: ltr;
     text-align: left;
     margin-right: 0;
-}
-.persons .teacher-up, .persons .partner-up,
-.persons .teacher-down, .persons .partner-down{
-    left: 78px;
-}
-.persons .teacher-up, .persons .partner-up,
-.persons .teacher-down, .persons .partner-down{
-    left: 78px;
 }
 .persons .person-item .image{
     left: 30px;
@@ -145,6 +134,7 @@ section.classes .owl-prev .arrow,
 }
 .persons .person-item .job{
     left: 160px;
+    right: auto;
 }
 .persons .person-item .socials .email,
 .persons .person-item .socials .twitter{

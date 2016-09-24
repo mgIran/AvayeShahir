@@ -37,7 +37,7 @@
     if (Yii::app()->params['default_language'] !== Yii::app()->language)
     {
         // @todo add css for multi language
-        $cs->registerCssFile($baseUrl.'/css/bootstrap-theme-'.Yii::app()->language.'.css?2.4');
+        $cs->registerCssFile($baseUrl.'/css/bootstrap-theme-'.Yii::app()->language.'.css?2.4.1');
     }
 
     $cs->registerScriptFile($baseUrl.'/js/bootstrap.min.js');
