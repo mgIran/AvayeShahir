@@ -800,8 +800,10 @@ section.classes .owl-prev .arrow,
     z-index: 2;
 }
 .persons .teachers,
-.persons .partners{
-    padding-bottom: 150px;
+.persons .partners {
+    display: block;
+    overflow: hidden;
+    padding: 50px 0 100px;
 }
 .persons h3{
     color: #fff;
@@ -2427,13 +2429,15 @@ section.classes h3{
 }
 /*****************************************************/
 .classes .nav {
-    border-bottom: 3px solid #e8e8e8;
+    float: right;
+    margin-top: 40px;
+    padding-left: 50px;
+    position: relative;
 }
 .classes .nav > li {
-    display: inline-block;
-    overflow: hidden;
-    float: right;
-    border-radius: 4px 4px 0 0;
+    display: block;
+    background-color: #dfdfdf;
+    position: relative;
 }
 .classes .nav > li.active a{
     background-color: rgba(10, 36, 106, 0.55);
@@ -2441,4 +2445,19 @@ section.classes h3{
 }
 .classes .nav > li a{
     color: #333;
+    cursor: pointer;
+}
+.classes .nav li.active::before {
+    border-bottom: 10px solid transparent;
+    border-right: 12px solid #6a799f;
+    border-top: 10px solid transparent;
+    content: " ";
+    display: inline-block;
+    height: 0;
+    position: absolute;
+    right: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    z-index: 2;
 }

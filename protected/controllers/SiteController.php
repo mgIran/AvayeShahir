@@ -44,7 +44,11 @@ class SiteController extends Controller
 		$criteria->order = 't.order';
 		$courses = Courses::model()->findAll($criteria);
 		$personnel = Personnel::model()->findAll();
-		$teachers = Users::model()->findAll('role_id = 2');
+		$teachers = Users::model()->findAll(array(
+			'condition' => 'role_id = 2',
+			'with' => array('teacherDetails'),
+			'order' => 'teacherDetails.name'
+		));
 		$aboutText = Pages::model()->findByPk(12);
 		$termsText = Pages::model()->findByPk(5);
 

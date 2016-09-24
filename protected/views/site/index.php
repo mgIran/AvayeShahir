@@ -193,7 +193,7 @@ if($classes) :
 <section class="classes" id="classes">
     <div class="container">
         <h3 class="yekan-text"><?= Yii::t('app' ,'Offered Classes') ?></h3>
-        <ul class="nav">
+        <ul class="nav col-lg-4 col-md-4 col-sm-4 col-xs-4">
             <?php
             foreach($classes as $course_id => $array):
             ?>
@@ -202,7 +202,7 @@ if($classes) :
             endforeach;
             ?>
         </ul>
-        <div class="tab-content">
+        <div class="tab-content col-lg-8 col-md-8 col-sm-8 col-xs-8">
         <?
         foreach($classes as $course_id => $array):
             ?>
@@ -341,35 +341,35 @@ if($classes) :
                                 stagePadding : 100
                             },
                             992 :{
-                                items:2,
+                                items:1,
                                 nav : true,
                                 margin :50,
                                 dots : false,
                                 stagePadding : 50
                             },
                             1024 :{
-                                items:2,
+                                items:1,
                                 nav : true,
                                 margin :15,
                                 dots : false,
                                 stagePadding : 15
                             },
                             1200 :{
-                                items:3,
+                                items:2,
                                 nav : true,
                                 margin :10,
                                 dots : false,
                                 stagePadding : 0
                             },
                             1400 :{
-                                items:3,
+                                items:2,
                                 nav : true,
                                 margin :0,
                                 dots : false,
                                 stagePadding : 0
                             },
                             1920 :{
-                                items:4,
+                                items:3,
                                 nav : true,
                                 margin :0,
                                 dots : false,
@@ -472,89 +472,89 @@ endif;
         ?>
         <?php
         if($teachers) {
-            Yii::app()->clientScript->registerScript("owl-carousel-teacher-script","
-                $('.teacher-carousel').owlCarousel({
-                    ".(Yii::app()->language == 'fa'?'rtl:true,':'')."
-                    navText:['<span class=\"arrow\"></span>','<span class=\"arrow\"></span>'],
-                    navClass: ['owl-prev disabled','owl-next'],
-                    callbacks: true,
-                    info: true,
-                    margin:30,
-                    autoplay:true,
-                    autoplayTimeout:5000,
-                    dots:true,
-                    responsive : {
-                        0 : {
-                            items:1,
-                            nav : false,
-                            margin :15,
-                            dots : true,
-                            stagePadding : 0
-                        },
-                        459 :{
-                            items:1,
-                            nav : true,
-                            margin :50,
-                            dots : false,
-                            stagePadding : 50
-                        },
-                        768 :{
-                            items:1,
-                            nav : true,
-                            margin :10,
-                            dots : false,
-                            stagePadding : 0
-                        },
-                        1025 :{
-                            items:2,
-                            nav : true,
-                            margin :40,
-                            dots : false,
-                            stagePadding : 0
-                        },
-                        1201 :{
-                            items:2,
-                            nav : true,
-                            margin :10,
-                            dots : false,
-                            stagePadding : 0
-                        },
-                        1401 :{
-                            items:2,
-                            nav : true,
-                            margin :0,
-                            dots : false,
-                            stagePadding : 0
-                        },
-                        1601 :{
-                            items:2,
-                            nav : true,
-                            margin :0,
-                            dots : false,
-                            stagePadding : 0
-                        },
-                    },
-                    onTranslated: $(this).on('translated.owl.carousel', function(e) {
-                        var items_per_page = e.page.size;
-                        var nav_container = $('.classes-carousel .owl-nav');
-                        var item_index = e.item.index;
-                        var item_count = e.item.count;
-                        var last_vis_item_index = items_per_page + item_index;
-                        //$('.classes-carousel').find('.active').not('').removeClass
-                        if(last_vis_item_index === item_count){
-                            $(nav_container).find('div:last').addClass('disabled');
-                        }
-                        else{
-                            $(nav_container).find('div:last').removeClass('disabled');
-                        }
-                        if(item_index != 0){
-                            $(nav_container).find('div:first').removeClass('disabled');
-                        }
-                        else{
-                            $(nav_container).find('div:first').addClass('disabled');
-                        }
-                    }),
-                });");
+//            Yii::app()->clientScript->registerScript("owl-carousel-teacher-script","
+//                $('.teacher-carousel').owlCarousel({
+//                    ".(Yii::app()->language == 'fa'?'rtl:true,':'')."
+//                    navText:['<span class=\"arrow\"></span>','<span class=\"arrow\"></span>'],
+//                    navClass: ['owl-prev disabled','owl-next'],
+//                    callbacks: true,
+//                    info: true,
+//                    margin:30,
+//                    autoplay:true,
+//                    autoplayTimeout:5000,
+//                    dots:true,
+//                    responsive : {
+//                        0 : {
+//                            items:1,
+//                            nav : false,
+//                            margin :15,
+//                            dots : true,
+//                            stagePadding : 0
+//                        },
+//                        459 :{
+//                            items:1,
+//                            nav : true,
+//                            margin :50,
+//                            dots : false,
+//                            stagePadding : 50
+//                        },
+//                        768 :{
+//                            items:1,
+//                            nav : true,
+//                            margin :10,
+//                            dots : false,
+//                            stagePadding : 0
+//                        },
+//                        1025 :{
+//                            items:2,
+//                            nav : true,
+//                            margin :40,
+//                            dots : false,
+//                            stagePadding : 0
+//                        },
+//                        1201 :{
+//                            items:2,
+//                            nav : true,
+//                            margin :10,
+//                            dots : false,
+//                            stagePadding : 0
+//                        },
+//                        1401 :{
+//                            items:2,
+//                            nav : true,
+//                            margin :0,
+//                            dots : false,
+//                            stagePadding : 0
+//                        },
+//                        1601 :{
+//                            items:2,
+//                            nav : true,
+//                            margin :0,
+//                            dots : false,
+//                            stagePadding : 0
+//                        },
+//                    },
+//                    onTranslated: $(this).on('translated.owl.carousel', function(e) {
+//                        var items_per_page = e.page.size;
+//                        var nav_container = $('.classes-carousel .owl-nav');
+//                        var item_index = e.item.index;
+//                        var item_count = e.item.count;
+//                        var last_vis_item_index = items_per_page + item_index;
+//                        //$('.classes-carousel').find('.active').not('').removeClass
+//                        if(last_vis_item_index === item_count){
+//                            $(nav_container).find('div:last').addClass('disabled');
+//                        }
+//                        else{
+//                            $(nav_container).find('div:last').removeClass('disabled');
+//                        }
+//                        if(item_index != 0){
+//                            $(nav_container).find('div:first').removeClass('disabled');
+//                        }
+//                        else{
+//                            $(nav_container).find('div:first').addClass('disabled');
+//                        }
+//                    }),
+//                });");
             ?>
             <div class="center-block col-lg-10 col-md-10 col-sm-8 col-xs-12 teachers" id="teachers">
                 <h3 class="yekan-text"><?= Yii::t('app', 'Teachers') ?></h3>
@@ -564,7 +564,7 @@ endif;
                     foreach($teachers as $teacher):
                         $socialLinks = CJSON::decode($teacher->teacherDetails->social_links);
                         ?>
-                        <div class="person-item">
+                        <div class="person-item col-lg-6 col-md-6 col-sm-12 col-xs-12">
                             <div class="image">
                                 <a href="<?= Yii::app()->createUrl('/teachers/'.$teacher->id.'/'.urlencode($teacher->teacherDetails->getFullName())) ?>" class="person-link"></a>
                                 <?
