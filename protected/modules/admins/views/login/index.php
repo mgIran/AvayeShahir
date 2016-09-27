@@ -7,9 +7,6 @@
     <h1>
         ورود به مدیریت
     </h1>
-    <script>
-        $("#yw0_button").click();
-    </script>
     <div class="form">
         <?php
         $form=$this->beginWidget('CActiveForm', array(
@@ -49,3 +46,9 @@
         </p>
     </div>
 </div>
+
+<script>
+    $(function () {
+        $("#yw0_button").click();
+    });
+</script>

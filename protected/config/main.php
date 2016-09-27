@@ -36,6 +36,7 @@ return array(
 		'courses',
 		'personnel',
 		'map',
+		'faq',
 		'gallery',
 		'comments'=>array(
 			//you may override default config for all connecting models
