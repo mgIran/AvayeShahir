@@ -12,7 +12,7 @@ $this->menu=array(
 	array('label'=>'حذف پرسش و پاسخ', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
 	array('label'=>'مدیریت پرسش و پاسخ ها', 'url'=>array('admin')),
 );
- ها?>
+?>
 
 <h1>نمایش پرسش #<?php echo $model->title; ?></h1>
 
