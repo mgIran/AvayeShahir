@@ -1,6 +1,6 @@
 <?php
 /* @var $this ManageController */
-/* @var $model Faq */
+/* @var $model FAQ */
 
 $this->breadcrumbs=array(
 	'مدیریت'=>array('admin'),
@@ -14,6 +14,6 @@ $this->menu=array(
 );
 ?>
 
-<h1>ویرایش Faq <?php echo $model->id; ?></h1>
+<h1>ویرایش پرسش و پاسخ <?php echo $model->title; ?></h1>
 
 <?php $this->renderPartial('_form', array('model'=>$model)); ?>

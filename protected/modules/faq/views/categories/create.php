@@ -1,6 +1,6 @@
 <?php
 /* @var $this CategoriesController */
-/* @var $model FaqCategories */
+/* @var $model FAQCategories */
 
 $this->breadcrumbs=array(
 	'مدیریت'=>array('admin'),
@@ -12,6 +12,6 @@ $this->menu=array(
 );
 ?>
 
-<h1>افزودن FaqCategories</h1>
+<h1>افزودن دسته بندی FAQ</h1>
 
 <?php $this->renderPartial('_form', array('model'=>$model)); ?>

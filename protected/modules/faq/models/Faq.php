@@ -8,7 +8,7 @@
  * @property string $category_id
  * @property string $title
  * @property string $body
- * @property string $sort
+ * @property string $order
  *
  * The followings are the available model relations:
  * @property FaqCategories $category
@@ -73,11 +73,11 @@ class Faq extends SortableCActiveRecord
 		// will receive user inputs.
 		return array(
 			array('category_id, title, body', 'required'),
-			array('category_id, sort', 'length', 'max'=>10),
+			array('category_id, order', 'length', 'max'=>10),
 			array('title', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, category_id, title, body, sort', 'safe', 'on'=>'search'),
+			array('id, category_id, title, body, order', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -99,12 +99,12 @@ class Faq extends SortableCActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => Yii::t('faq.app','ID'),
-			'category_id' => Yii::t('faq.app','Category'),
-			'category' => Yii::t('faq.app','Category'),
-			'title' => Yii::t('faq.app','Title'),
-			'body' => Yii::t('faq.app','Body'),
-			'sort' => 'Sort',
+			'id' => Yii::t('Faq.app','ID'),
+			'category_id' => 'دسته بندی',
+			'category' => 'دسته بندی',
+			'title' => 'عنوان',
+			'body' => "متن",
+			'order' => 'ترتیب',
 		);
 	}
 
@@ -130,7 +130,7 @@ class Faq extends SortableCActiveRecord
 		$criteria->compare('category_id',$this->category_id,true);
 		$criteria->compare('title',$this->title,true);
 		$criteria->compare('body',$this->body,true);
-		$criteria->compare('sort',$this->sort,true);
+		$criteria->compare('order',$this->order,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

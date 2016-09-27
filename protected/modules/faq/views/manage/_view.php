@@ -1,6 +1,6 @@
 <?php
 /* @var $this ManageController */
-/* @var $data Faq */
+/* @var $data FAQ */
 ?>
 
 <div class="view">
@@ -9,7 +9,7 @@
 	<?php echo CHtml::link(CHtml::encode($data->id), array('view', 'id'=>$data->id)); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('category_id')); ?>:</b>
+	<b><?php echo CHtml::encode($data->getAttributeLabel('category.title')); ?>:</b>
 	<?php echo CHtml::encode($data->category_id); ?>
 	<br />
 
@@ -21,8 +21,8 @@
 	<?php echo CHtml::encode($data->body); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('sort')); ?>:</b>
-	<?php echo CHtml::encode($data->sort); ?>
+	<b><?php echo CHtml::encode($data->getAttributeLabel('order')); ?>:</b>
+	<?php echo CHtml::encode($data->order); ?>
 	<br />
 
 

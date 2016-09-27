@@ -1,6 +1,6 @@
 <?php
 /* @var $this ManageController */
-/* @var $model Faq */
+/* @var $model FAQ */
 /* @var $form CActiveForm */
 ?>
 
@@ -32,8 +32,8 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'sort'); ?>
-		<?php echo $form->textField($model,'sort',array('size'=>10,'maxlength'=>10)); ?>
+		<?php echo $form->label($model,'order'); ?>
+		<?php echo $form->textField($model,'order',array('size'=>10,'maxlength'=>10)); ?>
 	</div>
 
 	<div class="row buttons">

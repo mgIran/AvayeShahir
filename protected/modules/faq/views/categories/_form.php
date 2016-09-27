@@ -1,6 +1,6 @@
 <?php
 /* @var $this CategoriesController */
-/* @var $model FaqCategories */
+/* @var $model FAQCategories */
 /* @var $form CActiveForm */
 ?>
 
@@ -17,7 +17,7 @@
 		<?php echo $form->error($model,'title'); ?>
 	</div>
 	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'افزودن' : 'ویرایش'); ?>
+		<?php echo CHtml::submitButton($model->isNewRecord ? 'افزودن' : 'ویرایش',array('class'=>'btn btn-success')); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

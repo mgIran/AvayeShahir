@@ -1,17 +1,17 @@
 <?php
 /* @var $this ManageController */
-/* @var $model Faq */
+/* @var $model FAQ */
 
 $this->breadcrumbs=array(
 	'مدیریت',
 );
 
 $this->menu=array(
-	array('label'=>'افزودن Faq', 'url'=>array('create')),
+	array('label'=>'افزودن FAQ', 'url'=>array('create')),
 );
 ?>
 
-<h1>مدیریت Faqs</h1>
+<h1>مدیریت پرسش و پاسخ ها</h1>
 
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'faq-grid',
@@ -20,8 +20,8 @@ $this->menu=array(
 	'columns'=>array(
 		array(
 			'name' =>'category_id',
-			'value' => 'category.title',
-			'filter' => CHtml::listData(FaqCategories::model()->findAll(array('order'=>'sort DESC')),'id','title')
+			'value' => '$data->category->title',
+			'filter' => CHtml::listData(FAQCategories::model()->findAll(array('order'=>'t.order DESC')),'id','title')
 		),
 		'title',
 		array(

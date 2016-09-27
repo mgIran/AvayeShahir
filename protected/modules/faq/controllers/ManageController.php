@@ -28,15 +28,7 @@ class ManageController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
-                'roles'=>array('admin'),
-			),
-			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
-                'roles'=>array('admin'),
-			),
-			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
+				'actions'=>array('index','view','create','update','admin','delete'),
                 'roles'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -63,10 +55,6 @@ class ManageController extends Controller
 	public function actionCreate()
 	{
 		$model=new Faq;
-
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
-
 		if(isset($_POST['Faq']))
 		{
 			$model->attributes=$_POST['Faq'];
@@ -87,9 +75,6 @@ class ManageController extends Controller
 	public function actionUpdate($id)
 	{
 		$model=$this->loadModel($id);
-
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
 
 		if(isset($_POST['Faq']))
 		{
@@ -122,10 +107,7 @@ class ManageController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Faq');
-		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
-		));
+		$this->actionAdmin();
 	}
 
 	/**

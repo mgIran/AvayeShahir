@@ -1,6 +1,6 @@
 <?php
 /* @var $this CategoriesController */
-/* @var $model FaqCategories */
+/* @var $model FAQCategories */
 /* @var $form CActiveForm */
 ?>
 
@@ -22,8 +22,8 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'sort'); ?>
-		<?php echo $form->textField($model,'sort',array('size'=>11,'maxlength'=>11)); ?>
+		<?php echo $form->label($model,'order'); ?>
+		<?php echo $form->textField($model,'order',array('size'=>11,'maxlength'=>11)); ?>
 	</div>
 
 	<div class="row buttons">

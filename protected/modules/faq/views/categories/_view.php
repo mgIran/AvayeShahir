@@ -1,6 +1,6 @@
 <?php
 /* @var $this CategoriesController */
-/* @var $data FaqCategories */
+/* @var $data FAQCategories */
 ?>
 
 <div class="view">
@@ -13,8 +13,8 @@
 	<?php echo CHtml::encode($data->title); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('sort')); ?>:</b>
-	<?php echo CHtml::encode($data->sort); ?>
+	<b><?php echo CHtml::encode($data->getAttributeLabel('order')); ?>:</b>
+	<?php echo CHtml::encode($data->order); ?>
 	<br />
 
 

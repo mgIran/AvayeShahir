@@ -6,7 +6,7 @@
  * The followings are the available columns in table '{{faq_categories}}':
  * @property string $id
  * @property string $title
- * @property string $sort
+ * @property string $order
  *
  * The followings are the available model relations:
  * @property Faq[] $faqs
@@ -73,10 +73,10 @@ class FaqCategories extends SortableCActiveRecord
 		return array(
 			array('title', 'required'),
 			array('title', 'length', 'max'=>255),
-			array('sort', 'length', 'max'=>11),
+			array('order', 'length', 'max'=>11),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, title, sort', 'safe', 'on'=>'search'),
+			array('id, title, order', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -100,7 +100,7 @@ class FaqCategories extends SortableCActiveRecord
 		return array(
 			'id' => 'ID',
 			'title' => 'عنوان',
-			'sort' => 'Sort',
+			'order' => 'Sort',
 		);
 	}
 
@@ -124,7 +124,7 @@ class FaqCategories extends SortableCActiveRecord
 
 		$criteria->compare('id',$this->id,true);
 		$criteria->compare('title',$this->title,true);
-		$criteria->compare('sort',$this->sort,true);
+		$criteria->compare('order',$this->order,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50616
 File Encoding         : 65001
 
-Date: 2016-09-27 13:58:01
+Date: 2016-09-28 00:25:05
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -24,7 +24,7 @@ CREATE TABLE `ym_faq` (
   `category_id` int(10) unsigned NOT NULL,
   `title` varchar(255) COLLATE utf8_persian_ci NOT NULL COMMENT 'عنوان',
   `body` text COLLATE utf8_persian_ci NOT NULL COMMENT 'متن',
-  `sort` int(10) unsigned DEFAULT NULL,
+  `order` int(10) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `category_id` (`category_id`),
   CONSTRAINT `ym_faq_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `ym_faq_categories` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
@@ -37,6 +37,6 @@ DROP TABLE IF EXISTS `ym_faq_categories`;
 CREATE TABLE `ym_faq_categories` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(255) COLLATE utf8_persian_ci NOT NULL COMMENT 'عنوان',
-  `sort` int(11) unsigned DEFAULT NULL,
+  `order` int(11) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
