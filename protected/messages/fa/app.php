@@ -127,5 +127,7 @@ return array(
     'Date' => 'تاریخ',
     'Description' => 'توضیحات',
     'Remaining Capacity' => 'ظرفیت مانده',
-    'Free' => 'رایگان'
+    'Free' => 'رایگان',
+    'FAQ' => 'سوالات متداول',
+    'Heading' => 'فهرست',
 );

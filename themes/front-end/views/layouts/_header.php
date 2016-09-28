@@ -38,6 +38,9 @@ $action = $this->action->id;
                 <a class="scroll-link" href="<?= $menuID == 'site' && $action == 'index'?'#teachers':Yii::app()->baseUrl.'#teachers'; ?>" title="<?= Yii::t('app','Teachers');?>"><?= Yii::t('app','Teachers');?></a>
             </li>
             <li>
+                <a class="scroll-link" href="<?= $this->createUrl('/FAQ'); ?>" title="<?= Yii::t('app','FAQ');?>"><?= Yii::t('app','FAQ');?></a>
+            </li>
+            <li>
                 <a class="scroll-link" href="<?= $menuID == 'site' && $action == 'index'?'#about':Yii::app()->baseUrl.'#about'; ?>" title="<?= Yii::t('app','About Us');?>"><?= Yii::t('app','About Us');?></a>
             </li>
             <li>

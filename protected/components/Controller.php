@@ -138,6 +138,17 @@ class Controller extends CController
                         array('label' => 'افزودن' ,'url' => Yii::app()->createUrl('/gallery/manage/create')) ,
                     )
                 ) ,
+                array(
+                    'label' => 'FAQ<span class="caret"></span>' ,
+                    'url' => '#' ,
+                    'itemOptions' => array('class' => 'dropdown' ,'tabindex' => "-1") ,
+                    'linkOptions' => array('class' => 'dropdown-toggle' ,'data-toggle' => "dropdown") ,
+                    'items' => array(
+                        array('label' => 'مدیریت پرسش و پاسخ ها' ,'url' => Yii::app()->createUrl('/faq/manage/admin')) ,
+                        array('label' => 'افزودن پرسش و پاسخ' ,'url' => Yii::app()->createUrl('/faq/manage/create')) ,
+                        array('label' => 'دسته بندی های پرسش و پاسخ' ,'url' => Yii::app()->createUrl('/faq/categories/admin')) ,
+                    )
+                ) ,
 //                array(
 //                    'label' => 'نظرات<span class="caret"></span>' ,
 //                    'url' => '#' ,

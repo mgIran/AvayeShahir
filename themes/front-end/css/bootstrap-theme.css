@@ -2466,3 +2466,82 @@ section.classes h3{
     width: 0;
     z-index: 2;
 }
+.faq-section{
+    display: block;
+    padding-bottom: 200px;
+}
+.faq-section > ul{
+    background-color: #f0f0f0;
+    border: 1px solid #dedede;
+}
+.faq-section h1,
+.faq-section h2,
+.faq-section h3,
+.faq-section h4,
+.faq-section h5,
+.faq-section h6 {
+    margin: 15px 0;
+    color: #252525;
+}
+.faq-section a:hover,
+.faq-section a:active,
+.faq-section a:focus
+{
+    text-decoration: underline !important;
+}
+.faq-section ul > li > a {
+    margin-bottom: 15px;
+    display: block;
+    overflow: hidden;
+    font-size: 22px;
+    color: #5396de;
+    font-family: "BYekan";
+}
+.faq-section ul > li{
+    margin: 25px 0;
+}
+.faq-section ul > li > ol > li > a {
+    font-size: 16px;
+    color: #5396de;
+    font-family: "BYekan";
+}
+.faq-section ul,
+.faq-section ol{
+    list-style: none;
+}
+.faq-section > .contents ul{
+    padding: 0;
+}
+.faq-section > .contents h2 {
+    border-top: 4px solid #e1e3e8;
+    line-height: 44px;
+}
+.faq-section > .contents h2 > span {
+    border-top: 4px solid #13aaf1;
+    color: #252525;
+    display: inline-block;
+    font-family: "BYekan";
+    font-size: 22px;
+    margin-top: -4px;
+    padding: 0 15px;
+}
+.faq-section > .contents ol > li{
+    font-size: 22px;
+    border-bottom: 1px solid #dadada;
+    margin-bottom: 25px;
+}
+.faq-section > .contents ol > li:last-of-type{
+    font-size: 22px;
+    border-bottom: none;
+}
+.faq-section .row-num{
+    font: inherit !important;
+}
+.faq-section .faq-text{
+    padding: 0 40px;
+    text-align: justify;
+    line-height: 34px;
+}
+.faq-section .contents h3 {
+    padding-top: 15px;
+}

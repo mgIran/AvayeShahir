@@ -7,15 +7,18 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'افزودن FAQ', 'url'=>array('create')),
+	array('label'=>'افزودن پرسش و پاسخ', 'url'=>array('create')),
+	array('label'=>'افزودن دسته بندی پرسش و پاسخ', 'url'=>array('/faq/categories/create')),
 );
 ?>
 
 <h1>مدیریت پرسش و پاسخ ها</h1>
-
-<?php $this->widget('zii.widgets.grid.CGridView', array(
-	'id'=>'faq-grid',
+<?php $this->widget('ext.yiiSortableModel.widgets.SortableCGridView', array(
 	'dataProvider'=>$model->search(),
+	'orderField' => 'order',
+	'idField' => 'id',
+	'orderUrl' => 'order',
+	'id'=>'faq-grid',
 	'filter'=>$model,
 	'columns'=>array(
 		array(

@@ -110,9 +110,7 @@ return array(
             'showScriptName'=>false,
             'appendParams'=>true,
 			'rules'=>array(
-                'terms' => 'site/terms',
-                'forum' => 'site/forum',
-				'guidance' => 'site/guidance',
+                '<action:(terms|forum|guidance|FAQ)>' => 'site/<action>',
 				'gallery' => 'gallery/manage/index',
 				'teachers/<id:\d+>/<title:(.*)>' => 'users/teachers/view',
 				'<action:(login|logout|register|dashboard)>' => 'users/public/<action>',

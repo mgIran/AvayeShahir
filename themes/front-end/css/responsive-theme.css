@@ -77,8 +77,91 @@
     .footer .contact-box form div.col-sm-12.col-xs-12{
         padding: 0 !important;
     }
+
+    span.navTrigger{
+        display: flex;
+        height: 45px;
+        justify-content: center;
+        position: absolute;
+        left: 0;
+        top:7.5px;
+        width: 50px;
+        z-index: 10000;
+        opacity: 0.7;
+    }
+    span.navTrigger:hover {
+        opacity: 1;
+    }
+    span.navTrigger ~ ul {
+        opacity: 0;
+        visibility: hidden;
+        position: fixed !important;
+        top: -100vh !important;
+        right:0;
+        left:0;
+        bottom: 0 !important;
+        height: 100vh;
+        z-index: 9999;
+        background-color: #2a2a2a;
+        -webkit-transition: all 700ms cubic-bezier(0.330, 0.750, 0.350, 0.980);
+        -moz-transition: all 700ms cubic-bezier(0.330, 0.750, 0.350, 0.980);
+        -o-transition: all 700ms cubic-bezier(0.330, 0.750, 0.350, 0.980);
+        transition: all 700ms cubic-bezier(0.330, 0.750, 0.350, 0.980); /* custom */
+
+        -webkit-transition-timing-function: cubic-bezier(0.330, 0.750, 0.350, 0.980);
+        -moz-transition-timing-function: cubic-bezier(0.330, 0.750, 0.350, 0.980);
+        -o-transition-timing-function: cubic-bezier(0.330, 0.750, 0.350, 0.980);
+        transition-timing-function: cubic-bezier(0.330, 0.750, 0.350, 0.980); /* custom */
+        overflow: auto;
+        padding-top: 40px;
+    }
+    span.navTrigger.clicked ~ ul {
+        opacity: 1;
+        top: 0 !important;
+        visibility: visible;
+    }
+    span.navTrigger.clicksed ~ .logo {
+        right: 50%;
+        margin-right: -50px;
+        top: 30px;
+        background-color: #2a2a2a;
+    }
+    span.navTrigger ~ ul.nav > li {
+        float: none;
+        width: 100%;
+        line-height: 40px;
+        text-align: center;
+    }
+    span.navTrigger ~ ul.nav > li *{
+        text-align: center !important;
+        font-size: 20px;
+    }
+    span.navTrigger ~ ul.nav > li .divider {
+        display: none;
+    }
+    .header.scroll-mode .nav,
+    .inner-page .header .nav{
+        right: 0;
+    }
+    .inner-page .inner-page-content{
+        margin-top: 60px;
+    }
+    .header .container{
+        height: 60px;
+    }
+    .header .logo{
+        width: 100px;
+        opacity: 1;
+        top: 10px;
+        right: 10px;
+    }
 }
 @media (max-width: 767px) {
+    .faq-section .faq-text,
+    .faq-section ul,
+    .faq-section ol{
+        padding:0 20px;
+    }
     .owl-dots {
         left: 0;
         right: 0;

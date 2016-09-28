@@ -1,3 +1,4 @@
+var $body = $("body");
 $(function() {
     $.material.init();
     // fade out alert messages
@@ -7,7 +8,7 @@ $(function() {
         });
     }, 10000);
 
-    $("body").on("click" ,".scroll-link[href^='#']",function(e) {
+    $body.on("click" ,".scroll-link[href^='#']",function(e) {
         e.preventDefault();
         if($(window).width() < 768)
         {
@@ -21,7 +22,6 @@ $(function() {
             },1000,'easeOutCubic');
     });
 
-
     $("[data-toggle='tooltip']").tooltip({
         trigger:'hover'
     });
@@ -30,7 +30,7 @@ $(function() {
         template : '<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner large"></div></div>'
     });
 
-    $("body").on('click','.navTrigger',function(){
+    $body.on('click','.navTrigger',function(){
         $(this).toggleClass("clicked");
         $(this).find('.lines').toggleClass("close");
         $("html,body").toggleClass("overflow");

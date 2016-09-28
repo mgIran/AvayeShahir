@@ -290,4 +290,12 @@ class SiteController extends Controller
 		$model = Pages::model()->findByPk(2);
 		$this->render('//site/pages/page' ,array('model' => $model,'comment'=>true));
 	}
+
+	public function actionFAQ(){
+		Yii::app()->getModule('faq');
+		Yii::app()->theme = 'front-end';
+		$this->layout = '//layouts/inner';
+		$FAQCategories = FaqCategories::model()->findAll(array('condition'=>'faqs.id IS NOT NULL','order'=>'t.order','with'=>array('faqs')));
+		$this->render('FAQ' ,array('FAQCategories' => $FAQCategories));
+	}
 }

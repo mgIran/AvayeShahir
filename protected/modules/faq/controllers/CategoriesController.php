@@ -28,7 +28,7 @@ class CategoriesController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','create','update','admin','delete'),
+				'actions'=>array('index','view','create','update','admin','delete','order'),
                 'roles'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -36,7 +36,14 @@ class CategoriesController extends Controller
 			),
 		);
 	}
-
+	public function actions()
+	{
+		return array(
+			'order' => array(
+				'class' => 'ext.yiiSortableModel.actions.AjaxSortingAction',
+			),
+		);
+	}
 	/**
 	 * Displays a particular model.
 	 * @param integer $id the ID of the model to be displayed
@@ -54,12 +61,29 @@ class CategoriesController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new FaqCategories;
+		$model=new FaqCategories('ajaxInsert');
+		if(isset($_POST['ajax']) && $_POST['ajax'] === 'category-ajax-form') {
+			$errors = CActiveForm::validate($model);
+			if(CJSON::decode($errors)) {
+				echo $errors;
+				Yii::app()->end();
+			}
+		}
 		if(isset($_POST['FaqCategories']))
 		{
 			$model->attributes=$_POST['FaqCategories'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+			if(isset($_POST['ajax']))
+			{
+				if($model->save())
+				{
+					echo CJSON::encode(array('state' => 'ok'));
+				}else
+					echo CJSON::encode(array('state' => 'error'));
+				Yii::app()->end();
+			}else {
+				if ($model->save())
+					$this->redirect(array('admin'));
+			}
 		}
 
 		$this->render('create',array(

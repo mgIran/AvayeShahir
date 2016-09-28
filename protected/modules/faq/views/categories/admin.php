@@ -12,10 +12,12 @@ $this->menu=array(
 ?>
 
 <h1>مدیریت دسته بندی های FAQ</h1>
-
-<?php $this->widget('zii.widgets.grid.CGridView', array(
-	'id'=>'faq-categories-grid',
+<?php $this->widget('ext.yiiSortableModel.widgets.SortableCGridView', array(
 	'dataProvider'=>$model->search(),
+	'orderField' => 'order',
+	'idField' => 'id',
+	'orderUrl' => 'order',
+	'id'=>'faq-categories-grid',
 	'filter'=>$model,
 	'columns'=>array(
 		'title',

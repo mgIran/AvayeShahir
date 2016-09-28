@@ -28,11 +28,20 @@ class ManageController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','create','update','admin','delete'),
+				'actions'=>array('index','view','create','update','order','admin','delete'),
                 'roles'=>array('admin'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
+			),
+		);
+	}
+
+	public function actions()
+	{
+		return array(
+			'order' => array(
+				'class' => 'ext.yiiSortableModel.actions.AjaxSortingAction',
 			),
 		);
 	}
