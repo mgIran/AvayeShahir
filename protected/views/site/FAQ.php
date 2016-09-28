@@ -25,7 +25,7 @@
                     $k=1;
                     foreach ($category->faqs as $faq):
                         echo '<li>';
-                        echo '<a class="scroll-link" href="#cat'.$category->id.'-q'.$faq->id.'"><span class="row-num">'.$i.'.'.$k.'.&nbsp;&nbsp;</span>'.$faq->title.'</a>';
+                        echo '<a class="scroll-link" href="#cat'.$category->id.'-q'.$faq->id.'"><span class="row-num">'.$i.'. '.$k.'.&nbsp;&nbsp;</span>'.$faq->title.'</a>';
                         echo'</li>';
                         $k++;
                     endforeach;
@@ -46,7 +46,7 @@
                         $k=1;
                         foreach ($category->faqs as $faq):
                             echo '<li>';
-                            echo '<h3 id="cat'.$category->id.'-q'.$faq->id.'"><span class="row-num">'.$i.'.'.$k.'.&nbsp;&nbsp;</span>'.$faq->title.'</h3>';
+                            echo '<h3 id="cat'.$category->id.'-q'.$faq->id.'"><span class="row-num">'.$i.'. '.$k.'.&nbsp;&nbsp;</span>'.$faq->title.'</h3>';
                             $purifier = new CHtmlPurifier();
                             $purifier->setOptions(array(
                                 'HTML.Allowed'=> 'p,a[href|target],b,i,br',
