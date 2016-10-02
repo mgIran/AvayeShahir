@@ -36,6 +36,25 @@
 		<?php echo $form->error($model,'body'); ?>
 	</div>
 
+	<div class="row">
+		<?php echo $form->labelEx($model,'formTags'); ?>
+		<?php
+		$this->widget("ext.tagIt.tagIt",array(
+			'model' => $model,
+			'attribute' => 'formTags',
+			'suggestType' => 'json',
+			'suggestUrl' => Yii::app()->createUrl('/courses/tags/list'),
+			'data' => $model->formTags
+		));
+		?>
+		<button data-toggle="modal" data-target="#modal" class="btn btn-success btn-round btn-inverse btn-sm">
+			<i class="icon-plus icon-1x"></i>
+			&nbsp;&nbsp;
+			افزودن برچسب دلخواه
+		</button>
+		<?php echo $form->error($model,'formTags'); ?>
+	</div>
+
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'افزودن' : 'ویرایش',array('class'=>'btn btn-success')); ?>
 	</div>
@@ -52,6 +71,20 @@
 			</div>
 			<div class="modal-body">
 				<? $this->renderPartial('faq.views.categories._ajax_form',array('model' => new FaqCategories('ajaxInsert'))); ?>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="modal fade" role="dialog" id="modal">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+			<div class="modal-body">
+				<?
+				$this->renderPartial('_tagForm',array(
+					'model' => new ClassTags()
+				)); ?>
 			</div>
 		</div>
 	</div>

@@ -30,8 +30,10 @@ $(".tab-content .tab-pane:first-child").addClass("in active");
         echo '<h5>تعداد ثبت نام: '.$transaction['dataProvider']->totalItemCount.' نفر</h5>';
         echo '<h5>ظرفیت باقی مانده کلاس: '.($transaction['class']->capacity - $transaction['dataProvider']->totalItemCount).' نفر</h5>';
         $this->widget('zii.widgets.grid.CGridView', array(
+            'id' => "tab-grid-".$transaction['class']->id,
             'dataProvider' => $transaction['dataProvider'],
             'template' => '{items}',
+            'rowHtmlOptionsExpression'=>'array("data-order-id"=>$data->order_id)',
 //            'filter' => $model,
             'columns' => array(
                 array(
@@ -71,7 +73,39 @@ $(".tab-content .tab-pane:first-child").addClass("in active");
                     'name'=>'verbal',
                     'value'=>'$data->verbalLabels[$data->verbal]',
                     'filter' => CHtml::activeDropDownList($model ,'verbalFilter',$model->verbalLabels,array('prompt' => '-'))
-                )
+                ),
+                array(
+                    'class'=>'CButtonColumn',
+                    'template' => '{delete}',
+                    'buttons'=>array(
+                        'update' => array(
+                            'label'=>'ویرایش',
+                            'url'=>'Yii::app()->createUrl("/courses/classes/classRegister",array("id"=>$data->order_id))',
+                            'imageUrl'=>false,
+                            'options'=>array('class'=>'btn btn-info'),
+                            'visible'=>'$data->verbal',
+                        ),
+                        'delete' => array(
+                            'label'=>'انصراف',
+                            'url'=>'Yii::app()->createUrl("/courses/classes/deleteRegister")',
+                            'imageUrl'=>false,
+                            'click'=>'function(){
+                                var order_id = $(this).parents("tr").data("order-id");
+                                if(!confirm("آیا از حذف این آیتم اطمینان دارید؟")) return false;
+                                $.fn.yiiGridView.update("tab-grid-'.$transaction['class']->id.'", {
+                                    type:"POST",
+                                    url:$(this).attr("href"),
+                                    data:{order_id:order_id},
+                                    success:function(text,status) {
+                                        $.fn.yiiGridView.update("tab-grid-'.$transaction['class']->id.'");
+                                    }
+                                });
+                                return false;
+                            }',
+                            'options'=>array('class'=>'btn btn-danger'),
+                        ),
+                    )
+                ),
             )
         ));
         echo '</div>';

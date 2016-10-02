@@ -67,8 +67,12 @@ class ManageController extends Controller
 		if(isset($_POST['Faq']))
 		{
 			$model->attributes=$_POST['Faq'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+			$model->formTags = isset($_POST['Faq']['formTags'])?explode(',',$_POST['Faq']['formTags']):null;
+			if($model->save()) {
+				Yii::app()->user->setFlash('success', '<span class="icon-check"></span>&nbsp;&nbsp;اطلاعات با موفقیت ذخیره شد.');
+				$this->redirect(array('admin'));
+			}else
+				Yii::app()->user->setFlash('failed' ,'در ثبت اطلاعات خطایی رخ داده است! لطفا مجددا تلاش کنید.');
 		}
 
 		$this->render('create',array(
@@ -84,12 +88,17 @@ class ManageController extends Controller
 	public function actionUpdate($id)
 	{
 		$model=$this->loadModel($id);
-
+		foreach($model->tags as $tag)
+			array_push($model->formTags,$tag->title);
 		if(isset($_POST['Faq']))
 		{
 			$model->attributes=$_POST['Faq'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+			$model->formTags = isset($_POST['Faq']['formTags'])?explode(',',$_POST['Faq']['formTags']):null;
+			if($model->save()) {
+				Yii::app()->user->setFlash('success', '<span class="icon-check"></span>&nbsp;&nbsp;اطلاعات با موفقیت ذخیره شد.');
+				$this->redirect(array('admin'));
+			}else
+				Yii::app()->user->setFlash('failed' ,'در ثبت اطلاعات خطایی رخ داده است! لطفا مجددا تلاش کنید.');
 		}
 
 		$this->render('update',array(

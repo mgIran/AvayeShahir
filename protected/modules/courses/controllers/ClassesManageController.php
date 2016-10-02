@@ -15,7 +15,7 @@ class ClassesManageController extends Controller
 	{
 		return array(
 				'accessControl', // perform access control for CRUD operations
-				'postOnly + delete', // we only allow deletion via POST request
+				'postOnly + delete,deleteRegister', // we only allow deletion via POST request
 		);
 	}
 
@@ -27,15 +27,15 @@ class ClassesManageController extends Controller
 	public function accessRules()
 	{
 		return array(
-				array(
-						'allow',  // allow all users to perform 'index' and 'view' actions
-						'actions' => array('index', 'classRegister', 'view', 'create', 'update', 'admin', 'delete', 'order', 'getCategories'),
-						'roles' => array('admin'),
-				),
-				array(
-						'deny',  // deny all users
-						'users' => array('*'),
-				),
+			array(
+				'allow',  // allow all users to perform 'index' and 'view' actions
+				'actions' => array('index', 'classRegister', 'deleteRegister', 'view', 'create', 'update', 'admin', 'delete', 'order', 'getCategories'),
+				'roles' => array('admin'),
+			),
+			array(
+				'deny',  // deny all users
+				'users' => array('*'),
+			),
 		);
 	}
 
@@ -219,5 +219,17 @@ class ClassesManageController extends Controller
 				'model' => $model,
 				'validClasses' => $validClasses
 		));
+	}
+
+	public function actionDeleteRegister()
+	{
+		if($_POST['order_id']) {
+			$model = UserTransactions::model()->findByAttributes(array('order_id'=>(int)$_POST['order_id']));
+			if($model)
+				$model->delete();
+			elseif($model === null)
+				throw new CHttpException(404, 'The requested page does not exist.');
+
+		}
 	}
 }

@@ -1,6 +1,6 @@
 <?php
 
-class FaqModule extends CWebModule
+class NewsModule extends CWebModule
 {
 	public function init()
 	{
@@ -9,11 +9,16 @@ class FaqModule extends CWebModule
 
 		// import the module-level models and components
 		$this->setImport(array(
+			'news.models.*',
+			'news.components.*',
 			'courses.models.ClassTags',
-			'faq.models.*',
-			'faq.components.*',
 		));
 	}
+
+	public $controllerMap = array(
+		'manage' => 'news.controllers.NewsManageController',
+		'categories' => 'news.controllers.NewsCategoriesManageController'
+	);
 
 	public function beforeControllerAction($controller, $action)
 	{

@@ -1,25 +1,25 @@
 <?php
 
 /**
- * This is the model class for table "ym_page_categories".
+ * This is the model class for table "{{faq_tag_rel}}".
  *
- * The followings are the available columns in table 'ym_page_categories':
- * @property string $id
- * @property string $name
- * @property string $slug
- * @property int $multiple
+ * The followings are the available columns in table '{{faq_tag_rel}}':
+ * @property string $tag_id
+ * @property string $faq_id
  *
  * The followings are the available model relations:
- * @property Pages[] $pages
+ * @property ClassTags[] $tag
+ * @property Faq[] $faq
+ *
  */
-class PageCategories extends CActiveRecord
+class FaqTagRel extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'ym_page_categories';
+		return '{{faq_tag_rel}}';
 	}
 
 	/**
@@ -30,11 +30,11 @@ class PageCategories extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name, slug', 'length', 'max'=>255),
-			array('name','filter','filter' => 'strip_tags'),
+			array('tag_id, faq_id', 'required'),
+			array('tag_id, faq_id', 'length', 'max'=>10),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, name, slug, multiple', 'safe', 'on'=>'search'),
+			array('tag_id, faq_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -46,7 +46,8 @@ class PageCategories extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'pages' => array(self::HAS_MANY, 'Pages', 'category_id'),
+			'tag' => array(self::BELONGS_TO, 'ClassTags', 'tag_id'),
+			'faq' => array(self::BELONGS_TO, 'Faq', 'faq_id')
 		);
 	}
 
@@ -56,8 +57,8 @@ class PageCategories extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'name' => 'عنوان',
-			'slug' => 'آدرس',
+			'tag_id' => 'Tag',
+			'faq_id' => 'Faq',
 		);
 	}
 
@@ -79,9 +80,8 @@ class PageCategories extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id,true);
-		$criteria->compare('name',$this->name,true);
-		$criteria->compare('slug',$this->slug,true);
+		$criteria->compare('tag_id',$this->tag_id,true);
+		$criteria->compare('faq_id',$this->faq_id,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -92,7 +92,7 @@ class PageCategories extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return PageCategories the static model class
+	 * @return FaqTagRel the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{

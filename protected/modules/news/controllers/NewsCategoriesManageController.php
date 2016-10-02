@@ -1,6 +1,6 @@
 <?php
 
-class CategoriesController extends Controller
+class NewsCategoriesManageController extends Controller
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -28,22 +28,19 @@ class CategoriesController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','create','update','admin','delete','order'),
-                'roles'=>array('admin'),
+				'actions'=>array('index','view'),
+				'users'=>array('*'),
+			),
+			array('allow', // allow authenticated user to perform 'create' and 'update' actions
+				'actions'=>array('create','update','admin','delete'),
+				'roles'=>array('admin'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
 			),
 		);
 	}
-	public function actions()
-	{
-		return array(
-			'order' => array(
-				'class' => 'ext.yiiSortableModel.actions.AjaxSortingAction',
-			),
-		);
-	}
+
 	/**
 	 * Displays a particular model.
 	 * @param integer $id the ID of the model to be displayed
@@ -61,32 +58,15 @@ class CategoriesController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new FaqCategories('ajaxInsert');
-		if(isset($_POST['ajax']) && $_POST['ajax'] === 'category-ajax-form') {
-			$errors = CActiveForm::validate($model);
-			if(CJSON::decode($errors)) {
-				echo $errors;
-				Yii::app()->end();
-			}
-		}
-		if(isset($_POST['FaqCategories']))
+		$model=new NewsCategories;
+		if(isset($_POST['NewsCategories']))
 		{
-			$model->attributes=$_POST['FaqCategories'];
-			if(isset($_POST['ajax']))
-			{
-				if($model->save())
-				{
-					echo CJSON::encode(array('state' => 'ok'));
-				}else
-					echo CJSON::encode(array('state' => 'error'));
-				Yii::app()->end();
-			}else {
-				if($model->save()) {
-					Yii::app()->user->setFlash('success', '<span class="icon-check"></span>&nbsp;&nbsp;اطلاعات با موفقیت ذخیره شد.');
-					$this->redirect(array('admin'));
-				}else
-					Yii::app()->user->setFlash('failed' ,'در ثبت اطلاعات خطایی رخ داده است! لطفا مجددا تلاش کنید.');
-			}
+			$model->attributes=$_POST['NewsCategories'];
+			if($model->save()) {
+				Yii::app()->user->setFlash('success', '<span class="icon-check"></span>&nbsp;&nbsp;اطلاعات با موفقیت ذخیره شد.');
+				$this->redirect(array('admin'));
+			}else
+				Yii::app()->user->setFlash('failed' ,'در ثبت اطلاعات خطایی رخ داده است! لطفا مجددا تلاش کنید.');
 		}
 
 		$this->render('create',array(
@@ -102,11 +82,11 @@ class CategoriesController extends Controller
 	public function actionUpdate($id)
 	{
 		$model=$this->loadModel($id);
-		if(isset($_POST['FaqCategories']))
+		if(isset($_POST['NewsCategories']))
 		{
-			$model->attributes=$_POST['FaqCategories'];
+			$model->attributes=$_POST['NewsCategories'];
 			if($model->save()) {
-				Yii::app()->user->setFlash('success', '<span class="icon-check"></span>&nbsp;&nbsp;اطلاعات با موفقیت ذخیره شد.');
+				Yii::app()->user->setFlash('success', '<span class="icon-check"></span>&nbsp;&nbsp;اطلاعات با موفقیت ویرایش شد.');
 				$this->redirect(array('admin'));
 			}else
 				Yii::app()->user->setFlash('failed' ,'در ثبت اطلاعات خطایی رخ داده است! لطفا مجددا تلاش کنید.');
@@ -136,7 +116,10 @@ class CategoriesController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$this->actionAdmin();
+		$dataProvider=new CActiveDataProvider('NewsCategories');
+		$this->render('index',array(
+			'dataProvider'=>$dataProvider,
+		));
 	}
 
 	/**
@@ -144,10 +127,10 @@ class CategoriesController extends Controller
 	 */
 	public function actionAdmin()
 	{
-		$model=new FaqCategories('search');
+		$model=new NewsCategories('search');
 		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['FaqCategories']))
-			$model->attributes=$_GET['FaqCategories'];
+		if(isset($_GET['NewsCategories']))
+			$model->attributes=$_GET['NewsCategories'];
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -158,12 +141,12 @@ class CategoriesController extends Controller
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.
 	 * @param integer $id the ID of the model to be loaded
-	 * @return FaqCategories the loaded model
+	 * @return NewsCategories the loaded model
 	 * @throws CHttpException
 	 */
 	public function loadModel($id)
 	{
-		$model=FaqCategories::model()->findByPk($id);
+		$model=NewsCategories::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
@@ -171,11 +154,11 @@ class CategoriesController extends Controller
 
 	/**
 	 * Performs the AJAX validation.
-	 * @param FaqCategories $model the model to be validated
+	 * @param NewsCategories $model the model to be validated
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='faq-categories-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='news-categories-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();

@@ -16488,3 +16488,11 @@ in E:\wamp\www\yusef\shahir\index.php (11)
 in E:\wamp\www\yusef\shahir\protected\modules\courses\models\Classes.php (65)
 in E:\wamp\www\yusef\shahir\protected\modules\courses\controllers\ClassesManageController.php (99)
 in E:\wamp\www\yusef\shahir\index.php (11)
+2016/10/02 11:23:48 [warning] [application] Failed to set unsafe attribute "formTags" of "Classes".
+in E:\wamp\www\yusef\shahir\protected\modules\courses\models\Classes.php (65)
+in E:\wamp\www\yusef\shahir\protected\modules\courses\controllers\ClassesManageController.php (99)
+in E:\wamp\www\yusef\shahir\index.php (11)
+2016/10/02 11:24:57 [warning] [application] Failed to set unsafe attribute "formTags" of "Classes".
+in E:\wamp\www\yusef\shahir\protected\modules\courses\models\Classes.php (65)
+in E:\wamp\www\yusef\shahir\protected\modules\courses\controllers\ClassesManageController.php (99)
+in E:\wamp\www\yusef\shahir\index.php (11)

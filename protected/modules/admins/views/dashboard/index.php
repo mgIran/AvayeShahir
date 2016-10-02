@@ -61,6 +61,7 @@
             $this->widget('zii.widgets.grid.CGridView',array(
                 'id' => 'paid-grid-view',
                 'dataProvider' => $transactionsPaid,
+                'rowHtmlOptionsExpression'=>'array("data-order-id"=>$data->order_id)',
                 'filter' => $model,
                 'columns'=>array(
                     array(
@@ -84,7 +85,39 @@
                         'name'=>'verbal',
                         'value'=>'$data->verbalLabels[$data->verbal]',
                         'filter' => CHtml::activeDropDownList($model ,'verbalFilter',$model->verbalLabels,array('prompt' => '-'))
-                    )
+                    ),
+                    array(
+                        'class'=>'CButtonColumn',
+                        'template' => '{delete}',
+                        'buttons'=>array(
+                            'update' => array(
+                                'label'=>'ویرایش',
+                                'url'=>'Yii::app()->createUrl("/courses/classes/classRegister",array("id"=>$data->order_id))',
+                                'imageUrl'=>false,
+                                'options'=>array('class'=>'btn btn-info'),
+                                'visible'=>'$data->verbal',
+                            ),
+                            'delete' => array(
+                                'label'=>'انصراف',
+                                'url'=>'Yii::app()->createUrl("/courses/classes/deleteRegister")',
+                                'imageUrl'=>false,
+                                'click'=>'function(){
+                                var order_id = $(this).parents("tr").data("order-id");
+                                if(!confirm("آیا از حذف این آیتم اطمینان دارید؟")) return false;
+                                $.fn.yiiGridView.update("paid-grid-view", {
+                                    type:"POST",
+                                    url:$(this).attr("href"),
+                                    data:{order_id:order_id},
+                                    success:function(text,status) {
+                                        location.reload();
+                                    }
+                                });
+                                return false;
+                            }',
+                                'options'=>array('class'=>'btn btn-danger'),
+                            ),
+                        )
+                    ),
                 )
             ));
             ?>

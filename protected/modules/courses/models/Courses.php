@@ -78,6 +78,8 @@ class Courses extends SortableCActiveRecord
 		// will receive user inputs.
 		return array(
 			array('title, pic, summary', 'required'),
+			array('title','filter','filter' => 'strip_tags'),
+			array('summary','filter','filter'=>array($obj=new CHtmlPurifier(),'purify')),
 			array('pic', 'length', 'max'=>200),
 			array('seen', 'default', 'value'=>0),
 			array('formTags', 'safe'),

@@ -72,6 +72,8 @@ class Pages extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('title', 'length', 'max'=>255),
+			array('title','filter','filter' => 'strip_tags'),
+			array('summary','filter','filter'=>array($obj=new CHtmlPurifier(),'purify')),
 			array('category_id', 'length', 'max'=>11),
 			array('summary', 'safe'),
 			// The following rule is used by search().

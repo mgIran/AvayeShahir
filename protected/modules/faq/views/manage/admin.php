@@ -24,11 +24,12 @@ $this->menu=array(
 		array(
 			'name' =>'category_id',
 			'value' => '$data->category->title',
-			'filter' => CHtml::listData(FAQCategories::model()->findAll(array('order'=>'t.order DESC')),'id','title')
+			'filter' => CHtml::listData(FaqCategories::model()->findAll(array('order'=>'t.order DESC')),'id','title')
 		),
 		'title',
 		array(
 			'class'=>'CButtonColumn',
+			'template' => '{update}{delete}',
 		),
 	),
 )); ?>

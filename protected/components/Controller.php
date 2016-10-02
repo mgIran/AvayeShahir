@@ -107,6 +107,18 @@ class Controller extends CController
                     )
                 ) ,
                 array(
+                    'label' => 'اخبار<span class="caret"></span>' ,
+                    'url' => '#' ,
+                    'itemOptions' => array('class' => 'dropdown' ,'tabindex' => "-1") ,
+                    'linkOptions' => array('class' => 'dropdown-toggle' ,'data-toggle' => "dropdown") ,
+                    'items' => array(
+                        array('label' => 'مدیریت' ,'url' => Yii::app()->createUrl('/news/manage/admin/')) ,
+                        array('label' => ' افزودن خبر' ,'url' => Yii::app()->createUrl('/news/manage/create/')) ,
+                        array('label' => 'مدیریت دسته بندی ها' ,'url' => Yii::app()->createUrl('/news/categories/admin/')) ,
+                        array('label' => 'کلمات کلیدی' ,'url' => Yii::app()->createUrl('/courses/tags/admin/'))
+                    )
+                ) ,
+                array(
                     'label' => 'اساتید<span class="caret"></span>' ,
                     'url' => '#' ,
                     'itemOptions' => array('class' => 'dropdown' ,'tabindex' => "-1") ,
@@ -144,9 +156,9 @@ class Controller extends CController
                     'itemOptions' => array('class' => 'dropdown' ,'tabindex' => "-1") ,
                     'linkOptions' => array('class' => 'dropdown-toggle' ,'data-toggle' => "dropdown") ,
                     'items' => array(
-                        array('label' => 'مدیریت پرسش و پاسخ ها' ,'url' => Yii::app()->createUrl('/faq/manage/admin')) ,
-                        array('label' => 'افزودن پرسش و پاسخ' ,'url' => Yii::app()->createUrl('/faq/manage/create')) ,
-                        array('label' => 'دسته بندی های پرسش و پاسخ' ,'url' => Yii::app()->createUrl('/faq/categories/admin')) ,
+                        array('label' => 'مدیریت سوالات' ,'url' => Yii::app()->createUrl('/faq/manage/admin')) ,
+                        array('label' => 'افزودن سوال' ,'url' => Yii::app()->createUrl('/faq/manage/create')) ,
+                        array('label' => 'دسته بندی ها' ,'url' => Yii::app()->createUrl('/faq/categories/admin')) ,
                     )
                 ) ,
 //                array(

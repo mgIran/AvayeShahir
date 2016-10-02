@@ -58,16 +58,16 @@ class ClassCategories extends SortableCActiveRecord
 	public function behaviors()
 	{
 		return array(
-				'EasyMultiLanguage'=>array(
-						'class' => 'ext.EasyMultiLanguage.EasyMultiLanguageBehavior',
-						// @todo Please change those attributes that should be translated.
-						'translated_attributes' => array('title','summary'),
-						'admin_routes' => array('courses/categories/admin', 'courses/categories/update', 'courses/categories/delete', 'courses/categories/create'),
-						//
-						'languages' => Yii::app()->params['languages'],
-						'default_language' => Yii::app()->params['default_language'],
-						'translations_table' => 'ym_translations',
-				),
+			'EasyMultiLanguage'=>array(
+				'class' => 'ext.EasyMultiLanguage.EasyMultiLanguageBehavior',
+				// @todo Please change those attributes that should be translated.
+				'translated_attributes' => array('title','summary'),
+				'admin_routes' => array('courses/categories/admin', 'courses/categories/update', 'courses/categories/delete', 'courses/categories/create'),
+				//
+				'languages' => Yii::app()->params['languages'],
+				'default_language' => Yii::app()->params['default_language'],
+				'translations_table' => 'ym_translations',
+			),
 		);
 	}
 
@@ -81,8 +81,10 @@ class ClassCategories extends SortableCActiveRecord
 		return array(
 			array('title ,course_id','required'),
 			array('title','unique'),
+			array('title','filter','filter' => 'strip_tags'),
+			array('summary','filter','filter'=>array($obj=new CHtmlPurifier(),'purify')),
 		  	array('title', 'length', 'max'=>255),
-			array('summary ,course_id' , 'safe'),
+			array('course_id' , 'safe'),
 			array('formTags', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.

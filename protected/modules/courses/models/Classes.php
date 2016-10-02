@@ -97,9 +97,11 @@ class Classes extends SortableCActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('title, category_id, course_id ,capacity ,teacher_id', 'required'),
+			array('title, category_id, course_id, capacity, teacher_id', 'required'),
+			array('title','filter','filter' => 'strip_tags'),
+			array('summary','filter','filter'=>array($obj=new CHtmlPurifier(),'purify')),
 			array('price', 'default', 'value' => 0),
-			array('price,sessions', 'numerical', 'integerOnly' => true),
+			array('price, sessions, capacity', 'numerical', 'integerOnly' => true),
 			array('endSignupDate', 'compare', 'compareAttribute' => 'startSignupDate', 'operator' => '>', 'message' => 'تاریخ پایان ثبت نام باید بیشتر از تاریخ شروع ثبت نام باشد.'),
 			array('endClassDate', 'compare', 'compareAttribute' => 'startClassDate', 'operator' => '>', 'message' => 'تاریخ پایان کلاس باید بیشتر از تاریخ شروع کلاس باشد.'),
 			array('title', 'length', 'max' => 50),

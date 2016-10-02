@@ -1,27 +1,32 @@
 <?php
 
 /**
- * This is the model class for table "{{faq}}".
+ * This is the model class for table "{{news}}".
  *
- * The followings are the available columns in table '{{faq}}':
+ * The followings are the available columns in table '{{news}}':
  * @property string $id
- * @property string $category_id
  * @property string $title
+ * @property string $summary
  * @property string $body
+ * @property string $image
+ * @property string $seen
+ * @property string $publish_date
+ * @property string $status
+ * @property string $category_id
  * @property string $order
  *
  * The followings are the available model relations:
- * @property FaqCategories $category
+ * @property NewsCategories $category
  * @property ClassTags[] $tags
  */
-class Faq extends SortableCActiveRecord
+class News extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return '{{faq}}';
+		return '{{news}}';
 	}
 
 	public $formTags=[];
@@ -51,14 +56,14 @@ class Faq extends SortableCActiveRecord
 	 *
 	 * @return array
 	 */
-
 	public function behaviors()
 	{
 		return array(
 			'EasyMultiLanguage'=>array(
 				'class' => 'ext.EasyMultiLanguage.EasyMultiLanguageBehavior',
-				'translated_attributes' => array('title' ,'body'),
-				'admin_routes' => array('faq/manage/create','faq/manage/update','faq/manage/admin','faq/manage/delete'),
+				// @todo Please change those attributes that should be translated.
+				'translated_attributes' => array('title','summary','body'),
+				'admin_routes' => array('news/manage/admin', 'news/manage/update', 'news/manage/create', 'news/manage/delete'),
 				//
 				'languages' => Yii::app()->params['languages'],
 				'default_language' => Yii::app()->params['default_language'],
@@ -75,13 +80,18 @@ class Faq extends SortableCActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('category_id, title, body', 'required'),
+			array('title, body, category_id', 'required'),
+			array('title, seen', 'length', 'max'=>255),
+			array('summary', 'length', 'max'=>2000),
+			array('title','filter','filter' => 'strip_tags'),
+			array('summary, body','filter','filter'=>array($obj=new CHtmlPurifier(),'purify')),
+			array('image', 'length', 'max'=>200),
+			array('status', 'length', 'max'=>7),
 			array('category_id, order', 'length', 'max'=>10),
-			array('title', 'length', 'max'=>255),
-			array('formTags', 'safe'),
+			array('publish_date, formTags', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, category_id, title, body, order', 'safe', 'on'=>'search'),
+			array('id, title, summary, body, image, seen, publish_date, status, category_id, order', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -93,8 +103,8 @@ class Faq extends SortableCActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'category' => array(self::BELONGS_TO, 'FaqCategories', 'category_id'),
-			'tags' => array(self::MANY_MANY, 'ClassTags', '{{faq_tag_rel}}(faq_id,tag_id)'),
+			'category' => array(self::BELONGS_TO, 'NewsCategories', 'category_id'),
+			'tags' => array(self::MANY_MANY, 'ClassTags', '{{news_tag_rel}}(news_id,tag_id)'),
 		);
 	}
 
@@ -104,13 +114,17 @@ class Faq extends SortableCActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => Yii::t('Faq.app','ID'),
-			'category_id' => 'دسته بندی',
-			'category' => 'دسته بندی',
+			'id' => 'ID',
 			'title' => 'عنوان',
-			'body' => "متن",
+			'summary' => 'خلاصه',
+			'body' => 'متن خبر',
+			'image' => 'تصویر',
+			'seen' => 'بازدید',
+			'publish_date' => 'تاریخ انتشار',
+			'status' => 'وضعیت',
+			'category_id' => 'دسته بندی',
 			'order' => 'ترتیب',
-			'formTags' => 'برچسب ها',
+			'formTags' => 'برچسب ها'
 		);
 	}
 
@@ -133,11 +147,16 @@ class Faq extends SortableCActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id,true);
-		$criteria->compare('category_id',$this->category_id,true);
 		$criteria->compare('title',$this->title,true);
+		$criteria->compare('summary',$this->summary,true);
 		$criteria->compare('body',$this->body,true);
+		$criteria->compare('image',$this->image,true);
+		$criteria->compare('seen',$this->seen,true);
+		$criteria->compare('publish_date',$this->publish_date,true);
+		$criteria->compare('status',$this->status,true);
+		$criteria->compare('category_id',$this->category_id,true);
 		$criteria->compare('order',$this->order,true);
-
+		$criteria->order = 't.order';
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
@@ -147,31 +166,32 @@ class Faq extends SortableCActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return Faq the static model class
+	 * @return News the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
 	}
 
+
 	protected function afterSave()
 	{
 		if($this->formTags && !empty($this->formTags)) {
 			if(!$this->IsNewRecord)
-				FaqTagRel::model()->deleteAll('faq_id='.$this->id);
+				NewsTagRel::model()->deleteAll('news_id='.$this->id);
 			foreach($this->formTags as $tag) {
 				$tagModel = ClassTags::model()->findByAttributes(array('title' => $tag));
 				if($tagModel) {
-					$tag_rel = new FaqTagRel();
-					$tag_rel->faq_id = $this->id;
+					$tag_rel = new NewsTagRel();
+					$tag_rel->news_id = $this->id;
 					$tag_rel->tag_id = $tagModel->id;
 					$tag_rel->save(false);
 				} else {
 					$tagModel = new ClassTags;
 					$tagModel->title = $tag;
 					$tagModel->save(false);
-					$tag_rel = new FaqTagRel();
-					$tag_rel->faq_id = $this->id;
+					$tag_rel = new NewsTagRel();
+					$tag_rel->news_id = $this->id;
 					$tag_rel->tag_id = $tagModel->id;
 					$tag_rel->save(false);
 				}
