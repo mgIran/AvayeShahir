@@ -32,7 +32,7 @@ class NewsManageController extends Controller
 				'users'=>array('admin'),
 			),
 			array('allow',
-				'actions'=>array('view'),
+				'actions'=>array('index','view'),
 				'users'=>array('*'),
 			),
 			array('deny',  // deny all users
@@ -84,10 +84,6 @@ class NewsManageController extends Controller
 			mkdir($imageDIR);
 
 		$image = array();
-
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
-
 		if(isset($_POST['News']))
 		{
 			$model->attributes=$_POST['News'];
@@ -100,13 +96,15 @@ class NewsManageController extends Controller
 					'serverName' => $file,
 				);
 			}
+			if($model->status == 'publish')
+				$model->publish_date = time();
 			$model->formTags = isset($_POST['News']['formTags'])?explode(',',$_POST['News']['formTags']):null;
 			if($model->save())
 			{
 				if ($model->image and file_exists($tmpDIR.$model->image)) {
-					$imager = new Imager();
-					$imager->resize($tmpDIR.$model->image ,$imageDIR.$model->image,200,200);
-					unlink($tmpDIR.$model->image);
+					$thumbnail = new Imager();
+					$thumbnail->createThumbnail($tmpDIR . $model->image, 200, 200, false, $imageDIR.'200x200/' . $model->image);
+					rename($tmpDIR . $model->image, $imageDIR . $model->image);
 				}
 				Yii::app()->user->setFlash('success' ,'<span class="icon-check"></span>&nbsp;&nbsp;اطلاعات با موفقیت ذخیره شد.');
 				$this->redirect(array('admin'));
@@ -162,13 +160,15 @@ class NewsManageController extends Controller
 					'serverName' => $file,
 				);
 			}
+			if($model->status == 'publish')
+				$model->publish_date = time();
 			$model->formTags = isset($_POST['News']['formTags'])?explode(',',$_POST['News']['formTags']):null;
 			if($model->save())
 			{
 				if ($model->image and file_exists($tmpDIR.$model->image)) {
-					$imager = new Imager();
-					$imager->resize($tmpDIR.$model->image ,$imageDIR.$model->image,200,200);
-					unlink($tmpDIR.$model->image);
+					$thumbnail = new Imager();
+					$thumbnail->createThumbnail($tmpDIR . $model->image, 200, 200, false, $imageDIR.'200x200/' . $model->image);
+					rename($tmpDIR . $model->image, $imageDIR . $model->image);
 				}
 				Yii::app()->user->setFlash('success' ,'<span class="icon-check"></span>&nbsp;&nbsp;اطلاعات با موفقیت ذخیره شد.');
 				$this->redirect(array('admin'));
@@ -192,7 +192,10 @@ class NewsManageController extends Controller
 		$imageDIR = Yii::getPathOfAlias("webroot") . "/uploads/news/";
 		$model = $this->loadModel($id);
 		if(file_exists($imageDIR.$model->image))
-			unlink($imageDIR.$model->image);
+		{
+			@unlink($imageDIR.$model->image);
+			@unlink($imageDIR.'200x200/'.$model->image);
+		}
 		$model->delete();
 
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
@@ -205,7 +208,14 @@ class NewsManageController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$this->actionAdmin();
+		$criteria = News::model()->getValidNews();
+		$dataProvider=new CActiveDataProvider('News',array(
+			'criteria' => $criteria,
+			'pagination' => array('pageSize' => 20)
+		));
+		$this->render('index',array(
+			'dataProvider'=>$dataProvider,
+		));
 	}
 
 	/**
@@ -274,7 +284,7 @@ class NewsManageController extends Controller
 		echo CJSON::encode($response);
 		Yii::app()->end();
 	}
-
+	
 	public function actionDeleteUpload()
 	{
 		$Dir = Yii::getPathOfAlias("webroot") . '/uploads/news/';
@@ -288,7 +298,8 @@ class NewsManageController extends Controller
 			$model = News::model()->findByAttributes(array('image' => $fileName));
 			if ($model) {
 				if (@unlink($Dir . $model->image)) {
-					$model->updateByPk($model->id, array('image' => null));
+					@unlink($Dir .'200x200/'. $model->image);
+					$model->updateByPk($model->id,array('image'=>null));
 					$response = ['state' => 'ok', 'msg' => $this->implodeErrors($model)];
 				} else
 					$response = ['state' => 'error', 'msg' => 'مشکل ایجاد شده است'];

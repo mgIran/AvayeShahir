@@ -9,6 +9,7 @@ class NewsModule extends CWebModule
 
 		// import the module-level models and components
 		$this->setImport(array(
+			'news.messages.*',
 			'news.models.*',
 			'news.components.*',
 			'courses.models.ClassTags',

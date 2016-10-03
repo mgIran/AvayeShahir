@@ -3,60 +3,57 @@
 /* @var $model News */
 
 $this->breadcrumbs=array(
-	'News'=>array('index'),
-	'Manage',
+	'نمایش لیست اخبار'=>array('index'),
+	'مدیریت',
 );
 
 $this->menu=array(
-	array('label'=>'List News', 'url'=>array('index')),
-	array('label'=>'Create News', 'url'=>array('create')),
+	array('label'=>'لیست اخبار', 'url'=>array('index')),
+	array('label'=>'لیست دسته بندی اخبار', 'url'=>array('/news/categories/index')),
+	array('label'=>'افزودن خبر', 'url'=>array('create')),
+	array('label'=>'افزودن دسته بندی', 'url'=>array('/news/categories/create')),
 );
-
-Yii::app()->clientScript->registerScript('search', "
-$('.search-button').click(function(){
-	$('.search-form').toggle();
-	return false;
-});
-$('.search-form form').submit(function(){
-	$('#news-grid').yiiGridView('update', {
-		data: $(this).serialize()
-	});
-	return false;
-});
-");
 ?>
 
-<h1>Manage News</h1>
-
-<p>
-You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
-or <b>=</b>) at the beginning of each of your search values to specify how the comparison should be done.
-</p>
-
-<?php echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); ?>
-<div class="search-form" style="display:none">
-<?php $this->renderPartial('_search',array(
-	'model'=>$model,
-)); ?>
-</div><!-- search-form -->
+<h1>مدیریت اخبار</h1>
+<? $this->renderPartial('//layouts/_flashMessage'); ?>
 
 <?php $this->widget('zii.widgets.grid.CGridView', array(
+//<?php $this->widget('ext.yiiSortableModel.widgets.SortableCGridView', array(
+//	'orderField' => 'order',
+//	'idField' => 'id',
+//	'orderUrl' => 'order',
 	'id'=>'news-grid',
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
 	'columns'=>array(
 		'id',
+//		array(
+//			'name' => 'image',
+//			'value' => 'CHtml::image(Yii::app()->baseUrl."/uploads/news/".$data->image,$data->title,array("style"=>"height:80px;width:auto"))',
+//			'filter' => false
+//		),
 		'title',
-		'summary',
-		'body',
-		'image',
+//		'summary',
+		array(
+			'name' => 'category_id',
+			'value' => '$data->category->fullTitle',
+			'filter' => CHtml::activeDropDownList($model,'category_id',
+				CHtml::listData(NewsCategories::model()->findAll(),'id','fullTitle'),array('prompt'=>'همه'))
+		),
+		array(
+			'name' => 'status',
+			'value' => '$data->statusLabel'
+		),
+		array(
+			'name' => 'create_date',
+			'value' => 'JalaliDate::date("Y/m/d - H:i",$data->create_date)'
+		),
+		array(
+			'name' => 'publish_date',
+			'value' => '$data->publish_date?JalaliDate::date("Y/m/d - H:i",$data->publish_date):"-"'
+		),
 		'seen',
-		/*
-		'publish_date',
-		'status',
-		'category_id',
-		'order',
-		*/
 		array(
 			'class'=>'CButtonColumn',
 		),

@@ -2,81 +2,114 @@
 /* @var $this NewsManageController */
 /* @var $model News */
 /* @var $form CActiveForm */
+/* @var $image [] */
 ?>
 
 <div class="form">
 
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'news-form',
-	// Please note: When you enable ajax validation, make sure the corresponding
-	// controller action is handling ajax validation correctly.
-	// There is a call to performAjaxValidation() commented in generated controller code.
-	// See class documentation of CActiveForm for details on this.
 	'enableAjaxValidation'=>false,
 )); ?>
-
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
-
-	<?php echo $form->errorSummary($model); ?>
+	<?= $this->renderPartial("//layouts/_loading");?>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'title'); ?>
-		<?php echo $form->textField($model,'title',array('size'=>60,'maxlength'=>255)); ?>
+		<?php echo $form->labelEx($model,'category_id'); ?>
+		<?php echo $form->dropDownList($model,'category_id',NewsCategories::model()->adminSortList()); ?>
+		<?php echo $form->error($model,'category_id'); ?>
+	</div>
+
+	<div class='row'>
+		<?php echo $form->labelEx($model,'image', array('class'=>'control-label')); ?>
+		<?php
+		$this->widget('ext.dropZoneUploader.dropZoneUploader', array(
+			'id' => 'uploaderFile',
+			'model' => $model,
+			'name' => 'image',
+			'maxFiles' => 1,
+			'maxFileSize' => 2, //MB
+			'url' => $this->createUrl('/news/manage/upload'),
+			'deleteUrl' => $this->createUrl('/news/manage/deleteUpload'),
+			'acceptedFiles' => '.jpeg, .jpg, .png, .gif',
+			'serverFiles' => $image,
+			'onSuccess' => '
+				var responseObj = JSON.parse(res);
+				if(responseObj.state == "ok")
+				{
+					{serverName} = responseObj.fileName;
+				}else if(responseObj.state == "error"){
+					console.log(responseObj.msg);
+				}
+		',
+		));
+		?>
+		<?php echo $form->error($model,'image'); ?>
+	</div>
+	<div class='row'>
+		<?php echo $form->labelEx($model,'title', array('class'=>'control-label')); ?>
+		<?php echo EMHelper::megaOgogo($model, 'title',array('class'=> 'span7 pull-right','maxlength'=>255)); ?>
 		<?php echo $form->error($model,'title'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'summary'); ?>
-		<?php echo $form->textField($model,'summary',array('size'=>60,'maxlength'=>2000)); ?>
+		<?php echo EMHelper::megaOgogo($model,'summary',array('rows'=>6,'style'=>'width:100%','maxlength'=>2000),'textArea'); ?>
 		<?php echo $form->error($model,'summary'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'body'); ?>
-		<?php echo $form->textArea($model,'body',array('rows'=>6, 'cols'=>50)); ?>
+		<?php
+		$this->widget("ext.ckeditor.CKEditor",array(
+			'model' => $model,
+			'attribute' => 'body',
+			'multiLanguage' => true
+		));
+		?>
 		<?php echo $form->error($model,'body'); ?>
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'image'); ?>
-		<?php echo $form->textField($model,'image',array('size'=>60,'maxlength'=>200)); ?>
-		<?php echo $form->error($model,'image'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'seen'); ?>
-		<?php echo $form->textField($model,'seen',array('size'=>60,'maxlength'=>255)); ?>
-		<?php echo $form->error($model,'seen'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'publish_date'); ?>
-		<?php echo $form->textField($model,'publish_date'); ?>
-		<?php echo $form->error($model,'publish_date'); ?>
-	</div>
-
-	<div class="row">
 		<?php echo $form->labelEx($model,'status'); ?>
-		<?php echo $form->textField($model,'status',array('size'=>7,'maxlength'=>7)); ?>
+		<?php echo $form->dropDownList($model,'status',$model->statusLabels); ?>
 		<?php echo $form->error($model,'status'); ?>
 	</div>
-
 	<div class="row">
-		<?php echo $form->labelEx($model,'category_id'); ?>
-		<?php echo $form->textField($model,'category_id',array('size'=>10,'maxlength'=>10)); ?>
-		<?php echo $form->error($model,'category_id'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'order'); ?>
-		<?php echo $form->textField($model,'order',array('size'=>10,'maxlength'=>10)); ?>
-		<?php echo $form->error($model,'order'); ?>
+		<?php echo $form->labelEx($model,'formTags'); ?>
+		<?php
+		$this->widget("ext.tagIt.tagIt",array(
+			'model' => $model,
+			'attribute' => 'formTags',
+			'suggestType' => 'json',
+			'suggestUrl' => Yii::app()->createUrl('/courses/tags/list'),
+			'data' => $model->formTags
+		));
+		?>
+		<button data-toggle="modal" data-target="#modal" class="btn btn-success btn-round btn-inverse btn-sm">
+			<i class="icon-plus icon-1x"></i>
+			&nbsp;&nbsp;
+			افزودن برچسب دلخواه
+		</button>
+		<?php echo $form->error($model,'formTags'); ?>
 	</div>
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+		<?php echo CHtml::submitButton($model->isNewRecord ? 'ثبت' : 'ذخیره',array('class' => 'btn btn-success')); ?>
 	</div>
 
 <?php $this->endWidget(); ?>
 
 </div><!-- form -->
+
+<div class="modal fade" role="dialog" id="modal">
+	<div class="modal-dialog modal-sm	">
+		<div class="modal-content">
+			<div class="modal-body">
+				<?
+				$this->renderPartial('_tagForm',array(
+					'model' => new ClassTags()
+				)); ?>
+			</div>
+		</div>
+	</div>
+</div>

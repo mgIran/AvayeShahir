@@ -10,6 +10,7 @@
  * @property string $body
  * @property string $image
  * @property string $seen
+ * @property string $create_date
  * @property string $publish_date
  * @property string $status
  * @property string $category_id
@@ -19,7 +20,7 @@
  * @property NewsCategories $category
  * @property ClassTags[] $tags
  */
-class News extends CActiveRecord
+class News extends SortableCActiveRecord
 {
 	/**
 	 * @return string the associated database table name
@@ -30,6 +31,10 @@ class News extends CActiveRecord
 	}
 
 	public $formTags=[];
+	public $statusLabels=[
+		'draft' => 'پیش نویس',
+		'publish' => 'انتشار یافته'
+	];
 
 	/**
 	 * __set
@@ -88,10 +93,12 @@ class News extends CActiveRecord
 			array('image', 'length', 'max'=>200),
 			array('status', 'length', 'max'=>7),
 			array('category_id, order', 'length', 'max'=>10),
-			array('publish_date, formTags', 'safe'),
+			array('create_date, publish_date, formTags', 'safe'),
+			array('create_date', 'default' , 'value' => time()),
+			array('seen', 'default' , 'value' => 0),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, title, summary, body, image, seen, publish_date, status, category_id, order', 'safe', 'on'=>'search'),
+			array('id, title, summary, body, image, seen, create_date, publish_date, status, category_id, order', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -114,13 +121,14 @@ class News extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'ID',
-			'title' => 'عنوان',
+			'id' => 'شناسه خبر',
+			'title' => 'عنوان خبر',
 			'summary' => 'خلاصه',
 			'body' => 'متن خبر',
 			'image' => 'تصویر',
 			'seen' => 'بازدید',
-			'publish_date' => 'تاریخ انتشار',
+			'create_date' => 'تاریخ ثبت',
+			'publish_date' => 'تاریخ آخرین انتشار',
 			'status' => 'وضعیت',
 			'category_id' => 'دسته بندی',
 			'order' => 'ترتیب',
@@ -156,7 +164,8 @@ class News extends CActiveRecord
 		$criteria->compare('status',$this->status,true);
 		$criteria->compare('category_id',$this->category_id,true);
 		$criteria->compare('order',$this->order,true);
-		$criteria->order = 't.order';
+//		$criteria->order = 't.order';
+		$criteria->order = 'create_date DESC';
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
@@ -204,5 +213,20 @@ class News extends CActiveRecord
 	{
 		$tags = CHtml::listData($this->tags,'title','title');
 		return implode(',',$tags);
+	}
+
+	public function getStatusLabel(){
+		return $this->statusLabels[$this->status];
+	}
+
+	/**
+	 * get Valid New to show
+	 * @return CDbCriteria
+	 */
+	public static function getValidNews(){
+		$criteria = new CDbCriteria();
+		$criteria->addCondition('status = "publish"');
+		$criteria->order = 'publish_date DESC';
+		return $criteria;
 	}
 }

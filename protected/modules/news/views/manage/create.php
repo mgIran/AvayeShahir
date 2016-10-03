@@ -1,18 +1,18 @@
 <?php
 /* @var $this NewsManageController */
 /* @var $model News */
+/* @var $image [] */
 
 $this->breadcrumbs=array(
-	'News'=>array('index'),
-	'Create',
+	'مدیریت اخبار'=>array('admin'),
+	'افزودن',
 );
 
 $this->menu=array(
-	array('label'=>'List News', 'url'=>array('index')),
-	array('label'=>'Manage News', 'url'=>array('admin')),
+	array('label'=>'مدیریت اخبار', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Create News</h1>
+<h1>افزودن خبر</h1>
 
-<?php $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php $this->renderPartial('_form', array('model'=>$model,'image' => $image)); ?>

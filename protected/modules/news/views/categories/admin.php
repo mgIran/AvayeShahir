@@ -8,10 +8,12 @@ $this->breadcrumbs=array(
 
 $this->menu=array(
 	array('label'=>'افزودن دسته بندی', 'url'=>array('create')),
+	array('label'=>'افزودن خبر', 'url'=>array('create')),
+	array('label'=>'مدیریت اخبار', 'url'=>array('admin')),
 );
 ?>
+<h1>مدیریت دسته بندی اخبار</h1>
 <? $this->renderPartial('//layouts/_flashMessage'); ?>
-	<h1>مدیریت دسته بندی اخبار</h1>
 
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'dataProvider'=>$model->search(),
