@@ -16,7 +16,7 @@ if($this->categorySlug == 'base')
 }
 if($this->categorySlug == 'free')
     $this->menu=array(
-	    array('label'=>'افزودن صحفه جدید', 'url'=>array('create')),
+	    array('label'=>'افزودن صفحه جدید', 'url'=>array('create')),
     );
 
 ?>

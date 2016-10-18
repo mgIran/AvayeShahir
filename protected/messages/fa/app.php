@@ -1,6 +1,6 @@
 <?php
 return array(
-    'Home' => 'صحفه اصلی',
+    'Home' => 'صفحه اصلی',
     'Courses' => 'دوره ها',
     'Course' => 'دوره',
     'Staff' => 'کارمندان',

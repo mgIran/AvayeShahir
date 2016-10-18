@@ -19,7 +19,7 @@ if($this->categorySlug == 'free')
     $this->menu=array(
         array('label'=>'مدیریت', 'url'=>array('admin')),
     );
-    $pageType = 'صحفه';
+    $pageType = 'صفحه';
 }
 
 ?>

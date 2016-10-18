@@ -27,8 +27,9 @@ $(".tab-content .tab-pane:first-child").addClass("in active");
     foreach($classTransactions as $transaction) {
         echo '<div id="tab-'.$transaction['class']->id.'" class="tab-pane fade">';
         echo '<h3>کلاس: '.$transaction['class']->title.'</h3>';
-        echo '<h5>تعداد ثبت نام: '.$transaction['dataProvider']->totalItemCount.' نفر</h5>';
-        echo '<h5>ظرفیت باقی مانده کلاس: '.($transaction['class']->capacity - $transaction['dataProvider']->totalItemCount).' نفر</h5>';
+        echo '<h5>تعداد ثبت نام: '.($transaction['class']->capacity - $transaction['class']->remainingCapacity).' نفر</h5>';
+        echo '<h5>ظرفیت باقی مانده کلاس: '.$transaction['class']->remainingCapacity.' نفر</h5>';
+        echo '<h5>تاریخ شروع ثبت نام جدید: '.JalaliDate::date('Y/m/d',$transaction['class']->startSignupDate).'</h5>';
         $this->widget('zii.widgets.grid.CGridView', array(
             'id' => "tab-grid-".$transaction['class']->id,
             'dataProvider' => $transaction['dataProvider'],

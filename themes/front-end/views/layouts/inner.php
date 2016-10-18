@@ -33,7 +33,7 @@
     $cs->registerCssFile($baseUrl.'/css/owl.carousel.css');
     $cs->registerCssFile($baseUrl.'/css/font-awesome.css');
     $cs->registerCssFile($baseUrl.'/css/svg.css');
-    $cs->registerCssFile($baseUrl.'/css/bootstrap-theme.css?2.5');
+    $cs->registerCssFile($baseUrl.'/css/bootstrap-theme.css?2.6');
     $cs->registerCssFile($baseUrl.'/css/responsive-theme.css?2.5');
     if (Yii::app()->params['default_language'] !== Yii::app()->language)
     {

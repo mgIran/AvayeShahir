@@ -34,6 +34,7 @@ $this->menu=array(
 //			'filter' => false
 //		),
 		'title',
+		'title_en',
 //		'summary',
 		array(
 			'name' => 'category_id',

@@ -8,7 +8,7 @@ $this->breadcrumbs=array(
 
 $this->menu=array(
 	array('label'=>'افزودن دسته بندی', 'url'=>array('create')),
-	array('label'=>'افزودن خبر', 'url'=>array('create')),
+	array('label'=>'افزودن خبر', 'url'=>array('manage/create')),
 	array('label'=>'مدیریت اخبار', 'url'=>array('admin')),
 );
 ?>
