@@ -240,9 +240,11 @@ header.header.scroll-mode{
     padding: 10px 0;
     float: right;
     color: #fff;
+    line-height: 30px;
 }
 .header .nav >li a{
     color: #fff;
+    line-height: 30px;
     border-radius: 2px;
     font-weight: 500;
 }
@@ -573,9 +575,13 @@ section.courses{
     height: 614px;
 }
 .courses h3{
-    color: #155ca1;
     margin: 45px 0;
-    font-weight: 600;
+    color: #155ca1;
+}
+.inner-page .courses h3{
+    font-weight: 500;
+    color: #333;
+    font-size: 16px;
 }
 .courses .course-carousel{
     position: relative;
@@ -1059,9 +1065,10 @@ section.classes .owl-prev .arrow,
     border-radius: 2px;
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
     color: #2a2a2a;
-    font-size: 20px;
+    font-size: 14px;
+    text-align: justify;
     opacity: 0.8;
-    padding: 10px 15px;
+    padding: 30px;
     position: relative;
     white-space: pre-line;
     background-color: rgba(20, 103, 183, 0.2);
@@ -1284,7 +1291,7 @@ section.classes .owl-prev .arrow,
     white-space: nowrap;
     color: #fff;
     padding: 0 20px;
-    line-height: 40px;
+    line-height: 49px;
     border-radius: 2px;
     border: none;
     text-decoration: none;
@@ -1607,7 +1614,7 @@ section.classes .owl-carousel .owl-controls .owl-nav [class*="owl-"].disabled ,
 }
 .inner-page .page-content.courses{
     margin-top: 50px;
-    min-height: 300px;
+    min-height: 700px;
 }
 .page-content.courses .basic-information{
     overflow: hidden;
@@ -2079,7 +2086,7 @@ section.classes h3{
 }
 .class .top-box h4{
     color: rgba(88, 142, 180, 1);
-    font-size: 26px;
+    font-size: 20px;
     font-weight: 500;
     line-height: 40px;
     display: block;
@@ -2129,7 +2136,7 @@ section.classes h3{
 }
 .text-lg,
 .text-lg span{
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 500;
     color: #1467b7 !important;
 }
@@ -2543,7 +2550,7 @@ ul.main-menu li > a{
     overflow: hidden;
     padding: 5px 15px;
     line-height: 25px;
-    border-right:4px double transparent;
+    /*border-right:4px double transparent;*/
     -webkit-transition: all 0.3s ease-in-out;
     -moz-transition: all 0.3s ease-in-out;
     -ms-transition: all 0.3s ease-in-out;
@@ -2608,17 +2615,17 @@ ul.main-menu.tree li.active:after,
 ul.main-menu.tree li:active:before,
 ul.main-menu.tree li:focus:before,
 ul.main-menu.tree li.active:before{
-    border-color: #2ea5ef;
+    /*border-color: #2ea5ef;*/
 }
 ul.main-menu.tree ol li:hover:before{
-    opacity: 0;
+    /*opacity: 0;*/
 }
 ul.main-menu a:hover,
 ul.main-menu a:active,
 ul.main-menu a:focus,
 ul.main-menu a.active
 {
-    border-color: #2ea5ef;
+    /*border-color: #2ea5ef;*/
     opacity: 1;
     background-color: rgba(46, 165, 239, 0.12);
 }
@@ -3191,6 +3198,14 @@ ol{
 }
 .news-list{
     margin: 50px 0;
+}
+.address{
+    color: #fff;
+    display: block;
+    margin: 0 30px 15px 0;
+    overflow: hidden;
+    font-size: 13px;
+    text-align: justify;
 }
 @media all and (min-width: 769px){
     .affix{

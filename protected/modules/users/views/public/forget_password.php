@@ -8,7 +8,7 @@
 <div class="page-content forgot">
 
     <div class="container">
-        <div class="col-lg-8 col-md-8 col-sm-10 col-xs-12 col-lg-pull-2 col-md-pull-2 col-sm-pull-1 col-lg-push-2 col-md-push-2 col-sm-push-1">
+        <div class="col-lg-8 col-md-8 col-sm-10 col-xs-12 <?= Yii::app()->language == 'fa'?"col-lg-push-2 col-md-push-2 col-sm-push-1":"col-lg-pull-2 col-md-pull-2 col-sm-pull-1" ?>">
             <ul class="nav nav-tabs">
                 <li class="active">
                     <a><?= Yii::t('app','Recover Password')?></a>
@@ -31,7 +31,7 @@
                         ?>
                     </div>
                     <div class="relative">
-                        <?php echo CHtml::ajaxSubmitButton('ارسال', Yii::app()->createUrl('/users/public/forgetPassword'), array(
+                        <?php echo CHtml::ajaxSubmitButton(Yii::t('app',"Send"), Yii::app()->createUrl('/users/public/forgetPassword'), array(
                             'type'=>'POST',
                             'dataType'=>'JSON',
                             'data'=>"js:$('#forget-password-form').serialize()",
