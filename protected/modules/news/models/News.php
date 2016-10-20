@@ -19,8 +19,9 @@
  * The followings are the available model relations:
  * @property NewsCategories $category
  * @property ClassTags[] $tags
+ * @property ClassTagRel[] $tagsRel
  */
-class News extends SortableCActiveRecord
+class News extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
@@ -111,6 +112,7 @@ class News extends SortableCActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'category' => array(self::BELONGS_TO, 'NewsCategories', 'category_id'),
+			'tagsRel' => array(self::HAS_MANY, 'NewsTagRel', 'news_id'),
 			'tags' => array(self::MANY_MANY, 'ClassTags', '{{news_tag_rel}}(news_id,tag_id)'),
 		);
 	}
@@ -226,8 +228,8 @@ class News extends SortableCActiveRecord
 	 */
 	public static function getValidNews(){
 		$criteria = new CDbCriteria();
-		$criteria->addCondition('status = "publish"');
-		$criteria->order = 'publish_date DESC';
+		$criteria->addCondition('t.status = "publish"');
+		$criteria->order = 't.publish_date DESC';
 		return $criteria;
 	}
 }

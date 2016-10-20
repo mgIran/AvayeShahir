@@ -1,5 +1,6 @@
 <?
 /* @var $courses Courses[] */
+/* @var $newsProvider CActiveDataProvider */
 /* @var $classes Classes[] */
 /* @var $personnel Personnel[] */
 /* @var $teachers Users[] */
@@ -114,6 +115,41 @@ Yii::app()->clientScript->registerScriptFile($baseUrl.'/js/jquery.mousewheel.min
         </div>
     </div>
 </section>
+<?php
+if($newsProvider->totalItemCount):
+?>
+<section class="news-section" id="news">
+    <div class="container">
+        <h3 class="yekan-text"><?= Yii::t('app' ,'News') ?></h3>
+        <div class="news-container">
+            <?php
+            $this->widget("zii.widgets.CListView",array(
+                'id' => 'news-list',
+                'dataProvider' => $newsProvider,
+                'itemView' => 'news.views.manage._view',
+                'template' => '{items}',
+            ));
+            ?>
+            <?php
+            if(News::model()->count(News::getValidNews()) > 4):
+            ?>
+                <a class="more-btn" href="<?= $this->createUrl('/news') ?>">
+                <?= Yii::t('app','See More') ?>
+                <div class="bounces">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </a>
+            <?php
+            endif;
+            ?>
+        </div>
+    </div>
+</section>
+<?php
+endif;
+?>
 <section class="signup" id="signup">
     <div class="mask"></div>
     <?= $this->renderPartial("//layouts/_loading");?>
@@ -601,11 +637,12 @@ endif;
         ?>
     </div>
 </section>
+
 <section class="about" id="about">
     <div class="container">
         <h3 class="yekan-text"><?= Yii::t('app','About Avaye Shahir') ?></h3>
         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 text-container">
-                <div class="text form-group">
+                <div class="text">
 <!--                --><?//
 //                $aboutText->summary = str_ireplace('<br />','#br#',$aboutText->summary);
 //                $text = strip_tags($aboutText->summary);

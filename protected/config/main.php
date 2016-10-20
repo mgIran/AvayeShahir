@@ -113,6 +113,9 @@ return array(
 			'rules'=>array(
                 '<action:(terms|forum|guidance|FAQ)>' => 'site/<action>',
 				'gallery' => 'gallery/manage/index',
+				'news/tag/<id:\d+>/<title:(.*)>' => 'news/manage/tag',
+				'news/tag<id:\d+>' => 'news/manage/tag',
+				'news/tag' => 'news/manage/tag',
 				'teachers/<id:\d+>/<title:(.*)>' => 'users/teachers/view',
 				'<action:(login|logout|register|dashboard)>' => 'users/public/<action>',
                 '<module:\w+>/<id:\d+>/<title:(.*)>'=>'<module>/manage/view',
@@ -129,6 +132,7 @@ return array(
 				'<module:\w+>/<controller:\w+>/<id:\d+>'=>'<module>/<controller>/view',
 				'<module:\w+>/<title:(.*)>/<id:\d+>/*'=>'<module>/manage/view',
 				'<module:\w+>/<title:(.*)>/<id:\d+>'=>'<module>/manage/view',
+				'<module:\w+>/'=>'<module>/manage/index',
             ),
 		),
 

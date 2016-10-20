@@ -310,3 +310,73 @@ section.classes .owl-prev .arrow,
     width: 0;
     z-index: 2;
 }
+.news-item .news-detail {
+    float: left;
+    padding-left: 165px;
+    padding-right: 15px;
+}
+.news-item .pic {
+    float: left;
+    left: 0;
+    right: auto;
+}
+.news-item .date {
+    left: auto;
+    right: 15px;
+}
+.news-view .news-details > span{
+    margin-right: 5px;
+    margin-left: 11px;
+}
+.news-view .news-details span,
+.news-view .news-details > a{
+    float: left;
+}
+.news-view .clock-icon{
+    margin-right: 8px;
+    margin-left: 0;
+}
+.news-container .more-btn,
+.news-container .more-btn > .bounces{
+    text-align: right;
+}
+.news-container .more-btn > .bounces > span{
+    float: right;
+}
+.share-icons{
+    margin-left: 5px;
+}
+
+.news-item:hover .paragraph-end{
+    background: linear-gradient(to right, rgba(233, 233, 233, 0), rgba(233, 233, 233, 1)) repeat scroll 0 0 rgba(0, 0, 0, 0);
+}
+
+ul.main-menu li > a{
+    border-right:none;
+    border-left:4px double transparent;
+}
+ul.main-menu ol {
+    padding-right: 0;
+    padding-left: 15px;
+}
+
+.main-menu.tree ol li:after{
+    border-right:none;
+    border-left:1px solid #bbb;
+    top:0;
+    right: auto;
+    left: 0;
+}
+.main-menu.tree ol li:before{
+    right: auto;
+    left: 0;
+}
+
+
+
+@media (max-width: 420px) {
+    .news-item .news-detail{
+        padding-right: 15px;
+        padding-left: 115px;
+    }
+}

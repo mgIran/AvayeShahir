@@ -47,8 +47,22 @@ class NewsCategoriesManageController extends Controller
 	 */
 	public function actionView($id)
 	{
+		Yii::app()->theme = 'front-end';
+		$this->layout = '//layouts/inner';
+
+		$model = $this->loadModel($id);
+		$this->keywords = 'آوای شهیر,اخبار,دسته بندی اخبار,دسته بندی '.$model->title.','.$model->title;
+		$this->pageTitle = $model->title;
+
+		// get latest news
+		$criteria = News::getValidNews();
+		$criteria->addInCondition('category_id',$model->getCategoryChildes());
+		$dataProvider = new CActiveDataProvider("News",array(
+			'criteria' => $criteria
+		));
 		$this->render('view',array(
-			'model'=>$this->loadModel($id),
+			'model' => $model,
+			'dataProvider' => $dataProvider
 		));
 	}
 

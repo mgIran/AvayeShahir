@@ -32,7 +32,7 @@ class NewsManageController extends Controller
 				'users'=>array('admin'),
 			),
 			array('allow',
-				'actions'=>array('index','view'),
+				'actions'=>array('index','tag','view'),
 				'users'=>array('*'),
 			),
 			array('deny',  // deny all users
@@ -61,9 +61,47 @@ class NewsManageController extends Controller
 		$this->keywords = $model->getKeywords();
 		$this->description = mb_substr(strip_tags($model->summary),0,160,'UTF-8');
 		$this->pageTitle = $model->title;
+		// increase seen counter
 		Yii::app()->db->createCommand()->update('{{news}}',array('seen'=>((int)$model->seen+1)),'id = :id',array(":id"=>$model->id));
+
+		// get latest news
+		$criteria = News::getValidNews();
+		$criteria->addCondition('id <> :id');
+		$criteria->params = array(':id' => $id);
+		$criteria->limit = 4;
+		$latestNewsProvider = new CActiveDataProvider("News",array(
+			'criteria' => $criteria
+		));
 		$this->render('view',array(
 			'model'=>$model,
+			'latestNewsProvider' => $latestNewsProvider
+		));
+	}
+
+	/**
+	 * Displays a particular model.
+	 * @param integer $id the ID of the model to be displayed
+	 */
+	public function actionTag($id)
+	{
+		Yii::app()->theme = 'front-end';
+		$this->layout = '//layouts/inner';
+
+		$model = ClassTags::model()->findByPk($id);
+		$this->keywords = 'آوای شهیر,برچسب اخبار '.$model->title.',برچسب '.$model->title.','.$model->title;
+		$this->pageTitle = 'برچسب '.$model->title;
+
+		// get latest news
+		$criteria = News::getValidNews();
+		$criteria->together = true;
+		$criteria->compare('tagsRel.tag_id',$model->id);
+		$criteria->with[] = 'tagsRel';
+		$dataProvider = new CActiveDataProvider("News",array(
+			'criteria' => $criteria
+		));
+		$this->render('tags',array(
+			'model' => $model,
+			'dataProvider' => $dataProvider
 		));
 	}
 
@@ -160,7 +198,7 @@ class NewsManageController extends Controller
 					'serverName' => $file,
 				);
 			}
-			if($model->status == 'publish')
+			if($model->status == 'publish' && !$model->publish_date)
 				$model->publish_date = time();
 			$model->formTags = isset($_POST['News']['formTags'])?explode(',',$_POST['News']['formTags']):null;
 			if($model->save())
@@ -208,10 +246,12 @@ class NewsManageController extends Controller
 	 */
 	public function actionIndex()
 	{
+		Yii::app()->theme = 'front-end';
+		$this->layout = '//layouts/inner';
 		$criteria = News::model()->getValidNews();
 		$dataProvider=new CActiveDataProvider('News',array(
 			'criteria' => $criteria,
-			'pagination' => array('pageSize' => 20)
+			'pagination' => false
 		));
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,

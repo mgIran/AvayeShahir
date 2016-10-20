@@ -31,6 +31,7 @@ class SiteController extends Controller
 	{
 		Yii::app()->theme = 'front-end';
 		Yii::import('courses.models.*');
+		Yii::import('news.models.*');
 		Yii::import('personnel.models.*');
 		Yii::import('users.models.*');
 		Yii::import('pages.models.*');
@@ -40,6 +41,7 @@ class SiteController extends Controller
 				$this->message = CHtml::encode(SiteSetting::model()->findByAttributes(array('name' => 'message'))->value);
 			else
 				$this->message = CHtml::encode(SiteSetting::model()->findByAttributes(array('name' => 'message_en'))->value);
+
 		$criteria = new CDbCriteria();
 		$criteria->order = 't.order';
 		$courses = Courses::model()->findAll($criteria);
@@ -49,6 +51,7 @@ class SiteController extends Controller
 			'with' => array('teacherDetails'),
 			'order' => 'teacherDetails.name'
 		));
+
 		$aboutText = Pages::model()->findByPk(12);
 		$termsText = Pages::model()->findByPk(5);
 
@@ -62,8 +65,15 @@ class SiteController extends Controller
 				$classes[$course->id]['objects'] = Classes::model()->findAll($criteria);
 			}
 		}
+		$criteria = News::getValidNews();
+		$criteria->limit = 4;
+		$newsProvider = new CActiveDataProvider("News",array(
+			'criteria' => $criteria,
+			'pagination' => array('pageSize' => 4)
+		));
 		$this->render('index' ,array(
 			'courses' => $courses ,
+			'newsProvider' => $newsProvider,
 			'classes' => $classes ,
 			'personnel' => $personnel ,
 			'teachers' => $teachers ,

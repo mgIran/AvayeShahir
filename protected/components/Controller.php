@@ -114,7 +114,7 @@ class Controller extends CController
                     'items' => array(
                         array('label' => 'مدیریت' ,'url' => Yii::app()->createUrl('/news/manage/admin/')) ,
                         array('label' => ' افزودن خبر' ,'url' => Yii::app()->createUrl('/news/manage/create/')) ,
-                        array('label' => 'مدیریت دسته بندی ها' ,'url' => Yii::app()->createUrl('/news/categories/admin/')) ,
+                        array('label' => 'مدیریت دسته بندی ها' ,'url' => Yii::app()->createUrl('/news/category/admin/')) ,
                         array('label' => 'کلمات کلیدی' ,'url' => Yii::app()->createUrl('/courses/tags/admin/'))
                     )
                 ) ,

@@ -10,7 +10,7 @@ $fileDir = Yii::getPathOfAlias("webroot").'/uploads/classCategoryFiles/';
 		<h2><?= $model->title ?></h2>
 		<div class="details">
 			<span><?= Yii::t('app','Views') ?></span>
-			<span><?= $model->seen ?></span>
+			<span><?= Yii::app()->language == 'fa'?Controller::parseNumbers($model->seen):$model->seen ?></span>
 			<span class="svg svg-eye pull-right"></span>
 		</div>
 	</div>

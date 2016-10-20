@@ -66,9 +66,8 @@ $action = $this->action->id;
                 // @todo after user login change login and register buttons
                 ?>
                 <li class="pull-left">
-                    <a href="<?= Yii::app()->createUrl('logout') ?>"
+                    <a class="red-link" href="<?= Yii::app()->createUrl('logout') ?>"
                        title="<?= Yii::t('app', 'Log Out'); ?>">
-                        <span class="icon-exit"></span>
                         <?= Yii::t('app', 'Log Out'); ?>
                     </a>
                 </li>

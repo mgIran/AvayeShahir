@@ -1,12 +1,13 @@
 <?php
-/* @var $this NewsManageController */
+/* @var $this NewsCategoriesManageController */
+/* @var $model NewsCategories */
 /* @var $dataProvider CActiveDataProvider */
 ?>
 
 <div class="page-title-container courses personnel-page-header news-page-header ">
 	<div class="mask"></div>
 	<div class="container">
-		<h2><?= Yii::t('app','News') ?></h2>
+		<h2><?= Yii::t('app','{category} News',array('{category}'=>$model->title)) ?></h2>
 		<div class="details">
 			<span><?= Yii::t('app','Number of Entries') ?>:&nbsp;</span>
 			<span><?= Yii::app()->language == 'fa'?Controller::parseNumbers($dataProvider->totalItemCount):$dataProvider->totalItemCount ?>&nbsp;<?= $dataProvider->totalItemCount>1?Yii::t('app','entries'):Yii::t('app','entry') ?></span>
@@ -21,7 +22,7 @@
 				<h3><?= Yii::t('app','Category') ?></h3>
 				<ul class="main-menu nav nav-stacked tree">
 					<?php
-					NewsCategories::getHtmlSortList();
+					NewsCategories::getHtmlSortList(Null,$model->id);
 					?>
 				</ul>
 			</div>

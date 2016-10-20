@@ -60,7 +60,8 @@ root {
 }
 .comments-list li .comment-name{
     color: #13aaf1;
-    font-size: 22px;
+    font-size: 18px;
+    font-weight: 600;
 }
 .comments-list li .comment-avatar{
     display: inline-block;
@@ -107,15 +108,16 @@ root {
     white-space: pre-line;
     -ms-text-align-last: auto;
     text-align-last: auto;
+    overflow: hidden;
 }
 p.rtl {
     direction: rtl;
-    text-align: right;
+    text-align: justify;
 }
 
 p.ltr {
     direction: ltr;
-    text-align: left;
+    text-align: justify;
 }
 .comment-form-outer{
     position: relative;

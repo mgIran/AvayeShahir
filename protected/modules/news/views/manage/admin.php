@@ -9,9 +9,9 @@ $this->breadcrumbs=array(
 
 $this->menu=array(
 	array('label'=>'لیست اخبار', 'url'=>array('index')),
-	array('label'=>'لیست دسته بندی اخبار', 'url'=>array('/news/categories/index')),
+	array('label'=>'لیست دسته بندی اخبار', 'url'=>array('/news/category/admin')),
 	array('label'=>'افزودن خبر', 'url'=>array('create')),
-	array('label'=>'افزودن دسته بندی', 'url'=>array('/news/categories/create')),
+	array('label'=>'افزودن دسته بندی', 'url'=>array('/news/category/create')),
 );
 ?>
 

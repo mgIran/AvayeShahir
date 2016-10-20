@@ -75,13 +75,11 @@
         <div class="info-box">
             <div class="col-md-6">
                 <p>
-                    <i class="map-point"></i><span>
-                        تهران: خیابان شهید بهشتی، خ سرافراز (قائم مقام فراهانی)، کوچه دهم، پلاک 9، واحد 1
-</span>
+                    <i class="map-point"></i><span><?= Yii::t("app",'Unit 1, No 9, 10th Street, Sarafraz Street, Beheshti Avenue, Tehran, Iran.') ?></span>
                 </p>
                 <p>
                     <i class="phone"></i>
-                    <span class="phone-number">021 88730902 - 021 88736668 - 021 88502049</span>
+                    <span class="phone-number"><?= Yii::app()->language == 'fa'?Controller::parseNumbers("021 88730902 - 021 88736668 - 021 88502049"):'021 88730902 - 021 88736668 - 021 88502049' ?></span>
                 </p>
                 <p>
                     <i class="email"></i>

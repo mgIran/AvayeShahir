@@ -222,6 +222,6 @@ class Users extends CActiveRecord
                 $model->save(false);
             }
         }
-        return true;
+        parent::afterSave();
     }
 }

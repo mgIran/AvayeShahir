@@ -56,7 +56,7 @@ class NewsCategories extends CActiveRecord
 				'class' => 'ext.EasyMultiLanguage.EasyMultiLanguageBehavior',
 				// @todo Please change those attributes that should be translated.
 				'translated_attributes' => array('title'),
-				'admin_routes' => array('news/categories/admin', 'news/categories/update', 'news/categories/delete', 'news/categories/create'),
+				'admin_routes' => array('news/category/admin', 'news/category/update', 'news/category/delete', 'news/category/create'),
 				//
 				'languages' => Yii::app()->params['languages'],
 				'default_language' => Yii::app()->params['default_language'],
@@ -201,7 +201,7 @@ class NewsCategories extends CActiveRecord
 		return CHtml::listData($list, 'id', 'fullTitle');
 	}
 
-	public function getParents( $id = NULL )
+	public function getParents( $id = NULL ,$title = 'fullTitle')
 	{
 		if ($id)
 			$parents = $this->findAll('parent_id = :id order by title', array(':id' => $id));
@@ -211,7 +211,7 @@ class NewsCategories extends CActiveRecord
 		foreach ($parents as $parent) {
 			array_push($list, $parent);
 		}
-		return CHtml::listData($list, 'id', 'fullTitle');
+		return CHtml::listData($list, 'id', $title);
 	}
 
 	public function getFullTitle()
@@ -237,7 +237,7 @@ class NewsCategories extends CActiveRecord
 	protected function afterSave()
 	{
 		$this->updatePath($this->id);
-		return true;
+		parent::afterSave();
 	}
 
 	public function getCategoryChildes($id = null, $withSelf = true, $returnType='array'){
@@ -268,5 +268,25 @@ class NewsCategories extends CActiveRecord
 		}
 		foreach ($model->childes as $child)
 			$this->updatePath($child->id);
+	}
+
+
+	public static function getHtmlSortList($categoryID=null,$activeID=Null)
+	{
+		foreach (NewsCategories::model()->getParents($categoryID,'title') as $id => $title){
+			echo '<li class="'.($activeID == $id?'active':'').'" ><a href="'.Yii::app()->createUrl('/news/category/'.$id.'/'.urlencode($title)).'" >'.$title.'&nbsp;&nbsp;<small>('.self::model()->countNews($id).')</small></a></li>';
+			if(NewsCategories::model()->count('parent_id = :id',array(':id'=>$id))) {
+				echo '<ol>';
+				self::getHtmlSortList($id, $activeID);
+				echo '</ol>';
+			}
+		}
+	}
+
+	public function countNews($id = NULL)
+	{
+		$criteria = News::getValidNews();
+		$criteria->addInCondition('category_id',NewsCategories::model()->getCategoryChildes($id));
+		return News::model()->count($criteria);
 	}
 }

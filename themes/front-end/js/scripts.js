@@ -1,4 +1,5 @@
 var $body = $("body");
+var $window = $(window);
 $(function() {
     $.material.init();
     // fade out alert messages
@@ -30,10 +31,23 @@ $(function() {
         template : '<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner large"></div></div>'
     });
 
+    $(".auto-select").focus(function () {
+        $(this).select();
+    }).click(function () {
+        $(this).select();
+    });
+    
     $body.on('click','.navTrigger',function(){
         $(this).toggleClass("clicked");
         $(this).find('.lines').toggleClass("close");
         $("html,body").toggleClass("overflow");
+    });
+
+    var $affix = $('.affix-top');
+    $affix.width($affix.parents('[class*="col-"]').width());
+    $window.resize(function () {
+        var $affix = $('.affix-top');
+        $affix.width($affix.parents('[class*="col-"]').width());
     });
 });
 
