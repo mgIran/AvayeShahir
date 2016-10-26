@@ -35,21 +35,32 @@
             <div class="news-pic">
                 <img src="<?= Yii::app()->baseUrl.'/uploads/news/'.$model->image ?>" alt="<?= $model->title ?>">
             </div>
+            <?php
+            if($model->summary):
+            ?>
             <div class="news-summery text-justify well"><?= $model->summary ?></div>
+            <?php
+            endif;
+            ?>
             <div class="news-text"><?= $model->body ?></div>
             <!-- END OF NEWS CONTENT -->
 
 
-
+            <?php
+            if($model->tags):
+            ?>
             <!-- NEWS META DATA : TAGS -->
             <div class="news-tags">
                 <h5><?= Yii::t('app','Tags') ?></h5>
                 <?php
                 foreach ($model->tags as $tag)
-                    echo CHtml::link($tag->title,array('/news/tag/'.$tag->id.'/'.urlencode($tag->title)),array('class'=>'label label-blue'));
+                    if($tag->title && !empty($tag->title))
+                        echo CHtml::link($tag->title,array('/news/tag/'.$tag->id.'/'.urlencode($tag->title)),array('class'=>'label label-blue'));
                 ?>
             </div>
-
+            <?php
+            endif;
+            ?>
             <!-- NEWS META DATA : SOCIAL MEDIA -->
             <div class="overflow-fix">
                 <div class="news-share pull-right">
@@ -75,6 +86,9 @@
                 NewsCategories::getHtmlSortList(Null,$model->category->id);
                 ?>
             </ul>
+            <?php
+            if($latestNewsProvider->totalItemCount):
+            ?>
             <h3><?= Yii::t('app','Latest News') ?></h3>
             <div class="news-container">
                 <?php
@@ -101,6 +115,9 @@
                 endif;
                 ?>
             </div>
+            <?php
+            endif;
+            ?>
         </div>
     </div>
 </div>

@@ -48,6 +48,9 @@ body{
     overflow-y: auto;
     overflow-x: hidden;
 }
+p{
+    font-weight: 400;
+}
 /*********************** LOADING **********************/
 .loading-container{
     position: absolute;
@@ -666,6 +669,7 @@ section.classes .owl-controls .owl-nav .owl-prev,
     overflow: hidden;
     text-align: justify;
     color: #333;
+    font-weight: 400;
 }
 .courses .course-detail > p.text .paragraph-end{
     height: 20px;
@@ -1073,11 +1077,15 @@ section.classes .owl-prev .arrow,
     white-space: pre-line;
     background-color: rgba(20, 103, 183, 0.2);
     border: 1px solid #1467b7;
+    font-weight: 400;
 }
 .message-box .message .close{
     position: absolute;
     top: 10px;
     left: 15px;
+}
+.comments-list p{
+    font-weight: 400 !important;
 }
 .about{
     position: relative;
@@ -1729,6 +1737,7 @@ section.classes .owl-carousel .owl-controls .owl-nav [class*="owl-"].disabled ,
     -webkit-box-shadow: 0 0 8px #d4dee8;
     -moz-box-shadow: 0 0 8px #d4dee8;
     box-shadow: 0 0 8px #d4dee8;
+    font-weight: 400;
     -webkit-transition: all 0.5s ease-in-out; -moz-transition: all 0.5s ease-in-out; -ms-transition: all 0.5s ease-in-out; -o-transition: all 0.5s ease-in-out; transition: all 0.5s ease-in-out;
 }
 .page-content.courses .files .file > a,
@@ -2130,9 +2139,13 @@ section.classes h3{
     width: 100%;
     display: block;
 }
+.full span{
+    color: #555;
+    font-weight: 400;
+}
 .full span:first-of-type{
     color: #555;
-    font-weight: 500;
+    font-weight: 500 !important;
 }
 .text-lg,
 .text-lg span{
@@ -2533,9 +2546,9 @@ ul.main-menu > li > a {
     margin-bottom: 5px;
     display: block;
     overflow: hidden;
-    font-size: 18px;
+    font-size: 16px;
     color: #111111;
-    font-weight:400;
+    font-weight:500;
 }
 ul.main-menu > li a{
     padding: 5px 15px;
@@ -2548,8 +2561,8 @@ ul.main-menu li > a{
     color: #111;
     display: block;
     overflow: hidden;
-    padding: 5px 15px;
-    line-height: 25px;
+    padding: 8px 15px;
+    line-height: 22px;
     /*border-right:4px double transparent;*/
     -webkit-transition: all 0.3s ease-in-out;
     -moz-transition: all 0.3s ease-in-out;

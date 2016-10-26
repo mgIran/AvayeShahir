@@ -187,7 +187,7 @@ class EMHelper
         } elseif (isset(Yii::app()->request->cookies['_language'])) {
             $cookie = Yii::app()->request->cookies['_language'];
             if (key_exists($cookie->value, Yii::app()->params['languages']))
-                Yii::app()->language = $cookie;
+                Yii::app()->language = $cookie->value;
         }
     }
 

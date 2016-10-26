@@ -113,8 +113,10 @@ return array(
 			'rules'=>array(
                 '<action:(terms|forum|guidance|FAQ)>' => 'site/<action>',
 				'gallery' => 'gallery/manage/index',
+				'news/category/<id:\d+>/<title:(.*)>' => 'news/category/view',
+				'news/category/<id:\d+>' => 'news/category/view',
 				'news/tag/<id:\d+>/<title:(.*)>' => 'news/manage/tag',
-				'news/tag<id:\d+>' => 'news/manage/tag',
+				'news/tag/<id:\d+>' => 'news/manage/tag',
 				'news/tag' => 'news/manage/tag',
 				'teachers/<id:\d+>/<title:(.*)>' => 'users/teachers/view',
 				'<action:(login|logout|register|dashboard)>' => 'users/public/<action>',
