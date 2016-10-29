@@ -14,7 +14,7 @@
         </div>
     </div>
 </div>
-<div class="page-content courses">
+<div class="page-content courses news-page-content">
     <div class="container">
         <div class="news-view col-lg-8 col-md-8 col-sm-12 col-xs-12">
             <h2><?= $model->title ?></h2>

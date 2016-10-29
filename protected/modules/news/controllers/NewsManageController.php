@@ -70,7 +70,8 @@ class NewsManageController extends Controller
 		$criteria->params = array(':id' => $id);
 		$criteria->limit = 4;
 		$latestNewsProvider = new CActiveDataProvider("News",array(
-			'criteria' => $criteria
+			'criteria' => $criteria,
+			'pagination' => array('pageSize'=>6)
 		));
 		$this->render('view',array(
 			'model'=>$model,
