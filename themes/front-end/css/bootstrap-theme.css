@@ -46,7 +46,7 @@ html{
 body{
     background: #fff;
     overflow-y: auto;
-    overflow-x: hidden;
+    overflow-x: hidden !important;
 }
 p{
     font-weight: 400;
@@ -1991,6 +1991,10 @@ span.navTrigger {
 .category-show .tooltip-inner{
     min-width: 100% !important;
     max-width: 800px !important;
+}
+.tooltip-inner{
+    line-height: 22px;
+    text-align: justify;
 }
 
 #message-modal.modal,
