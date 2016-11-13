@@ -408,7 +408,7 @@
         font-size: 1em;
     }
 }
-@media (min-width: 992px) and (max-width: 1200px) {
+@media (min-width: 768px) and (max-width: 1200px) {
     .news-item .pic{
         width: 100px;
         height: 100px;
@@ -419,6 +419,9 @@
     }
     .news-detail a > p{
         height: 26px;
+    }
+    .news-item .news-detail h3{
+        padding-left:0;
     }
     .news-detail .date{
         display: none;
