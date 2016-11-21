@@ -1998,6 +1998,11 @@ span.navTrigger {
     max-width: 800px !important;
 }
 
+.tooltip-inner{
+    text-align: justify;
+    line-height: 22px;
+}
+
 #message-modal.modal,
 #terms-modal.modal{
     background-color: rgba(0,0,0,0.7)
