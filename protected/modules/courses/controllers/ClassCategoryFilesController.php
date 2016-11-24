@@ -27,15 +27,15 @@ class ClassCategoryFilesController extends Controller
 	public function accessRules()
 	{
 		return array(
-				array(
-						'allow',  // allow all users to perform 'index' and 'view' actions
-						'actions' => array('index', 'create', 'update', 'delete', 'upload', 'deleteUpload' ,'order'),
-						'roles' => array('admin'),
-				),
-				array(
-						'deny',  // deny all users
-						'users' => array('*'),
-				),
+			array(
+				'allow',  // allow all users to perform 'index' and 'view' actions
+				'actions' => array('index', 'create', 'update', 'delete', 'upload', 'deleteUpload', 'uploadImage', 'deleteUploadImage' ,'order'),
+				'roles' => array('admin'),
+			),
+			array(
+				'deny',  // deny all users
+				'users' => array('*'),
+			),
 		);
 	}
 
@@ -185,6 +185,55 @@ class ClassCategoryFilesController extends Controller
 		{
 			Yii::app()->user->setFlash('upload-failed', 'در ثبت اطلاعات خطایی رخ داده است! لطفا مجددا تلاش کنید.');
 			$this->redirect(array('/courses/categories/update/id/'.$model->category_id.'/step/2'));
+		}
+	}
+
+
+	public function actionUploadImage()
+	{
+		$_POST = CJSON::decode($_POST['data']);
+		$tempDir = Yii::getPathOfAlias("webroot") . '/uploads/fileImages';
+
+		if (!is_dir($tempDir))
+			mkdir($tempDir);
+		if (isset($_FILES)) {
+			$file = $_FILES['image'];
+			$ext = pathinfo($file['name'], PATHINFO_EXTENSION);
+			$file['name'] = Controller::generateRandomString(5) . time();
+			while (file_exists($tempDir . DIRECTORY_SEPARATOR . $file['name']))
+				$file['name'] = Controller::generateRandomString(5) . time();
+			$file['name'] = $file['name'] . '.' . $ext;
+			$model = ClassCategoryFiles::model()->findByPk((int)$_POST['id']);
+			if ($model && move_uploaded_file($file['tmp_name'], $tempDir . DIRECTORY_SEPARATOR . strip_tags($file['name']))){
+				ClassCategoryFiles::model()->updateByPk($model->id,array('image'=> strip_tags($file['name'])));
+				$response = ['state' => 'ok', 'fileName' => CHtml::encode($file['name'])];
+			}
+			else
+				$response = ['state' => 'error', 'msg' => 'فایل آپلود نشد.'];
+		} else
+			$response = ['state' => 'error', 'msg' => 'فایلی ارسال نشده است.'];
+		echo CJSON::encode($response);
+		Yii::app()->end();
+	}
+
+	public function actionDeleteUploadImage()
+	{
+		$Dir = Yii::getPathOfAlias("webroot") . '/uploads/fileImages/';
+
+		if (isset($_POST['fileName'])) {
+
+			$fileName = $_POST['fileName'];
+			$model = ClassCategoryFiles::model()->findByAttributes(array('image' => $fileName));
+			if ($model) {
+				if (@unlink($Dir . $model->image)) {
+					$model->updateByPk($model->id, array('image' => null));
+					$response = ['state' => 'ok', 'msg' => $this->implodeErrors($model)];
+				} else
+					$response = ['state' => 'error', 'msg' => 'مشکل ایجاد شده است'];
+			}else
+				$response = ['state' => 'error', 'msg' => 'مشکل ایجاد شده است'];
+			echo CJSON::encode($response);
+			Yii::app()->end();
 		}
 	}
 }

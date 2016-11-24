@@ -57,6 +57,14 @@ echo CHtml::hiddenField('ClassCategoryFileLinks[category_id]',$model->id);
 		<?php echo $form->error($fileLinkModel,'link'); ?>
 	</div>
 
+	<div class='row'>
+		<?php echo $form->labelEx($fileLinkModel,'link_size', array('class'=>'control-label')); ?>
+		<?php echo $form->textField($fileLinkModel,'link_size', array('size'=>20,'placeholder' => 'نمونه: 15MB یا 500KB'))?>
+		<span class="clearfix"></span>
+		<span class="description">B: بایت, KB: کیلوبایت, MB: مگابایت</span>
+		<?php echo $form->error($fileLinkModel,'link_size'); ?>
+	</div>
+
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'ادامه' : 'ذخیره',array('class'=>'btn btn-success')); ?>
 	</div>

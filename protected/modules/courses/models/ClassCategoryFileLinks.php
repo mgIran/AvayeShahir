@@ -8,9 +8,11 @@
  * @property string $title
  * @property string $summary
  * @property string $link
+ * @property string $image
  * @property string $file_type
  * @property string $category_id
  * @property string $order
+ * @property string $link_size
  *
  * The followings are the available model relations:
  * @property ClassCategories $category
@@ -61,17 +63,17 @@ class ClassCategoryFileLinks extends SortableCActiveRecord
 	public function behaviors()
 	{
 		return array(
-				'EasyMultiLanguage'=>array(
-						'class' => 'ext.EasyMultiLanguage.EasyMultiLanguageBehavior',
-						// @todo Please change those attributes that should be translated.
-						'translated_attributes' => array('title' ,'summary'),
-						// @todo Please add admin actions
-						'admin_routes' => array('courses/links/create','courses/links/update','courses/links/admin','courses/links/delete','courses/categories/update'),
-						//
-						'languages' => Yii::app()->params['languages'],
-						'default_language' => Yii::app()->params['default_language'],
-						'translations_table' => 'ym_translations',
-				),
+			'EasyMultiLanguage'=>array(
+				'class' => 'ext.EasyMultiLanguage.EasyMultiLanguageBehavior',
+				// @todo Please change those attributes that should be translated.
+				'translated_attributes' => array('title' ,'summary'),
+				// @todo Please add admin actions
+				'admin_routes' => array('courses/links/create','courses/links/update','courses/links/admin','courses/links/delete','courses/categories/update'),
+				//
+				'languages' => Yii::app()->params['languages'],
+				'default_language' => Yii::app()->params['default_language'],
+				'translations_table' => 'ym_translations',
+			),
 		);
 	}
 
@@ -86,9 +88,11 @@ class ClassCategoryFileLinks extends SortableCActiveRecord
 			array('title, link, file_type, category_id', 'required'),
 			array('title', 'length', 'max'=>255),
 			array('file_type', 'length', 'max'=>50),
-			array('link', 'length', 'max'=>500),
+			array('link, image', 'length', 'max'=>500),
 			array('category_id', 'length', 'max'=>10),
+			array('link_size', 'length', 'max'=>15),
 			//array('file_type', 'checkFileType'),
+			array('title, summary, link_size', 'filter', 'filter'=>'strip_tags'),
 			array('summary', 'safe'),
 
 			// The following rule is used by search().
@@ -125,9 +129,11 @@ class ClassCategoryFileLinks extends SortableCActiveRecord
 			'title_en' => 'عنوان انگلیسی',
 			'summary' => 'توضیحات',
 			'summary_en' => 'توضیحات انگلیسی',
+			'image' => 'تصویر',
 			'link' => 'لینک فایل',
 			'file_type' => 'نوع فایل',
 			'category_id' => 'گروه',
+			'link_size' => 'حجم فایل',
 			'order' => 'ترتیب',
 		);
 	}

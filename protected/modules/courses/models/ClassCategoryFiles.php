@@ -7,6 +7,7 @@
  * @property string $id
  * @property string $title
  * @property string $path
+ * @property string $image
  * @property string $file_type
  * @property string $summary
  * @property string $category_id
@@ -85,10 +86,11 @@ class ClassCategoryFiles extends SortableCActiveRecord
 			array('path,category_id', 'required'),
 			array('title', 'length', 'max'=>255),
 			array('file_type', 'length', 'max'=>50),
-			array('path', 'length', 'max'=>500),
+			array('path, image', 'length', 'max'=>500),
 			array('category_id', 'length', 'max'=>10),
 			//array('file_type', 'checkFileType'),
 			array('summary', 'safe'),
+			array('title, summary', 'filter', 'filter'=>'strip_tags'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, title, category_id', 'safe'),
@@ -125,6 +127,7 @@ class ClassCategoryFiles extends SortableCActiveRecord
 			'summary' => 'توضیحات',
 			'summary_en' => 'توضیحات انگلیسی',
 			'path' => 'فایل',
+			'image' => 'تصویر',
 			'file_type' => 'نوع فایل',
 			'category_id' => 'گروه',
 			'order' => 'ترتیب',

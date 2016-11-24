@@ -14,13 +14,20 @@
             'link',
             array(
                 'class'=>'CButtonColumn',
-                'template'=>'{update}{delete}',
+                'template'=>'{image}{update}{delete}',
                 'buttons'=>array(
                     'delete'=>array(
                         'url'=>'Yii::app()->createUrl("/courses/links/delete/id/".$data->id)'
                     ),
                     'update'=>array(
                         'url'=>'Yii::app()->createUrl("/courses/links/update/id/".$data->id)',
+                    ),
+                    'image'=>array(
+                        'label' => 'تصویر',
+                        'options' => array(
+                            'style' => 'margin-bottom:10px;margin-left:5px;display:inline-block'
+                        ),
+                        'url'=>'Yii::app()->createUrl("/courses/links/update/id/".$data->id."?image")',
                     ),
                 ),
             ),
