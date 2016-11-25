@@ -32,19 +32,19 @@
     $cs->registerCssFile($baseUrl.'/css/ripples.min.css');
     $cs->registerCssFile($baseUrl.'/css/owl.carousel.css');
     $cs->registerCssFile($baseUrl.'/css/font-awesome.css');
-    $cs->registerCssFile($baseUrl.'/css/svg.css?4.1');
-    $cs->registerCssFile($baseUrl.'/css/bootstrap-theme.css?4.1');
-    $cs->registerCssFile($baseUrl.'/css/responsive-theme.css?4.1');
+    $cs->registerCssFile($baseUrl.'/css/svg.css?4.2');
+    $cs->registerCssFile($baseUrl.'/css/bootstrap-theme.css?4.2');
+    $cs->registerCssFile($baseUrl.'/css/responsive-theme.css?4.2');
     if (Yii::app()->params['default_language'] !== Yii::app()->language)
     {
         // @todo add css for multi language
-        $cs->registerCssFile($baseUrl.'/css/bootstrap-theme-'.Yii::app()->language.'.css?4.1');
+        $cs->registerCssFile($baseUrl.'/css/bootstrap-theme-'.Yii::app()->language.'.css?4.2');
     }
 
     $cs->registerScriptFile($baseUrl.'/js/bootstrap.min.js');
     $cs->registerScriptFile($baseUrl.'/js/material.min.js');
     $cs->registerScriptFile($baseUrl.'/js/ripples.min.js');
-    $cs->registerScriptFile($baseUrl.'/js/scripts.js?4.1');
+    $cs->registerScriptFile($baseUrl.'/js/scripts.js?4.2');
     ?>
 </head>
 <body id="top" class="inner-page">

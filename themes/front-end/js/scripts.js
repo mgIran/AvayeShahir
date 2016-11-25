@@ -2,6 +2,36 @@ var $body = $("body");
 var $window = $(window);
 $(function() {
     $.material.init();
+    $body.on('click','.three-dots-container',function () {
+        $('.three-dots-container').not($(this)).parent().removeClass('open');
+        $(this).parent().toggleClass('open');
+    });
+
+    $('.courses .course').each(function () {
+        setCourseCatHeight($(this));
+    });
+
+    function setCourseCatHeight($this) {
+        var $ch = $this.height(),
+            $catE = $this.find('.course-cat-list'),
+            $cath = $catE.height();
+        if($ch-50 <= $cath)
+            $catE.css({bottom:50});
+    }
+
+    $('.scrollbar').each(function () {
+        var $this = $(this),
+            $align = (typeof $this.data('railalign') !== "undefined"?$this.data('railalign'):'right'),
+            $offset = $align == 'right'?-5:5;
+        $this.niceScroll({
+            railalign:$align,
+            railoffset:{left:$offset},
+            cursorwidth:'4px',
+            cursorborder:'none',
+            zindex:10,
+            autohidemode:false
+        });
+    });
     // fade out alert messages
     setInterval(function(){
         $(".alert:not(.message)").fadeTo(500, 0).slideUp(500, function(){

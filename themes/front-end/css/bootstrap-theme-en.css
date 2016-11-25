@@ -101,6 +101,20 @@ section.classes .owl-prev .arrow,
 .search .btn-search{
     border-radius: 0 2px 2px 0;
 }
+.courses .course .three-dots-container{
+    right:auto;
+    left: 0;
+}
+.courses .course .course-cat-list{
+    right:auto;
+    left: 4px;
+}
+.courses .course .course-cat-list h4 {
+    padding: 10px 15px 10px 40px;
+}
+.courses .course ul li a {
+    padding: 8px 15px 8px 30px;
+}
 .btn-input .btn.form-control span:first-child{
     text-align: left !important;
 }

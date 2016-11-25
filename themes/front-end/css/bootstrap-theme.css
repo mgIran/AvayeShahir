@@ -187,7 +187,7 @@ header.header{
     top: 0;
     right:0;
     left: 0;
-    z-index: 100;
+    z-index: 1040;
     transition: all 0.4s ease-in-out;
     -webkit-transition: all 0.4s ease-in-out;
     -moz-transition: all 0.4s ease-in-out;
@@ -621,6 +621,11 @@ section.classes .owl-controls .owl-nav .owl-prev,
 .courses .course-carousel .owl-controls .owl-nav .owl-prev{
     right: -5%;
 }
+.courses .course{
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+}
 .courses .course-pic{
     width: 100%;
     display: block;
@@ -628,6 +633,147 @@ section.classes .owl-controls .owl-nav .owl-prev,
     height: 190px;
     border-bottom: 3px solid #89a404;
     position: relative;
+}
+.courses .course-pic .overlay{
+    position: absolute;
+    top:0;
+    bottom:0;
+    right: 0;
+    left: 0;
+    z-index: 10;
+    display: block;
+    opacity: 0;
+    visibility: hidden;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    background-color: rgba(0,0,0,0.7);
+}
+.courses .course .three-dots-container{
+    position: absolute;
+    display: inline-block;
+    cursor: pointer;
+    padding: 5px 0;
+    z-index: 12;
+    right:0;
+    top:0;
+}
+.courses .course .three-dots,
+.courses .course .three-dots:after,
+.courses .course .three-dots:before{
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+.courses .course .three-dots{
+    position: relative;
+    display: inline-block;
+    border-radius: 4px;
+    width: 6px;
+    height: 6px;
+    background-color: #f0f0f0;
+    margin:15px;
+}
+.courses .course .three-dots:before{
+    content: "";
+    position: absolute;
+    display: inline-block;
+    border-radius: 4px;
+    width: 6px;
+    height: 6px;
+    background-color: #f0f0f0;
+    top: -8px;
+}
+.courses .course .three-dots:after{
+    content: "";
+    position: absolute;
+    display: inline-block;
+    border-radius: 4px;
+    width: 6px;
+    height: 6px;
+    background-color: #f0f0f0;
+    bottom: -8px;
+}
+.courses .course .course-cat-list{
+    border-radius: 4px;
+    display: none;
+    max-width:80%;
+    position: absolute;
+    right: 4px;
+    top: 4px;
+    overflow: hidden;
+    z-index: 11;
+    min-width: 150px;
+    bottom:auto;
+    -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+.courses .course .course-cat-list .scrollbar{
+    padding: 0;
+    padding-top: 39px;
+    max-height: 100%;
+    width: 100%;
+    display: block;overflow: hidden;
+}
+.courses .course .course-cat-list ul{
+    padding: 0;
+    margin: 0;
+}
+.courses .course ul li{
+    background-color: rgba(255,255,255,0.9);
+    color: #3f3f3f;
+}
+.courses .course ul li a{
+    color: inherit;
+    padding: 8px 30px 8px 15px;
+    display: block;
+}
+.courses .course ul li:hover,
+.courses .course ul li:focus,
+.courses .course ul li:active{
+    background-color: rgba(16, 170, 255, 0.9);
+}
+.courses .course ul li:hover a,
+.courses .course ul li:focus a,
+.courses .course ul li:active a{
+    color: #fff;
+}
+.courses .course.open .course-cat-list{
+    display: block;
+}
+.courses .course .course-cat-list h4{
+    background-color: #eee !important;
+    font-size: 16px;
+    font-weight: 500;
+    margin: 0;
+    padding: 10px 40px 10px 15px;
+    border-bottom:1px solid #ddd;
+    position: absolute;
+    top: 0;
+    right:0;
+    left: 0;
+    z-index: 11;
+}
+.courses .course.open .overlay,
+.courses .course:hover .overlay{
+    opacity: 1;
+    visibility: visible;
+}
+.courses .course.open .three-dots-container .three-dots,
+.courses .course.open .three-dots-container .three-dots:before,
+.courses .course.open .three-dots-container .three-dots:after,
+.courses .course .three-dots-container:hover .three-dots,
+.courses .course .three-dots-container:hover .three-dots:after,
+.courses .course .three-dots-container:hover .three-dots:before{
+    background-color: #10aaff;
+}
+.courses .course:hover{
+    background-color: #f4f4f4;
 }
 .courses .course-pic img{
     display: block;
@@ -648,8 +794,6 @@ section.classes .owl-controls .owl-nav .owl-prev,
     width: 100%;
     display: block;
     overflow: hidden;
-    padding-right: 0;
-    padding-left: 0;
 }
 .courses .course-detail > h4{
     margin: 15px 0;
@@ -675,6 +819,9 @@ section.classes .owl-controls .owl-nav .owl-prev,
 .courses .course-detail > p.text .paragraph-end{
     height: 20px;
     width: 150px;
+}
+.courses .course:hover .course-detail > p.text .paragraph-end{
+    background-color: #f4f4f4;
 }
 .courses .course-detail .btn{
     background-color: #89a404;
@@ -1843,7 +1990,7 @@ section.classes .owl-carousel .owl-controls .owl-nav [class*="owl-"].disabled ,
 }
 .page-content.courses .classes .mini-label{
     opacity:0.5;
-    font-size: 12pt;
+    font-size: 12px;
 }
 .page-content.courses .classes .tr a{
     color: #96b404;
@@ -2000,6 +2147,9 @@ span.navTrigger {
 .category-show .tooltip-inner{
     min-width: 100% !important;
     max-width: 800px !important;
+}
+.tooltip{
+    z-index: 1000;
 }
 .tooltip-inner{
     line-height: 22px;

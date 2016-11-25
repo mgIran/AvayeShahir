@@ -6,8 +6,6 @@
 /* @var $teachers Users[] */
 /* @var $form CActiveForm */
 /* @var $aboutText Pages */
-$baseUrl = Yii::app()->theme->baseUrl;
-Yii::app()->clientScript->registerScriptFile($baseUrl.'/js/jquery.mousewheel.min.js');
 ?>
 <section class="courses" id="courses">
     <div class="container">
@@ -15,6 +13,7 @@ Yii::app()->clientScript->registerScriptFile($baseUrl.'/js/jquery.mousewheel.min
         <div class="course-carousel">
             <?
             if($courses) :
+                $baseUrl = Yii::app()->theme->baseUrl;
                 Yii::app()->clientScript->registerScriptFile($baseUrl.'/js/owl.carousel.min.js');
                 Yii::app()->clientScript->registerScript("owl-carousel-script","
                 $('.course-carousel').owlCarousel({
@@ -91,7 +90,13 @@ Yii::app()->clientScript->registerScriptFile($baseUrl.'/js/jquery.mousewheel.min
                 foreach($courses as $course):
                     ?>
                     <div class="course">
-                        <div class="course-pic" data-toggle="tooltip" data-placement="top" title="<?= $course->title ?>">
+                        <div class="three-dots-container">
+                            <div class="three-dots"></div>
+                        </div>
+                        <?php $this->renderPartial('_course_categories',array('model' => $course)) ?>
+                        <div class="course-pic" title="<?= $course->title ?>">
+                            <div class="overlay">
+                            </div>
                             <a href="<?= Yii::app()->createUrl('/courses/'.urlencode($course->title).'/'.$course->id); ?>">
                                 <img src="<?= Yii::app()->baseUrl.'/uploads/courses/'.$course->pic; ?>" alt="<?= $course->title ?>">
                             </a>
