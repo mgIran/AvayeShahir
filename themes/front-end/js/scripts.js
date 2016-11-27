@@ -2,23 +2,20 @@ var $body = $("body");
 var $window = $(window);
 $(function() {
     $.material.init();
-    $body.on('click','.three-dots-container',function () {
-        $('.three-dots-container').not($(this)).parent().removeClass('open');
+    // course categories show trigger
+    var $courseHover;
+    $body.on('click','.course .three-dots-container',function () {
+        $('.course .three-dots-container').not($(this)).parent().removeClass('open');
         $(this).parent().toggleClass('open');
     });
-
-    $('.courses .course').each(function () {
-        setCourseCatHeight($(this));
+    $body.on('click','.course .course-pic',function () {
+        $('.course .course-pic').not($(this)).parent().removeClass('open');
+        $(this).parent().toggleClass('open');
     });
-
-    function setCourseCatHeight($this) {
-        var $ch = $this.height(),
-            $catE = $this.find('.course-cat-list'),
-            $cath = $catE.height();
-        if($ch-50 <= $cath)
-            $catE.css({bottom:50});
-    }
-
+    $body.on('mouseleave','.course',function () {
+        $(this).removeClass('open');
+    });
+//
     $('.scrollbar').each(function () {
         var $this = $(this),
             $align = (typeof $this.data('railalign') !== "undefined"?$this.data('railalign'):'right'),
@@ -78,8 +75,25 @@ $(function() {
     $window.resize(function () {
         var $affix = $('.affix-top');
         $affix.width($affix.parents('[class*="col-"]').width());
+
+        // resize course category boxes
+        $('.courses .course').each(function () {
+            setCourseCatHeight($(this));
+        });
+    });
+
+    $('.courses .course').each(function () {
+        setCourseCatHeight($(this));
     });
 });
+
+function setCourseCatHeight($this) {
+    var $ch = $this.height(),
+        $catE = $this.find('.course-cat-list'),
+        $cath = $catE.height();
+    if($ch-50 <= $cath)
+        $catE.css({bottom:50});
+}
 
 
 function submitAjaxForm(form ,url ,loading ,callback) {
