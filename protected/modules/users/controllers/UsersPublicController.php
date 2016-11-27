@@ -1,6 +1,6 @@
 <?php
 
-class PublicController extends Controller
+class UsersPublicController extends Controller
 {
     /**
      * @return array action filters
@@ -8,30 +8,18 @@ class PublicController extends Controller
     public function filters()
     {
         return array(
-            'accessControl', // perform access control for CRUD operations
+            'checkAccess + dashboard, logout, setting, update', // perform access control for CRUD operations
         );
     }
-
     /**
      * Specifies the access control rules.
      * This method is used by the 'accessControl' filter.
      * @return array access control rules
      */
-    public function accessRules()
+    public static function actionsType()
     {
         return array(
-            array('allow',  // allow all users to perform 'index' and 'views' actions
-                'actions'=>array('dashboard','logout','setting','update'),
-                'users' => array('@'),
-            ),
-            array('allow',  // allow all users to perform 'index' and 'views' actions
-                  'actions'=>array('register','login','verify','forgetPassword','changePassword','captcha'),
-                'users' => array('*'),
-                //'roles'=>array('admin','validator'),
-            ),
-            array('deny',  // deny all users
-                'users'=>array('*'),
-            ),
+            'frontend' => array('dashboard','logout','setting','update','register','login','verify','forgetPassword','changePassword','captcha'),
         );
     }
 

@@ -15,7 +15,10 @@ class AdminsModule extends CWebModule
     }
 
     public $controllerMap = array(
-        'manage' => 'application.modules.admins.controllers.AdminsManageController',
+        'dashboard' => 'admins.controllers.AdminsDashboardController',
+        'roles' => 'admins.controllers.AdminsRolesController',
+        'manage' => 'admins.controllers.AdminsManageController',
+        'login' => 'admins.controllers.AdminsLoginController',
     );
 
 	public function beforeControllerAction($controller, $action)

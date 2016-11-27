@@ -11,33 +11,30 @@ class NewsCategoriesManageController extends Controller
 	/**
 	 * @return array action filters
 	 */
-	public function filters()
+	public static function actionsType()
 	{
 		return array(
-			'accessControl', // perform access control for CRUD operations
-			'postOnly + delete', // we only allow deletion via POST request
+			'frontend'=>array(
+				'index',
+				'view'
+			),
+			'backend' => array(
+				'create',
+				'update',
+				'admin',
+				'delete'
+			)
 		);
 	}
 
 	/**
-	 * Specifies the access control rules.
-	 * This method is used by the 'accessControl' filter.
-	 * @return array access control rules
+	 * @return array action filters
 	 */
-	public function accessRules()
+	public function filters()
 	{
 		return array(
-			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
-				'users'=>array('*'),
-			),
-			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','admin','delete'),
-				'roles'=>array('admin'),
-			),
-			array('deny',  // deny all users
-				'users'=>array('*'),
-			),
+			'checkAccess + create, update, admin, delete', // perform access control for CRUD operations
+			'postOnly + delete', // we only allow deletion via POST request
 		);
 	}
 

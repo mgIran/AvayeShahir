@@ -5,7 +5,7 @@
  *
  * @property SearchForm $searchModel
  */
-class Controller extends CController
+class Controller extends AuthController
 {
     /**
      * @var string the default layout for the controller views. Defaults to '//layouts/column1',
@@ -161,29 +161,12 @@ class Controller extends CController
                         array('label' => 'دسته بندی ها' ,'url' => Yii::app()->createUrl('/faq/categories/admin')) ,
                     )
                 ) ,
-//                array(
-//                    'label' => 'نظرات<span class="caret"></span>' ,
-//                    'url' => '#' ,
-//                    'itemOptions' => array('class' => 'dropdown' ,'tabindex' => "-1") ,
-//                    'linkOptions' => array('class' => 'dropdown-toggle' ,'data-toggle' => "dropdown") ,
-//                    'items' => array(
-//                        array('label' => 'مدیریت' ,'url' => Yii::app()->createUrl('/comments/comment/admin')) ,
-//                    )
-//                ) ,
-                array(
-                    'label' => 'گوگل ارث<span class="caret"></span>' ,
-                    'url' => '#' ,
-                    'itemOptions' => array('class' => 'dropdown' ,'tabindex' => "-1") ,
-                    'linkOptions' => array('class' => 'dropdown-toggle' ,'data-toggle' => "dropdown") ,
-                    'items' => array(
-                        array('label' => 'مدیریت' ,'url' => Yii::app()->createUrl('/map/manage/update')) ,
-                    )
-                ) ,
                 array(
                     'label' => 'مدیران <span class="caret"></span>' ,
                     'url' => '#' ,
                     'itemOptions' => array('class' => 'dropdown' ,'tabindex' => "-1") ,'linkOptions' => array('class' => 'dropdown-toggle' ,'data-toggle' => "dropdown") ,
                     'items' => array(
+                        array('label' => 'نقش مدیران' ,'url' => Yii::app()->createUrl('/admins/roles/admin')) ,
                         array('label' => 'مدیریت' ,'url' => Yii::app()->createUrl('/admins/manage')) ,
                         array('label' => 'افزودن' ,'url' => Yii::app()->createUrl('/admins/manage/create')) ,
                     )
@@ -207,17 +190,18 @@ class Controller extends CController
                         array('label' => 'صفحات اصلی سایت' ,'url' => Yii::app()->createUrl('/pages/manage/admin/slug/base')) ,
                         array('label' => 'قوانین' ,'url' => Yii::app()->createUrl('/pages/manage/update/id/5/slug/rules')) ,
                         array('label' => 'صفحات راهنما' ,'url' => Yii::app()->createUrl('/pages/manage/admin/slug/guide')) ,
-                        array('label' => 'صفحات آزاد' ,'url' => Yii::app()->createUrl('/pages/manage/admin/')) ,
                     )
-                ) ,
+                ),
                 array(
                     'label' => 'تنظیمات<span class="caret"></span>' ,
                     'url' => '#' ,
                     'itemOptions' => array('class' => 'dropdown' ,'tabindex' => "-1") ,
                     'linkOptions' => array('class' => 'dropdown-toggle' ,'data-toggle' => "dropdown") ,
                     'items' => array(
-                        array('label' => 'عمومی' ,'url' => Yii::app()->createUrl('/setting/siteSettingManage/changeSetting')) ,
-                        array('label' => 'پیام وبسایت' ,'url' => Yii::app()->createUrl('/setting/siteSettingManage/siteMessage')) ,
+                        array('label' => 'عمومی' ,'url' => Yii::app()->createUrl('/setting/manage/changeSetting')) ,
+                        array('label' => 'پیام وبسایت' ,'url' => Yii::app()->createUrl('/setting/manage/siteMessage')) ,
+                        array('label' => 'گوگل ارث' ,'url' => Yii::app()->createUrl('/map/manage/update')) ,
+                        array('label' => 'تغییر کلمه عبور' ,'url' => Yii::app()->createUrl('/admins/manage/changePass')) ,
                     )
                 ) ,
                 array(

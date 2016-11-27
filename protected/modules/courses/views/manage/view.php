@@ -4,12 +4,14 @@
 $fileUrl = Yii::app()->baseUrl.'/uploads/classCategoryFiles/';
 $fileDir = Yii::getPathOfAlias("webroot").'/uploads/classCategoryFiles/';
 Yii::app()->clientScript->registerScript('active-collapse','
-var url = window.location.hash, idx = url.indexOf("#")
-var hash = idx != -1 ? url.substring(idx) : "";
-$(hash).collapse("show");
-$(\'html, body\').animate({
-	scrollTop: ($(hash).offset().top-124)
-},0);
+	var url = window.location.hash, idx = url.indexOf("#")
+	var hash = idx != -1 ? url.substring(idx) : -1;
+	if(hash != -1){
+		$(hash).collapse("show");
+		$(\'html, body\').animate({
+			scrollTop: ($(hash).offset().top-124)
+		},0);
+	}
 ',CClientScript::POS_LOAD);
 ?>
 <div class="page-title-container courses personnel-page-header ">

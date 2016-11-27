@@ -19,38 +19,27 @@ Yii::app()->clientScript->registerScript('resetForm','document.getElementById("a
 
 	<div class="row form-group">
 		<?php echo $form->labelEx($model,'username' ,array('class'=>'col-lg-2 control-label')); ?>
-		<?php echo $form->textField($model,'username',array('size'=>50,'maxlength'=>100 , (!$model->isNewRecord?'disabled':'s') => true)); ?>
+		<?php
+        if($model->isNewRecord)
+            echo $form->textField($model,'username',array('size'=>50,'maxlength'=>100));
+        else
+            echo CHtml::label($model->username, '', array('style'=>'font-weight:600')); ?>
 		<?php echo $form->error($model,'username'); ?>
 	</div>
     <?php
-    if(!$model->isNewRecord){
+    if($model->isNewRecord){
     ?>
         <div class="row form-group">
-            <?php echo $form->labelEx($model,'oldPassword',array('class'=>'col-lg-2 control-label')); ?>
-            <?php echo $form->passwordField($model,'oldPassword',array('size'=>50,'maxlength'=>100)); ?>
-            <?php echo $form->error($model,'oldPassword'); ?>
+            <?php echo $form->labelEx($model,'password',array('class'=>'col-lg-2 control-label')); ?>
+            <?php echo $form->passwordField($model,'password',array('size'=>50,'maxlength'=>100)); ?>
+            <?php echo $form->error($model,'password'); ?>
         </div>
         <div class="row form-group">
-            <?php echo $form->labelEx($model,'newPassword',array('class'=>'col-lg-2 control-label')); ?>
-            <?php echo $form->passwordField($model,'newPassword',array('size'=>50,'maxlength'=>100)); ?>
-            <?php echo $form->error($model,'newPassword'); ?>
+            <?php echo $form->labelEx($model,'repeatPassword',array('class'=>'col-lg-2 control-label')); ?>
+            <?php echo $form->passwordField($model,'repeatPassword',array('size'=>50,'maxlength'=>100)); ?>
+            <?php echo $form->error($model,'repeatPassword'); ?>
         </div>
-    <?php
-    }else{
-    ?>
-	<div class="row form-group">
-		<?php echo $form->labelEx($model,'password',array('class'=>'col-lg-2 control-label')); ?>
-		<?php echo $form->passwordField($model,'password',array('size'=>50,'maxlength'=>100)); ?>
-		<?php echo $form->error($model,'password'); ?>
-	</div>
-
     <?php } ?>
-
-    <div class="row form-group">
-        <?php echo $form->labelEx($model,'repeatPassword',array('class'=>'col-lg-2 control-label')); ?>
-        <?php echo $form->passwordField($model,'repeatPassword',array('size'=>50,'maxlength'=>100)); ?>
-        <?php echo $form->error($model,'repeatPassword'); ?>
-    </div>
 
     <div class="row form-group">
         <?php echo $form->labelEx($model,'email',array('class'=>'col-lg-2 control-label')); ?>
@@ -60,7 +49,7 @@ Yii::app()->clientScript->registerScript('resetForm','document.getElementById("a
 
     <div class="row ">
         <?php echo $form->labelEx($model,'role_id',array('class'=>'col-lg-2 control-label')); ?>
-        <?php echo $form->dropDownList($model,'role_id' ,CHtml::listData(  AdminRoles::model()->findAll() , 'id' , 'name')); ?>
+        <?php echo $form->dropDownList($model,'role_id' ,CHtml::listData(  AdminRoles::model()->findAll('role != "superAdmin"') , 'id' , 'name')); ?>
         <?php echo $form->error($model,'role_id'); ?>
     </div>
 

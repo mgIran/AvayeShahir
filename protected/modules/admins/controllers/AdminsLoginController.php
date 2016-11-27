@@ -1,7 +1,20 @@
 <?php
 
-class LoginController extends Controller
+class AdminsLoginController extends Controller
 {
+    /**
+     * @return array actions type list
+     */
+    public static function actionsType()
+    {
+        return array(
+            'frontend' => array(
+                'index',
+                'logout'
+            )
+        );
+    }
+
     /**
      * Declares class-based actions.
      */
@@ -15,28 +28,15 @@ class LoginController extends Controller
         );
     }
 
-
-    /**
-     * This is the action to handle external exceptions.
-     */
-    public function actionError()
-    {
-        if($error=Yii::app()->errorHandler->error)
-        {
-            if(Yii::app()->request->isAjaxRequest)
-                echo $error['message'];
-            else
-                $this->render('error', $error);
-        }
-    }
-
     /**
      * Index Action
      */
     public function actionIndex()
     {
+        Yii::app()->theme = 'abound';
+        $this->layout = '//layouts/login';
         if(!Yii::app()->user->isGuest && Yii::app()->user->type === 'admin')
-            $this->redirect(array('/admins/dashboard'));
+            $this->redirect(array('/admins/'));
 
         $model = new AdminLoginForm;
 
@@ -57,12 +57,7 @@ class LoginController extends Controller
             if ( $model->validate() && $model->login())
             {
                 Yii::app()->user->setState('attempts-login', 0);
-//                Yii::app()->language = 'fa';
-//                Yii::app()->user->setState('_language','fa');
-                if(Yii::app()->user->returnUrl != Yii::app()->request->baseUrl.'/' && Yii::app()->user->returnUrl != Yii::app()->request->baseUrl.'/admins')
-                    $this->redirect(Yii::app()->user->returnUrl);
-                else
-                    $this->redirect(Yii::app()->createUrl('/admins/dashboard'));
+                $this->redirect(Yii::app()->createUrl('/admins/dashboard'));
             }else
             {
                 Yii::app()->user->setState('attempts-login', Yii::app()->user->getState('attempts-login', 0) + 1);

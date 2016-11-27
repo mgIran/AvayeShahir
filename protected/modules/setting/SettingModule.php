@@ -14,7 +14,10 @@ class SettingModule extends CWebModule
 		));
 	}
 
-
+	public $controllerMap = array(
+		'manage' => 'setting.controllers.SettingManageController',
+	);
+	
 	public function beforeControllerAction($controller, $action)
 	{
 		if(parent::beforeControllerAction($controller, $action))

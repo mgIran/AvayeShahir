@@ -25,7 +25,7 @@ $this->menu=array(
             'header' => 'نقش',
             'name' => 'role.name',
             'filter' => CHtml::activeDropDownList($model , 'roleId' ,
-                CHtml::listData(AdminRoles::model()->findAll() , 'id' , 'name'))
+                CHtml::listData(AdminRoles::model()->findAll('role <> "superAdmin"') , 'id' , 'name'))
         ),
 		array(
 			'class'=>'CButtonColumn',

@@ -1,6 +1,6 @@
 <?php
 
-class ClassCategoryFilesController extends Controller
+class CoursesFilesController extends Controller
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -14,31 +14,22 @@ class ClassCategoryFilesController extends Controller
 	public function filters()
 	{
 		return array(
-				'accessControl', // perform access control for CRUD operations
-				'postOnly + delete', // we only allow deletion via POST request
+			'checkAccess', // perform access control for CRUD operations
+			'postOnly + delete', // we only allow deletion via POST request
 		);
 	}
-
 	/**
 	 * Specifies the access control rules.
 	 * This method is used by the 'accessControl' filter.
 	 * @return array access control rules
 	 */
-	public function accessRules()
+	public static function actionsType()
 	{
 		return array(
-			array(
-				'allow',  // allow all users to perform 'index' and 'view' actions
-				'actions' => array('index', 'create', 'update', 'delete', 'upload', 'deleteUpload', 'uploadImage', 'deleteUploadImage' ,'order'),
-				'roles' => array('admin'),
-			),
-			array(
-				'deny',  // deny all users
-				'users' => array('*'),
-			),
+			'backend' => array('index', 'create', 'update', 'delete', 'upload', 'deleteUpload', 'uploadImage', 'deleteUploadImage' ,'order')
 		);
 	}
-
+	
 	public function actions()
 	{
 		return array(
