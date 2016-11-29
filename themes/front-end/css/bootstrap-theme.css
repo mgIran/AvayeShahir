@@ -2999,7 +2999,7 @@ ol{
     float: left;
     display: block;
     text-align: left;
-    color: #7a7a7a;
+    color: #1aa4de;
     font-size: 14px;
     font-weight: 400;
     width: 100%;
@@ -3012,7 +3012,7 @@ ol{
 .news-container .more-btn:focus,
 .news-container .more-btn:active,
 .news-container .more-btn:hover{
-    color: #1aa4de;
+    color: #1376a0;
 }
 .news-container .more-btn > .bounces{
     display: block;
@@ -3025,7 +3025,7 @@ ol{
     border-radius: 50%;
     width: 8px;
     height: 8px;
-    background-color: #999;
+    background-color: #1aa4de;
     margin: 0 1px;
     -webkit-transition: all 0.3s ease-in-out;
     -moz-transition: all 0.3s ease-in-out;
@@ -3036,7 +3036,7 @@ ol{
 .news-container .more-btn:focus > .bounces > span,
 .news-container .more-btn:active > .bounces > span,
 .news-container .more-btn:hover > .bounces > span{
-    background-color: #1aa4de;
+    background-color: #1376a0;
 }
 
 .news-view h2 {

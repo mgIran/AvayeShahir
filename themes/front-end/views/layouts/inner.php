@@ -44,6 +44,7 @@
     $cs->registerScriptFile($baseUrl.'/js/bootstrap.min.js');
     $cs->registerScriptFile($baseUrl.'/js/material.min.js');
     $cs->registerScriptFile($baseUrl.'/js/ripples.min.js');
+    $cs->registerScriptFile($baseUrl.'/js/jquery.nicescroll.min.js');
     $cs->registerScriptFile($baseUrl.'/js/scripts.js?4.5');
     ?>
 </head>
