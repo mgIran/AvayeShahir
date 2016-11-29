@@ -2843,7 +2843,7 @@ ol{
     float: left;
     display: block;
     text-align: left;
-    color: #bbb;
+    color: #7a7a7a;
     font-size: 14px;
     font-weight: 400;
     width: 100%;
@@ -2869,7 +2869,7 @@ ol{
     border-radius: 50%;
     width: 8px;
     height: 8px;
-    background-color: #ddd;
+    background-color: #999;
     margin: 0 1px;
     -webkit-transition: all 0.3s ease-in-out;
     -moz-transition: all 0.3s ease-in-out;
