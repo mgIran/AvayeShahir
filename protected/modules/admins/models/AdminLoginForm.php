@@ -40,7 +40,7 @@ class AdminLoginForm extends CFormModel
 	{
 		return array(
             'username' => 'نام کاربری',
-            'password' => 'رمز عبور',
+            'password' => 'کلمه عبور',
 			'rememberMe'=>'مرا بخاطر بسپار',
 			'verifyCode' => 'کد امنیتی'
 		);
@@ -56,7 +56,7 @@ class AdminLoginForm extends CFormModel
 		{
 			$this->_identity = new AdminIdentity($this->username,$this->password);
 			if(!$this->_identity->authenticate())
-				$this->addError($attribute,'نام کاربری یا رمز عبور اشتباه است .');
+				$this->addError($attribute,'نام کاربری یا کلمه عبور اشتباه است .');
 		}
 	}
 

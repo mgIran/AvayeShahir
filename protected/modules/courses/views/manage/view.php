@@ -3,6 +3,16 @@
 /* @var $model Courses */
 $fileUrl = Yii::app()->baseUrl.'/uploads/classCategoryFiles/';
 $fileDir = Yii::getPathOfAlias("webroot").'/uploads/classCategoryFiles/';
+Yii::app()->clientScript->registerScript('active-collapse','
+	var url = window.location.hash, idx = url.indexOf("#")
+	var hash = idx != -1 ? url.substring(idx) : -1;
+	if(hash != -1){
+		$(hash).collapse("show");
+		$(\'html, body\').animate({
+			scrollTop: ($(hash).offset().top-124)
+		},0);
+	}
+',CClientScript::POS_LOAD);
 ?>
 <div class="page-title-container courses personnel-page-header ">
 	<div class="mask"></div>
@@ -41,11 +51,11 @@ $fileDir = Yii::getPathOfAlias("webroot").'/uploads/classCategoryFiles/';
 			foreach($model->categories as $key => $category):
 			?>
 				<div class="group-item panel">
-				<a class="collapse-header btn collapsed" data-toggle="collapse" href="#collapse-<?= $key ?>" data-parent="#collapse-parent">
+				<a class="collapse-header btn collapsed" data-toggle="collapse" href="#collapse-category-<?= $category->id ?>" data-parent="#collapse-parent">
 					<span><?= $category->title ?></span>
 					<i class="arrow-white"></i>
 				</a>
-				<div id="collapse-<?= $key ?>" class="panel-collapse collapse">
+				<div id="collapse-category-<?= $category->id ?>" class="panel-collapse collapse">
 					<div class="container-fluid">
 						<?
 						$text = trim($category->summary);
@@ -97,6 +107,7 @@ $fileDir = Yii::getPathOfAlias("webroot").'/uploads/classCategoryFiles/';
 									<span class="download">
 										<i></i>
 										<span><?= Yii::t('app','Download'); ?></span>
+										<?= $fileLink->link_size?'<span class="size">'.$fileLink->link_size.'</span>':'' ?>
 									</span>
 								</li>
 							<?

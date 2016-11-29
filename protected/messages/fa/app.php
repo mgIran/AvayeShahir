@@ -135,6 +135,7 @@ return array(
     'News ID' => 'شناسه خبر',
     'Tags' => 'برچسب ها',
     'Category' => 'دسته بندی',
+    'Categories' => 'گروه ها',
     '{category} News' => 'اخبار {category}',
     'News tagged "{tag}"' => 'اخبار برچسب "{tag}"',
     'Sharing' => 'اشتراک گذاری',

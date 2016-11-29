@@ -17,12 +17,12 @@ class CoursesModule extends CWebModule
 
 	public $controllerMap = array(
 		'manage' => 'courses.controllers.CoursesManageController',
-		'classes' => 'courses.controllers.ClassesManageController',
-		'categories' => 'courses.controllers.ClassCategoriesManageController',
-		'tags' => 'courses.controllers.ClassTagsManageController',
-		'files' => 'courses.controllers.ClassCategoryFilesController',
-		'links' => 'courses.controllers.ClassCategoryFileLinksController',
-		'register' => 'courses.controllers.ClassRegisterController'
+		'classes' => 'courses.controllers.CoursesClassesController',
+		'categories' => 'courses.controllers.CoursesCategoriesController',
+		'tags' => 'courses.controllers.CoursesTagsController',
+		'files' => 'courses.controllers.CoursesFilesController',
+		'links' => 'courses.controllers.CoursesLinksController',
+		'register' => 'courses.controllers.CoursesRegisterController'
 	);
 	public function beforeControllerAction($controller, $action)
 	{

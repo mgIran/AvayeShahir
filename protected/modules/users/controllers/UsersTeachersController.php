@@ -1,6 +1,6 @@
 <?php
 
-class TeachersManageController extends Controller
+class UsersTeachersController extends Controller
 {
 	const TEACHER_ROLE = 2;
 	const STATUS_ACTIVE = 2;
@@ -16,33 +16,20 @@ class TeachersManageController extends Controller
 	public function filters()
 	{
 		return array(
-				'accessControl', // perform access control for CRUD operations
-				'postOnly + delete', // we only allow deletion via POST request
+			'checkAccess - view', // perform access control for CRUD operations
+			'postOnly + delete', // we only allow deletion via POST request
 		);
 	}
-
 	/**
 	 * Specifies the access control rules.
 	 * This method is used by the 'accessControl' filter.
 	 * @return array access control rules
 	 */
-	public function accessRules()
+	public static function actionsType()
 	{
 		return array(
-				array(
-						'allow',  // allow all users to perform 'index' and 'views' actions
-						'actions' => array('index', 'create', 'admin', 'delete'),
-						'roles' => array('admin'),
-				),
-				array(
-						'allow',  // allow all users to perform 'index' and 'views' actions
-						'actions' => array('view'),
-						'users' => array('*'),
-				),
-				array(
-						'deny',  // deny all users
-						'users' => array('*'),
-				),
+			'backend' => array('index', 'create', 'admin', 'delete'),
+			'frontend' => array('view')
 		);
 	}
 

@@ -1,6 +1,6 @@
 <?php
 
-class ClassRegisterController extends Controller
+class CoursesRegisterController extends Controller
 {
     public $layout='//layouts/inner';
 
@@ -11,29 +11,19 @@ class ClassRegisterController extends Controller
     public function filters()
     {
         return array(
-            'accessControl', // perform access control for CRUD operations
+            'checkAccess + admin, inquiry', // perform access control for CRUD operations
         );
     }
-
     /**
      * Specifies the access control rules.
      * This method is used by the 'accessControl' filter.
      * @return array access control rules
      */
-    public function accessRules()
+    public static function actionsType()
     {
         return array(
-            array('allow',  // allow all users to perform 'index' and 'views' actions
-                'actions'=>array('admin','inquiry'),
-                'roles' => array('admin'),
-            ),
-            array('allow',  // allow all users to perform 'index' and 'views' actions
-                'actions'=>array('index','bill','verify'),
-                'users' => array('*'),
-            ),
-            array('deny',  // deny all users
-                'users'=>array('*'),
-            ),
+            'frontend' => array('index','bill','verify'),
+            'backend' => array('admin','inquiry')
         );
     }
 

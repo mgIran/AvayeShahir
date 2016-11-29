@@ -17,8 +17,10 @@ class UsersModule extends CWebModule
 
     public $controllerMap = array(
         'manage' => 'users.controllers.UsersManageController',
-        'teachers' => 'users.controllers.TeachersManageController',
-        'teacherDetails' => 'users.controllers.TeacherDetailsController',
+        'teachers' => 'users.controllers.UsersTeachersController',
+        'teacherDetails' => 'users.controllers.UsersTeacherDetailsController',
+		'public' => 'users.controllers.UsersPublicController',
+		'roles' => 'users.controllers.UsersRolesController',
     );
 
 	public function beforeControllerAction($controller, $action)

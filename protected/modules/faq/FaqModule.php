@@ -15,6 +15,11 @@ class FaqModule extends CWebModule
 		));
 	}
 
+	public $controllerMap = array(
+		'manage' => 'faq.controllers.FaqManageController',
+		'categories' => 'faq.controllers.FaqCategoriesController'
+	);
+
 	public function beforeControllerAction($controller, $action)
 	{
 		if(parent::beforeControllerAction($controller, $action))

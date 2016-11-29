@@ -1,24 +1,26 @@
 <?php
 
 /**
- * This is the model class for table "ym_admin_roles".
+ * This is the model class for table "{{admin_roles}}".
  *
- * The followings are the available columns in table 'ym_admin_roles':
+ * The followings are the available columns in table '{{admin_roles}}':
  * @property string $id
  * @property string $name
  * @property string $role
  *
  * The followings are the available model relations:
+ * @property AdminRolePermissions[] $adminRolePermissions
  * @property Admins[] $admins
  */
 class AdminRoles extends CActiveRecord
 {
+	public $permissions=array();
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'ym_admin_roles';
+		return '{{admin_roles}}';
 	}
 
 	/**
@@ -29,9 +31,11 @@ class AdminRoles extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name, role', 'required'),
+			array('name, role, permissions', 'required'),
+			array('role', 'unique'),
 			array('name', 'length', 'max'=>100),
 			array('role', 'length', 'max'=>255),
+			array('permissions', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, name, role', 'safe', 'on'=>'search'),
@@ -46,6 +50,7 @@ class AdminRoles extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'adminRolePermissions' => array(self::HAS_MANY, 'AdminRolePermissions', 'role_id'),
 			'admins' => array(self::HAS_MANY, 'Admins', 'role_id'),
 		);
 	}
@@ -59,6 +64,7 @@ class AdminRoles extends CActiveRecord
 			'id' => 'ID',
 			'name' => 'عنوان نقش',
 			'role' => 'نقش',
+			'permissions' => 'سطح دسترسی',
 		);
 	}
 
@@ -79,6 +85,8 @@ class AdminRoles extends CActiveRecord
 		// @todo Please modify the following code to remove attributes that should not be searched.
 
 		$criteria=new CDbCriteria;
+
+		$criteria->addCondition('id != 1');
 
 		$criteria->compare('id',$this->id,true);
 		$criteria->compare('name',$this->name,true);

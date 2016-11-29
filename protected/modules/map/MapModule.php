@@ -4,11 +4,6 @@ class MapModule extends CWebModule
 {
 	public function init()
 	{
-		$defaultController = 'mapsManage';
-		// this method is called when the module is being created
-		// you may place code here to customize the module or the application
-
-		// import the module-level models and components
 		$this->setImport(array(
 			'map.models.*',
 			'map.components.*',
@@ -16,8 +11,9 @@ class MapModule extends CWebModule
 	}
 
 	public $controllerMap = array(
-		'manage' => 'map.controllers.MapsManageController'
+		'manage' => 'map.controllers.MapManageController'
 	);
+
 	public function beforeControllerAction($controller, $action)
 	{
 		if(parent::beforeControllerAction($controller, $action))

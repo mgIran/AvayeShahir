@@ -16496,3 +16496,11 @@ in E:\wamp\www\yusef\shahir\index.php (11)
 in E:\wamp\www\yusef\shahir\protected\modules\courses\models\Classes.php (65)
 in E:\wamp\www\yusef\shahir\protected\modules\courses\controllers\ClassesManageController.php (99)
 in E:\wamp\www\yusef\shahir\index.php (11)
+2016/11/27 02:50:56 [warning] [application] Failed to set unsafe attribute "role_id" of "Admins".
+in D:\Important\Xamppp\htdocs\shahir\protected\modules\admins\controllers\AdminsManageController.php (89)
+in D:\Important\Xamppp\htdocs\shahir\protected\components\AuthController.php (85)
+in D:\Important\Xamppp\htdocs\shahir\index.php (11)
+2016/11/27 02:51:19 [warning] [application] Failed to set unsafe attribute "role_id" of "Admins".
+in D:\Important\Xamppp\htdocs\shahir\protected\modules\admins\controllers\AdminsManageController.php (89)
+in D:\Important\Xamppp\htdocs\shahir\protected\components\AuthController.php (85)
+in D:\Important\Xamppp\htdocs\shahir\index.php (11)

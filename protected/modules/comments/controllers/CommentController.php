@@ -19,12 +19,25 @@ class CommentController extends Controller
 	public $layout = '//layouts/column1';
 
 	/**
+	 * Specifies the access control rules.
+	 * This method is used by the 'accessControl' filter.
+	 * @return array access control rules
+	 */
+	public static function actionsType()
+	{
+		return array(
+			'frontend' => array('postComment' ,'captcha'),
+			'backend' => array('admin' ,'delete' ,'approve')
+		);
+	}
+	
+	/**
 	 * @return array action filters
 	 */
 	public function filters()
 	{
 		return array(
-			'accessControl' , // perform access control for CRUD operations
+			'checkAccess - postComment, captcha' , // perform access control for CRUD operations
 			'ajaxOnly + PostComment, Delete, Approve' ,
 		);
 	}
@@ -38,28 +51,6 @@ class CommentController extends Controller
 			'captcha' => array(
 				'class' => 'CCaptchaAction' ,
 				'backColor' => 0xFFFFFF ,
-			) ,
-		);
-	}
-
-	/**
-	 * Specifies the access control rules.
-	 * This method is used by the 'accessControl' filter.
-	 * @return array access control rules
-	 */
-	public function accessRules()
-	{
-		return array(
-			array('allow' ,
-				'actions' => array('postComment' ,'captcha') ,
-				'users' => array('*') ,
-			) ,
-			array('allow' ,
-				'actions' => array('admin' ,'delete' ,'approve') ,
-				'roles' => array('admin') ,
-			) ,
-			array('deny' ,  // deny all users
-				'users' => array('*') ,
 			) ,
 		);
 	}

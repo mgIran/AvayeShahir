@@ -1,7 +1,19 @@
 <?php
 
-class DashboardController extends Controller
+class AdminsDashboardController extends Controller
 {
+
+    /**
+     * @return array action filters
+     */
+    public static function actionsType()
+    {
+        return array(
+            'backend' => array(
+                'index'
+            )
+        );
+    }
 
     /**
      * @return array action filters
@@ -9,27 +21,7 @@ class DashboardController extends Controller
     public function filters()
     {
         return array(
-            'accessControl', // perform access control for CRUD operations
-        );
-    }
-
-    /**
-     * Specifies the access control rules.
-     * This method is used by the 'accessControl' filter.
-     * @return array access control rules
-     */
-    public function accessRules()
-    {
-        return array(
-            array('allow',  // allow all users to perform 'index' and 'views' actions
-                'actions'=>array('index'),
-                'roles' => array('admin'),
-                //'roles'=>array('admin','validator'),
-            ),
-            array('deny',  // deny all users
-                'actions'=>array('index'),
-                'users'=>array('*'),
-            ),
+            'checkAccess', // perform access control for CRUD operations
         );
     }
 

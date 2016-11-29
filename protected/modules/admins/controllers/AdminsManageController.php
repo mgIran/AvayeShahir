@@ -12,30 +12,29 @@ class AdminsManageController extends Controller
 	/**
 	 * @return array action filters
 	 */
-	public function filters()
+	public static function actionsType()
 	{
 		return array(
-			'accessControl', // perform access control for CRUD operations
-			'postOnly + delete', // we only allow deletion via POST request
+			'backend' => array(
+				'index',
+				'views',
+				'create',
+				'update',
+				'admin',
+				'changePass',
+				'delete'
+			)
 		);
 	}
 
 	/**
-	 * Specifies the access control rules.
-	 * This method is used by the 'accessControl' filter.
-	 * @return array access control rules
+	 * @return array action filters
 	 */
-	public function accessRules()
+	public function filters()
 	{
 		return array(
-			array('allow',  // allow all users to perform 'index' and 'views' actions
-				'actions'=>array('index','views','create','update','admin','delete'),
-				'roles'=>array('admin'),
-			),
-			array('deny',  // deny all users
-                'actions'=>array('index','views','create','update','admin','delete'),
-				'users'=>array('*'),
-			),
+			'checkAccess',
+			'postOnly + delete', // we only allow deletion via POST request
 		);
 	}
 
@@ -89,6 +88,29 @@ class AdminsManageController extends Controller
 
         if ( isset( $_POST[ 'Admins' ] ) ) {
             $model->attributes = $_POST[ 'Admins' ];
+			if ( $model->save() )
+			{
+				Yii::app()->user->setFlash('success','با موفقیت انجام شد');
+				$this->redirect(array('admin'));
+			}
+			else
+				Yii::app()->user->setFlash('failed','درخواست با خطا مواجه است. لطفا مجددا سعی نمایید.');
+        }
+
+        $this->render( 'update', array(
+            'model' => $model,
+        ) );
+    }
+
+	public function actionChangePass()
+    {
+		$id = Yii::app()->user->getId();
+        $this->pageTitle = 'تغییر کلمه عبور';
+        $model = $this->loadModel( $id );
+        $model->setScenario('changePassword');
+
+        if ( isset( $_POST[ 'Admins' ] ) ) {
+            $model->attributes = $_POST[ 'Admins' ];
             if($model->validate() ) {
                 $model->password = $_POST[ 'Admins' ][ 'newPassword' ];
 				if ( $model->save() )
@@ -103,7 +125,7 @@ class AdminsManageController extends Controller
 				Yii::app()->user->setFlash('failed','درخواست با خطا مواجه است. لطفا مجددا سعی نمایید.');
         }
 
-        $this->render( 'update', array(
+        $this->render( '_change_password_form', array(
             'model' => $model,
         ) );
     }
