@@ -177,6 +177,15 @@ section.classes .owl-prev .arrow,
     padding-right: 0;
     padding-left: 60px;
 }
+
+.files ul li > span:first-of-type {
+    left: 60px;
+    right: 140px;
+}
+.files ul li:hover > span:first-of-type {
+    left: 60px;
+    right: 320px;
+}
 .page-content.courses .collapse-header{
     text-align: left;
 }

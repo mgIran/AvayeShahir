@@ -3412,6 +3412,25 @@ ol{
     font-size: 13px;
     text-align: justify;
 }
+
+.files ul li > span:first-of-type {
+    display: block;
+    left: 140px;
+    overflow: hidden;
+    position: absolute;
+    right: 60px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -ms-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
+}
+.files ul li:hover > span:first-of-type {
+    left: 320px;
+}
+
 @media all and (min-width: 769px){
     .affix{
         position: fixed !important;
