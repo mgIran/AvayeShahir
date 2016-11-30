@@ -40,14 +40,7 @@ echo CHtml::hiddenField('ClassCategoryFileLinks[category_id]',$model->id);
 
 	<div class='row'>
 		<?php echo $form->labelEx($fileLinkModel,'file_type', array('class'=>'control-label')); ?>
-		<?php echo $form->dropDownList($fileLinkModel,'file_type',array(
-			'jpeg'=>'jpeg','jpg'=>'jpg','png'=>'png','bmp'=>'bmp','pdf'=>'pdf',
-			'docx'=>'docx','doc'=>'doc','ppt'=>'ppt','pptx'=>'pptx','pps'=>'pps',
-			'ppsx'=>'ppsx','xls'=>'xls','xlsx'=>'xlsx','mp4'=>'mp4','mov'=>'mov',
-			'webm'=>'webm','avi'=>'avi','wmv'=>'wmv','flv'=>'flv','mkv'=>'mkv',
-			'mp3'=>'mp3','m4a'=>'m4a','ogg'=>'ogg','wav'=>'wav','acc'=>'acc',
-			'wma'=>'wma','rma'=>'rma','zip'=>'zip','rar'=>'rar'
-		)) ?>
+		<?php echo $form->dropDownList($fileLinkModel,'file_type',$fileLinkModel->getTypes()) ?>
 		<?php echo $form->error($fileLinkModel,'file_type'); ?>
 	</div>
 

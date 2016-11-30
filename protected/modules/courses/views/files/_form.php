@@ -1,7 +1,7 @@
 <?php
 /* @var $this ClassCategoriesManageController */
 /* @var $model ClassCategories */
-/* @var $model ClassCategoryFileLinks */
+/* @var $model ClassCategoryFiles */
 /* @var $form CActiveForm */
 ?>
 <div class="form">
@@ -37,12 +37,7 @@
 			'maxFileSize' => 50, //MB
 			'url' => Yii::app()->createUrl('/courses/files/upload'),
 			'deleteUrl' => Yii::app()->createUrl('/courses/files/deleteUpload'),
-			'acceptedFiles' => '.jpeg, .jpg, .png, .bmp,
-				.pdf, .docx, .doc, .ppt, .pptx, .pps, .ppsx, .xls, .xlsx,
-				.mp4, .mov, .webm, .avi, .wmv, .flv, .mkv,
-				.mp3, .m4a, .ogg, .wav, .acc, .wma, .rma,
-				.zip, .rar
-				',
+			'acceptedFiles' => implode(', ',$model->getTypes()),
 			'serverFiles' => $file,
 			'onSuccess' => '
 			var responseObj = JSON.parse(res);

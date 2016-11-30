@@ -21,9 +21,10 @@ class ClassCategoryFileLinks extends SortableCActiveRecord
 {
 
 	private $_types = array(
-			'jpeg','jpg','png','bmp','pdf',	'docx','doc','ppt','pptx','pps',
-			'ppsx','xls','xlsx','mp4','mov','webm','avi','wmv','flv','mkv',
-			'mp3','m4a','ogg','wav','acc','wma','rma','zip','rar'
+		'jpeg','jpg','png','bmp','pdf',	'docx','doc','ppt','pptx','pps',
+		'ppsx','xls','xlsx','mp4','mov','webm','avi','wmv','flv','mkv',
+		'mp3','m4a','ogg','wav','acc','wma','rma','zip','rar',
+		'apk'
 	);
 	/**
 	 * @return string the associated database table name
@@ -177,5 +178,12 @@ class ClassCategoryFileLinks extends SortableCActiveRecord
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
+	}
+
+	public function getTypes(){
+		$list = array();
+		foreach($this->_types as $type)
+			$list[$type] = $type;
+		return $list;
 	}
 }

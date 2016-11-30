@@ -28,14 +28,7 @@
 
 	<div class='row'>
 		<?php echo $form->labelEx($model,'file_type', array('class'=>'control-label')); ?>
-		<?php echo $form->dropDownList($model,'file_type',array(
-				'jpeg'=>'jpeg','jpg'=>'jpg','png'=>'png','bmp'=>'bmp','pdf'=>'pdf',
-				'docx'=>'docx','doc'=>'doc','ppt'=>'ppt','pptx'=>'pptx','pps'=>'pps',
-				'ppsx'=>'ppsx','xls'=>'xls','xlsx'=>'xlsx','mp4'=>'mp4','mov'=>'mov',
-				'webm'=>'webm','avi'=>'avi','wmv'=>'wmv','flv'=>'flv','mkv'=>'mkv',
-				'mp3'=>'mp3','m4a'=>'m4a','ogg'=>'ogg','wav'=>'wav','acc'=>'acc',
-				'wma'=>'wma','rma'=>'rma','zip'=>'zip','rar'=>'rar'
-		)) ?>
+		<?php echo $form->dropDownList($model,'file_type',$model->getTypes()) ?>
 		<?php echo $form->error($model,'file_type'); ?>
 	</div>
 
