@@ -402,6 +402,13 @@ ul.main-menu ol {
     padding-right: 15px;
     padding-left: 115px;
 }
+
+.header .btn-input .btn.form-control .my-caret {
+    margin-right:-4px;
+    margin-left:0;
+    left: auto;
+    right: 25px;
+}
 @media (max-width: 1200px) and (min-width: 768px){
     .news-item .news-detail{
         padding-right: 15px;
@@ -416,6 +423,10 @@ ul.main-menu ol {
     }
     .news-item .news-detail .date{
         display: none;
+    }
+    .header .btn-input .btn.form-control .my-caret {
+        margin-left:0;
+        margin-right: 100px;
     }
 }
 

@@ -35,6 +35,9 @@ class Controller extends AuthController
     public $searchModel;
     public $sideRender = null;
     public $message = null;
+    public $courses = null;
+    public $newsCategories = null;
+    public $articleCategories = null;
     /**
      * Declares class-based actions.
      */
@@ -280,5 +283,38 @@ class Controller extends AuthController
             $size = (float)$size/(1024*1024*1024);
             return number_format($size,1). ' GB';
         }
+    }
+
+    public function getCoursesList(){
+        Yii::import('courses.models.*');
+        if(!$this->courses)
+            $this->courses = CHtml::listData(Courses::model()->findAll(array('order'=>'t.order')),
+                function($model){
+                    return 'courses/'.$model->id.'/'.urlencode($model->title);
+                }
+                , 'title');
+        return $this->courses;
+    }
+
+    public function getArticleCategories(){
+        Yii::import('articles.models.*');
+        if(!$this->articleCategories)
+            $this->articleCategories = CHtml::listData(ArticleCategories::model()->findAll(array('order'=>'t.order')),
+                function($model){
+                    return 'articles/category/'.$model->id.'/'.urlencode($model->title);
+                }
+                , 'title');
+        return $this->articleCategories;
+    }
+
+    public function getNewsCategories(){
+        Yii::import('news.models.*');
+        if(!$this->newsCategories)
+            $this->newsCategories = CHtml::listData(NewsCategories::model()->findAll(array('order'=>'t.order')),
+                function($model){
+                    return 'news/category/'.$model->id.'/'.urlencode($model->title);
+                }
+                , 'title');
+        return $this->newsCategories;
     }
 }

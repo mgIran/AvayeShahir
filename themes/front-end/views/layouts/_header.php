@@ -1,4 +1,5 @@
 <?
+/* @var $this Controller */
 // Module
 if(isset($this->module))
     $menuID = $this->module->getName();
@@ -26,7 +27,22 @@ $action = $this->action->id;
                 </a>
             </li>
             <li>
-                <a class="scroll-link" href="<?= $menuID == 'site' && $action == 'index'?'#courses':Yii::app()->baseUrl.'#courses'; ?>" title="<?= Yii::t('app','Courses');?>"><?= Yii::t('app','Courses');?></a>
+                <?
+                $this->widget('ext.dropDown.dropDown', array(
+                    'id' => 'nav_courses',
+                    'name' => 'course',
+                    'label' => Yii::t('app','Courses'),
+                    'data' => $this->getCoursesList(),
+                    'caret' => '<i class="caret"></i>',
+                    'emptyOpt' => false,
+                    'onchange' => 'js:
+                        var $s = {id};
+                        var $base = \''.Yii::app()->createUrl('/').'/\';
+                        location.href = $base+$s;
+                    ',
+                ));
+                ?>
+<!--                <a class="scroll-link" href="--><?//= $menuID == 'site' && $action == 'index'?'#courses':Yii::app()->baseUrl.'#courses'; ?><!--" title="--><?//= Yii::t('app','Courses');?><!--">--><?//= Yii::t('app','Courses');?><!--</a>-->
             </li>
             <li>
                 <a class="scroll-link" href="<?= $menuID == 'site' && $action == 'index'?'#classes':Yii::app()->baseUrl.'#classes'; ?>" title="<?= Yii::t('app','Classes');?>"><?= Yii::t('app','Classes');?></a>

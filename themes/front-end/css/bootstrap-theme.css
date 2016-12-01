@@ -1412,7 +1412,7 @@ section.classes .owl-prev .arrow,
 .header .btn-input .dropdown-menu{
     display: inline-block;
     visibility: hidden;
-    width: 100%;
+    width: auto;
     text-align: right;
     max-height: 0;
     overflow: hidden;
@@ -1431,14 +1431,18 @@ section.classes .owl-prev .arrow,
     -o-transition-timing-function: cubic-bezier(0.295, 0.795, 0.500, 1.000);
     transition-timing-function: cubic-bezier(0.295, 0.795, 0.500, 1.000); /* custom */
 }
+.inner-page .header .btn-input .dropdown-menu,
 .header.scroll-mode .btn-input .dropdown-menu{
     background-color: rgba(11, 55, 98, 0.75);
     -webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2); -moz-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2); box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
 }
 
 .header .btn-input .dropdown-menu > li > a{
-    padding: 8px 16px;
+    padding: 4px 16px;
     color: #fff;
+    font-size: 12px;
+    display: block;
+    overflow: hidden;
 }
 
 .header .btn-input .btn.form-control.wd {
@@ -1456,6 +1460,7 @@ section.classes .owl-prev .arrow,
     background-image: none;
     display: inline-block;
     height: auto;
+    text-transform: none !important;
 }
 .header .btn-input.open .dropdown-menu{
     opacity: 1;
@@ -1485,9 +1490,10 @@ section.classes .owl-prev .arrow,
     top: 50%;
 }
 .header .btn-input .btn.form-control .my-caret {
-    margin-top: -6px;
+    left: 0;
+    margin-left: -4px;
+    margin-top: 0;
     position: absolute;
-    left: 10px;
     top: 50%;
 }
 .header .dropdown-menu li > a:hover{
@@ -1928,6 +1934,8 @@ section.classes .owl-carousel .owl-controls .owl-nav [class*="owl-"].disabled ,
     line-height:20px;
     margin: 10px 0;
     display:inline-block;
+    position: relative;
+    z-index:1;
     -webkit-transition: all 0.5s linear; -moz-transition: all 0.5s linear; -ms-transition: all 0.5s linear; -o-transition: all 0.5s linear; transition: all 0.5s linear;
 }
 
@@ -1953,6 +1961,13 @@ section.classes .owl-carousel .owl-controls .owl-nav [class*="owl-"].disabled ,
 .page-content.courses .files .download span.size{
     border-left:1px solid #fff;
     direction: ltr;
+    opacity: 0;
+    visibility: hidden;
+}
+.page-content.courses .files .file:hover span.size,
+.page-content.courses .files li:hover span.size{
+    opacity: 1;
+    visibility: visible;
 }
 .page-content.courses .panel-collapse .classes{
     margin-top: 50px;
@@ -2239,6 +2254,7 @@ section.classes h3{
     color: #155ca1;
     margin: 45px 0;
     font-weight: 500;
+    margin-bottom:0;
 }
 .class{
     padding: 0 5px;
