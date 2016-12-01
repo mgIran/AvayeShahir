@@ -75,7 +75,13 @@ class AuthController extends CController
             Yii::app()->user->returnUrl = Yii::app()->request->pathInfo;
             $this->redirect(array('/login'));
         }
-
+        if(in_array($filterChain->action->id, $filterChain->controller->actionsType()['backend']))
+        {
+            if(isset(Yii::app()->params['default_language']))
+                Yii::app()->language = Yii::app()->params['default_language'];
+            else
+                Yii::app()->language = 'fa_ir';
+        }
         $moduleID = is_null($filterChain->controller->module) ? 'base' : $filterChain->controller->module->name;
         $controllerID = (($moduleID == 'base') ? '' : ucfirst($moduleID)) . ucfirst($filterChain->controller->id) . 'Controller';
         $actionID = $filterChain->action->id;

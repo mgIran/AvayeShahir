@@ -1,7 +1,7 @@
 <?php
-/* @var $this ClassCategoriesManageController */
-/* @var $model ClassCategories */
-/* @var $fileLinkModel ClassCategoryFileLinks */
+/* @var $this ArticlesManageController */
+/* @var $model Articles */
+/* @var $fileLinkModel ArticleFileLinks */
 /* @var $form CActiveForm */
 ?>
 <h1>افزودن لینک فایل</h1>
@@ -18,13 +18,13 @@
 			{
 				var form = $("#link-categories-form");
 				var loading = $("#link-categories-form .loading-container");
-				var url = \''.Yii::app()->createUrl('/courses/links/create').'\';
+				var url = \''.Yii::app()->createUrl('/articles/links/create').'\';
 				submitAjaxForm(form ,url ,loading ,"if(typeof html.url == \'undefined\') location.reload(); else window.location=html.url;");
 			}
 		}'
 	),
 ));
-echo CHtml::hiddenField('ClassCategoryFileLinks[category_id]',$model->id);
+echo CHtml::hiddenField('ArticleFileLinks[article_id]',$model->id);
 ?>
 	<?= $this->renderPartial("//layouts/_loading");?>
 	<div class='row'>

@@ -39,6 +39,7 @@ return array(
 		'faq',
 		'gallery',
 		'news',
+		'articles',
 		'comments'=>array(
 			//you may override default config for all connecting models
 			'defaultModelConfig' => array(
@@ -111,6 +112,7 @@ return array(
             'showScriptName'=>false,
             'appendParams'=>true,
 			'rules'=>array(
+				'gii' => 'gii/default/index',
                 '<action:(terms|forum|guidance|FAQ)>' => 'site/<action>',
 				'gallery' => 'gallery/manage/index',
 				'news/category/<id:\d+>/<title:(.*)>' => 'news/category/view',

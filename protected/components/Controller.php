@@ -107,6 +107,17 @@ class Controller extends AuthController
                     )
                 ) ,
                 array(
+                    'label' => 'مطالب آموزشی<span class="caret"></span>' ,
+                    'url' => '#' ,
+                    'itemOptions' => array('class' => 'dropdown' ,'tabindex' => "-1") ,
+                    'linkOptions' => array('class' => 'dropdown-toggle' ,'data-toggle' => "dropdown") ,
+                    'items' => array(
+                        array('label' => 'مدیریت مطالب' ,'url' => Yii::app()->createUrl('/articles/manage/admin/')) ,
+                        array('label' => 'افزودن مطلب' ,'url' => Yii::app()->createUrl('/articles/manage/create/')) ,
+                        array('label' => 'دسته بندی ها' ,'url' => Yii::app()->createUrl('/articles/category/admin/')) ,
+                    )
+                ) ,
+                array(
                     'label' => 'اخبار<span class="caret"></span>' ,
                     'url' => '#' ,
                     'itemOptions' => array('class' => 'dropdown' ,'tabindex' => "-1") ,

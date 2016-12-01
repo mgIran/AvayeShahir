@@ -1,7 +1,7 @@
 <?php
-/* @var $this ClassCategoriesManageController */
-/* @var $model ClassCategories */
-/* @var $model ClassCategoryFileLinks */
+/* @var $this ArticlesManageController */
+/* @var $model Articles */
+/* @var $model ArticleFileLinks */
 /* @var $form CActiveForm */
 ?>
 <div class="form">

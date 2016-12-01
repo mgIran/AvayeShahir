@@ -28,7 +28,7 @@ class ClassCategories extends SortableCActiveRecord
 		return '{{class_categories}}';
 	}
 
-	public $formTags=[];
+	public $formTags = [];
 
 	/**
 	 * __set
@@ -41,13 +41,13 @@ class ClassCategories extends SortableCActiveRecord
 	 * @return string
 	 */
 
-		public function __set($name, $value)
-		{
-			if (EMHelper::WinnieThePooh($name, $this->behaviors()))
-				$this->{$name} = $value;
-			else
-				parent::__set($name, $value);
-		}
+	public function __set($name ,$value)
+	{
+		if(EMHelper::WinnieThePooh($name ,$this->behaviors()))
+			$this->{$name} = $value;
+		else
+			parent::__set($name ,$value);
+	}
 
 
 	/**
@@ -58,16 +58,16 @@ class ClassCategories extends SortableCActiveRecord
 	public function behaviors()
 	{
 		return array(
-			'EasyMultiLanguage'=>array(
-				'class' => 'ext.EasyMultiLanguage.EasyMultiLanguageBehavior',
+			'EasyMultiLanguage' => array(
+				'class' => 'ext.EasyMultiLanguage.EasyMultiLanguageBehavior' ,
 				// @todo Please change those attributes that should be translated.
-				'translated_attributes' => array('title','summary'),
-				'admin_routes' => array('courses/categories/admin', 'courses/categories/update', 'courses/categories/delete', 'courses/categories/create'),
+				'translated_attributes' => array('title' ,'summary') ,
+				'admin_routes' => array('courses/categories/admin' ,'courses/categories/update' ,'courses/categories/delete' ,'courses/categories/create') ,
 				//
-				'languages' => Yii::app()->params['languages'],
-				'default_language' => Yii::app()->params['default_language'],
-				'translations_table' => 'ym_translations',
-			),
+				'languages' => Yii::app()->params['languages'] ,
+				'default_language' => Yii::app()->params['default_language'] ,
+				'translations_table' => 'ym_translations' ,
+			) ,
 		);
 	}
 
@@ -79,16 +79,16 @@ class ClassCategories extends SortableCActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('title ,course_id','required'),
-			array('title','unique'),
-			array('title','filter','filter' => 'strip_tags'),
-			array('summary','filter','filter'=>array($obj=new CHtmlPurifier(),'purify')),
-		  	array('title', 'length', 'max'=>255),
-			array('course_id' , 'safe'),
-			array('formTags', 'safe'),
+			array('title ,course_id' ,'required') ,
+			array('title' ,'unique') ,
+			array('title' ,'filter' ,'filter' => 'strip_tags') ,
+			array('summary' ,'filter' ,'filter' => array($obj = new CHtmlPurifier() ,'purify')) ,
+			array('title' ,'length' ,'max' => 255) ,
+			array('course_id' ,'safe') ,
+			array('formTags' ,'safe') ,
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, title ,summary', 'safe', 'on'=>'search'),
+			array('id, title ,summary' ,'safe' ,'on' => 'search') ,
 		);
 	}
 
@@ -100,11 +100,11 @@ class ClassCategories extends SortableCActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'course' => array(self::BELONGS_TO, 'Courses', 'course_id'),
-			'classes' => array(self::HAS_MANY, 'Classes', 'category_id', 'order'=>'classes.order'),
-			'files' => array(self::HAS_MANY, 'ClassCategoryFiles', 'category_id' , 'order'=>'files.order'),
-			'links' => array(self::HAS_MANY, 'ClassCategoryFileLinks', 'category_id' , 'order'=>'links.order'),
-			'tags' => array(self::MANY_MANY, 'ClassTags', '{{category_tag_rel}}(category_id,tag_id)'),
+			'course' => array(self::BELONGS_TO ,'Courses' ,'course_id') ,
+			'classes' => array(self::HAS_MANY ,'Classes' ,'category_id' ,'order' => 'classes.order') ,
+			'files' => array(self::HAS_MANY ,'ClassCategoryFiles' ,'category_id' ,'order' => 'files.order') ,
+			'links' => array(self::HAS_MANY ,'ClassCategoryFileLinks' ,'category_id' ,'order' => 'links.order') ,
+			'tags' => array(self::MANY_MANY ,'ClassTags' ,'{{category_tag_rel}}(category_id,tag_id)') ,
 		);
 	}
 
@@ -114,12 +114,12 @@ class ClassCategories extends SortableCActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'ID',
-			'title' => 'عنوان',
-			'summary' => 'توضیحات',
-			'course_id' => 'دوره موردنظر',
-			'order' => 'ترتیب',
-			'formTags' => 'برچسب ها',
+			'id' => 'ID' ,
+			'title' => 'عنوان' ,
+			'summary' => 'توضیحات' ,
+			'course_id' => 'دوره موردنظر' ,
+			'order' => 'ترتیب' ,
+			'formTags' => 'برچسب ها' ,
 		);
 	}
 
@@ -139,13 +139,13 @@ class ClassCategories extends SortableCActiveRecord
 	{
 		// @todo Please modify the following code to remove attributes that should not be searched.
 
-		$criteria=new CDbCriteria;
+		$criteria = new CDbCriteria;
 
-		$criteria->compare('id',$this->id,true);
-		$criteria->compare('title',$this->title,true);
-		$criteria->compare('course_id', $this->course_id, true);
-		return new CActiveDataProvider($this, array(
-			'criteria'=>$criteria,
+		$criteria->compare('id' ,$this->id ,true);
+		$criteria->compare('title' ,$this->title ,true);
+		$criteria->compare('course_id' ,$this->course_id ,true);
+		return new CActiveDataProvider($this ,array(
+			'criteria' => $criteria ,
 		));
 	}
 
@@ -155,31 +155,32 @@ class ClassCategories extends SortableCActiveRecord
 	 * @param string $className active record class name.
 	 * @return ClassCategories the static model class
 	 */
-	public static function model($className=__CLASS__)
+	public static function model($className = __CLASS__)
 	{
 		return parent::model($className);
 	}
 
-	public function getValidClasses(){
+	public function getValidClasses()
+	{
 		$criteria = new CDbCriteria();
-		$criteria = Classes::getValidClasses($this->course_id,$this->id);
+		$criteria = Classes::getValidClasses($this->course_id ,$this->id);
 		return Classes::model()->findAll($criteria);
 	}
 
 
 	protected function afterSave()
 	{
-		if($this->formTags && !empty($this->formTags)) {
+		if($this->formTags && !empty($this->formTags)){
 			if(!$this->isNewRecord)
-				CategoryTagRel::model()->deleteAll('category_id='.$this->id);
-			foreach($this->formTags as $tag) {
+				CategoryTagRel::model()->deleteAll('category_id=' . $this->id);
+			foreach($this->formTags as $tag){
 				$tagModel = ClassTags::model()->findByAttributes(array('title' => $tag));
-				if($tagModel) {
+				if($tagModel){
 					$tag_rel = new CategoryTagRel();
 					$tag_rel->category_id = $this->id;
 					$tag_rel->tag_id = $tagModel->id;
 					$tag_rel->save(false);
-				} else {
+				}else{
 					$tagModel = new ClassTags;
 					$tagModel->title = $tag;
 					$tagModel->save(false);
@@ -195,7 +196,7 @@ class ClassCategories extends SortableCActiveRecord
 
 	public function getKeywords()
 	{
-		$tags = CHtml::listData($this->tags,'title','title');
-		return implode(',',$tags);
+		$tags = CHtml::listData($this->tags ,'title' ,'title');
+		return implode(',' ,$tags);
 	}
 }

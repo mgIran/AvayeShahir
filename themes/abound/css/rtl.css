@@ -307,3 +307,6 @@ textarea{
 .clearfix{
     clear: both;
 }
+.ltr{
+    direction: ltr !important;
+}
