@@ -86,7 +86,7 @@ class Articles extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('title, category_id', 'required'),
+			array('title, category_id, summary', 'required'),
 			array('title', 'length', 'max'=>100),
 			array('image, publish_date', 'length', 'max'=>255),
 			array('create_date', 'length', 'max'=>20),
