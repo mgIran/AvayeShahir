@@ -21,6 +21,7 @@ class ArticlesModule extends CWebModule
 		'tags' => 'articles.controllers.ArticlesTagsController',
 		'files' => 'articles.controllers.ArticlesFilesController',
 		'links' => 'articles.controllers.ArticlesLinksController',
+		'extlinks' => 'articles.controllers.ArticlesExtlinksController',
 	);
 
 	public function beforeControllerAction($controller, $action)

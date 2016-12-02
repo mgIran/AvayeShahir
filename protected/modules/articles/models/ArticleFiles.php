@@ -67,7 +67,7 @@ class ArticleFiles extends SortableCActiveRecord
 				// @todo Please change those attributes that should be translated.
 				'translated_attributes' => array('title' ,'summary'),
 				// @todo Please add admin actions
-				'admin_routes' => array('articles/files/create','articles/files/update','articles/files/admin','articles/files/delete','articles/categories/update'),
+				'admin_routes' => array('articles/files/create','articles/files/update','articles/files/admin','articles/files/delete','articles/manage/update'),
 				//
 				'languages' => Yii::app()->params['languages'],
 				'default_language' => Yii::app()->params['default_language'],

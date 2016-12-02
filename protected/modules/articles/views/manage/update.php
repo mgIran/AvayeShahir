@@ -25,6 +25,7 @@ $this->menu=array(
 	<li class="<?= !isset($_GET['step'])?'active':'' ?>"><a data-toggle="tab" href="#general">عمومی</a></li>
 	<li class="<?= isset($_GET['step'])&&$_GET['step'] == 2?'active':'' ?>"><a data-toggle="tab" href="#filesForm" >آپلود فایل</a></li>
 	<li class="<?= isset($_GET['step'])&&$_GET['step'] == 3?'active':'' ?>"><a data-toggle="tab" href="#filesLink" >لینک فایل</a></li>
+	<li class="<?= isset($_GET['step'])&&$_GET['step'] == 4?'active':'' ?>"><a data-toggle="tab" href="#extLink" >لینک خارجی</a></li>
 </ul>
 
 <div class="tab-content">
@@ -59,6 +60,21 @@ $this->menu=array(
 		<?php $this->renderPartial('_fileLinksList', array(
 					'model'=>$model,
 					'fileLinks' => $fileLinks
+				)); ?>
+	</div>
+
+	<!-- add ext Link -->
+	<div id="extLink" class="tab-pane fade <?= isset($_GET['step'])&&$_GET['step'] == 4?'in active':'' ?>">
+		<? $this->renderPartial('//layouts/_flashMessage',array('prefix'=>'ext-link-')); ?>
+		<?php $this->renderPartial('_extLinksForm', array(
+					'model'=>$model,
+					'linkModel' => $linkModel,
+				)); ?>
+		<hr>
+		<h2>لیست لینک ها</h2>
+		<?php $this->renderPartial('_extLinksList', array(
+					'model'=>$model,
+					'extLinks' => $extLinks
 				)); ?>
 	</div>
 </div>

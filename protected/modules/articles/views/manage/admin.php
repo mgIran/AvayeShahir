@@ -24,6 +24,11 @@ $this->menu=array(
 		'title',
 		'title_en',
 		array(
+			'name' => 'status',
+			'value' => '$data->statusLabel',
+			'filter' => $model->statusLabels
+		),
+		array(
 			'name' => 'category_id',
 			'value' => '$data->category->title',
 			'filter' => ArticleCategories::model()->adminSortList(null,false)

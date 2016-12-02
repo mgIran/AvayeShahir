@@ -218,6 +218,15 @@ class ArticlesManageController extends Controller
 					)
 				)
 			)),
+			'linkModel' => new ArticleLinks(),
+			'extLinks' => new CActiveDataProvider('ArticleLinks',array(
+				'criteria' => array(
+					'condition' => 'article_id = :id',
+					'params' => array(
+						':id' => $id
+					)
+				)
+			)),
 			'image' => $image
 		));
 	}

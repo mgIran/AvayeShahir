@@ -17,6 +17,7 @@
  *
  * The followings are the available model relations:
  * @property ArticleFileLinks[] $links
+ * @property ArticleLinks[] $extlinks
  * @property ArticleFiles[] $files
  * @property ArticleCategories $category
  * @property ClassTags[] $tags
@@ -113,6 +114,7 @@ class Articles extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'extlinks' => array(self::HAS_MANY, 'ArticleLinks', 'article_id','order' => 'extlinks.order'),
 			'links' => array(self::HAS_MANY, 'ArticleFileLinks', 'article_id','order' => 'links.order'),
 			'files' => array(self::HAS_MANY, 'ArticleFiles', 'article_id','order' => 'files.order'),
 			'category' => array(self::BELONGS_TO, 'ArticleCategories', 'category_id'),

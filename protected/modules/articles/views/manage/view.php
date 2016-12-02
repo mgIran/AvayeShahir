@@ -84,6 +84,25 @@ $fileDir = Yii::getPathOfAlias("webroot").'/uploads/articles/files/';
                         <?
                         endif;
                         ?>
+                        <?
+                        if($model->extlinks):
+                            ?>
+                            <h4><?= Yii::t('app','External Website Links') ?></h4>
+                            <ul class='extlinks'>
+                                <?
+                                foreach($model->extlinks as $file):
+                                    ?>
+                                    <li data-toggle="tooltip" data-placement="top" title="<?= CHtml::encode($file->summary) ?>">
+                                        <a href="<?= $file->link ?>" target="_blank" rel="nofollow"></a>
+                                        <span><?= $file->title ?></span>
+                                    </li>
+                                    <?
+                                endforeach;
+                                ?>
+                            </ul>
+                            <?
+                        endif;
+                        ?>
                     </div>
                 <?php
             endif;

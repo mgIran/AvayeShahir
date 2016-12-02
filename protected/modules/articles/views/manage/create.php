@@ -20,6 +20,7 @@ if(isset($_GET['return']) && $_GET['return'] == true)
 	<li class="active"><a data-toggle="tab" href="#general">عمومی</a></li>
 	<li class="disabled"><a href="#">آپلود فایل</a></li>
 	<li class="disabled"><a href="#">لینک فایل</a></li>
+	<li class="disabled"><a href="#">لینک خارجی</a></li>
 </ul>
 
 <div class="tab-content">

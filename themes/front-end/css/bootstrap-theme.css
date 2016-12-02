@@ -3483,6 +3483,14 @@ ol{
     min-height: 200px;
     margin-bottom: 30px;
 }
+.extlinks li span{
+    position: relative;
+    right: 0;
+    left: 0;
+}
+.extlinks li{
+    background-image: url("../svg/link.svg") !important;
+}
 @media all and (min-width: 769px){
     .affix{
         position: fixed !important;
