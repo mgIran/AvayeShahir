@@ -230,7 +230,7 @@ header.header.scroll-mode{
     bottom: 10px;
 }
 .header.scroll-mode .nav{
-    right: 130px;
+    right: 95px;
 }
 .header .navbar{
     margin: 0 auto;
@@ -250,9 +250,10 @@ header.header.scroll-mode{
     line-height: 30px;
     border-radius: 2px;
     font-weight: 500;
+    padding: 10px;
 }
 .header .nav >li >a.wide{
-    padding: 10px 20px;
+    padding: 10px;
 }
 .header .nav > li > a:focus,
 .header .nav > li > a:active{
@@ -469,6 +470,29 @@ header.header.scroll-mode{
 
 
 
+section .category-list .btn-input{
+    background-color: #ddd;
+}
+section .btn-input .btn.form-control .my-caret{
+    margin-top: 0;
+}
+section .category-list .btn-input .dropdown-menu{
+    background-color: #ddd;
+    padding: 0;
+}
+section .category-list .btn-input .dropdown-menu li a{
+    padding: 4px 15px;
+}
+section .category-list .btn-input .dropdown-menu li a:focus,
+section .category-list .btn-input .dropdown-menu li a:active,
+section .category-list .btn-input .dropdown-menu li a:hover{
+    background-color: rgba(11, 55, 98, 0.6) !important;
+    color: #fff;
+}
+section .category-list li a{
+    color: #333;
+    padding: 4px 5px;
+}
 section.search{
     background: #f2f6f9;
     position: relative;
@@ -1408,6 +1432,9 @@ section.classes .owl-prev .arrow,
     color: #fff;
     margin: 0;
     border: none;
+}
+.header .btn-input button span{
+    font-size: 14px !important;
 }
 .header .btn-input .dropdown-menu{
     display: inline-block;
@@ -3113,6 +3140,8 @@ ol{
 }
 .news-view .news-pic {
     display: block;
+    overflow: hidden;
+    border-radius: 4px;
     margin: 15px 0 25px;
 }
 .news-view .news-pic img {
@@ -3446,7 +3475,14 @@ ol{
 .files ul li:hover > span:first-of-type {
     left: 320px;
 }
-
+.panel-collapse.files{
+    margin-top: 0 !important;
+    padding: 30px 15px;
+}
+.news-page-content.article-page-content .news-view .news-text{
+    min-height: 200px;
+    margin-bottom: 30px;
+}
 @media all and (min-width: 769px){
     .affix{
         position: fixed !important;
@@ -3458,3 +3494,4 @@ ol{
         position: static !important;
     }
 }
+

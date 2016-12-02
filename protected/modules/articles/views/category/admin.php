@@ -9,7 +9,7 @@ $this->breadcrumbs=array(
 $this->menu=array(
 	array('label'=>'افزودن دسته بندی', 'url'=>array('create')),
 	array('label'=>'افزودن مطالب', 'url'=>array('manage/create')),
-	array('label'=>'مدیریت مطالب', 'url'=>array('/news/manage/admin')),
+	array('label'=>'مدیریت مطالب', 'url'=>array('/articles/manage/admin')),
 );
 ?>
 <h1>مدیریت دسته بندی مطالب</h1>

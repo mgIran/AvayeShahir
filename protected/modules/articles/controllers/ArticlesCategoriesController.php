@@ -48,11 +48,18 @@ class ArticlesCategoriesController extends Controller
 		$this->layout = '//layouts/inner';
 
 		$model = $this->loadModel($id);
-		$this->keywords = 'آوای شهیر,اخبار,دسته بندی اخبار,دسته بندی '.$model->title.','.$model->title;
+		$this->keywords = 'آوای شهیر,مطالب آموزشی,دسته بندی مطالب آموزشی,دسته بندی '.$model->title.','.$model->title;
 		$this->pageTitle = $model->title;
 
+		// get latest articles
+		$criteria = Articles::getValidArticles();
+		$criteria->addInCondition('category_id',$model->getCategoryChildes());
+		$dataProvider = new CActiveDataProvider("Articles",array(
+			'criteria' => $criteria
+		));
 		$this->render('view',array(
-			'model' => $model
+			'model' => $model,
+			'dataProvider' => $dataProvider
 		));
 	}
 
@@ -162,7 +169,7 @@ class ArticlesCategoriesController extends Controller
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='news-categories-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='articles-categories-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();

@@ -1,6 +1,6 @@
 <?php
-/* @var $this ArticlesCategoriesManageController */
-/* @var $model ArticlesCategories */
+/* @var $this ArticlesCategoriesController */
+/* @var $model ArticleCategories */
 
 $this->breadcrumbs=array(
 	'دسته بندی مطالب'=>array('index'),

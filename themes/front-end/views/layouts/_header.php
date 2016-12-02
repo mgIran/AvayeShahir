@@ -42,14 +42,33 @@ $action = $this->action->id;
                     ',
                 ));
                 ?>
-<!--                <a class="scroll-link" href="--><?//= $menuID == 'site' && $action == 'index'?'#courses':Yii::app()->baseUrl.'#courses'; ?><!--" title="--><?//= Yii::t('app','Courses');?><!--">--><?//= Yii::t('app','Courses');?><!--</a>-->
             </li>
             <li>
                 <a class="scroll-link" href="<?= $menuID == 'site' && $action == 'index'?'#classes':Yii::app()->baseUrl.'#classes'; ?>" title="<?= Yii::t('app','Classes');?>"><?= Yii::t('app','Classes');?></a>
             </li>
-<!--            <li>-->
-<!--                <a class="scroll-link" href="--><?//= $menuID == 'site' && $action == 'index'?'#staff':Yii::app()->baseUrl.'#staff'; ?><!--" title="--><?//= Yii::t('app','Staff');?><!--">--><?//= Yii::t('app','Staff');?><!--</a>-->
-<!--            </li>-->
+            <?php
+            if($this->getArticleCategories()){
+                ?>
+                <li>
+                    <?
+                    $this->widget('ext.dropDown.dropDown' ,array(
+                        'id' => 'nav_articles' ,
+                        'name' => 'article' ,
+                        'label' => Yii::t('app' ,'Educational Materials') ,
+                        'data' => $this->getArticleCategories() ,
+                        'caret' => '<i class="caret"></i>' ,
+                        'emptyOpt' => false ,
+                        'onchange' => 'js:
+                        var $s = {id};
+                        var $base = \'' . Yii::app()->createUrl('/') . '/\';
+                        location.href = $base+$s;
+                    ' ,
+                    ));
+                    ?>
+                </li>
+                <?php
+            }
+            ?>
             <li>
                 <a class="scroll-link" href="<?= $menuID == 'site' && $action == 'index'?'#teachers':Yii::app()->baseUrl.'#teachers'; ?>" title="<?= Yii::t('app','Teachers');?>"><?= Yii::t('app','Teachers');?></a>
             </li>

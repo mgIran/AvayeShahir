@@ -13,7 +13,7 @@
  * The followings are the available model relations:
  * @property Articles[] $articles
  * @property ArticleCategories $parent
- * @property ArticleCategories[] $childs
+ * @property ArticleCategories[] $childes
  */
 class ArticleCategories extends CActiveRecord
 {
@@ -56,8 +56,8 @@ class ArticleCategories extends CActiveRecord
 			'EasyMultiLanguage' => array(
 				'class' => 'ext.EasyMultiLanguage.EasyMultiLanguageBehavior' ,
 				// @todo Please change those attributes that should be translated.
-				'translated_attributes' => array('title' ,'summary') ,
-				'admin_routes' => array('articles/manage/admin' ,'articles/manage/update' ,'articles/manage/delete' ,'articles/manage/create') ,
+				'translated_attributes' => array('title') ,
+				'admin_routes' => array('articles/category/admin' ,'articles/category/update' ,'articles/category/delete' ,'articles/category/create') ,
 				//
 				'languages' => Yii::app()->params['languages'] ,
 				'default_language' => Yii::app()->params['default_language'] ,
@@ -111,7 +111,7 @@ class ArticleCategories extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'articles' => array(self::HAS_MANY, 'Articles', 'category_id'),
-			'childs' => array(self::HAS_MANY, 'ArticleCategories', 'parent_id'),
+			'childes' => array(self::HAS_MANY, 'ArticleCategories', 'parent_id'),
 			'parent' => array(self::BELONGS_TO, 'ArticleCategories', 'parent_id'),
 		);
 	}
@@ -175,8 +175,8 @@ class ArticleCategories extends CActiveRecord
 		$parents = $this->findAll( 'parent_id IS NULL order by title' );
 		$list = array();
 		foreach ( $parents as $parent ) {
-			$childs = $this->findAll($this->getCategoryChilds($parent->id ,false, 'criteria'));
-			foreach ( $childs as $child ) {
+			$childes = $this->findAll($this->getCategoryChildes($parent->id ,false, 'criteria'));
+			foreach ( $childes as $child ) {
 				array_push( $list, $child );
 			}
 		}
@@ -190,8 +190,8 @@ class ArticleCategories extends CActiveRecord
 		foreach ($parents as $parent) {
 			if ($parent->id != $excludeId) {
 				array_push($list, $parent);
-				$childs = $this->findAll($this->getCategoryChilds($parent->id, false, 'criteria'));
-				foreach ($childs as $child) {
+				$childes = $this->findAll($this->getCategoryChildes($parent->id, false, 'criteria'));
+				foreach ($childes as $child) {
 					if ($child->id != $excludeId && $child->parent_id != $excludeId)
 						array_push($list, $child);
 				}
@@ -238,10 +238,10 @@ class ArticleCategories extends CActiveRecord
 	protected function afterSave()
 	{
 		$this->updatePath($this->id);
-		return true;
+		parent::afterSave();
 	}
 
-	public function getCategoryChilds($id = null, $withSelf = true, $returnType='array')
+	public function getCategoryChildes($id = null, $withSelf = true, $returnType='array')
 	{
 		if ($id)
 			$this->id = $id;
@@ -272,7 +272,7 @@ class ArticleCategories extends CActiveRecord
 			$path = $model->parent->path ? $model->parent->path . $model->parent_id . '-' : $model->parent_id . '-';
 			ArticleCategories::model()->updateByPk($model->id,array('path' => $path));
 		}
-		foreach ($model->childs as $child)
+		foreach ($model->childes as $child)
 			$this->updatePath($child->id);
 	}
 
@@ -282,7 +282,7 @@ class ArticleCategories extends CActiveRecord
 	public static function getHtmlSortList($categoryID=null,$activeID=Null)
 	{
 		foreach (ArticleCategories::model()->getParents($categoryID,'title') as $id => $title){
-			echo '<li class="'.($activeID == $id?'active':'').'" ><a href="'.Yii::app()->createUrl('/articles/category/'.$id.'/'.urlencode($title)).'" >'.$title.'&nbsp;&nbsp;<small>('.self::model()->countArticle($id).')</small></a></li>';
+			echo '<li class="'.($activeID == $id?'active':'').'" ><a href="'.Yii::app()->createUrl('/articles/category/'.$id.'/'.urlencode($title)).'" >'.$title.'&nbsp;&nbsp;<small>('.self::model()->countArticles($id).')</small></a></li>';
 			if(ArticleCategories::model()->count('parent_id = :id',array(':id'=>$id))) {
 				echo '<ol>';
 				self::getHtmlSortList($id, $activeID);
@@ -291,8 +291,8 @@ class ArticleCategories extends CActiveRecord
 		}
 	}
 	
-	public function getArticlesCount(){
-		$catIds = $this->getCategoryChilds();
+	public function countArticles(){
+		$catIds = $this->getCategoryChildes();
 		$criteria = Articles::model()->getValidArticles($catIds);
 		return Articles::model()->count($criteria);
 	}

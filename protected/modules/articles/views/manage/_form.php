@@ -63,6 +63,12 @@
 	</div>
 
 	<div class="row">
+		<?php echo $form->labelEx($model,'status'); ?>
+		<?php echo $form->dropDownList($model,'status',$model->statusLabels); ?>
+		<?php echo $form->error($model,'status'); ?>
+	</div>
+
+	<div class="row">
 		<?php echo $form->labelEx($model,'formTags'); ?>
 		<?php
 		$this->widget("ext.tagIt.tagIt",array(

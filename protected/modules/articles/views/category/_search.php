@@ -1,6 +1,6 @@
 <?php
-/* @var $this ArticlesCategoriesManageController */
-/* @var $model ArticlesCategories */
+/* @var $this ArticlesCategoriesController */
+/* @var $model ArticleCategories */
 /* @var $form CActiveForm */
 ?>
 

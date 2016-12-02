@@ -1,13 +1,13 @@
 <?php
-/* @var $this ArticlesCategoriesManageController */
-/* @var $model ArticlesCategories */
+/* @var $this ArticlesCategoriesController */
+/* @var $model ArticleCategories */
 /* @var $form CActiveForm */
 ?>
 
 <div class="form">
 
 <?php $form=$this->beginWidget('CActiveForm', array(
-	'id'=>'news-categories-form',
+	'id'=>'articles-categories-form',
 	'enableAjaxValidation'=>false,
 )); ?>
 

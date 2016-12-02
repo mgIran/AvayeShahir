@@ -416,7 +416,7 @@ ul.main-menu ol {
     }
 }
 
-@media (max-width: 992px) {
+@media (max-width: 991px) {
     .news-item .news-detail h3{
         padding-left:0;
         padding-right:0;

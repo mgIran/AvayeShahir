@@ -137,11 +137,16 @@ return array(
     'Category' => 'دسته بندی',
     'Categories' => 'گروه ها',
     '{category} News' => 'اخبار {category}',
+    '{category} Educational Materials' => 'مطالب آموزشی {category}',
     'News tagged "{tag}"' => 'اخبار برچسب "{tag}"',
+    'News Category' => 'دسته بندی های خبر',
     'Sharing' => 'اشتراک گذاری',
     'See More' => 'مشاهده مطالب بیشتر',
     'Number of Entries' => 'تعداد نوشته ها',
     'entry' => 'نوشته',
     'entries' => 'نوشته',
     'Unit 1, No 9, 10th Street, Sarafraz Street, Beheshti Avenue, Tehran, Iran.' => 'تهران: خیابان شهید بهشتی، خ سرافراز (قائم مقام فراهانی)، کوچه دهم، پلاک 9، واحد 1',
+    'Educational Materials' => 'مطالب آموزشی',
+    'Educational Material' => 'مطلب آموزشی',
+    'Educational Materials Category' => 'دسته بندی مطالب آموزشی'
 );

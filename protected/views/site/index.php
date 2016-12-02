@@ -1,4 +1,5 @@
 <?
+/* @var $this SiteController */
 /* @var $courses Courses[] */
 /* @var $newsProvider CActiveDataProvider */
 /* @var $classes Classes[] */
@@ -126,6 +127,25 @@ if($newsProvider->totalItemCount):
 <section class="news-section" id="news">
     <div class="container">
         <h3 class="yekan-text"><?= Yii::t('app' ,'News') ?></h3>
+        <div class="row">
+            <div class="col-lg-3 col-md-4 col-sm-5 col-xs-12 pull-left category-list">
+            <?php
+            $this->widget('ext.dropDown.dropDown', array(
+                'id' => 'news_categories',
+                'name' => 'news',
+                'label' => Yii::t('app','News Category'),
+                'data' => $this->getNewsCategories(),
+                'caret' => '<i class="caret"></i>',
+                'emptyOpt' => false,
+                'onchange' => 'js:
+                            var $s = {id};
+                            var $base = \''.Yii::app()->createUrl('/').'/\';
+                            location.href = $base+$s;
+                        ',
+            ));
+            ?>
+            </div>
+        </div>
         <div class="news-container">
             <?php
             $this->widget("zii.widgets.CListView",array(
