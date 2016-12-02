@@ -846,7 +846,7 @@ section.classes .owl-controls .owl-nav .owl-prev,
     width: 150px;
 }
 .courses .course:hover .course-detail > p.text .paragraph-end{
-    background-color: #f4f4f4;
+    background: linear-gradient(to left, rgba(244, 244, 244, 0), rgba(244, 244, 244, 1)) repeat scroll 0 0 rgba(0, 0, 0, 0);
 }
 .courses .course-detail .btn{
     background-color: #89a404;
@@ -1723,7 +1723,7 @@ section.classes .owl-carousel .owl-controls .owl-nav [class*="owl-"].disabled ,
     opacity:1;
 }
 .inner-page .header .nav{
-    right:130px;
+    right:95px;
 }
 .inner-page .inner-page-content{
     margin-top: 70px;
