@@ -22,7 +22,7 @@
  * @property ArticleCategories $category
  * @property ClassTags[] $tags
  */
-class Articles extends CActiveRecord
+class Articles extends SortableCActiveRecord
 {
 	/**
 	 * @return string the associated database table name
@@ -232,7 +232,7 @@ class Articles extends CActiveRecord
 	 * @param string $alias
 	 * @return CDbCriteria
 	 */
-	public static function getValidArticles($categoryIds = array(),$order = 'id DESC',$limit = null ,$alias = 't')
+	public static function getValidArticles($categoryIds = array(),$order = 't.order',$limit = null ,$alias = 't')
 	{
 		$criteria = new CDbCriteria();
 		$criteria->addCondition($alias.'.'.'status=:status');
