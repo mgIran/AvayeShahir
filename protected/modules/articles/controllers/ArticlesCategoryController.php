@@ -1,6 +1,6 @@
 <?php
 
-class ArticlesCategoriesController extends Controller
+class ArticlesCategoryController extends Controller
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning

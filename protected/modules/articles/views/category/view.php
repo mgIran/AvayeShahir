@@ -1,5 +1,5 @@
 <?php
-/* @var $this ArticlesCategoriesController */
+/* @var $this ArticlesCategoryController */
 /* @var $model ArticleCategories */
 /* @var $dataProvider CActiveDataProvider */
 ?>

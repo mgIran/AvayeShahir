@@ -1,5 +1,5 @@
 <?php
-/* @var $this NewsCategoriesManageController */
+/* @var $this NewsCategoryController */
 /* @var $model NewsCategories */
 /* @var $dataProvider CActiveDataProvider */
 ?>

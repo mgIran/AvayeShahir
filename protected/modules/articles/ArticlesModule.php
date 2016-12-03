@@ -17,7 +17,7 @@ class ArticlesModule extends CWebModule
 
 	public $controllerMap = array(
 		'manage' => 'articles.controllers.ArticlesManageController',
-		'category' => 'articles.controllers.ArticlesCategoriesController',
+		'category' => 'articles.controllers.ArticlesCategoryController',
 		'tags' => 'articles.controllers.ArticlesTagsController',
 		'files' => 'articles.controllers.ArticlesFilesController',
 		'links' => 'articles.controllers.ArticlesLinksController',

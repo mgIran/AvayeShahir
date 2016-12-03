@@ -18,7 +18,7 @@ class NewsModule extends CWebModule
 
 	public $controllerMap = array(
 		'manage' => 'news.controllers.NewsManageController',
-		'category' => 'news.controllers.NewsCategoriesManageController'
+		'category' => 'news.controllers.NewsCategoryController'
 	);
 
 	public function beforeControllerAction($controller, $action)
