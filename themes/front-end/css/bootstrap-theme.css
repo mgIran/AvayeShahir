@@ -3029,7 +3029,6 @@ ol{
     margin-top: 5px;
     position: relative;
     text-align: justify;
-    direction: ltr;
     overflow: hidden;
 }
 .news-detail a > p .paragraph-end {
