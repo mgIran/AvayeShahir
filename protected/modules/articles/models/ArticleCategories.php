@@ -74,21 +74,21 @@ class ArticleCategories extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('title', 'length', 'max'=>50),
-			array('parent_id, order', 'length', 'max'=>10),
-			array('path', 'length', 'max'=>255),
-			array('title' ,'compareWithParent'),
-			array('parent_id', 'checkParent'),
+			array('title' ,'length' ,'max' => 50) ,
+			array('parent_id, order' ,'length' ,'max' => 10) ,
+			array('path' ,'length' ,'max' => 255) ,
+			array('title' ,'compareWithParent') ,
+			array('parent_id' ,'checkParent') ,
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, title, parent_id, path, order', 'safe', 'on'=>'search'),
+			array('id, title, parent_id, path, order' ,'safe' ,'on' => 'search') ,
 		);
 	}
 
 	public function compareWithParent($attribute ,$params)
 	{
 		if(!empty($this->title) && $this->parent_id){
-			$record = ArticleCategories::model()->findByAttributes(array('id' => $this->parent_id ,'title' => $this->title ));
+			$record = ArticleCategories::model()->findByAttributes(array('id' => $this->parent_id ,'title' => $this->title));
 			if($record)
 				$this->addError($attribute ,'عنوان دسته بندی با عنوان والد یکسان است.');
 		}
@@ -110,9 +110,9 @@ class ArticleCategories extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'articles' => array(self::HAS_MANY, 'Articles', 'category_id'),
-			'childes' => array(self::HAS_MANY, 'ArticleCategories', 'parent_id'),
-			'parent' => array(self::BELONGS_TO, 'ArticleCategories', 'parent_id'),
+			'articles' => array(self::HAS_MANY ,'Articles' ,'category_id') ,
+			'childes' => array(self::HAS_MANY ,'ArticleCategories' ,'parent_id') ,
+			'parent' => array(self::BELONGS_TO ,'ArticleCategories' ,'parent_id') ,
 		);
 	}
 
@@ -122,11 +122,11 @@ class ArticleCategories extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'ID',
-			'title' => 'عنوان',
-			'parent_id' => 'Parent',
-			'path' => 'Path',
-			'order' => 'Order',
+			'id' => 'ID' ,
+			'title' => 'عنوان' ,
+			'parent_id' => 'Parent' ,
+			'path' => 'Path' ,
+			'order' => 'Order' ,
 		);
 	}
 
@@ -146,16 +146,16 @@ class ArticleCategories extends CActiveRecord
 	{
 		// @todo Please modify the following code to remove attributes that should not be searched.
 
-		$criteria=new CDbCriteria;
+		$criteria = new CDbCriteria;
 
-		$criteria->compare('id',$this->id,true);
-		$criteria->compare('title',$this->title,true);
-		$criteria->compare('parent_id',$this->parent_id,true);
-		$criteria->compare('path',$this->path,true);
-		$criteria->compare('order',$this->order,true);
+		$criteria->compare('id' ,$this->id ,true);
+		$criteria->compare('title' ,$this->title ,true);
+		$criteria->compare('parent_id' ,$this->parent_id ,true);
+		$criteria->compare('path' ,$this->path ,true);
+		$criteria->compare('order' ,$this->order ,true);
 
-		return new CActiveDataProvider($this, array(
-			'criteria'=>$criteria,
+		return new CActiveDataProvider($this ,array(
+			'criteria' => $criteria ,
 		));
 	}
 
@@ -165,71 +165,71 @@ class ArticleCategories extends CActiveRecord
 	 * @param string $className active record class name.
 	 * @return ArticleCategories the static model class
 	 */
-	public static function model($className=__CLASS__)
+	public static function model($className = __CLASS__)
 	{
 		return parent::model($className);
 	}
 
 	public function sortList()
 	{
-		$parents = $this->findAll( 'parent_id IS NULL order by title' );
+		$parents = $this->findAll('parent_id IS NULL order by title');
 		$list = array();
-		foreach ( $parents as $parent ) {
-			$childes = $this->findAll($this->getCategoryChildes($parent->id ,false, 'criteria'));
-			foreach ( $childes as $child ) {
-				array_push( $list, $child );
+		foreach($parents as $parent){
+			$childes = $this->findAll($this->getCategoryChildes($parent->id ,false ,'criteria'));
+			foreach($childes as $child){
+				array_push($list ,$child);
 			}
 		}
-		return CHtml::listData( $list, 'id', 'fullTitle' );
+		return CHtml::listData($list ,'id' ,'fullTitle');
 	}
 
-	public function adminSortList($excludeId = NULL,$withPrompt = true)
+	public function adminSortList($excludeId = NULL ,$withPrompt = true)
 	{
 		$parents = $this->findAll('parent_id IS NULL order by title');
 		$list = array();
-		foreach ($parents as $parent) {
-			if ($parent->id != $excludeId) {
-				array_push($list, $parent);
-				$childes = $this->findAll($this->getCategoryChildes($parent->id, false, 'criteria'));
-				foreach ($childes as $child) {
-					if ($child->id != $excludeId && $child->parent_id != $excludeId)
-						array_push($list, $child);
+		foreach($parents as $parent){
+			if($parent->id != $excludeId){
+				array_push($list ,$parent);
+				$childes = $this->findAll($this->getCategoryChildes($parent->id ,false ,'criteria'));
+				foreach($childes as $child){
+					if($child->id != $excludeId && $child->parent_id != $excludeId)
+						array_push($list ,$child);
 				}
 			}
 		}
-		return $withPrompt ? CMap::mergeArray(array('' => '-'), CHtml::listData($list, 'id', 'fullTitle')) : CHtml::listData($list, 'id', 'fullTitle');
+		return $withPrompt ? CMap::mergeArray(array('' => '-') ,CHtml::listData($list ,'id' ,'fullTitle')) : CHtml::listData($list ,'id' ,'fullTitle');
 	}
 
-	public function getParents( $id = NULL )
+	public function getParents($id = NULL ,$title = 'fullTitle')
 	{
-		if ( $id )
-			$parents = $this->findAll( 'parent_id = :id order by title', array( ':id' => $id ) );
+		if($id)
+			$parents = $this->findAll('parent_id = :id order by title' ,array(':id' => $id));
 		else
-			$parents = $this->findAll( 'parent_id IS NULL order by title' );
+			$parents = $this->findAll('parent_id IS NULL order by title');
 		$list = array();
-		foreach ( $parents as $parent ) {
-			array_push( $list, $parent );
+		foreach($parents as $parent){
+			array_push($list ,$parent);
 		}
-		return CHtml::listData( $list, 'id', 'fullTitle' );
+		return CHtml::listData($list ,'id' ,$title);
 	}
 
 	public function getFullTitle()
 	{
 		$fullTitle = $this->title;
 		$model = $this;
-		while ( $model->parent ) {
+		while($model->parent){
 			$model = $model->parent;
 			if($model->parent)
 				$fullTitle = $model->title . ' - ' . $fullTitle;
 			else
-				$fullTitle = $fullTitle . ' ('.$model->title.')';
+				$fullTitle = $fullTitle . ' (' . $model->title . ')';
 		}
 		return $fullTitle;
 	}
 
 	public function beforeSave()
 	{
-		if (empty($this->parent_id))
+		if(empty($this->parent_id))
 			$this->parent_id = NULL;
 		$this->path = null;
 		return parent::beforeSave();
@@ -241,22 +241,22 @@ class ArticleCategories extends CActiveRecord
 		parent::afterSave();
 	}
 
-	public function getCategoryChildes($id = null, $withSelf = true, $returnType='array')
+	public function getCategoryChildes($id = null ,$withSelf = true ,$returnType = 'array')
 	{
-		if ($id)
+		if($id)
 			$this->id = $id;
 		$criteria = new CDbCriteria();
-		$criteria->addCondition('path LIKE :regex1', 'OR');
-		$criteria->addCondition('path LIKE :regex2', 'OR');
+		$criteria->addCondition('path LIKE :regex1' ,'OR');
+		$criteria->addCondition('path LIKE :regex2' ,'OR');
 		$criteria->params[':regex1'] = $this->id . '-%';
 		$criteria->params[':regex2'] = '%-' . $this->id . '-%';
-		if ($withSelf) {
-			$criteria->addCondition('id  = :id', 'OR');
+		if($withSelf){
+			$criteria->addCondition('id  = :id' ,'OR');
 			$criteria->params[':id'] = $this->id;
 		}
-		if ($returnType === 'array')
-			return CHtml::listData($this->findAll($criteria), 'id', 'id');
-		elseif ($returnType === 'criteria')
+		if($returnType === 'array')
+			return CHtml::listData($this->findAll($criteria) ,'id' ,'id');
+		elseif($returnType === 'criteria')
 			return $criteria;
 	}
 
@@ -268,32 +268,31 @@ class ArticleCategories extends CActiveRecord
 	{
 		/* @var $model ArticleCategories */
 		$model = ArticleCategories::model()->findByPk($id);
-		if ($model->parent) {
+		if($model->parent){
 			$path = $model->parent->path ? $model->parent->path . $model->parent_id . '-' : $model->parent_id . '-';
-			ArticleCategories::model()->updateByPk($model->id,array('path' => $path));
+			ArticleCategories::model()->updateByPk($model->id ,array('path' => $path));
 		}
-		foreach ($model->childes as $child)
+		foreach($model->childes as $child)
 			$this->updatePath($child->id);
 	}
 
 
-
-
-	public static function getHtmlSortList($categoryID=null,$activeID=Null)
+	public static function getHtmlSortList($categoryID = null ,$activeID = Null)
 	{
-		foreach (ArticleCategories::model()->getParents($categoryID,'title') as $id => $title){
-			echo '<li class="'.($activeID == $id?'active':'').'" ><a href="'.Yii::app()->createUrl('/articles/category/'.$id.'/'.urlencode($title)).'" >'.$title.'&nbsp;&nbsp;<small>('.self::model()->countArticles($id).')</small></a></li>';
-			if(ArticleCategories::model()->count('parent_id = :id',array(':id'=>$id))) {
+		foreach(ArticleCategories::model()->getParents($categoryID ,'title') as $id => $title){
+			echo '<li class="' . ($activeID == $id ? 'active' : '') . '" ><a href="' . Yii::app()->createUrl('/articles/category/' . $id . '/' . urlencode($title)) . '" >' . $title . '&nbsp;&nbsp;<small>(' . ArticleCategories::model()->countArticles($id) . ')</small></a></li>';
+			if(ArticleCategories::model()->count('parent_id = :id' ,array(':id' => $id))){
 				echo '<ol>';
-				self::getHtmlSortList($id, $activeID);
+				self::getHtmlSortList($id ,$activeID);
 				echo '</ol>';
 			}
 		}
 	}
-	
-	public function countArticles(){
-		$catIds = $this->getCategoryChildes();
-		$criteria = Articles::model()->getValidArticles($catIds);
+
+	public function countArticles($id = NULL)
+	{
+		$criteria = Articles::getValidArticles();
+		$criteria->addInCondition('category_id' ,ArticleCategories::model()->getCategoryChildes($id));
 		return Articles::model()->count($criteria);
-	}
+	}	
 }
