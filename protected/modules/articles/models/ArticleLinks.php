@@ -58,7 +58,7 @@ class ArticleLinks extends SortableCActiveRecord
 				// @todo Please change those attributes that should be translated.
 				'translated_attributes' => array('title' ,'summary'),
 				// @todo Please add admin actions
-				'admin_routes' => array('article/extlinks/create','article/extlinks/update','article/extlinks/admin','article/extlinks/delete','article/manage/update'),
+				'admin_routes' => array('articles/extlinks/create','articles/extlinks/update','articles/extlinks/admin','articles/extlinks/delete','articles/manage/update'),
 				//
 				'languages' => Yii::app()->params['languages'],
 				'default_language' => Yii::app()->params['default_language'],
