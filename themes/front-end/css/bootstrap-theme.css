@@ -2191,6 +2191,10 @@ span.navTrigger {
     min-width: 100% !important;
     max-width: 800px !important;
 }
+.extlinks .tooltip-inner{
+    min-width: 90% !important;
+    max-width: 600px !important;
+}
 .tooltip{
     z-index: 1000;
 }
