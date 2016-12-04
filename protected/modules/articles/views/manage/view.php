@@ -26,7 +26,7 @@ $fileDir = Yii::getPathOfAlias("webroot").'/uploads/articles/files/';
             <div class="news-text"><?= $model->summary ?></div>
             <!-- END OF NEWS CONTENT -->
             <?php
-            if($model->files || $model->links):
+            if($model->files || $model->links || $model->extlinks):
             ?>
                 <h3 class="collapse-header"><?= Yii::t('app','Files') ?></h3>
                     <div class="container-fluid panel-collapse files">
