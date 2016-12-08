@@ -99,7 +99,8 @@ class NewsManageController extends Controller
 		$criteria->compare('tagsRel.tag_id',$model->id);
 		$criteria->with[] = 'tagsRel';
 		$dataProvider = new CActiveDataProvider("News",array(
-			'criteria' => $criteria
+			'criteria' => $criteria,
+			'pagination' => array('pageSize' => 20)
 		));
 		$this->render('tags',array(
 			'model' => $model,
@@ -253,7 +254,7 @@ class NewsManageController extends Controller
 		$criteria = News::model()->getValidNews();
 		$dataProvider=new CActiveDataProvider('News',array(
 			'criteria' => $criteria,
-			'pagination' => false
+			'pagination' => array('pageSize' => 30)
 		));
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,

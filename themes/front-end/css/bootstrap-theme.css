@@ -2849,6 +2849,7 @@ ul.main-menu.tree li.active:before{
 ul.main-menu.tree ol li:hover:before{
     /*opacity: 0;*/
 }
+ul.main-menu li.active > a,
 ul.main-menu a:hover,
 ul.main-menu a:active,
 ul.main-menu a:focus,

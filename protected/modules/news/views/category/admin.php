@@ -15,7 +15,12 @@ $this->menu=array(
 <h1>مدیریت دسته بندی اخبار</h1>
 <? $this->renderPartial('//layouts/_flashMessage'); ?>
 
-<?php $this->widget('zii.widgets.grid.CGridView', array(
+<?php
+//$this->widget('zii.widgets.grid.CGridView', array(
+$this->widget('ext.yiiSortableModel.widgets.SortableCGridView', array(
+	'orderField' => 'order',
+	'idField' => 'id',
+	'orderUrl' => 'order',
 	'dataProvider'=>$model->search(),
 	'id'=>'categories-grid',
 	'filter'=>$model,

@@ -310,7 +310,7 @@ class Controller extends AuthController
     public function getNewsCategories(){
         Yii::import('news.models.*');
         if(!$this->newsCategories)
-            $this->newsCategories = CHtml::listData(NewsCategories::model()->findAll(array('order'=>'t.title')),
+            $this->newsCategories = CHtml::listData(NewsCategories::model()->findAll(array('order'=>'t.order')),
                 function($model){
                     return 'news/category/'.$model->id.'/'.urlencode($model->title);
                 }

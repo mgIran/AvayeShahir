@@ -22,7 +22,8 @@ class NewsCategoryController extends Controller
 				'create',
 				'update',
 				'admin',
-				'delete'
+				'delete',
+				'order'
 			)
 		);
 	}
@@ -33,8 +34,18 @@ class NewsCategoryController extends Controller
 	public function filters()
 	{
 		return array(
-			'checkAccess + create, update, admin, delete', // perform access control for CRUD operations
+			'checkAccess - index, view', // perform access control for CRUD operations
 			'postOnly + delete', // we only allow deletion via POST request
+		);
+	}
+
+
+	public function actions()
+	{
+		return array(
+			'order' => array(
+				'class' => 'ext.yiiSortableModel.actions.AjaxSortingAction',
+			),
 		);
 	}
 
@@ -55,7 +66,8 @@ class NewsCategoryController extends Controller
 		$criteria = News::getValidNews();
 		$criteria->addInCondition('category_id',$model->getCategoryChildes());
 		$dataProvider = new CActiveDataProvider("News",array(
-			'criteria' => $criteria
+			'criteria' => $criteria,
+			'pagination' => array('pageSize' => 20)
 		));
 		$this->render('view',array(
 			'model' => $model,

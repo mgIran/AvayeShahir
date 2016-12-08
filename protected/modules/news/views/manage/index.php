@@ -27,12 +27,34 @@
 			</div>
 			<div class="news-list col-lg-8 col-md-8 col-sm-8 col-xs-12 pull-left">
 				<?php
-				$this->widget("zii.widgets.CListView",array(
-					'id' => 'latest-news-list',
-					'dataProvider' => $dataProvider,
-					'itemView' => 'news.views.manage._side_view',
-					'template' => '{items}',
-				));
+				$this->widget('zii.widgets.CListView', array(
+						'id' => 'latest-news-list',
+						'dataProvider' => $dataProvider,
+						'itemView' => 'news.views.manage._side_view',
+						'template' => '{items} {pager}',
+						'ajaxUpdate' => true,
+						'pager' => array(
+							'class' => 'ext.infiniteScroll.IasPager',
+							'rowSelector'=>'.news-item-container',
+							'listViewId' => 'latest-news-list',
+							'header' => '',
+							'loaderText'=>'در حال دریافت ...',
+							'options' => array('history' => false, 'triggerPageTreshold' => ((int)$dataProvider->totalItemCount+1), 'trigger'=>'بیشتر'),
+						),
+						'afterAjaxUpdate'=>"function(id, data) {
+							$.ias({
+								'history': false,
+								'triggerPageTreshold': ".((int)$dataProvider->totalItemCount+1).",
+								'trigger': 'بیشتر',
+								'container': '#latest-news-list',
+								'item': '.news-item-container',
+								'pagination': '#latest-news-list .pager',
+								'next': '#latest-news-list .next:not(.disabled):not(.hidden) a',
+								'loader': 'در حال دریافت ...'
+							});
+						}",
+					)
+				);
 				?>
 			</div>
 		</div>

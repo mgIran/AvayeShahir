@@ -14,7 +14,7 @@
  * @property NewsCategories $parent
  * @property NewsCategories[] $childes
  */
-class NewsCategories extends CActiveRecord
+class NewsCategories extends SortableCActiveRecord
 {
 	/**
 	 * @return string the associated database table name
