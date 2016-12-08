@@ -8,7 +8,7 @@ class UsersPublicController extends Controller
     public function filters()
     {
         return array(
-            'checkAccess + dashboard, logout, setting, update', // perform access control for CRUD operations
+            'checkAccess + dashboard, logout, setting, update, changePassword', // perform access control for CRUD operations
         );
     }
     /**

@@ -311,7 +311,6 @@
     .page-content.courses .files li > span:first-of-type{
         display: block;
         padding-left: 10px;
-        line-height: 28px;
     }
     .page-content.courses .files .file,
     .page-content.courses .files li{
@@ -323,11 +322,12 @@
         background: #ef5350;
         padding: 0;
     }
-    .page-content.courses .files .download i{
-        display: none;
+    .files ul li > span:first-of-type{
+        position: static !important;
     }
-    .page-content.courses .files .download span:first-of-type{
-        display: none;
+    .page-content.courses .files .download i{
+        margin: 5px;
+        background: url("../svg/download-white.svg") no-repeat center / auto 25px;
     }
     .page-content.courses .files .download span:last-of-type{
         color: #fff;

@@ -75,7 +75,7 @@ class AuthController extends CController
             Yii::app()->user->returnUrl = Yii::app()->request->pathInfo;
             $this->redirect(array('/login'));
         }
-        if(in_array($filterChain->action->id, $filterChain->controller->actionsType()['backend']))
+        if(isset($filterChain->controller->actionsType()['backend']) && in_array($filterChain->action->id, $filterChain->controller->actionsType()['backend']))
         {
             if(isset(Yii::app()->params['default_language']))
                 Yii::app()->language = Yii::app()->params['default_language'];

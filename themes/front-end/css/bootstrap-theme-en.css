@@ -179,12 +179,18 @@ section.classes .owl-prev .arrow,
 }
 
 .files ul li > span:first-of-type {
-    left: 60px;
+    left: 60px !important;
     right: 140px;
 }
 .files ul li:hover > span:first-of-type {
     left: 60px;
     right: 320px;
+}
+
+.files ul.extlinks li:hover > span:first-of-type,
+.files ul.extlinks li > span:first-of-type {
+    left: 60px !important;
+    right: 15px !important;
 }
 .page-content.courses .collapse-header{
     text-align: left;
