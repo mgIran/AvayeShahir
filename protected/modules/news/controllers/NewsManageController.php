@@ -201,7 +201,7 @@ class NewsManageController extends Controller
 					'serverName' => $file,
 				);
 			}
-			if($model->status == 'publish' && !$model->publish_date)
+			if($model->status == 'publish')
 				$model->publish_date = time();
 			$model->formTags = isset($_POST['News']['formTags'])?explode(',',$_POST['News']['formTags']):null;
 			if($model->save())
