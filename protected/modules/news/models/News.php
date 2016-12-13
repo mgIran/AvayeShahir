@@ -229,7 +229,7 @@ class News extends CActiveRecord
 	public static function getValidNews(){
 		$criteria = new CDbCriteria();
 		$criteria->addCondition('t.status = "publish"');
-		$criteria->order = 't.publish_date DESC';
+		$criteria->order = 't.create_date DESC';
 		return $criteria;
 	}
 }
