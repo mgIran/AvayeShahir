@@ -178,17 +178,17 @@ section.classes .owl-prev .arrow,
     padding-left: 60px;
 }
 
-.files ul li > span:first-of-type {
+.files ul li > div:first-of-type {
     left: 60px !important;
     right: 140px;
 }
-.files ul li:hover > span:first-of-type {
+.files ul li:hover > div:first-of-type {
     left: 60px;
     right: 320px;
 }
 
-.files ul.extlinks li:hover > span:first-of-type,
-.files ul.extlinks li > span:first-of-type {
+.files ul.extlinks li:hover > div:first-of-type,
+.files ul.extlinks li > div:first-of-type {
     left: 60px !important;
     right: 15px !important;
 }
@@ -415,6 +415,11 @@ ul.main-menu ol {
     left: auto;
     right: 25px;
 }
+.file-image {
+    right: auto;
+    left: 10px;
+}
+
 @media (max-width: 1200px) and (min-width: 768px){
     .news-item .news-detail{
         padding-right: 15px;

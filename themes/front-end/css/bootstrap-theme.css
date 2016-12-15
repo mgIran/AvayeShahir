@@ -1989,8 +1989,12 @@ section.classes .owl-carousel .owl-controls .owl-nav [class*="owl-"].disabled ,
 .page-content.courses .files li:hover .download i{
     background: url("../svg/download-white.svg") no-repeat center / auto 25px;
 }
+.files li:hover .download span{
+    visibility: visible !important;
+}
 .page-content.courses .files .download span{
     float: left;
+    visibility: hidden;
     padding: 0 10px;
 }
 .page-content.courses .files .download span.size{
@@ -2199,7 +2203,7 @@ span.navTrigger {
     min-width: 100% !important;
     max-width: 800px !important;
 }
-.extlinks .tooltip-inner{
+.news-view .tooltip-inner{
     min-width: 90% !important;
     max-width: 600px !important;
 }
@@ -3476,7 +3480,7 @@ ol{
     text-align: justify;
 }
 
-.files ul li > span:first-of-type {
+.files ul li > div:first-of-type {
     display: block;
     left: 140px;
     overflow: hidden;
@@ -3490,7 +3494,7 @@ ol{
     -o-transition: all 0.3s;
     transition: all 0.3s;
 }
-.files ul li:hover > span:first-of-type {
+.files ul li:hover > div:first-of-type {
     left: 320px;
 }
 .panel-collapse.files{
@@ -3513,6 +3517,45 @@ ol{
 }
 .extlinks li{
     background-image: url("../svg/link.svg") !important;
+}
+
+.file-image {
+    border-radius: 2px;
+    display: inline-block;
+    height: 40px;
+    max-width: 40px;
+    overflow: hidden;
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    z-index: 1;
+}
+
+.ias_trigger > a {
+    background-color: #eee !important;
+    border: medium none !important;
+    color: #3f3f3f !important;
+    display: inline-block;
+    font-family: IrANSans !important;
+    min-width: 130px;
+    padding: 10px !important;
+}
+.ias_trigger > a:hover,
+.ias_trigger > a:active,
+.ias_trigger > a:focus{
+    background-color: #dfdfdf !important;
+    color: #222 !important;
+}
+.files .ias_trigger > a {
+    background-color: #2f4364 !important;
+    color: #fff !important;
+    padding: 6px !important;
+}
+.ias_trigger > a:hover,
+.ias_trigger > a:active,
+.ias_trigger > a:focus{
+    background-color: #466395 !important;
+    color: #eee !important;
 }
 @media all and (min-width: 769px){
     .affix{

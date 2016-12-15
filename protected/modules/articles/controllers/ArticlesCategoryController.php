@@ -55,7 +55,8 @@ class ArticlesCategoryController extends Controller
 		$criteria = Articles::getValidArticles();
 		$criteria->addInCondition('category_id',$model->getCategoryChildes());
 		$dataProvider = new CActiveDataProvider("Articles",array(
-			'criteria' => $criteria
+			'criteria' => $criteria,
+			'pagination' => array('pageSize' => 8)
 		));
 		$this->render('view',array(
 			'model' => $model,

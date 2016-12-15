@@ -44,7 +44,7 @@
     .courses .course-carousel .owl-controls .owl-nav .owl-next{
         left: -2%;
     }
-    .page-content.courses .files li > span:first-of-type{
+    .page-content.courses .files li > div:first-of-type{
         display: block;
         left: 160px;
         overflow: hidden;
@@ -308,7 +308,7 @@
     .persons .bg{
         display: none;
     }
-    .page-content.courses .files li > span:first-of-type{
+    .page-content.courses .files li > div:first-of-type{
         display: block;
         padding-left: 10px;
     }
@@ -322,7 +322,7 @@
         background: #ef5350;
         padding: 0;
     }
-    .files ul li > span:first-of-type{
+    .files ul li > div:first-of-type{
         position: static !important;
     }
     .page-content.courses .files .download i{

@@ -2,8 +2,8 @@
 /* @var $this ArticlesManageController */
 /* @var $model Articles */
 
-$fileUrl = Yii::app()->baseUrl.'/uploads/articles/files/';
-$fileDir = Yii::getPathOfAlias("webroot").'/uploads/articles/files/';
+$imageDir = Yii::getPathOfAlias("webroot").'/uploads/articles/fileimages/';
+$imageUrl = Yii::app()->baseUrl.'/uploads/articles/fileimages/';
 ?>
 <div class="page-title-container courses personnel-page-header news-page-header ">
     <div class="mask"></div>
@@ -35,23 +35,37 @@ $fileDir = Yii::getPathOfAlias("webroot").'/uploads/articles/files/';
                         ?>
                         <h4><?= Yii::t('app','Direct Links') ?></h4>
                         <ul>
-                            <?
-                            foreach($model->files as $file):
-                                if($file->path and file_exists($fileDir.$file->path)):
-                                    ?>
-                                    <li data-toggle="tooltip" data-placement="top" title="<?= CHtml::encode($file->summary) ?>">
-                                        <a href="<?= $fileUrl.$file->path ?>"></a>
-                                        <span><?= $file->title ?></span>
-                                        <span class="extension"><?= strtoupper($file->file_type) ?></span>
-                                        <span class="download">
-                                            <i></i>
-                                            <span><?= Yii::t('app','Download'); ?></span>
-                                            <span class="size"><?= Controller::fileSize($fileDir.$file->path) ?></span>
-                                        </span>
-                                    </li>
-                                    <?
-                                endif;
-                            endforeach;
+                            <?php
+                            $this->widget('zii.widgets.CListView', array(
+                                    'id' => 'direct-link-list',
+                                    'dataProvider' => new CArrayDataProvider($model->files,array(
+                                        'pagination' => array('pageSize' => 6)
+                                    )),
+                                    'itemView' => 'articles.views.files._item_view',
+                                    'template' => '{items} {pager}',
+                                    'ajaxUpdate' => true,
+                                    'pager' => array(
+                                        'class' => 'ext.infiniteScroll.IasPager',
+                                        'rowSelector'=>'.file-item-container',
+                                        'listViewId' => 'direct-link-list',
+                                        'header' => '',
+                                        'loaderText'=>'در حال دریافت ...',
+                                        'options' => array('history' => false, 'triggerPageTreshold' => 1, 'trigger'=>'بیشتر'),
+                                    ),
+                                    'afterAjaxUpdate'=>"function(id, data) {
+                                        $.ias({
+                                            'history': false,
+                                            'triggerPageTreshold': 1,
+                                            'trigger': 'بیشتر',
+                                            'container': '#direct-link-list',
+                                            'item': '.file-item-container',
+                                            'pagination': '#direct-link-list .pager',
+                                            'next': '#direct-link-list .next:not(.disabled):not(.hidden) a',
+                                            'loader': 'در حال دریافت ...'
+                                        });
+                                    }",
+                                )
+                            );
                             ?>
                         </ul>
                         <?
@@ -62,23 +76,37 @@ $fileDir = Yii::getPathOfAlias("webroot").'/uploads/articles/files/';
                         ?>
                         <h4><?= Yii::t('app','Mirror Links') ?></h4>
                         <ul>
-                            <?
-                            foreach($model->links as $fileLink):
-                                if($fileLink->link):
-                                    ?>
-                                    <li data-toggle="tooltip" data-placement="top" title="<?= CHtml::encode($fileLink->summary) ?>">
-                                        <a target="_blank" rel="nofollow" href="<?= $fileLink->link ?>"></a>
-                                        <span><?= $fileLink->title ?></span>
-                                        <span class="extension"><?= strtoupper($fileLink->file_type) ?></span>
-                                        <span class="download">
-                                            <i></i>
-                                            <span><?= Yii::t('app','Download'); ?></span>
-                                            <?= $fileLink->link_size?'<span class="size">'.$fileLink->link_size.'</span>':'' ?>
-                                        </span>
-                                    </li>
-                                    <?
-                                endif;
-                            endforeach;
+                            <?php
+                            $this->widget('zii.widgets.CListView', array(
+                                    'id' => 'mirror-link-list',
+                                    'dataProvider' => new CArrayDataProvider($model->links,array(
+                                        'pagination' => array('pageSize' => 6)
+                                    )),
+                                    'itemView' => 'articles.views.links._item_view',
+                                    'template' => '{items} {pager}',
+                                    'ajaxUpdate' => true,
+                                    'pager' => array(
+                                        'class' => 'ext.infiniteScroll.IasPager',
+                                        'rowSelector'=>'.link-item-container',
+                                        'listViewId' => 'mirror-link-list',
+                                        'header' => '',
+                                        'loaderText'=>'در حال دریافت ...',
+                                        'options' => array('history' => false, 'triggerPageTreshold' => 1, 'trigger'=>'بیشتر'),
+                                    ),
+                                    'afterAjaxUpdate'=>"function(id, data) {
+                                        $.ias({
+                                            'history': false,
+                                            'triggerPageTreshold': 1,
+                                            'trigger': 'بیشتر',
+                                            'container': '#mirror-link-list',
+                                            'item': '.link-item-container',
+                                            'pagination': '#direct-link-list .pager',
+                                            'next': '#direct-link-list .next:not(.disabled):not(.hidden) a',
+                                            'loader': 'در حال دریافت ...'
+                                        });
+                                    }",
+                                )
+                            );
                             ?>
                         </ul>
                         <?
@@ -89,15 +117,37 @@ $fileDir = Yii::getPathOfAlias("webroot").'/uploads/articles/files/';
                             ?>
                             <h4><?= Yii::t('app','External Website Links') ?></h4>
                             <ul class='extlinks'>
-                                <?
-                                foreach($model->extlinks as $file):
-                                    ?>
-                                    <li data-toggle="tooltip" data-placement="top" title="<?= CHtml::encode($file->summary) ?>">
-                                        <a href="<?= $file->link ?>" target="_blank" rel="nofollow"></a>
-                                        <span><?= $file->title ?></span>
-                                    </li>
-                                    <?
-                                endforeach;
+                                <?php
+                                $this->widget('zii.widgets.CListView', array(
+                                        'id' => 'ext-link-list',
+                                        'dataProvider' => new CArrayDataProvider($model->extlinks,array(
+                                            'pagination' => array('pageSize' => 6)
+                                        )),
+                                        'itemView' => 'articles.views.links._item_view',
+                                        'template' => '{items} {pager}',
+                                        'ajaxUpdate' => true,
+                                        'pager' => array(
+                                            'class' => 'ext.infiniteScroll.IasPager',
+                                            'rowSelector'=>'.ext-link-item-container',
+                                            'listViewId' => 'ext-link-list',
+                                            'header' => '',
+                                            'loaderText'=>'در حال دریافت ...',
+                                            'options' => array('history' => false, 'triggerPageTreshold' => 1, 'trigger'=>'بیشتر'),
+                                        ),
+                                        'afterAjaxUpdate'=>"function(id, data) {
+                                        $.ias({
+                                            'history': false,
+                                            'triggerPageTreshold': 1,
+                                            'trigger': 'بیشتر',
+                                            'container': '#ext-link-list',
+                                            'item': '.ext-link-item-container',
+                                            'pagination': '#ext-link-list .pager',
+                                            'next': '#ext-link-list .next:not(.disabled):not(.hidden) a',
+                                            'loader': 'در حال دریافت ...'
+                                        });
+                                    }",
+                                    )
+                                );
                                 ?>
                             </ul>
                             <?

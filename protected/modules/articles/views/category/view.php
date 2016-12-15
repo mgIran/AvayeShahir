@@ -28,12 +28,34 @@
 			</div>
 			<div class="articles-list col-lg-8 col-md-8 col-sm-8 col-xs-12 pull-left">
 				<?php
-				$this->widget("zii.widgets.CListView",array(
-					'id' => 'latest-articles-list',
-					'dataProvider' => $dataProvider,
-					'itemView' => 'articles.views.manage._side_view',
-					'template' => '{items}',
-				));
+				$this->widget('zii.widgets.CListView', array(
+						'id' => 'latest-articles-list',
+						'dataProvider' => $dataProvider,
+						'itemView' => 'articles.views.manage._side_view',
+						'template' => '{items} {pager}',
+						'ajaxUpdate' => true,
+						'pager' => array(
+							'class' => 'ext.infiniteScroll.IasPager',
+							'rowSelector'=>'.article-container',
+							'listViewId' => 'latest-articles-list',
+							'header' => '',
+							'loaderText'=>'در حال دریافت ...',
+							'options' => array('history' => false, 'triggerPageTreshold' => 3, 'trigger'=>'بیشتر'),
+						),
+						'afterAjaxUpdate'=>"function(id, data) {
+							$.ias({
+								'history': false,
+								'triggerPageTreshold': 3,
+								'trigger': 'بیشتر',
+								'container': '#latest-articles-list',
+								'item': '.article-container',
+								'pagination': '#latest-articles-list .pager',
+								'next': '#latest-articles-list .next:not(.disabled):not(.hidden) a',
+								'loader': 'در حال دریافت ...'
+							});
+						}",
+					)
+				);
 				?>
 			</div>
 		</div>

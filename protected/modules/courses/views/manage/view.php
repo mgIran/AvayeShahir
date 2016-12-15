@@ -3,6 +3,8 @@
 /* @var $model Courses */
 $fileUrl = Yii::app()->baseUrl.'/uploads/classCategoryFiles/';
 $fileDir = Yii::getPathOfAlias("webroot").'/uploads/classCategoryFiles/';
+$imageDir = Yii::getPathOfAlias("webroot").'/uploads/fileImages/';
+$imageUrl = Yii::app()->baseUrl.'/uploads/fileImages/';
 Yii::app()->clientScript->registerScript('active-collapse','
 	var url = window.location.hash, idx = url.indexOf("#")
 	var hash = idx != -1 ? url.substring(idx) : -1;
@@ -75,7 +77,11 @@ Yii::app()->clientScript->registerScript('active-collapse','
 							?>
 								<li data-toggle="tooltip" data-placement="top" title="<?= CHtml::encode($file->summary) ?>">
 									<a href="<?= $fileUrl.$file->path ?>"></a>
-									<span><?= $file->title ?></span>
+									<?php
+									if($file->image && file_exists($imageDir.$file->image))
+										echo CHtml::image($imageUrl.$file->image,$file->title,array('class' => 'file-image'))
+									?>
+									<div><?= $file->title ?></div>
 									<span class="extension"><?= strtoupper($file->file_type) ?></span>
 									<span class="download">
 										<i></i>
@@ -102,7 +108,11 @@ Yii::app()->clientScript->registerScript('active-collapse','
 							?>
 								<li data-toggle="tooltip" data-placement="top" title="<?= CHtml::encode($fileLink->summary) ?>">
 									<a target="_blank" rel="nofollow" href="<?= $fileLink->link ?>"></a>
-									<span><?= $fileLink->title ?></span>
+									<?php
+									if($fileLink->image && file_exists($imageDir.$fileLink->image))
+										echo CHtml::image($imageUrl.$fileLink->image,$fileLink->title,array('class' => 'file-image'))
+									?>
+									<div><?= $fileLink->title ?></div>
 									<span class="extension"><?= strtoupper($fileLink->file_type) ?></span>
 									<span class="download">
 										<i></i>
