@@ -37,35 +37,31 @@ $imageUrl = Yii::app()->baseUrl.'/uploads/articles/fileimages/';
                         <ul>
                             <?php
                             $this->widget('zii.widgets.CListView', array(
-                                    'id' => 'direct-link-list',
-                                    'dataProvider' => new CArrayDataProvider($model->files,array(
-                                        'pagination' => array('pageSize' => 6)
-                                    )),
-                                    'itemView' => 'articles.views.files._item_view',
-                                    'template' => '{items} {pager}',
-                                    'ajaxUpdate' => true,
-                                    'pager' => array(
-                                        'class' => 'ext.infiniteScroll.IasPager',
-                                        'rowSelector'=>'.file-item-container',
-                                        'listViewId' => 'direct-link-list',
-                                        'header' => '',
-                                        'loaderText'=>'در حال دریافت ...',
-                                        'options' => array('history' => false, 'triggerPageTreshold' => 1, 'trigger'=>'بیشتر'),
+                                'id' => 'direct-link-list',
+                                'dataProvider' => new CArrayDataProvider($model->files,array(
+                                    'pagination' => array('pageSize' => 12)
+                                )),
+                                'itemView' => 'articles.views.files._item_view',
+                                'template' => '{pager} {items} {pager}',
+                                'ajaxUpdate' => true,
+                                'afterAjaxUpdate' => "function(id, data){
+                                    $('html, body').animate({
+                                        scrollTop: ($('#'+id).offset().top-130)
+                                    },1000,'easeOutCubic');
+                                }",
+                                'pager' => array(
+                                    'header' => '',
+                                    'firstPageLabel' => '<<',
+                                    'lastPageLabel' => '>>',
+                                    'prevPageLabel' => '<',
+                                    'nextPageLabel' => '>',
+                                    'cssFile' => false,
+                                    'htmlOptions' => array(
+                                        'class' => 'pagination pagination-sm',
                                     ),
-                                    'afterAjaxUpdate'=>"function(id, data) {
-                                        $.ias({
-                                            'history': false,
-                                            'triggerPageTreshold': 1,
-                                            'trigger': 'بیشتر',
-                                            'container': '#direct-link-list',
-                                            'item': '.file-item-container',
-                                            'pagination': '#direct-link-list .pager',
-                                            'next': '#direct-link-list .next:not(.disabled):not(.hidden) a',
-                                            'loader': 'در حال دریافت ...'
-                                        });
-                                    }",
-                                )
-                            );
+                                ),
+                                'pagerCssClass' => 'blank',
+                            ));
                             ?>
                         </ul>
                         <?
@@ -78,35 +74,31 @@ $imageUrl = Yii::app()->baseUrl.'/uploads/articles/fileimages/';
                         <ul>
                             <?php
                             $this->widget('zii.widgets.CListView', array(
-                                    'id' => 'mirror-link-list',
-                                    'dataProvider' => new CArrayDataProvider($model->links,array(
-                                        'pagination' => array('pageSize' => 6)
-                                    )),
-                                    'itemView' => 'articles.views.links._item_view',
-                                    'template' => '{items} {pager}',
-                                    'ajaxUpdate' => true,
-                                    'pager' => array(
-                                        'class' => 'ext.infiniteScroll.IasPager',
-                                        'rowSelector'=>'.link-item-container',
-                                        'listViewId' => 'mirror-link-list',
-                                        'header' => '',
-                                        'loaderText'=>'در حال دریافت ...',
-                                        'options' => array('history' => false, 'triggerPageTreshold' => 1, 'trigger'=>'بیشتر'),
+                                'id' => 'mirror-link-list',
+                                'dataProvider' => new CArrayDataProvider($model->links,array(
+                                    'pagination' => array('pageSize' => 12)
+                                )),
+                                'itemView' => 'articles.views.links._item_view',
+                                'template' => '{pager} {items} {pager}',
+                                'ajaxUpdate' => true,
+                                'afterAjaxUpdate' => "function(id, data){                                  
+                                    $('html, body').animate({
+                                        scrollTop: ($('#'+id).offset().top-130)
+                                    },1000,'easeOutCubic');
+                                }",
+                                'pager' => array(
+                                    'header' => '',
+                                    'firstPageLabel' => '<<',
+                                    'lastPageLabel' => '>>',
+                                    'prevPageLabel' => '<',
+                                    'nextPageLabel' => '>',
+                                    'cssFile' => false,
+                                    'htmlOptions' => array(
+                                        'class' => 'pagination pagination-sm',
                                     ),
-                                    'afterAjaxUpdate'=>"function(id, data) {
-                                        $.ias({
-                                            'history': false,
-                                            'triggerPageTreshold': 1,
-                                            'trigger': 'بیشتر',
-                                            'container': '#mirror-link-list',
-                                            'item': '.link-item-container',
-                                            'pagination': '#direct-link-list .pager',
-                                            'next': '#direct-link-list .next:not(.disabled):not(.hidden) a',
-                                            'loader': 'در حال دریافت ...'
-                                        });
-                                    }",
-                                )
-                            );
+                                ),
+                                'pagerCssClass' => 'blank',
+                            ));
                             ?>
                         </ul>
                         <?
@@ -119,33 +111,30 @@ $imageUrl = Yii::app()->baseUrl.'/uploads/articles/fileimages/';
                             <ul class='extlinks'>
                                 <?php
                                 $this->widget('zii.widgets.CListView', array(
-                                        'id' => 'ext-link-list',
-                                        'dataProvider' => new CArrayDataProvider($model->extlinks,array(
-                                            'pagination' => array('pageSize' => 6)
-                                        )),
-                                        'itemView' => 'articles.views.links._item_view',
-                                        'template' => '{items} {pager}',
-                                        'ajaxUpdate' => true,
-                                        'pager' => array(
-                                            'class' => 'ext.infiniteScroll.IasPager',
-                                            'rowSelector'=>'.ext-link-item-container',
-                                            'listViewId' => 'ext-link-list',
-                                            'header' => '',
-                                            'loaderText'=>'در حال دریافت ...',
-                                            'options' => array('history' => false, 'triggerPageTreshold' => 1, 'trigger'=>'بیشتر'),
-                                        ),
-                                        'afterAjaxUpdate'=>"function(id, data) {
-                                        $.ias({
-                                            'history': false,
-                                            'triggerPageTreshold': 1,
-                                            'trigger': 'بیشتر',
-                                            'container': '#ext-link-list',
-                                            'item': '.ext-link-item-container',
-                                            'pagination': '#ext-link-list .pager',
-                                            'next': '#ext-link-list .next:not(.disabled):not(.hidden) a',
-                                            'loader': 'در حال دریافت ...'
-                                        });
+                                    'id' => 'ext-link-list',
+                                    'dataProvider' => new CArrayDataProvider($model->extlinks,array(
+                                        'pagination' => array('pageSize' => 12)
+                                    )),
+                                    'itemView' => 'articles.views.extlinks._item_view',
+                                    'template' => '{pager} {items} {pager}',
+                                    'ajaxUpdate' => true,
+                                    'afterAjaxUpdate' => "function(id, data){
+                                        $('html, body').animate({
+                                            scrollTop: ($('#'+id).offset().top-130)
+                                        },1000,'easeOutCubic');
                                     }",
+                                    'pager' => array(
+                                        'header' => '',
+                                        'firstPageLabel' => '<<',
+                                        'lastPageLabel' => '>>',
+                                        'prevPageLabel' => '<',
+                                        'nextPageLabel' => '>',
+                                        'cssFile' => false,
+                                        'htmlOptions' => array(
+                                            'class' => 'pagination pagination-sm',
+                                        ),
+                                    ),
+                                    'pagerCssClass' => 'blank',
                                     )
                                 );
                                 ?>

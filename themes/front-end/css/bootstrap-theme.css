@@ -1773,8 +1773,8 @@ section.classes .owl-carousel .owl-controls .owl-nav [class*="owl-"].disabled ,
 .page-title-container.courses.personnel-page-header h2{
     line-height:30px;
     min-height:60px;
-    display: block;
-    overflow: hidden;
+    display: inline-block;
+    width: 100%;
     height: auto;
 }
 .page-title-container.courses.personnel-page-header .details{
@@ -1819,7 +1819,8 @@ section.classes .owl-carousel .owl-controls .owl-nav [class*="owl-"].disabled ,
 }
 .page-content.courses .basic-information p{
     line-height:30px;
-    padding: 30px 0;
+    padding: 0;
+    margin: 0;
 }
 .page-content.courses .basic-information .image {
     border-radius: 6px;
@@ -1921,7 +1922,8 @@ section.classes .owl-carousel .owl-controls .owl-nav [class*="owl-"].disabled ,
     margin-bottom: 50px !important;
 }
 .page-content.courses .files .file,
-.page-content.courses .files li{
+.page-content.courses .files > ul > li,
+.page-content.courses .files .items > li{
     list-style: none;
     background: #fff url('../svg/attachment.svg') no-repeat right 20px center / 18px auto;
     border-right: 3px solid #ef5350;
@@ -1938,8 +1940,10 @@ section.classes .owl-carousel .owl-controls .owl-nav [class*="owl-"].disabled ,
     font-weight: 400;
     -webkit-transition: all 0.5s ease-in-out; -moz-transition: all 0.5s ease-in-out; -ms-transition: all 0.5s ease-in-out; -o-transition: all 0.5s ease-in-out; transition: all 0.5s ease-in-out;
 }
-.page-content.courses .files .file > a,
-.page-content.courses .files li > a{
+.page-content.courses .files > ul .file > a,
+.page-content.courses .files .items .file > a,
+.page-content.courses .files > ul > li > a,
+.page-content.courses .files .items > li > a{
     position: absolute;
     top:0;
     right:0;
@@ -1948,8 +1952,10 @@ section.classes .owl-carousel .owl-controls .owl-nav [class*="owl-"].disabled ,
     z-index: 1;
     display: block;
 }
-.page-content.courses .files .file:hover,
-.page-content.courses .files li:hover{
+.page-content.courses .files > ul .file:hover,
+.page-content.courses .files .items .file:hover,
+.page-content.courses .files > ul > li:hover,
+.page-content.courses .files .items > li:hover{
     background-color: #f7fbff;
 }
 .page-content.courses .files .extension{
@@ -1970,12 +1976,12 @@ section.classes .owl-carousel .owl-controls .owl-nav [class*="owl-"].disabled ,
     margin: 10px 0;
     display:inline-block;
     position: relative;
-    z-index:1;
-    -webkit-transition: all 0.5s linear; -moz-transition: all 0.5s linear; -ms-transition: all 0.5s linear; -o-transition: all 0.5s linear; transition: all 0.5s linear;
+    -webkit-transition: all 0.3s linear; -moz-transition: all 0.3s linear; -ms-transition: all 0.3s linear; -o-transition: all 0.3s linear; transition: all 0.3s linear;
 }
 
 .page-content.courses .files .file:hover .download,
-.page-content.courses .files li:hover .download{
+.page-content.courses .files > ul > li:hover .download,
+.page-content.courses .files .items > li:hover .download{
     background: #ef5350;
 }
 .page-content.courses .files .download i{
@@ -1986,7 +1992,8 @@ section.classes .owl-carousel .owl-controls .owl-nav [class*="owl-"].disabled ,
     float: left;
 }
 .page-content.courses .files .file:hover .download i,
-.page-content.courses .files li:hover .download i{
+.page-content.courses .files > ul > li:hover .download i,
+.page-content.courses .files .items > li:hover .download i{
     background: url("../svg/download-white.svg") no-repeat center / auto 25px;
 }
 .files li:hover .download span{
@@ -2004,7 +2011,8 @@ section.classes .owl-carousel .owl-controls .owl-nav [class*="owl-"].disabled ,
     visibility: hidden;
 }
 .page-content.courses .files .file:hover span.size,
-.page-content.courses .files li:hover span.size{
+.page-content.courses .files > ul > li:hover span.size,
+.page-content.courses .files .items > li:hover span.size{
     opacity: 1;
     visibility: visible;
 }
@@ -3480,7 +3488,8 @@ ol{
     text-align: justify;
 }
 
-.files ul li > div:first-of-type {
+.files > ul > li > div:first-of-type ,
+.files ul .items > li > div:first-of-type {
     display: block;
     left: 140px;
     overflow: hidden;
@@ -3494,7 +3503,8 @@ ol{
     -o-transition: all 0.3s;
     transition: all 0.3s;
 }
-.files ul li:hover > div:first-of-type {
+.files > ul > li:hover > div:first-of-type ,
+.files ul .items > li:hover > div:first-of-type {
     left: 320px;
 }
 .panel-collapse.files{
@@ -3528,7 +3538,6 @@ ol{
     position: absolute;
     right: 10px;
     top: 5px;
-    z-index: 1;
 }
 
 .ias_trigger > a {
@@ -3556,6 +3565,12 @@ ol{
 .ias_trigger > a:focus{
     background-color: #466395 !important;
     color: #eee !important;
+}
+.pagination li.selected a{
+    background-color: #eee !important;
+    border-color: #ddd !important;
+    color: #23527c !important;
+    z-index: 2;
 }
 @media all and (min-width: 769px){
     .affix{

@@ -63,6 +63,7 @@
                             $purifier = new CHtmlPurifier();
                             $purifier->setOptions(array(
                                 'HTML.Allowed'=> 'p,a[href|target],b,i,br',
+                                'HTML.AllowedAttributes'=> 'style,id,class,src',
                             ));
                             $text = $purifier->purify($faq->body);
                             echo '<div class="faq-text">'.$text.'</div>';

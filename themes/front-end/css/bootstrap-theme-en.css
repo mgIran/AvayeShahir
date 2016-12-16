@@ -164,31 +164,38 @@ section.classes .owl-prev .arrow,
     padding-left: 0;
     padding-right: 30px;
 }
-.page-content.courses .files .file,
-.page-content.courses .files li{
+.page-content.courses .files > ul .file,
+.page-content.courses .files .items .file,
+.page-content.courses .files > ul > li,
+.page-content.courses .files .items > li{
     background: #fff url("../svg/attachment.svg") no-repeat scroll left 20px center / 18px auto;
     padding-right: 0;
     padding-left: 60px;
     border-right: none;
     border-left: 3px solid #ef5350;
 }
-.page-content.courses .files .file,
-.page-content.courses .files li{
+.page-content.courses .files > ul .file,
+.page-content.courses .files .items .file,
+.page-content.courses .files > ul > li,
+.page-content.courses .files .items > li{
     padding-right: 0;
     padding-left: 60px;
 }
 
-.files ul li > div:first-of-type {
+.files > ul > li > div:first-of-type ,
+.files ul .items > li > div:first-of-type {
     left: 60px !important;
     right: 140px;
 }
-.files ul li:hover > div:first-of-type {
+.files > ul > li:hover > div:first-of-type ,
+.files ul .items > li:hover > div:first-of-type {
     left: 60px;
     right: 320px;
 }
-
-.files ul.extlinks li:hover > div:first-of-type,
-.files ul.extlinks li > div:first-of-type {
+.files ul.extlinks > ul > li:hover > div:first-of-type,
+.files ul.extlinks .items > li:hover > div:first-of-type,
+.files ul.extlinks > ul > li > div:first-of-type ,
+.files ul.extlinks .items > li > div:first-of-type {
     left: 60px !important;
     right: 15px !important;
 }
@@ -420,6 +427,15 @@ ul.main-menu ol {
     left: 10px;
 }
 
+.pagination li{
+    float: left !important;
+}
+.pagination > li:last-child > a, .pagination > li:last-child > span{
+    border-radius: 0 4px 4px 0 !important;
+}
+.pagination > li:first-child > a, .pagination > li:first-child > span{
+    border-radius: 4px 0 0 4px !important;
+}
 @media (max-width: 1200px) and (min-width: 768px){
     .news-item .news-detail{
         padding-right: 15px;
