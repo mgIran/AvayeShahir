@@ -76,10 +76,15 @@ class Courses extends SortableCActiveRecord
 	{
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
+		$purifier  = new CHtmlPurifier();
+		$purifier->setOptions(array(
+			'HTML.Allowed'=> 'p,a,b,i,br,img',
+			'HTML.AllowedAttributes'=> 'style,id,class,src,a.href',
+		));
 		return array(
 			array('title, pic, summary', 'required'),
 			array('title','filter','filter' => 'strip_tags'),
-			array('summary','filter','filter'=>array($obj=new CHtmlPurifier(),'purify')),
+			array('summary','filter','filter'=>array($purifier,'purify')),
 			array('pic', 'length', 'max'=>200),
 			array('seen', 'default', 'value'=>0),
 			array('formTags', 'safe'),

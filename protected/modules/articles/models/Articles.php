@@ -86,6 +86,11 @@ class Articles extends SortableCActiveRecord
 	{
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
+		$purifier  = new CHtmlPurifier();
+		$purifier->setOptions(array(
+			'HTML.Allowed'=> 'p,a,b,i,br,img',
+			'HTML.AllowedAttributes'=> 'style,id,class,src,a.href',
+		));
 		return array(
 			array('title, category_id, summary', 'required'),
 			array('title', 'length', 'max'=>100),
@@ -95,7 +100,7 @@ class Articles extends SortableCActiveRecord
 			array('status', 'length', 'max'=>7),
 			array('category_id, order', 'length', 'max'=>10),
 			array('title' ,'filter' ,'filter' => 'strip_tags') ,
-			array('summary' ,'filter' ,'filter' => array($obj = new CHtmlPurifier() ,'purify')) ,
+			array('summary' ,'filter' ,'filter' => array($purifier ,'purify')) ,
 			array('create_date, publish_date, formTags', 'safe'),
 			array('create_date', 'default' , 'value' => time()),
 			array('seen', 'default' , 'value' => 0),

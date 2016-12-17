@@ -96,10 +96,15 @@ class Classes extends SortableCActiveRecord
 	{
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
+		$purifier  = new CHtmlPurifier();
+		$purifier->setOptions(array(
+			'HTML.Allowed'=> 'p,a,b,i,br,img',
+			'HTML.AllowedAttributes'=> 'style,id,class,src,a.href',
+		));
 		return array(
 			array('title, category_id, course_id, capacity, teacher_id', 'required'),
 			array('title','filter','filter' => 'strip_tags'),
-			array('summary','filter','filter'=>array($obj=new CHtmlPurifier(),'purify')),
+			array('summary','filter','filter'=>array($purifier,'purify')),
 			array('price', 'default', 'value' => 0),
 			array('price, sessions, capacity', 'numerical', 'integerOnly' => true),
 			array('endSignupDate', 'compare', 'compareAttribute' => 'startSignupDate', 'operator' => '>', 'message' => 'تاریخ پایان ثبت نام باید بیشتر از تاریخ شروع ثبت نام باشد.'),

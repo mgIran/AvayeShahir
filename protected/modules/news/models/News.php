@@ -85,12 +85,17 @@ class News extends CActiveRecord
 	{
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
+		$purifier  = new CHtmlPurifier();
+		$purifier->setOptions(array(
+			'HTML.Allowed'=> 'p,a,b,i,br,img',
+			'HTML.AllowedAttributes'=> 'style,id,class,src,a.href',
+		));
 		return array(
 			array('title, body, category_id', 'required'),
 			array('title, seen', 'length', 'max'=>255),
 			array('summary', 'length', 'max'=>2000),
 			array('title','filter','filter' => 'strip_tags'),
-			array('summary, body','filter','filter'=>array($obj=new CHtmlPurifier(),'purify')),
+			array('summary, body','filter','filter'=>array($purifier,'purify')),
 			array('image', 'length', 'max'=>200),
 			array('status', 'length', 'max'=>7),
 			array('category_id, order', 'length', 'max'=>10),

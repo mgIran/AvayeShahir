@@ -22,10 +22,10 @@ $this->menu=array(
 	'columns'=>array(
 		'title',
 		'title_en',
-//		array(
-//			'header' => 'والد',
-//			'name' => 'parent.fullTitle',
-//		),
+		array(
+			'header' => 'والد',
+			'name' => 'parent.fullTitle',
+		),
 		array(
 			'class'=>'CButtonColumn',
 			'template' => '{update}{delete}'
