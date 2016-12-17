@@ -275,7 +275,7 @@ class NewsCategories extends SortableCActiveRecord
 	public static function getHtmlSortList($categoryID = null ,$activeID = Null)
 	{
 		foreach(NewsCategories::model()->getParents($categoryID ,'title') as $id => $title){
-			echo '<li class="' . ($activeID == $id ? 'active' : '') . '" ><a href="' . Yii::app()->createUrl('/news/category/' . $id . '/' . urlencode($title)) . '" >' . $title . '&nbsp;&nbsp;<small>(' . self::model()->countNews($id) . ')</small></a></li>';
+			echo '<li class="' . ($activeID == $id ? 'active' : '') . '" ><a href="' . Yii::app()->createUrl('/news/category/' . $id . '/' . urlencode($title)) . '" ><span>' . $title . '</span>&nbsp;&nbsp;<small>(' . self::model()->countNews($id) . ')</small></a></li>';
 			if(NewsCategories::model()->count('parent_id = :id' ,array(':id' => $id))){
 				echo '<ol>';
 				self::getHtmlSortList($id ,$activeID);

@@ -2826,6 +2826,9 @@ ul.main-menu a.active
 .main-menu li{
     position: relative;
 }
+.main-menu li >a >span{
+    display: inline-block;
+}
 .main-menu.tree ol li:after{
     content: "";
     position: absolute;
@@ -3132,6 +3135,7 @@ ol{
     margin-bottom: 20px;
     min-height: 20px;
     padding: 19px;
+    line-height: 27px;
 }
 .news-view .news-pic > img {
     width: 100%;

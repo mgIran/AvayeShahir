@@ -124,7 +124,7 @@ class ArticleCategories extends CActiveRecord
 		return array(
 			'id' => 'ID' ,
 			'title' => 'عنوان' ,
-			'parent_id' => 'Parent' ,
+			'parent_id' => 'والد' ,
 			'path' => 'Path' ,
 			'order' => 'Order' ,
 		);
@@ -280,7 +280,7 @@ class ArticleCategories extends CActiveRecord
 	public static function getHtmlSortList($categoryID = null ,$activeID = Null)
 	{
 		foreach(ArticleCategories::model()->getParents($categoryID ,'title') as $id => $title){
-			echo '<li class="' . ($activeID == $id ? 'active' : '') . '" ><a href="' . Yii::app()->createUrl('/articles/category/' . $id . '/' . urlencode($title)) . '" >' . $title . '&nbsp;&nbsp;<small>(' . ArticleCategories::model()->countArticles($id) . ')</small></a></li>';
+			echo '<li class="' . ($activeID == $id ? 'active' : '') . '" ><a href="' . Yii::app()->createUrl('/articles/category/' . $id . '/' . urlencode($title)) . '" ><span>' . $title . '</span>&nbsp;&nbsp;<small>(' . ArticleCategories::model()->countArticles($id) . ')</small></a></li>';
 			if(ArticleCategories::model()->count('parent_id = :id' ,array(':id' => $id))){
 				echo '<ol>';
 				self::getHtmlSortList($id ,$activeID);
