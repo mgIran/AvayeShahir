@@ -241,17 +241,24 @@ class ArticleCategories extends CActiveRecord
 		parent::afterSave();
 	}
 
-	public function getCategoryChildes($id = null ,$withSelf = true ,$returnType = 'array')
+	public function getCategoryChildes($id = null ,$withSelf = true ,$returnType = 'array', $fullTree = false)
 	{
 		if($id)
 			$this->id = $id;
 		$criteria = new CDbCriteria();
-		$criteria->addCondition('path LIKE :regex1' ,'OR');
-		$criteria->addCondition('path LIKE :regex2' ,'OR');
-		$criteria->params[':regex1'] = $this->id . '-%';
-		$criteria->params[':regex2'] = '%-' . $this->id . '-%';
-		if($withSelf){
-			$criteria->addCondition('id  = :id' ,'OR');
+		if($fullTree) {
+			$criteria->addCondition('path LIKE :regex1', 'OR');
+			$criteria->addCondition('path LIKE :regex2', 'OR');
+			$criteria->params[':regex1'] = $this->id.'-%';
+			$criteria->params[':regex2'] = '%-'.$this->id.'-%';
+		}else
+		{
+			$criteria->addCondition('parent_id = :parent');
+			$criteria->params[':parent'] = $this->id;
+		}
+
+		if ($withSelf) {
+			$criteria->addCondition('id  = :id', 'OR');
 			$criteria->params[':id'] = $this->id;
 		}
 		if($returnType === 'array')
