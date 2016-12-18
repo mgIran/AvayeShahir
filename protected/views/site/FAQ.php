@@ -1,6 +1,6 @@
 <?php
 /* @var $this SiteController */
-/* @var $FAQCategories FaqCategories */
+/* @var $FAQCategories FaqCategories[] */
 ?>
 <!--<script>-->
 <!--    $(function () {-->
