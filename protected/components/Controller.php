@@ -288,7 +288,8 @@ class Controller extends AuthController
     public function getCoursesList(){
         Yii::import('courses.models.*');
         if(!$this->courses)
-            $this->courses = CHtml::listData(Courses::model()->findAll(array('order'=>'t.order')),
+            $this->courses = CHtml::listData(Courses::model()->findAll(array(
+                'order'=>'t.order')),
                 function($model){
                     return 'courses/'.$model->id.'/'.urlencode($model->title);
                 }
@@ -299,7 +300,10 @@ class Controller extends AuthController
     public function getArticleCategories(){
         Yii::import('articles.models.*');
         if(!$this->articleCategories)
-            $this->articleCategories = CHtml::listData(ArticleCategories::model()->findAll(array('order'=>'t.order')),
+            $this->articleCategories = CHtml::listData(ArticleCategories::model()->findAll(array(
+                'condition'=>'parent_id IS NULL',
+                'order'=>'t.order'
+            )),
                 function($model){
                     return 'articles/category/'.$model->id.'/'.urlencode($model->title);
                 }
@@ -310,7 +314,10 @@ class Controller extends AuthController
     public function getNewsCategories(){
         Yii::import('news.models.*');
         if(!$this->newsCategories)
-            $this->newsCategories = CHtml::listData(NewsCategories::model()->findAll(array('order'=>'t.order')),
+            $this->newsCategories = CHtml::listData(NewsCategories::model()->findAll(array(
+                'condition'=>'parent_id IS NULL',
+                'order'=>'t.order'
+            )),
                 function($model){
                     return 'news/category/'.$model->id.'/'.urlencode($model->title);
                 }

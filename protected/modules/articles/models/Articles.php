@@ -177,6 +177,8 @@ class Articles extends SortableCActiveRecord
 		$criteria->compare('category_id',$this->category_id,true);
 		$criteria->compare('order',$this->order,true);
 
+		$criteria->order = 't.create_date DESC';
+
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
@@ -237,7 +239,7 @@ class Articles extends SortableCActiveRecord
 	 * @param string $alias
 	 * @return CDbCriteria
 	 */
-	public static function getValidArticles($categoryIds = array(),$order = 't.order',$limit = null ,$alias = 't')
+	public static function getValidArticles($categoryIds = array(),$order = 't.publish_date DESC',$limit = null ,$alias = 't')
 	{
 		$criteria = new CDbCriteria();
 		$criteria->addCondition($alias.'.'.'status=:status');

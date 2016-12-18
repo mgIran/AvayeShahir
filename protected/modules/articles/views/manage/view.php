@@ -19,7 +19,7 @@ $imageUrl = Yii::app()->baseUrl.'/uploads/articles/fileimages/';
 <div class="page-content courses news-page-content article-page-content">
     <div class="container">
         <div class="news-view col-lg-8 col-md-8 col-sm-12 col-xs-12">
-            <h2><?= Yii::t('app','Educational Material').' '.$model->title ?></h2>
+            <h2><?= $model->title ?></h2>
             <div class="news-pic">
                 <img src="<?= Yii::app()->baseUrl.'/uploads/articles/'.$model->image ?>" alt="<?= $model->title ?>">
             </div>
