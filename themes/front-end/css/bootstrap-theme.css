@@ -3576,6 +3576,57 @@ ol{
     color: #23527c !important;
     z-index: 2;
 }
+.svg-icons{
+    display: inline-block;
+}
+.svg-icons.folder{
+    width: 20px;
+    height: 20px;
+    background: url("../svg/folder.svg") no-repeat scroll center transparent;
+    background-size: 19px;
+}
+.category-child-item {
+    background-color: rgba(24, 0, 255, 0.05);
+    border-radius: 4px;
+    display: inline-block;
+    width: 100%;
+}
+.category-child-item:hover,
+.category-child-item:focus {
+    background-color: rgba(0, 0, 176, 0.1);
+}
+.category-child-item > a {
+    display: block;
+    overflow: hidden;
+    padding: 10px;
+}
+.category-child-item > a > span.svg-icons{
+    display: inline-block !important;
+}
+.category-child-item > a > span{
+    display: inline;
+    padding: 0 10px;
+    vertical-align: top;
+}
+.articles-category-list h3{
+    margin: 25px 0;
+}
+.articles-list h4{
+    display: inline-block;
+    width: 100%;
+    margin: 25px 0;
+}
+
+.articles-list .news-item .pic,
+.articles-list .news-item .news-detail{
+    height: 70px;
+}
+.articles-list .news-item .pic{
+    width: 70px;
+}
+.articles-list .news-item .news-detail{
+    padding-right: 85px;
+}
 @media all and (min-width: 769px){
     .affix{
         position: fixed !important;

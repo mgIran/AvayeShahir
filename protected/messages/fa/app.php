@@ -144,6 +144,7 @@ return array(
     'See More' => 'مشاهده مطالب بیشتر',
     'Number of Entries' => 'تعداد نوشته ها',
     'entry' => 'نوشته',
+    'entry(s)' => 'نوشته',
     'entries' => 'نوشته',
     'Unit 1, No 9, 10th Street, Sarafraz Street, Beheshti Avenue, Tehran, Iran.' => 'تهران: خیابان شهید بهشتی، خ سرافراز (قائم مقام فراهانی)، کوچه دهم، پلاک 9، واحد 1',
     'Educational Materials' => 'مطالب آموزشی',

@@ -203,9 +203,9 @@ class ArticleCategories extends CActiveRecord
 	public function getParents($id = NULL ,$title = 'fullTitle')
 	{
 		if($id)
-			$parents = $this->findAll('parent_id = :id order by title' ,array(':id' => $id));
+			$parents = $this->findAll('parent_id = :id order by t.order' ,array(':id' => $id));
 		else
-			$parents = $this->findAll('parent_id IS NULL order by title');
+			$parents = $this->findAll('parent_id IS NULL order by t.order');
 		$list = array();
 		foreach($parents as $parent){
 			array_push($list ,$parent);

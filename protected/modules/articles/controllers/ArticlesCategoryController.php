@@ -53,7 +53,7 @@ class ArticlesCategoryController extends Controller
 
 		// get latest articles
 		$criteria = Articles::getValidArticles();
-		$criteria->addInCondition('category_id',$model->getCategoryChildes());
+		$criteria->compare('category_id',$model->id);
 		$dataProvider = new CActiveDataProvider("Articles",array(
 			'criteria' => $criteria,
 			'pagination' => array('pageSize' => 8)

@@ -25,9 +25,14 @@ $date = Yii::app()->language=="fa"?JalaliDate::date("Y/m/d - H:i",$data->publish
 			</a>
 			<span class="date hidden-sm hidden-xs"><?= $date ?></span>
 			<span class="category"><strong><?= Yii::t('app','Category') ?>: </strong><a href="<?= $this->createUrl('/articles/category/'.$data->category->id.'/'.urlencode($data->category->title)) ?>" ><?= $data->category->title ?></a></span>
-			<a href="<?= $this->createUrl('/articles/'.$data->id.'/'.urlencode($data->title)) ?>">
+			<?php
+			if(!$category):
+			?><a href="<?= $this->createUrl('/articles/'.$data->id.'/'.urlencode($data->title)) ?>">
 				<p><?= strip_tags($data->summary) ?><span class="paragraph-end" ></span></p>
 			</a>
+			<?php
+			endif;
+			?>
 		</div>
 	</div>
 </div>
