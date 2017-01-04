@@ -150,5 +150,7 @@ return array(
     'Educational Materials' => 'مطالب آموزشی',
     'Educational Material' => 'مطلب آموزشی',
     'Educational Materials Category' => 'دسته بندی مطالب آموزشی',
-    'External Website Links' => 'لینک سایت های خارجی'
+    'External Website Links' => 'لینک سایت های خارجی',
+    'Attachments' => 'پیوست ها',
+    'Articles' => 'مطالب',
 );

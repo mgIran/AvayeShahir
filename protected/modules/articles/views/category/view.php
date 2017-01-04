@@ -52,7 +52,7 @@
 				<?php
 				if($dataProvider->totalItemCount):
 				?>
-					<h4><?= Yii::t('app','Educational Materials') ?></h4>
+					<h4><?= Yii::t('app','Articles') ?></h4>
 					<?php
 					$this->widget('zii.widgets.CListView', array(
 							'id' => 'latest-articles-list',

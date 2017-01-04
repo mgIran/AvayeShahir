@@ -28,7 +28,7 @@ $imageUrl = Yii::app()->baseUrl.'/uploads/articles/fileimages/';
             <?php
             if($model->files || $model->links || $model->extlinks):
             ?>
-                <h3 class="collapse-header"><?= Yii::t('app','Files') ?></h3>
+                <h3 class="collapse-header"><?= Yii::t('app','Attachments') ?></h3>
                     <div class="container-fluid panel-collapse files">
                         <?
                         if($model->files):
