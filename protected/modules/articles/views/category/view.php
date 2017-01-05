@@ -7,7 +7,7 @@
 <div class="page-title-container courses personnel-page-header articles-page-header ">
 	<div class="mask"></div>
 	<div class="container">
-		<h2><?= Yii::t('app','{category} Educational Materials',array('{category}'=>$model->title)) ?></h2>
+		<h2><?= $model->title ?></h2>
 		<div class="details">
 			<span><?= Yii::t('app','Number of Entries') ?>:&nbsp;</span>
 			<span><?= Yii::app()->language == 'fa'?Controller::parseNumbers($dataProvider->totalItemCount):$dataProvider->totalItemCount ?>&nbsp;<?= $dataProvider->totalItemCount>1?Yii::t('app','entries'):Yii::t('app','entry') ?></span>
@@ -30,29 +30,20 @@
 				<?php
 				if($model->childes):
 				?>
-				<h4><?= Yii::t('app','Categories') ?></h4>
-				<div class="child-category-list col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<?php
-					foreach($model->childes as $child):
-						?>
-						<div class="category-child-item">
-							<a href="<?= $this->createUrl('/articles/category/'.$child->id.'/'.urlencode($child->title)) ?>">
-								<span class="svg-icons folder "></span>
-								<span class=""><?= CHtml::encode($child->title) ?></span>
-								<span class="pull-left"><small><?= CHtml::encode(Controller::parseNumbers(number_format($child->countArticles()))) ?>&nbsp;<?= Yii::t('app','entry(s)') ?></small></span>
-							</a>
-						</div>
-					<?
-					endforeach;
+					$this->widget('zii.widgets.CListView', array(
+						'id' => 'articles-category-list',
+						'dataProvider' => $categoryProvider,
+						'itemView' => '_view',
+						'template' => '{items}',
+					));
 					?>
-				</div>
 				<?php
 				endif;
 				?>
 				<?php
 				if($dataProvider->totalItemCount):
 				?>
-					<h4><?= Yii::t('app','Articles') ?></h4>
 					<?php
 					$this->widget('zii.widgets.CListView', array(
 							'id' => 'latest-articles-list',

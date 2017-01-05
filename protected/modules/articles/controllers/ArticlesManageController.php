@@ -126,7 +126,7 @@ class ArticlesManageController extends Controller
 				if ($model->image and file_exists($tmpDIR.$model->image)) {
 					$thumbnail = new Imager();
 					$thumbnail->createThumbnail($tmpDIR . $model->image, 200, 200, false, $imageDIR.'200x200/' . $model->image);
-					rename($tmpDIR . $model->image, $imageDIR . $model->image);
+					@rename($tmpDIR . $model->image, $imageDIR . $model->image);
 				}
 				Yii::app()->user->setFlash('success' ,'<span class="icon-check"></span>&nbsp;&nbsp;	اطلاعات با موفقیت ذخیره شد.');
 				$this->redirect(array('/articles/manage/update/id/'.$model->id.'/step/2'));
@@ -190,7 +190,7 @@ class ArticlesManageController extends Controller
 				if ($model->image and file_exists($tmpDIR.$model->image)) {
 					$thumbnail = new Imager();
 					$thumbnail->createThumbnail($tmpDIR . $model->image, 200, 200, false, $imageDIR.'200x200/' . $model->image);
-					rename($tmpDIR . $model->image, $imageDIR . $model->image);
+					@rename($tmpDIR . $model->image, $imageDIR . $model->image);
 				}
 				Yii::app()->user->setFlash('success' ,'<span class="icon-check"></span>&nbsp;&nbsp;اطلاعات با موفقیت ذخیره شد.');
 				$this->redirect(array('admin'));

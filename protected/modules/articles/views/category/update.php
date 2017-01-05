@@ -16,4 +16,4 @@ $this->menu=array(
 
 <h1>ویرایش دسته بندی مطالب #<?php echo $model->title; ?></h1>
 
-<?php $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php $this->renderPartial('_form', array('model'=>$model,'image' => $image)); ?>

@@ -6,6 +6,7 @@
  * The followings are the available columns in table '{{article_categories}}':
  * @property string $id
  * @property string $title
+ * @property string $image
  * @property string $parent_id
  * @property string $path
  * @property string $order
@@ -24,7 +25,7 @@ class ArticleCategories extends CActiveRecord
 	{
 		return '{{article_categories}}';
 	}
-
+	public $formTags=[];
 	/**
 	 * __set
 	 *
@@ -76,9 +77,10 @@ class ArticleCategories extends CActiveRecord
 		return array(
 			array('title' ,'length' ,'max' => 50) ,
 			array('parent_id, order' ,'length' ,'max' => 10) ,
-			array('path' ,'length' ,'max' => 255) ,
+			array('path, image' ,'length' ,'max' => 255) ,
 			array('title' ,'compareWithParent') ,
 			array('parent_id' ,'checkParent') ,
+			array('formTags' ,'safe') ,
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, title, parent_id, path, order' ,'safe' ,'on' => 'search') ,
@@ -110,9 +112,11 @@ class ArticleCategories extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'articles' => array(self::HAS_MANY ,'Articles' ,'category_id') ,
-			'childes' => array(self::HAS_MANY ,'ArticleCategories' ,'parent_id') ,
-			'parent' => array(self::BELONGS_TO ,'ArticleCategories' ,'parent_id') ,
+			'articles' => array(self::HAS_MANY, 'Articles', 'category_id'),
+			'childes' => array(self::HAS_MANY, 'ArticleCategories', 'parent_id'),
+			'parent' => array(self::BELONGS_TO, 'ArticleCategories', 'parent_id'),
+			'tags' => array(self::MANY_MANY, 'ClassTags', '{{article_category_tag_rel}}(category_id,tag_id)'),
+			'tagsRel' => array(self::HAS_MANY, 'ArticleCategoryTagRel', 'article_id'),
 		);
 	}
 
@@ -124,9 +128,11 @@ class ArticleCategories extends CActiveRecord
 		return array(
 			'id' => 'ID' ,
 			'title' => 'عنوان' ,
+			'image' => 'تصویر' ,
 			'parent_id' => 'والد' ,
 			'path' => 'Path' ,
 			'order' => 'Order' ,
+			'formTags' => 'برچسب ها' ,
 		);
 	}
 
@@ -237,6 +243,27 @@ class ArticleCategories extends CActiveRecord
 
 	protected function afterSave()
 	{
+		if($this->formTags && !empty($this->formTags)){
+			if(!$this->isNewRecord)
+				ArticleCategoryTagRel::model()->deleteAll('category_id=' . $this->id);
+			foreach($this->formTags as $tag){
+				$tagModel = ClassTags::model()->findByAttributes(array('title' => $tag));
+				if($tagModel){
+					$tag_rel = new ArticleCategoryTagRel();
+					$tag_rel->category_id = $this->id;
+					$tag_rel->tag_id = $tagModel->id;
+					$tag_rel->save(false);
+				}else{
+					$tagModel = new ClassTags;
+					$tagModel->title = $tag;
+					$tagModel->save(false);
+					$tag_rel = new ArticleCategoryTagRel();
+					$tag_rel->category_id = $this->id;
+					$tag_rel->tag_id = $tagModel->id;
+					$tag_rel->save(false);
+				}
+			}
+		}
 		$this->updatePath($this->id);
 		parent::afterSave();
 	}
@@ -301,5 +328,11 @@ class ArticleCategories extends CActiveRecord
 		$criteria = Articles::getValidArticles();
 		$criteria->addInCondition('category_id' ,ArticleCategories::model()->getCategoryChildes($id));
 		return Articles::model()->count($criteria);
-	}	
+	}
+
+	public function getKeywords()
+	{
+		$tags = CHtml::listData($this->tags ,'title' ,'title');
+		return implode(',' ,$tags);
+	}
 }
