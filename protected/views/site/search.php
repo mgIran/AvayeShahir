@@ -37,13 +37,7 @@ $this->renderPartial('//layouts/_search_box');
 <div class="page-content courses search-result">
     <div class="container">
         <div class="articles-container">
-            <div class="articles-category-list col-lg-4 col-md-4 col-sm-4 col-xs-12 pull-left">
-                <h3><?= $sideTitle ?></h3>
-                <ul class="main-menu nav nav-stacked tree">
-                    <?= $sideContent::getHtmlSortList() ?>
-                </ul>
-            </div>
-            <div class="articles-list col-lg-8 col-md-8 col-sm-8 col-xs-12 pull-left">
+            <div class="articles-list col-lg-8 col-md-8 col-sm-8 col-xs-12">
             <?php
             if($dataProvider && $dataProvider->totalItemCount):
                 $flag = true;
@@ -82,6 +76,12 @@ $this->renderPartial('//layouts/_search_box');
                 echo '<h4>نتیجه ای یافت نشد.</h4>';
             endif;
             ?>
+            </div>
+            <div class="articles-category-list col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                <h3><?= $sideTitle ?></h3>
+                <ul class="main-menu nav nav-stacked tree">
+                    <?= $sideContent::getHtmlSortList() ?>
+                </ul>
             </div>
         </div>
     </div>

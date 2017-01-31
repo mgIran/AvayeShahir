@@ -13,37 +13,36 @@ if(isset($_GET['SearchForm']))
             'action' =>array('search')
         ));
         ?>
-        <div class="row">
-            <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12">
-                <div class="row">
-                    <?= $form->textField($this->searchModel,'text' ,array('class' => 'col-md-8 text-field' ,'placeholder' => Yii::t('app','Search for ...'))) ?>
-                </div>
+        <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12">
+            <div class="row">
+                <?= $form->textField($this->searchModel,'text' ,array('class' => 'col-md-8 text-field' ,'placeholder' => Yii::t('app','Search for ...'))) ?>
             </div>
-            <div class="btn-group col-lg-3 col-md-3 col-sm-4 col-xs-7">
-                <div class="row">
-                    <?
-                    $this->widget('ext.dropDown.dropDown', array(
-                        'id' => 'search_type_box',
-                        'model' => $this->searchModel,
-                        'attribute' => 'type',
-                        'label' => Yii::t('app','Search the entire site'),
-                        'data' => array(
-//                            'all' => Yii::t('app' ,'All'),
-                            'courses' => Yii::t('app' ,'Courses'),
-                            'articles' => Yii::t('app' ,'Educational Materials'),
-                            'news' => Yii::t('app' ,'News'),
-                        ),
-                        // @todo index page search box not work
-                        'selected' => $this->searchModel->type?$this->searchModel->type:'courses',
-                        'emptyOpt' => false,
-                    ));
-                    ?>
-                </div>
-            </div>
-            <button type="submit" class="col-lg-1 col-md-1 col-sm-2 col-xs-5 btn-search btn">
-                <i class="search-icon"></i>
-            </button>
         </div>
+        <div class="btn-group col-lg-3 col-md-3 col-sm-4 col-xs-7">
+            <div class="row">
+                <?
+                $this->widget('ext.dropDown.dropDown', array(
+                    'id' => 'search_type_box',
+                    'model' => $this->searchModel,
+                    'attribute' => 'type',
+                    'label' => Yii::t('app','Search the entire site'),
+                    'data' => array(
+//                            'all' => Yii::t('app' ,'All'),
+                        'courses' => Yii::t('app' ,'Courses'),
+                        'articles' => Yii::t('app' ,'Educational Materials'),
+                        'news' => Yii::t('app' ,'News'),
+                    ),
+                    // @todo index page search box not work
+                    'selected' => $this->searchModel->type?$this->searchModel->type:'courses',
+                    'emptyOpt' => false,
+                ));
+                ?>
+            </div>
+        </div>
+        <button type="submit" class="col-lg-1 col-md-1 col-sm-2 col-xs-5 btn-search btn">
+            <i class="search-icon"></i>
+        </button>
+    </div>
 <!--        <div class="row">-->
 <!--            <a href="#advanced-search" data-toggle="collapse">-->
 <!--                <strong>+</strong>-->
@@ -53,7 +52,6 @@ if(isset($_GET['SearchForm']))
 <!--        <div id="advanced-search" class="collapse row">-->
 <!--            -->
 <!--        </div>-->
-        <?php $this->endWidget(); ?>
-    </div>
+    <?php $this->endWidget(); ?>
     <div class="bg-icon"></div>
 </section>

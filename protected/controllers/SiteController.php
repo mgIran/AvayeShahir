@@ -258,6 +258,7 @@ class SiteController extends Controller
                     $criteria->addCondition('t.title LIKE :text OR t.summary LIKE :text OR extlinks.title LIKE :text OR extlinks.summary LIKE :text OR links.title LIKE :text OR links.summary LIKE :text OR files.title LIKE :text OR files.summary LIKE :text OR category.title  LIKE :text');
                     $criteria->params['text'] = "%".$model->text."%";
                     $criteria->together = true;
+                    $criteria->order = 't.publish_date DESC';
                     $dataProvider = new CActiveDataProvider('Articles',array(
                         'criteria' => $criteria,
                         'pagination' => array('pageSize' => $pageSize)
@@ -267,6 +268,8 @@ class SiteController extends Controller
 				case 'news':
 					Yii::app()->getModule('news');
 					$criteria = new CDbCriteria();
+                    $criteria->addCondition('t.status = "publish"');
+                    $criteria->order = 't.publish_date DESC';
                     $criteria->with = array('category');
                     $criteria->addCondition('t.title LIKE :text OR t.summary LIKE :text OR t.body LIKE :text OR category.title LIKE :text');
                     $criteria->params['text'] = "%".$model->text."%";

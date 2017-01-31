@@ -504,8 +504,10 @@ section.search{
 .search form{
     position: relative;
     margin: 75px 0;
-    height: 45px;
+    min-height: 45px;
     z-index: 2;
+    display: inline-block;
+    width: 100%;
 }
 .search .text-field{
     box-shadow: 0 0 5px #f2f2f2;
@@ -2267,7 +2269,9 @@ span.navTrigger {
 #terms-modal .modal-header .close:hover{
     opacity: 0.8;
 }
-
+.search-result{
+    padding: 0 15px;
+}
 .search-result .row{
     margin-bottom: 25px;
 }
@@ -3591,6 +3595,9 @@ ol{
 .articles-list .news-item .news-detail{
     padding-right: 85px;
 }
+#search-form{
+    padding: 0 15px;
+}
 @media all and (min-width: 769px){
     .affix{
         position: fixed !important;
@@ -3602,4 +3609,5 @@ ol{
         position: static !important;
     }
 }
+
 

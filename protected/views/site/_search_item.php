@@ -46,7 +46,7 @@ elseif($type == 'news')
             <?php
             if($type == 'courses'):
                 ?>
-                sad
+                <span class="category text-nowrap overflow-ellipsis"><?= strip_tags($data->summary) ?><span class="paragraph-end" ></span></span>
                 <?php
             else:
                 $date = Yii::app()->language=="fa"?JalaliDate::date("Y/m/d - H:i",$data->publish_date):date("Y/m/d - H:i",$data->publish_date);
@@ -67,3 +67,8 @@ elseif($type == 'news')
         </div>
     </div>
 </div>
+<style>
+    .overflow-ellipsis{
+    text-overflow: ellipsis;
+    }
+</style>
