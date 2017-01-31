@@ -3598,6 +3598,12 @@ ol{
 #search-form{
     padding: 0 15px;
 }
+.pagination-sm > li > a, .pagination-sm > li > span{
+    font-size: 12px !important;
+}
+.search-result .row .pagination-sm > li > a:hover, .search-result .row .pagination-sm > li > a:focus{
+    text-decoration: none !important;
+}
 @media all and (min-width: 769px){
     .affix{
         position: fixed !important;

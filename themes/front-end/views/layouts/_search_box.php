@@ -27,13 +27,13 @@ if(isset($_GET['SearchForm']))
                     'attribute' => 'type',
                     'label' => Yii::t('app','Search the entire site'),
                     'data' => array(
-//                            'all' => Yii::t('app' ,'All'),
+                        'all' => Yii::t('app','Search the entire site'),
                         'courses' => Yii::t('app' ,'Courses'),
                         'articles' => Yii::t('app' ,'Educational Materials'),
                         'news' => Yii::t('app' ,'News'),
                     ),
                     // @todo index page search box not work
-                    'selected' => $this->searchModel->type?$this->searchModel->type:'courses',
+                    'selected' => $this->searchModel->type?$this->searchModel->type:'all',
                     'emptyOpt' => false,
                 ));
                 ?>

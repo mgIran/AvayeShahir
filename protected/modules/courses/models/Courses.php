@@ -211,4 +211,23 @@ class Courses extends SortableCActiveRecord
 			echo '<li><a href="' . Yii::app()->createUrl('/courses/' . $id . '/' . urlencode($title)) . '" ><span>' . $title . '</span></a></li>';
 		}
 	}
+
+	public static function getSearchCriteria($text, $words){
+		$criteria = new CDbCriteria();
+		$criteria->with = array('categories', 'categories.links', 'categories.files');
+		$condition = 't.title LIKE :text OR t.summary LIKE :text OR categories.title LIKE :text OR 
+                                  categories.summary LIKE :text OR links.title LIKE :text OR links.summary LIKE :text OR 
+                                  files.title LIKE :text OR files.summary LIKE :text';
+		$criteria->params['text'] = "%{$text}%";
+		foreach($words as $key => $word){
+			$condition .= " OR t.title LIKE :text$key OR t.summary LIKE :text$key OR categories.title LIKE :text$key OR 
+                                  categories.summary LIKE :text$key OR links.title LIKE :text$key OR links.summary LIKE :text$key OR 
+                                  files.title LIKE :text$key OR files.summary LIKE :text$key";
+			$criteria->params["text$key"] = "%{$word}%";
+		}
+		$criteria->addCondition($condition);
+		$criteria->together = true;
+		$criteria->order = 't.order';
+		return $criteria;
+	}
 }

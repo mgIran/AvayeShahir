@@ -226,69 +226,78 @@ class SiteController extends Controller
 		$model = new SearchForm();
         $title = '';
         $dataProvider = false;
-		if(isset($_GET['SearchForm']))
-		{
-			$model->attributes = $_GET['SearchForm'];
-            $pageSize=15;
-			$words = explode(' ',$model->text);
-			switch($model->type)
-			{
-				case 'courses':
-					Yii::app()->getModule('courses');
-					$criteria = new CDbCriteria();
-					$criteria->compare('title',$model->text,true,'OR');
-					$criteria->compare('summary',$model->text,true,'OR');
-					foreach($words as $word)
-					{
-						$criteria->compare('title',$word,true,'OR');
-						$criteria->compare('summary',$word,true,'OR');
-					}
-                    $dataProvider = new CActiveDataProvider('Courses',array(
+        $dataProviders = false;
+		if(isset($_GET['SearchForm'])){
+            $model->attributes = $_GET['SearchForm'];
+            $pageSize = 10;
+            $words = explode(' ', $model->text);
+            switch($model->type){
+                case 'courses':
+                    Yii::app()->getModule('courses');
+                    $criteria = Courses::getSearchCriteria($model->text, $words);
+                    $dataProvider = new CActiveDataProvider('Courses', array(
                         'criteria' => $criteria,
                         'pagination' => array('pageSize' => $pageSize)
                     ));
-					$title = Yii::t('app', 'Courses');
-					break;
-				case 'articles':
-					Yii::app()->getModule('articles');
-                    $criteria = new CDbCriteria();
-                    $criteria->addCondition('t.status=:status','AND');
-                    $criteria->params[':status'] = 'publish';
-                    $criteria->with = array('extlinks', 'links', 'files', 'category');
-                    $criteria->addCondition('t.title LIKE :text OR t.summary LIKE :text OR extlinks.title LIKE :text OR extlinks.summary LIKE :text OR links.title LIKE :text OR links.summary LIKE :text OR files.title LIKE :text OR files.summary LIKE :text OR category.title  LIKE :text');
-                    $criteria->params['text'] = "%".$model->text."%";
-                    $criteria->together = true;
-                    $criteria->order = 't.publish_date DESC';
-                    $dataProvider = new CActiveDataProvider('Articles',array(
+                    $title = Yii::t('app', 'Courses');
+                    break;
+                case 'articles':
+                    Yii::app()->getModule('articles');
+                    $criteria = Articles::getSearchCriteria($model->text, $words);
+                    $dataProvider = new CActiveDataProvider('Articles', array(
                         'criteria' => $criteria,
                         'pagination' => array('pageSize' => $pageSize)
                     ));
                     $title = Yii::t('app', 'Educational Materials');
-					break;
-				case 'news':
-					Yii::app()->getModule('news');
-					$criteria = new CDbCriteria();
-                    $criteria->addCondition('t.status = "publish"');
-                    $criteria->order = 't.publish_date DESC';
-                    $criteria->with = array('category');
-                    $criteria->addCondition('t.title LIKE :text OR t.summary LIKE :text OR t.body LIKE :text OR category.title LIKE :text');
-                    $criteria->params['text'] = "%".$model->text."%";
-                    $dataProvider = new CActiveDataProvider('News',array(
+                    break;
+                case 'news':
+                    Yii::app()->getModule('news');
+                    $criteria = News::getSearchCriteria($model->text, $words);
+                    $dataProvider = new CActiveDataProvider('News', array(
                         'criteria' => $criteria,
                         'pagination' => array('pageSize' => $pageSize)
                     ));
                     $title = Yii::t('app', 'News');
-					break;
-				case 'all':
-				default:
-					break;
-			}
+                    break;
+                case 'all':
+                default:
+                    Yii::app()->getModule('courses');
+                    Yii::app()->getModule('articles');
+                    Yii::app()->getModule('news');
+                    $dataProvider = [];
+                    // courses search
+                    $criteria = Courses::getSearchCriteria($model->text, $words);
+                    $dataProviders['courses']['dataProvider'] = new CActiveDataProvider('Courses', array(
+                        'criteria' => $criteria,
+                        'pagination' => array('pageSize' => $pageSize)
+                    ));
+                    $dataProviders['courses']['title'] = Yii::t('app', 'Courses');
 
-		}
+                    // article search
+                    $criteria = Articles::getSearchCriteria($model->text, $words);
+                    $dataProviders['articles']['dataProvider'] = new CActiveDataProvider('Articles', array(
+                        'criteria' => $criteria,
+                        'pagination' => array('pageSize' => $pageSize)
+                    ));
+                    $dataProviders['articles']['title'] = Yii::t('app', 'Educational Materials');
+
+                    // news search
+                    $criteria = News::getSearchCriteria($model->text, $words);
+                    $dataProviders['news']['dataProvider'] = new CActiveDataProvider('News', array(
+                        'criteria' => $criteria,
+                        'pagination' => array('pageSize' => $pageSize)
+                    ));
+                    $dataProviders['news']['title'] = Yii::t('app', 'News');
+                    $title = 'تمام مطالب سایت';
+                    break;
+            }
+
+        }
 		$this->render('search',array(
 			'model' => $model,
 			'title' => $title,
-			'dataProvider' => $dataProvider
+			'dataProvider' => $dataProvider,
+			'dataProviders' => $dataProviders
 		));
 	}
 

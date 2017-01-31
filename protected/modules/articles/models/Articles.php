@@ -251,4 +251,25 @@ class Articles extends SortableCActiveRecord
 			$criteria->limit = $limit;
 		return $criteria;
 	}
+
+	public static function getSearchCriteria($text, $words){
+		$criteria = new CDbCriteria();
+		$criteria->addCondition('t.status=:status', 'AND');
+		$criteria->params[':status'] = 'publish';
+		$criteria->with = array('extlinks', 'links', 'files', 'category');
+		$condition = 't.title LIKE :text OR t.summary LIKE :text OR extlinks.title LIKE :text OR 
+                                  extlinks.summary LIKE :text OR links.title LIKE :text OR links.summary LIKE :text OR 
+                                  files.title LIKE :text OR files.summary LIKE :text OR category.title  LIKE :text';
+		$criteria->params['text'] = "%{$text}%";
+		foreach($words as $key => $word){
+			$condition .= " OR t.title LIKE :text$key OR t.summary LIKE :text$key OR extlinks.title LIKE :text$key OR 
+                                       extlinks.summary LIKE :text$key OR links.title LIKE :text$key OR links.summary LIKE :text$key OR 
+                                       files.title LIKE :text$key OR files.summary LIKE :text$key OR category.title  LIKE :text$key";
+			$criteria->params["text$key"] = "%{$word}%";
+		}
+		$criteria->addCondition($condition);
+		$criteria->together = true;
+		$criteria->order = 't.publish_date DESC';
+		return $criteria;
+	}
 }

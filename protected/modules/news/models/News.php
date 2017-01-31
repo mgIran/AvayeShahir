@@ -237,4 +237,21 @@ class News extends CActiveRecord
 		$criteria->order = 't.publish_date DESC';
 		return $criteria;
 	}
+
+	public static function getSearchCriteria($text, $words){
+		$criteria = new CDbCriteria();
+		$criteria->addCondition('t.status = "publish"');
+		$criteria->order = 't.publish_date DESC';
+		$criteria->with = array('category');
+		$condition = 't.title LIKE :text OR t.summary LIKE :text OR t.body LIKE :text OR category.title LIKE :text';
+		$criteria->params['text'] = "%{$text}%";
+		foreach($words as $key => $word){
+			$condition .= " OR t.title LIKE :text$key OR t.summary LIKE :text$key OR t.body LIKE :text$key OR category.title LIKE :text$key";
+			$criteria->params["text$key"] = "%{$word}%";
+		}
+		$criteria->addCondition($condition);
+		$criteria->together = true;
+        $criteria->order = 't.publish_date DESC';
+        return $criteria;
+	}
 }
