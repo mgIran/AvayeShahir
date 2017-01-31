@@ -224,10 +224,12 @@ class SiteController extends Controller
 		$this->layout = '//layouts/inner';
 		Yii::app()->theme = 'front-end';
 		$model = new SearchForm();
-		if(isset($_POST['SearchForm']))
+        $title = '';
+        $dataProvider = false;
+		if(isset($_GET['SearchForm']))
 		{
-			$model->attributes = $_POST['SearchForm'];
-			//var_dump($model->attributes);exit;
+			$model->attributes = $_GET['SearchForm'];
+            $pageSize=15;
 			$words = explode(' ',$model->text);
 			switch($model->type)
 			{
@@ -236,60 +238,54 @@ class SiteController extends Controller
 					$criteria = new CDbCriteria();
 					$criteria->compare('title',$model->text,true,'OR');
 					$criteria->compare('summary',$model->text,true,'OR');
-					$criteria->distinct = true;
-					$criteria->select = 'id,title,summary';
-					$courses_h = Courses::model()->findAll($criteria);
-					$criteria = new CDbCriteria();
 					foreach($words as $word)
 					{
 						$criteria->compare('title',$word,true,'OR');
 						$criteria->compare('summary',$word,true,'OR');
 					}
-					$criteria->distinct = true;
-					$criteria->select = 'id,title,summary';
-					$courses_l = Courses::model()->findAll($criteria);
-					$courses = CMap::mergeArray($courses_h,$courses_l);
-					$x=array();
-					foreach($courses as $key=>$course)
-					{
-						if(!in_array($course->id,$x))
-							array_push($x,$course->id);
-						else
-							unset($courses[$key]);
-					}
-					$title = 'دوره ها';
+                    $dataProvider = new CActiveDataProvider('Courses',array(
+                        'criteria' => $criteria,
+                        'pagination' => array('pageSize' => $pageSize)
+                    ));
+					$title = Yii::t('app', 'Courses');
 					break;
-				case 'personnel':
-					Yii::app()->getModule('personnel');
-					$criteria = new CDbCriteria();
-					$criteria->compare('name',$model->text,true,'OR');
-					$criteria->compare('family',$model->text,true,'OR');
-					$courses = Personnel::model()->findAll($criteria);
-					$title = 'کارکنان';
+				case 'articles':
+					Yii::app()->getModule('articles');
+                    $criteria = new CDbCriteria();
+                    $criteria->addCondition('t.status=:status','AND');
+                    $criteria->params[':status'] = 'publish';
+                    $criteria->with = array('extlinks', 'links', 'files', 'category');
+                    $criteria->addCondition('t.title LIKE :text OR t.summary LIKE :text OR extlinks.title LIKE :text OR extlinks.summary LIKE :text OR links.title LIKE :text OR links.summary LIKE :text OR files.title LIKE :text OR files.summary LIKE :text OR category.title  LIKE :text');
+                    $criteria->params['text'] = "%".$model->text."%";
+                    $criteria->together = true;
+                    $dataProvider = new CActiveDataProvider('Articles',array(
+                        'criteria' => $criteria,
+                        'pagination' => array('pageSize' => $pageSize)
+                    ));
+                    $title = Yii::t('app', 'Educational Materials');
 					break;
-				case 'teachers':
-					Yii::app()->getModule('users');
+				case 'news':
+					Yii::app()->getModule('news');
 					$criteria = new CDbCriteria();
-					$criteria->compare('name',$model->text,true,'OR');
-					$criteria->compare('family',$model->text,true,'OR');
-					$courses = userDetails::model()->findAll($criteria);
-					$title = 'اساتید';
+                    $criteria->with = array('category');
+                    $criteria->addCondition('t.title LIKE :text OR t.summary LIKE :text OR t.body LIKE :text OR category.title LIKE :text');
+                    $criteria->params['text'] = "%".$model->text."%";
+                    $dataProvider = new CActiveDataProvider('News',array(
+                        'criteria' => $criteria,
+                        'pagination' => array('pageSize' => $pageSize)
+                    ));
+                    $title = Yii::t('app', 'News');
 					break;
 				case 'all':
 				default:
-					//$criteria->addCondition('title');
 					break;
 			}
 
 		}
-//		Yii::import('pages.models.*');
-//		$model = new Pages();
-//		$model->title = 'پیام وبسایت';
-//		$model->summary = 'با عرض پوزش این بخش هنوز تکمیل نشده است.';
-		$this->render('_searchResult',array(
+		$this->render('search',array(
 			'model' => $model,
 			'title' => $title,
-			'courses' => $courses
+			'dataProvider' => $dataProvider
 		));
 	}
 

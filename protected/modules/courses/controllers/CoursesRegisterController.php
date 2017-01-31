@@ -88,7 +88,7 @@ class CoursesRegisterController extends Controller
                     $model->amount = $class->price;
                     $model->description = 'پرداخت شهریه جهت ثبت نام در دوره ' . $class->course->title . '، کلاس ' . $class->title;  // Required
                     $model->date = time();
-                    $model->order_id=(int)$lastTransaction->order_id+1;
+                    $model->newOrderId();
                     $lastTransaction->delete();
                     if ($model->save()) {
                         $flag = true;
@@ -110,7 +110,7 @@ class CoursesRegisterController extends Controller
                     }
                 }
                 if ($flag) {
-                    $Amount = intval($lastTransaction->amount) * 10; //Amount will be based on Toman  - Required
+                    $Amount = doubleval($lastTransaction->amount) * 10; //Amount will be based on Toman  - Required
                     $CallbackURL = Yii::app()->getBaseUrl(true) . '/courses/register/verify';  // Required
                     $result = Yii::app()->Payment->PayRequest($Amount, $lastTransaction->order_id, $CallbackURL);
                     if (!$result['error']) {

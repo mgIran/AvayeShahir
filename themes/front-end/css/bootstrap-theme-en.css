@@ -426,7 +426,10 @@ ul.main-menu ol {
     right: auto;
     left: 10px;
 }
-
+.btn-input .btn.form-control .caret{
+    left: auto !important;
+    right:10px !important;
+}
 .pagination li{
     float: left !important;
 }

@@ -20,6 +20,17 @@ $imageUrl = Yii::app()->baseUrl.'/uploads/articles/fileimages/';
     <div class="container">
         <div class="news-view col-lg-8 col-md-8 col-sm-12 col-xs-12">
             <h2><?= $model->title ?></h2>
+            <div class="news-details">
+                <!-- category -->
+                <span><?= Yii::t('app','Category') ?>:</span>
+                <a class="link-blue" target="_blank" href="<?= $this->createUrl('/articles/category/'.$model->category_id.'/'.urlencode($model->category->title)) ?>">
+                    <?= $model->category->title ?>
+                </a>
+                <span class="clearfix">
+                    <span class="clock-icon"></span>
+                    <?= Yii::app()->language=="fa"?JalaliDate::date("Y/m/d - H:i",$model->publish_date):date("Y/m/d - H:i",$model->publish_date) ?>
+                </span>
+            </div>
             <div class="news-pic">
                 <img src="<?= Yii::app()->baseUrl.'/uploads/articles/'.$model->image ?>" alt="<?= $model->title ?>">
             </div>

@@ -23,8 +23,8 @@ echo CHtml::beginForm(array('/search'),'get',array('class'=>'navbar-form navbar-
     <div class="form-group">
         <?php echo CHtml::textField('term',isset($_GET['term'])?CHtml::encode($_GET['term']):'',array('id'=>'search-term','class'=>'form-control','placeholder'=>'جستجو کنید...','autocomplete' => 'off')) ?>
         <span class="search-btn-icon">
-                        <?php echo CHtml::submitButton('',array('name'=>'','class'=>'btn btn-default')) ?>
-                    </span>
+            <?php echo CHtml::submitButton('',array('name'=>'','class'=>'btn btn-default')) ?>
+        </span>
     </div>
     <div class="search-suggest-box">
         <div class="search-entries"></div>

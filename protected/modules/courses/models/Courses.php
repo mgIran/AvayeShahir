@@ -204,4 +204,11 @@ class Courses extends SortableCActiveRecord
 		}
 		return implode(',', $allTags);
 	}
+
+	public static function getHtmlSortList()
+	{
+		foreach(CHtml::listData(Courses::model()->findAll(), 'id', 'title') as $id => $title){
+			echo '<li><a href="' . Yii::app()->createUrl('/courses/' . $id . '/' . urlencode($title)) . '" ><span>' . $title . '</span></a></li>';
+		}
+	}
 }

@@ -155,11 +155,11 @@ class UserTransactions extends CActiveRecord
 				->from("ym_user_transactions")
 				->queryScalar();
 		if($this->order_id && $this->order_id <= $lastOrderId)
-			$this->order_id = (int)$lastOrderId + 1;
+			$this->order_id = (int)$lastOrderId + 10;
 		elseif(!$this->order_id)
 		{
 			if($lastOrderId)
-				$this->order_id = (int)$lastOrderId + 1;
+				$this->order_id = (int)$lastOrderId + 10;
 			else
 				$this->order_id = 1100;
 		}
