@@ -8,6 +8,7 @@ $this->breadcrumbs=array(
 
 $this->menu=array(
 	array('label'=>'افزودن دوره', 'url'=>array('create')),
+	array('label'=>'زباله دان', 'url'=>array('recycleBin')),
 );
 ?>
 <? $this->renderPartial('//layouts/_flashMessage'); ?>

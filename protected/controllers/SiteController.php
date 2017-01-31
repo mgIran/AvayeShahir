@@ -43,8 +43,10 @@ class SiteController extends Controller
 				$this->message = CHtml::encode(SiteSetting::model()->findByAttributes(array('name' => 'message_en'))->value);
 
 		$criteria = new CDbCriteria();
+		$criteria->addCondition('deleted = 0');
 		$criteria->order = 't.order';
 		$courses = Courses::model()->findAll($criteria);
+        // teachers
 		$personnel = Personnel::model()->findAll();
 		$teachers = Users::model()->findAll(array(
 			'condition' => 'role_id = 2',

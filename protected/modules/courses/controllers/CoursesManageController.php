@@ -26,7 +26,7 @@ class CoursesManageController extends Controller
 	{
 		return array(
 			'frontend' => array('view'),
-			'backend' => array('create','update','admin','delete', 'upload', 'deleteUpload','order')
+			'backend' => array('create','update','admin','delete', 'upload', 'deleteUpload','order', 'recycleBin', 'restore')
 		);
 	}
 
@@ -181,9 +181,15 @@ class CoursesManageController extends Controller
 	{
 		$picDIR = Yii::getPathOfAlias("webroot") . "/uploads/courses/";
 		$model = $this->loadModel($id);
-		if(file_exists($picDIR.$model->pic))
-			unlink($picDIR.$model->pic);
-		$model->delete();
+		if($model->deleted){
+			if(file_exists($picDIR . $model->pic))
+				unlink($picDIR . $model->pic);
+			$model->delete();
+		}else{
+			$model->scenario = 'delete';
+			$model->deleted = 1;
+			$model->update();
+		}
 
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 		if(!isset($_GET['ajax']))
@@ -200,10 +206,43 @@ class CoursesManageController extends Controller
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['Courses']))
 			$model->attributes=$_GET['Courses'];
-
+        $model->deleted = 0;
 		$this->render('admin',array(
 			'model'=>$model,
 		));
+	}
+
+    /**
+	 * Manages all models.
+	 */
+	public function actionRecycleBin()
+	{
+		$model=new Courses('search');
+		$model->unsetAttributes();  // clear any default values
+		if(isset($_GET['Courses']))
+			$model->attributes=$_GET['Courses'];
+        $model->deleted = 1;
+		$this->render('recycle_bin',array(
+			'model'=>$model,
+		));
+	}
+
+    /**
+     * Restore deleted course from recycle bin
+     * @param $id
+     * @throws CDbException
+     * @throws CHttpException
+     */
+	public function actionRestore($id)
+	{
+        $model = $this->loadModel($id);
+        $model->scenario = 'delete';
+        $model->deleted = 0;
+        if($model->update())
+            Yii::app()->user->setFlash('success' ,'<span class="icon-check"></span>&nbsp;&nbsp;با موفقیت بازیابی شد.');
+        // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+        if(!isset($_GET['ajax']))
+            $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('recycleBin'));
 	}
 
 	/**

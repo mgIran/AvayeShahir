@@ -10,6 +10,7 @@
  * @property string $summary
  * @property string $order
  * @property string $seen
+ * @property string $deleted
  * @property [] $formTags
  *
  * The followings are the available model relations:
@@ -86,11 +87,11 @@ class Courses extends SortableCActiveRecord
 			array('title','filter','filter' => 'strip_tags'),
 			array('summary','filter','filter'=>array($purifier,'purify')),
 			array('pic', 'length', 'max'=>200),
-			array('seen', 'default', 'value'=>0),
-			array('formTags', 'safe'),
+			array('seen, deleted', 'default', 'value'=>0),
+			array('formTags, deleted', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('title, pic, summary', 'safe', 'on'=>'search'),
+			array('title, pic, summary, deleted', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -145,6 +146,7 @@ class Courses extends SortableCActiveRecord
 		$criteria->compare('pic',$this->pic,true);
 		$criteria->compare('title',$this->title,true);
 		$criteria->compare('summary',$this->summary,true);
+		$criteria->compare('deleted',$this->deleted);
 		$criteria->order = 't.order';
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -164,7 +166,7 @@ class Courses extends SortableCActiveRecord
 
 	protected function afterSave()
 	{
-		if($this->formTags && !empty($this->formTags)) {
+		if($this->scenario != 'delete' &&  $this->formTags && !empty($this->formTags)) {
 			if(!$this->IsNewRecord)
 				CourseTagRel::model()->deleteAll('course_id='.$this->id);
 			foreach($this->formTags as $tag) {
@@ -207,7 +209,7 @@ class Courses extends SortableCActiveRecord
 
 	public static function getHtmlSortList()
 	{
-		foreach(CHtml::listData(Courses::model()->findAll(), 'id', 'title') as $id => $title){
+		foreach(CHtml::listData(Courses::model()->findAll('deleted = 0'), 'id', 'title') as $id => $title){
 			echo '<li><a href="' . Yii::app()->createUrl('/courses/' . $id . '/' . urlencode($title)) . '" ><span>' . $title . '</span></a></li>';
 		}
 	}
@@ -226,6 +228,7 @@ class Courses extends SortableCActiveRecord
 			$criteria->params["text$key"] = "%{$word}%";
 		}
 		$criteria->addCondition($condition);
+		$criteria->addCondition('deleted = 0');
 		$criteria->together = true;
 		$criteria->order = 't.order';
 		return $criteria;
