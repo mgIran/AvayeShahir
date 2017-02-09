@@ -218,16 +218,21 @@ class Courses extends SortableCActiveRecord
     public static function getSearchCriteria($text, $words, $withFiles = false, $withLinks = false)
     {
         $criteria = new CDbCriteria();
-        $criteria->with = array('categories', 'categories.links', 'categories.files');
+        $criteria->with = array('categories');
         $condition = 't.title LIKE :text OR t.summary LIKE :text OR categories.title LIKE :text OR categories.summary LIKE :text';
         if($withLinks)
+        {
             $condition .= ' OR links.title LIKE :text OR links.summary LIKE :text';
+            $criteria->with[] = 'categories.links';
+        }
         if($withFiles)
+        {
             $condition .= ' OR files.title LIKE :text OR files.summary LIKE :text';
+            $criteria->with[] = 'categories.files';
+        }
         $criteria->params['text'] = "%{$text}%";
         foreach($words as $key => $word){
-            $condition .= " OR t.title LIKE :text$key OR t.summary LIKE :text$key OR 
-				categories.title LIKE :text$key OR categories.summary LIKE :text$key";
+            $condition .= " OR t.title LIKE :text$key OR t.summary LIKE :text$key OR categories.title LIKE :text$key OR categories.summary LIKE :text$key";
             if($withLinks)
                 $condition .= " OR links.title LIKE :text$key OR links.summary LIKE :text$key";
             if($withFiles)
@@ -235,8 +240,8 @@ class Courses extends SortableCActiveRecord
             $criteria->params["text$key"] = "%{$word}%";
         }
         $criteria->addCondition($condition);
-        $criteria->addCondition('deleted = 0');
         $criteria->together = true;
+        $criteria->addCondition('deleted = 0');
         $criteria->order = 't.order';
         return $criteria;
     }

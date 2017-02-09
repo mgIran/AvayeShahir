@@ -3541,7 +3541,8 @@ ol{
     overflow: hidden;
     position: absolute;
     right: 10px;
-    top: 5px;
+    top: 50%;
+    margin-top: -20px;
 }
 
 .ias_trigger > a {
@@ -3579,6 +3580,9 @@ ol{
 .articles-category-list h3{
     margin: 0 0 25px 0;
 }
+.search-result .articles-category-list h3{
+    margin-top: 35px;
+}
 .articles-list h4{
     display: inline-block;
     width: 100%;
@@ -3604,6 +3608,33 @@ ol{
 .search-result .row .pagination-sm > li > a:hover, .search-result .row .pagination-sm > li > a:focus{
     text-decoration: none !important;
 }
+
+.search-result .row .list-view{
+    margin-top: 35px;
+}
+.search-result .nav.nav-tabs{
+    background-color: transparent;
+    border: none;
+    margin-top: 15px;
+}
+.search-result .nav.nav-tabs li{
+    background-color: transparent;
+    border: none;
+}
+.search-result .nav.nav-tabs li.active{
+    border-bottom:3px solid #0a6aa1;
+}
+.search-result .nav.nav-tabs li a{
+    line-height: 25px;
+    font-size: 16px;
+    padding:15px 15px 7px;
+    color: #222 !important;
+}
+.search-result .nav.nav-tabs li a small{
+    line-height: 20px;
+    font-size: 11px;
+    font-weight: 300;
+}
 @media all and (min-width: 769px){
     .affix{
         position: fixed !important;
@@ -3615,5 +3646,4 @@ ol{
         position: static !important;
     }
 }
-
 

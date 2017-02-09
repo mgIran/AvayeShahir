@@ -303,21 +303,56 @@ class SiteController extends Controller
                     Yii::app()->getModule('courses');
                     Yii::app()->getModule('articles');
                     Yii::app()->getModule('news');
-                    $dataProvider = [];
+                    $dataProviders = [];
                     // courses search
                     $criteria = Courses::getSearchCriteria($model->text, $words);
-                    $dataProviders['courses']['dataProvider'] = new CActiveDataProvider('Courses', array(
+                    $dataProviders['courses']['dataProvider']['courses'] = new CArrayDataProvider(Courses::model()->findAll($criteria), array(
+                        'pagination' => array('pageSize' => $pageSize)
+                    ));
+                    // files search
+                    $criteria = ClassCategoryFiles::getSearchCriteria($model->text, $words);
+                    $dataProviders['courses']['dataProvider']['files']  = new CActiveDataProvider('ClassCategoryFiles', array(
                         'criteria' => $criteria,
                         'pagination' => array('pageSize' => $pageSize)
                     ));
+                    // links search
+                    $criteria = ClassCategoryFileLinks::getSearchCriteria($model->text, $words);
+                    $dataProviders['courses']['dataProvider']['links']  = new CActiveDataProvider('ClassCategoryFileLinks', array(
+                        'criteria' => $criteria,
+                        'pagination' => array('pageSize' => $pageSize)
+                    ));
+
+
                     $dataProviders['courses']['title'] = Yii::t('app', 'Courses');
 
                     // article search
                     $criteria = Articles::getSearchCriteria($model->text, $words);
-                    $dataProviders['articles']['dataProvider'] = new CActiveDataProvider('Articles', array(
+                    $dataProviders['articles']['dataProvider']['articles'] = new CActiveDataProvider('Articles', array(
                         'criteria' => $criteria,
                         'pagination' => array('pageSize' => $pageSize)
                     ));
+
+                    // files search
+                    $criteria = ArticleFiles::getSearchCriteria($model->text, $words);
+                    $dataProviders['articles']['dataProvider']['files'] = new CActiveDataProvider('ArticleFiles', array(
+                        'criteria' => $criteria,
+                        'pagination' => array('pageSize' => $pageSize)
+                    ));
+
+                    // links search
+                    $criteria = ArticleFileLinks::getSearchCriteria($model->text, $words);
+                    $dataProviders['articles']['dataProvider']['links'] = new CActiveDataProvider('ArticleFileLinks', array(
+                        'criteria' => $criteria,
+                        'pagination' => array('pageSize' => $pageSize)
+                    ));
+
+                    // ext links search
+                    $criteria = ArticleLinks::getSearchCriteria($model->text, $words);
+                    $dataProviders['articles']['dataProvider']['extLinks'] = new CActiveDataProvider('ArticleLinks', array(
+                        'criteria' => $criteria,
+                        'pagination' => array('pageSize' => $pageSize)
+                    ));
+
                     $dataProviders['articles']['title'] = Yii::t('app', 'Educational Materials');
 
                     // news search

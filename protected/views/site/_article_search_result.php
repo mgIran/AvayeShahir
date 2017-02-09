@@ -6,9 +6,11 @@
 /* @var $extLinksDataProvider CActiveDataProvider */
 /* @var $showEmpty string */
 if(!isset($showEmpty))
-    $showEmpty = false;
+    $showEmpty = true;
+if(!isset($showTitle))
+    $showTitle = true;
 
-if(($fileDataProvider && $fileDataProvider->totalItemCount) || ($linksDataProvider && $linksDataProvider->totalItemCount) || ($extLinksDataProvider && $extLinksDataProvider->totalItemCount) || ($dataProvider && $dataProvider->totalItemCount))
+if($showTitle && (($fileDataProvider && $fileDataProvider->totalItemCount) || ($linksDataProvider && $linksDataProvider->totalItemCount) || ($extLinksDataProvider && $extLinksDataProvider->totalItemCount) || ($dataProvider && $dataProvider->totalItemCount)))
     echo '<h2>'.Yii::t('app','Educational Materials').'</h2>';
 if($fileDataProvider && $fileDataProvider->totalItemCount){
     ?>
@@ -17,7 +19,7 @@ if($fileDataProvider && $fileDataProvider->totalItemCount){
         <ul>
     <?
     $this->widget('zii.widgets.CListView', array(
-        'id' => 'courses-file-search-list',
+        'id' => 'article-file-search-list',
         'dataProvider' => $fileDataProvider,
         'itemView' => 'articles.views.files._item_view',
         'template' => '{items} {pager}',
@@ -53,9 +55,45 @@ if($linksDataProvider && $linksDataProvider->totalItemCount){
         <ul>
         <?php
         $this->widget('zii.widgets.CListView', array(
-            'id' => 'courses-link-search-list',
+            'id' => 'article-link-search-list',
             'dataProvider' => $linksDataProvider,
             'itemView' => 'articles.views.links._item_view',
+            'template' => '{items} {pager}',
+            'viewData' => array('type' => $_GET['SearchForm']['type']),
+            'ajaxUpdate' => true,
+            'afterAjaxUpdate' => "function(id, data){
+                $('html, body').animate({
+                    scrollTop: ($('#'+id).offset().top-130)
+                },1000);
+            }",
+            'pager' => array(
+                'header' => '',
+                'firstPageLabel' => '<<',
+                'lastPageLabel' => '>>',
+                'prevPageLabel' => '<',
+                'nextPageLabel' => '>',
+                'cssFile' => false,
+                'htmlOptions' => array(
+                    'class' => 'pagination pagination-sm',
+                ),
+            ),
+            'pagerCssClass' => 'thumbnail-container',
+        ));
+        ?>
+        </ul>
+    </div>
+    <?php
+}
+if($extLinksDataProvider && $extLinksDataProvider->totalItemCount){
+    ?>
+    <div class="files">
+        <h4><?= Yii::t('app','External Website Links') ?></h4>
+        <ul>
+        <?php
+        $this->widget('zii.widgets.CListView', array(
+            'id' => 'article-ext-link-search-list',
+            'dataProvider' => $extLinksDataProvider,
+            'itemView' => 'articles.views.extlinks._item_view',
             'template' => '{items} {pager}',
             'viewData' => array('type' => $_GET['SearchForm']['type']),
             'ajaxUpdate' => true,
@@ -85,14 +123,15 @@ if($linksDataProvider && $linksDataProvider->totalItemCount){
 
 if($dataProvider && $dataProvider->totalItemCount){
     ?>
+    <h4><?= Yii::t('app','Articles') ?></h4>
     <div class="row">
         <?php
         $this->widget('zii.widgets.CListView', array(
-            'id' => 'courses-search-list',
+            'id' => 'article-search-list',
             'dataProvider' => $dataProvider,
-            'itemView' => 'articles.views.extlinks._item_view',
+            'itemView' => '//site/_search_item',
             'template' => '{items} {pager}',
-            'viewData' => array('type' => $_GET['SearchForm']['type']),
+            'viewData' => array('type' => 'articles'),
             'ajaxUpdate' => true,
             'afterAjaxUpdate' => "function(id, data){
                 $('html, body').animate({

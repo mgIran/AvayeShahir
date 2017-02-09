@@ -22,7 +22,35 @@
                 <?
                 $type = isset($_GET['SearchForm']['type'])?$_GET['SearchForm']['type']:'';
                 if($type == 'all'){
+                    ?>
+                    <ul class="nav nav-tabs">
+                    <?php
+                    $i=0;
                     foreach($dataProviders as $key => $item){
+                        $dataProvider = $item['dataProvider'];
+                        $count = 0;
+                        if(is_array($dataProvider)){
+                            foreach($dataProvider as $dp)
+                                $count+=$dp->totalItemCount;
+                        }else
+                            $count+=$dataProvider->totalItemCount;
+                        $count = Yii::app()->language == 'fa'?
+                            Controller::parseNumbers(number_format($count)):number_format($count);
+//                        var_dump($count);exit;
+                        ?>
+                        <li<?= $i==0?' class="active"':'' ?>><a data-toggle="tab" href="#<?= $key ?>-result-tab"><?php echo $item['title'] ?>
+                                <small>(<?= $count ?>)</small></a></li>
+                        <?
+                        $i++;
+                    }
+                    ?>
+                    </ul>
+                    <div class="tab-content">
+                    <?php
+                    $i=0;
+                    foreach($dataProviders as $key => $item){
+                        $active = $i == 0?"in active":"";
+                        $i++;
                         $dataProvider = $item['dataProvider'];
                         $sideTitle = '';
                         $sideContent = '';
@@ -36,11 +64,19 @@
                             $sideTitle = Yii::t('app', 'News Category');
                             $sideContent = new NewsCategories();
                         }
-                        if($dataProvider && $dataProvider->totalItemCount){
+                        if($key == 'courses'){
+                            echo '<div id="' . $key . '-result-tab" class="tab-pane fade ' . $active . '">';
+                            $this->renderPartial('_course_search_result', array('showTitle' => false, 'dataProvider' => $dataProvider['courses'], 'fileDataProvider' => $dataProvider['files'], 'linksDataProvider' => $dataProvider['links']));
+                            echo '</div>';
+                        }elseif($key == 'articles'){
+                            echo '<div id="' . $key . '-result-tab" class="tab-pane fade ' . $active . '">';
+                            $this->renderPartial('_article_search_result', array('showTitle' => false, 'dataProvider' => $dataProvider['articles'], 'fileDataProvider' => $dataProvider['files'], 'linksDataProvider' => $dataProvider['links'], 'extLinksDataProvider' => $dataProvider['extLinks']));
+                            echo '</div>';
+                        }elseif($dataProvider && $dataProvider->totalItemCount){
                             $flag = true;
                             ?>
-                            <h4><?php echo $item['title'] ?></h4>
-                            <div class="row">
+                            <div id="<?= $key ?>-result-tab" class="tab-pane fade <?= $active ?>">
+                                <div class="row">
                                 <?php
                                 $this->widget('zii.widgets.CListView', array(
                                     'id' => $key . '-list',
@@ -68,10 +104,14 @@
                                     'pagerCssClass' => 'thumbnail-container',
                                 ));
                                 ?>
+                                </div>
                             </div>
                             <?php
                         }
                     }
+                    ?>
+                    </div>
+                <?php
                 }else{
                     Yii::app()->clientScript->registerCss('font-inherit', '
                         .font-inherit{
@@ -136,6 +176,38 @@
             </div>
             <?php
             if($type != 'all'){
+                ?>
+                <div class="articles-category-list col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                    <h3><?= $sideTitle ?></h3>
+                    <ul class="main-menu nav nav-stacked tree">
+                        <?php $sideContent::getHtmlSortList() ?>
+                    </ul>
+                </div>
+                <?php
+            }else
+            {
+                $sideTitle = Yii::t('app', 'Courses');
+                $sideContent = new Courses();
+                ?>
+                <div class="articles-category-list col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                    <h3><?= $sideTitle ?></h3>
+                    <ul class="main-menu nav nav-stacked tree">
+                        <?php $sideContent::getHtmlSortList() ?>
+                    </ul>
+                </div>
+                <?php
+                $sideTitle = Yii::t('app', 'Educational Materials Category');
+                $sideContent = new ArticleCategories();
+                ?>
+                <div class="articles-category-list col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                    <h3><?= $sideTitle ?></h3>
+                    <ul class="main-menu nav nav-stacked tree">
+                        <?php $sideContent::getHtmlSortList() ?>
+                    </ul>
+                </div>
+                <?php
+                $sideTitle = Yii::t('app', 'News Category');
+                $sideContent = new NewsCategories();
                 ?>
                 <div class="articles-category-list col-lg-4 col-md-4 col-sm-4 col-xs-12">
                     <h3><?= $sideTitle ?></h3>

@@ -403,6 +403,9 @@
     {
         padding: 15px;
     }
+    .tooltip{
+        display: none;
+    }
 }
 @media (max-width: 420px) {
     .news-item .pic{
@@ -467,8 +470,6 @@
     .page-content.courses .files .file,
     .page-content.courses .files >ul .items li,
     .page-content.courses .files >ul>li{
-        padding:0 5px !important;
-        background-image: none !important;
     }
 }
 @media (max-width: 991px) {

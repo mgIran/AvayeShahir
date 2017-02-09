@@ -5,9 +5,11 @@
 /* @var $linksDataProvider CActiveDataProvider */
 /* @var $showEmpty string */
 if(!isset($showEmpty))
-    $showEmpty = false;
+    $showEmpty = true;
+if(!isset($showTitle))
+    $showTitle = true;
 
-if(($fileDataProvider && $fileDataProvider->totalItemCount) || ($linksDataProvider && $linksDataProvider->totalItemCount) || ($dataProvider && $dataProvider->totalItemCount))
+if($showTitle && (($fileDataProvider && $fileDataProvider->totalItemCount) || ($linksDataProvider && $linksDataProvider->totalItemCount) || ($dataProvider && $dataProvider->totalItemCount)))
     echo '<h2>'.Yii::t('app','Courses').'</h2>';
 if($fileDataProvider && $fileDataProvider->totalItemCount){
     ?>
@@ -84,6 +86,7 @@ if($linksDataProvider && $linksDataProvider->totalItemCount){
 
 if($dataProvider && $dataProvider->totalItemCount){
     ?>
+    <h4><?= Yii::t('app','Courses') ?></h4>
     <div class="row">
         <?php
         $this->widget('zii.widgets.CListView', array(
@@ -91,13 +94,13 @@ if($dataProvider && $dataProvider->totalItemCount){
             'dataProvider' => $dataProvider,
             'itemView' => '//site/_search_item',
             'template' => '{items} {pager}',
-            'viewData' => array('type' => $_GET['SearchForm']['type']),
+            'viewData' => array('type' => 'courses'),
             'ajaxUpdate' => true,
             'afterAjaxUpdate' => "function(id, data){
-                                    $('html, body').animate({
-                                        scrollTop: ($('#'+id).offset().top-130)
-                                    },1000);
-                                }",
+                $('html, body').animate({
+                    scrollTop: ($('#'+id).offset().top-130)
+                },1000);
+            }",
             'pager' => array(
                 'header' => '',
                 'firstPageLabel' => '<<',
