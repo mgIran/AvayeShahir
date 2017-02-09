@@ -2,6 +2,9 @@
 /* @var $this SiteController */
 /* @var $title string */
 /* @var $dataProvider CActiveDataProvider */
+/* @var $fileDataProvider CActiveDataProvider */
+/* @var $linksDataProvider CActiveDataProvider */
+/* @var $extLinksDataProvider CActiveDataProvider */
 /* @var $dataProviders CActiveDataProvider[] */
 ?>
 <div class="page-title-container courses">
@@ -12,7 +15,7 @@
 </div>
 
 <?php $this->renderPartial('//layouts/_search_box'); ?>
-<div class="page-content courses search-result">
+<div class="page-content courses search-result" style="overflow: visible">
     <div class="container">
         <div class="articles-container">
             <div class="articles-list col-lg-8 col-md-8 col-sm-8 col-xs-12">
@@ -87,41 +90,47 @@
                         $sideTitle = Yii::t('app', 'News Category');
                         $sideContent = new NewsCategories();
                     }
-                    if($dataProvider && $dataProvider->totalItemCount){
-                        $flag = true;
-                        ?>
-                        <div class="row">
-                            <?php
-                            $this->widget('zii.widgets.CListView', array(
-                                'id' => 'book-list',
-                                'dataProvider' => $dataProvider,
-                                'itemView' => '_search_item',
-                                'template' => '{items} {pager}',
-                                'viewData' => array('type' => $_GET['SearchForm']['type']),
-                                'ajaxUpdate' => true,
-                                'afterAjaxUpdate' => "function(id, data){
-                        $('html, body').animate({
-                            scrollTop: ($('#'+id).offset().top-130)
-                        },1000);
-                    }",
-                                'pager' => array(
-                                    'header' => '',
-                                    'firstPageLabel' => '<<',
-                                    'lastPageLabel' => '>>',
-                                    'prevPageLabel' => '<',
-                                    'nextPageLabel' => '>',
-                                    'cssFile' => false,
-                                    'htmlOptions' => array(
-                                        'class' => 'pagination pagination-sm',
-                                    ),
-                                ),
-                                'pagerCssClass' => 'thumbnail-container',
-                            ));
+                    if($type == 'courses'){
+                        $this->renderPartial('_course_search_result', array('dataProvider'=>$dataProvider,'fileDataProvider'=>$fileDataProvider,'linksDataProvider'=>$linksDataProvider));
+                    }elseif($type == 'articles'){
+                        $this->renderPartial('_article_search_result', array('dataProvider'=>$dataProvider,'fileDataProvider'=>$fileDataProvider,'linksDataProvider'=>$linksDataProvider,'extLinksDataProvider'=>$extLinksDataProvider));
+                    }else{
+                        if($dataProvider && $dataProvider->totalItemCount){
+                            $flag = true;
                             ?>
-                        </div>
-                        <?php
-                    }else
-                        echo '<h4>نتیجه ای یافت نشد.</h4>';
+                            <div class="row">
+                                <?php
+                                $this->widget('zii.widgets.CListView', array(
+                                    'id' => 'book-list',
+                                    'dataProvider' => $dataProvider,
+                                    'itemView' => '_search_item',
+                                    'template' => '{items} {pager}',
+                                    'viewData' => array('type' => $_GET['SearchForm']['type']),
+                                    'ajaxUpdate' => true,
+                                    'afterAjaxUpdate' => "function(id, data){
+                                    $('html, body').animate({
+                                        scrollTop: ($('#'+id).offset().top-130)
+                                    },1000);
+                                }",
+                                    'pager' => array(
+                                        'header' => '',
+                                        'firstPageLabel' => '<<',
+                                        'lastPageLabel' => '>>',
+                                        'prevPageLabel' => '<',
+                                        'nextPageLabel' => '>',
+                                        'cssFile' => false,
+                                        'htmlOptions' => array(
+                                            'class' => 'pagination pagination-sm',
+                                        ),
+                                    ),
+                                    'pagerCssClass' => 'thumbnail-container',
+                                ));
+                                ?>
+                            </div>
+                            <?php
+                        }else
+                            echo '<h4>نتیجه ای یافت نشد.</h4>';
+                    }
                 }
                 ?>
             </div>

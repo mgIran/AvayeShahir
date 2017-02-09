@@ -7,13 +7,11 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'افزودن کلاس', 'url'=>array('create')),
-	array('label'=>'ثبت نام حضوری در کلاس', 'url'=>array('classRegister')),
-	array('label'=>'زباله دان', 'url'=>array('recycleBin')),
+	array('label'=>'لیست کلاس ها', 'url'=>array('admin')),
 );
 ?>
 <? $this->renderPartial('//layouts/_flashMessage'); ?>
-<h1>مدیریت کلاس ها</h1>
+<h1>زباله دان کلاس ها</h1>
 
 <?php $this->widget('ext.yiiSortableModel.widgets.SortableCGridView', array(
 	'dataProvider'=>$model->search(),
@@ -46,7 +44,19 @@ $this->menu=array(
 		),
 		array(
 			'class'=>'CButtonColumn',
-			'template' => '{update}{delete}'
+			'template' => '{restore} {delete}',
+			'buttons' => array(
+				'delete' => array(
+					'label' => 'پاک کردن برای همیشه',
+					'options' => array('class' => 'btn btn-danger btn-sm','style' => 'margin:10px 0 5px'),
+					'imageUrl' => false
+				),
+				'restore' => array(
+					'label' => 'بازیابی',
+					'options' => array('class' => 'btn btn-success btn-sm','style' => 'margin-top:5px'),
+					'url' => 'Yii::app()->createUrl("/courses/classes/restore",array("id" => $data->id))'
+				)
+			)
 		),
 	),
 )); ?>

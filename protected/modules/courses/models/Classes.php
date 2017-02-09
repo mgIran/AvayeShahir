@@ -24,6 +24,7 @@
  * @property string $status
  * @property string $remainingCapacity
  * @property string $titleWithCapacity
+ * @property string $deleted
  * @property [] $formTags
  *
  * The followings are the available model relations:
@@ -71,7 +72,6 @@ class Classes extends SortableCActiveRecord
 	 *
 	 * @return array
 	 */
-
 	public function behaviors()
 	{
 		return array(
@@ -105,14 +105,14 @@ class Classes extends SortableCActiveRecord
 			array('title, category_id, course_id, capacity, teacher_id', 'required'),
 			array('title','filter','filter' => 'strip_tags'),
 			array('summary','filter','filter'=>array($purifier,'purify')),
-			array('price', 'default', 'value' => 0),
+			array('price, deleted', 'default', 'value' => 0),
 			array('price, sessions, capacity', 'numerical', 'integerOnly' => true),
 			array('endSignupDate', 'compare', 'compareAttribute' => 'startSignupDate', 'operator' => '>', 'message' => 'تاریخ پایان ثبت نام باید بیشتر از تاریخ شروع ثبت نام باشد.'),
 			array('endClassDate', 'compare', 'compareAttribute' => 'startClassDate', 'operator' => '>', 'message' => 'تاریخ پایان کلاس باید بیشتر از تاریخ شروع کلاس باشد.'),
 			array('title', 'length', 'max' => 50),
 			array('category_id, course_id', 'length', 'max' => 10),
 			array('status, summary, startSignupDate, endSignupDate, startClassDate, endClassDate,startClassTime,endClassTime,classDays', 'safe'),
-			array('id, title, summary, price, startSignupDate, endSignupDate, startClassDate, endClassDate, category_id, course_id', 'safe', 'on' => 'search'),
+			array('id, title, summary, price, startSignupDate, endSignupDate, startClassDate, endClassDate, category_id, course_id, deleted', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -190,6 +190,8 @@ class Classes extends SortableCActiveRecord
 		$criteria->compare('category_id', $this->category_id, true);
 		$criteria->compare('course_id', $this->course_id, true);
 		$criteria->compare('teacher_id', $this->teacher_id, true);
+		$criteria->compare('deleted', $this->deleted);
+//		$criteria->order = 'order';
 		return new CActiveDataProvider($this, array(
 			'criteria' => $criteria,
 		));
@@ -208,7 +210,7 @@ class Classes extends SortableCActiveRecord
 
 	protected function afterSave()
 	{
-		if ($this->formTags && !empty($this->formTags)) {
+		if ($this->scenario != 'delete' && $this->formTags && !empty($this->formTags)) {
 			if (!$this->IsNewRecord)
 				ClassTagRel::model()->deleteAll('class_id=' . $this->id);
 			foreach ($this->formTags as $tag) {
@@ -234,7 +236,7 @@ class Classes extends SortableCActiveRecord
 
 	protected function beforeSave()
 	{
-		if ($this->classDays && !empty($this->classDays)) {
+		if ($this->scenario != 'delete' && $this->classDays && !empty($this->classDays)) {
 			$this->classDays = array_filter($this->classDays, function ($v) {
 				if (in_array($v, array(
 					'شنبه',
@@ -261,7 +263,7 @@ class Classes extends SortableCActiveRecord
 			$criteria->compare('t.category_id',$category_id);
 		$criteria->addCondition('endSignupDate >= :now');
 		$criteria->addCondition('t.status = 1');
-//		$criteria->addCondition('t.deleted = 0');
+		$criteria->addCondition('t.deleted = 0');
 		$criteria->with[] = 'paidRegisters';
 		$criteria->group = 't.id';
 		$criteria->having = 'paidRegisters.user_id IS NULL OR COUNT(paidRegisters.user_id) < t.capacity';

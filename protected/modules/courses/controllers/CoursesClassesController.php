@@ -25,7 +25,8 @@ class CoursesClassesController extends Controller
 	public static function actionsType()
 	{
 		return array(
-			'backend' => array('index', 'classRegister', 'deleteRegister', 'view', 'create', 'update', 'admin', 'delete', 'order', 'getCategories')
+			'backend' => array('index', 'classRegister', 'deleteRegister', 'view', 'create', 'update', 'admin', 'delete', 'order', 'getCategories',
+				'recycleBin', 'restore')
 		);
 	}
 
@@ -109,7 +110,14 @@ class CoursesClassesController extends Controller
 	 */
 	public function actionDelete($id)
 	{
-		$this->loadModel($id)->delete();
+		$model = $this->loadModel($id);
+		if($model->deleted){
+			$model->delete();
+		}else{
+			$model->scenario = 'delete';
+			$model->deleted = 1;
+			$model->update();
+		}
 
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 		if(!isset($_GET['ajax']))
@@ -133,10 +141,43 @@ class CoursesClassesController extends Controller
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['Classes']))
 			$model->attributes = $_GET['Classes'];
-
+		$model->deleted = 0;
 		$this->render('admin', array(
 				'model' => $model,
 		));
+	}
+
+	/**
+	 * Manages all models.
+	 */
+	public function actionRecycleBin()
+	{
+		$model=new Classes('search');
+		$model->unsetAttributes();  // clear any default values
+		if(isset($_GET['Classes']))
+			$model->attributes=$_GET['Classes'];
+		$model->deleted = 1;
+		$this->render('recycle_bin',array(
+			'model'=>$model,
+		));
+	}
+
+	/**
+	 * Restore deleted course from recycle bin
+	 * @param $id
+	 * @throws CDbException
+	 * @throws CHttpException
+	 */
+	public function actionRestore($id)
+	{
+		$model = $this->loadModel($id);
+		$model->scenario = 'delete';
+		$model->deleted = 0;
+		if($model->update())
+			Yii::app()->user->setFlash('success' ,'<span class="icon-check"></span>&nbsp;&nbsp;با موفقیت بازیابی شد.');
+		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+		if(!isset($_GET['ajax']))
+			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('recycleBin'));
 	}
 
 	/**

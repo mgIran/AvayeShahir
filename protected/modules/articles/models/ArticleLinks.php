@@ -152,4 +152,20 @@ class ArticleLinks extends SortableCActiveRecord
 	{
 		return parent::model($className);
 	}
+
+	public static function getSearchCriteria($text, $words){
+		$criteria = new CDbCriteria();
+		$condition = 't.title LIKE :text';
+//		$condition .= ' OR t.summary LIKE :text';
+		$criteria->params['text'] = "%{$text}%";
+		foreach($words as $key => $word){
+			$condition .= " OR t.title LIKE :text$key";
+			//		$condition .= " OR t.summary LIKE :text$key";
+			$criteria->params["text$key"] = "%{$word}%";
+		}
+		$criteria->addCondition($condition);
+//		$criteria->addCondition('deleted = 0');
+		$criteria->order = 't.order';
+		return $criteria;
+	}
 }

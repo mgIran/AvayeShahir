@@ -252,19 +252,27 @@ class Articles extends SortableCActiveRecord
 		return $criteria;
 	}
 
-	public static function getSearchCriteria($text, $words){
+	public static function getSearchCriteria($text, $words,$withFiles = false,$withLinks = false,$withExtLinks = false){
 		$criteria = new CDbCriteria();
 		$criteria->addCondition('t.status=:status', 'AND');
 		$criteria->params[':status'] = 'publish';
 		$criteria->with = array('extlinks', 'links', 'files', 'category');
-		$condition = 't.title LIKE :text OR t.summary LIKE :text OR extlinks.title LIKE :text OR 
-                                  extlinks.summary LIKE :text OR links.title LIKE :text OR links.summary LIKE :text OR 
-                                  files.title LIKE :text OR files.summary LIKE :text OR category.title  LIKE :text';
+		$condition = 't.title LIKE :text OR t.summary LIKE :text OR category.title  LIKE :text';
+        if($withLinks)
+            $condition .= ' OR links.title LIKE :text OR links.summary LIKE :text';
+        if($withFiles)
+            $condition .= ' OR files.title LIKE :text OR files.summary LIKE :text';
+        if($withExtLinks)
+            $condition .= ' OR extlinks.title LIKE :text OR extlinks.summary LIKE :text';
 		$criteria->params['text'] = "%{$text}%";
 		foreach($words as $key => $word){
-			$condition .= " OR t.title LIKE :text$key OR t.summary LIKE :text$key OR extlinks.title LIKE :text$key OR 
-                                       extlinks.summary LIKE :text$key OR links.title LIKE :text$key OR links.summary LIKE :text$key OR 
-                                       files.title LIKE :text$key OR files.summary LIKE :text$key OR category.title  LIKE :text$key";
+			$condition .= " OR t.title LIKE :text$key OR t.summary LIKE :text$key OR category.title  LIKE :text$key";
+            if($withLinks)
+                $condition .= " OR links.title LIKE :text$key OR links.summary LIKE :text$key";
+            if($withFiles)
+                $condition .= " OR files.title LIKE :text$key OR files.summary LIKE :text$key";
+            if($withExtLinks)
+                $condition .= " OR extlinks.title LIKE :text$key OR extlinks.summary LIKE :text$key";
 			$criteria->params["text$key"] = "%{$word}%";
 		}
 		$criteria->addCondition($condition);

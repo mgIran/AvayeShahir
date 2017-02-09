@@ -229,6 +229,9 @@ class SiteController extends Controller
         $title = '';
         $dataProvider = false;
         $dataProviders = false;
+        $fileDataProvider = false;
+        $linksDataProvider = false;
+        $extLinksDataProvider = false;
 		if(isset($_GET['SearchForm'])){
             $model->attributes = $_GET['SearchForm'];
             $pageSize = 10;
@@ -241,6 +244,18 @@ class SiteController extends Controller
                         'criteria' => $criteria,
                         'pagination' => array('pageSize' => $pageSize)
                     ));
+                    // files search
+					$criteria = ClassCategoryFiles::getSearchCriteria($model->text, $words);
+					$fileDataProvider = new CActiveDataProvider('ClassCategoryFiles', array(
+						'criteria' => $criteria,
+						'pagination' => array('pageSize' => $pageSize)
+					));
+                    // links search
+                    $criteria = ClassCategoryFileLinks::getSearchCriteria($model->text, $words);
+					$linksDataProvider = new CActiveDataProvider('ClassCategoryFileLinks', array(
+						'criteria' => $criteria,
+						'pagination' => array('pageSize' => $pageSize)
+					));
                     $title = Yii::t('app', 'Courses');
                     break;
                 case 'articles':
@@ -250,6 +265,28 @@ class SiteController extends Controller
                         'criteria' => $criteria,
                         'pagination' => array('pageSize' => $pageSize)
                     ));
+
+                    // files search
+                    $criteria = ArticleFiles::getSearchCriteria($model->text, $words);
+                    $fileDataProvider = new CActiveDataProvider('ArticleFiles', array(
+                        'criteria' => $criteria,
+                        'pagination' => array('pageSize' => $pageSize)
+                    ));
+
+                    // links search
+                    $criteria = ArticleFileLinks::getSearchCriteria($model->text, $words);
+                    $linksDataProvider = new CActiveDataProvider('ArticleFileLinks', array(
+                        'criteria' => $criteria,
+                        'pagination' => array('pageSize' => $pageSize)
+                    ));
+
+                    // ext links search
+                    $criteria = ArticleLinks::getSearchCriteria($model->text, $words);
+                    $extLinksDataProvider = new CActiveDataProvider('ArticleLinks', array(
+                        'criteria' => $criteria,
+                        'pagination' => array('pageSize' => $pageSize)
+                    ));
+
                     $title = Yii::t('app', 'Educational Materials');
                     break;
                 case 'news':
@@ -299,6 +336,9 @@ class SiteController extends Controller
 			'model' => $model,
 			'title' => $title,
 			'dataProvider' => $dataProvider,
+			'fileDataProvider' => $fileDataProvider,
+			'linksDataProvider' => $linksDataProvider,
+			'extLinksDataProvider' => $extLinksDataProvider,
 			'dataProviders' => $dataProviders
 		));
 	}
