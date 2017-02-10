@@ -10,7 +10,21 @@ if(!isset($showTitle))
     $showTitle = true;
 
 if($showTitle && (($fileDataProvider && $fileDataProvider->totalItemCount) || ($linksDataProvider && $linksDataProvider->totalItemCount) || ($dataProvider && $dataProvider->totalItemCount)))
-    echo '<h2>'.Yii::t('app','Courses').'</h2>';
+{
+    $count = 0;
+    if($fileDataProvider && $fileDataProvider->totalItemCount)
+        $count+=$fileDataProvider->totalItemCount;
+    if($linksDataProvider && $linksDataProvider->totalItemCount)
+        $count+=$linksDataProvider->totalItemCount;
+    if($dataProvider && $dataProvider->totalItemCount)
+        $count+=$dataProvider->totalItemCount;
+    echo '<ul class="nav nav-tabs">';
+    echo '<li class="active"><a href="#">'.Yii::t('app','Courses').'<small>('.$count.')</small></a></li>';
+    echo '</ul>';
+    echo '<div class="tab-content">';
+
+}
+
 if($fileDataProvider && $fileDataProvider->totalItemCount){
     ?>
     <div class="files">
@@ -120,3 +134,6 @@ if($dataProvider && $dataProvider->totalItemCount){
 }
 if($showEmpty && !(($fileDataProvider && $fileDataProvider->totalItemCount) || ($linksDataProvider && $linksDataProvider->totalItemCount) || ($dataProvider && $dataProvider->totalItemCount)))
     echo '<h4>نتیجه ای یافت نشد.</h4>';
+
+if($showTitle && (($fileDataProvider && $fileDataProvider->totalItemCount) || ($linksDataProvider && $linksDataProvider->totalItemCount) || ($dataProvider && $dataProvider->totalItemCount)))
+    echo '</div>';

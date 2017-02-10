@@ -1,4 +1,6 @@
 $(function(){
+    if($('.selectpicker').length && $.fn.selectpicker)
+        $('.selectpicker').selectpicker();
     // CALL CALENDAR
     $('.datepicker').persianDatepicker({
         altField: '.date',

@@ -28,7 +28,10 @@ if($validClasses) {
 
 		<div class="row">
 			<?php echo $form->labelEx($model, 'user_id'); ?>
-			<?php echo $form->dropDownList($model, 'user_id', CHtml::listData(Users::model()->findAll('role_id = 1'), 'id', 'userDetails.fullName')); ?>
+			<?php echo $form->dropDownList($model, 'user_id', CHtml::listData(Users::model()->findAll('role_id = 1'), 'id', 'userDetails.fullName'),array(
+				'class' => 'selectpicker',
+				'data-live-search' => true,
+			)); ?>
 			<a href="#new-user-modal" data-toggle="modal" class="btn btn-success"><span class="icon icon-plus">&nbsp;&nbsp;</span><span class="icon icon-user"></span></a>
 			<?php echo $form->error($model, 'user_id'); ?>
 		</div>
