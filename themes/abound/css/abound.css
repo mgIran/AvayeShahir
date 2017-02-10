@@ -525,3 +525,15 @@ footer {
 .grid-view .button-column{
     width: 100px;
 }
+
+.dropdown-toggle.btn-default{
+    background-color: #fff !important;
+}
+
+.dropdown-toggle.btn-default span{
+    color: #333 !important;
+}
+.dropdown-toggle.btn-default .caret {
+    border-bottom-color: #333 !important;
+    border-top-color: #333 !important;
+}

@@ -7,7 +7,7 @@
 if($validClasses) {
 	?>
 	<? $this->renderPartial('//layouts/_flashMessage'); ?>
-	<div class="form">
+	<div class="">
 		<? $this->renderPartial("//layouts/_loading") ?>
 		<?php $form = $this->beginWidget('CActiveForm', array(
 				'id' => 'classes-form',
