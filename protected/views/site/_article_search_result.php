@@ -21,8 +21,11 @@ if($showTitle && (($fileDataProvider && $fileDataProvider->totalItemCount) || ($
         $count+=$extLinksDataProvider->totalItemCount;
     if($dataProvider && $dataProvider->totalItemCount)
         $count+=$dataProvider->totalItemCount;
+    $count = Yii::app()->language == 'fa'?
+        Controller::parseNumbers(number_format($count)):number_format($count);
     echo '<ul class="nav nav-tabs">';
-    echo '<li class="active"><a href="#">'.Yii::t('app','Educational Materials').'<small>('.$count.')</small></a></li>';
+    echo '<li class="active"><a href="#">'.Yii::t('app','Educational Materials').'
+    <small>('.$count.')</small></a></li>';
     echo '</ul>';
     echo '<div class="tab-content">';
 

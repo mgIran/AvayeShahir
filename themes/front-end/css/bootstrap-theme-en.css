@@ -72,7 +72,7 @@ body {
     float: left;
 }
 .paragraph-end{
-    background: linear-gradient(to right, rgba(245, 245, 245, 0), rgba(245, 245, 245, 1)) repeat scroll 0 0 rgba(0, 0, 0, 0);
+    background: linear-gradient(to right, rgba(245, 245, 245, 0), rgba(245, 245, 245, 1)) repeat scroll 0 0 rgba(0, 0, 0, 0) !important;
     left: auto;
     right: 0;
 }
@@ -395,11 +395,9 @@ section.classes .owl-prev .arrow,
 .share-icons{
     margin-left: 5px;
 }
-
-.news-item .paragraph-end,
 .news-item:hover .paragraph-end,
 .news-item:focus .paragraph-end{
-    background: linear-gradient(to right, rgba(233, 233, 233, 0), rgba(233, 233, 233, 1)) repeat scroll 0 0 rgba(0, 0, 0, 0);
+    background: linear-gradient(to right, rgba(233, 233, 233, 0), rgba(233, 233, 233, 1)) repeat scroll 0 0 rgba(0, 0, 0, 0) !important;
 }
 
 ul.main-menu li > a{
@@ -439,7 +437,7 @@ ul.main-menu ol {
 }
 .btn-input .btn.form-control .caret{
     left: auto !important;
-    right:10px !important;
+    right:-15px !important;
 }
 .pagination li{
     float: left !important;
