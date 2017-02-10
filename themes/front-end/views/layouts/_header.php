@@ -35,6 +35,7 @@ $action = $this->action->id;
                     'data' => $this->getCoursesList(),
                     'caret' => '<i class="caret"></i>',
                     'emptyOpt' => false,
+                    'changeLabel' => false,
                     'onchange' => 'js:
                         var $s = {id};
                         var $base = \''.Yii::app()->createUrl('/').'/\';
@@ -58,11 +59,12 @@ $action = $this->action->id;
                         'data' => $this->getArticleCategories() ,
                         'caret' => '<i class="caret"></i>' ,
                         'emptyOpt' => false ,
+                        'changeLabel' => false,
                         'onchange' => 'js:
-                        var $s = {id};
-                        var $base = \'' . Yii::app()->createUrl('/') . '/\';
-                        location.href = $base+$s;
-                    ' ,
+                            var $s = {id};
+                            var $base = \'' . Yii::app()->createUrl('/') . '/\';
+                            location.href = $base+$s;
+                        ' ,
                     ));
                     ?>
                 </li>
@@ -133,6 +135,7 @@ $action = $this->action->id;
                     'selected' => Yii::app()->language,
                     'caret' => '<i></i>',
                     'emptyOpt' => false,
+                    'changeLabel' => false,
                     'onchange' => 'js:
                         var $s = {id};
                         var $base = \''.Yii::app()->baseUrl.'/\';

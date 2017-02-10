@@ -60,6 +60,10 @@ class dropDown extends CWidget
      * @var array html tag options
      */
     public $onchange = false;
+    /**
+     * @var boolean change dropdown label when select item
+     */
+    public $changeLabel = true;
 
     /**
      * init widget
@@ -138,12 +142,16 @@ class dropDown extends CWidget
         }elseif($this->onclickAjax && $this->onchange)
             throw new CException('تنظیم همزمان رویداد onchange و onclickAjax ممکن نیست.' );
 
+        $changeLabel = '';
+        if($this->changeLabel)
+            $changeLabel = '$target.closest(".btn-group")
+                .find("[data-bind=\'label\']").text( $target.text() )
+                .end();';
+
         $cs->registerScript( 'dropDown-' . $this->id, '
         $( "body").on( "click", "#' . $this->id . '.dropdown-menu li", function( event ) {
             var $target = $( event.currentTarget );
-            $target.closest(".btn-group")
-                .find("[data-bind=\'label\']").text( $target.text() )
-                .end();
+            '.$changeLabel.'
             $target.closest(".btn-group")
                 .find("#' . $this->id . '-hidden").val($target.data("id"));
                 ' . $script . '
