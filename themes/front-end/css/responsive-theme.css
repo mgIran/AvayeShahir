@@ -158,6 +158,9 @@
     }
 }
 @media (max-width: 767px) {
+    .ekko-lightbox-nav-overlay a{
+        opacity: 1 !important;
+    }
     .news-item .news-detail h3{
         padding-left: 0;
     }
@@ -385,16 +388,8 @@
         right: 11px;
         background: transparent url("../svg/twitter.svg") no-repeat center / 15px auto;
     }
-    .gallery-item .gallery-detail
-    {
-        position: relative;
-        bottom: auto;
-    }
     .gallery-item{
         display: block;
-    }
-    .gallery-item .blur-mask{
-        display: none;
     }
     .class .inner{
         padding: 0 25px;

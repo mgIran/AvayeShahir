@@ -23,26 +23,6 @@
                 ",CClientScript::POS_LOAD);
 
                 Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/isotope.pkgd.min.js',CClientScript::POS_END);
-                Yii::app()->clientScript->registerCss('sa','
-                    .gallery-item{
-                        width: calc( 25% - 5px);
-                        height: auto;
-                        overflow: hidden;
-                        display: inline-block;
-                        margin-bottom:5px;
-                    }
-                    .gallery-item img{
-                        width: 100%;
-                        margin: 0 auto;
-                        height: auto;
-                    }
-                    .modal-backdrop{
-                        background-color: rgba(0,0,0,1);
-                    }
-                    .modal-backdrop.in{
-                        opacity: 0.8;
-                    }
-                ');
                 Yii::app()->clientScript->registerScript("owl-carousel-script","
                     $('.gallery-carousel').isotope({
                         itemSelector : '.gallery-item',
