@@ -37,7 +37,6 @@
                     <div class="gallery-item">
                         <a href="<?= Yii::app()->baseUrl.'/uploads/gallery/'.$model->file_name; ?>"
                            data-toggle="lightbox" data-gallery="gallery"
-
                         >
                             <div class="gallery-pic">
                                 <img src="<?= Yii::app()->baseUrl.'/uploads/gallery/'.$model->file_name; ?>" alt="<?= $model->title ?>" style="width: 100%">
@@ -62,3 +61,10 @@
         </div>
     </div>
 </div>
+<style>
+    .page-content.courses{
+        margin: 0 !important;
+        padding: 60px 0 !important;
+        background-color: #f5f5f5;
+    }
+</style>
