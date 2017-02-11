@@ -2418,6 +2418,24 @@ section.classes h3{
     z-index: 2;
     overflow: hidden;
     padding: 0;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    -webkit-transform: translateY(100%);
+    -moz-transform: translateY(100%);
+    -ms-transform: translateY(100%);
+    -o-transform: translateY(100%);
+    transform: translateY(100%);
+}
+.gallery-item:hover .gallery-detail,
+.gallery-item:focus .gallery-detail{
+    -webkit-transform: translateY(0);
+    -moz-transform: translateY(0);
+    -ms-transform: translateY(0);
+    -o-transform: translateY(0);
+    transform: translateY(0);
 }
 .gallery-item .blur-mask{
     display: block;
@@ -2444,8 +2462,8 @@ section.classes h3{
 }
 .gallery-item .gallery-detail h2{
     margin: 10px 0;
-    font-size: 18px;
-    font-weight: 600;
+    font-size: 14px;
+    font-weight: 400;
 }
 .gallery-item .gallery-detail .text{
     margin:0;
@@ -3647,3 +3665,58 @@ ol{
     }
 }
 
+
+
+#show-pic-modal .modal-dialog {
+    width: 100% !important;
+    background-color: rgba(0,0,0,0.8);
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1050;
+    margin: 0;
+}
+#show-pic-modal .modal-content {
+    background-color: transparent;
+}
+#show-pic-modal .modal-body{
+    margin:50px;
+    padding: 0;
+    position: fixed;
+    left: 0;
+    right:0;
+    top:0;
+    bottom:0;
+    display: inline-block;
+}
+#show-pic-modal .gallery-item{
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+#show-pic-modal .gallery-item .gallery-pic{
+    text-align: center;
+}
+#show-pic-modal .gallery-item img{
+    width: auto;
+    height: auto;
+    margin: 0 auto;
+}
+#show-pic-modal .gallery-detail{
+    position: relative;
+    -webkit-transform: none;
+    -moz-transform: none;
+    -ms-transform: none;
+    -o-transform: none;
+    transform: none;
+}
+#show-pic-modal .gallery-detail{
+    position: relative;
+    -webkit-transform: none;
+    -moz-transform: none;
+    -ms-transform: none;
+    -o-transform: none;
+    transform: none;
+}
