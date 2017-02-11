@@ -41,6 +41,7 @@ return array(
     'Learn English with us ...'=>'همراه با ما انگلیسی را بیاموزید...',
     'Search for ...'=>'جستجو کنید...',
     'Search the entire site'=>'جستجو در کل سایت',
+    'All Site Content'=>'تمام مطالب سایت',
     'Select Language'=>'انتخاب زبان',
     'Language'=>'زبان',
     'All' => 'همه',
@@ -154,4 +155,5 @@ return array(
     'External Website Links' => 'لینک سایت های خارجی',
     'Attachments' => 'پیوست ها',
     'Articles' => 'مطالب',
+    'Search In' => 'جستجو در',
 );

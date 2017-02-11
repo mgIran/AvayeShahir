@@ -6,11 +6,16 @@
 /* @var $linksDataProvider CActiveDataProvider */
 /* @var $extLinksDataProvider CActiveDataProvider */
 /* @var $dataProviders CActiveDataProvider[] */
+Yii::app()->clientScript->registerCss('font-inherit', '
+    .font-inherit{
+        font-size: inherit !important;
+    }
+');
 ?>
 <div class="page-title-container courses">
     <div class="mask"></div>
     <div class="container">
-        <h2><strong class="font-inherit">جستجو در </strong>"<?= $title ?>"</h2>
+        <h2><strong class="font-inherit"><?= Yii::t('app','Search In') ?> </strong>"<?= $title ?>"</h2>
     </div>
 </div>
 
@@ -114,11 +119,6 @@
                     </div>
                     <?php
                 }else{
-                    Yii::app()->clientScript->registerCss('font-inherit', '
-                    .font-inherit{
-                        font-size: inherit !important;
-                    }
-                ');
                     $sideTitle = '';
                     $sideContent = '';
                     if($type == 'courses'){
@@ -170,7 +170,7 @@
                             </div>
                             <?php
                         }else
-                            echo '<h4>نتیجه ای یافت نشد.</h4>';
+                            echo '<h4>'.Yii::t('yii','No results found.').'</h4>';
                     }
                 }
                 ?>

@@ -174,7 +174,7 @@ if($dataProvider && $dataProvider->totalItemCount){
     <?php
 }
 if($showEmpty && !(($fileDataProvider && $fileDataProvider->totalItemCount) || ($linksDataProvider && $linksDataProvider->totalItemCount) || ($extLinksDataProvider && $extLinksDataProvider->totalItemCount) || ($dataProvider && $dataProvider->totalItemCount)))
-    echo '<h4>نتیجه ای یافت نشد.</h4>';
+    echo '<h4>'.Yii::t('yii','No results found.').'</h4>';
 
 if($showTitle && (($fileDataProvider && $fileDataProvider->totalItemCount) || ($linksDataProvider && $linksDataProvider->totalItemCount) || ($extLinksDataProvider && $extLinksDataProvider->totalItemCount) || ($dataProvider && $dataProvider->totalItemCount)))
     echo '</div>';

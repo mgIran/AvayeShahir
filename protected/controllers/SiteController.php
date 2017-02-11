@@ -362,7 +362,7 @@ class SiteController extends Controller
                         'pagination' => array('pageSize' => $pageSize)
                     ));
                     $dataProviders['news']['title'] = Yii::t('app', 'News');
-                    $title = 'تمام مطالب سایت';
+                    $title = Yii::t('app','All Site Content');
                     break;
             }
 
