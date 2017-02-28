@@ -2027,38 +2027,39 @@ section.classes .owl-carousel .owl-controls .owl-nav [class*="owl-"].disabled ,
     margin: 0;
     font-size: 17px;
 }
-.page-content.courses .table{
+.page-content.courses table{
     margin-top: 15px;
     margin-bottom: 50px;
 }
-.page-content.courses .classes .tr.thead{
+.page-content.courses .classes tr.thead{
     font-size: 15pt;
     color: #10395a;
     border-bottom-color: #b1bec9;
 }
-.page-content.courses .classes .tr{
+.page-content.courses .classes tr{
     border-bottom: 1px solid #d6dce1;
     color: #879bab;
     overflow: hidden;
     padding: 10px 0;
 }
-.page-content.courses .classes .tr.tr-collapse{
+.page-content.courses .classes tr.tr-collapse{
     padding:0;
     background-color: rgba(0,0,0,0.07);
     color: rgba(94, 106, 118,0.90);
 }
-.page-content.courses .classes .tr.tr-collapse .td{
+.page-content.courses .classes tr.tr-collapse td{
     padding: 10px 0;
 }
-.page-content.courses .classes .tr:not(.thead):hover{
+.page-content.courses .classes tr:not(.thead):hover{
     background: #dfe5ea;
 }
 .page-content.courses .classes .mini-label{
     opacity:0.5;
     font-size: 12px;
 }
-.page-content.courses .classes .tr a{
-    color: #96b404;
+.page-content.courses .classes tr a{
+    margin: 0;
+    font-size: 13px !important;
 }
 
 .disabled{
@@ -2347,18 +2348,27 @@ section.classes h3{
     padding: 0 !important;
     font-weight: 500;
 }
-.class .btn{
+.class .btn-info{
     -webkit-transition: all 0.3s ease-in-out; -moz-transition: all 0.3s ease-in-out; -ms-transition: all 0.3s ease-in-out; -o-transition: all 0.3s ease-in-out; transition: all 0.3s ease-in-out;
-    color: #eee;
+    color: #fff !important;
     margin: 20px auto 0;
     font-size: 18px;
     background-color: rgba(88, 142, 180, 0.7);
+    text-transform: none !important;
+}
+.class .btn-success{
+    -webkit-transition: all 0.3s ease-in-out; -moz-transition: all 0.3s ease-in-out; -ms-transition: all 0.3s ease-in-out; -o-transition: all 0.3s ease-in-out; transition: all 0.3s ease-in-out;
+    color: #fff !important;
+    margin: 20px auto 0;
+    font-size: 18px;
+    background-color: rgba(150, 180, 4, 0.7);
     text-transform: none !important;
 }
 .class a{
     color: #419bf1;
     font-size: 16px;
     font-weight: 500;
+
 }
 .class .class-detail{
     padding: 0 !important;
@@ -2368,11 +2378,17 @@ section.classes h3{
     text-decoration: underline !important;
     color: #1467b7;
 }
-.class .btn:hover,
-.class .btn:focus{
+.class .btn-info:hover,
+.class .btn-info:focus{
     color: #fff;
     text-decoration: none !important;
     background-color: rgba(88, 142, 180, 1) !important;
+}
+.class .btn-success:hover,
+.class .btn-success:focus{
+    color: #fff;
+    text-decoration: none !important;
+    background-color: rgba(150, 180, 4, 1) !important;
 }
 .full{
     padding: 8px 0;

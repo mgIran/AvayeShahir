@@ -358,8 +358,26 @@ if($classes) :
                             </div>
                             <div class="text-center">
                                 <a href="<?= Yii::app()->createUrl('/courses/register/'.$class->id) ?>"
-                                   class="btn" ><?= Yii::t('app','Register')?>
+                                   class="btn btn-info"><?= Yii::t('app','Register')?>
                                 </a>
+                                <?php if($class->summary && !empty($class->summary)): ?>
+                                    <a href="#" class="btn btn-success show-class-details"><?= Yii::t('app','Details')?></a>
+                                    <div class="hidden class-details"><?
+                                        $purifier = new CHtmlPurifier();
+                                        $purifier->setOptions(array(
+                                            'HTML.Allowed'=> 'p,a[href|target],b,i,br',
+                                            'HTML.AllowedAttributes'=> 'style,id,class,src',
+                                        ));
+                                        echo $text = $purifier->purify($class->summary);
+                                        ?>
+                                        <div class="clearfix"></div>
+                                        <a href="<?= Yii::app()->createUrl('/courses/register/'.$class->id) ?>"
+                                           class="btn btn-success"><?= Yii::t('app','Register')?>
+                                        </a>
+                                    </div>
+                                    <?php
+                                endif;
+                                ?>
                             </div>
                         </div>
                     </div>
@@ -371,6 +389,33 @@ if($classes) :
             </div>
         <?
         endforeach;
+        ?>
+            <div id="show-class-detail-modal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header" style="border-bottom: 1px solid #eee;">
+                            <h4 style="margin-top: 0" class="pull-right">توضیحات کلاس</h4>
+                            <button type="button" class="close pull-left" style="color: #000 !important;font-size: 20px" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        <?php
+        Yii::app()->clientScript->registerScript('show-class-details','
+            $("body").on("click", ".show-class-details", function(e){
+                e.preventDefault();
+                var $this = $(this),
+                    $text = $this.parent().find(".class-details").html();
+                if($text){
+                    $("#show-class-detail-modal .modal-body").html($text);
+                    $("#show-class-detail-modal").modal("show");
+                }
+            });
+        ');
         Yii::app()->clientScript->registerScript("owl-carousel-class-script","
                 var options = {
                         ".(Yii::app()->language == 'fa'?'rtl:true,':'')."
@@ -533,89 +578,6 @@ endif;
         ?>
         <?php
         if($teachers) {
-//            Yii::app()->clientScript->registerScript("owl-carousel-teacher-script","
-//                $('.teacher-carousel').owlCarousel({
-//                    ".(Yii::app()->language == 'fa'?'rtl:true,':'')."
-//                    navText:['<span class=\"arrow\"></span>','<span class=\"arrow\"></span>'],
-//                    navClass: ['owl-prev disabled','owl-next'],
-//                    callbacks: true,
-//                    info: true,
-//                    margin:30,
-//                    autoplay:true,
-//                    autoplayTimeout:5000,
-//                    dots:true,
-//                    responsive : {
-//                        0 : {
-//                            items:1,
-//                            nav : false,
-//                            margin :15,
-//                            dots : true,
-//                            stagePadding : 0
-//                        },
-//                        459 :{
-//                            items:1,
-//                            nav : true,
-//                            margin :50,
-//                            dots : false,
-//                            stagePadding : 50
-//                        },
-//                        768 :{
-//                            items:1,
-//                            nav : true,
-//                            margin :10,
-//                            dots : false,
-//                            stagePadding : 0
-//                        },
-//                        1025 :{
-//                            items:2,
-//                            nav : true,
-//                            margin :40,
-//                            dots : false,
-//                            stagePadding : 0
-//                        },
-//                        1201 :{
-//                            items:2,
-//                            nav : true,
-//                            margin :10,
-//                            dots : false,
-//                            stagePadding : 0
-//                        },
-//                        1401 :{
-//                            items:2,
-//                            nav : true,
-//                            margin :0,
-//                            dots : false,
-//                            stagePadding : 0
-//                        },
-//                        1601 :{
-//                            items:2,
-//                            nav : true,
-//                            margin :0,
-//                            dots : false,
-//                            stagePadding : 0
-//                        },
-//                    },
-//                    onTranslated: $(this).on('translated.owl.carousel', function(e) {
-//                        var items_per_page = e.page.size;
-//                        var nav_container = $('.classes-carousel .owl-nav');
-//                        var item_index = e.item.index;
-//                        var item_count = e.item.count;
-//                        var last_vis_item_index = items_per_page + item_index;
-//                        //$('.classes-carousel').find('.active').not('').removeClass
-//                        if(last_vis_item_index === item_count){
-//                            $(nav_container).find('div:last').addClass('disabled');
-//                        }
-//                        else{
-//                            $(nav_container).find('div:last').removeClass('disabled');
-//                        }
-//                        if(item_index != 0){
-//                            $(nav_container).find('div:first').removeClass('disabled');
-//                        }
-//                        else{
-//                            $(nav_container).find('div:first').addClass('disabled');
-//                        }
-//                    }),
-//                });");
             ?>
             <div class="center-block col-lg-10 col-md-10 col-sm-8 col-xs-12 teachers" id="teachers">
                 <h3 class="yekan-text"><?= Yii::t('app', 'Teachers') ?></h3>

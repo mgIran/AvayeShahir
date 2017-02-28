@@ -133,49 +133,62 @@ Yii::app()->clientScript->registerScript('active-collapse','
 						<?
 						if($category->getValidClasses()):
 						?>
-							<div class="classes">
+							<div class="classes table-responsive" id="class-list-<?= $category->id ?>">
 								<h3><?= Yii::t('app','Classes'); ?></h3>
-								<div class="table text-center">
-									<div class="tr thead">
-										<div class="col-lg-2 col-md-2 col-xs-2 col-sm-2 col-xs-2 td"><?= Yii::t('app','Title'); ?></div>
-										<div class="col-lg-2 col-md-2 col-xs-2 col-sm-2 col-xs-2 td"><?= Yii::t('app','Start of Registration'); ?></div>
-										<div class="col-lg-2 col-md-2 col-xs-2 col-sm-2 col-xs-2 td"><?= Yii::t('app','Registration deadline'); ?></div>
-										<div class="col-lg-1 col-md-1 col-xs-1 col-sm-1 col-xs-1 td"><?= Yii::t('app','Class Hours'); ?></div>
-										<div class="col-lg-2 col-md-2 col-xs-2 col-sm-2 col-xs-2 td"><?= Yii::t('app','Teacher'); ?></div>
-										<div class="col-lg-1 col-md-1 col-xs-1 col-sm-1 col-xs-1 td"><?= Yii::t('app','Tuition'); ?>
-											<span class="mini-label">(<?= Yii::t('app','Toman') ?>)</span>
-										</div>
-										<div class="col-lg-2 col-md-2 col-xs-2 col-sm-2 col-xs-2 td"></div>
-									</div>
+								<table class="table text-center">
+                                    <thead>
+                                        <tr>
+                                            <th><?= Yii::t('app','Title'); ?></th>
+                                            <th><?= Yii::t('app','Start of Registration'); ?></th>
+                                            <th><?= Yii::t('app','Registration deadline'); ?></th>
+                                            <th><?= Yii::t('app','Class Hours'); ?></th>
+                                            <th><?= Yii::t('app','Teacher'); ?></th>
+                                            <th><?= Yii::t('app','Tuition'); ?>
+                                                <span class="mini-label">(<?= Yii::t('app','Toman') ?>)</span>
+                                            </th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
 									<?
 									foreach($category->getValidClasses() as $key => $class):
 									?>
-										<div class="tr" <?= $class->summary && !empty($class->summary)?'data-toggle="collapse" data-target="#class-collapse-'.$key.'"':''; ?>>
-											<div class="col-lg-2 col-md-2 col-xs-2 col-sm-2 col-xs-2 td"><?= $class->title ?></div>
-											<div class="col-lg-2 col-md-2 col-xs-2 col-sm-2 col-xs-2 td"><?= Yii::app()->language == 'fa' ?JalaliDate::date("Y/m/d",$class->startSignupDate):date("Y/m/d",$class->startSignupDate); ?></div>
-											<div class="col-lg-2 col-md-2 col-xs-2 col-sm-2 col-xs-2 td"><?= Yii::app()->language == 'fa' ?JalaliDate::date("Y/m/d",$class->endSignupDate):date("Y/m/d",$class->endSignupDate); ?></div>
-											<div class="col-lg-1 col-md-1 col-xs-1 col-sm-1 col-xs-1 td"><?= (Yii::app()->language == 'fa' ?Controller::parseNumbers($class->startClassTime):$class->startClassTime).' '.Yii::t('app','up to').' '.(Yii::app()->language == 'fa' ?Controller::parseNumbers($class->endClassTime):$class->endClassTime) ?></div>
-											<div class="col-lg-2 col-md-2 col-xs-2 col-sm-2 col-xs-2 td"><?= $class->getTeachersFullName() ?></div>
-											<div class="col-lg-1 col-md-1 col-xs-1 col-sm-1 col-xs-1 td"><?= Yii::app()->language == 'fa' ? Controller::parseNumbers(number_format($class->price)):number_format($class->price); ?></div>
-											<div class="col-lg-2 col-md-2 col-xs-2 col-sm-2 col-xs-2 td">
+										<tr>
+											<td><?= $class->title ?></td>
+											<td><?= Yii::app()->language == 'fa' ?JalaliDate::date("Y/m/d",$class->startSignupDate):date("Y/m/d",$class->startSignupDate); ?></td>
+											<td><?= Yii::app()->language == 'fa' ?JalaliDate::date("Y/m/d",$class->endSignupDate):date("Y/m/d",$class->endSignupDate); ?></td>
+											<td><?= (Yii::app()->language == 'fa' ?Controller::parseNumbers($class->startClassTime):$class->startClassTime).' '.Yii::t('app','up to').' '.(Yii::app()->language == 'fa' ?Controller::parseNumbers($class->endClassTime):$class->endClassTime) ?></td>
+											<td><?= $class->getTeachersFullName() ?></td>
+											<td><?= Yii::app()->language == 'fa' ? Controller::parseNumbers(number_format($class->price)):number_format($class->price); ?></td>
+											<td>
 												<a href="<?= Yii::app()->createUrl('/courses/register/'.$class->id) ?>"
-												   class="btn" ><?= Yii::t('app','Register')?>
+												   class="btn btn-success"><?= Yii::t('app','Register')?>
 												</a>
-											</div>
-										</div>
-										<?
-										if($class->summary && !empty($class->summary)):
-										?>
-											<div class="tr collapse tr-collapse" id="class-collapse-<?= $key ?>">
-												<div class="col-md-12 td"><?= $class->summary ?></div>
-											</div>
-										<?
-										endif;
-										?>
+												<?php if($class->summary && !empty($class->summary)): ?>
+													<span class="clearfix"></span>
+													<a href="#" class="btn btn-info show-class-details"><?= Yii::t('app','Details')?>
+                                                    </a>
+                                                    <div class="hidden class-details"><?
+                                                        $purifier = new CHtmlPurifier();
+                                                        $purifier->setOptions(array(
+                                                            'HTML.Allowed'=> 'p,a[href|target],b,i,br',
+                                                            'HTML.AllowedAttributes'=> 'style,id,class,src',
+                                                        ));
+                                                        echo $text = $purifier->purify($class->summary);
+                                                        ?>
+                                                        <div class="clearfix"></div>
+                                                        <a href="<?= Yii::app()->createUrl('/courses/register/'.$class->id) ?>"
+                                                           class="btn btn-success"><?= Yii::t('app','Register')?>
+                                                        </a>
+                                                    </div>
+												<?php
+												endif;
+												?>
+											</td>
+										</tr>
 									<?
 									endforeach;
 									?>
-								</div>
+								</table>
 							</div>
 						<?
 						endif;
@@ -192,3 +205,29 @@ Yii::app()->clientScript->registerScript('active-collapse','
 		?>
 	</div>
 </div>
+<div id="show-class-detail-modal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header" style="border-bottom: 1px solid #eee;">
+                <h4 style="margin-top: 0" class="pull-right">توضیحات کلاس</h4>
+                <button type="button" class="close pull-left" style="color: #000 !important;font-size: 20px" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+            </div>
+        </div>
+
+    </div>
+</div>
+<?php
+Yii::app()->clientScript->registerScript('show-class-details','
+    $("body").on("click", ".show-class-details", function(e){
+        e.preventDefault();
+        var $this = $(this),
+            $text = $this.parent().find(".class-details").html();
+        if($text){
+            $("#show-class-detail-modal .modal-body").html($text);
+            $("#show-class-detail-modal").modal("show");
+        }
+    });
+');
