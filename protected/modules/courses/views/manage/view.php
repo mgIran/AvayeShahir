@@ -165,7 +165,7 @@ Yii::app()->clientScript->registerScript('active-collapse','
 												</a>
 												<?php if($class->summary && !empty($class->summary)): ?>
 													<span class="clearfix"></span>
-													<a href="#" class="btn btn-info show-class-details"><?= Yii::t('app','Details')?>
+													<a href="#" class="btn btn-info show-class-details"><?= Yii::t('app','Description')?>
                                                     </a>
                                                     <div class="hidden class-details"><?
                                                         $purifier = new CHtmlPurifier();
@@ -210,7 +210,7 @@ Yii::app()->clientScript->registerScript('active-collapse','
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header" style="border-bottom: 1px solid #eee;">
-                <h4 style="margin-top: 0" class="pull-right">توضیحات کلاس</h4>
+                <h4 style="margin-top: 0" class="pull-right"><?= Yii::t('app','Class Description') ?></h4>
                 <button type="button" class="close pull-left" style="color: #000 !important;font-size: 20px" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">

@@ -127,6 +127,7 @@ return array(
     'Amount' => 'مبلغ',
     'Date' => 'تاریخ',
     'Description' => 'توضیحات',
+    'Class Description' => 'توضیحات کلاس',
     'Remaining Capacity' => 'ظرفیت مانده',
     'Free' => 'رایگان',
     'FAQ' => 'سوالات متداول',
