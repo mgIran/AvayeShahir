@@ -60,8 +60,10 @@ class CoursesClassesController extends Controller
 		if(isset($_POST['Classes'])) {
 			$model->attributes = $_POST['Classes'];
 			$model->formTags = isset($_POST['Classes']['formTags']) ? explode(',', $_POST['Classes']['formTags']) : null;
+			$model->teachers = isset($_POST['Classes']['teachers']) ? $_POST['Classes']['teachers']: null;
 			$model->classDays = isset($_POST['Classes']['classDays']) ? explode(',', $_POST['Classes']['classDays']) : null;
 			$model->price = isset($_POST['Classes']['price']) ? $_POST['Classes']['price'] : 0;
+
 			if($model->save()) {
 				Yii::app()->user->setFlash('success', '<span class="icon-check"></span>&nbsp;&nbsp;اطلاعات با موفقیت ذخیره شد.');
 				$this->redirect(array('admin'));
@@ -85,12 +87,19 @@ class CoursesClassesController extends Controller
 		if($model->tags)
 			foreach($model->tags as $tag)
 				array_push($model->formTags, $tag->title);
+
+		if($model->teacherModels)
+			foreach($model->teacherModels as $teacher)
+				array_push($model->teachers, $teacher->id);
+		
 		$model->classDays = $model->classDays ? explode(',', $model->classDays) : null;
 		if(isset($_POST['Classes'])) {
 			$model->attributes = $_POST['Classes'];
 			$model->formTags = isset($_POST['Classes']['formTags']) ? explode(',', $_POST['Classes']['formTags']) : null;
+            $model->teachers = isset($_POST['Classes']['teachers']) ? $_POST['Classes']['teachers']: null;
 			$model->classDays = isset($_POST['Classes']['classDays']) ? explode(',', $_POST['Classes']['classDays']) : null;
 			$model->price = isset($_POST['Classes']['price']) ? $_POST['Classes']['price'] : 0;
+
 			if($model->save()) {
 				Yii::app()->user->setFlash('success', '<span class="icon-check"></span>&nbsp;&nbsp;اطلاعات با موفقیت ذخیره شد.');
 				$this->redirect(array('admin'));

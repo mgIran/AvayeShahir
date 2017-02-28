@@ -50,7 +50,7 @@
                         <?= Yii::t('app', 'Instructor') ?>&nbsp;
                     </div>
                     <div class="td">
-                        <?= $class->teacher->getFullName() ?>
+                        <?= $class->getTeachersFullName() ?>
                     </div>
                 </div>
 

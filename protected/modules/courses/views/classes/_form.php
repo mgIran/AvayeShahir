@@ -40,12 +40,13 @@ Yii::app()->user->returnUrl = Yii::app()->request->getRequestUri();
 		<?php echo $form->error($model,'category_id'); ?>
 	</div>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'teacher_id'); ?>
-		<?php echo $form->dropDownList($model,'teacher_id',CHtml::listData(Users::model()->findAll('role_id = 2'),'id','teacherDetails.fullName'),array(
-            'prompt' => '-',
+	<div class="row well">
+		<?php echo $form->labelEx($model,'teachers'); ?>
+		<span class="clearfix"></span>
+		<?php echo $form->checkBoxList($model,'teachers',CHtml::listData(Users::model()->findAll('role_id = 2'),'id','teacherDetails.fullName'),array(
         )); ?>
-		<?php echo $form->error($model,'teacher_id'); ?>
+		<span class="clearfix"></span>
+		<?php echo $form->error($model,'teachers'); ?>
 	</div>
 
 	<div class="row">

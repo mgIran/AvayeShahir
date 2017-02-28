@@ -295,12 +295,12 @@ if($classes) :
                                 </a>
                             </div>
 
-                            <div class="full text-nowrap">
+                            <div class="full">
                                 <span>
                                     <?= Yii::t('app','Instructor') ?>:&nbsp;
                                 </span>
                                 <span>
-                                    <?= $class->teacher->getFullName() ?>
+                                    <?= $class->getTeachersFullName() ?>
                                 </span>
                             </div>
                             <div class="full">
