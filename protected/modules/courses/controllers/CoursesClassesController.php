@@ -87,7 +87,7 @@ class CoursesClassesController extends Controller
 		if($model->tags)
 			foreach($model->tags as $tag)
 				array_push($model->formTags, $tag->title);
-
+//var_dump($model->teacherModels);exit;
 		if($model->teacherModels)
 			foreach($model->teacherModels as $teacher)
 				array_push($model->teachers, $teacher->id);
