@@ -144,10 +144,31 @@ $action = $this->action->id;
                 ));
                 ?>
             </li>
+            <li class="pull-left">
+                <span class="divider">|</span>
+            </li>
+            <li class="pull-left">
+                <a href="#" data-toggle="modal" data-target="#search-box-modal"
+                   title="<?= Yii::t('app', 'Search'); ?>">
+                    <i class="search-icon"></i>
+                </a>
+            </li>
         </ul>
     </div>
 </header>
 
+<div id="search-box-modal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <div class="center-block box">
+                    <?= $this->renderPartial('//layouts/_search_box',array('prefix' => 'modal')); ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div id="login-modal" class="modal fade" role="dialog">
     <div class="modal-dialog">

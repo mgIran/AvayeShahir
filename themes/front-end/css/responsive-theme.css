@@ -158,6 +158,14 @@
     }
 }
 @media (max-width: 767px) {
+    #search-box-modal .modal-body .box{
+        width: calc(100% - 15px);
+    }
+    #search-box-modal .text-field,
+    #search-box-modal .btn-default,
+    #search-box-modal .btn-search{
+        height: 45px;
+    }
     .ekko-lightbox-nav-overlay a{
         opacity: 1 !important;
     }

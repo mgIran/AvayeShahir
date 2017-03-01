@@ -571,11 +571,12 @@ section.search{
 .search .btn-search.btn:focus{
     background: #0f5da9;
 }
-.search .btn-search .search-icon{
-    background: url("../svg/search.svg") no-repeat scroll transparent center / 25px auto;
-    display: block;
-    width: 100%;
-    height: 100%;
+.search-icon{
+    background: url("../svg/search.svg") no-repeat scroll transparent center / 24px auto;
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    vertical-align: middle;
 }
 .search .bg-icon{
     background: url("../svg/search-blue.svg") no-repeat scroll transparent center / 200px auto;
@@ -3704,6 +3705,147 @@ ol{
 .modal-backdrop.in{
     opacity: 0.8;
 }
+#search-box-modal [class*="col-"]{
+    width: 100% !important;
+}
+
+#search-box-modal{
+    padding: 0 !important;
+}
+#search-box-modal .text-field{
+    background-color: #222;
+    color: #fff;
+    font-size: 20px;
+    height: 60px;
+    border-radius: 0;
+}
+#search-box-modal .btn-default{
+    color: #fff !important;
+    height: 60px;
+    border-radius: 0;
+}
+#search-box-modal .btn-default span{
+    font-size: 20px;
+}
+#search-box-modal .btn-default{
+    background-color: #222;
+    color: #eee;
+    padding: 0 15px;
+    border: none !important;
+    -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.5) !important;
+    -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.5) !important;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5) !important;
+    background-image: none !important;
+}
+#search-box-modal .dropdown-menu{
+    background-color: #333;
+}
+#search-box-modal .dropdown-menu li a{
+    color: #eee;
+}
+#search-box-modal .dropdown-menu li a:hover,
+#search-box-modal .dropdown-menu li a:focus,
+#search-box-modal .dropdown-menu li a:active{
+    color: #eee !important;
+    background-color: #555 !important;
+}
+#search-box-modal .btn-default.active.focus,
+#search-box-modal .btn-default.active:focus,
+#search-box-modal .btn-default.active:hover,
+#search-box-modal .btn-default.focus:active,
+#search-box-modal .btn-default:active:focus,
+#search-box-modal .btn-default:active:hover,
+#search-box-modal .open > .dropdown-toggle.btn-default.focus,
+#search-box-modal .open > .dropdown-toggle.btn-default:focus,
+#search-box-modal .open > .dropdown-toggle.btn-default:hover{
+    background-color: #292929;
+}
+#search-box-modal .btn-search{
+    background-color: #222;
+    line-height: 60px;
+    padding: 0;
+    margin: 0;
+    border-radius: 0;
+    -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+#search-box-modal .btn-search:focus,
+#search-box-modal .btn-search:hover{
+    background-color: #292929;
+}
+
+#search-box-modal .modal-dialog{
+    margin: 0;
+    width: 100%;
+    height: 100%;
+}
+#search-box-modal .modal-content{
+    box-shadow: none;
+    border: none;
+    border-radius: 0;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    color: #fff;
+}
+#search-box-modal .modal-header{
+    border: none;
+    z-index: 2;
+    position: relative;
+}
+#search-box-modal .modal-header .close{
+    color: #fff;
+    font-size: 80px;
+    line-height: 40px;
+    margin: 20px 25px;
+    padding: 10px 15px 13px;
+    border-radius: 50%;
+    background: transparent;
+    opacity: 0.3;
+}
+#search-box-modal .modal-header .close:hover{
+    opacity: 0.45;
+}
+#search-box-modal .modal-body{
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    z-index: 1;
+}
+#search-box-modal .box{
+    width: 70%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+#search-box-modal.modal.fade .modal-dialog {
+    -webkit-transform: scale(0.8);
+    -moz-transform: scale(0.8);
+    -ms-transform: scale(0.8);
+    transform: scale(0.8);
+    opacity: 0;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+}
+#search-box-modal.modal.fade.in .modal-dialog {
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+}
+
 @media all and (max-width: 768px){
     .gallery-item{
         width: calc( 50% - 5px);

@@ -32,26 +32,31 @@
     $cs->registerCssFile($baseUrl.'/css/ripples.min.css');
     $cs->registerCssFile($baseUrl.'/css/owl.carousel.css');
     $cs->registerCssFile($baseUrl.'/css/font-awesome.css');
-    $cs->registerCssFile($baseUrl.'/css/bootstrap-theme.css?7');
-    $cs->registerCssFile($baseUrl.'/css/responsive-theme.css?7');
+    $cs->registerCssFile($baseUrl.'/css/bootstrap-theme.css?7.1');
+    $cs->registerCssFile($baseUrl.'/css/responsive-theme.css?7.1');
     if (Yii::app()->params['default_language'] !== Yii::app()->language)
     {
         // @todo add css for multi language
-        $cs->registerCssFile($baseUrl.'/css/bootstrap-theme-'.Yii::app()->language.'.css?7');
+        $cs->registerCssFile($baseUrl.'/css/bootstrap-theme-'.Yii::app()->language.'.css?7.1');
     }
 
     $cs->registerScriptFile($baseUrl.'/js/bootstrap.min.js');
     $cs->registerScriptFile($baseUrl.'/js/material.min.js');
     $cs->registerScriptFile($baseUrl.'/js/ripples.min.js');
     $cs->registerScriptFile($baseUrl.'/js/jquery.nicescroll.min.js');
-    $cs->registerScriptFile($baseUrl.'/js/scripts.js?7');
+    $cs->registerScriptFile($baseUrl.'/js/scripts.js?7.1');
     ?>
 </head>
 <body id="top">
     <?= $this->renderPartial('//layouts/_page_loading'); ?>
     <?= $this->renderPartial('//layouts/_header'); ?>
     <?= $this->renderPartial('//layouts/_banner'); ?>
-    <?= $this->renderPartial('//layouts/_search_box'); ?>
+    <section class="search" id="main">
+        <div class="container">
+            <?= $this->renderPartial('//layouts/_search_box'); ?>
+        </div>
+        <div class="bg-icon"></div>
+    </section>
     <?= $content ?>
     <section class="map">
         <?= $this->renderPartial('//layouts/_map'); ?>

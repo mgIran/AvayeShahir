@@ -19,7 +19,12 @@ Yii::app()->clientScript->registerCss('font-inherit', '
     </div>
 </div>
 
-<?php $this->renderPartial('//layouts/_search_box'); ?>
+<section class="search" id="main">
+    <div class="container">
+        <?= $this->renderPartial('//layouts/_search_box'); ?>
+    </div>
+    <div class="bg-icon"></div>
+</section>
 <div class="page-content courses search-result" style="overflow: visible">
     <div class="container">
         <div class="articles-container">
