@@ -2061,6 +2061,10 @@ section.classes .owl-carousel .owl-controls .owl-nav [class*="owl-"].disabled ,
     margin: 0;
     font-size: 13px !important;
 }
+.page-content.courses .classes tr th,
+.page-content.courses .classes tr td{
+    vertical-align: middle;
+}
 
 .disabled{
     color: #000 !important;
