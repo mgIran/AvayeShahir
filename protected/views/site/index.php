@@ -288,7 +288,7 @@ if($classes) :
                                     <?php echo $class->course->title ?>
                                 </a>
                             </div>
-                            <div class="full text-nowrap">
+                            <div class="full">
                                 <span><?= Yii::t('app','Department') ?>:&nbsp;</span>
                                 <a href="<?= Yii::app()->createUrl('/courses/'.urlencode($class->course->title).'/'.$class->course->id.'/#collapse-category-'.$class->category->id); ?>">
                                     <?php echo $class->category->title ?>

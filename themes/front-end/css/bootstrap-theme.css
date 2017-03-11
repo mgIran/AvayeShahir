@@ -2356,7 +2356,7 @@ section.classes h3{
 .class .btn-info{
     -webkit-transition: all 0.3s ease-in-out; -moz-transition: all 0.3s ease-in-out; -ms-transition: all 0.3s ease-in-out; -o-transition: all 0.3s ease-in-out; transition: all 0.3s ease-in-out;
     color: #fff !important;
-    margin: 20px auto 0;
+    margin: 10px auto 0;
     font-size: 18px;
     background-color: rgba(88, 142, 180, 0.7);
     text-transform: none !important;
@@ -2364,7 +2364,7 @@ section.classes h3{
 .class .btn-success{
     -webkit-transition: all 0.3s ease-in-out; -moz-transition: all 0.3s ease-in-out; -ms-transition: all 0.3s ease-in-out; -o-transition: all 0.3s ease-in-out; transition: all 0.3s ease-in-out;
     color: #fff !important;
-    margin: 20px auto 0;
+    margin: 10px auto 0;
     font-size: 18px;
     background-color: rgba(150, 180, 4, 0.7);
     text-transform: none !important;
@@ -3718,6 +3718,9 @@ ol{
     font-size: 20px;
     height: 60px;
     border-radius: 0;
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    box-shadow: none !important;
 }
 #search-box-modal .btn-default{
     color: #fff !important;
@@ -3732,9 +3735,6 @@ ol{
     color: #eee;
     padding: 0 15px;
     border: none !important;
-    -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.5) !important;
-    -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.5) !important;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5) !important;
     background-image: none !important;
 }
 #search-box-modal .dropdown-menu{
@@ -3742,6 +3742,7 @@ ol{
 }
 #search-box-modal .dropdown-menu li a{
     color: #eee;
+    line-height: 40px;
 }
 #search-box-modal .dropdown-menu li a:hover,
 #search-box-modal .dropdown-menu li a:focus,
@@ -3766,9 +3767,6 @@ ol{
     padding: 0;
     margin: 0;
     border-radius: 0;
-    -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
-    -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 }
 #search-box-modal .btn-search:focus,
 #search-box-modal .btn-search:hover{

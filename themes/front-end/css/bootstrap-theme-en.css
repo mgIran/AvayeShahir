@@ -42,9 +42,9 @@ body {
 /*.courses .course-detail > p.text{*/
     /*font-size: 14px;*/
 /*}*/
-/*.class .inner {*/
-    /*font-size: 12px;*/
-/*}*/
+.class .full a{
+    font-size: 12px;
+}
 
 /*.courses .course-detail > h4 a{*/
     /*font-size: 16px;*/
