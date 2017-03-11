@@ -75,10 +75,12 @@
         <div class="info-box">
             <div class="col-md-6">
                 <div><i class="map-point"></i><div class="address <?= Yii::app()->language == 'fa' ?"text-right":"text-left" ?>"><?= Yii::t("app",'Unit 1, No 9, 10th Street, Sarafraz Street, Beheshti Avenue, Tehran, Iran.') ?></div></div>
-                <p>
+                <div>
                     <i class="phone"></i>
-                    <span class="phone-number"><?= Yii::app()->language == 'fa'?Controller::parseNumbers("021 88730902 - 021 88736668 - 021 88502049"):'021 88730902 - 021 88736668 - 021 88502049' ?></span>
-                </p>
+                    <div class="address ltr <?= Yii::app()->language == 'fa' ?"text-right":"text-left" ?>"><?= Yii::app()->language == 'fa'?Controller::parseNumbers("021 88546127 - 021 88546128 - 021 88730902 - 
+                    021 88736668 - 021 88502049"):'021 88546127 - 021 88546128 - 021 88730902 - 
+                    021 88736668 - 021 88502049' ?></div>
+                </div>
                 <p>
                     <i class="email"></i>
                     <span>pardis@avayeshahir.com</span>

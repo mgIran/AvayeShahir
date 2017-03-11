@@ -3533,6 +3533,13 @@ ol{
     overflow: hidden;
     font-size: 13px;
     text-align: justify;
+    white-space: pre-line;
+}
+.address.text-right{
+    padding-right: 5px;
+}
+.address.text-left{
+    padding-left: 5px;
 }
 
 .files > ul > li > div:first-of-type ,
@@ -3863,4 +3870,7 @@ ol{
     .gallery-item{
         width: 100%;
     }
+}
+.ltr{
+    direction: ltr !important;
 }
