@@ -2341,13 +2341,14 @@ section.classes h3{
 }
 .class .top-box h4{
     color: rgba(88, 142, 180, 1);
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 500;
-    line-height: 40px;
+    line-height: 26px;
     display: block;
     overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+    height: 52px;
+    vertical-align: middle !important;
+    word-spacing: -2px;
 }
 .class .top-box >div{
     padding: 0 !important;
