@@ -112,6 +112,28 @@
             </div>
             <?php echo CHtml::beginForm(Yii::app()->createUrl('/courses/register/bill/'.$class->id)); ?>
             <?php echo CHtml::hiddenField('pay', ''); ?>
+            <div class="form-group">
+                <div class="text-center col-lg-8 col-md-8 col-sm-8 col-xs-12 <?= Yii::app()->language == 'fa'?'col-lg-push-2 col-md-push-2 col-sm-push-2':'col-lg-pull-2 col-md-pull-2 col-sm-pull-2' ?>">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                        <h4>درگاه موردنظر خود را انتخاب کنید</h4>
+                    </div>
+                    <div class="text-center relative gateway-select">
+                        <div class="gateway-logo">
+                            <img src="<?= Yii::app()->baseUrl.'/images/fanavaLogo.png' ?>" width="200" height="200" alt="فن آوا کارت">
+                        </div>
+                        <?php echo CHtml::radioButton('gateway', true, array('value'=>UserTransactions::GATEWAY_SINA)) ?>
+                        <?php echo CHtml::label('بانک سینا','',array('style' => 'color:#000')) ?>
+                    </div>
+                    <div class="text-center relative gateway-select">
+                        <div class="gateway-logo">
+                            <img src="<?= Yii::app()->baseUrl.'/images/mellatLogo.png' ?>" width="200" height="200" alt="بانک ملت">
+                        </div>
+                        <?php echo CHtml::radioButton('gateway', false, array('value'=>UserTransactions::GATEWAY_MELLAT)) ?>
+                        <?php echo CHtml::label('بانک ملت','',array('style' => 'color:#000')) ?>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
             <div class="buttons">
                 <?php echo CHtml::submitButton($class->price!=0?Yii::t('app', 'Payment'):Yii::t('app', 'Register'), array('class' => 'btn btn-success btn-lg pull-left')); ?>
             </div>
@@ -122,3 +144,15 @@
         ?>
     </div>
 </div>
+<style>
+    
+</style>
+<script>
+    $(function () {
+        $('.gateway-select input[type="radio"]:checked').parent().addClass('select');
+        $("body").on('click', '.gateway-select input[type="radio"]', function () {
+            $('.gateway-select').not($(this)).removeClass('select');
+            $(this).parent().addClass('select');
+        })
+    })
+</script>

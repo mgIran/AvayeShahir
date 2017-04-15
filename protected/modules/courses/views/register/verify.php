@@ -1,5 +1,6 @@
 <?php
 /* @var $model UserTransactions */
+/* @var $msg string */
 ?>
 
 <div class="page-title-container courses">
@@ -21,13 +22,20 @@
                 <div class="td"><?= $model->res_code == 0?'موفق':'نا موفق' ?></div>
             </div>
             <?
-            if($model->res_code !== 0):
+            if($model->res_code > 0):
             ?>
             <div class="tr">
                 <div class="td"><?= Yii::t('app', 'Bank Gateway Message') ?></div>
                 <div class="td"><?= Yii::t('rezvan', $model->res_code)?></div>
             </div>
             <?
+            elseif($model->res_code < 0):
+                ?>
+                <div class="tr">
+                    <div class="td"><?= Yii::t('app', 'Bank Gateway Message') ?></div>
+                    <div class="td"><?= $msg ?></div>
+                </div>
+                <?
             endif;
             ?>
             <div class="tr">

@@ -9,7 +9,7 @@ $form = $this->beginWidget("CActiveForm",array(
     'id' => $prefix.'search-form',
     'method' => 'get',
     'enableAjaxValidation' =>false,
-    'action' =>array('search')
+    'action' =>array('/site/search')
 ));
 ?>
 <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12">

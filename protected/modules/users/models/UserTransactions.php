@@ -16,6 +16,7 @@
  * @property string $sale_reference_id
  * @property string $settle
  * @property string $verbal
+ * @property string $gateway
  *
  * The followings are the available model relations:
  * @property Users $user
@@ -23,12 +24,15 @@
  */
 class UserTransactions extends CActiveRecord
 {
+	const GATEWAY_MELLAT = 1;
+	const GATEWAY_SINA = 2;
+
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'ym_user_transactions';
+		return '{{user_transactions}}';
 	}
 
 	public $verbalLabels=array(
@@ -51,13 +55,14 @@ class UserTransactions extends CActiveRecord
 				array('user_id, amount', 'length', 'max' => 10),
 				array('order_id', 'length', 'max' => 12),
 				array('date', 'length', 'max' => 20),
+				array('gateway', 'length', 'max' => 15),
 				array('status', 'length', 'max' => 6),
 				array('res_code', 'length', 'max' => 5),
 				array('sale_reference_id, ref_id', 'length', 'max' => 50),
 				array('description', 'length', 'max' => 200),
 				// The following rule is used by search().
 				// @todo Please remove those attributes that should not be searched.
-				array('class_id, verbalFilter, user_id, amount, date, status, sale_reference_id, description, order_id, ref_id, settle', 'safe', 'on' => 'search'),
+				array('gateway, class_id, verbalFilter, user_id, amount, date, status, sale_reference_id, description, order_id, ref_id, settle', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -89,6 +94,7 @@ class UserTransactions extends CActiveRecord
 				'description' => 'توضیحات',
 				'order_id' => 'شماره فاکتور',
 				'verbal' => 'نوع ثبت نام',
+				'gateway' => 'درگاه',
 		);
 	}
 
@@ -117,6 +123,7 @@ class UserTransactions extends CActiveRecord
 		$criteria->compare('status', $this->status);
 		$criteria->compare('sale_reference_id', $this->sale_reference_id);
 		$criteria->compare('verbal', $this->verbalFilter);
+		$criteria->compare('gateway', $this->gateway);
 		$criteria->order = 'date DESC';
 		return new CActiveDataProvider($this, array(
 				'criteria' => $criteria,
@@ -152,7 +159,7 @@ class UserTransactions extends CActiveRecord
 	public function newOrderId(){
 		$lastOrderId = Yii::app()->db->createCommand()
 				->select("MAX(order_id) as max")
-				->from("ym_user_transactions")
+				->from("{{user_transactions}}")
 				->queryScalar();
 		if($this->order_id && $this->order_id <= $lastOrderId)
 			$this->order_id = (int)$lastOrderId + 10;

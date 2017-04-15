@@ -48,3 +48,6 @@
 .dropdown-menu li > a:hover{
     background-color: #888 !important;
 }
+.open > .dropdown-menu {
+    display: block !important;
+}

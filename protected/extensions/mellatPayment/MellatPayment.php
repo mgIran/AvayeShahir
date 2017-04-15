@@ -4,7 +4,7 @@
  * Extension to Payment  using Mellat Bank accounts
  * Based on Mohammad Amini code <http://www.yiiframework.com/user/99958> for yii-MellatPayment
  *
- * @author faravaghi <faravaghi@gmail.com>
+ * @author yusef mobasheri <yusef.mobasheri@gmail.com>
  * @license MIT
  * @version 1.0.1
  */

@@ -174,11 +174,18 @@ return array(
 		'coreMessages'=>array(
 				'basePath'=>null,
 		),
-		'Payment' => array(
+		'MellatPayment' => array(
 			'class'=> 'ext.MellatPayment.MellatPayment',
 			'terminalId' => '2034929',
 			'userName' => 'avay988',
 			'userPassword' => '90233241',
+		),
+		'SinaPayment' => array(
+			'class'=> 'ext.SinaPayment.SinaPayment',
+			'terminalId' => '21482455',
+			'merchantId' => '21471505',
+			'userName' => '21471505',
+			'userPassword' => '21548598',
 		),
     ),
     'controllerMap' => array(
