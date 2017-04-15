@@ -47,5 +47,19 @@
                 <div class="td"><?= $model->sale_reference_id?$model->sale_reference_id:$model->ref_id ?></div>
             </div>
         </div>
+        <div class="clearfix"></div>
+        <div class="buttons">
+            <?
+            if($model->res_code != 0):
+            ?>
+            <a href="<?= $this->createUrl('/courses/register/'.$model->class_id) ?>" class="btn btn-info pull-left">تلاش مجدد</a>
+            <?php
+            else:
+            ?>
+            <a href="<?= Yii::app()->baseUrl ?>" class="btn btn-info pull-left">صفحه اصلی</a>
+            <?php
+            endif;
+            ?>
+        </div>
     </div>
 </div>
