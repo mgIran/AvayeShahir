@@ -18,6 +18,10 @@
                 <div class="td"><?= $model->order_id ?></div>
             </div>
             <div class="tr">
+                <div class="td"><?= Yii::t('app', 'Gateway') ?>&nbsp;</div>
+                <div class="td"><?= $model->getGatewayLabel() ?></div>
+            </div>
+            <div class="tr">
                 <div class="td"><?= Yii::t('app', 'Transaction Status') ?></div>
                 <div class="td"><?= $model->res_code == 0?'موفق':'نا موفق' ?></div>
             </div>

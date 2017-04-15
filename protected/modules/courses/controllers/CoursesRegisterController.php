@@ -180,8 +180,8 @@ class CoursesRegisterController extends Controller
         }elseif(isset($_POST['ResNum'])){
             $orderId = $_POST['ResNum'];
             $model = UserTransactions::model()->findByAttributes(array('order_id' => $orderId));
-            $model->sale_reference_id = $_POST['RefNum'];
-            $model->ref_id = $_POST['TraceNo'];
+            $model->sale_reference_id = isset($_POST['RefNum'])?$_POST['RefNum']:null;
+            $model->ref_id = isset($_POST['TraceNo'])?$_POST['TraceNo']:null;
             if($_POST['State'] == "OK"){
                 if(Yii::app()->SinaPayment->RequestUnPack()){
                     Yii::app()->SinaPayment->VerifyRequest();

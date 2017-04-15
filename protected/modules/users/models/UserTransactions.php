@@ -35,10 +35,16 @@ class UserTransactions extends CActiveRecord
 		return '{{user_transactions}}';
 	}
 
-	public $verbalLabels=array(
+	public $verbalLabels = array(
 		0 => 'ثبت نام اینترنتی',
 		1 => 'ثبت نام حضوری'
 	);
+
+	public $gatewayLabels = array(
+		self::GATEWAY_MELLAT => 'بانک ملت',
+		self::GATEWAY_SINA => 'بانک سینا'
+	);
+
 	public $verbalFilter;
 
 	/**
@@ -49,20 +55,20 @@ class UserTransactions extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-				array('user_id, class_id', 'required'),
-				array('order_id', 'unique'),
-				array('settle', 'default' ,'value' => 0),
-				array('user_id, amount', 'length', 'max' => 10),
-				array('order_id', 'length', 'max' => 12),
-				array('date', 'length', 'max' => 20),
-				array('gateway', 'length', 'max' => 15),
-				array('status', 'length', 'max' => 6),
-				array('res_code', 'length', 'max' => 5),
-				array('sale_reference_id, ref_id', 'length', 'max' => 50),
-				array('description', 'length', 'max' => 200),
-				// The following rule is used by search().
-				// @todo Please remove those attributes that should not be searched.
-				array('gateway, class_id, verbalFilter, user_id, amount, date, status, sale_reference_id, description, order_id, ref_id, settle', 'safe', 'on' => 'search'),
+			array('user_id, class_id', 'required'),
+			array('order_id', 'unique'),
+			array('settle', 'default', 'value' => 0),
+			array('user_id, amount', 'length', 'max' => 10),
+			array('order_id', 'length', 'max' => 12),
+			array('date', 'length', 'max' => 20),
+			array('gateway', 'length', 'max' => 15),
+			array('status', 'length', 'max' => 6),
+			array('res_code', 'length', 'max' => 5),
+			array('sale_reference_id, ref_id', 'length', 'max' => 50),
+			array('description', 'length', 'max' => 200),
+			// The following rule is used by search().
+			// @todo Please remove those attributes that should not be searched.
+			array('gateway, class_id, verbalFilter, user_id, amount, date, status, sale_reference_id, description, order_id, ref_id, settle', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -74,8 +80,8 @@ class UserTransactions extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-				'user' => array(self::BELONGS_TO, 'Users', 'user_id'),
-				'class' => array(self::BELONGS_TO, 'Classes', 'class_id'),
+			'user' => array(self::BELONGS_TO, 'Users', 'user_id'),
+			'class' => array(self::BELONGS_TO, 'Classes', 'class_id'),
 		);
 	}
 
@@ -85,16 +91,16 @@ class UserTransactions extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-				'class_id' => 'کلاس',
-				'user_id' => 'کاربر',
-				'amount' => 'مقدار',
-				'date' => 'تاریخ',
-				'status' => 'وضعیت',
-				'sale_reference_id' => 'کد رهگیری تراکنش',
-				'description' => 'توضیحات',
-				'order_id' => 'شماره فاکتور',
-				'verbal' => 'نوع ثبت نام',
-				'gateway' => 'درگاه',
+			'class_id' => 'کلاس',
+			'user_id' => 'کاربر',
+			'amount' => 'مقدار',
+			'date' => 'تاریخ',
+			'status' => 'وضعیت',
+			'sale_reference_id' => 'کد رهگیری تراکنش',
+			'description' => 'توضیحات',
+			'order_id' => 'شماره فاکتور',
+			'verbal' => 'نوع ثبت نام',
+			'gateway' => 'درگاه',
 		);
 	}
 
@@ -126,7 +132,7 @@ class UserTransactions extends CActiveRecord
 		$criteria->compare('gateway', $this->gateway);
 		$criteria->order = 'date DESC';
 		return new CActiveDataProvider($this, array(
-				'criteria' => $criteria,
+			'criteria' => $criteria,
 		));
 	}
 
@@ -143,28 +149,27 @@ class UserTransactions extends CActiveRecord
 
 	protected function beforeSave()
 	{
-		if(parent::beforeSave()) {
-			if($this->isNewRecord) {
+		if(parent::beforeSave()){
+			if($this->isNewRecord){
 				$this->newOrderId();
 			}
 			return true;
-		}
-		else
+		}else
 			return false;
 	}
 
 	/**
 	 * create unique order id for any transaction
 	 */
-	public function newOrderId(){
+	public function newOrderId()
+	{
 		$lastOrderId = Yii::app()->db->createCommand()
-				->select("MAX(order_id) as max")
-				->from("{{user_transactions}}")
-				->queryScalar();
+			->select("MAX(order_id) as max")
+			->from("{{user_transactions}}")
+			->queryScalar();
 		if($this->order_id && $this->order_id <= $lastOrderId)
 			$this->order_id = (int)$lastOrderId + 10;
-		elseif(!$this->order_id)
-		{
+		elseif(!$this->order_id){
 			if($lastOrderId)
 				$this->order_id = (int)$lastOrderId + 10;
 			else
@@ -174,10 +179,15 @@ class UserTransactions extends CActiveRecord
 
 	public function getHtmlAmount()
 	{
-		if ($this->amount != 0)
-			$html = Yii::app()->language == 'fa' ? Controller::parseNumbers(number_format($this->amount)) . Yii::t('app', "Toman") : number_format($this->amount) . Yii::t('app', "Toman");
+		if($this->amount != 0)
+			$html = Yii::app()->language == 'fa'?Controller::parseNumbers(number_format($this->amount)) . Yii::t('app', "Toman"):number_format($this->amount) . Yii::t('app', "Toman");
 		else
 			$html = Yii::t('app', "Free");
 		return $html;
+	}
+
+	public function getGatewayLabel()
+	{
+		return $this->gatewayLabels[$this->gateway];
 	}
 }

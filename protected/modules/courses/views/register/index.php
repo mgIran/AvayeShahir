@@ -144,15 +144,11 @@
         ?>
     </div>
 </div>
-<style>
-    
-</style>
-<script>
-    $(function () {
-        $('.gateway-select input[type="radio"]:checked').parent().addClass('select');
-        $("body").on('click', '.gateway-select input[type="radio"]', function () {
-            $('.gateway-select').not($(this)).removeClass('select');
-            $(this).parent().addClass('select');
-        })
+<?php
+Yii::app()->clientScript->registerScript('changePayment',"
+    $('.gateway-select input[type=\"radio\"]:checked').parent().addClass('select');
+    $(\"body\").on('click', '.gateway-select input[type=\"radio\"]', function () {
+        $('.gateway-select').not($(this)).removeClass('select');
+        $(this).parent().addClass('select');
     })
-</script>
+", CClientScript::POS_READY);

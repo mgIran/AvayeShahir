@@ -157,4 +157,5 @@ return array(
     'Attachments' => 'پیوست ها',
     'Articles' => 'مطالب',
     'Search In' => 'جستجو در',
+    'Gateway' => 'درگاه بانک',
 );
