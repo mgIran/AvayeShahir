@@ -195,6 +195,10 @@ class CoursesRegisterController extends Controller
                 }
             }else{
                 $model->res_code = -1;
+                if($_POST['State'] == 'Canceled By User'){
+                    $model->res_code = 17;
+                    $msg = Yii::t('rezvan', 17);
+                }
             }
             $msg = Yii::app()->SinaPayment->getError();
             $model->update();
@@ -209,15 +213,16 @@ class CoursesRegisterController extends Controller
     public function actionInquiry($id)
     {
         $model = UserTransactions::model()->findByAttributes(array('order_id' => $id));
-        if($model)
-        {
-            $result = Yii::app()->MellatPayment->InquiryRequest( $model->order_id, $model->order_id, $model->sale_reference_id);
-            var_dump($result);exit;
+        if($model){
+            $result = Yii::app()->MellatPayment->InquiryRequest($model->order_id, $model->order_id, $model->sale_reference_id);
+            var_dump($result);
+            exit;
         }else
             echo 'Model is not found';
     }
 
-    public function actionAdmin(){
+    public function actionAdmin()
+    {
         Yii::app()->theme = 'abound';
         $this->layout = '//layouts/column1';
         $classIds = Yii::app()->db->createCommand()
@@ -227,13 +232,12 @@ class CoursesRegisterController extends Controller
             ->order('class_id DESC')
             ->queryColumn();
         $classTransactions = array();
-        foreach($classIds as $id)
-        {
+        foreach($classIds as $id){
             $class = Classes::model()->findByPk($id);
-            $dataProvider = new CActiveDataProvider('UserTransactions',array(
+            $dataProvider = new CActiveDataProvider('UserTransactions', array(
                 'criteria' => array(
                     'condition' => 'class_id = :class_id AND status = "paid"',
-                    'params' => array(':class_id'=>$id),
+                    'params' => array(':class_id' => $id),
                     'order' => 'date DESC'
                 ),
                 'pagination' => false
@@ -241,7 +245,7 @@ class CoursesRegisterController extends Controller
             $classTransactions[$id]['dataProvider'] = $dataProvider;
             $classTransactions[$id]['class'] = $class;
         }
-        $this->render('admin',array(
+        $this->render('admin', array(
             'courses' => Courses::model()->findAll(),
             'classTransactions' => $classTransactions
         ));
