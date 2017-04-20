@@ -132,7 +132,7 @@
                     </span>
                 </div>
             </div>
-            <p class="copyright"><?= Yii::t('app','All Rights Reserved By Pardis-e Avaye Shahir. ©‏') ?>&nbsp;<?= Yii::app()->language=='fa'?JalaliDate::date('Y'):date("Y"); ?> </p>
+            <p class="copyright"><?= Yii::t('app','All Rights Reserved By Pardis-e Avaye Shahir. ©‏') ?>&nbsp;<?= Yii::app()->language=='fa'?Controller::parseNumbers('1394'):'2016'; ?> </p>
         </div>
     </div>
 </footer>

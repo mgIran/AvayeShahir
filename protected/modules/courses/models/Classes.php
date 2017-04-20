@@ -46,6 +46,16 @@ class Classes extends SortableCActiveRecord
         return '{{classes}}';
     }
 
+    private $weekDays = array(
+        'شنبه',
+        'یکشنبه',
+        'دوشنبه',
+        'سه شنبه',
+        'چهارشنبه',
+        'پنجشنبه',
+        'جمعه'
+    );
+
     public $formTags = [];
     public $teachers = [];
 
@@ -265,15 +275,7 @@ class Classes extends SortableCActiveRecord
     {
         if($this->scenario != 'delete' && $this->classDays && !empty($this->classDays)){
             $this->classDays = array_filter($this->classDays, function ($v){
-                if(in_array($v, array(
-                    'شنبه',
-                    'یکشنبه',
-                    'دوشنبه',
-                    'سه شنبه',
-                    'چهارشنبه',
-                    'پنجشنبه',
-                    'جمعه'
-                )))
+                if(in_array($v, $this->weekDays))
                     return $v;
             });
             $this->classDays = implode(',', $this->classDays);
