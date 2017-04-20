@@ -73,6 +73,7 @@ class CoursesRegisterController extends Controller
         if(isset($_POST['pay']) && empty($_POST['pay'])){
             $class = Classes::model()->findByPk($id);
             $startDate = JalaliDate::date('Y/m/d', $class->startClassDate);
+            $endDate = JalaliDate::date('Y/m/d', $class->endClassDate);
             $time = Controller::parseNumbers($class->startClassTime);
             if(!$class)
                 $this->redirect(Yii::app()->baseUrl);
@@ -90,7 +91,7 @@ class CoursesRegisterController extends Controller
                     $model->class_id = $id;
                     $model->user_id = Yii::app()->user->getId();
                     $model->amount = $class->price;
-                    $model->description = "پرداخت شهریه جهت ثبت نام در دوره {$class->course->title}، کلاس {$class->title} - تاریخ شروع کلاس از {$startDate} در روز(های) \"{$class->classDays}\" ساعت {$time} می باشد.";
+                    $model->description = "پرداخت شهریه جهت ثبت نام در دوره {$class->course->title}، کلاس {$class->title} - تاریخ شروع کلاس از {$startDate} تا {$endDate} هر هفته در روزهای \"{$class->classDays}\" ساعت {$time} می باشد.";
                     $model->date = time();
                     $model->newOrderId();
                     $model->gateway = (int)$_POST['gateway'];
@@ -107,7 +108,7 @@ class CoursesRegisterController extends Controller
                     $model->class_id = $id;
                     $model->user_id = Yii::app()->user->getId();
                     $model->amount = $class->price;
-                    $model->description = "پرداخت شهریه جهت ثبت نام در دوره {$class->course->title}، کلاس {$class->title} - تاریخ شروع کلاس از {$startDate} در روز(های) \"{$class->classDays}\" ساعت {$time} می باشد.";
+                    $model->description = "پرداخت شهریه جهت ثبت نام در دوره {$class->course->title}، کلاس {$class->title} - تاریخ شروع کلاس از {$startDate} تا {$endDate} هر هفته در روزهای \"{$class->classDays}\" ساعت {$time} می باشد.";
                     $model->date = time();
                     $model->gateway = (int)$_POST['gateway'];
                     if($model->save()){
@@ -142,7 +143,7 @@ class CoursesRegisterController extends Controller
                 $model->class_id = $id;
                 $model->user_id = Yii::app()->user->getId();
                 $model->amount = 0;
-                $model->description = "پرداخت شهریه جهت ثبت نام در دوره {$class->course->title}، کلاس {$class->title} - تاریخ شروع کلاس از {$startDate} در روز(های) \"{$class->classDays}\" ساعت {$time} می باشد.";
+                $model->description = "پرداخت شهریه جهت ثبت نام در دوره {$class->course->title}، کلاس {$class->title} - تاریخ شروع کلاس از {$startDate} تا {$endDate} هر هفته در روزهای \"{$class->classDays}\" ساعت {$time} می باشد.";
                 $model->date = time();
                 $model->status = 'paid';
                 $model->settle = 1;
