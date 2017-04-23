@@ -229,11 +229,14 @@ class CoursesClassesController extends Controller
 	{
 		$model = new UserTransactions();
 
-		$criteria = $criteria = Classes::getValidClasses();
+		$criteria = Classes::getValidClasses();
 		$validClasses = Classes::model()->findAll($criteria);
 
 		if(isset($_POST['UserTransactions'])) {
 			$class = Classes::model()->findByPk($_POST['UserTransactions']['class_id']);
+			$startDate = JalaliDate::date('Y/m/d', $class->startClassDate);
+			$endDate = JalaliDate::date('Y/m/d', $class->endClassDate);
+			$time = Controller::parseNumbers($class->startClassTime);
 			$lastTransaction = UserTransactions::model()->findByAttributes(array('user_id'=>$_POST['UserTransactions']['user_id'],'class_id' => $class->id));
 			if($lastTransaction && $lastTransaction->status == 'paid')
 			{
@@ -245,7 +248,7 @@ class CoursesClassesController extends Controller
 			$model->class_id = $class->id;
 			$model->user_id = $_POST['UserTransactions']['user_id'];
 			$model->amount = $class->price;
-			$model->description = 'پرداخت شهریه جهت ثبت نام در دوره '.$class->course->title.'، کلاس '.$class->title;  // Required
+			$model->description = "پرداخت شهریه جهت ثبت نام در دوره {$class->course->title}، کلاس {$class->title} - تاریخ شروع کلاس از {$startDate} تا {$endDate} هر هفته در روزهای \"{$class->classDays}\" ساعت {$time} می باشد.";
 			$model->date = time();
 			$model->status = 'paid';
 			$model->verbal = 1;
