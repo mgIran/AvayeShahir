@@ -75,6 +75,7 @@ class CoursesRegisterController extends Controller
             $startDate = JalaliDate::date('Y/m/d', $class->startClassDate);
             $endDate = JalaliDate::date('Y/m/d', $class->endClassDate);
             $time = Controller::parseNumbers($class->startClassTime);
+            $endTime = Controller::parseNumbers($class->endClassTime);
             if(!$class)
                 $this->redirect(Yii::app()->baseUrl);
             if(!$class->remainingCapacity)
@@ -91,7 +92,10 @@ class CoursesRegisterController extends Controller
                     $model->class_id = $id;
                     $model->user_id = Yii::app()->user->getId();
                     $model->amount = $class->price;
-                    $model->description = "پرداخت شهریه جهت ثبت نام در دوره {$class->course->title}، کلاس {$class->title} - تاریخ شروع کلاس از {$startDate} تا {$endDate} هر هفته در روزهای \"{$class->classDays}\" ساعت {$time} می باشد.";
+                    $model->description = "ثبت نام شما در دوره {$class->course->title} کلاس {$class->title} با موفقیت انجام شد.
+تاریخ شروع کلاس از {$startDate} تا {$endDate} هر هفته روزهای \"{$class->classDays}\" از ساعت {$time} الی {$endTime} می باشد.
+با تشکر
+آوای شهیر";
                     $model->date = time();
                     $model->newOrderId();
                     $model->gateway = (int)$_POST['gateway'];
@@ -108,7 +112,10 @@ class CoursesRegisterController extends Controller
                     $model->class_id = $id;
                     $model->user_id = Yii::app()->user->getId();
                     $model->amount = $class->price;
-                    $model->description = "پرداخت شهریه جهت ثبت نام در دوره {$class->course->title}، کلاس {$class->title} - تاریخ شروع کلاس از {$startDate} تا {$endDate} هر هفته در روزهای \"{$class->classDays}\" ساعت {$time} می باشد.";
+                    $model->description = "ثبت نام شما در دوره {$class->course->title} کلاس {$class->title} با موفقیت انجام شد.
+تاریخ شروع کلاس از {$startDate} تا {$endDate} هر هفته روزهای \"{$class->classDays}\" از ساعت {$time} الی {$endTime} می باشد.
+با تشکر
+آوای شهیر";
                     $model->date = time();
                     $model->gateway = (int)$_POST['gateway'];
                     if($model->save()){
@@ -143,7 +150,10 @@ class CoursesRegisterController extends Controller
                 $model->class_id = $id;
                 $model->user_id = Yii::app()->user->getId();
                 $model->amount = 0;
-                $model->description = "پرداخت شهریه جهت ثبت نام در دوره {$class->course->title}، کلاس {$class->title} - تاریخ شروع کلاس از {$startDate} تا {$endDate} هر هفته در روزهای \"{$class->classDays}\" ساعت {$time} می باشد.";
+                $model->description = "ثبت نام شما در دوره {$class->course->title} کلاس {$class->title} با موفقیت انجام شد.
+تاریخ شروع کلاس از {$startDate} تا {$endDate} هر هفته روزهای \"{$class->classDays}\" از ساعت {$time} الی {$endTime} می باشد.
+با تشکر
+آوای شهیر";
                 $model->date = time();
                 $model->status = 'paid';
                 $model->settle = 1;
@@ -208,6 +218,18 @@ class CoursesRegisterController extends Controller
             $model->update();
         }else
             throw new CHttpException(404, 'تراکنش پرداختی شما یافت نشد، در صورتی که مبلغی از حساب شما کسر شده طی 72 ساعت آینده به حساب شما برگردانده خواهد شد.');
+
+        // Add Sms Schedules
+        if($model->user && $model->user->userDetails && $model->user->userDetails->phone && !empty($phone = $model->user->userDetails->phone)){
+            @Notify::SendSms($model->description,$phone);
+            @SmsSchedules::AddSchedule(
+                $model->class->startClassDate - (2 * 24 * 60 * 60),
+                $model->description,
+                array($phone)
+            );
+        }
+
+
         $this->render('verify', array(
             'model' => $model,
             'msg' => $msg,

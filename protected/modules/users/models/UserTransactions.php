@@ -65,7 +65,7 @@ class UserTransactions extends CActiveRecord
 			array('status', 'length', 'max' => 6),
 			array('res_code', 'length', 'max' => 5),
 			array('sale_reference_id, ref_id', 'length', 'max' => 50),
-			array('description', 'length', 'max' => 200),
+			array('description', 'length', 'max' => 1000),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('gateway, class_id, verbalFilter, user_id, amount, date, status, sale_reference_id, description, order_id, ref_id, settle', 'safe', 'on' => 'search'),

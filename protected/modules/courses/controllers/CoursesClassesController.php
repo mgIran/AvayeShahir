@@ -237,6 +237,7 @@ class CoursesClassesController extends Controller
 			$startDate = JalaliDate::date('Y/m/d', $class->startClassDate);
 			$endDate = JalaliDate::date('Y/m/d', $class->endClassDate);
 			$time = Controller::parseNumbers($class->startClassTime);
+			$endTime = Controller::parseNumbers($class->endClassTime);
 			$lastTransaction = UserTransactions::model()->findByAttributes(array('user_id'=>$_POST['UserTransactions']['user_id'],'class_id' => $class->id));
 			if($lastTransaction && $lastTransaction->status == 'paid')
 			{
@@ -248,12 +249,25 @@ class CoursesClassesController extends Controller
 			$model->class_id = $class->id;
 			$model->user_id = $_POST['UserTransactions']['user_id'];
 			$model->amount = $class->price;
-			$model->description = "پرداخت شهریه جهت ثبت نام در دوره {$class->course->title}، کلاس {$class->title} - تاریخ شروع کلاس از {$startDate} تا {$endDate} هر هفته در روزهای \"{$class->classDays}\" ساعت {$time} می باشد.";
+			$model->description = "ثبت نام شما در دوره {$class->course->title} کلاس {$class->title} با موفقیت انجام شد.
+تاریخ شروع کلاس از {$startDate} تا {$endDate} هر هفته روزهای \"{$class->classDays}\" از ساعت {$time} الی {$endTime} می باشد.
+با تشکر
+آوای شهیر";
 			$model->date = time();
 			$model->status = 'paid';
 			$model->verbal = 1;
 			if($model->save()) {
 				Yii::app()->user->setFlash("success",'ثبت نام باموفقیت انجام شد.');
+                // Add Sms Schedules
+                if($model->user && $model->user->userDetails && $model->user->userDetails->phone && !empty($phone = $model->user->userDetails->phone)){
+					@Notify::SendSms($model->description,$phone);
+                    @SmsSchedules::AddSchedule(
+                        $class->startClassDate - (2 * 24 * 60 * 60),
+                        $model->description,
+                        array($phone)
+                    );
+                }
+                //
 				$this->refresh();
 			}
 		}
