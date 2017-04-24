@@ -220,7 +220,8 @@ class CoursesRegisterController extends Controller
             throw new CHttpException(404, 'تراکنش پرداختی شما یافت نشد، در صورتی که مبلغی از حساب شما کسر شده طی 72 ساعت آینده به حساب شما برگردانده خواهد شد.');
 
         // Add Sms Schedules
-        if($model->user && $model->user->userDetails && $model->user->userDetails->phone && !empty($phone = $model->user->userDetails->phone)){
+        if($model->user && $model->user->userDetails && $model->user->userDetails->phone && !empty($model->user->userDetails->phone)){
+            $phone = $model->user->userDetails->phone;
             @Notify::SendSms($model->description,$phone);
             @SmsSchedules::AddSchedule(
                 $model->class->startClassDate - (2 * 24 * 60 * 60),

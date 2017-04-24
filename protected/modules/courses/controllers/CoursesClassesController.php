@@ -259,7 +259,8 @@ class CoursesClassesController extends Controller
 			if($model->save()) {
 				Yii::app()->user->setFlash("success",'ثبت نام باموفقیت انجام شد.');
                 // Add Sms Schedules
-                if($model->user && $model->user->userDetails && $model->user->userDetails->phone && !empty($phone = $model->user->userDetails->phone)){
+                if($model->user && $model->user->userDetails && $model->user->userDetails->phone && !empty($model->user->userDetails->phone)){
+					$phone = $model->user->userDetails->phone;
 					@Notify::SendSms($model->description,$phone);
                     @SmsSchedules::AddSchedule(
                         $class->startClassDate - (2 * 24 * 60 * 60),
