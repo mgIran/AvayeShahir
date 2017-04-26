@@ -16,14 +16,12 @@ class SmsSchedulesController extends Controller
 			$emails = CJSON::decode($schedule->emails);
 			foreach($emails as $email){
 				if($email && !empty($email)){
-					$html = '<html><body>';
-					$html .= '<div style="font-family:tahoma,arial;font-size:12px;white-space: pre-line;text-align: right;background:#F5F5F5;min-height:100px;padding:5px 30px 5px;direction:rtl;line-height:25px;color:#4b4b4b;">';
+					$html = '<div style="font-family:tahoma,arial;font-size:12px;white-space: pre-line;text-align: right;background:#F5F5F5;min-height:100px;padding:5px 30px 5px;direction:rtl;line-height:25px;color:#4b4b4b;">';
 					$html .= '<h1 style="direction:ltr;">اطلاعیه جدید</h1>';
 					$html .= '<span>' . (CHtml::encode($schedule->text)) . '</span>';
 					$html .= "</div>";
-					$html .= "</body></html>";
 					$subject = 'اطلاعیه جدید - وبسایت آوای شهیر';
-					@Mailer::mail($email, $subject, $html, Yii::app()->params['no-reply-email']);
+					@(new Mailer())->mail($email, $subject, $html, Yii::app()->params['no-reply-email']);
 				}
 			}
 
