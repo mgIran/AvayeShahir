@@ -8,55 +8,15 @@
 class Notify
 {
     /**
-     * @param $siteMessage
-     * @param $userID
-     * @param bool $sms
-     * @param bool $smsMessage
-     * @param bool $email
-     * @param bool $emailSubject
-     * @param $emailMessage
-     * @throws CException
+     * @param $text
+     * @param $phone
+     * @param $email
+     * @param null $emailSubject
      */
-    public static function Send($siteMessage, $userID, $sms = false, $smsMessage = false, $email = false, $emailSubject = false, $emailMessage = false)
+    public static function Send($text, $phone, $email, $emailSubject=null)
     {
-        /* @var $user Users */
-        Yii::app()->getModule('users');
-        $user = Users::model()->findByPk($userID);
-        $result = false;
-        if($user){
-            // Send Notification in site profile
-//            $model = new UsersNotifications();
-//            $model->user_id = $userID;
-//            $model->message = $siteMessage;
-//            $model->seen = 0;
-//            $model->date = time();
-//            @$model->save();
-            // Send Notification with sms
-            if($sms && $user->mobile && !empty($user->mobile)){
-                $sms = new SendSMS();
-                $sms->AddNumber($user->mobile);
-                if($sms->getNumbers()){
-                    $sms->AddMessage($smsMessage?$smsMessage:$siteMessage);
-                    $sms->SendWithLine();
-//                    $model->sms_sent = empty($sms->getResult()->message)?1:0;
-//                    $model->sms_id = $model->sms_sent?$sms->getResult()->SendMessageWithLineNumberResult->long:NULL;
-//                    @$model->save();
-                }
-            }
-            // Send Notification with email
-            if($email && $user->email && !empty($user->email)){
-                $html = '<html><body>';
-                $html .= '<div style="font-family:tahoma,arial;font-size:12px;width:600px;background:#F5F5F5;min-height:100px;padding:5px 30px 5px;direction:rtl;line-height:25px;color:#4b4b4b;">';
-                $html .= '<h1 style="direction:ltr;">اطلاعیه جدید</h1>';
-                $html .= '<span>' . ($emailMessage?$emailMessage:$siteMessage) . '</span>';
-                $html .= "</div>";
-                $html .= "</body></html>";
-
-                $subject = $emailSubject && !empty($emailSubject)?$emailSubject:'اطلاعیه جدید در مترجمان پیشتاز';
-//                $model->email_sent = @Mailer::mail($user->email, $subject, $html, "noreply@pishtaztranslation.com")?1:0;
-//                @$model->save();
-            }
-        }
+//        self::SendSms($text, $phone);
+        self::SendEmail($text, $email, $emailSubject);
     }
 
 
@@ -76,6 +36,20 @@ class Notify
                 $sms->AddMessage($message);
                 @$sms->SendWithLine();
             }
+        }
+    }
+
+    public static function SendEmail($message, $email, $emailSubject)
+    {
+        if($email && !empty($email)){
+            $html = '<html><body>';
+            $html .= '<div style="font-family:tahoma,arial;font-size:12px;white-space: pre-line;text-align: right;background:#F5F5F5;min-height:100px;padding:5px 30px 5px;direction:rtl;line-height:25px;color:#4b4b4b;">';
+            $html .= '<h1 style="direction:ltr;">اطلاعیه جدید</h1>';
+            $html .= '<span>' . (CHtml::encode($message)) . '</span>';
+            $html .= "</div>";
+            $html .= "</body></html>";
+            $subject = $emailSubject && !empty($emailSubject)?$emailSubject:'اطلاعیه جدید - وبسایت آوای شهیر';
+            @Mailer::mail($email, $subject, $html, Yii::app()->params['no-reply-email']);
         }
     }
 

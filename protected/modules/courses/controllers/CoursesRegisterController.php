@@ -72,10 +72,6 @@ class CoursesRegisterController extends Controller
         $flag = false;
         if(isset($_POST['pay']) && empty($_POST['pay'])){
             $class = Classes::model()->findByPk($id);
-            $startDate = JalaliDate::date('Y/m/d', $class->startClassDate);
-            $endDate = JalaliDate::date('Y/m/d', $class->endClassDate);
-            $time = Controller::parseNumbers($class->startClassTime);
-            $endTime = Controller::parseNumbers($class->endClassTime);
             if(!$class)
                 $this->redirect(Yii::app()->baseUrl);
             if(!$class->remainingCapacity)
@@ -92,10 +88,7 @@ class CoursesRegisterController extends Controller
                     $model->class_id = $id;
                     $model->user_id = Yii::app()->user->getId();
                     $model->amount = $class->price;
-                    $model->description = "ثبت نام شما در دوره {$class->course->title} کلاس {$class->title} با موفقیت انجام شد.
-تاریخ شروع کلاس از {$startDate} تا {$endDate} هر هفته روزهای \"{$class->classDays}\" از ساعت {$time} الی {$endTime} می باشد.
-با تشکر
-آوای شهیر";
+                    $model->description = "پرداخت شهریه جهت ثبت نام در دوره {$class->course->title} کلاس {$class->title}";
                     $model->date = time();
                     $model->newOrderId();
                     $model->gateway = (int)$_POST['gateway'];
@@ -112,10 +105,7 @@ class CoursesRegisterController extends Controller
                     $model->class_id = $id;
                     $model->user_id = Yii::app()->user->getId();
                     $model->amount = $class->price;
-                    $model->description = "ثبت نام شما در دوره {$class->course->title} کلاس {$class->title} با موفقیت انجام شد.
-تاریخ شروع کلاس از {$startDate} تا {$endDate} هر هفته روزهای \"{$class->classDays}\" از ساعت {$time} الی {$endTime} می باشد.
-با تشکر
-آوای شهیر";
+                    $model->description = "پرداخت شهریه جهت ثبت نام در دوره {$class->course->title} کلاس {$class->title}";
                     $model->date = time();
                     $model->gateway = (int)$_POST['gateway'];
                     if($model->save()){
@@ -150,14 +140,34 @@ class CoursesRegisterController extends Controller
                 $model->class_id = $id;
                 $model->user_id = Yii::app()->user->getId();
                 $model->amount = 0;
-                $model->description = "ثبت نام شما در دوره {$class->course->title} کلاس {$class->title} با موفقیت انجام شد.
-تاریخ شروع کلاس از {$startDate} تا {$endDate} هر هفته روزهای \"{$class->classDays}\" از ساعت {$time} الی {$endTime} می باشد.
-با تشکر
-آوای شهیر";
+                $startDate = JalaliDate::date('Y/m/d', $class->startClassDate);
+                $endDate = JalaliDate::date('Y/m/d', $class->endClassDate);
+                $time = Controller::parseNumbers($class->startClassTime);
+                $endTime = Controller::parseNumbers($class->endClassTime);
+                $model->description = "پرداخت شهریه جهت ثبت نام در دوره {$class->course->title} کلاس {$class->title}";
                 $model->date = time();
                 $model->status = 'paid';
                 $model->settle = 1;
-                $model->save();
+                if($model->save()){
+                    if($model->user && $model->user->userDetails && $model->user->userDetails->phone && !empty($model->user->userDetails->phone)){
+                        $phone = $model->user->userDetails->phone;
+                        $smsText = "ثبت نام شما در دوره {$class->course->title} کلاس {$class->title} با موفقیت انجام شد.
+تاریخ شروع کلاس از {$startDate} تا {$endDate} هر هفته روزهای \"{$class->classDays}\" از ساعت {$time} الی {$endTime} می باشد.
+با تشکر
+آوای شهیر";
+                        @Notify::Send($smsText, $phone, $model->user->email);
+                        $smsScheduleText = "دانشجوی گرامی
+زمان برگزاری کلاس {$class->title} شما از تاریخ {$startDate} تا {$endDate} هر هفته روزهای \"{$class->classDays}\" از ساعت {$time} الی {$endTime} می باشد.
+با تشکر
+آوای شهیر";
+                        @SmsSchedules::AddSchedule(
+                            $class->startClassDate - (2 * 24 * 60 * 60),
+                            $smsScheduleText,
+                            array($phone),
+                            array($model->user->email)
+                        );
+                    }
+                }
                 $this->render('free_register');
             }
         }else
@@ -221,15 +231,28 @@ class CoursesRegisterController extends Controller
 
         // Add Sms Schedules
         if($model->user && $model->user->userDetails && $model->user->userDetails->phone && !empty($model->user->userDetails->phone)){
+            $class = $model->class;
+            $startDate = JalaliDate::date('Y/m/d', $class->startClassDate);
+            $endDate = JalaliDate::date('Y/m/d', $class->endClassDate);
+            $time = Controller::parseNumbers($class->startClassTime);
+            $endTime = Controller::parseNumbers($class->endClassTime);
             $phone = $model->user->userDetails->phone;
-            @Notify::SendSms($model->description,$phone);
+            $smsText = "ثبت نام شما در دوره {$class->course->title} کلاس {$class->title} با موفقیت انجام شد.
+تاریخ شروع کلاس از {$startDate} تا {$endDate} هر هفته روزهای \"{$class->classDays}\" از ساعت {$time} الی {$endTime} می باشد.
+با تشکر
+آوای شهیر";
+            @Notify::Send($smsText, $phone, $model->user->email);
+            $smsScheduleText = "دانشجوی گرامی
+زمان برگزاری کلاس {$class->title} شما از تاریخ {$startDate} تا {$endDate} هر هفته روزهای \"{$class->classDays}\" از ساعت {$time} الی {$endTime} می باشد.
+با تشکر
+آوای شهیر";
             @SmsSchedules::AddSchedule(
-                $model->class->startClassDate - (2 * 24 * 60 * 60),
-                $model->description,
-                array($phone)
+                $class->startClassDate - (2 * 24 * 60 * 60),
+                $smsScheduleText,
+                array($phone),
+                array($model->user->email)
             );
         }
-
 
         $this->render('verify', array(
             'model' => $model,

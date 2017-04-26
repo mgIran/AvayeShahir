@@ -7,6 +7,7 @@
  * @property string $id
  * @property string $send_date
  * @property string $text
+ * @property string $emails
  * @property string $receivers
  * @property string $responses
  * @property string $status
@@ -38,10 +39,10 @@ class SmsSchedules extends CActiveRecord
 			array('text', 'length', 'max' => 600),
 			array('status', 'length', 'max' => 1),
 			array('status', 'default', 'value' => 0),
-			array('receivers, responses', 'safe'),
+			array('receivers, responses, emails', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, send_date, text, receivers, responses, status', 'safe', 'on' => 'search'),
+			array('id, send_date, text, emails, receivers, responses, status', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -64,7 +65,8 @@ class SmsSchedules extends CActiveRecord
 			'id' => 'ID',
 			'send_date' => 'تاریخ ارسال',
 			'text' => 'متن ارسالی',
-			'receivers' => 'گیرندگان',
+			'emails' => 'ایمیل گیرندگان',
+			'receivers' => 'موبایل گیرندگان',
 			'responses' => 'پاسخ وبسرویس',
 			'status' => 'وضعیت',
 		);
@@ -91,6 +93,7 @@ class SmsSchedules extends CActiveRecord
 		$criteria->compare('id', $this->id, true);
 		$criteria->compare('send_date', $this->send_date, true);
 		$criteria->compare('text', $this->text, true);
+		$criteria->compare('emails', $this->emails, true);
 		$criteria->compare('receivers', $this->receivers, true);
 		$criteria->compare('responses', $this->responses, true);
 		$criteria->compare('status', $this->status, true);
@@ -113,17 +116,19 @@ class SmsSchedules extends CActiveRecord
 
 	/**
 	 * Add New SmS Schedule Send
-	 *
-	 * @param $sendDate int
-	 * @param $text string
-	 * @param $receivers array
+	 * 
+	 * @param $sendDate
+	 * @param $text
+	 * @param $receivers
+	 * @param $emails
 	 * @return bool|SmsSchedules
 	 */
-	public static function AddSchedule($sendDate, $text, $receivers)
+	public static function AddSchedule($sendDate, $text, $receivers, $emails)
 	{
 		$model = new SmsSchedules();
 		$model->send_date = $sendDate;
 		$model->text = $text;
+		$model->emails = CJSON::encode($emails);
 		$model->receivers = CJSON::encode($receivers);
 		$model->status = self::SEND_PENDING;
 		if($model->save())
@@ -134,22 +139,29 @@ class SmsSchedules extends CActiveRecord
 
 	/**
 	 * Add Receiver to SMS Schedule Send
+	 *
 	 * @param $id
 	 * @param $receiver
-	 * @return bool|SmsSchedules
+	 * @param $email
+	 * @return bool|static
 	 */
-	public static function AddReceiverToSchedule($id, $receiver)
+	public static function AddReceiverToSchedule($id, $receiver, $email)
 	{
 		$model = SmsSchedules::model()->findByPk($id);
 		if($model === NULL)
 			return false;
 		if($model->status != self::SEND_PENDING){
-			self::AddSchedule(time(), $model->text, array($receiver));
+			self::AddSchedule(time(), $model->text, array($receiver), array($email));
 			return true;
 		}else{
 			$receivers = CJSON::decode($model->receivers);
 			$receivers[] = $receiver;
 			$model->receivers = CJSON::encode($receivers);
+
+			$emails = CJSON::decode($model->emails);
+			$emails[] = $email;
+			$model->emails = CJSON::encode($emails);
+
 			if($model->save())
 				return true;
 			else

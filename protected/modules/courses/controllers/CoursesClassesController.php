@@ -232,16 +232,15 @@ class CoursesClassesController extends Controller
 		$criteria = Classes::getValidClasses();
 		$validClasses = Classes::model()->findAll($criteria);
 
-		if(isset($_POST['UserTransactions'])) {
+		if(isset($_POST['UserTransactions'])){
 			$class = Classes::model()->findByPk($_POST['UserTransactions']['class_id']);
 			$startDate = JalaliDate::date('Y/m/d', $class->startClassDate);
 			$endDate = JalaliDate::date('Y/m/d', $class->endClassDate);
 			$time = Controller::parseNumbers($class->startClassTime);
 			$endTime = Controller::parseNumbers($class->endClassTime);
-			$lastTransaction = UserTransactions::model()->findByAttributes(array('user_id'=>$_POST['UserTransactions']['user_id'],'class_id' => $class->id));
-			if($lastTransaction && $lastTransaction->status == 'paid')
-			{
-				Yii::app()->user->setFlash("failed",'این کاربر قبلا در این کلاس ثبت نام کرده است.');
+			$lastTransaction = UserTransactions::model()->findByAttributes(array('user_id' => $_POST['UserTransactions']['user_id'], 'class_id' => $class->id));
+			if($lastTransaction && $lastTransaction->status == 'paid'){
+				Yii::app()->user->setFlash("failed", 'این کاربر قبلا در این کلاس ثبت نام کرده است.');
 				$this->refresh();
 			}elseif($lastTransaction && $lastTransaction->status == 'unpaid')
 				$lastTransaction->delete();
@@ -249,26 +248,32 @@ class CoursesClassesController extends Controller
 			$model->class_id = $class->id;
 			$model->user_id = $_POST['UserTransactions']['user_id'];
 			$model->amount = $class->price;
-			$model->description = "ثبت نام شما در دوره {$class->course->title} کلاس {$class->title} با موفقیت انجام شد.
-تاریخ شروع کلاس از {$startDate} تا {$endDate} هر هفته روزهای \"{$class->classDays}\" از ساعت {$time} الی {$endTime} می باشد.
-با تشکر
-آوای شهیر";
+			$model->description = "پرداخت شهریه جهت ثبت نام در دوره {$class->course->title} کلاس {$class->title}";
 			$model->date = time();
 			$model->status = 'paid';
 			$model->verbal = 1;
-			if($model->save()) {
-				Yii::app()->user->setFlash("success",'ثبت نام باموفقیت انجام شد.');
-                // Add Sms Schedules
-                if($model->user && $model->user->userDetails && $model->user->userDetails->phone && !empty($model->user->userDetails->phone)){
+			if($model->save()){
+				Yii::app()->user->setFlash("success", 'ثبت نام باموفقیت انجام شد.');
+				// Add Sms Schedules
+				if($model->user && $model->user->userDetails && $model->user->userDetails->phone && !empty($model->user->userDetails->phone)){
 					$phone = $model->user->userDetails->phone;
-					@Notify::SendSms($model->description,$phone);
-                    @SmsSchedules::AddSchedule(
-                        $class->startClassDate - (2 * 24 * 60 * 60),
-                        $model->description,
-                        array($phone)
-                    );
-                }
-                //
+					$smsText = "ثبت نام شما در دوره {$class->course->title} کلاس {$class->title} با موفقیت انجام شد.
+تاریخ شروع کلاس از {$startDate} تا {$endDate} هر هفته روزهای \"{$class->classDays}\" از ساعت {$time} الی {$endTime} می باشد.
+با تشکر
+آوای شهیر";
+					@Notify::Send($smsText, $phone, $model->user->email);
+					$smsScheduleText = "دانشجوی گرامی
+زمان برگزاری کلاس {$class->title} شما از تاریخ {$startDate} تا {$endDate} هر هفته روزهای \"{$class->classDays}\" از ساعت {$time} الی {$endTime} می باشد.
+با تشکر
+آوای شهیر";
+					@SmsSchedules::AddSchedule(
+						$class->startClassDate - (2 * 24 * 60 * 60),
+						$smsScheduleText,
+						array($phone),
+						array($model->user->email)
+					);
+				}
+				//
 				$this->refresh();
 			}
 		}
