@@ -1,11 +1,11 @@
 <?php
 class Mailer {
 
-    public $host = 'server70.bertina.us';
+    public $host = 'mail.avayeshahir.com';
     public $username = 'noreply@avayeshahir.com';
     public $password = '!@avayeshahir1395';
-    public $port = '465';
-    public $secure = 'ssl';
+    public $port = '587';
+    public $secure = '';
 
     /**
      * @param $to
