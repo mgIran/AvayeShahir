@@ -215,7 +215,7 @@ class UsersPublicController extends Controller
                     Yii::app()->user->setFlash('setting-success' , Yii::t('app','Operation was successful.'));
                     if(isset($_POST['ajax']) && $_POST['ajax'] === 'change-pass-form')
                     {
-                        echo CJSON::encode(['state' => 'ok' ,'url' => Yii::app()->createUrl('/dashboard/tab/setting')]);
+                        echo CJSON::encode(['state' => 'ok' ,'url' => Yii::app()->createUrl('/dashboard?tab=setting')]);
                         Yii::app()->end();
                     }
                     else
