@@ -38,9 +38,8 @@ class SmsSchedulesController extends Controller
 				$schedule->status = SmsSchedules::SEND_SUCCESSFUL;
 			}else
 				$schedule->status = $response->message;
-			$result[]=$schedule->save();
+			@$schedule->save();
 		}
-		var_dump($result);
 		Yii::app()->end();
 	}
 }
