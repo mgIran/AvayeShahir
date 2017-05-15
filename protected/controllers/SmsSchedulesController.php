@@ -41,7 +41,7 @@ class SmsSchedulesController extends Controller
 		}
 		if(!is_dir(Yii::getPathOfAlias('webroot').'/uploads/temp/cron/'))
 			mkdir(Yii::getPathOfAlias('webroot').'/uploads/temp/cron/');
-		@file_put_contents(Yii::getPathOfAlias('webroot').'/uploads/temp/cron/cron-'.time().'.txt','OK');
+		@file_put_contents(Yii::getPathOfAlias('webroot').'/uploads/temp/cron/cron-'.JalaliDate::date('Y-m-d-H-i', time(), false).'.txt','OK');
 		Yii::app()->end();
 	}
 }
