@@ -6,9 +6,8 @@ class SmsSchedulesController extends Controller
 	{
 		$floorTime = strtotime(date('Y/m/d', time()).' 00:00');
 		$ceilTime = $floorTime + 86400;
-
 		$criteria = new CDbCriteria();
-		$criteria->addCondition('send_date <= :ceil AND status = 0');
+		$criteria->addCondition('send_date < :ceil AND status = 0');
 		$criteria->params[':ceil'] = $ceilTime;
 		$schedules = SmsSchedules::model()->findAll($criteria);
 		foreach($schedules as $schedule){
