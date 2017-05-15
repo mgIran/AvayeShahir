@@ -39,6 +39,9 @@ class SmsSchedulesController extends Controller
 				$schedule->status = $response->message;
 			@$schedule->save();
 		}
+		if(!is_dir(Yii::getPathOfAlias('webroot').'/uploads/temp/cron/'))
+			mkdir(Yii::getPathOfAlias('webroot').'/uploads/temp/cron/');
+		@file_put_contents(Yii::getPathOfAlias('webroot').'/uploads/temp/cron/cron-'.time().'.txt','OK');
 		Yii::app()->end();
 	}
 }
