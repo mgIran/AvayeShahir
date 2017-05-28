@@ -71,7 +71,7 @@ class ClassCategories extends SortableCActiveRecord
 				'class' => 'ext.EasyMultiLanguage.EasyMultiLanguageBehavior',
 				// @todo Please change those attributes that should be translated.
 				'translated_attributes' => array('title', 'summary'),
-				'admin_routes' => array('courses/categories/admin', 'courses/categories/update', 'courses/categories/delete', 'courses/categories/create'),
+				'admin_routes' => array('courses/categories/admin', 'courses/categories/update', 'courses/categories/delete', 'courses/categories/create', 'courses/categories/changeStatus'),
 				//
 				'languages' => Yii::app()->params['languages'],
 				'default_language' => Yii::app()->params['default_language'],
