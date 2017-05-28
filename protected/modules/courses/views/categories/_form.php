@@ -23,10 +23,15 @@
 
 
 	<div class='row'>
-		<?php
-		echo $form->labelEx($model,'course_id', array('class'=>'control-label')); ?>
+		<?php echo $form->labelEx($model,'course_id', array('class'=>'control-label')); ?>
 		<?php echo $form->dropDownList($model, 'course_id',CHtml::listData(Courses::model()->findAll(),'id','title')); ?>
 		<?php echo $form->error($model,'course_id'); ?>
+	</div>
+
+	<div class='row'>
+		<?php echo $form->labelEx($model,'status', array('class'=>'control-label')); ?>
+		<?php echo $form->dropDownList($model, 'status',$model->statusLabels); ?>
+		<?php echo $form->error($model,'status'); ?>
 	</div>
 
 	<div class="row">

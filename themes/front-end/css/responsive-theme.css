@@ -461,9 +461,6 @@
     .page-content.courses .files .download i{
         display: none !important;
     }
-    .container{
-        padding: 0 !important;
-    }
     .article-container{
         padding: 0;
     }
