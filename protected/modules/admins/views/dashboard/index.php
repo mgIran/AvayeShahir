@@ -1,5 +1,5 @@
 <?php
-/* @var $transactionsPaid CActiveDataProvider */
+/* @var $transactionsModel UserTransactions */
 /* @var $totalTransactionsPaidAmount string */
 ?>
 <?php if(Yii::app()->user->hasFlash('success')):?>
@@ -37,7 +37,7 @@
     </div>
     <div class="panel-body">
         <p>
-            ثبت نام جدید: <?php echo $transactionsPaid->totalItemCount ?><br />
+            تعداد کل ثبت نام ها: <?php echo $transactionsModel->searchCount() ?><br />
         </p>
         <p>
             <a class="btn btn-info" href="<?= $this->createUrl('/courses/register/admin') ?>">مشاهده لیست کامل</a>
@@ -60,7 +60,7 @@
             $model = new UserTransactions();
             $this->widget('zii.widgets.grid.CGridView',array(
                 'id' => 'paid-grid-view',
-                'dataProvider' => $transactionsPaid,
+                'dataProvider' => $transactionsModel->search(),
                 'rowHtmlOptionsExpression'=>'array("data-order-id"=>$data->order_id)',
                 'filter' => $model,
                 'columns'=>array(
@@ -79,6 +79,7 @@
                     'sale_reference_id',
                     array(
                         'header'=>'توضیحات تراکنش',
+                        'name' => 'description',
                         'value'=>'$data->description',
                     ),
                     array(

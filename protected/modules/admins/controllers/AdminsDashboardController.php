@@ -31,14 +31,7 @@ class AdminsDashboardController extends Controller
         $transactionsModel->unsetAttributes();
         if(isset($_GET['UserTransactions']))
             $transactionsModel->attributes=$_GET['UserTransactions'];
-        $criteria = new CDbCriteria;
-        $criteria->addCondition('status = "paid"');
-        $criteria->compare('sale_reference_id', $transactionsModel->sale_reference_id);
-        $criteria->compare('verbal', $transactionsModel->verbalFilter);
-        $criteria->order = 'date DESC';
-        $transactionsPaid = new CActiveDataProvider($transactionsModel, array(
-            'criteria' => $criteria,
-        ));
+        $transactionsModel->status ="paid";
 
         $totalTransactionsPaidAmount =Yii::app()->db->createCommand()
             ->select('SUM(amount) AS sum')
@@ -47,7 +40,7 @@ class AdminsDashboardController extends Controller
             ->queryScalar();
 
 		$this->render('index',array(
-            'transactionsPaid' => $transactionsPaid,
+            'transactionsModel' => $transactionsModel,
             'totalTransactionsPaidAmount' => $totalTransactionsPaidAmount
         ));
 	}

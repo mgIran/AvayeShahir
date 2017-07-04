@@ -122,18 +122,31 @@ class UserTransactions extends CActiveRecord
 
 		$criteria = new CDbCriteria;
 
-		$criteria->compare('class_id', $this->class_id);
 		$criteria->compare('user_id', $this->user_id);
-		$criteria->compare('amount', $this->amount, true);
-		$criteria->compare('date', $this->date, true);
 		$criteria->compare('status', $this->status);
+		$criteria->compare('description', $this->description,true);
 		$criteria->compare('sale_reference_id', $this->sale_reference_id);
 		$criteria->compare('verbal', $this->verbalFilter);
-		$criteria->compare('gateway', $this->gateway);
 		$criteria->order = 'date DESC';
 		return new CActiveDataProvider($this, array(
 			'criteria' => $criteria,
+			'pagination' => array('pageSize' => 20)
 		));
+	}
+
+	public function searchCount()
+	{
+		// @todo Please modify the following code to remove attributes that should not be searched.
+
+		$criteria = new CDbCriteria;
+
+		$criteria->compare('user_id', $this->user_id);
+		$criteria->compare('status', $this->status);
+		$criteria->compare('description', $this->description,true);
+		$criteria->compare('sale_reference_id', $this->sale_reference_id);
+		$criteria->compare('verbal', $this->verbalFilter);
+		$criteria->order = 'date DESC';
+		return $this->count($criteria);
 	}
 
 	/**
