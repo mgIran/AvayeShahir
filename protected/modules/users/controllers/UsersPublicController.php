@@ -8,7 +8,7 @@ class UsersPublicController extends Controller
     public function filters()
     {
         return array(
-            'checkAccess + dashboard, logout, setting, update, changePassword', // perform access control for CRUD operations
+            'checkAccess + dashboard, logout, setting, update', // perform access control for CRUD operations
         );
     }
     /**
@@ -422,14 +422,14 @@ class UsersPublicController extends Controller
     {
         Yii::app()->theme = 'front-end';
         $this->layout = '//layouts/inner';
-        if(!Yii::app()->user->isGuest and Yii::app()->user->type!='admin')
+        if(!Yii::app()->user->isGuest and Yii::app()->user->type != 'admin')
             $this->redirect($this->createAbsoluteUrl('//'));
-        else if(!Yii::app()->user->isGuest and Yii::app()->user->type =='admin')
+        else if(!Yii::app()->user->isGuest and Yii::app()->user->type == 'admin')
             Yii::app()->user->logout(false);
 
-        $token=Yii::app()->request->getQuery('token');
-        $model=Users::model()->find('verification_token=:token', array(':token'=>$token));
-        if($model) {
+        $token = Yii::app()->request->getQuery('token');
+        $model = Users::model()->find('verification_token=:token', array(':token' => $token));
+        if($model){
             $model->password = null;
             if(!$model)
                 $this->redirect($this->createAbsoluteUrl('//'));
@@ -439,26 +439,27 @@ class UsersPublicController extends Controller
             $model->setScenario('change_password');
             $this->performAjaxValidation($model);
 
-            if($model->status == 'active') {
+            if($model->status == 'active'){
 
-                if(isset($_POST['Users'])) {
+                if(isset($_POST['Users'])){
                     $model->password = $_POST['Users']['password'];
                     $model->repeatPassword = $_POST['Users']['repeatPassword'];
                     $model->verification_token = null;
                     $model->change_password_request_count = 0;
-                    if($model->save()) {
+                    if($model->save()){
                         Yii::app()->user->setFlash('success', 'کلمه عبور با موفقیت تغییر یافت.');
                         $this->refresh();
-                    } else
+                    }else
                         Yii::app()->user->setFlash('failed', 'در انجام عملیات خطایی رخ داده است لطفا مجددا تلاش کنید.');
                 }
 
                 $this->render('change_password', array(
                     'model' => $model
                 ));
-            } else
+            }else
                 $this->redirect($this->createAbsoluteUrl('//'));
-        }
+        }else
+            Yii::app()->user->setFlash('failed', 'لینک بازیابی کلمه عبور منقضی شده است. لطفا مجددا تلاش فرمایید.');
         $this->render('change_password', array(
             'model' => $model
         ));
