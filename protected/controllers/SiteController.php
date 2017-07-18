@@ -60,7 +60,7 @@ class SiteController extends Controller
 		$classes = array();
 		foreach(Courses::model()->findAll() as $course){
 			$criteria = Classes::getValidClasses($course->id);
-			$criteria->order = 'startSignupDate DESC,t.order';
+			$criteria->order = 't.order';
 			$objects = Classes::model()->findAll($criteria);
 			if($objects){
 				$classes[$course->id]['title'] = $course->title;

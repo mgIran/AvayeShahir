@@ -273,7 +273,7 @@ class Classes extends SortableCActiveRecord
 
     protected function beforeSave()
     {
-        if($this->scenario != 'delete' && $this->classDays && !empty($this->classDays)){
+        if($this->scenario != 'delete' && $this->scenario != 'sort_order_change' && $this->classDays && !empty($this->classDays)){
             $this->classDays = array_filter($this->classDays, function ($v){
                 if(in_array($v, $this->weekDays))
                     return $v;
