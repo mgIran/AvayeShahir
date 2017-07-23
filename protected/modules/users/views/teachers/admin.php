@@ -19,7 +19,10 @@ if(isset($_GET['return']) && $_GET['return'] == true)
 <h1>مدیریت اساتید</h1>
 
 <?php
-$this->widget('zii.widgets.grid.CGridView', array(
+$this->widget('ext.yiiSortableModel.widgets.SortableCGridView', array(
+    'orderField' => 'order',
+    'idField' => 'id',
+    'orderUrl' => 'order',
     'id'=>'admins-grid',
     'dataProvider'=>$model->searchTeachers(),
     'filter'=>$model,

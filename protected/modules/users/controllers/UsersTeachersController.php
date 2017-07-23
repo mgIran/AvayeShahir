@@ -28,8 +28,17 @@ class UsersTeachersController extends Controller
 	public static function actionsType()
 	{
 		return array(
-			'backend' => array('index', 'create', 'admin', 'delete'),
+			'backend' => array('index', 'create', 'admin', 'delete', 'order'),
 			'frontend' => array('view')
+		);
+	}
+
+	public function actions()
+	{
+		return array(
+			'order' => array(
+				'class' => 'ext.yiiSortableModel.actions.AjaxSortingAction',
+			),
 		);
 	}
 

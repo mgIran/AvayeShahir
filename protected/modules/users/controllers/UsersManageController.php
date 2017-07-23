@@ -6,8 +6,8 @@ class UsersManageController extends Controller
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
 	 */
-	public $layout='//layouts/column2';
-    public $defaultAction='admin';
+	public $layout = '//layouts/column2';
+	public $defaultAction = 'admin';
 
 	/**
 	 * @return array action filters
@@ -19,6 +19,7 @@ class UsersManageController extends Controller
 			'postOnly + delete', // we only allow deletion via POST request
 		);
 	}
+
 	/**
 	 * Specifies the access control rules.
 	 * This method is used by the 'accessControl' filter.
@@ -27,7 +28,16 @@ class UsersManageController extends Controller
 	public static function actionsType()
 	{
 		return array(
-			'backend' => array('index','view','create','createUser','update','admin','delete'),
+			'backend' => array('index', 'view', 'create', 'createUser', 'update', 'admin', 'delete', 'order'),
+		);
+	}
+
+	public function actions()
+	{
+		return array(
+			'order' => array(
+				'class' => 'ext.yiiSortableModel.actions.AjaxSortingAction',
+			),
 		);
 	}
 
@@ -37,8 +47,8 @@ class UsersManageController extends Controller
 	 */
 	public function actionView($id)
 	{
-		$this->render('view',array(
-			'model'=>$this->loadModel($id),
+		$this->render('view', array(
+			'model' => $this->loadModel($id),
 		));
 	}
 
@@ -48,20 +58,18 @@ class UsersManageController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new Users;
-		if(isset($_POST['Users']))
-		{
-			$model->attributes=$_POST['Users'];
-			if($model->save())
-			{
-				Yii::app()->user->setFlash('success' ,'<span class="icon-check"></span>&nbsp;&nbsp;اطلاعات با موفقیت ذخیره شد.');
+		$model = new Users;
+		if(isset($_POST['Users'])){
+			$model->attributes = $_POST['Users'];
+			if($model->save()){
+				Yii::app()->user->setFlash('success', '<span class="icon-check"></span>&nbsp;&nbsp;اطلاعات با موفقیت ذخیره شد.');
 				$this->redirect(array('admin'));
 			}else
-				Yii::app()->user->setFlash('failed' ,'در ثبت اطلاعات خطایی رخ داده است! لطفا مجددا تلاش کنید.');
+				Yii::app()->user->setFlash('failed', 'در ثبت اطلاعات خطایی رخ داده است! لطفا مجددا تلاش کنید.');
 		}
 
-		$this->render('create',array(
-			'model'=>$model,
+		$this->render('create', array(
+			'model' => $model,
 		));
 	}
 
@@ -71,21 +79,19 @@ class UsersManageController extends Controller
 	 */
 	public function actionCreateUser()
 	{
-		$model=new Users('ajaxInsert');
+		$model = new Users('ajaxInsert');
 
-		if(isset($_POST['ajax']) && $_POST['ajax'] === 'users-ajax-form') {
+		if(isset($_POST['ajax']) && $_POST['ajax'] === 'users-ajax-form'){
 			$errors = CActiveForm::validate($model);
-			if(CJSON::decode($errors)) {
+			if(CJSON::decode($errors)){
 				echo $errors;
 				Yii::app()->end();
 			}
 		}
-		if(isset($_POST['Users']))
-		{
-			$model->attributes=$_POST['Users'];
+		if(isset($_POST['Users'])){
+			$model->attributes = $_POST['Users'];
 			$model->status = 2;
-			if($model->save())
-			{
+			if($model->save()){
 				echo CJSON::encode(array('state' => 'ok'));
 			}else
 				echo CJSON::encode(array('state' => 'error'));
@@ -100,21 +106,19 @@ class UsersManageController extends Controller
 	 */
 	public function actionUpdate($id)
 	{
-		$model=$this->loadModel($id);
+		$model = $this->loadModel($id);
 		$model->scenario = 'changeStatus';
-		if(isset($_POST['Users']))
-		{
-			$model->attributes=$_POST['Users'];
-			if($model->save())
-			{
-				Yii::app()->user->setFlash('success' ,'<span class="icon-check"></span>&nbsp;&nbsp;اطلاعات با موفقیت ذخیره شد.');
+		if(isset($_POST['Users'])){
+			$model->attributes = $_POST['Users'];
+			if($model->save()){
+				Yii::app()->user->setFlash('success', '<span class="icon-check"></span>&nbsp;&nbsp;اطلاعات با موفقیت ذخیره شد.');
 				$this->redirect(array('admin'));
 			}else
-				Yii::app()->user->setFlash('failed' ,'در ثبت اطلاعات خطایی رخ داده است! لطفا مجددا تلاش کنید.');
+				Yii::app()->user->setFlash('failed', 'در ثبت اطلاعات خطایی رخ داده است! لطفا مجددا تلاش کنید.');
 		}
 
-		$this->render('update',array(
-			'model'=>$model,
+		$this->render('update', array(
+			'model' => $model,
 		));
 	}
 
@@ -129,7 +133,7 @@ class UsersManageController extends Controller
 
 		// if AJAX request (triggered by deletion via admin grid views), we should not redirect the browser
 		if(!isset($_GET['ajax']))
-			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+			$this->redirect(isset($_POST['returnUrl'])?$_POST['returnUrl']:array('admin'));
 	}
 
 	/**
@@ -145,13 +149,13 @@ class UsersManageController extends Controller
 	 */
 	public function actionAdmin()
 	{
-		$model=new Users('search');
+		$model = new Users('search');
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['Users']))
-			$model->attributes=$_GET['Users'];
+			$model->attributes = $_GET['Users'];
 
-		$this->render('admin',array(
-			'model'=>$model,
+		$this->render('admin', array(
+			'model' => $model,
 		));
 	}
 
@@ -164,9 +168,9 @@ class UsersManageController extends Controller
 	 */
 	public function loadModel($id)
 	{
-		$model=Users::model()->findByPk($id);
-		if($model===null)
-			throw new CHttpException(404,'The requested page does not exist.');
+		$model = Users::model()->findByPk($id);
+		if($model === null)
+			throw new CHttpException(404, 'The requested page does not exist.');
 		return $model;
 	}
 
@@ -176,8 +180,7 @@ class UsersManageController extends Controller
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='users-form')
-		{
+		if(isset($_POST['ajax']) && $_POST['ajax'] === 'users-form'){
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
 		}

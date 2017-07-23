@@ -17,6 +17,7 @@
  * @property string $newPassword
  * @property string $fullName
  * @property string $create_date
+ * @property string $order
  * @property string $name
  * @property string $family
  * @property string $phone
@@ -27,14 +28,14 @@
  * @property UserRoles $role
  * @property UserTransactions $register
  */
-class Users extends CActiveRecord
+class Users extends SortableCActiveRecord
 {
     /**
      * @return string the associated database table name
      */
     public function tableName()
     {
-        return 'ym_users';
+        return '{{users}}';
     }
 
     public $statusLabels = array(
@@ -66,8 +67,8 @@ class Users extends CActiveRecord
             array('password, email', 'required', 'on' => 'insert,agreeTerms,ajaxInsert'),
             array('name, family, phone', 'required', 'on' => 'ajaxInsert'),
             array('agreeTerms', 'compare', 'compareValue' => 1, 'operator' => '==', 'message' => Yii::t('app', 'You Rejected the Terms and Policies'), 'on' => 'agreeTerms'),
-            array('email', 'unique','on' => 'insert,create,agreeTerms,ajaxInsert'),
-            array('change_password_request_count', 'numerical', 'integerOnly'=>true),
+            array('email', 'unique', 'on' => 'insert,create,agreeTerms,ajaxInsert'),
+            array('change_password_request_count', 'numerical', 'integerOnly' => true),
             array('role_id', 'default', 'value' => 1, 'on' => 'insert,agreeTerms,ajaxInsert'),
             array('status', 'default', 'value' => 1, 'on' => 'insert,agreeTerms'),
             array('status', 'default', 'value' => 2, 'on' => 'ajaxInsert'),
@@ -82,8 +83,8 @@ class Users extends CActiveRecord
             array('role_id', 'length', 'max' => 10),
             array('status', 'length', 'max' => 8),
             array('phone', 'length', 'min' => 11, 'on' => 'agreeTerms,ajaxInsert'),
-            array('name, family', 'length', 'max'=>50, 'on' => 'ajaxInsert'),
-            array('create_date', 'length', 'max'=>20),
+            array('name, family', 'length', 'max' => 50, 'on' => 'ajaxInsert'),
+            array('create_date', 'length', 'max' => 20),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
             array('fullName ,email ,statusFilter,phone, create_date, verification_token, change_password_request_count', 'safe', 'on' => 'search,searchTeachers'),
@@ -112,7 +113,7 @@ class Users extends CActiveRecord
             'userDetails' => array(self::BELONGS_TO, 'UserDetails', 'id'),
             'teacherDetails' => array(self::BELONGS_TO, 'TeacherDetails', 'id'),
             'role' => array(self::BELONGS_TO, 'UserRoles', 'role_id'),
-            'register' => array(self::HAS_ONE, 'UserTransactions', 'user_id' ,'on' => 'register.status = "paid"'),
+            'register' => array(self::HAS_ONE, 'UserTransactions', 'user_id', 'on' => 'register.status = "paid"'),
         );
     }
 
@@ -136,6 +137,7 @@ class Users extends CActiveRecord
             'change_password_request_count' => 'تعداد درخواست تغییر کلمه عبور',
             'name' => 'نام',
             'family' => 'نام خانوادگی',
+            'order' => 'ترتیب',
         );
     }
 
@@ -160,7 +162,7 @@ class Users extends CActiveRecord
         $criteria->compare('role_id', 1);
         $criteria->compare('status', $this->statusFilter, true);
         $criteria->order = 'status ,t.id DESC';
-        $criteria->addSearchCondition('userDetails.phone',$this->phone);
+        $criteria->addSearchCondition('userDetails.phone', $this->phone);
         $criteria->with = array('userDetails');
         return new CActiveDataProvider($this, array(
             'criteria' => $criteria,
@@ -177,7 +179,7 @@ class Users extends CActiveRecord
         $criteria->addSearchCondition('teacherDetails.family', $this->fullName, true, 'OR', "LIKE");
         $criteria->with = array('teacherDetails');
         $criteria->addCondition('role_id = 2');
-        $criteria->order = 'status ,t.id DESC';
+        $criteria->order = 't.order';
         return new CActiveDataProvider($this, array(
             'criteria' => $criteria,
         ));
@@ -208,15 +210,15 @@ class Users extends CActiveRecord
 
     public function afterSave()
     {
-        if($this->isNewRecord) {
-            if($this->role_id == 1) {
+        if($this->isNewRecord){
+            if($this->role_id == 1){
                 $model = new UserDetails;
                 $model->user_id = $this->id;
-                $model->name = $this->name && !empty($this->name) ? $this->name : null;
-                $model->family = $this->family && !empty($this->family) ? $this->family : null;
-                $model->phone = $this->phone && !empty($this->phone) ? $this->phone : null;
+                $model->name = $this->name && !empty($this->name)?$this->name:null;
+                $model->family = $this->family && !empty($this->family)?$this->family:null;
+                $model->phone = $this->phone && !empty($this->phone)?$this->phone:null;
                 $model->save(false);
-            } elseif($this->role_id == 2) {
+            }elseif($this->role_id == 2){
                 $model = new TeacherDetails();
                 $model->user_id = $this->id;
                 $model->save(false);
