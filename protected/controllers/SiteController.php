@@ -51,7 +51,7 @@ class SiteController extends Controller
 		$teachers = Users::model()->findAll(array(
 			'condition' => 'role_id = 2',
 			'with' => array('teacherDetails'),
-			'order' => 'teacherDetails.name'
+			'order' => 't.order'
 		));
 
 		$aboutText = Pages::model()->findByPk(12);
