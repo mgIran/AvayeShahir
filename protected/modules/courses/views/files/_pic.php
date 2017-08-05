@@ -22,7 +22,7 @@ if($model->image && file_exists($uploadDir.DIRECTORY_SEPARATOR.$model->image))
 			'model' => $model,
 			'name' => 'image',
 			'maxFiles' => 1,
-			'maxFileSize' => 0.2, //MB
+			'maxFileSize' => 1, //MB
 			'url' => Yii::app()->createUrl('/courses/files/uploadImage'),
 			'deleteUrl' => Yii::app()->createUrl('/courses/files/deleteUploadImage'),
 			'acceptedFiles' => '.jpeg, .jpg, .png',

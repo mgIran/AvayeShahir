@@ -46,7 +46,7 @@ echo CHtml::hiddenField('ArticleFiles[article_id]',$model->id);
 			'model' => $fileModel,
 			'name' => 'path',
 			'maxFiles' => 1,
-			'maxFileSize' => 50, //MB
+			'maxFileSize' => 20480, //MB
 			'url' => Yii::app()->createUrl('/articles/files/upload'),
 			'deleteUrl' => Yii::app()->createUrl('/articles/files/deleteUpload'),
 			'acceptedFiles' => implode(', ',$fileModel->getTypes()),
