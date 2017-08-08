@@ -48,13 +48,31 @@ $(function () {
         var $fileSelected = $container.find(".filemanager-list-section .selected");
         var $files;
 
-        if($fileSelected.length > 1)
-        {
+        if ($fileSelected.length > 1) {
 
-        }else if($fileSelected.length == 1)
+        } else if ($fileSelected.length == 1)
             $files = $container.find(".filemanager-list-section .selected").data('file-name');
         $container.find('.filemanager-input input[type="hidden"]').val($files);
         $container.find('.filemanager-input .filemanager-label').text($files);
         $container.find('.filemanager-modal').modal('toggle');
+    });
+
+    $body.on('keyup', '.filemanager-filter-text', function () {
+        var $section = $(this).parents('.filemanager-list-container').find('.filemanager-list-section');
+        var $loading = $(this).parents('.filemanager-modal').find('.modal-loading-container');
+        var rex = new RegExp($(this).val(), 'i');
+        $loading.show();
+        $section.find('.filemanager-item').hide();
+        $section.find('.filemanager-item').filter(function () {
+            return rex.test($(this).text());
+        }).show();
+        $loading.hide();
+        if ($section.find('.filemanager-item:visible').length === 0) {
+            if ($section.find('.filemanager-error').length === 0)
+                $section.append('<div class="filemanager-item filemanager-error">فایل موردنظر یافت نشد.</div>');
+            else
+                $section.find('.filemanager-error').show();
+        } else
+            $section.find('.filemanager-error').hide();
     });
 });

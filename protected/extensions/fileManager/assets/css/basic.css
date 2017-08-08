@@ -51,7 +51,7 @@ body.modal-open,
 }
 
 .filemanager-modal .modal-body .filemanager-list-container{
-    height: 395px;
+    height: 430px;
 }
 .filemanager-modal .modal-body .filemanager-list-container .filemanager-list-header{
     background-color: rgba(206, 217, 255, 0.6);
@@ -107,4 +107,9 @@ body.modal-open,
 }
 .filemanager-modal .modal-footer button{
     width:100%;
+}
+.filemanager-filter-text{
+    width: 100%;
+    border-radius: 0 !important;
+    height: 35px !important;
 }

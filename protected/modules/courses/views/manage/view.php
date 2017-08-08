@@ -73,7 +73,7 @@ Yii::app()->clientScript->registerScript('active-collapse','
 							<ul>
 							<?
 							foreach($category->files as $file):
-								if($file->path and file_exists($fileDir.$file->path)):
+								if($file->path && file_exists($fileDir.$file->path)):
 							?>
 								<li data-toggle="tooltip" data-placement="top" title="<?= CHtml::encode($file->summary) ?>">
 									<a href="<?= $fileUrl.$file->path ?>"></a>

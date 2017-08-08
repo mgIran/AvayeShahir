@@ -39,6 +39,9 @@ class AjaxFetchFilesListAction extends CAction
                   $items[] = '<div class="filemanager-item"  data-file-name="' . $file . '"><span class="item-title">' . $file . '</span><span class="ltr text-left pull-left item-size">' . Controller::fileSize($path . DIRECTORY_SEPARATOR . $file) . '</span></div>';
             // create output html
             $html = '<div class="filemanager-list-header"><span>نام فایل</span><span class="text-left pull-left">حجم فایل</span></div>';
+            $html .= '<div class="filemanager-filter">';
+            $html .= '<input type="text" class="filemanager-filter-text text-right" placeholder="جستجو کنید ...">';
+            $html .= '</div>';
             $html .= '<div class="filemanager-list-section">';
             if($items)
                $html .= implode('', $items);
