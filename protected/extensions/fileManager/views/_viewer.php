@@ -8,7 +8,7 @@
 <div class="filemanager-container">
     <div class="filemanager-input">
         <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#<?= $id ?>-file-manager-modal">انتخاب از سرور</button>
-        <label class="filemanager-label"></label>
+        <label class="filemanager-label ltr"></label>
         <?php echo $hiddenField ?>
     </div>
     <div class="modal fade filemanager-modal" id="<?= $id ?>-file-manager-modal" data-fetch-url="<?= $url ?>" data-fetch-path="<?= $path ?>">
