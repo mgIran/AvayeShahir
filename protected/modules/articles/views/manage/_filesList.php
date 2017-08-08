@@ -11,6 +11,7 @@
         'columns'=>array(
             'title',
             'summary',
+            'path',
             'file_type',
             array(
                 'class'=>'CButtonColumn',

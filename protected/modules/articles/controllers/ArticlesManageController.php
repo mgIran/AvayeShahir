@@ -27,7 +27,7 @@ class ArticlesManageController extends Controller
 	{
 		return array(
 			'frontend' => array('index','view','tag'),
-			'backend' => array('create','update','admin','delete','order','upload','deleteUpload')
+			'backend' => array('create','update','admin','delete','order','upload','deleteUpload', 'fetch')
 		);
 	}
 
@@ -36,6 +36,9 @@ class ArticlesManageController extends Controller
 		return array(
 			'order' => array(
 				'class' => 'ext.yiiSortableModel.actions.AjaxSortingAction',
+			),
+			'fetch' => array(
+				'class' => 'ext.fileManager.actions.AjaxFetchFilesListAction',
 			),
 		);
 	}
@@ -99,6 +102,8 @@ class ArticlesManageController extends Controller
 		$imageDIR = Yii::getPathOfAlias("webroot") . "/uploads/articles/";
 		if (!is_dir($imageDIR))
 			mkdir($imageDIR);
+		if (!is_dir($imageDIR.'files'))
+			mkdir($imageDIR.'files');
 		if (!is_dir($imageDIR.'/200x200'))
 			mkdir($imageDIR.'/200x200');
 
@@ -154,6 +159,10 @@ class ArticlesManageController extends Controller
 			mkdir($tmpDIR);
 		$tmpUrl = Yii::app()->baseUrl .'/uploads/temp/';
 		$imageDIR = Yii::getPathOfAlias("webroot") . "/uploads/articles/";
+		if (!is_dir($imageDIR))
+			mkdir($imageDIR);
+		if (!is_dir($imageDIR.'files'))
+			mkdir($imageDIR.'files');
 		$imageUrl = Yii::app()->baseUrl .'/uploads/articles/';
 
 		$image = array();

@@ -41,26 +41,14 @@ echo CHtml::hiddenField('ArticleFiles[article_id]',$model->id);
 	<div class='row'>
 		<?php echo $form->labelEx($fileModel,'path', array('class'=>'control-label')); ?>
 		<?php
-		$this->widget('ext.dropZoneUploader.dropZoneUploader', array(
-			'id' => 'uploaderFile',
+		$this->widget('ext.fileManager.fileManager', array(
+			'id' => 'article-file',
 			'model' => $fileModel,
-			'name' => 'path',
+			'attribute' => 'path',
+			'url' => $this->createUrl('fetch'),
 			'maxFiles' => 1,
-			'maxFileSize' => 20480, //MB
-			'url' => Yii::app()->createUrl('/articles/files/upload'),
-			'deleteUrl' => Yii::app()->createUrl('/articles/files/deleteUpload'),
-			'acceptedFiles' => implode(', ',$fileModel->getTypes()),
-			'onSuccess' => '
-				var responseObj = JSON.parse(res);
-				if(responseObj.state == "ok")
-				{
-					{serverName} = responseObj.fileName;
-				}else if(responseObj.state == "error"){
-					console.log(responseObj.msg);
-				}
-		',
+			'serverDir' => 'uploads/articles/files'
 		));
-		Yii::app()->clientScript->registerCss('dropZone','.dropzone.single{width:100%}');
 		?>
 		<?php echo $form->error($fileModel,'path'); ?>
 	</div>

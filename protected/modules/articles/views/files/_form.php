@@ -29,27 +29,14 @@
 	<div class='row'>
 		<?php echo $form->labelEx($model,'path', array('class'=>'control-label')); ?>
 		<?php
-		$this->widget('ext.dropZoneUploader.dropZoneUploader', array(
-			'id' => 'uploaderFile',
+		$this->widget('ext.fileManager.fileManager', array(
+			'id' => 'article-file',
 			'model' => $model,
-			'name' => 'path',
+			'attribute' => 'path',
+			'url' => $this->createUrl('/articles/manage/fetch'),
 			'maxFiles' => 1,
-			'maxFileSize' => 20480, //MB
-			'url' => Yii::app()->createUrl('/articles/files/upload'),
-			'deleteUrl' => Yii::app()->createUrl('/articles/files/deleteUpload'),
-			'acceptedFiles' => implode(', ',$model->getTypes()),
-			'serverFiles' => $file,
-			'onSuccess' => '
-			var responseObj = JSON.parse(res);
-			if(responseObj.state == "ok")
-			{
-				{serverName} = responseObj.fileName;
-			}else if(responseObj.state == "error"){
-				console.log(responseObj.msg);
-			}
-		',
+			'serverDir' => 'uploads/articles/files'
 		));
-		Yii::app()->clientScript->registerCss('dropZone','.dropzone.single{width:100%}');
 		?>
 		<?php echo $form->error($model,'path'); ?>
 	</div>
