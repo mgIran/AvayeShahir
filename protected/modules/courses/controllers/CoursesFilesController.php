@@ -167,8 +167,8 @@ class CoursesFilesController extends Controller
 	public function actionDelete($id){
 		$Dir = Yii::getPathOfAlias("webroot") . '/uploads/classCategoryFiles/';
 		$model = ClassCategoryFiles::model()->findByPk($id);
-		if($model->path && file_exists($Dir.$model->path))
-			unlink($Dir.$model->path);
+//		if($model->path && file_exists($Dir.$model->path))
+//			unlink($Dir.$model->path);
 		if($model->delete()) {
 			Yii::app()->user->setFlash('upload-success', '<span class="icon-check"></span>&nbsp;&nbsp;اطلاعات با موفقیت ذخیره شد.');
 			$this->redirect(array('/courses/categories/update/id/'.$model->category_id.'/step/2'));

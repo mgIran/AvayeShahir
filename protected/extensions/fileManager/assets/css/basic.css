@@ -71,6 +71,8 @@
     display: block;
     overflow: hidden;
     cursor: pointer;
+    direction: ltr !important;
+    text-align: right;
 }
 .filemanager-modal .modal-body .filemanager-list-section .filemanager-item:not(.filemanager-error):hover{
     background-color: rgba(0, 89, 255, 0.1);
