@@ -27,7 +27,7 @@ class CoursesCategoriesController extends Controller
 	public static function actionsType()
 	{
 		return array(
-			'backend' => array('index', 'create', 'update', 'admin', 'delete', 'order', 'changeStatus')
+			'backend' => array('index', 'create', 'update', 'admin', 'delete', 'order', 'changeStatus', 'fetch')
 		);
 	}
 
@@ -36,6 +36,9 @@ class CoursesCategoriesController extends Controller
 		return array(
 			'order' => array(
 				'class' => 'ext.yiiSortableModel.actions.AjaxSortingAction',
+			),
+			'fetch' => array(
+				'class' => 'ext.fileManager.actions.AjaxFetchFilesListAction',
 			),
 		);
 	}

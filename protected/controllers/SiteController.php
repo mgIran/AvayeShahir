@@ -393,4 +393,14 @@ class SiteController extends Controller
 		$FAQCategories = FaqCategories::model()->findAll(array('condition'=>'faqs.id IS NOT NULL','order'=>'t.order','with'=>array('faqs')));
 		$this->render('FAQ' ,array('FAQCategories' => $FAQCategories));
 	}
+
+	public function actionDrive(){
+		$temp = Yii::getPathOfAlias('webroot').'/uploads/temp/';
+		Yii::import('courses.models.*');
+		$articles = ClassCategoryFileLinks::model()->findAll();
+		echo '<pre>';
+		var_dump(CHtml::listData($articles,'id','link'));
+		echo '</pre>';exit;
+		copy($articles[100]->link, $temp.$articles[100]->title.'.'.$articles[100]->file_type);
+	}
 }
