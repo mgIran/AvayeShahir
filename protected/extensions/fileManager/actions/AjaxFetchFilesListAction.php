@@ -29,20 +29,30 @@ class AjaxFetchFilesListAction extends CAction
 {
    public function run()
    {
-      if(isset($_POST['path']))
-      {
-         $path= $_POST['path'];
-         $files = scandir($path,SCANDIR_SORT_ASCENDING);
+      if(isset($_POST['path'])){
+         $path = $_POST['path'];
+         $files = scandir($path, SCANDIR_SORT_ASCENDING);
          if($files){
+            $items = [];
+            foreach($files as $file)
+               if(is_file($path . DIRECTORY_SEPARATOR . $file))
+                  $items[] = '<div class="filemanager-item"  data-file-name="' . $file . '"><span class="item-title">' . $file . '</span><span class="ltr text-left pull-left item-size">' . Controller::fileSize($path . DIRECTORY_SEPARATOR . $file) . '</span></div>';
+            // create output html
             $html = '<div class="filemanager-list-header"><span>نام فایل</span><span class="text-left pull-left">حجم فایل</span></div>';
             $html .= '<div class="filemanager-list-section">';
-            foreach($files as $file)
-               if(is_file($path.DIRECTORY_SEPARATOR.$file))
-                  $html .= '<div class="filemanager-item"  data-file-name="'.$file.'"><span class="item-title">'.$file.'</span><span class="ltr text-left pull-left item-size">'.Controller::fileSize($path.DIRECTORY_SEPARATOR.$file).'</span></div>';
+            if($items)
+               $html .= implode('', $items);
+            else
+               $html .= '<div class="filemanager-item filemanager-error">در مسیر موردنظر فایلی وجود ندارد.</div>';
             $html .= '</div>';
             echo $html;
-         }else
-            echo '<div class="filemanager-item filemanager-error">در مسیر موردنظر فایلی وجود ندارد.</div>';
+         }else{
+            $html = '<div class="filemanager-list-header"><span>نام فایل</span><span class="text-left pull-left">حجم فایل</span></div>';
+            $html .= '<div class="filemanager-list-section">';
+            $html .= '<div class="filemanager-item filemanager-error">در مسیر موردنظر فایلی وجود ندارد.</div>';
+            $html .= '</div>';
+            echo $html;
+         }
          Yii::app()->end();
       }
    }

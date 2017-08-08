@@ -30,7 +30,14 @@
                     <div class="filemanager-list-container"></div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-success filemanager-submit">انتخاب</button>
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-ex-12">
+                            <button type="button" class="btn btn-success filemanager-submit">انتخاب</button>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-ex-12">
+                            <button type="button" class="btn btn-danger filemanager-dismiss" data-dismiss="modal">انصراف</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

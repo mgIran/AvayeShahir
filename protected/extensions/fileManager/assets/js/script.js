@@ -6,7 +6,7 @@ $(function () {
         var $input = $(this).find('.filemanager-input input[type="hidden"]');
         var $label = $(this).find('.filemanager-input .filemanager-label');
         if ($input.val()) {
-            $(this).find(".filemanager-list-section .filemanager-item[data-file-name='" + $input.val() + "']").addClass('selected');
+            $(this).find(".filemanager-list-section .filemanager-item[data-file-name='" + $input.val().replace(/'/g, "\\'") + "']").addClass('selected');
             $label.text($input.val());
         }
     });
@@ -32,12 +32,12 @@ $(function () {
                 $thisModal.find(".filemanager-list-container").html(html);
                 var $input = $thisModal.parents(".filemanager-container").find('.filemanager-input input[type="hidden"]');
                 if ($input.val())
-                    $thisModal.find(".filemanager-list-section .filemanager-item[data-file-name='" + $input.val() + "']").addClass('selected');
+                    $thisModal.find(".filemanager-list-section .filemanager-item[data-file-name='" + $input.val().replace(/'/g, "\\'") + "']").addClass('selected');
             }
         });
     }
 
-    $body.on('click', '.filemanager-item', function () {
+    $body.on('click', '.filemanager-item:not(.filemanager-error)', function () {
         var $thisModal = $(this).parents(".filemanager-modal");
         $thisModal.find(".filemanager-list-section .selected").removeClass('selected');
         $(this).addClass('selected');
