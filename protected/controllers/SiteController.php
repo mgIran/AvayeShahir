@@ -12,14 +12,14 @@ class SiteController extends Controller
 		return array(
 			// captcha action renders the CAPTCHA image displayed on the contact page
 			'captcha' => array(
-				'class' => 'CCaptchaAction' ,
-				'backColor' => 0xFFFFFF ,
-			) ,
+				'class' => 'CCaptchaAction',
+				'backColor' => 0xFFFFFF,
+			),
 			// page action renders "static" pages stored under 'protected/views/site/pages'
 			// They can be accessed via: index.php?r=site/page&views=FileName
 			'page' => array(
-				'class' => 'CViewAction' ,
-			) ,
+				'class' => 'CViewAction',
+			),
 		);
 	}
 
@@ -46,7 +46,7 @@ class SiteController extends Controller
 		$criteria->addCondition('deleted = 0');
 		$criteria->order = 't.order';
 		$courses = Courses::model()->findAll($criteria);
-        // teachers
+		// teachers
 		$personnel = Personnel::model()->findAll();
 		$teachers = Users::model()->findAll(array(
 			'condition' => 'role_id = 2',
@@ -69,18 +69,18 @@ class SiteController extends Controller
 		}
 		$criteria = News::getValidNews();
 		$criteria->limit = 4;
-		$newsProvider = new CActiveDataProvider("News",array(
+		$newsProvider = new CActiveDataProvider("News", array(
 			'criteria' => $criteria,
 			'pagination' => array('pageSize' => 4)
 		));
-		$this->render('index' ,array(
-			'courses' => $courses ,
+		$this->render('index', array(
+			'courses' => $courses,
 			'newsProvider' => $newsProvider,
-			'classes' => $classes ,
-			'personnel' => $personnel ,
-			'teachers' => $teachers ,
-			'aboutText' => $aboutText ,
-			'termsText' => $termsText ,
+			'classes' => $classes,
+			'personnel' => $personnel,
+			'teachers' => $teachers,
+			'aboutText' => $aboutText,
+			'termsText' => $termsText,
 		));
 	}
 
@@ -95,7 +95,7 @@ class SiteController extends Controller
 			if(Yii::app()->request->isAjaxRequest)
 				echo $error['message'];
 			else
-				$this->render('error' ,$error);
+				$this->render('error', $error);
 		}
 	}
 
@@ -138,12 +138,12 @@ class SiteController extends Controller
 				Yii::import('admins.models.Admins');
 				$admins = Admins::model()->findAll();
 				foreach($admins as $admin){
-					$mail->AddCC($admin->email ,$admin->username);
+					$mail->AddCC($admin->email, $admin->username);
 				}
 				$mail->AddCC(Yii::app()->params['adminEmail']);
 				$mail->AddAddress('yusef.mobasheri@gmail.com');
 				if($mail->send()){
-					Yii::app()->user->setFlash('footer-success' ,'پیام شما با موفقیت ارسال شد.');
+					Yii::app()->user->setFlash('footer-success', 'پیام شما با موفقیت ارسال شد.');
 					if(isset($_POST['ajax'])){
 						echo CJSON::encode(array('state' => 'ok'));
 						Yii::app()->end();
@@ -154,7 +154,7 @@ class SiteController extends Controller
 							$this->refresh();
 					}
 				}else{
-					Yii::app()->user->setFlash('footer-failed' ,'متاسفانه ارسال پیام با مشکل مواجه است. لطفا مجددا تلاش کنید.');
+					Yii::app()->user->setFlash('footer-failed', 'متاسفانه ارسال پیام با مشکل مواجه است. لطفا مجددا تلاش کنید.');
 					if(isset($_POST['ajax'])){
 						echo CJSON::encode(array('state' => 'error'));
 						Yii::app()->end();
@@ -171,7 +171,7 @@ class SiteController extends Controller
 		Yii::app()->theme = 'front-end';
 		$this->layout = '//layouts/public';
 		$model = Pages::model()->findByPk(2);
-		$this->render('//site/pages/page' ,array('model' => $model));
+		$this->render('//site/pages/page', array('model' => $model));
 	}
 
 	public function actionContactUs()
@@ -180,7 +180,7 @@ class SiteController extends Controller
 		Yii::app()->theme = 'front-end';
 		$this->layout = '//layouts/public';
 		$model = Pages::model()->findByPk(3);
-		$this->render('//site/pages/page' ,array('model' => $model));
+		$this->render('//site/pages/page', array('model' => $model));
 	}
 
 
@@ -190,7 +190,7 @@ class SiteController extends Controller
 		Yii::app()->theme = 'front-end';
 		$this->layout = '//layouts/inner';
 		$model = Pages::model()->findByPk(5);
-		$this->render('//site/pages/page' ,array('model' => $model));
+		$this->render('//site/pages/page', array('model' => $model));
 	}
 
 
@@ -199,18 +199,18 @@ class SiteController extends Controller
 		Yii::import('pages.models.*');
 		Yii::app()->theme = 'front-end';
 		$this->layout = '//layouts/public';
-		$dataProvider = new CActiveDataProvider("Pages" ,array(
+		$dataProvider = new CActiveDataProvider("Pages", array(
 			'criteria' => array(
 				'condition' => 'category_id = 2'
-			) ,
+			),
 			'pagination' => array(
 				'pageSize' => 10
 			)
 		));
-		$dataProvider2 = new CActiveDataProvider("Pages" ,array(
+		$dataProvider2 = new CActiveDataProvider("Pages", array(
 			'criteria' => array(
 				'condition' => 'category_id = 3'
-			) ,
+			),
 			'pagination' => array(
 				'pageSize' => 10
 			)
@@ -218,7 +218,7 @@ class SiteController extends Controller
 		$this->sideRender = array(
 			'//layouts/_support'
 		);
-		$this->render('//site/pages/guidance' ,array('dataProvider' => $dataProvider ,'dataProvider2' => $dataProvider2));
+		$this->render('//site/pages/guidance', array('dataProvider' => $dataProvider, 'dataProvider2' => $dataProvider2));
 	}
 
 	public function actionSearch()
@@ -226,148 +226,148 @@ class SiteController extends Controller
 		$this->layout = '//layouts/inner';
 		Yii::app()->theme = 'front-end';
 		$model = new SearchForm();
-        $title = '';
-        $dataProvider = false;
-        $dataProviders = false;
-        $fileDataProvider = false;
-        $linksDataProvider = false;
-        $extLinksDataProvider = false;
+		$title = '';
+		$dataProvider = false;
+		$dataProviders = false;
+		$fileDataProvider = false;
+		$linksDataProvider = false;
+		$extLinksDataProvider = false;
 		if(isset($_GET['SearchForm'])){
-            $model->attributes = $_GET['SearchForm'];
-            $pageSize = 10;
-            $words = explode(' ', $model->text);
-            switch($model->type){
-                case 'courses':
-                    Yii::app()->getModule('courses');
-                    $criteria = Courses::getSearchCriteria($model->text, $words);
-                    $dataProvider = new CActiveDataProvider('Courses', array(
-                        'criteria' => $criteria,
-                        'pagination' => array('pageSize' => $pageSize)
-                    ));
-                    // files search
+			$model->attributes = $_GET['SearchForm'];
+			$pageSize = 10;
+			$words = explode(' ', $model->text);
+			switch($model->type){
+				case 'courses':
+					Yii::app()->getModule('courses');
+					$criteria = Courses::getSearchCriteria($model->text, $words);
+					$dataProvider = new CActiveDataProvider('Courses', array(
+						'criteria' => $criteria,
+						'pagination' => array('pageSize' => $pageSize)
+					));
+					// files search
 					$criteria = ClassCategoryFiles::getSearchCriteria($model->text, $words);
 					$fileDataProvider = new CActiveDataProvider('ClassCategoryFiles', array(
 						'criteria' => $criteria,
 						'pagination' => array('pageSize' => $pageSize)
 					));
-                    // links search
-                    $criteria = ClassCategoryFileLinks::getSearchCriteria($model->text, $words);
+					// links search
+					$criteria = ClassCategoryFileLinks::getSearchCriteria($model->text, $words);
 					$linksDataProvider = new CActiveDataProvider('ClassCategoryFileLinks', array(
 						'criteria' => $criteria,
 						'pagination' => array('pageSize' => $pageSize)
 					));
-                    $title = Yii::t('app', 'Courses');
-                    break;
-                case 'articles':
-                    Yii::app()->getModule('articles');
-                    $criteria = Articles::getSearchCriteria($model->text, $words);
-                    $dataProvider = new CActiveDataProvider('Articles', array(
-                        'criteria' => $criteria,
-                        'pagination' => array('pageSize' => $pageSize)
-                    ));
+					$title = Yii::t('app', 'Courses');
+					break;
+				case 'articles':
+					Yii::app()->getModule('articles');
+					$criteria = Articles::getSearchCriteria($model->text, $words);
+					$dataProvider = new CActiveDataProvider('Articles', array(
+						'criteria' => $criteria,
+						'pagination' => array('pageSize' => $pageSize)
+					));
 
-                    // files search
-                    $criteria = ArticleFiles::getSearchCriteria($model->text, $words);
-                    $fileDataProvider = new CActiveDataProvider('ArticleFiles', array(
-                        'criteria' => $criteria,
-                        'pagination' => array('pageSize' => $pageSize)
-                    ));
+					// files search
+					$criteria = ArticleFiles::getSearchCriteria($model->text, $words);
+					$fileDataProvider = new CActiveDataProvider('ArticleFiles', array(
+						'criteria' => $criteria,
+						'pagination' => array('pageSize' => $pageSize)
+					));
 
-                    // links search
-                    $criteria = ArticleFileLinks::getSearchCriteria($model->text, $words);
-                    $linksDataProvider = new CActiveDataProvider('ArticleFileLinks', array(
-                        'criteria' => $criteria,
-                        'pagination' => array('pageSize' => $pageSize)
-                    ));
+					// links search
+					$criteria = ArticleFileLinks::getSearchCriteria($model->text, $words);
+					$linksDataProvider = new CActiveDataProvider('ArticleFileLinks', array(
+						'criteria' => $criteria,
+						'pagination' => array('pageSize' => $pageSize)
+					));
 
-                    // ext links search
-                    $criteria = ArticleLinks::getSearchCriteria($model->text, $words);
-                    $extLinksDataProvider = new CActiveDataProvider('ArticleLinks', array(
-                        'criteria' => $criteria,
-                        'pagination' => array('pageSize' => $pageSize)
-                    ));
+					// ext links search
+					$criteria = ArticleLinks::getSearchCriteria($model->text, $words);
+					$extLinksDataProvider = new CActiveDataProvider('ArticleLinks', array(
+						'criteria' => $criteria,
+						'pagination' => array('pageSize' => $pageSize)
+					));
 
-                    $title = Yii::t('app', 'Educational Materials');
-                    break;
-                case 'news':
-                    Yii::app()->getModule('news');
-                    $criteria = News::getSearchCriteria($model->text, $words);
-                    $dataProvider = new CActiveDataProvider('News', array(
-                        'criteria' => $criteria,
-                        'pagination' => array('pageSize' => $pageSize)
-                    ));
-                    $title = Yii::t('app', 'News');
-                    break;
-                case 'all':
-                default:
-                    Yii::app()->getModule('courses');
-                    Yii::app()->getModule('articles');
-                    Yii::app()->getModule('news');
-                    $dataProviders = [];
-                    // courses search
-                    $criteria = Courses::getSearchCriteria($model->text, $words);
-                    $dataProviders['courses']['dataProvider']['courses'] = new CArrayDataProvider(Courses::model()->findAll($criteria), array(
-                        'pagination' => array('pageSize' => $pageSize)
-                    ));
-                    // files search
-                    $criteria = ClassCategoryFiles::getSearchCriteria($model->text, $words);
-                    $dataProviders['courses']['dataProvider']['files']  = new CActiveDataProvider('ClassCategoryFiles', array(
-                        'criteria' => $criteria,
-                        'pagination' => array('pageSize' => $pageSize)
-                    ));
-                    // links search
-                    $criteria = ClassCategoryFileLinks::getSearchCriteria($model->text, $words);
-                    $dataProviders['courses']['dataProvider']['links']  = new CActiveDataProvider('ClassCategoryFileLinks', array(
-                        'criteria' => $criteria,
-                        'pagination' => array('pageSize' => $pageSize)
-                    ));
+					$title = Yii::t('app', 'Educational Materials');
+					break;
+				case 'news':
+					Yii::app()->getModule('news');
+					$criteria = News::getSearchCriteria($model->text, $words);
+					$dataProvider = new CActiveDataProvider('News', array(
+						'criteria' => $criteria,
+						'pagination' => array('pageSize' => $pageSize)
+					));
+					$title = Yii::t('app', 'News');
+					break;
+				case 'all':
+				default:
+					Yii::app()->getModule('courses');
+					Yii::app()->getModule('articles');
+					Yii::app()->getModule('news');
+					$dataProviders = [];
+					// courses search
+					$criteria = Courses::getSearchCriteria($model->text, $words);
+					$dataProviders['courses']['dataProvider']['courses'] = new CArrayDataProvider(Courses::model()->findAll($criteria), array(
+						'pagination' => array('pageSize' => $pageSize)
+					));
+					// files search
+					$criteria = ClassCategoryFiles::getSearchCriteria($model->text, $words);
+					$dataProviders['courses']['dataProvider']['files'] = new CActiveDataProvider('ClassCategoryFiles', array(
+						'criteria' => $criteria,
+						'pagination' => array('pageSize' => $pageSize)
+					));
+					// links search
+					$criteria = ClassCategoryFileLinks::getSearchCriteria($model->text, $words);
+					$dataProviders['courses']['dataProvider']['links'] = new CActiveDataProvider('ClassCategoryFileLinks', array(
+						'criteria' => $criteria,
+						'pagination' => array('pageSize' => $pageSize)
+					));
 
 
-                    $dataProviders['courses']['title'] = Yii::t('app', 'Courses');
+					$dataProviders['courses']['title'] = Yii::t('app', 'Courses');
 
-                    // article search
-                    $criteria = Articles::getSearchCriteria($model->text, $words);
-                    $dataProviders['articles']['dataProvider']['articles'] = new CActiveDataProvider('Articles', array(
-                        'criteria' => $criteria,
-                        'pagination' => array('pageSize' => $pageSize)
-                    ));
+					// article search
+					$criteria = Articles::getSearchCriteria($model->text, $words);
+					$dataProviders['articles']['dataProvider']['articles'] = new CActiveDataProvider('Articles', array(
+						'criteria' => $criteria,
+						'pagination' => array('pageSize' => $pageSize)
+					));
 
-                    // files search
-                    $criteria = ArticleFiles::getSearchCriteria($model->text, $words);
-                    $dataProviders['articles']['dataProvider']['files'] = new CActiveDataProvider('ArticleFiles', array(
-                        'criteria' => $criteria,
-                        'pagination' => array('pageSize' => $pageSize)
-                    ));
+					// files search
+					$criteria = ArticleFiles::getSearchCriteria($model->text, $words);
+					$dataProviders['articles']['dataProvider']['files'] = new CActiveDataProvider('ArticleFiles', array(
+						'criteria' => $criteria,
+						'pagination' => array('pageSize' => $pageSize)
+					));
 
-                    // links search
-                    $criteria = ArticleFileLinks::getSearchCriteria($model->text, $words);
-                    $dataProviders['articles']['dataProvider']['links'] = new CActiveDataProvider('ArticleFileLinks', array(
-                        'criteria' => $criteria,
-                        'pagination' => array('pageSize' => $pageSize)
-                    ));
+					// links search
+					$criteria = ArticleFileLinks::getSearchCriteria($model->text, $words);
+					$dataProviders['articles']['dataProvider']['links'] = new CActiveDataProvider('ArticleFileLinks', array(
+						'criteria' => $criteria,
+						'pagination' => array('pageSize' => $pageSize)
+					));
 
-                    // ext links search
-                    $criteria = ArticleLinks::getSearchCriteria($model->text, $words);
-                    $dataProviders['articles']['dataProvider']['extLinks'] = new CActiveDataProvider('ArticleLinks', array(
-                        'criteria' => $criteria,
-                        'pagination' => array('pageSize' => $pageSize)
-                    ));
+					// ext links search
+					$criteria = ArticleLinks::getSearchCriteria($model->text, $words);
+					$dataProviders['articles']['dataProvider']['extLinks'] = new CActiveDataProvider('ArticleLinks', array(
+						'criteria' => $criteria,
+						'pagination' => array('pageSize' => $pageSize)
+					));
 
-                    $dataProviders['articles']['title'] = Yii::t('app', 'Educational Materials');
+					$dataProviders['articles']['title'] = Yii::t('app', 'Educational Materials');
 
-                    // news search
-                    $criteria = News::getSearchCriteria($model->text, $words);
-                    $dataProviders['news']['dataProvider'] = new CActiveDataProvider('News', array(
-                        'criteria' => $criteria,
-                        'pagination' => array('pageSize' => $pageSize)
-                    ));
-                    $dataProviders['news']['title'] = Yii::t('app', 'News');
-                    $title = Yii::t('app','All Site Content');
-                    break;
-            }
+					// news search
+					$criteria = News::getSearchCriteria($model->text, $words);
+					$dataProviders['news']['dataProvider'] = new CActiveDataProvider('News', array(
+						'criteria' => $criteria,
+						'pagination' => array('pageSize' => $pageSize)
+					));
+					$dataProviders['news']['title'] = Yii::t('app', 'News');
+					$title = Yii::t('app', 'All Site Content');
+					break;
+			}
 
-        }
-		$this->render('search',array(
+		}
+		$this->render('search', array(
 			'model' => $model,
 			'title' => $title,
 			'dataProvider' => $dataProvider,
@@ -378,29 +378,122 @@ class SiteController extends Controller
 		));
 	}
 
-	public function actionForum(){
+	public function actionForum()
+	{
 		Yii::import('pages.models.*');
 		Yii::app()->theme = 'front-end';
 		$this->layout = '//layouts/inner';
 		$model = Pages::model()->findByPk(2);
-		$this->render('//site/pages/page' ,array('model' => $model,'comment'=>true));
+		$this->render('//site/pages/page', array('model' => $model, 'comment' => true));
 	}
 
-	public function actionFAQ(){
+	public function actionFAQ()
+	{
 		Yii::app()->getModule('faq');
 		Yii::app()->theme = 'front-end';
 		$this->layout = '//layouts/inner';
-		$FAQCategories = FaqCategories::model()->findAll(array('condition'=>'faqs.id IS NOT NULL','order'=>'t.order','with'=>array('faqs')));
-		$this->render('FAQ' ,array('FAQCategories' => $FAQCategories));
+		$FAQCategories = FaqCategories::model()->findAll(array('condition' => 'faqs.id IS NOT NULL', 'order' => 't.order', 'with' => array('faqs')));
+		$this->render('FAQ', array('FAQCategories' => $FAQCategories));
 	}
 
-	public function actionDrive(){
-		$temp = Yii::getPathOfAlias('webroot').'/uploads/temp/';
+	public function actionDrive()
+	{
+		$temp = Yii::getPathOfAlias('webroot') . '/uploads/DRIVE/';
+		if(!is_dir($temp))
+			mkdir($temp);
 		Yii::import('courses.models.*');
-		$articles = ClassCategoryFileLinks::model()->findAll();
-		echo '<pre>';
-		var_dump(CHtml::listData($articles,'id','link'));
-		echo '</pre>';exit;
-		copy($articles[100]->link, $temp.$articles[100]->title.'.'.$articles[100]->file_type);
+		$class_categories = ClassCategoryFileLinks::model()->findAll();
+		foreach($class_categories as $class_category){
+			$parts = parse_url($class_category->link);
+			parse_str($parts['query'], $query);
+			if($query){
+				try{
+					Yii::app()->db->createCommand()->insert('__move_drive__', array(
+						'model' => get_class($class_category),
+						'model_id' => $class_category->id,
+						'status' => 0,
+						'link' => $class_category->link,
+						'file_id' => $query['id'],
+						'file_size' => $class_category->link_size,
+					));
+				}catch(Exception $e){
+				}
+			}
+		}
+
+		Yii::import('articles.models.*');
+		$articles = ArticleFileLinks::model()->findAll();
+		foreach($articles as $article){
+			$parts = parse_url($article->link);
+			parse_str($parts['query'], $query);
+			if($query){
+				try{
+					Yii::app()->db->createCommand()->insert('__move_drive__', array(
+						'model' => get_class($article),
+						'model_id' => $article->id,
+						'status' => 0,
+						'link' => $article->link,
+						'file_id' => $query['id'],
+						'file_size' => $article->link_size,
+					));
+				}catch(Exception $e){
+				}
+			}
+		}
+	}
+
+	public function actionGooglereturn()
+	{
+		if(isset($_GET['reset']) && $_GET['reset'] == true)
+			unset(Yii::app()->session['auth_token']);
+		/* @var $jgoogleapi JGoogleAPI */
+		Yii::app()->getModule('setting');
+		$jgoogleapi = Yii::app()->JGoogleAPI;
+		try{
+			$client = $jgoogleapi->getClient();
+			if(!isset(Yii::app()->session['auth_token'])){
+				$client->authenticate();
+				$model = SiteSetting::model()->findByAttributes(array('name' => 'google_auth_token'));
+				if($model === null){
+					$model = new SiteSetting();
+					$model->name = 'google_auth_token';
+					$model->title = 'توکن';
+				}
+				if($client->getAccessToken()){
+					$model->value = $client->getAccessToken();
+					Yii::app()->session['auth_token'] = $client->getAccessToken();
+					$model->save(false);
+					$this->refresh();
+				}
+			}else{
+				Yii::app()->session['auth_token'] = $client->getAccessToken();
+			}
+		}catch(Exception $exc){
+			//Becarefull because the Exception you catch may not be from invalid token
+			Yii::app()->session['auth_token'] = null;
+			throw $exc;
+		}
+	}
+
+	public function actionDownloadFromGoogle()
+	{
+		/* @var $jgoogleapi JGoogleAPI */
+		/* @var $drive Google_DriveService */
+		try{
+			$jgoogleapi = Yii::app()->JGoogleAPI;
+			$client = $jgoogleapi->getClient();
+			$client->setAccessToken(Yii::app()->session['auth_token']);
+			//List files from Google Drive
+			$drive = $jgoogleapi->getService('Drive');
+			$file = $drive->files->listFiles();
+var_dump($file);exit;
+			print "Title: " . $file->getTitle();
+			print "Description: " . $file->getDescription();
+			print "MIME type: " . $file->getMimeType();
+
+			var_dump($files);exit;
+		}catch(Exception $e){
+			throw $e;
+		}
 	}
 }

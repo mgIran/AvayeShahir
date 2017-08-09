@@ -89,6 +89,44 @@ return array(
 
 	// application components
 	'components'=>array(
+		'JGoogleAPI' => array(
+			'class' => 'ext.google.JGoogleAPI',
+			//Default authentication type to be used by the extension
+			'defaultAuthenticationType'=>'webappAPI',
+
+			//Account type Authentication data
+//			'serviceAPI' => array(
+//				'clientId' => 'YOUR_SERVICE_ACCOUNT_CLIENT_ID',
+//				'clientEmail' => 'YOUR_SERVICE_ACCOUNT_CLIENT_EMAIL',
+//				'keyFilePath' => 'THE_PATH_TO_YOUR_KEY_FILE',
+//			),
+
+            //You can define one of the authentication types or both (for a Service Account or Web Application Account)
+            'webappAPI' => array(
+                'clientId' => '847053315039-s41olq8kabaaee4dn5sk7hk4era5a6b4.apps.googleusercontent.com',
+                'clientEmail' => 'yusef.mobasheri@gmail.com',
+                'clientSecret' => 'nAsP8voWDtb2sm3ZC__ZlYit',
+                'redirectUri' => '/site/googlereturn',
+                'javascriptOrigins' => 'YOUR_WEB_APPLICATION_JAVASCRIPT_ORIGINS',
+            ),
+			'simpleApiKey' => 'AIzaSyCsnDxdU2qfR-KAPMwKEHHz9dVj2HPWyqk',
+
+			//Scopes needed to access the API data defined by authentication type
+			'scopes' => array(
+				'serviceAPI' => array(
+					'drive' => array(
+						'https://www.googleapis.com/auth/drive.file',
+					),
+				),
+				'webappAPI' => array(
+					'drive' => array(
+						'https://www.googleapis.com/auth/drive.file',
+					),
+				),
+			),
+			//Use objects when retriving data from api if true or an array if false
+			'useObjects'=>true,
+		),
         'userCounter' => array(
             'class' => 'application.components.UserCounter',
             'tableUsers' => 'ym_counter_users',
