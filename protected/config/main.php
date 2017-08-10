@@ -109,7 +109,7 @@ return array(
                 'redirectUri' => '/site/googlereturn',
                 'javascriptOrigins' => 'YOUR_WEB_APPLICATION_JAVASCRIPT_ORIGINS',
             ),
-			'simpleApiKey' => 'AIzaSyCsnDxdU2qfR-KAPMwKEHHz9dVj2HPWyqk',
+			'simpleApiKey' => 'AIzaSyCAO1qkpCMAqznb0dhNKqgCgsqvVVWMqis',
 
 			//Scopes needed to access the API data defined by authentication type
 			'scopes' => array(
@@ -120,7 +120,9 @@ return array(
 				),
 				'webappAPI' => array(
 					'drive' => array(
+						'https://www.googleapis.com/auth/drive',
 						'https://www.googleapis.com/auth/drive.file',
+//						'https://www.googleapis.com/auth/drive.readonly'
 					),
 				),
 			),
