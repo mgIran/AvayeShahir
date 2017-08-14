@@ -107,24 +107,24 @@ class EasyMultiLanguageBehavior extends CActiveRecordBehavior
                 $owner->{$attr} = '';
 
                 // Creating array of all attributes with lang postfix (attribute_lang)
-                if(!in_array($attr ,$validate))
+                if(!in_array($attr, $validate))
                     $validate[] = $attr;
 
                 foreach($owner->rules() as $rule){
-                    if(in_array($attr ,array_map('trim' ,explode(',' ,$rule[0])))){
+                    if(in_array($attr, array_map('trim', explode(',', $rule[0])))){
                         // Creating array of all attributes with lang postfix (attribute_lang)
                         // that already have validation rules
-                        if(!in_array($attr ,$no_validate))
+                        if(!in_array($attr, $no_validate))
                             $no_validate[] = $attr;
                     }
                 }
             }
         }
 
-        $to_validate = array_diff($validate ,$no_validate);
+        $to_validate = array_diff($validate, $no_validate);
 
         foreach($to_validate as $attr)
-            $owner->getValidatorList()->add(CValidator::createValidator('safe' ,$owner ,$attr));
+            $owner->getValidatorList()->add(CValidator::createValidator('safe', $owner, $attr));
 
         parent::attach($owner);
     }
@@ -149,33 +149,33 @@ class EasyMultiLanguageBehavior extends CActiveRecordBehavior
                         ->select('id')
                         ->from($this->translations_table)
                         ->where("
-                                table_name = '" . str_ireplace(array('{' ,'}') ,array('\{' ,'\}') ,$this->owner->tableName()) . "' AND
+                                table_name = '" . str_ireplace(array('{', '}'), array('\{', '\}'), $this->owner->tableName()) . "' AND
                                 model_id = '{$this->owner->primaryKey}' AND
                                 attribute = '{$attr}' AND
                                 lang = '{$lang}'
                         ")->queryRow();
                     if($this->owner->isNewRecord OR ($isMulitlangTableExists === false)){
                         Yii::app()->db->createCommand()->
-                        insert($this->translations_table ,array(
-                            'table_name' => $this->owner->tableName() ,
-                            'attribute' => $attr ,
-                            'lang' => $lang ,
-                            'model_id' => $this->owner->primaryKey ,
-                            'value' => $value ,
+                        insert($this->translations_table, array(
+                            'table_name' => $this->owner->tableName(),
+                            'attribute' => $attr,
+                            'lang' => $lang,
+                            'model_id' => $this->owner->primaryKey,
+                            'value' => $value,
                         ));
                     }else{
                         $s = Yii::app()->db->createCommand()->
-                        update($this->translations_table ,
+                        update($this->translations_table,
                             array(
-                                'value' => $value ,
-                            ) ,
+                                'value' => $value,
+                            ),
                             '(table_name = :table_name) AND (attribute = :attribute) AND ' .
-                            '(lang = :lang) AND (model_id = :model_id)' ,
+                            '(lang = :lang) AND (model_id = :model_id)',
                             array(
-                                'table_name' => $this->owner->tableName() ,
-                                'attribute' => $attr ,
-                                'lang' => $lang ,
-                                'model_id' => $this->owner->primaryKey ,
+                                'table_name' => $this->owner->tableName(),
+                                'attribute' => $attr,
+                                'lang' => $lang,
+                                'model_id' => $this->owner->primaryKey,
                             )
                         );
                     }
@@ -192,9 +192,9 @@ class EasyMultiLanguageBehavior extends CActiveRecordBehavior
     public function afterDelete($event)
     {
         Yii::app()->db->createCommand()
-            ->delete($this->translations_table ,'(table_name = :table_name) AND (model_id = :model_id)' ,array(
-                'table_name' => $this->owner->tableName() ,
-                'model_id' => $this->owner->primaryKey ,
+            ->delete($this->translations_table, '(table_name = :table_name) AND (model_id = :model_id)', array(
+                'table_name' => $this->owner->tableName(),
+                'model_id' => $this->owner->primaryKey,
             ));
         parent::afterDelete($event);
     }
@@ -218,18 +218,18 @@ class EasyMultiLanguageBehavior extends CActiveRecordBehavior
         foreach($this->translated_attributes as $attr)
             $attributes[] = "'{$attr}'";
         // If it's admin routes, we load all data
-        if(in_array(strtolower(Yii::app()->controller->route) ,array_map('strtolower' ,$this->admin_routes))){
+        if(in_array(strtolower(Yii::app()->controller->route), array_map('strtolower', $this->admin_routes))){
             if(!$values){
                 $values = Yii::app()->db->createCommand()
                     ->select('value, lang, model_id, attribute')
                     ->from($this->translations_table)
                     ->where("
-                                                table_name = '" . str_ireplace(array('{' ,'}') ,array('\{' ,'\}') ,$this->owner->tableName()) . "' AND
-                                                attribute IN (" . implode(',' ,$attributes) . ")
+                                                table_name = '" . str_ireplace(array('{', '}'), array('\{', '\}'), $this->owner->tableName()) . "' AND
+                                                attribute IN (" . implode(',', $attributes) . ")
                                         ")->queryAll();
 
                 // Preserve values, to prevent multiple queries
-                EMSingleton::getInstance()->setData('alreadyFound_' . $this->owner->tableName() ,$values);
+                EMSingleton::getInstance()->setData('alreadyFound_' . $this->owner->tableName(), $values);
             }
             foreach($values as $val){
                 $result[$val['model_id']][$val['attribute']][$val['lang']] = $val['value'];
@@ -244,16 +244,16 @@ class EasyMultiLanguageBehavior extends CActiveRecordBehavior
         }
         // If current language is in aray of translated languages, then we load data for this model with this language
         // and overwrite primary attribute with current language value
-        elseif(in_array(Yii::app()->language ,$languages)){
+        elseif(in_array(Yii::app()->language, $languages)){
             if(!$values){
                 $values = Yii::app()->db->createCommand()
                     ->select('value, attribute, model_id')
                     ->from($this->translations_table)
-                    ->where("table_name = '" . str_ireplace(array('{' ,'}') ,array('\{' ,'\}') ,$this->owner->tableName()) . "' AND
+                    ->where("table_name = '" . str_ireplace(array('{', '}'), array('\{', '\}'), $this->owner->tableName()) . "' AND
                                                 lang = '" . Yii::app()->language . "' AND
-                                                attribute IN (" . implode(',' ,$attributes) . ")")->queryAll();
+                                                attribute IN (" . implode(',', $attributes) . ")")->queryAll();
                 // Preserve values, to prevent multiple queries
-                EMSingleton::getInstance()->setData('alreadyFound_' . $this->owner->tableName() ,$values);
+                EMSingleton::getInstance()->setData('alreadyFound_' . $this->owner->tableName(), $values);
             }
             foreach($values as $val){
                 $result[$val['model_id']][$val['attribute']] = $val['value'];
@@ -265,6 +265,33 @@ class EasyMultiLanguageBehavior extends CActiveRecordBehavior
                 }
             }
         }
+    }
 
+    /**
+     * @param $attribute
+     * @param null $language
+     * @return bool|mixed
+     * @throws CException
+     */
+    public function getValueLang($attribute, $language = null)
+    {
+        if(!$language)
+            $language = $this->default_language;
+        // Remove default language from translated
+        $tmp = $this->languages;
+        $languages = array_keys($tmp);
+        if(!in_array($language, $languages))
+            throw new CException('Language is invalid.');
+        if($language == $this->default_language)
+            return $this->owner->{$attribute};
+        // preserve values
+        $values = Yii::app()->db->createCommand()
+            ->select('value, lang, model_id, attribute')
+            ->from($this->translations_table)
+            ->where("table_name = '" . str_ireplace(array('{', '}'), array('\{', '\}'), $this->owner->tableName()) . "' AND
+                     model_id = {$this->owner->primaryKey} AND
+                     lang = '{$language}' AND
+                     attribute = '{$attribute}'")->queryRow();
+        return $values === false?false:$values['value'];
     }
 }

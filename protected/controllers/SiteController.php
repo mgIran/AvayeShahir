@@ -442,6 +442,7 @@ class SiteController extends Controller
 		}
 	}
 
+	// Move Files From Google Drive to Our Server
 	public function actionGooglereturn()
 	{
 		if(isset($_GET['reset']) && $_GET['reset'] == true)
@@ -465,9 +466,9 @@ class SiteController extends Controller
 					$model->save(false);
 					$this->refresh();
 				}
-			}else{
-				Yii::app()->session['auth_token'] = $client->getAccessToken();
 			}
+			echo Yii::app()->session['auth_token'];
+			exit;
 		}catch(Exception $exc){
 			//Becarefull because the Exception you catch may not be from invalid token
 			Yii::app()->session['auth_token'] = null;
@@ -477,23 +478,126 @@ class SiteController extends Controller
 
 	public function actionDownloadFromGoogle()
 	{
+		$this->checkToken();
 		/* @var $jgoogleapi JGoogleAPI */
+		/* @var $jgoogleapi2 JGoogleAPI */
 		/* @var $drive Google_DriveService */
+		/* @var $drive2 Google_DriveService */
 		try{
+			$start = time();
+			Yii::app()->getModule('courses');
+			Yii::app()->getModule('articles');
+			// for get file content
 			$jgoogleapi = Yii::app()->JGoogleAPI;
 			$client = $jgoogleapi->getClient();
 			$client->setAccessToken(Yii::app()->session['auth_token']);
+			// for get file detail
+			$jgoogleapi2 = Yii::app()->JGoogleAPI;
+			$client2 = $jgoogleapi2->getClient();
+			$client2->setAccessToken(Yii::app()->session['auth_token']);
+
 			//List files from Google Drive
 			$drive = $jgoogleapi->getService('Drive');
-			$file = $drive->files->listFiles();
-var_dump($file);exit;
-			print "Title: " . $file->getTitle();
-			print "Description: " . $file->getDescription();
-			print "MIME type: " . $file->getMimeType();
+			$drive2 = $jgoogleapi2->getService('Drive');
 
-			var_dump($files);exit;
+			$move = MoveDrive::model()->find('status = 3');
+			$model = call_user_func(array($move->model, 'model'));
+			$model = $model->findByPk($move->model_id);
+			$response = $drive2->files->get($move->file_id);
+			$fileContent = $drive->files->get($move->file_id, array(
+				'alt' => 'media'));
+			$path = Yii::getPathOfAlias('webroot') . '/' . $response->getOriginalFilename();
+			$copy = @file_put_contents($path, $fileContent, FILE_APPEND);
+			$flag = false;
+			$r = false;
+			if($copy){
+				if($move->model == 'ClassCategoryFileLinks'){
+					$new = new ClassCategoryFiles();
+					$new->attributes = $model->attributes;
+					$new->id = null;
+					$new->path = $response->getOriginalFilename();
+					if($new->save()){
+						$flag = true;
+						$dir = Yii::getPathOfAlias('webroot') . '/uploads/classCategoryFilesTemp/';
+						if(!is_dir($dir))
+							mkdir($dir);
+					}
+				}else if($move->model == 'ArticleFileLinks'){
+					$new = new ArticleFiles();
+					$new->attributes = $model->attributes;
+					$new->id = null;
+					$new->path = $response->getOriginalFilename();
+					if($new->save()){
+						$flag = true;
+						$dir = Yii::getPathOfAlias('webroot') . '/uploads/articles/temp/';
+						if(!is_dir($dir))
+							mkdir($dir);
+					}
+				}
+				if($flag){
+					$move->status = 1;
+					$move->detail = $new->id;
+					$move->save();
+					$r = @rename($path, $dir . $new->path);
+				}
+			}
+			$end = time();
+			$o = "Copy: ".$copy;
+			$o .= "\n\rMove To Destination: ".$r;
+			$o .= "\n\rSave File: ".$flag;
+			$o .= "\n\rMove ID: ".$move->id;
+			$o .= "\n\rNew ID: ".$move->detail;
+			$o .= "\n\rElapsed Time: ".($end - $start)."(s)";
+			$o .= "\n\r----------------------------------------------------------------------------------\n\r";
+			file_put_contents(Yii::getPathOfAlias('webroot').'/drive_log.txt', $o, FILE_APPEND);
 		}catch(Exception $e){
-			throw $e;
+			$move->status = 2;
+			$move->detail = json_encode(['error' => 1, 'message' => $e->getMessage(), 'response' => $response]);
+			$move->save();
+
+			$o = "Copy: 0";
+			$o .= "\n\rMove To Destination: 0";
+			$o .= "\n\rSave File: 0";
+			$o .= "\n\rMove ID: ".$move->id;
+			$o .= "\n\rNew ID: ".$move->detail;
+			$o .= "\n\rError Message: ".$e->getMessage();
+			$o .= "\n\r----------------------------------------------------------------------------------\n\r";
+			file_put_contents(Yii::getPathOfAlias('webroot').'/drive_log.txt', $o, FILE_APPEND);
+		}
+		$this->refresh();
+	}
+
+	private function checkToken()
+	{
+		Yii::app()->getModule('setting');
+		if(!isset(Yii::app()->session['auth_token']))
+			$this->redirect(array('/site/googlereturn'));
+
+		$token = json_decode(Yii::app()->session['auth_token'], true);
+		if(!isset($token['refresh_token'])){
+			$model = SiteSetting::model()->findByAttributes(array('name' => 'google_auth_token'));
+			if($model === null)
+				$this->redirect(array('/site/googlereturn?reset=true'));
+			$token = json_decode($model->value, true);
+		}
+		if($token['created'] + $token['expires_in'] < time()){
+			if(!isset($token['refresh_token']))
+				$this->redirect(array('/site/googlereturn?reset=true'));
+			else{
+				/* @var $jgoogleapi JGoogleAPI */
+				$jgoogleapi = Yii::app()->JGoogleAPI;
+				$client = $jgoogleapi->getClient();
+				$client->setAccessToken(json_encode($token));
+				$client->refreshToken($token['refresh_token']);
+				if($client->getAccessToken()){
+					$model = SiteSetting::model()->findByAttributes(array('name' => 'google_auth_token'));
+					$model->value = $client->getAccessToken();
+					Yii::app()->session['auth_token'] = $client->getAccessToken();
+					$model->save(false);
+					$this->refresh();
+				}else
+					$this->redirect(array('/site/googlereturn?reset=true'));
+			}
 		}
 	}
 }

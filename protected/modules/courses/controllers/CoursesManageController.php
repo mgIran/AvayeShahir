@@ -49,8 +49,8 @@ class CoursesManageController extends Controller
 		$this->layout = '//layouts/inner';
 		$model = $this->loadModel($id);
 		$this->keywords = $model->getKeywords().','.$model->getCategoriesKeywords();
-		$this->description = substr(strip_tags($model->summary),0,160);
-		$this->pageTitle = $model->title;
+		$this->description = substr(strip_tags($model->getValueLang('summary', 'en')),0,160);
+		$this->pageTitle = $model->getValueLang('title', 'en');
 		Yii::app()->db->createCommand()->update('{{courses}}',array('seen'=>((int)$model->seen+1)),'id = :id',array(":id"=>$model->id));
 		$this->render('view',array(
 			'model'=>$model,

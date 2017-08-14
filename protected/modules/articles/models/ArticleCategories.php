@@ -206,17 +206,17 @@ class ArticleCategories extends CActiveRecord
 		return $withPrompt ? CMap::mergeArray(array('' => '-') ,CHtml::listData($list ,'id' ,'fullTitle')) : CHtml::listData($list ,'id' ,'fullTitle');
 	}
 
-	public function getParents($id = NULL ,$title = 'fullTitle')
+	public function getParents($id = NULL ,$title = 'fullTitle', $return = 'array')
 	{
 		if($id)
-			$parents = $this->findAll('parent_id = :id order by t.order' ,array(':id' => $id));
+			$parents = $this->findAll('parent_id = :id order by t.order', array(':id' => $id));
 		else
 			$parents = $this->findAll('parent_id IS NULL order by t.order');
 		$list = array();
 		foreach($parents as $parent){
-			array_push($list ,$parent);
+			array_push($list, $parent);
 		}
-		return CHtml::listData($list ,'id' ,$title);
+		return $return == 'array'?CHtml::listData($list, 'id', $title):$list;
 	}
 
 	public function getFullTitle()
@@ -313,11 +313,11 @@ class ArticleCategories extends CActiveRecord
 
 	public static function getHtmlSortList($categoryID = null ,$activeID = Null)
 	{
-		foreach(ArticleCategories::model()->getParents($categoryID ,'title') as $id => $title){
-			echo '<li class="' . ($activeID == $id ? 'active' : '') . '" ><a href="' . Yii::app()->createUrl('/articles/category/' . $id . '/' . urlencode($title)) . '" ><span>' . $title . '</span>&nbsp;&nbsp;<small>(' . ArticleCategories::model()->countArticles($id) . ')</small></a></li>';
-			if(ArticleCategories::model()->count('parent_id = :id' ,array(':id' => $id))){
+		foreach(ArticleCategories::model()->getParents($categoryID ,'title', 'object') as $category){
+			echo '<li class="' . ($activeID == $category->id ? 'active' : '') . '" ><a href="' . Yii::app()->createUrl('/articles/category/' . $category->id . '/' . urlencode($category->getValueLang('title','en'))) . '" ><span>' . $category->title . '</span>&nbsp;&nbsp;<small>(' . ArticleCategories::model()->countArticles($category->id) . ')</small></a></li>';
+			if(ArticleCategories::model()->count('parent_id = :id' ,array(':id' => $category->id))){
 				echo '<ol>';
-				self::getHtmlSortList($id ,$activeID);
+				self::getHtmlSortList($category->id ,$activeID);
 				echo '</ol>';
 			}
 		}

@@ -41,8 +41,7 @@ class ArticlesCategoryController extends Controller
 
 		$model = $this->loadModel($id);
 		$this->keywords = 'آوای شهیر,مطالب آموزشی,دسته بندی مطالب آموزشی,دسته بندی '.$model->title.','.$model->title;
-		$this->pageTitle = $model->title;
-
+		$this->pageTitle = $model->getValueLang('title', 'en');
 		// get latest articles
 		$criteria = Articles::getValidArticles();
 		$criteria->compare('category_id',$model->id);

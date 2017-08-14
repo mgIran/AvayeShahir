@@ -23,7 +23,7 @@ $imageUrl = Yii::app()->baseUrl.'/uploads/articles/fileimages/';
             <div class="news-details">
                 <!-- category -->
                 <span><?= Yii::t('app','Category') ?>:</span>
-                <a class="link-blue" target="_blank" href="<?= $this->createUrl('/articles/category/'.$model->category_id.'/'.urlencode($model->category->title)) ?>">
+                <a class="link-blue" target="_blank" href="<?= $this->createUrl('/articles/category/'.$model->category_id.'/'.urlencode($model->category->getValueLang('title', 'en'))) ?>">
                     <?= $model->category->title ?>
                 </a>
                 <span class="clearfix">
@@ -176,10 +176,10 @@ $imageUrl = Yii::app()->baseUrl.'/uploads/articles/fileimages/';
             <div class="overflow-fix">
                 <div class="news-share pull-right">
                     <span><?= Yii::t('app','Sharing') ?></span><span class="share-icons">
-                        <a target="_blank" class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=<?= $this->createAbsoluteUrl('/articles/'.$model->id.'/'.urlencode($model->title)) ?>"></a>
-                        <a target="_blank" class="twitter" href="https://twitter.com/home?status=<?= $this->createAbsoluteUrl('/articles/'.$model->id.'/'.urlencode($model->title)) ?>"></a>
-                        <a target="_blank" class="google-plus" href="https://plus.google.com/share?url=<?= $this->createAbsoluteUrl('/articles/'.$model->id.'/'.urlencode($model->title)) ?>"></a>
-                        <a target="_blank" class="telegram" href="https://telegram.me/share/url?url=<?= $this->createAbsoluteUrl('/articles/'.$model->id.'/'.urlencode($model->title)) ?>"></a>
+                        <a target="_blank" class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=<?= $this->createAbsoluteUrl('/articles/'.$model->id.'/'.urlencode($model->getValueLang('title','en'))) ?>"></a>
+                        <a target="_blank" class="twitter" href="https://twitter.com/home?status=<?= $this->createAbsoluteUrl('/articles/'.$model->id.'/'.urlencode($model->getValueLang('title','en'))) ?>"></a>
+                        <a target="_blank" class="google-plus" href="https://plus.google.com/share?url=<?= $this->createAbsoluteUrl('/articles/'.$model->id.'/'.urlencode($model->getValueLang('title','en'))) ?>"></a>
+                        <a target="_blank" class="telegram" href="https://telegram.me/share/url?url=<?= $this->createAbsoluteUrl('/articles/'.$model->id.'/'.urlencode($model->getValueLang('title','en'))) ?>"></a>
                     </span>
                 </div>
                 <div class="short-url pull-left">

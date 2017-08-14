@@ -19,7 +19,7 @@ $thumbPath = Yii::getPathOfAlias("webroot").'/uploads/articles/categories/80x80/
 			?>
 		</div>
 		<div class="news-detail">
-			<a href="<?= $this->createUrl('/articles/category/'.$data->id.'/'.urlencode($data->title)) ?>">
+			<a href="<?= $this->createUrl('/articles/category/'.$data->id.'/'.urlencode($data->getValueLang('title','en'))) ?>">
 				<h3 class="text-nowrap"><?= CHtml::encode($data->title) ?></h3>
 			</a>
 			<span class="category"><strong><?= Yii::t('app','Entries') ?>: </strong><?= Controller::parseNumbers(number_format($data->countArticles($data->id))) ?></span>

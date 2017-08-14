@@ -14,7 +14,7 @@
     <!-- The above 3.2 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title><?
         if($this->siteName)
-            echo $this->siteName.(!empty($this->pageTitle)?' - '.$this->pageTitle:Yii::app()->name);
+            echo (!empty($this->pageTitle)?$this->pageTitle.' - ':'').$this->siteName;
         elseif(!empty($this->pageTitle))
             echo $this->pageTitle;
         else

@@ -60,7 +60,7 @@ class NewsCategoryController extends Controller
 
 		$model = $this->loadModel($id);
 		$this->keywords = 'آوای شهیر,اخبار,دسته بندی اخبار,دسته بندی '.$model->title.','.$model->title;
-		$this->pageTitle = $model->title;
+		$this->pageTitle = $model->getValueLang('title', 'en');
 
 		// get latest news
 		$criteria = News::getValidNews();
