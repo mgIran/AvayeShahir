@@ -98,18 +98,18 @@
                         <div class="course-pic" title="<?= $course->title ?>">
                             <div class="overlay">
                             </div>
-                            <a href="<?= Yii::app()->createUrl('/courses/'.urlencode($course->title).'/'.$course->id); ?>">
+                            <a href="<?= Yii::app()->createUrl('/courses/'.urlencode($course->getValueLang('title', 'en')).'/'.$course->id); ?>">
                                 <img src="<?= Yii::app()->baseUrl.'/uploads/courses/'.$course->pic; ?>" alt="<?= $course->title ?>">
                             </a>
                         </div>
                         <div class="course-detail container-fluid">
-                            <h4><a href="<?= Yii::app()->createUrl('/courses/'.urlencode($course->title).'/'.$course->id); ?>"><?= $course->title ?></a></h4>
+                            <h4><a href="<?= Yii::app()->createUrl('/courses/'.urlencode($course->getValueLang('title', 'en')).'/'.$course->id); ?>"><?= $course->title ?></a></h4>
 
                             <p class="text">
                                 <?= strip_tags($course->summary) ?>
                                 <span class="paragraph-end"></span>
                             </p>
-                            <a href="<?= Yii::app()->createUrl('/courses/'.urlencode($course->title).'/'.$course->id); ?>"
+                            <a href="<?= Yii::app()->createUrl('/courses/'.urlencode($course->getValueLang('title', 'en')).'/'.$course->id); ?>"
                                data-toggle="tooltip" data-placement="<?= Yii::app()->language == 'fa'?'right':'left';?>" title="<?= Yii::t('app','Course Details') ?>"
                                class="btn pull-left"><?= Yii::t('app','Details')?></a>
                         </div>
@@ -284,13 +284,13 @@ if($classes) :
                         <div class="class-detail container-fluid">
                             <div class="full text-nowrap">
                                 <span><?= Yii::t('app','Course') ?>:&nbsp;</span>
-                                <a href="<?= Yii::app()->createUrl('/courses/'.urlencode($class->course->title).'/'.$class->course->id); ?>">
+                                <a href="<?= Yii::app()->createUrl('/courses/'.urlencode($class->course->getValueLang('title', 'en')).'/'.$class->course->id); ?>">
                                     <?php echo $class->course->title ?>
                                 </a>
                             </div>
                             <div class="full">
                                 <span><?= Yii::t('app','Department') ?>:&nbsp;</span>
-                                <a href="<?= Yii::app()->createUrl('/courses/'.urlencode($class->course->title).'/'.$class->course->id.'/#collapse-category-'.$class->category->id); ?>">
+                                <a href="<?= Yii::app()->createUrl('/courses/'.urlencode($class->course->getValueLang('title', 'en')).'/'.$class->course->id.'/#collapse-category-'.$class->category->id); ?>">
                                     <?php echo $class->category->title ?>
                                 </a>
                             </div>
@@ -666,8 +666,7 @@ endif;
 
         </div>
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 licenses-container">
-<!--            <div class="col-md-6"><img src="--><?//= Yii::app()->theme->baseUrl .'/images/rasaneh.jpg';?><!--"></div>-->
-            <div class="col-md-12"><img id='nbpegwmdgwmdgwmdsgui' style='cursor:pointer' onclick='window.open("http://trustseal.enamad.ir/Verify.aspx?id=29990&p=wkynjzpgjzpgjzpgdrfs", "Popup","toolbar=no, location=no, statusbar=no, menubar=no, scrollbars=1, resizable=0, width=580, height=600, top=30")' alt='' src='http://trustseal.enamad.ir/logo.aspx?id=29990&p=qesgzpfvzpfvzpfvgthv'/></div>
+            <div class="col-md-12"><img id='nbpegwmdgwmdgwmdsgui' style='cursor:pointer' onclick='window.open("https://trustseal.enamad.ir/Verify.aspx?id=29990&p=wkynjzpgjzpgjzpgdrfs", "Popup","toolbar=no, location=no, statusbar=no, menubar=no, scrollbars=1, resizable=0, width=580, height=600, top=30")' alt='' src='https://trustseal.enamad.ir/logo.aspx?id=29990&p=qesgzpfvzpfvzpfvgthv'/></div>
         </div>
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="col-md-12">

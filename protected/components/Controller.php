@@ -291,7 +291,7 @@ class Controller extends AuthController
             $this->courses = CHtml::listData(Courses::model()->findAll(array(
                 'order'=>'t.order')),
                 function($model){
-                    return 'courses/'.$model->id.'/'.urlencode($model->title);
+                    return 'courses/'.$model->id.'/'.urlencode($model->getValueLang('title', 'en'));
                 }
                 , 'title');
         return $this->courses;
@@ -305,7 +305,7 @@ class Controller extends AuthController
                 'order'=>'t.order'
             )),
                 function($model){
-                    return 'articles/category/'.$model->id.'/'.urlencode($model->title);
+                    return 'articles/category/'.$model->id.'/'.urlencode($model->getValueLang('title', 'en'));
                 }
                 , 'title');
         return $this->articleCategories;
@@ -319,7 +319,7 @@ class Controller extends AuthController
                 'order'=>'t.order'
             )),
                 function($model){
-                    return 'news/category/'.$model->id.'/'.urlencode($model->title);
+                    return 'news/category/'.$model->id.'/'.urlencode($model->getValueLang('title', 'en'));
                 }
                 , 'title');
         return $this->newsCategories;

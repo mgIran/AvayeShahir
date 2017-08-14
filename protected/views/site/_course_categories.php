@@ -10,7 +10,7 @@
             foreach($model->categories as $category):
             ?>
                 <li>
-                    <a href="<?= $this->createUrl('/courses/'.$model->id.'/'.urlencode($model->title).'/#collapse-category-'.$category->id) ?>"><?= CHtml::encode($category->title) ?></a>
+                    <a href="<?= $this->createUrl('/courses/'.$model->id.'/'.urlencode($model->getValueLang('title', 'en')).'/#collapse-category-'.$category->id) ?>"><?= CHtml::encode($category->title) ?></a>
                 </li>
             <?php
             endforeach;
