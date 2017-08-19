@@ -6,8 +6,10 @@ class SmsSchedulesController extends Controller
 	{
 		$floorTime = strtotime(date('Y/m/d', time()).' 00:00');
 		$ceilTime = $floorTime + 86400;
+		$floorTime -= 2*86400;
 		$criteria = new CDbCriteria();
-		$criteria->addCondition('send_date < :ceil AND status = 0');
+		$criteria->addCondition('send_date >= :floor AND send_date < :ceil AND status = 0');
+		$criteria->params[':floor'] = $floorTime;
 		$criteria->params[':ceil'] = $ceilTime;
 		$schedules = SmsSchedules::model()->findAll($criteria);
 		foreach($schedules as $schedule){
@@ -39,9 +41,6 @@ class SmsSchedulesController extends Controller
 				$schedule->status = $response->message;
 			@$schedule->save();
 		}
-		if(!is_dir(Yii::getPathOfAlias('webroot').'/uploads/temp/cron/'))
-			mkdir(Yii::getPathOfAlias('webroot').'/uploads/temp/cron/');
-		@file_put_contents(Yii::getPathOfAlias('webroot').'/uploads/temp/cron/cron-'.JalaliDate::date('Y-m-d-H-i', time(), false).'.txt','OK');
 		Yii::app()->end();
 	}
 }
