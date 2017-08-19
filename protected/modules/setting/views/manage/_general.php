@@ -19,7 +19,16 @@
         <div class="row">
             <div class="row">
                 <?php echo CHtml::label($field->title, '', array('class' => 'col-lg-3 control-label')); ?>
-                <?php echo CHtml::textarea("SiteSetting[$field->name]", $field->value, array('size' => 60, 'class' => 'col-lg-9')); ?>
+                <?php
+                if($field->name=='keywords'){
+                    $this->widget("ext.tagIt.tagIt",array(
+                        'model' => $field,
+                        'attribute' => $field->name,
+                        'data' => explode(',',$field->value)
+                    ));
+                }else
+                    echo CHtml::textarea("SiteSetting[$field->name]", $field->value, array('size' => 60, 'class' => 'col-lg-9'));
+                ?>
                 <?php echo $form->error($field, 'name'); ?>
             </div>
         </div>

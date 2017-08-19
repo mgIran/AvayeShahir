@@ -269,6 +269,7 @@ header.header.scroll-mode{
 .introduction{
     display: block;
     overflow: hidden;
+    height: 600px;
     height: 100vh;
     position: relative;
     top: 0;
@@ -412,12 +413,14 @@ header.header.scroll-mode{
 }
 #signup-modal .email,
 #login-modal .email{
-    background: #fff url("../svg/email.svg") no-repeat scroll 15px center / 25px auto;
+    background: #fff url("../svg/email.svg") no-repeat scroll 15px center;
+    background-size: 25px auto;
     padding: 0 15px 0 55px;
 }
 #signup-modal .password,
 #login-modal .password{
-    background: #fff url("../svg/password.svg") no-repeat scroll 15px center / 25px auto;
+    background: #fff url("../svg/password.svg") no-repeat scroll 15px center;
+    background-size: 25px auto;
     padding: 0 15px 0 55px;
 }
 #signup-modal .button-field,
@@ -572,14 +575,16 @@ section.search{
     background: #0f5da9;
 }
 .search-icon{
-    background: url("../svg/search.svg") no-repeat scroll transparent center / 24px auto;
+    background: url("../svg/search.svg") no-repeat scroll transparent center;
+    background-size: 24px auto;
     display: inline-block;
     width: 24px;
     height: 24px;
     vertical-align: middle;
 }
 .search .bg-icon{
-    background: url("../svg/search-blue.svg") no-repeat scroll transparent center / 200px auto;
+    background: url("../svg/search-blue.svg") no-repeat scroll transparent center;
+    background-size: 200px auto;
     position: absolute;
     width: 300px;
     height: 100%;
@@ -715,6 +720,7 @@ section.classes .owl-controls .owl-nav .owl-prev,
     height: 6px;
     background-color: #f0f0f0;
     top: -8px;
+    right: 0;
 }
 .courses .course .three-dots:after{
     content: "";
@@ -725,6 +731,7 @@ section.classes .owl-controls .owl-nav .owl-prev,
     height: 6px;
     background-color: #f0f0f0;
     bottom: -8px;
+    right: 0;
 }
 .courses .course .course-cat-list{
     border-radius: 4px;
@@ -883,7 +890,8 @@ section.classes .owl-prev .arrow,
 
 
 .signup{
-    background: transparent url("../images/signup-bg.jpg") no-repeat fixed center top / cover;
+    background: transparent url("../images/signup-bg.jpg") no-repeat fixed center top;
+    background-size: cover;
     position: relative;
     overflow: hidden;
     display: block;
@@ -979,7 +987,8 @@ section.classes .owl-prev .arrow,
     z-index: 1;
 }
 .persons .icons-set{
-    background: url("../svg/icons-sets.svg") no-repeat scroll 0 0 / auto 707px;
+    background: url("../svg/icons-sets.svg") no-repeat scroll 0 0;
+    background-size: auto 707px;
     position: absolute;
     width: 191px;
     height: 100%;
@@ -1070,7 +1079,8 @@ section.classes .owl-prev .arrow,
     position: absolute;
     top: 0;
     right: 0;
-    background: #89a404 url("../svg/person.svg") no-repeat center / 35px;
+    background: #89a404 url("../svg/person.svg") no-repeat center;
+    background-size: 35px;
     opacity: 0;
     -webkit-transition: all 0.5s;
     -moz-transition: all 0.5s;
@@ -1085,6 +1095,7 @@ section.classes .owl-prev .arrow,
     top: 0;
     right: 0;
     background: #777 url("../svg/person.svg") no-repeat center / 35px;
+    background-size: 35px;
     opacity: 1;
 }
 .persons .person-item .socials{
@@ -1117,7 +1128,8 @@ section.classes .owl-prev .arrow,
 .persons .person-item:hover .socials .email{
     top: 5px;
     right: 11px;
-    background: transparent url("../svg/email-green.svg") no-repeat center / 15px auto;
+    background: transparent url("../svg/email-green.svg") no-repeat center;
+    background-size: 15px auto;
 }
 .persons .person-item .socials .facebook{
     -webkit-transition: all 700ms cubic-bezier(0.330, 0.750, 0.350, 0.980);
@@ -1133,7 +1145,8 @@ section.classes .owl-prev .arrow,
 .persons .person-item:hover .socials .facebook{
     top: 40px;
     right: 2px;
-    background: transparent url("../svg/facebook.svg") no-repeat center / 15px auto;
+    background: transparent url("../svg/facebook.svg") no-repeat center;
+    background-size: 15px auto;
 }
 .persons .person-item .socials .twitter {
     -webkit-transition: all 900ms cubic-bezier(0.330, 0.750, 0.350, 0.980);
@@ -1150,7 +1163,8 @@ section.classes .owl-prev .arrow,
     animation-delay: 0.4s;
     top: 75px;
     right: 11px;
-    background: transparent url("../svg/twitter.svg") no-repeat center / 15px auto;
+    background: transparent url("../svg/twitter.svg") no-repeat center;
+    background-size: 15px auto;
 }
 .persons .person-item .person-link{
     position: absolute;
@@ -1658,20 +1672,23 @@ section.classes .owl-carousel .owl-controls .owl-nav [class*="owl-"].disabled ,
     text-align: justify;
 }
 .footer .map-point{
-    background: url("../svg/map-point.svg") no-repeat center / 20px auto;
+    background: url("../svg/map-point.svg") no-repeat center;
+    background-size: 20px auto;
     width: 20px;
     height: 20px;
     float: right;
     margin-top: 5px;
 }
 .footer .phone{
-    background: url("../svg/phone.svg") no-repeat center / 20px auto;
+    background: url("../svg/phone.svg") no-repeat center;
+    background-size: 20px auto;
     width: 20px;
     height: 20px;
     float: right;
 }
 .footer .email{
-    background: url("../svg/email-white.svg") no-repeat center / 20px auto;
+    background: url("../svg/email-white.svg") no-repeat center;
+    background-size: 20px auto;
     width: 20px;
     height: 20px;
     float: right;
@@ -1691,13 +1708,16 @@ section.classes .owl-carousel .owl-controls .owl-nav [class*="owl-"].disabled ,
     border-radius: 3px;
 }
 .footer .social-media.facebook{
-    background: #fff url("../svg/facebook-footer.svg") no-repeat center / 30px auto;
+    background: #fff url("../svg/facebook-footer.svg") no-repeat center;
+    background-size:30px auto;
 }
 .footer .social-media.twitter{
-    background: #fff url("../svg/twitter-footer.svg") no-repeat center / 30px auto;
+    background: #fff url("../svg/twitter-footer.svg") no-repeat center;
+    background-size:30px auto;
 }
 .footer .social-media.google-plus{
-    background: #fff url("../svg/google-footer.svg") no-repeat center / 30px auto;
+    background: #fff url("../svg/google-footer.svg") no-repeat center;
+    background-size:30px auto;
 }
 
 .footer .copyright{
@@ -1758,7 +1778,7 @@ section.classes .owl-carousel .owl-controls .owl-nav [class*="owl-"].disabled ,
     position: relative;
     z-index:2;
     color: #fff;
-    font-family: 'BYekan';
+    
     line-height: 120px;
     height: 120px;
     margin: 0;
@@ -1799,10 +1819,12 @@ section.classes .owl-carousel .owl-controls .owl-nav [class*="owl-"].disabled ,
     color: #ddd;
 }
 .page-title-container.courses{
-    background: url("../images/courses-bg.jpg") transparent no-repeat center / cover;
+    background: url("../images/courses-bg.jpg") transparent no-repeat center;
+    background-size: cover;
 }
 .page-title-container.courses.news-page-header{
-    background: url("../images/news_header.png") transparent no-repeat center / cover;
+    background: url("../images/news_header.png") transparent no-repeat center;
+    background-size: cover;
 }
 .inner-page .page-content{
     position: relative;
@@ -1871,7 +1893,7 @@ section.classes .owl-carousel .owl-controls .owl-nav [class*="owl-"].disabled ,
     background: #174a7d;
 }
 .page-content.courses .collapse-header span{
-    font-family: 'BYekan';
+    
     font-size: 13pt;
 }
 .page-content.courses .arrow-white{
@@ -1912,7 +1934,7 @@ section.classes .owl-carousel .owl-controls .owl-nav [class*="owl-"].disabled ,
 }
 .page-content.courses .files h3{
     color: #5b7991;
-    font-family: 'BYekan';
+    
     margin: 0;
     margin-bottom: 25px;
     font-size: 20px;
@@ -1928,7 +1950,8 @@ section.classes .owl-carousel .owl-controls .owl-nav [class*="owl-"].disabled ,
 .page-content.courses .files > ul > li,
 .page-content.courses .files .items > li{
     list-style: none;
-    background: #fff url('../svg/attachment.svg') no-repeat right 20px center / 18px auto;
+    background: #fff url('../svg/attachment.svg') no-repeat scroll right 20px center;
+    background-size: 18px auto;
     border-right: 3px solid #ef5350;
     height:50px;
     line-height:50px;
@@ -1989,7 +2012,8 @@ section.classes .owl-carousel .owl-controls .owl-nav [class*="owl-"].disabled ,
 }
 .page-content.courses .files .download i{
     display: block;
-    background: url("../svg/download.svg") no-repeat center / auto 25px;
+    background: url("../svg/download.svg") no-repeat center;
+    background-size: auto 25px;
     width: 25px;
     height:20px;
     float: left;
@@ -1997,7 +2021,8 @@ section.classes .owl-carousel .owl-controls .owl-nav [class*="owl-"].disabled ,
 .page-content.courses .files .file:hover .download i,
 .page-content.courses .files > ul > li:hover .download i,
 .page-content.courses .files .items > li:hover .download i{
-    background: url("../svg/download-white.svg") no-repeat center / auto 25px;
+    background: url("../svg/download-white.svg") no-repeat center;
+    background-size: auto 25px;
 }
 .files li:hover .download span{
     visibility: visible !important;
@@ -2024,7 +2049,7 @@ section.classes .owl-carousel .owl-controls .owl-nav [class*="owl-"].disabled ,
 }
 .page-content.courses .classes h3{
     color: #5b7991;
-    font-family: 'BYekan';
+    
     margin: 0;
     font-size: 17px;
 }
@@ -2661,7 +2686,8 @@ section.classes h3{
     bottom: 20px;
     right: 20px;
     z-index: 100;
-    background:url("../svg/telegram.svg") no-repeat scroll center / 30px rgba(150,150,150,0.15);
+    background:url("../svg/telegram.svg") no-repeat scroll center rgba(150,150,150,0.15);
+    background-size: 30px;
 }
 
 .header .forum-icon{
@@ -2674,7 +2700,8 @@ section.classes h3{
     bottom: 20px;
     right:80px;
     z-index: 100;
-    background:url("../svg/forum.svg") no-repeat scroll center /30px rgba(150,150,150,0.15);
+    background:url("../svg/forum.svg") no-repeat scroll center rgba(150,150,150,0.15);
+    background-size:30px;
 }
 .tab-content{
     min-height: 600px;
@@ -3207,7 +3234,8 @@ ol{
     clear: both;
 }
 .news-view .clock-icon {
-    background: rgba(0, 0, 0, 0) url("../svg/clock.svg") no-repeat scroll center center / 12px auto;
+    background: rgba(0, 0, 0, 0) url("../svg/clock.svg") no-repeat scroll center center;
+    background-size: 12px auto;
     display: inline-block;
     height: 23px;
     margin-left: 8px;
@@ -3259,16 +3287,20 @@ ol{
     opacity: 1;
 }
 .news-share .facebook {
-    background: rgba(0, 0, 0, 0) url("../svg/facebook-share.svg") no-repeat scroll center center / 18px auto;
+    background: rgba(0, 0, 0, 0) url("../svg/facebook-share.svg") no-repeat scroll center center;
+    background-size: 18px auto;
 }
 .news-share .twitter {
-    background: rgba(0, 0, 0, 0) url("../svg/twitter-share.svg") no-repeat scroll center center / 18px auto;
+    background: rgba(0, 0, 0, 0) url("../svg/twitter-share.svg") no-repeat scroll center center;
+    background-size: 18px auto;
 }
 .news-share .google-plus {
-    background: rgba(0, 0, 0, 0) url("../svg/google-plus-share.svg") no-repeat scroll center center / 18px auto;
+    background: rgba(0, 0, 0, 0) url("../svg/google-plus-share.svg") no-repeat scroll center center;
+    background-size: 18px auto;
 }
 .news-share .telegram {
-    background: rgba(0, 0, 0, 0) url("../svg/telegram-share.svg") no-repeat scroll center center / 18px auto;
+    background: rgba(0, 0, 0, 0) url("../svg/telegram-share.svg") no-repeat scroll center center;
+    background-size: 18px auto;
 }
 .news-view .comments-section {
     padding-top: 30px;
@@ -3370,7 +3402,8 @@ ol{
     z-index: 1;
 }
 .news-view .comment-pic .svg-icons.user {
-    background: transparent url("../svg/user.svg") no-repeat scroll center center / cover ;
+    background: transparent url("../svg/user.svg") no-repeat scroll center center;
+    background-size: cover;
     height: 36px;
     margin-left: -19px;
     margin-top: -18px;

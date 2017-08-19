@@ -168,7 +168,8 @@ section.classes .owl-prev .arrow,
 .page-content.courses .files .items .file,
 .page-content.courses .files > ul > li,
 .page-content.courses .files .items > li{
-    background: #fff url("../svg/attachment.svg") no-repeat scroll left 20px center / 18px auto;
+    background: #fff url("../svg/attachment.svg") no-repeat scroll left 20px center;
+    background-size: 18px auto;
     padding-right: 0;
     padding-left: 60px;
     border-right: none;

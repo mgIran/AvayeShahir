@@ -294,4 +294,46 @@ class EasyMultiLanguageBehavior extends CActiveRecordBehavior
                      attribute = '{$attribute}'")->queryRow();
         return $values === false?false:$values['value'];
     }
+
+    public function saveManual($attr, $value, $lang)
+    {
+        $s = false;
+        if($this->owner->scenario != 'sort_order_change'){
+            $isMulitlangTableExists = Yii::app()->db->createCommand()
+                ->select('id')
+                ->from($this->translations_table)
+                ->where("
+                        table_name = '" . str_ireplace(array('{', '}'), array('\{', '\}'), $this->owner->tableName()) . "' AND
+                        model_id = '{$this->owner->primaryKey}' AND
+                        attribute = '{$attr}' AND
+                        lang = '{$lang}'
+                ")->queryRow();
+            if($this->owner->isNewRecord OR ($isMulitlangTableExists === false)){
+                $s = Yii::app()->db->createCommand()->
+                insert($this->translations_table, array(
+                    'table_name' => $this->owner->tableName(),
+                    'attribute' => $attr,
+                    'lang' => $lang,
+                    'model_id' => $this->owner->primaryKey,
+                    'value' => $value,
+                ));
+            }else{
+                $s = Yii::app()->db->createCommand()->
+                update($this->translations_table,
+                    array(
+                        'value' => $value,
+                    ),
+                    '(table_name = :table_name) AND (attribute = :attribute) AND ' .
+                    '(lang = :lang) AND (model_id = :model_id)',
+                    array(
+                        'table_name' => $this->owner->tableName(),
+                        'attribute' => $attr,
+                        'lang' => $lang,
+                        'model_id' => $this->owner->primaryKey,
+                    )
+                );
+            }
+        }
+        return $s;
+    }
 }

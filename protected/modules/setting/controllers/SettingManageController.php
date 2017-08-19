@@ -31,21 +31,21 @@ class SettingManageController extends Controller
 	/**
 	 * Change site setting
 	 */
-    public function actionChangeSetting(){
-        if(isset($_POST['SiteSetting'])){
-            foreach($_POST['SiteSetting'] as $name => $value)
-            {
-                $field = SiteSetting::model()->findByAttributes(array('name'=>$name));
-				SiteSetting::model()->updateByPk($field->id,array('value'=>$value));
-            }
-            Yii::app()->user->setFlash('success' , 'اطلاعات با موفقیت ثبت شد.');
-            $this->refresh();
-        }
-        $model = SiteSetting::model()->findAll();
-        $this->render('_general',array(
-            'model'=>$model
-        ));
-    }
+    public function actionChangeSetting()
+	{
+		$model = SiteSetting::model()->findAll();
+		if(isset($_POST['SiteSetting'])){
+			foreach($_POST['SiteSetting'] as $name => $value)
+			{
+				SiteSetting::setOption($name, $value);
+			}
+			Yii::app()->user->setFlash('success', 'اطلاعات با موفقیت ثبت شد.');
+			$this->refresh();
+		}
+		$this->render('_general', array(
+			'model' => $model
+		));
+	}
 
 	/**
 	 * Change site setting

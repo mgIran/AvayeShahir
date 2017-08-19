@@ -180,6 +180,7 @@ class CoursesRegisterController extends Controller
         $this->layout = '//layouts/inner';
         $msg = '';
         $result = NULL;
+        $notify = false;
         if(isset($_POST['RefId'])){
             $orderId = $_POST['RefId'];
             $model = UserTransactions::model()->findByAttributes(array('ref_id' => $orderId));
@@ -193,7 +194,10 @@ class CoursesRegisterController extends Controller
                     // Settle Payment
                     $settle = Yii::app()->MellatPayment->SettleRequest($model->order_id, $_POST['SaleOrderId'], $_POST['SaleReferenceId']);
                     if($settle)
+                    {
                         $model->settle = 1;
+                        $notify = true;
+                    }
                 }
             }else{
                 $RecourceCode = $_POST['ResCode'];
@@ -214,6 +218,7 @@ class CoursesRegisterController extends Controller
                         $model->status = 'paid';
                         $model->res_code = 0;
                         $model->settle = 1;
+                        $notify = true;
                     }else
                         $model->res_code = -1;
                 }
@@ -230,7 +235,7 @@ class CoursesRegisterController extends Controller
             throw new CHttpException(404, 'تراکنش پرداختی شما یافت نشد، در صورتی که مبلغی از حساب شما کسر شده طی 72 ساعت آینده به حساب شما برگردانده خواهد شد.');
 
         // Add Sms Schedules
-        if($model->user && $model->user->userDetails && $model->user->userDetails->phone && !empty($model->user->userDetails->phone)){
+        if($notify && $model->user && $model->user->userDetails && $model->user->userDetails->phone && !empty($model->user->userDetails->phone)){
             $class = $model->class;
             $startDate = JalaliDate::date('Y/m/d', $class->startClassDate);
             $endDate = JalaliDate::date('Y/m/d', $class->endClassDate);

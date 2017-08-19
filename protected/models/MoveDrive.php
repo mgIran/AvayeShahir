@@ -12,6 +12,7 @@
  * @property string $link
  * @property string $file_id
  * @property string $file_size
+ * @property string $lang
  */
 class MoveDrive extends CActiveRecord
 {
@@ -34,7 +35,7 @@ class MoveDrive extends CActiveRecord
 			array('link, file_id', 'required'),
 			array('model_id', 'numerical', 'integerOnly'=>true),
 			array('model, link, file_id', 'length', 'max'=>255),
-			array('status', 'length', 'max'=>1),
+			array('status,lang', 'length', 'max'=>1),
 			array('file_size', 'length', 'max'=>50),
 			array('detail', 'safe'),
 			// The following rule is used by search().

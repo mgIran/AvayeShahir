@@ -542,14 +542,14 @@ class SiteController extends Controller
 				}
 			}
 			$end = time();
-			$o = "Copy: ".$copy;
-			$o .= "\n\rMove To Destination: ".$r;
-			$o .= "\n\rSave File: ".$flag;
-			$o .= "\n\rMove ID: ".$move->id;
-			$o .= "\n\rNew ID: ".$move->detail;
-			$o .= "\n\rElapsed Time: ".($end - $start)."(s)";
+			$o = "Copy: " . $copy;
+			$o .= "\n\rMove To Destination: " . $r;
+			$o .= "\n\rSave File: " . $flag;
+			$o .= "\n\rMove ID: " . $move->id;
+			$o .= "\n\rNew ID: " . $move->detail;
+			$o .= "\n\rElapsed Time: " . ($end - $start) . "(s)";
 			$o .= "\n\r----------------------------------------------------------------------------------\n\r";
-			file_put_contents(Yii::getPathOfAlias('webroot').'/drive_log.txt', $o, FILE_APPEND);
+			file_put_contents(Yii::getPathOfAlias('webroot') . '/drive_log.txt', $o, FILE_APPEND);
 		}catch(Exception $e){
 			$move->status = 2;
 			$move->detail = json_encode(['error' => 1, 'message' => $e->getMessage(), 'response' => $response]);
@@ -558,11 +558,11 @@ class SiteController extends Controller
 			$o = "Copy: 0";
 			$o .= "\n\rMove To Destination: 0";
 			$o .= "\n\rSave File: 0";
-			$o .= "\n\rMove ID: ".$move->id;
-			$o .= "\n\rNew ID: ".$move->detail;
-			$o .= "\n\rError Message: ".$e->getMessage();
+			$o .= "\n\rMove ID: " . $move->id;
+			$o .= "\n\rNew ID: " . $move->detail;
+			$o .= "\n\rError Message: " . $e->getMessage();
 			$o .= "\n\r----------------------------------------------------------------------------------\n\r";
-			file_put_contents(Yii::getPathOfAlias('webroot').'/drive_log.txt', $o, FILE_APPEND);
+			file_put_contents(Yii::getPathOfAlias('webroot') . '/drive_log.txt', $o, FILE_APPEND);
 		}
 		$this->refresh();
 	}
@@ -599,5 +599,46 @@ class SiteController extends Controller
 					$this->redirect(array('/site/googlereturn?reset=true'));
 			}
 		}
+	}
+
+	public function actionSaveOtherLanguages()
+	{
+		Yii::app()->getModule('courses');
+		Yii::app()->getModule('articles');
+		$moves = MoveDrive::model()->findAll('status = 1 AND lang = 0');
+		$o = "";
+		$sum=0;
+		foreach($moves as $move){
+			$model = call_user_func(array($move->model, 'model'));
+			$model = $model->findByPk($move->model_id);
+			if($move->detail && $model){
+				if($move->model == 'ClassCategoryFileLinks')
+					$new = ClassCategoryFiles::model()->findByPk($move->detail);
+				else
+					$new = ArticleFiles::model()->findByPk($move->detail);
+				if($new === null)
+					break;
+
+				$title_en = $model->getValueLang('title', 'en');
+				$summary_en = $model->getValueLang('summary', 'en');
+				$t_f = $new->saveManual('title', $title_en, 'en');
+				$s_f = $new->saveManual('summary', $summary_en, 'en');
+
+				$move->lang = $t_f && $s_f?1:0;
+				$move->save(false);
+
+				$o .= "Title save: " . $t_f;
+				$o .= "\n\rSummary save: " . $s_f;
+				$o .= "\n\rTitle: " . $title_en;
+				$o .= "\n\rSummary: " . $summary_en;
+				$o .= "\n\rMove ID: " . $move->id;
+				$o .= "\n\rNew ID: " . $move->detail;
+				$o .= "\n\r----------------------------------------------------------------------------------\n\r";
+			}
+		}
+		echo '<pre>';
+		echo $sum;
+		echo $o;
+		echo '</pre>';exit;
 	}
 }

@@ -22,7 +22,7 @@ $action = $this->action->id;
         </div>
         <ul class="nav">
             <li>
-                <a class="scroll-link" href="<?= $menuID == 'site' && $action == 'index'?'#top':Yii::app()->baseUrl.'#top'; ?>" title="<?= Yii::t('app','Home');?>">
+                <a class="scroll-link" href="<?= $menuID == 'site' && $action == 'index'?'#top':Yii::app()->getBaseUrl(true).'#top'; ?>" title="<?= Yii::t('app','Home');?>">
                     <?= Yii::t('app','Home');?>
                 </a>
             </li>
@@ -45,7 +45,7 @@ $action = $this->action->id;
                 ?>
             </li>
             <li>
-                <a class="scroll-link" href="<?= $menuID == 'site' && $action == 'index'?'#classes':Yii::app()->baseUrl.'#classes'; ?>" title="<?= Yii::t('app','Classes');?>"><?= Yii::t('app','Classes');?></a>
+                <a class="scroll-link" href="<?= $menuID == 'site' && $action == 'index'?'#classes':Yii::app()->getBaseUrl(true).'#classes'; ?>" title="<?= Yii::t('app','Classes');?>"><?= Yii::t('app','Classes');?></a>
             </li>
             <?php
             if($this->getArticleCategories()){
@@ -72,13 +72,13 @@ $action = $this->action->id;
             }
             ?>
             <li>
-                <a class="scroll-link" href="<?= $menuID == 'site' && $action == 'index'?'#teachers':Yii::app()->baseUrl.'#teachers'; ?>" title="<?= Yii::t('app','Teachers');?>"><?= Yii::t('app','Teachers');?></a>
+                <a class="scroll-link" href="<?= $menuID == 'site' && $action == 'index'?'#teachers':Yii::app()->getBaseUrl(true).'#teachers'; ?>" title="<?= Yii::t('app','Teachers');?>"><?= Yii::t('app','Teachers');?></a>
             </li>
             <li>
-                <a class="scroll-link" href="<?= $menuID == 'site' && $action == 'index'?'#about':Yii::app()->baseUrl.'#about'; ?>" title="<?= Yii::t('app','About Us');?>"><?= Yii::t('app','About Us');?></a>
+                <a class="scroll-link" href="<?= $menuID == 'site' && $action == 'index'?'#about':Yii::app()->getBaseUrl(true).'#about'; ?>" title="<?= Yii::t('app','About Us');?>"><?= Yii::t('app','About Us');?></a>
             </li>
             <li>
-                <a class="scroll-link" href="<?= $menuID == 'site' && $action == 'index'?'#contact':Yii::app()->baseUrl.'#contact'; ?>" title="<?= Yii::t('app','Contact Us');?>"><?= Yii::t('app','Contact Us');?></a>
+                <a class="scroll-link" href="<?= $menuID == 'site' && $action == 'index'?'#contact':Yii::app()->getBaseUrl(true).'#contact'; ?>" title="<?= Yii::t('app','Contact Us');?>"><?= Yii::t('app','Contact Us');?></a>
             </li>
             <li>
                 <a class="scroll-link" href="<?= $this->createUrl('/FAQ'); ?>" title="<?= Yii::t('app','FAQ');?>"><?= Yii::t('app','FAQ');?></a>
@@ -87,7 +87,7 @@ $action = $this->action->id;
             if(Yii::app()->user->isGuest ||  Yii::app()->user->type == 'admin'):
                 ?>
                 <li class="pull-left wide">
-                    <a class="wide <?= $menuID == 'site' && $action == 'index'?'scroll-link':''; ?>" href="<?= $menuID == 'site' && $action == 'index'?'#signup':Yii::app()->baseUrl.'#signup'; ?>"
+                    <a class="wide <?= $menuID == 'site' && $action == 'index'?'scroll-link':''; ?>" href="<?= $menuID == 'site' && $action == 'index'?'#signup':Yii::app()->getBaseUrl(true).'#signup'; ?>"
                        title="<?= Yii::t('app', 'Sign Up'); ?>"><?= Yii::t('app', 'Sign Up'); ?></a>
                 </li>
                 <li class="pull-left">
@@ -138,7 +138,7 @@ $action = $this->action->id;
                     'changeLabel' => false,
                     'onchange' => 'js:
                         var $s = {id};
-                        var $base = \''.Yii::app()->baseUrl.'/\';
+                        var $base = \''.Yii::app()->getBaseUrl(true).'/\';
                         location.href = $base+$s;
                     ',
                 ));
@@ -230,7 +230,7 @@ $action = $this->action->id;
                     <br>
                         <a href="<?= Yii::app()->createUrl('/users/public/forgetPassword'); ?>"><?= Yii::t('app','Forgot Password?');?></a>
                     <br>
-                        <span><?= Yii::t('app','Are You New?');?></span>&nbsp;<a class="<?= $menuID == 'site' && $action == 'index'?'scroll-link':''; ?>" href="<?= $menuID == 'site' && $action == 'index'?'#signup':Yii::app()->baseUrl.'#signup'; ?>" <?= $menuID == 'site' && $action == 'index'?'data-dismiss="modal"':'' ?>><?= Yii::t('app','Sign Up.');?></a>
+                        <span><?= Yii::t('app','Are You New?');?></span>&nbsp;<a class="<?= $menuID == 'site' && $action == 'index'?'scroll-link':''; ?>" href="<?= $menuID == 'site' && $action == 'index'?'#signup':Yii::app()->getBaseUrl(true).'#signup'; ?>" <?= $menuID == 'site' && $action == 'index'?'data-dismiss="modal"':'' ?>><?= Yii::t('app','Sign Up.');?></a>
                     <? $this->endWidget(); ?>
                 </div>
             </div>
