@@ -40,7 +40,7 @@ $(function() {
         e.preventDefault();
         if($(window).width() < 768)
         {
-            $('.navTrigger').removeClass("clicked").find('.lines').removeClass("close");
+            // $('.navTrigger').removeClass("clicked").find('.lines').removeClass("close");
             $("html,body").removeClass("overflow");
         }
         var href = $(this).attr('href');
@@ -64,10 +64,16 @@ $(function() {
         $(this).select();
     });
     
-    $body.on('click','.navTrigger',function(){
-        $(this).toggleClass("clicked");
-        $(this).find('.lines').toggleClass("close");
-        $("html,body").toggleClass("overflow");
+    $body.on('change','.navTrigger [type="checkbox"]',function() {
+        if ($(".navTrigger").hasClass("clicked"))
+            $(".navTrigger").removeClass("clicked");
+        else
+            $(".navTrigger").addClass("clicked");
+
+        if ($("html,body").hasClass("overflow"))
+            $("html,body").removeClass("overflow");
+        else
+            $("html,body").addClass("overflow");
     });
 
     var $affix = $('.affix-top');

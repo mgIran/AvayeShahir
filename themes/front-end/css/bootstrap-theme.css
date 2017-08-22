@@ -2131,59 +2131,6 @@ section.classes .owl-carousel .owl-controls .owl-nav [class*="owl-"].disabled ,
     outline: 0 none;
     transition-duration: 0.3s;
 }
-
-span.navTrigger {
-    display: none;
-}
-.lines {
-    background: #fff none repeat scroll 0 0;
-    bottom: 0;
-    display: inline-block;
-    height: 4px;
-    margin: auto;
-    pointer-events: none;
-    position: relative;
-    top: 0;
-    transition: all 0.3s ease 0s;
-    width: 32px;
-    border-radius: 2px;
-}
-.lines::after, .lines::before {
-    background: #fff none repeat scroll 0 0;
-    content: "";
-    display: inline-block;
-    height: 4px;
-    left: 0;
-    position: absolute;
-    transform-origin: 2.29px center 0;
-    transition: all 0.3s ease 0s;
-    width: 32px;
-    border-radius: 2px;
-}
-.lines::before {
-    top: 8px;
-}
-.lines::after {
-    top: -8px;
-}
-.lines.close {
-    background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
-    box-shadow: none;
-}
-.lines.close::after, .lines.close::before {
-    background-color: #fff;
-    border-radius: 2.29px;
-    opacity: 1;
-    top: 0;
-    transform-origin: 50% 50% 0;
-    width: 32px;
-}
-.lines.close::before {
-    transform: rotate3d(0, 0, 1, 45deg);
-}
-.lines.close::after {
-    transform: rotate3d(0, 0, 1, -45deg);
-}
 .overflow{
     overflow: hidden !important;
 }
@@ -3947,4 +3894,74 @@ ol{
     height: 60px;
     display: inline-block;
     margin: 10px;
+}
+
+
+span.navTrigger {
+    display: none;
+    line-height: 4px;
+    padding: 18px 0 18px 8px;
+    text-align: left;
+}
+span.navTrigger > input[type="checkbox"]{
+    opacity: 0;
+    position: absolute;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    top: 0;
+    z-index: 1;
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+}
+.lines {
+    background: #fff none repeat scroll 0 0;
+    bottom: 0;
+    display: inline-block;
+    height: 4px;
+    margin: auto;
+    pointer-events: none;
+    position: relative;
+    top: 0;
+    transition: all 0.3s ease 0s;
+    width: 32px;
+    border-radius: 2px;
+}
+.lines::after, .lines::before {
+    background: #fff none repeat scroll 0 0;
+    content: "";
+    display: inline-block;
+    height: 4px;
+    left: 0;
+    position: absolute;
+    transform-origin: 2.29px center 0;
+    transition: all 0.3s ease 0s;
+    width: 32px;
+    border-radius: 2px;
+}
+.lines::before {
+    top: 8px;
+}
+.lines::after {
+    top: -8px;
+}
+span.navTrigger > input[type="checkbox"]:checked + .lines{
+    background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+    box-shadow: none;
+}
+span.navTrigger > input[type="checkbox"]:checked + .lines::after,
+span.navTrigger > input[type="checkbox"]:checked + .lines::before {
+    background-color: #fff;
+    border-radius: 2.29px;
+    opacity: 1;
+    top: 0;
+    transform-origin: 50% 50% 0;
+    width: 32px;
+}
+span.navTrigger > input[type="checkbox"]:checked + .lines::before {
+    transform: rotate3d(0, 0, 1, 45deg);
+}
+span.navTrigger > input[type="checkbox"]:checked + .lines::after {
+    transform: rotate3d(0, 0, 1, -45deg);
 }

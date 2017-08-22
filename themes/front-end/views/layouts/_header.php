@@ -14,6 +14,7 @@ $action = $this->action->id;
     <a href="<?= Yii::app()->createUrl('/forum') ?>" class="forum-icon"></a>
     <div class="navbar container">
         <span class="navTrigger">
+            <input type="checkbox" id="navTriggerOpen">
             <span class="lines"></span>
         </span>
         <div class="<?= Yii::app()->language == 'fa'?'logo':'hidden'; ?>" title="<?= $this->siteName ?>">
