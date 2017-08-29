@@ -30,7 +30,7 @@ class ClassTags extends CActiveRecord
 		return array(
 			array('title','required'),
 			array('title','unique'),
-			array('title', 'length', 'max'=>50),
+			array('title', 'length', 'max'=>500),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, title', 'safe', 'on'=>'search'),
