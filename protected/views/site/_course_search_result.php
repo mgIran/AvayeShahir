@@ -21,7 +21,7 @@ if($showTitle && (($fileDataProvider && $fileDataProvider->totalItemCount) || ($
     $count = Yii::app()->language == 'fa'?
         Controller::parseNumbers(number_format($count)):number_format($count);
     echo '<ul class="nav nav-tabs">';
-    echo '<li class="active"><a href="#">'.Yii::t('app','Courses').'
+    echo '<li class="active"><a href="#">'.Yii::t('app','Courses & Resources').'
     <small>('.$count.')</small></a></li>';
     echo '</ul>';
     echo '<div class="tab-content">';
@@ -103,7 +103,7 @@ if($linksDataProvider && $linksDataProvider->totalItemCount){
 
 if($dataProvider && $dataProvider->totalItemCount){
     ?>
-    <h4><?= Yii::t('app','Courses') ?></h4>
+    <h4><?= Yii::t('app','Courses & Resources') ?></h4>
     <div class="row">
         <?php
         $this->widget('zii.widgets.CListView', array(

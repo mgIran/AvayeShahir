@@ -3,17 +3,17 @@
 /* @var $model Courses */
 
 $this->breadcrumbs=array(
-	'مدیریت دوره ها'=>array('admin'),
+	'مدیریت دوره ها و منابع'=>array('admin'),
 	'زباله دان',
 );
 
 $this->menu=array(
-	array('label'=>'مدیریت دوره ها', 'url'=>array('admin')),
+	array('label'=>'مدیریت دوره ها و منابع', 'url'=>array('admin')),
 	array('label'=>'افزودن دوره', 'url'=>array('create')),
 );
 ?>
 <? $this->renderPartial('//layouts/_flashMessage'); ?>
-<h1>زباله دان دوره ها</h1>
+<h1>زباله دان دوره ها و منابع</h1>
 
 <?php $this->widget('ext.yiiSortableModel.widgets.SortableCGridView', array(
 	'dataProvider'=>$model->search(),

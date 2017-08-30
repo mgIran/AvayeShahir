@@ -27,7 +27,7 @@ $form = $this->beginWidget("CActiveForm",array(
             'label' => Yii::t('app','Search the entire site'),
             'data' => array(
                 'all' => Yii::t('app','Search the entire site'),
-                'courses' => Yii::t('app' ,'Courses'),
+                'courses' => Yii::t('app' ,'Courses & Resources'),
                 'articles' => Yii::t('app' ,'Educational Materials'),
                 'news' => Yii::t('app' ,'News'),
             ),

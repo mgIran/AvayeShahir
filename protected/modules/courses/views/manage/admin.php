@@ -3,7 +3,7 @@
 /* @var $model Courses */
 
 $this->breadcrumbs=array(
-	'مدیریت دوره ها',
+	'مدیریت دوره ها و منابع',
 );
 
 $this->menu=array(
@@ -12,7 +12,7 @@ $this->menu=array(
 );
 ?>
 <? $this->renderPartial('//layouts/_flashMessage'); ?>
-<h1>مدیریت دوره ها</h1>
+<h1>مدیریت دوره ها و منابع</h1>
 
 <?php $this->widget('ext.yiiSortableModel.widgets.SortableCGridView', array(
 	'dataProvider'=>$model->search(),

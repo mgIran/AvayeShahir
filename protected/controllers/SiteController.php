@@ -256,7 +256,7 @@ class SiteController extends Controller
 						'criteria' => $criteria,
 						'pagination' => array('pageSize' => $pageSize)
 					));
-					$title = Yii::t('app', 'Courses');
+					$title = Yii::t('app', 'Courses & Resources');
 					break;
 				case 'articles':
 					Yii::app()->getModule('articles');
@@ -323,7 +323,7 @@ class SiteController extends Controller
 					));
 
 
-					$dataProviders['courses']['title'] = Yii::t('app', 'Courses');
+					$dataProviders['courses']['title'] = Yii::t('app', 'Courses & Resources');
 
 					// article search
 					$criteria = Articles::getSearchCriteria($model->text, $words);

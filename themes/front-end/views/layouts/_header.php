@@ -17,12 +17,13 @@ $action = $this->action->id;
             <input type="checkbox" id="navTriggerOpen">
             <span class="lines"></span>
         </span>
-        <div class="<?= Yii::app()->language == 'fa'?'logo':'hidden'; ?>" title="<?= $this->siteName ?>">
+        <div class="<?= Yii::app()->language == 'fa'?'logo relative':'hidden'; ?>" title="<?= $this->siteName ?>">
+            <a class="scroll-link logo-link" href="<?= $menuID == 'site' && $action == 'index'?'#top':Yii::app()->getBaseUrl(true).'#top'; ?>" title="<?= Yii::t('app','Home');?>"></a>
             <h1><?= $this->siteName ?></h1>
             <h2><?= $this->pageTitle ?></h2>
         </div>
         <ul class="nav">
-            <li>
+            <li class="hidden-fa-md">
                 <a class="scroll-link" href="<?= $menuID == 'site' && $action == 'index'?'#top':Yii::app()->getBaseUrl(true).'#top'; ?>" title="<?= Yii::t('app','Home');?>">
                     <?= Yii::t('app','Home');?>
                 </a>

@@ -4,13 +4,13 @@
 /* @var $pic [] */
 
 $this->breadcrumbs=array(
-	'مدیریت دوره ها'=>array('admin'),
+	'مدیریت دوره ها و منابع'=>array('admin'),
 	$model->title,
 	'ویرایش',
 );
 
 $this->menu=array(
-	array('label'=>'مدیریت دوره ها', 'url'=>array('admin')),
+	array('label'=>'مدیریت دوره ها و منابع', 'url'=>array('admin')),
 	array('label'=>'افزودن دوره', 'url'=>array('create')),
 );
 ?>

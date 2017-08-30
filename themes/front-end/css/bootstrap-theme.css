@@ -3965,3 +3965,16 @@ span.navTrigger > input[type="checkbox"]:checked + .lines::before {
 span.navTrigger > input[type="checkbox"]:checked + .lines::after {
     transform: rotate3d(0, 0, 1, -45deg);
 }
+
+.logo-link{
+    position: absolute;
+    right: 0;
+    top:0;
+    bottom:0;
+    left: 0;
+    z-index: 1;
+    display: block;
+}
+#search-box-modal .close{
+    opacity: 0.7 !important;
+}

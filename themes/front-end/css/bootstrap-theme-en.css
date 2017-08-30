@@ -462,6 +462,9 @@ ul.main-menu ol {
     .news-item .news-detail h3 {
         padding-left: 0;
     }
+    .hidden-fa-md{
+        display: block !important;
+    }
 }
 @media (max-width: 991px) {
     .news-item .news-detail h3{

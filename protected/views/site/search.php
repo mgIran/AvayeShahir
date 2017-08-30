@@ -66,7 +66,7 @@ Yii::app()->clientScript->registerCss('font-inherit', '
                             $sideTitle = '';
                             $sideContent = '';
                             if($key == 'courses'){
-                                $sideTitle = Yii::t('app', 'Courses');
+                                $sideTitle = Yii::t('app', 'Courses & Resources');
                                 $sideContent = new Courses();
                             }elseif($key == 'articles'){
                                 $sideTitle = Yii::t('app', 'Educational Materials Category');
@@ -127,7 +127,7 @@ Yii::app()->clientScript->registerCss('font-inherit', '
                     $sideTitle = '';
                     $sideContent = '';
                     if($type == 'courses'){
-                        $sideTitle = Yii::t('app', 'Courses');
+                        $sideTitle = Yii::t('app', 'Courses & Resources');
                         $sideContent = new Courses();
                     }elseif($type == 'articles'){
                         $sideTitle = Yii::t('app', 'Educational Materials Category');
@@ -191,7 +191,7 @@ Yii::app()->clientScript->registerCss('font-inherit', '
                 </div>
                 <?php
             }else{
-                $sideTitle = Yii::t('app', 'Courses');
+                $sideTitle = Yii::t('app', 'Courses & Resources');
                 $sideContent = new Courses();
                 ?>
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">

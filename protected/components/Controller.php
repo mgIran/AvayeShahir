@@ -102,7 +102,7 @@ class Controller extends AuthController
                     'itemOptions' => array('class' => 'dropdown' ,'tabindex' => "-1") ,
                     'linkOptions' => array('class' => 'dropdown-toggle' ,'data-toggle' => "dropdown") ,
                     'items' => array(
-                        array('label' => ' دوره ها' ,'url' => Yii::app()->createUrl('/courses/manage/admin/')) ,
+                        array('label' => ' دوره ها و منابع' ,'url' => Yii::app()->createUrl('/courses/manage/admin/')) ,
                         array('label' => ' گروه ها' ,'url' => Yii::app()->createUrl('/courses/categories/admin/')) ,
                         array('label' => ' کلاس ها' ,'url' => Yii::app()->createUrl('/courses/classes/admin/')) ,
                         array('label' => 'ثبت نام حضوری در کلاس','url' => Yii::app()->createUrl('/courses/classes/classRegister/')) ,

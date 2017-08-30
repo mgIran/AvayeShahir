@@ -2,6 +2,7 @@
 return array(
     'Home' => 'صفحه اصلی',
     'Courses' => 'دوره ها',
+    'Courses & Resources' => 'دوره ها و منابع',
     'Course' => 'دوره',
     'Staff' => 'کارمندان',
     'Teachers' => 'اساتید',
