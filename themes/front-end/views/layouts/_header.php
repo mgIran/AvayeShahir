@@ -23,7 +23,7 @@ $action = $this->action->id;
             <h2><?= $this->pageTitle ?></h2>
         </div>
         <ul class="nav">
-            <li class="hidden-fa-md">
+            <li>
                 <a class="scroll-link" href="<?= $menuID == 'site' && $action == 'index'?'#top':Yii::app()->getBaseUrl(true).'#top'; ?>" title="<?= Yii::t('app','Home');?>">
                     <?= Yii::t('app','Home');?>
                 </a>

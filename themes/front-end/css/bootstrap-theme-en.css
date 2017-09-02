@@ -449,6 +449,9 @@ ul.main-menu ol {
 .pagination > li:first-child > a, .pagination > li:first-child > span{
     border-radius: 4px 0 0 4px !important;
 }
+.header .nav > li .dropdown-toggle{
+    padding: 0 15px 0 5px !important;
+}
 @media (max-width: 1200px) and (min-width: 768px){
     .news-item .news-detail{
         padding-left: 115px;

@@ -10,7 +10,7 @@
 ?>
 <section class="courses" id="courses">
     <div class="container">
-        <h3 class="yekan-text"><?= Yii::t('app' ,'Education Courses') ?></h3>
+        <h3 class="yekan-text"><?= Yii::t('app' ,'Education Courses & Resources') ?></h3>
         <div class="course-carousel">
             <?
             if($courses) :

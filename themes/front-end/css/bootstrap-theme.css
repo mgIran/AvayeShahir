@@ -3980,7 +3980,7 @@ span.navTrigger > input[type="checkbox"]:checked + .lines::after {
 }
 
 .header .nav > li .dropdown-toggle{
-    padding: 0 15px 0 5px !important;
+    padding: 0 5px 0 15px !important;
 }
 .header .nav > li > a,
 .header .nav > li .dropdown-toggle span{
