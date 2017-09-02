@@ -33,7 +33,7 @@ $action = $this->action->id;
                 $this->widget('ext.dropDown.dropDown', array(
                     'id' => 'nav_courses',
                     'name' => 'course',
-                    'label' => Yii::t('app','Courses'),
+                    'label' => Yii::t('app','Courses & Resources'),
                     'data' => $this->getCoursesList(),
                     'caret' => '<i class="caret"></i>',
                     'emptyOpt' => false,

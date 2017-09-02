@@ -437,6 +437,9 @@
     }
 }
 @media (min-width: 768px) and (max-width: 1200px) {
+    .header .nav > li a{
+        padding: 10px 5px !important;
+    }
     .hidden-fa-md{
         display: none !important;
     }
