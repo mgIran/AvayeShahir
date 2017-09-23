@@ -44,6 +44,8 @@ class EMUrlManager extends CUrlManager
          * @param string $route 
          * @param array $params 
          * @param string $ampersand 
+         * 
+         * @return string
          *
          * @stolen from http://www.yiiframework.com/wiki/294/seo-conform-multilingual-urls-language-selector-widget-i18n/ 
          */

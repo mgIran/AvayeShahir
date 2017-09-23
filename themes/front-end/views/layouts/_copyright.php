@@ -1,0 +1,1 @@
+&copy; <?php echo date('Y');?> <strong>Avaye Shahir</strong>. All rights reserved.

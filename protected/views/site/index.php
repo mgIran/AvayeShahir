@@ -304,13 +304,13 @@ if($classes) :
 <!--                            <div class="text-danger remain-capacity">--><?//= Yii::t('app','Remaining Capacity').': '.$class->remainingCapacity ?><!--</div>-->
                         </div>
                         <div class="class-detail container-fluid">
-                            <div class="full text-nowrap">
+                            <div class="full line-2">
                                 <span><?= Yii::t('app','Course') ?>:&nbsp;</span>
                                 <a href="<?= Yii::app()->createUrl('/courses/'.urlencode($class->course->getValueLang('title', 'en')).'/'.$class->course->id); ?>">
                                     <?php echo $class->course->title ?>
                                 </a>
                             </div>
-                            <div class="full">
+                            <div class="full line-2">
                                 <span><?= Yii::t('app','Department') ?>:&nbsp;</span>
                                 <a href="<?= Yii::app()->createUrl('/courses/'.urlencode($class->course->getValueLang('title', 'en')).'/'.$class->course->id.'/#collapse-category-'.$class->category->id); ?>">
                                     <?php echo $class->category->title ?>
@@ -325,13 +325,13 @@ if($classes) :
                                     <?= $class->getTeachersFullName() ?>
                                 </span>
                             </div>
-                            <div class="full">
+                            <div class="full line-2">
                                     <span><?= Yii::t('app','Registration') ?>:</span><br><?= Yii::t('app','from') ?>&nbsp;<span><?php echo Yii::app()->language=='fa'?Controller::parseNumbers(JalaliDate::date("Y/m/d",$class->startSignupDate)):date("Y/m/d",$class->startSignupDate); ?></span>&nbsp;<?= Yii::t('app','up to') ?>&nbsp;<span><?php echo Yii::app()->language=='fa'?Controller::parseNumbers(JalaliDate::date("Y/m/d",$class->endSignupDate)):date("Y/m/d",$class->endSignupDate) ?></span>
                             </div>
-                            <div class="full">
+                            <div class="full line-2">
                                     <span><?= Yii::t('app','Start & End of the Course') ?>:</span><br><?= Yii::t('app','from') ?>&nbsp;<span><?php echo Yii::app()->language=='fa'?Controller::parseNumbers(JalaliDate::date("Y/m/d",$class->startClassDate)):date("Y/m/d",$class->startClassDate) ?></span><span>&nbsp;<?= Yii::t('app','to') ?>&nbsp;</span><span><?php echo Yii::app()->language=='fa'?Controller::parseNumbers(JalaliDate::date("Y/m/d",$class->endClassDate)):date("Y/m/d",$class->endClassDate) ?></span>
                             </div>
-                            <div class="full">
+                            <div class="full line-2">
                                 <span>
                                 <?= Yii::t('app','Class Days') ?>:&nbsp;
                                 </span>
@@ -562,42 +562,6 @@ endif;
         <div class="icons-set right"></div>
     </div>
     <div class="container">
-        <?php
-        if($personnel) {
-
-//            ?>
-<!--            <div class="--><?//= $teachers?'':'center-block' ?><!-- col-lg-6 col-md-6 col-sm-8 col-xs-12  partners" id="staff">-->
-<!--                <h3 class="yekan-text">--><?//= Yii::t('app', 'Staff') ?><!--</h3>-->
-<!---->
-<!--                <div class="slider">-->
-<!--                    --><?php
-//                    foreach($personnel as $person):
-//                    $socialLinks = CJSON::decode($person->social_links);
-//                        ?>
-<!--                    <div class="person-item">-->
-<!--                        <div class="image">-->
-<!--                            <img src="--><?//= Yii::app()->baseUrl.'/uploads/teachers/'.$person->avatar ?><!--" alt="--><?//= CHtml::encode($person->fullName) ?><!--">-->
-<!---->
-<!--                            <div class="img-overlay"></div>-->
-<!--                        </div>-->
-<!--                        <span class="name">--><?//= CHtml::encode($person->fullName) ?><!--</span>-->
-<!--                        <span class="job">--><?//= CHtml::encode($person->grade) ?><!--</span>-->
-<!---->
-<!--                        <div class="socials">-->
-<!--                            <a href="--><?//= $person->email ?><!--" class="email" title="--><?//= Yii::t('app','Email') ?><!--"></a>-->
-<!--                            <a href="--><?//= $socialLinks[0]['value'] ?><!--" class="facebook" title="--><?//= Yii::t('app','Facebook') ?><!--"></a>-->
-<!--                            <a href="--><?//= $socialLinks[1]['value'] ?><!--" class="twitter" title="--><?//= Yii::t('app','Twitter') ?><!--"></a>-->
-<!--                        </div>-->
-<!--                        <a href="--><?//= Yii::app()->createUrl('/personnel/'.$person->id.'/'.urlencode($person->getFullName())) ?><!--" class="person-link" title="--><?//= CHtml::encode($person->fullName) ?><!--"></a>-->
-<!--                    </div>-->
-<!--                    --><?php
-//                    endforeach;
-//                    ?>
-<!--                </div>-->
-<!--            </div>-->
-<!--            --><?//
-        }
-        ?>
         <?php
         if($teachers) {
             ?>

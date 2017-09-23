@@ -74,16 +74,27 @@ $action = $this->action->id;
             }
             ?>
             <li>
-                <a class="scroll-link" href="<?= $menuID == 'site' && $action == 'index'?'#teachers':Yii::app()->getBaseUrl(true).'#teachers'; ?>" title="<?= Yii::t('app','Teachers');?>"><?= Yii::t('app','Teachers');?></a>
-            </li>
-            <li>
-                <a class="scroll-link" href="<?= $menuID == 'site' && $action == 'index'?'#about':Yii::app()->getBaseUrl(true).'#about'; ?>" title="<?= Yii::t('app','About Us');?>"><?= Yii::t('app','About Us');?></a>
-            </li>
-            <li>
-                <a class="scroll-link" href="<?= $menuID == 'site' && $action == 'index'?'#contact':Yii::app()->getBaseUrl(true).'#contact'; ?>" title="<?= Yii::t('app','Contact Us');?>"><?= Yii::t('app','Contact Us');?></a>
-            </li>
-            <li>
-                <a class="scroll-link" href="<?= $this->createUrl('/FAQ'); ?>" title="<?= Yii::t('app','FAQ');?>"><?= Yii::t('app','FAQ');?></a>
+                <?
+                $this->widget('ext.dropDown.dropDown', array(
+                    'id' => 'other_list',
+                    'name' => 'other_list',
+                    'label' => Yii::t('app', 'Other'),
+                    'data' => [
+                        $menuID == 'site' && $action == 'index'?'#teachers':Yii::app()->getBaseUrl(true).'#teachers' => Yii::t('app','Teachers'),
+                        $menuID == 'site' && $action == 'index'?'#about':Yii::app()->getBaseUrl(true).'#about' => Yii::t('app','About Us'),
+                        $menuID == 'site' && $action == 'index'?'#contact':Yii::app()->getBaseUrl(true).'#contact' => Yii::t('app','Contact Us'),
+                        $this->createUrl('/FAQ') => Yii::t('app','FAQ'),
+                    ],
+                    'caret' => '<i class="caret"></i>',
+                    'emptyOpt' => false,
+                    'changeLabel' => false,
+                    'onchange' => 'js:
+                        var $s = {id};
+                        var $base = \''.Yii::app()->getBaseUrl(true).'/\';
+                        location.href = $base+$s;
+                    ',
+                ));
+                ?>
             </li>
             <?
             if(Yii::app()->user->isGuest ||  Yii::app()->user->type == 'admin'):

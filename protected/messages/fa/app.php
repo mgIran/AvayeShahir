@@ -163,4 +163,5 @@ return array(
     'People' => 'نفر',
     'Completed' => 'تکمیل شده',
     'Class Capacity' => 'ظرفیت کلاس',
+    'Other' => 'سایر',
 );
