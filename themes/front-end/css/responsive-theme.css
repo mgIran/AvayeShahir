@@ -421,7 +421,9 @@
     }
 }
 @media (max-width: 420px) {
-
+    .class .inner{
+        padding: 0 10px;
+    }
     .class a{
         font-size: 14px !important;
     }

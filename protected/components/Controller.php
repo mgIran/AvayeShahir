@@ -324,4 +324,18 @@ class Controller extends AuthController
                 , 'title');
         return $this->newsCategories;
     }
+
+    public function actionBackup()
+    {
+        Yii::import('ext.yii-database-dumper.SDatabaseDumper');
+        $dumper = new SDatabaseDumper;
+        // Get path to backup file
+
+        // Gzip dump
+        $file = Yii::getPathOfAlias('webroot') . DIRECTORY_SEPARATOR.'sqldump-'.date('Y-m-d');
+        if(function_exists('gzencode'))
+            file_put_contents($file . '.sql.gz', gzencode($dumper->getDump()));
+        else
+            file_put_contents($file . '.sql', $dumper->getDump());
+    }
 }
