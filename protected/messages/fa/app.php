@@ -160,4 +160,7 @@ return array(
     'Articles' => 'مطالب',
     'Search In' => 'جستجو در',
     'Gateway' => 'درگاه بانک',
+    'People' => 'نفر',
+    'Completed' => 'تکمیل شده',
+    'Class Capacity' => 'ظرفیت کلاس',
 );

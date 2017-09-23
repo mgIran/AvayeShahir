@@ -254,7 +254,7 @@ if($classes) :
 <section class="classes" id="classes">
     <div class="container">
         <h3 class="yekan-text"><?= Yii::t('app' ,'Offered Classes') ?></h3>
-        <ul class="nav col-lg-4 col-md-4 col-sm-4 col-xs-12">
+        <ul class="nav col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <?php
             foreach($classes as $course_id => $array):
             ?>
@@ -263,23 +263,45 @@ if($classes) :
             endforeach;
             ?>
         </ul>
-        <div class="tab-content col-lg-8 col-md-8 col-sm-8 col-xs-12">
+        <div class="tab-content col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <?
         foreach($classes as $course_id => $array):
             ?>
             <div id="classes-tab-<?= $course_id ?>" class="tab-pane fade">
-                <h3><?= $array['title'] ?></h3>
+<!--                <h3>--><?//= $array['title'] ?><!--</h3>-->
                 <div class="classes-carousel">
                 <?
                 foreach($array['objects'] as $class):
+                    /** @var $class Classes */
+                    $capPer = $class->capacity - $class->remainingCapacity == 0?0:(float)($class->capacity - $class->remainingCapacity)/$class->capacity*100;
                 ?>
-                <div class="class">
+                <div class="class col-lg-4 col-md-4 col-sm-4 col-xs-12">
                     <div class="inner">
                         <div class="top-box">
                             <a href="#">
                                 <h4 data-toggle="tooltip" data-placement="top" title="<?= $class->title ?>"><?= $class->title ?></h4>
                             </a>
-                            <div class="text-danger remain-capacity"><?= Yii::t('app','Remaining Capacity').': '.$class->remainingCapacity ?></div>
+                            <section class="progress" data-toggle="tooltip" title="<?= Yii::t('app','Class Capacity')?>">
+                                <div class="progress-bar progress-bar-<?php
+                                if($class->capacity - $class->remainingCapacity <= 3) echo 'success';
+                                else if($class->capacity - $class->remainingCapacity <15) echo 'warning';
+                                else echo 'danger';
+                                ?>" role="progressbar"
+                                     aria-valuenow="<?= $class->capacity - $class->remainingCapacity ?>" aria-valuemin="0" aria-valuemax="<?= $class->capacity ?>" style="width: <?= $capPer ?>%">
+<!--                                    --><?//= Yii::app()->language == 'fa' ? '%'.Controller::parseNumbers($capPer):$capPer.'%' ?>
+<!--                                    --><?php
+//
+//                                    if($class->remainingCapacity == 0):
+////                                        echo (Yii::app()->language == 'fa'?
+////                                            Controller::parseNumbers($class->capacity-$class->remainingCapacity):
+////                                            $class->capacity-$class->remainingCapacity).' '.Yii::t('app','People');
+////                                    else:
+//                                        echo Yii::t('app','Completed');
+//                                    endif;
+//                                    ?>
+                                </div>
+                            </section>
+<!--                            <div class="text-danger remain-capacity">--><?//= Yii::t('app','Remaining Capacity').': '.$class->remainingCapacity ?><!--</div>-->
                         </div>
                         <div class="class-detail container-fluid">
                             <div class="full text-nowrap">
@@ -505,15 +527,15 @@ if($classes) :
                     };
                 $('.classes .nav li:first-of-type').addClass('active');
                 $('.classes .tab-content .tab-pane:first-of-type').addClass('in active');
-                $('.classes .tab-content .tab-pane:first-of-type .classes-carousel').owlCarousel(options);
-                $('.classes .nav a').on('shown.bs.tab',function(){
-                    var thisTag = $(this);
-                    var thisTabId = thisTag.data('target');
-                    var owlClasses = $(thisTabId).find('.classes-carousel');
-                    owlClasses.trigger('destroy.owl.carousel');
-                    owlClasses.html(owlClasses.find('.owl-stage-outer').html()).removeClass('owl-loaded');
-                    owlClasses.owlCarousel(options);
-                });
+//                $('.classes .tab-content .tab-pane:first-of-type .classes-carousel').owlCarousel(options);
+//                $('.classes .nav a').on('shown.bs.tab',function(){
+//                    var thisTag = $(this);
+//                    var thisTabId = thisTag.data('target');
+//                    var owlClasses = $(thisTabId).find('.classes-carousel');
+//                    owlClasses.trigger('destroy.owl.carousel');
+//                    owlClasses.html(owlClasses.find('.owl-stage-outer').html()).removeClass('owl-loaded');
+//                    owlClasses.owlCarousel(options);
+//                });
                 ");
         ?>
         </div>

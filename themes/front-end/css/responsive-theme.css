@@ -465,6 +465,9 @@
     }
 }
 @media (max-width: 400px) {
+    .class .btn{
+        padding: 8px 15px !important;
+    }
     .short-url{
         width: 100%;
     }
