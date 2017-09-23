@@ -2999,6 +2999,10 @@ ol{
     right: 0;
     width: 150px;
 }
+.news-container .news-item .pic {
+    height: 80px;
+    width: 80px;
+}
 .news-item .pic > img {
     height: 100%;
     width: 100%;
@@ -3011,6 +3015,10 @@ ol{
     padding-left: 15px;
     height: 150px;
     width: 100%;
+}
+.news-container .news-item .news-detail {
+    padding-right: 95px;
+    height: 80px;
 }
 .news-item .news-detail h3 {
     margin: 15px 0 0;
@@ -3985,4 +3993,11 @@ span.navTrigger > input[type="checkbox"]:checked + .lines::after {
 .header .nav > li > a,
 .header .nav > li .dropdown-toggle span{
     font-size: 13px !important;
+}
+
+#news_categories-container #news_categories-label{
+    padding-right: 15px;
+}
+#news_categories > li > a{
+    white-space: normal;
 }

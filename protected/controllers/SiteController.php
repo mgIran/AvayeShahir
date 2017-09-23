@@ -71,7 +71,7 @@ class SiteController extends Controller
 		$criteria->limit = 4;
 		$newsProvider = new CActiveDataProvider("News", array(
 			'criteria' => $criteria,
-			'pagination' => array('pageSize' => 4)
+			'pagination' => array('pageSize' => 6)
 		));
 		$this->render('index', array(
 			'courses' => $courses,
