@@ -2297,6 +2297,7 @@ section.classes h3{
 .class{
     padding: 0 5px !important;
     display: inline-block;
+    margin-bottom: 15px;
 }
 .class .inner{
     padding:0 15px;
@@ -2757,6 +2758,7 @@ section.classes h3{
     display: inline-block;
     background-color: #dfdfdf;
     position: relative;
+    margin-bottom: 5px;
 }
 .classes .nav > li.active a{
     background-color: rgba(10, 36, 106, 0.55);

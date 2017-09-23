@@ -284,7 +284,7 @@ if($classes) :
                             <section class="progress" data-toggle="tooltip" title="<?= Yii::t('app','Class Capacity')?>">
                                 <div class="progress-bar progress-bar-<?php
                                 if($class->capacity - $class->remainingCapacity <= 3) echo 'success';
-                                else if($class->capacity - $class->remainingCapacity <15) echo 'warning';
+                                else if($class->capacity - $class->remainingCapacity <12) echo 'warning';
                                 else echo 'danger';
                                 ?>" role="progressbar"
                                      aria-valuenow="<?= $class->capacity - $class->remainingCapacity ?>" aria-valuemin="0" aria-valuemax="<?= $class->capacity ?>" style="width: <?= $capPer ?>%">

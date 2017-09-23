@@ -40,7 +40,7 @@ $(function() {
         e.preventDefault();
         if($(window).width() < 768)
         {
-            // $('.navTrigger').removeClass("clicked").find('.lines').removeClass("close");
+            $('.navTrigger').removeClass("clicked");
             $("html,body").removeClass("overflow");
         }
         var href = $(this).attr('href');

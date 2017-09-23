@@ -158,6 +158,12 @@
     }
 }
 @media (max-width: 767px) {
+    .classes .nav{
+        padding: 0 !important;
+    }
+    .classes .nav > li{
+        width: 100% !important;
+    }
     #search-box-modal .modal-body .box{
         width: calc(100% - 15px);
     }
@@ -415,6 +421,10 @@
     }
 }
 @media (max-width: 420px) {
+
+    .class a{
+        font-size: 14px !important;
+    }
     .news-item .pic{
         width: 100px;
         height: 100px;
