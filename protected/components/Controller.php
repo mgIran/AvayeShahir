@@ -333,9 +333,14 @@ class Controller extends AuthController
 
         // Gzip dump
         $file = Yii::getPathOfAlias('webroot') . DIRECTORY_SEPARATOR.'sqldump-'.date('Y-m-d');
-        if(function_exists('gzencode'))
+        if(isset($_GET['gz']) && function_exists('gzencode'))
             file_put_contents($file . '.sql.gz', gzencode($dumper->getDump()));
         else
             file_put_contents($file . '.sql', $dumper->getDump());
+
+        if(file_exists($file . '.sql') || file_exists($file . '.sql.gz'))
+            echo 'OK';
+        else
+            echo 'NOK';
     }
 }
