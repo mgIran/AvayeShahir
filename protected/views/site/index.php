@@ -1,5 +1,6 @@
 <?
 /* @var $this SiteController */
+/* @var $slides Slideshow[] */
 /* @var $courses Courses[] */
 /* @var $newsProvider CActiveDataProvider */
 /* @var $classes Classes[] */

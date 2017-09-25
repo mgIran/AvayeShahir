@@ -36,6 +36,7 @@ class SiteController extends Controller
 		Yii::import('users.models.*');
 		Yii::import('pages.models.*');
 		Yii::import('setting.models.*');
+		Yii::import('slideshow.models.*');
 		if(SiteSetting::model()->findByAttributes(array('name' => 'message_state'))->value == 1)
 			if(Yii::app()->language == 'fa')
 				$this->message = CHtml::encode(SiteSetting::model()->findByAttributes(array('name' => 'message'))->value);
@@ -73,6 +74,9 @@ class SiteController extends Controller
 			'criteria' => $criteria,
 			'pagination' => array('pageSize' => 6)
 		));
+
+
+		$this->slides = Slideshow::model()->getActiveSlides();
 		$this->render('index', array(
 			'courses' => $courses,
 			'newsProvider' => $newsProvider,
@@ -640,5 +644,18 @@ class SiteController extends Controller
 		echo $sum;
 		echo $o;
 		echo '</pre>';exit;
+	}
+
+	// temporary actions
+	public function actionCreateTable(){
+//		$tableName = Yii::app()->db->tablePrefix.'slideshow';
+//		$flag = Yii::app()->db->createCommand("CREATE TABLE IF NOT EXISTS `{$tableName}` (
+//			  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+//			  `image` varchar(255) COLLATE utf8_persian_ci NOT NULL,
+//			  `status` decimal(1,0) unsigned NOT NULL DEFAULT '1',
+//			  `order` int(10) unsigned NOT NULL,
+//			  PRIMARY KEY (`id`)
+//			) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;")
+//			->execute();
 	}
 }

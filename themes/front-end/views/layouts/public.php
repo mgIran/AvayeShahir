@@ -44,12 +44,13 @@
     $cs->registerScriptFile($baseUrl.'/js/bootstrap.min.js');
     $cs->registerScriptFile($baseUrl.'/js/material.min.js');
     $cs->registerScriptFile($baseUrl.'/js/ripples.min.js');
+    $cs->registerScriptFile($baseUrl.'/js/owl.carousel.min.js');
     $cs->registerScriptFile($baseUrl.'/js/jquery.nicescroll.min.js');
+    $cs->registerScriptFile($baseUrl.'/js/jquery.mousewheel.min.js');
     $cs->registerScriptFile($baseUrl.'/js/scripts.js?8.8');
     ?>
 </head>
 <body id="top">
-<!--    --><?//= $this->renderPartial('//layouts/_page_loading'); ?>
     <?= $this->renderPartial('//layouts/_header'); ?>
     <?= $this->renderPartial('//layouts/_banner'); ?>
     <section class="search" id="main">

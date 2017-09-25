@@ -1,4 +1,19 @@
+<?php
+/** @var $this Controller */
+if($this->slides):
+?>
 <section class="introduction">
+    <div class="slider" data-loop="true">
+        <?php
+        foreach($this->slides as $slide):
+            ?>
+            <div class="slider-item">
+                <div class="slider-thumbnail"><img src="<?= Yii::app()->baseUrl.'/uploads/slideshow/'.$slide->image ?>" alt="<?= $slide->image ?>"></div>
+            </div>
+            <?php
+        endforeach;
+        ?>
+    </div>
     <div class="mask"></div>
     <div class="logo"></div>
     <h2><?= Yii::t('app','Learn English with us ...')?></h2>
@@ -17,3 +32,32 @@
         </a>
     </div>
 </section>
+<?php
+    if(count($this->slides)>1)
+        Yii::app()->clientScript->registerScript('slider', "
+            if ($('.slider').length != 0) {
+                var loop = $('.slider').attr('data-loop');
+                if (typeof loop === 'undefined')
+                    loop = false;
+                $('.slider').owlCarousel({
+                    items: 1,
+                    dots: false,
+                    nav: true,
+                    navText: [\"<i class='arrow-icon'></i>\", \"<i class='arrow-icon'></i>\"],
+                    autoplay: true,
+                    autoplayTimeout: 8000,
+                    autoplayHoverPause: true,
+                    rtl: true,
+                    loop: loop
+                });
+        
+                $('.slider-overlay-nav').click(function () {
+                    if ($(this).hasClass('slider-next'))
+                        $('.slider .owl-controls .owl-nav .owl-next').trigger('click');
+                    else if ($(this).hasClass('slider-prev'))
+                        $('.slider .owl-controls .owl-nav .owl-prev').trigger('click');
+                    return false;
+                });
+            }
+        ");
+endif;

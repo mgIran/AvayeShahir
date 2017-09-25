@@ -275,16 +275,20 @@ header.header.scroll-mode{
     top: 0;
     width: 100%;
     z-index: 1;
-    background: url("../images/banner.jpg") fixed;
-    background-size: cover;
 }
 .introduction .mask{
     display: block;
     overflow: hidden;
     width: 100%;
     height: 100%;
-    position: relative;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom:0;
+    z-index: 2;
     background-color:rgba(0,0,0,0.5);
+
 }
 .introduction .logo{
     background: url("../svg/white-logo.svg") no-repeat scroll center transparent;
@@ -292,6 +296,7 @@ header.header.scroll-mode{
     width: 250px;
     height: 100px;
     position: absolute;
+    z-index: 2;
     top: 50%;
     left: 50%;
     margin-top: -60px;
@@ -317,6 +322,7 @@ header.header.scroll-mode{
     font-size: 9vmin;
     text-align: center;
     text-shadow: 0 0 8px #000;
+    z-index: 2;
 }
 .introduction .chevron {
     position: absolute;
@@ -324,6 +330,7 @@ header.header.scroll-mode{
     width: 100%;
     text-align: center;
     opacity: 0.9;
+    z-index: 2;
 }
 .introduction .chevron a{
     color: rgba(255, 255, 255, 0.8);
@@ -4034,4 +4041,24 @@ span.navTrigger > input[type="checkbox"]:checked + .lines::after {
 }
 .class .progress > div.progress-bar-warning{
     background-color: #f0ad4e !important;
+}
+.slider-item {
+    min-width: 100%;
+    width: auto;
+    height: 100%;
+    position: relative;
+    max-height: 800px;
+}
+
+.slider-item .slider-thumbnail {
+    min-width: 100%;
+    width: auto;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.slider-item .slider-thumbnail img {
+    min-width: 100%;
+    height: 100%;
 }

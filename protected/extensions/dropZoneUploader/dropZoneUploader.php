@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: Yusef-PC
+ * User: App-PC
  * Date: 12/10/2015
  * Time: 10:04 PM
  */
@@ -179,7 +179,6 @@ class dropZoneUploader extends CWidget
                 ';
             }else
             {
-                //var_dump($data);exit;
                 $filesAddScript = '
                 var value = '.$data.';
                 var mockFile = { name: value.name, size: value.size ,serverName : value.name ,accepted : true};

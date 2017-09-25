@@ -6,7 +6,7 @@ $mapLat = $map_model->map_lat;
 $mapLng = $map_model->map_lng;
 $mapZoom = 15;
 if($map_model) {
-    Yii::app()->clientScript->registerScriptFile('http://maps.googleapis.com/maps/api/js');
+    Yii::app()->clientScript->registerScriptFile('http://maps.googleapis.com/maps/api/js?key=AIzaSyBBSCzheQgsWRkdPKi2sNfNDbLnwxWAvGM');
     Yii::app()->clientScript->registerScript('googleMap', "
     var map;
 	var marker;

@@ -40,6 +40,7 @@ return array(
 		'gallery',
 		'news',
 		'articles',
+		'slideshow',
 		'comments'=>array(
 			//you may override default config for all connecting models
 			'defaultModelConfig' => array(
