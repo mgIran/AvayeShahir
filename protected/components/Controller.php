@@ -42,6 +42,7 @@ class Controller extends AuthController
      * @var Slideshow[]
      */
     public $slides = null;
+
     /**
      * Declares class-based actions.
      */
@@ -49,24 +50,25 @@ class Controller extends AuthController
     {
         return array(
             // captcha action renders the CAPTCHA image displayed on the contact page
-            'captcha'=>array(
-                'class'=>'CCaptchaAction',
-                'backColor'=>0xFFFFFF,
+            'captcha' => array(
+                'class' => 'CCaptchaAction',
+                'backColor' => 0xFFFFFF,
             ),
             // page action renders "static" pages stored under 'protected/views/site/pages'
             // They can be accessed via: index.php?r=site/page&views=FileName
-            'page'=>array(
-                'class'=>'CViewAction',
+            'page' => array(
+                'class' => 'CViewAction',
             ),
         );
     }
 
-    public function init(){
+    public function init()
+    {
         // for multi language
         EMHelper::catchLanguage();
-        Yii::app()->clientScript->registerScript('js-requirement','
-            var baseUrl = "'.Yii::app()->getBaseUrl(true).'";
-        ',CClientScript::POS_HEAD);
+        Yii::app()->clientScript->registerScript('js-requirement', '
+            var baseUrl = "' . Yii::app()->getBaseUrl(true) . '";
+        ', CClientScript::POS_HEAD);
         // set default meta tag values
         $this->description = Yii::app()->db->createCommand()
             ->select('value')
@@ -245,7 +247,7 @@ class Controller extends AuthController
     {
         $errors = '';
         foreach($model->getErrors() as $err){
-            $errors .= implode('<br>' ,$err) . '<br>';
+            $errors .= implode('<br>', $err) . '<br>';
         }
         return $errors;
     }
@@ -256,7 +258,7 @@ class Controller extends AuthController
         $charactersLength = strlen($characters);
         $randomString = '';
         for($i = 0;$i < $length;$i++){
-            $randomString .= $characters[rand(0 ,$charactersLength - 1)];
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
         }
         return $randomString;
     }
@@ -266,65 +268,67 @@ class Controller extends AuthController
      */
     public static function parseNumbers($matches)
     {
-        $farsi_array = array('۰' ,'۱' ,'۲' ,'۳' ,'۴' ,'۵' ,'۶' ,'۷' ,'۸' ,'۹');
-        $english_array = array('0' ,'1' ,'2' ,'3' ,'4' ,'5' ,'6' ,'7' ,'8' ,'9');
+        $farsi_array = array('۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹');
+        $english_array = array('0', '1', '2', '3', '4', '5', '6', '7', '8', '9');
 
-        return str_replace($english_array ,$farsi_array ,$matches);
+        return str_replace($english_array, $farsi_array, $matches);
     }
 
-    public static function fileSize($file){
+    public static function fileSize($file)
+    {
         $size = filesize($file);
         if($size < 1024)
-            return $size.' Byte';
-        elseif($size < 1024*1024){
-            $size = (float)$size/1024;
-            return number_format($size,1). ' KB';
-        }
-        elseif($size < 1024*1024*1024){
-            $size = (float)$size/(1024*1024);
-            return number_format($size,1). ' MB';
-        }else
-        {
-            $size = (float)$size/(1024*1024*1024);
-            return number_format($size,1). ' GB';
+            return $size . ' Byte';
+        elseif($size < 1024 * 1024){
+            $size = (float)$size / 1024;
+            return number_format($size, 1) . ' KB';
+        }elseif($size < 1024 * 1024 * 1024){
+            $size = (float)$size / (1024 * 1024);
+            return number_format($size, 1) . ' MB';
+        }else{
+            $size = (float)$size / (1024 * 1024 * 1024);
+            return number_format($size, 1) . ' GB';
         }
     }
 
-    public function getCoursesList(){
+    public function getCoursesList()
+    {
         Yii::import('courses.models.*');
         if(!$this->courses)
             $this->courses = CHtml::listData(Courses::model()->findAll(array(
-                'order'=>'t.order')),
-                function($model){
-                    return 'courses/'.$model->id.'/'.urlencode($model->getValueLang('title', 'en'));
+                'order' => 't.order')),
+                function ($model){
+                    return 'courses/' . $model->id . '/' . urlencode($model->getValueLang('title', 'en'));
                 }
                 , 'title');
         return $this->courses;
     }
 
-    public function getArticleCategories(){
+    public function getArticleCategories()
+    {
         Yii::import('articles.models.*');
         if(!$this->articleCategories)
             $this->articleCategories = CHtml::listData(ArticleCategories::model()->findAll(array(
-                'condition'=>'parent_id IS NULL',
-                'order'=>'t.order'
+                'condition' => 'parent_id IS NULL',
+                'order' => 't.order'
             )),
-                function($model){
-                    return 'articles/category/'.$model->id.'/'.urlencode($model->getValueLang('title', 'en'));
+                function ($model){
+                    return 'articles/category/' . $model->id . '/' . urlencode($model->getValueLang('title', 'en'));
                 }
                 , 'title');
         return $this->articleCategories;
     }
 
-    public function getNewsCategories(){
+    public function getNewsCategories()
+    {
         Yii::import('news.models.*');
         if(!$this->newsCategories)
             $this->newsCategories = CHtml::listData(NewsCategories::model()->findAll(array(
-                'condition'=>'parent_id IS NULL',
-                'order'=>'t.order'
+                'condition' => 'parent_id IS NULL',
+                'order' => 't.order'
             )),
-                function($model){
-                    return 'news/category/'.$model->id.'/'.urlencode($model->getValueLang('title', 'en'));
+                function ($model){
+                    return 'news/category/' . $model->id . '/' . urlencode($model->getValueLang('title', 'en'));
                 }
                 , 'title');
         return $this->newsCategories;
@@ -332,12 +336,16 @@ class Controller extends AuthController
 
     public function actionBackup()
     {
+        $dbPath = Yii::getPathOfAlias('webroot') . DIRECTORY_SEPARATOR . 'db_backup';
+        if(!is_dir($dbPath))
+            mkdir($dbPath);
+
         Yii::import('ext.yii-database-dumper.SDatabaseDumper');
         $dumper = new SDatabaseDumper;
         // Get path to backup file
 
         // Gzip dump
-        $file = Yii::getPathOfAlias('webroot') . DIRECTORY_SEPARATOR.'sqldump-'.date('Y-m-d');
+        $file = $dbPath . DIRECTORY_SEPARATOR . 'sql-dump-' . date('Y-m-d');
         if(isset($_GET['gz']) && function_exists('gzencode'))
             file_put_contents($file . '.sql.gz', gzencode($dumper->getDump()));
         else
@@ -347,5 +355,19 @@ class Controller extends AuthController
             echo 'OK';
         else
             echo 'NOK';
+
+        $files = scandir($dbPath);
+        unset($files[0]);
+        unset($files[1]);
+        $expireTime = time() - 7 * 24 * 60 * 60;
+        $index = 0;
+        foreach($files as $key => $file){
+            if(strpos($file, 'sql-dump-' . date('Y-m-d', $expireTime)) !== false){
+                $index = $key;
+                break;
+            }
+        }
+        for($i = 2;$i <= $index;$i++)
+            @unlink($dbPath . DIRECTORY_SEPARATOR . $files[$i]);
     }
 }
