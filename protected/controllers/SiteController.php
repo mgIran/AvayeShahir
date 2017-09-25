@@ -649,9 +649,9 @@ class SiteController extends Controller
 	// temporary actions
 	public function actionCreateTable(){
 //		$tableName = Yii::app()->db->tablePrefix.'slideshow';
-		$flag = Yii::app()->db->createCommand("ALTER TABLE `ym_classes`
-              MODIFY COLUMN `title`  varchar(255) CHARACTER SET utf8 COLLATE utf8_persian_ci;")
-			->execute();
-        var_dump($flag);exit;
+//		$flag = Yii::app()->db->createCommand("ALTER TABLE `ym_classes`
+//              MODIFY COLUMN `title`  varchar(255) CHARACTER SET utf8 COLLATE utf8_persian_ci;")
+//			->execute();
+//        var_dump($flag);exit;
 	}
 }
