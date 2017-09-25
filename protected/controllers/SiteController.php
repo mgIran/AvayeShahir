@@ -649,13 +649,9 @@ class SiteController extends Controller
 	// temporary actions
 	public function actionCreateTable(){
 //		$tableName = Yii::app()->db->tablePrefix.'slideshow';
-//		$flag = Yii::app()->db->createCommand("CREATE TABLE IF NOT EXISTS `{$tableName}` (
-//			  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-//			  `image` varchar(255) COLLATE utf8_persian_ci NOT NULL,
-//			  `status` decimal(1,0) unsigned NOT NULL DEFAULT '1',
-//			  `order` int(10) unsigned NOT NULL,
-//			  PRIMARY KEY (`id`)
-//			) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;")
-//			->execute();
+		$flag = Yii::app()->db->createCommand("ALTER TABLE `ym_classes`
+              MODIFY COLUMN `title`  varchar(255) CHARACTER SET utf8 COLLATE utf8_persian_ci;")
+			->execute();
+        var_dump($flag);exit;
 	}
 }

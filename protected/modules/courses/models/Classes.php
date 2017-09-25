@@ -121,7 +121,7 @@ class Classes extends SortableCActiveRecord
             array('price, sessions, capacity', 'numerical', 'integerOnly' => true),
             array('endSignupDate', 'compare', 'compareAttribute' => 'startSignupDate', 'operator' => '>', 'message' => 'تاریخ پایان ثبت نام باید بیشتر از تاریخ شروع ثبت نام باشد.'),
             array('endClassDate', 'compare', 'compareAttribute' => 'startClassDate', 'operator' => '>=', 'message' => 'تاریخ پایان کلاس باید بیشتر از تاریخ شروع کلاس باشد.'),
-            array('title', 'length', 'max' => 50),
+            array('title', 'length', 'max' => 255),
             array('category_id, course_id', 'length', 'max' => 10),
             array('teachers, formTags, status, summary, startSignupDate, endSignupDate, startClassDate, endClassDate,startClassTime,endClassTime,classDays', 'safe'),
             array('id, title, summary, price, startSignupDate, endSignupDate, startClassDate, endClassDate, category_id, course_id, deleted', 'safe', 'on' => 'search'),
