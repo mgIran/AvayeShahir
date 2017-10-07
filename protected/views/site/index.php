@@ -281,10 +281,15 @@ if($classes) :
                         <div class="top-box">
                             <div class="center-block">
                             <span class="circle-capacity bg-<?php
-                            if($capPer >= 0 && $capPer<= 15) echo 'success';
-                            else if($capPer > 15 && $capPer <= 80) echo 'warning';
+                            if($capPer >= 0 && $capPer< 10) echo 'success';
+                            else if($capPer >= 10 && $capPer <= 80) echo 'warning';
                             else echo 'danger';
                             ?>" data-toggle="tooltip" title="<?= Yii::t('app','Capacity State')?>"></span>
+<!--                                --><?//
+//                                if($capPer >= 0 && $capPer< 10) $state = Yii::t('app', '');
+//                                else if($capPer >= 10 && $capPer <= 80) $state = '';
+//                                else echo $state = '';
+//                                ?>
                             </div>
                             <a href="#">
                                 <h4 data-toggle="tooltip" data-placement="top" title="<?= $class->title ?>"><?= $class->title ?></h4>
