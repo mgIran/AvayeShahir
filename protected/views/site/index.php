@@ -279,9 +279,17 @@ if($classes) :
                 <div class="class col-lg-4 col-md-4 col-sm-4 col-xs-12">
                     <div class="inner">
                         <div class="top-box">
+                            <div class="center-block">
+                            <span class="circle-capacity bg-<?php
+                            if($capPer >= 0 && $capPer<= 15) echo 'success';
+                            else if($capPer > 15 && $capPer <= 80) echo 'warning';
+                            else echo 'danger';
+                            ?>" data-toggle="tooltip" title="<?= Yii::t('app','Capacity State')?>"></span>
+                            </div>
                             <a href="#">
                                 <h4 data-toggle="tooltip" data-placement="top" title="<?= $class->title ?>"><?= $class->title ?></h4>
                             </a>
+                            <? /*
                             <section class="progress" data-toggle="tooltip" title="<?= Yii::t('app','Class Capacity')?>">
                                 <div class="progress-bar progress-bar-<?php
                                 if($class->capacity - $class->remainingCapacity <= 3) echo 'success';
@@ -302,7 +310,8 @@ if($classes) :
 //                                    ?>
                                 </div>
                             </section>
-<!--                            <div class="text-danger remain-capacity">--><?//= Yii::t('app','Remaining Capacity').': '.$class->remainingCapacity ?><!--</div>-->
+                        */ ?>
+<!--                    <div class="text-danger remain-capacity">--><?//= Yii::t('app','Remaining Capacity').': '.$class->remainingCapacity ?><!--</div>-->
                         </div>
                         <div class="class-detail container-fluid">
                             <div class="full line-2">

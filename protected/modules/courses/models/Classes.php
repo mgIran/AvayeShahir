@@ -290,12 +290,12 @@ class Classes extends SortableCActiveRecord
             $criteria->compare('t.course_id', $course_id);
         if($category_id)
             $criteria->compare('t.category_id', $category_id);
-        $criteria->addCondition('endSignupDate >= :now');
+        $criteria->addCondition('startClassDate >= :now');
         $criteria->addCondition('t.status = 1');
         $criteria->addCondition('t.deleted = 0');
         $criteria->with[] = 'paidRegisters';
         $criteria->group = 't.id';
-        $criteria->having = 'paidRegisters.user_id IS NULL OR COUNT(paidRegisters.user_id) < t.capacity';
+        $criteria->having = 'paidRegisters.user_id IS NULL OR COUNT(paidRegisters.user_id) <= t.capacity';
         $criteria->params[':now'] = time();
         $criteria->order = 't.order';
         return $criteria;

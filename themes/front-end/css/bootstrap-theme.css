@@ -2319,7 +2319,7 @@ section.classes h3{
 }
 .class .top-box{
     display: block;
-    padding: 15px 0;
+    padding: 15px 0 0;
     margin-bottom: 25px;
     text-align: right;
     border-bottom: 1px solid #ddd;
@@ -4061,4 +4061,77 @@ span.navTrigger > input[type="checkbox"]:checked + .lines::after {
 .slider-item .slider-thumbnail img {
     min-width: 100%;
     height: 100%;
+}
+
+.class .top-box .center-block{
+    display: inline-block;
+    width: 100%;
+}
+.circle-capacity {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    border-radius: 50%;
+    /*animation: flashing 3s infinite;*/
+    -webkit-box-shadow: 0 0 6px 2px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0 0 6px 2px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 6px 2px rgba(0, 0, 0, 0.1);
+    float: left;
+}
+.circle-capacity.bg-success {
+    background-color: #4aec22 !important;
+    border: 1px solid #4aec22 !important;
+}
+.circle-capacity.bg-warning {
+    background-color: #ffe100 !important;
+    border: 1px solid #ffe100 !important;
+}
+.circle-capacity.bg-danger {
+    background-color: #ff2918 !important;
+    border: 1px solid #ff2918 !important;
+}
+
+@-webkit-keyframes flashing {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+@-moz-keyframes flashing{
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+@-o-keyframes flashing{
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+@-ms-keyframes flashing{
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }

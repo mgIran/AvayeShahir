@@ -164,4 +164,5 @@ return array(
     'Completed' => 'تکمیل شده',
     'Class Capacity' => 'ظرفیت کلاس',
     'Other' => 'سایر',
+    'Capacity State' => 'وضعیت ظرفیت',
 );
