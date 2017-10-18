@@ -31,7 +31,7 @@
  * @property Courses $course
  * @property ClassCategories $category
  * @property TeacherDetails $teacher
- * @property Users $teacherModels
+ * @property Users[] $teacherModels
  * @property ClassTags[] $tags
  * @property UserTransactions[] $registers
  * @property UserTransactions[] $paidRegisters
@@ -140,8 +140,8 @@ class Classes extends SortableCActiveRecord
             'category' => array(self::BELONGS_TO, 'ClassCategories', 'category_id'),
             'teacher' => array(self::BELONGS_TO, 'TeacherDetails', 'teacher_id'),
             'teacherModels' => array(self::MANY_MANY, 'Users', '{{class_teacher_rel}}(class_id,teacher_id)'),
-            'registers' => array(self::HAS_MANY, 'UserTransactions', 'class_id'),
-            'paidRegisters' => array(self::HAS_MANY, 'UserTransactions', 'class_id', 'on' => 'paidRegisters.status = "paid" AND paidRegisters.date >= startSignupDate'),
+            'registers' => array(self::HAS_MANY, 'UserTransactions', 'model_id', 'on' => 'registers.model_name = "Classes"'),
+            'paidRegisters' => array(self::HAS_MANY, 'UserTransactions', 'model_id', 'on' => 'paidRegisters.model_name = "Classes" AND paidRegisters.status = "paid" AND paidRegisters.date >= startSignupDate'),
             'tags' => array(self::MANY_MANY, 'ClassTags', '{{class_tag_rel}}(class_id,tag_id)'),
         );
     }
@@ -310,7 +310,8 @@ class Classes extends SortableCActiveRecord
     {
         $criteria = new CDbCriteria();
         $criteria->addCondition('status = "paid"');
-        $criteria->addCondition('class_id = :c');
+        $criteria->addCondition('model_name = "Classes"');
+        $criteria->addCondition('model_id = :c');
         $criteria->addCondition('date >= :date');
         $criteria->params[':c'] = $this->id;
         $criteria->params[':date'] = $this->startSignupDate;

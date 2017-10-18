@@ -46,7 +46,7 @@ class CoursesRegisterController extends Controller
         $class = Classes::model()->findByPk($id);
         if(!$class)
             $this->redirect(Yii::app()->baseUrl);
-        $lastTransaction = UserTransactions::model()->findByAttributes(array('user_id' => Yii::app()->user->getId(), 'class_id' => $id));
+        $lastTransaction = UserTransactions::model()->findByAttributes(array('user_id' => Yii::app()->user->getId(), 'model_id' => $id, 'model_name' => "Classes"));
         if($lastTransaction && $lastTransaction->status == 'paid')
             $message = Yii::t('app', 'You have already registered in this class.');
         if(!$class->remainingCapacity)
@@ -81,11 +81,12 @@ class CoursesRegisterController extends Controller
             if(time() > $class->endSignupDate)
                 $this->redirect($this->createUrl('/courses/register/' . $id));
             if($class->price != 0){
-                $lastTransaction = UserTransactions::model()->findByAttributes(array('user_id' => Yii::app()->user->getId(), 'class_id' => $id));
+                $lastTransaction = UserTransactions::model()->findByAttributes(array('user_id' => Yii::app()->user->getId(), 'model_id' => $id, 'model_name' => "Classes"));
                 if($lastTransaction && $lastTransaction->status == 'unpaid'){
                     $flag = true;
                     $model = new UserTransactions();
-                    $model->class_id = $id;
+                    $model->model_name = "Classes";
+                    $model->model_id = $id;
                     $model->user_id = Yii::app()->user->getId();
                     $model->amount = $class->price;
                     $model->description = "پرداخت شهریه جهت ثبت نام در دوره {$class->course->title} کلاس {$class->title}";
@@ -102,7 +103,8 @@ class CoursesRegisterController extends Controller
                 else{
                     // Save payment
                     $model = new UserTransactions();
-                    $model->class_id = $id;
+                    $model->model_name = "Classes";
+                    $model->model_id = $id;
                     $model->user_id = Yii::app()->user->getId();
                     $model->amount = $class->price;
                     $model->description = "پرداخت شهریه جهت ثبت نام در دوره {$class->course->title} کلاس {$class->title}";
@@ -137,7 +139,8 @@ class CoursesRegisterController extends Controller
                 }
             }else{
                 $model = new UserTransactions();
-                $model->class_id = $id;
+                $model->model_name = "Classes";
+                $model->model_id = $id;
                 $model->user_id = Yii::app()->user->getId();
                 $model->amount = 0;
                 $startDate = JalaliDate::date('Y/m/d', $class->startClassDate);
@@ -281,17 +284,17 @@ class CoursesRegisterController extends Controller
         Yii::app()->theme = 'abound';
         $this->layout = '//layouts/column1';
         $classIds = Yii::app()->db->createCommand()
-            ->selectDistinct('class_id')
+            ->selectDistinct('model_id')
             ->from('{{user_transactions}}')
-            ->where('status = "paid"')
-            ->order('class_id DESC')
+            ->where('model_name = "Classes" AND status = "paid"')
+            ->order('model_id DESC')
             ->queryColumn();
         $classTransactions = array();
         foreach($classIds as $id){
             $class = Classes::model()->findByPk($id);
             $dataProvider = new CActiveDataProvider('UserTransactions', array(
                 'criteria' => array(
-                    'condition' => 'class_id = :class_id AND status = "paid"',
+                    'condition' => 'model_name = "Classes" AND model_id = :class_id AND status = "paid"',
                     'params' => array(':class_id' => $id),
                     'order' => 'date DESC'
                 ),

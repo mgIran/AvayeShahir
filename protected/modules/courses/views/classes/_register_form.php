@@ -21,9 +21,9 @@ if($validClasses) {
 		?>
 
 		<div class="row">
-			<?php echo $form->labelEx($model, 'class_id'); ?>
-			<?php echo $form->dropDownList($model, 'class_id', CHtml::listData($validClasses, 'id', 'titleWithCapacity')); ?>
-			<?php echo $form->error($model, 'class_id'); ?>
+			<?php echo $form->labelEx($model, 'model_id'); ?>
+			<?php echo $form->dropDownList($model, 'model_id', CHtml::listData($validClasses, 'id', 'titleWithCapacity')); ?>
+			<?php echo $form->error($model, 'model_id'); ?>
 		</div>
 
 		<div class="row">

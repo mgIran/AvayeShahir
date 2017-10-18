@@ -1,9 +1,9 @@
 <?php
 return array (
-  'template' => 'default',
+  'template' => 'multiLanguage',
   'connectionId' => 'db',
   'tablePrefix' => 'ym',
-  'modelPath' => 'slideshow.models',
+  'modelPath' => 'orders.models',
   'baseClass' => 'CActiveRecord',
   'buildRelations' => '1',
   'commentsAsLabels' => '1',

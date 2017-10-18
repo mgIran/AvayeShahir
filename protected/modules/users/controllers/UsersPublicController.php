@@ -170,6 +170,7 @@ class UsersPublicController extends Controller
         $model=Users::model()->findByPk(Yii::app()->user->getId());
 
         $transactions=new UserTransactions('search');
+        $transactions->model_name = 'Classes';
         $transactions->status = 'paid';
         $transactions->user_id = Yii::app()->user->getId();
 

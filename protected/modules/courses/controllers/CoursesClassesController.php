@@ -238,14 +238,15 @@ class CoursesClassesController extends Controller
 			$endDate = JalaliDate::date('Y/m/d', $class->endClassDate);
 			$time = Controller::parseNumbers($class->startClassTime);
 			$endTime = Controller::parseNumbers($class->endClassTime);
-			$lastTransaction = UserTransactions::model()->findByAttributes(array('user_id' => $_POST['UserTransactions']['user_id'], 'class_id' => $class->id));
+			$lastTransaction = UserTransactions::model()->findByAttributes(array('user_id' => $_POST['UserTransactions']['user_id'], 'model_id' => $class->id, 'model_name' => "Classes"));
 			if($lastTransaction && $lastTransaction->status == 'paid'){
 				Yii::app()->user->setFlash("failed", 'این کاربر قبلا در این کلاس ثبت نام کرده است.');
 				$this->refresh();
 			}elseif($lastTransaction && $lastTransaction->status == 'unpaid')
 				$lastTransaction->delete();
 			$model = new UserTransactions();
-			$model->class_id = $class->id;
+			$model->model_name = "Classes";
+			$model->model_id = $class->id;
 			$model->user_id = $_POST['UserTransactions']['user_id'];
 			$model->amount = $class->price;
 			$model->description = "پرداخت شهریه جهت ثبت نام در دوره {$class->course->title} کلاس {$class->title}";

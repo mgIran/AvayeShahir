@@ -6,20 +6,24 @@ $model = new UserTransactions();
 $this->breadcrumbs=array(
     'گزارش ثبت نام کاربران',
 );
-Yii::app()->clientScript->registerScript('activeTab','
-$(".nav-tabs li:first-child").addClass("active");
+Yii::app()->clientScript->registerScript('change-tabs','
 $(".tab-content .tab-pane:first-child").addClass("in active");
+
+$("body").on("change", "#change-tab", function(){
+    $(".tab-pane").not($(this).val()).removeClass("in active");
+    $($(this).val()).addClass("in active");
+});
 ');
 ?>
-<ul class="nav nav-tabs">
+<select class="selectpicker" id="change-tab">
     <?php
     foreach($classTransactions as $transaction) {
         ?>
-        <li><a data-toggle="tab" href="#tab-<?=$transaction['class']->id?>"><?= $transaction['class']->title ?></a></li>
+        <option value="#tab-<?=$transaction['class']->id?>"><?= $transaction['class']->title ?></option>
         <?
     }
     ?>
-</ul>
+</select>
 
 <div class="tab-content">
     <? $this->renderPartial('//layouts/_flashMessage'); ?>
@@ -35,7 +39,6 @@ $(".tab-content .tab-pane:first-child").addClass("in active");
             'dataProvider' => $transaction['dataProvider'],
             'template' => '{items}',
             'rowHtmlOptionsExpression'=>'array("data-order-id"=>$data->order_id)',
-//            'filter' => $model,
             'columns' => array(
                 array(
                     'header' => 'کاربر',

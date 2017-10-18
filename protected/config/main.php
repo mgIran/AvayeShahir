@@ -41,6 +41,7 @@ return array(
 		'news',
 		'articles',
 		'slideshow',
+		'orders',
 		'comments'=>array(
 			//you may override default config for all connecting models
 			'defaultModelConfig' => array(

@@ -4,7 +4,9 @@
  * This is the model class for table "ym_user_transactions".
  *
  * The followings are the available columns in table 'ym_user_transactions':
- * @property string $class_id
+ * @property string $id
+ * @property string $model_name
+ * @property string $model_id
  * @property string $user_id
  * @property string $amount
  * @property string $date
@@ -55,12 +57,13 @@ class UserTransactions extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('user_id, class_id', 'required'),
+			array('user_id, model_id, model_name', 'required'),
 			array('order_id', 'unique'),
 			array('settle', 'default', 'value' => 0),
-			array('user_id, amount', 'length', 'max' => 10),
+			array('model_id, user_id, amount', 'length', 'max' => 10),
 			array('order_id', 'length', 'max' => 12),
 			array('date', 'length', 'max' => 20),
+			array('model_name', 'length', 'max' => 50),
 			array('gateway', 'length', 'max' => 15),
 			array('status', 'length', 'max' => 6),
 			array('res_code', 'length', 'max' => 5),
@@ -68,7 +71,7 @@ class UserTransactions extends CActiveRecord
 			array('description', 'length', 'max' => 1000),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('gateway, class_id, verbalFilter, user_id, amount, date, status, sale_reference_id, description, order_id, ref_id, settle', 'safe', 'on' => 'search'),
+			array('gateway, model_id, verbalFilter, user_id, amount, date, status, sale_reference_id, description, order_id, ref_id, settle', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -81,7 +84,7 @@ class UserTransactions extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'user' => array(self::BELONGS_TO, 'Users', 'user_id'),
-			'class' => array(self::BELONGS_TO, 'Classes', 'class_id'),
+			'class' => array(self::BELONGS_TO, 'Classes', 'model_id', 'on' => 't.model_name = "Classes"'),
 		);
 	}
 
@@ -91,7 +94,9 @@ class UserTransactions extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'class_id' => 'کلاس',
+			'id' => 'شناسه',
+			'model_id' => 'شناسه مدل',
+			'model_name' => 'نام مدل',
 			'user_id' => 'کاربر',
 			'amount' => 'مقدار',
 			'date' => 'تاریخ',
@@ -134,7 +139,7 @@ class UserTransactions extends CActiveRecord
 		));
 	}
 
-	public function searchCount()
+	public function searchCount($modelName = 'Classes')
 	{
 		// @todo Please modify the following code to remove attributes that should not be searched.
 
@@ -145,6 +150,7 @@ class UserTransactions extends CActiveRecord
 		$criteria->compare('description', $this->description,true);
 		$criteria->compare('sale_reference_id', $this->sale_reference_id);
 		$criteria->compare('verbal', $this->verbalFilter);
+		$criteria->compare('model_name', $modelName);
 		$criteria->order = 'date DESC';
 		return $this->count($criteria);
 	}

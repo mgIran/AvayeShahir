@@ -113,7 +113,7 @@ class Users extends SortableCActiveRecord
             'userDetails' => array(self::BELONGS_TO, 'UserDetails', 'id'),
             'teacherDetails' => array(self::BELONGS_TO, 'TeacherDetails', 'id'),
             'role' => array(self::BELONGS_TO, 'UserRoles', 'role_id'),
-            'register' => array(self::HAS_ONE, 'UserTransactions', 'user_id', 'on' => 'register.status = "paid"'),
+            'register' => array(self::HAS_ONE, 'UserTransactions', 'user_id', 'on' => 'register.model_name = "Classes" AND register.status = "paid"'),
         );
     }
 

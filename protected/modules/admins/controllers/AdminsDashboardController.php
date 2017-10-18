@@ -32,11 +32,12 @@ class AdminsDashboardController extends Controller
         if(isset($_GET['UserTransactions']))
             $transactionsModel->attributes=$_GET['UserTransactions'];
         $transactionsModel->status ="paid";
+        $transactionsModel->model_name ="Classes";
 
         $totalTransactionsPaidAmount =Yii::app()->db->createCommand()
             ->select('SUM(amount) AS sum')
             ->from('{{user_transactions}}')
-            ->where('status="paid"')
+            ->where('model_name = "Classes" AND status="paid"')
             ->queryScalar();
 
 		$this->render('index',array(
