@@ -52,7 +52,7 @@
             <?
             if($model->res_code != 0):
             ?>
-            <a href="<?= $this->createUrl('/courses/register/'.$model->class_id) ?>" class="btn btn-info pull-left">تلاش مجدد</a>
+            <a href="<?= $this->createUrl('/courses/register/'.$model->model_id) ?>" class="btn btn-info pull-left">تلاش مجدد</a>
             <?php
             else:
             ?>

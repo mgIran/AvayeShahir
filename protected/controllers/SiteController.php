@@ -648,19 +648,19 @@ class SiteController extends Controller
 
 	// temporary actions
 	public function actionRunSql(){
-		$flag = Yii::app()->db->createCommand("ALTER TABLE `ym_user_transactions`
-ADD COLUMN `model_name`  varchar(50) NOT NULL COMMENT 'نام مدل' DEFAULT \"Classes\" FIRST ;
-
-ALTER TABLE `ym_user_transactions`
-CHANGE COLUMN `class_id` `model_id`  int(10) UNSIGNED NOT NULL COMMENT 'شناسه مدل' AFTER `model_name`;
-
-ALTER TABLE `ym_user_transactions` DROP FOREIGN KEY `ym_user_transactions_ibfk_1`;
-
-ALTER TABLE `ym_user_transactions`
-ADD COLUMN `id`  int(10) UNSIGNED NOT NULL AUTO_INCREMENT FIRST ,
-DROP PRIMARY KEY,
-ADD PRIMARY KEY (`id`);")
-			->execute();
-        var_dump($flag);exit;
+//		$flag = Yii::app()->db->createCommand("ALTER TABLE `ym_user_transactions`
+//ADD COLUMN `model_name`  varchar(50) NOT NULL COMMENT 'نام مدل' DEFAULT \"Classes\" FIRST ;
+//
+//ALTER TABLE `ym_user_transactions`
+//CHANGE COLUMN `class_id` `model_id`  int(10) UNSIGNED NOT NULL COMMENT 'شناسه مدل' AFTER `model_name`;
+//
+//ALTER TABLE `ym_user_transactions` DROP FOREIGN KEY `ym_user_transactions_ibfk_1`;
+//
+//ALTER TABLE `ym_user_transactions`
+//ADD COLUMN `id`  int(10) UNSIGNED NOT NULL AUTO_INCREMENT FIRST ,
+//DROP PRIMARY KEY,
+//ADD PRIMARY KEY (`id`);")
+//			->execute();
+//        var_dump($flag);exit;
 	}
 }

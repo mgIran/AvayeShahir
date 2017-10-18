@@ -233,7 +233,7 @@ class CoursesClassesController extends Controller
 		$validClasses = Classes::model()->findAll($criteria);
 
 		if(isset($_POST['UserTransactions'])){
-			$class = Classes::model()->findByPk($_POST['UserTransactions']['class_id']);
+			$class = Classes::model()->findByPk($_POST['UserTransactions']['model_id']);
 			$startDate = JalaliDate::date('Y/m/d', $class->startClassDate);
 			$endDate = JalaliDate::date('Y/m/d', $class->endClassDate);
 			$time = Controller::parseNumbers($class->startClassTime);
