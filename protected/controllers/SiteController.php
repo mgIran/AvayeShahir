@@ -648,18 +648,27 @@ class SiteController extends Controller
 
 	// temporary actions
 	public function actionRunSql(){
-//		$flag = Yii::app()->db->createCommand("ALTER TABLE `ym_user_transactions`
-//ADD COLUMN `model_name`  varchar(50) NOT NULL COMMENT 'نام مدل' DEFAULT \"Classes\" FIRST ;
+//		$flag = Yii::app()->db->createCommand("DROP TABLE IF EXISTS `ym_order_categories`;
+//CREATE TABLE `ym_order_categories` (
+//  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+//  `title` varchar(150) COLLATE utf8_persian_ci DEFAULT NULL COMMENT 'عنوان',
+//  PRIMARY KEY (`id`)
+//) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
 //
-//ALTER TABLE `ym_user_transactions`
-//CHANGE COLUMN `class_id` `model_id`  int(10) UNSIGNED NOT NULL COMMENT 'شناسه مدل' AFTER `model_name`;
-//
-//ALTER TABLE `ym_user_transactions` DROP FOREIGN KEY `ym_user_transactions_ibfk_1`;
-//
-//ALTER TABLE `ym_user_transactions`
-//ADD COLUMN `id`  int(10) UNSIGNED NOT NULL AUTO_INCREMENT FIRST ,
-//DROP PRIMARY KEY,
-//ADD PRIMARY KEY (`id`);")
+//DROP TABLE IF EXISTS `ym_orders`;
+//CREATE TABLE `ym_orders` (
+//  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+//  `user_id` int(10) unsigned DEFAULT NULL COMMENT 'کاربر',
+//  `done_time` varchar(255) COLLATE utf8_persian_ci DEFAULT NULL COMMENT 'زمان انجام',
+//  `status` decimal(1,0) unsigned DEFAULT NULL COMMENT 'وضعیت سفارش',
+//  `order_price` decimal(10,0) DEFAULT NULL,
+//  `category_id` int(10) unsigned DEFAULT NULL,
+//  `description` varchar(1024) COLLATE utf8_persian_ci DEFAULT NULL,
+//  `order_priority` enum('normal','fast') COLLATE utf8_persian_ci DEFAULT NULL,
+//  `create_date` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+//  `update_date` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+//  PRIMARY KEY (`id`)
+//) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;")
 //			->execute();
 //        var_dump($flag);exit;
 	}
