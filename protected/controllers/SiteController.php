@@ -648,7 +648,8 @@ class SiteController extends Controller
 
 	// temporary actions
 	public function actionRunSql(){
-		$flag = Yii::app()->db->createCommand("")
+		$flag = Yii::app()->db->createCommand("ALTER TABLE `ym_orders`
+AUTO_INCREMENT=1000;")
 			->execute();
         var_dump($flag);exit;
 	}

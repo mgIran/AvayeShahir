@@ -85,8 +85,8 @@ class UserTransactions extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'user' => array(self::BELONGS_TO, 'Users', 'user_id'),
-			'class' => array(self::BELONGS_TO, 'Classes', 'model_id', 'on' => 't.model_name = "Classes"'),
-			'order' => array(self::BELONGS_TO, 'Orders', 'model_id', 'on' => 't.model_name = "Orders"'),
+			'class' => array(self::BELONGS_TO, 'Classes', 'model_id'),
+			'order' => array(self::BELONGS_TO, 'Orders', 'model_id'),
 		);
 	}
 

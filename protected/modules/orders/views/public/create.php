@@ -11,7 +11,7 @@ $this->breadcrumbs=array(
 <div class="page-title-container courses">
     <div class="mask"></div>
     <div class="container">
-        <h2>سفارش ترجمه و تصحیح</h2>
+        <h2><?= Yii::t('app', 'Translation & Correction Order') ?></h2>
     </div>
 </div>
 <div class="page-content courses gray-bg">

@@ -522,3 +522,6 @@ input[type='checkbox']{
 .btn-xs{
     font-size: 12px !important;
 }
+.text-warning {
+    color: #ffc622 !important;
+}

@@ -79,7 +79,7 @@ class OrdersPublicController extends Controller
         $filesArray = [];
 		if(isset($_POST['Orders']))
 		{
-            if(Yii::app()->user->isGuest && Yii::app()->user->type == 'admin')
+            if(Yii::app()->user->isGuest || (!Yii::app()->user->isGuest && Yii::app()->user->type == 'admin'))
                 $this->refresh();
 			$model->attributes=$_POST['Orders'];
             $model->user_id = Yii::app()->user->getId();
@@ -178,8 +178,16 @@ class OrdersPublicController extends Controller
 	public function actionDelete($id)
     {
         $model = $this->loadModel($id);
-        $model->status = Orders::ORDER_STATUS_DELETED;
-        if($model->save(false))
+        if(isset($_GET['forever']) && $_GET['forever']){
+            foreach($model->orderFiles as $file)
+                if($file->filename && file_exists(Yii::getPathOfAlias('webroot') . '/uploads/orders/' . $file->filename))
+                    @unlink(Yii::getPathOfAlias('webroot') . '/uploads/orders/' . $file->filename);
+            $flag = $model->delete();
+        }else{
+            $model->status = Orders::ORDER_STATUS_DELETED;
+            $flag = $model->save(false);
+        }
+        if($flag)
             Yii::app()->user->setFlash('success', '<span class="icon-check"></span>&nbsp;&nbsp;' . Yii::t('app', 'Order successfully deleted.'));
         else
             Yii::app()->user->setFlash('failed', Yii::t('app', 'Oops! A problem has occurred in deleting order! Please try again!'));
@@ -327,11 +335,11 @@ class OrdersPublicController extends Controller
             $orderId = $_POST['ResNum'];
             $model = UserTransactions::model()->findByAttributes(array('order_id' => $orderId));
             $model->sale_reference_id = isset($_POST['RefNum'])?$_POST['RefNum']:null;
-            $model->ref_id = isset($_POST['TraceNo'])?$_POST['TraceNo']:null;
+            $model->ref_id = Yii::app()->SinaPayment->refNumber;
             if($_POST['State'] == "OK"){
                 if(Yii::app()->SinaPayment->RequestUnPack()){
                     Yii::app()->SinaPayment->VerifyRequest();
-                    $model->sale_reference_id = Yii::app()->SinaPayment->refNumber;
+                    $model->sale_reference_id = isset($_POST['TraceNo'])?$_POST['TraceNo']:null;
                     if($model->amount * 10 == Yii::app()->SinaPayment->bankAmount){
                         $model->status = 'paid';
                         $model->res_code = 0;
@@ -355,6 +363,8 @@ class OrdersPublicController extends Controller
         // Add Sms Schedules
         if($notify && $model->user && $model->user->userDetails && $model->user->userDetails->phone && !empty($model->user->userDetails->phone)){
             $order = $model->order;
+            $order->status = Orders::ORDER_STATUS_PAID;
+            $order->save();
             $phone = $model->user->userDetails->phone;
             $smsText = "هزینه سفارش {$order->title} با کد شناسه {$order->id} با موفقیت پرداخت گردید و در اختیار کارشناسان قرار گرفت، شروع انجام سفارش متعاقباً به اطلاع شما خواهد رسید. 
 با تشکر

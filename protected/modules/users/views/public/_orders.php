@@ -8,6 +8,7 @@
     <table class="table table-hover table-striped">
         <thead>
         <tr>
+            <td width="20px">#</td>
             <td><?= Yii::t('app','Title')?></td>
             <td><?= Yii::t('app','Status')?></td>
             <td><?= Yii::t('app','Create Date')?></td>
@@ -22,6 +23,7 @@
             foreach($model->orders as $data):
                 ?>
                 <tr>
+                    <td><?= $data->id ?></td>
                     <td><?= $data->title ?></td>
                     <td class="text-<?php
                         if($data->status == Orders::ORDER_STATUS_DELETED)
@@ -49,7 +51,7 @@
         else:
             ?>
             <tr>
-                <td colspan="6" align="center"><?= Yii::t('app', 'No results found.') ?></td>
+                <td colspan="7" align="center"><?= Yii::t('app', 'No results found.') ?></td>
             </tr>
         <?php
         endif;

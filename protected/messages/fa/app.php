@@ -167,6 +167,7 @@ return array(
     'Other' => 'سایر',
     'Capacity State' => 'وضعیت ظرفیت',
     'Translation & Correction' => 'ترجمه و تصحیح',
+    'Translation & Correction Order' => 'سفارش ترجمه و تصحیح',
     'Done Time'=> 'زمان انجام',
     'Status'=> 'وضعیت',
     'Order Price'=> 'هزینه',
@@ -209,4 +210,7 @@ return array(
     'Close' => 'بستن',
     'Order successfully deleted.' => 'سفارش با موفقیت حذف گردید.',
     'Oops! A problem has occurred in deleting order! Please try again!' => 'در حذف سفارش خطایی رخ داده است! لطفا مجددا تلاش کنید!',
+    'Are you sure you want to delete this order?' => 'آیا از حذف این سفارش اطمینان دارید؟',
+    'Are you sure you want to delete forever this order?' => 'آیا از حذف این سفارش برای همیشه اطمینان دارید؟',
+    'Delete Forever' => 'حذف برای همیشه',
 );

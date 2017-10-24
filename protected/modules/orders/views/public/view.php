@@ -56,8 +56,11 @@ else if($model->status == Orders::ORDER_STATUS_DONE)
 )); ?>
 <div class="form-group buttons">
     <a href="#" data-dismiss="modal" class="btn btn-sm btn-info"><?= Yii::t('app', 'Close') ?></a>
-    <?php if($model->status != Orders::ORDER_STATUS_DELETED):?>
-        <a href="<?= $this->createUrl('/order/delete/'.$model->id) ?>" class="btn btn-sm btn-danger" onclick="if(!confirm('<?= Yii::t('zii', 'Are you sure you want to delete this item?') ?>')) return false;"><?= Yii::t('app', 'Delete') ?></a>
+    <?php if($model->status != Orders::ORDER_STATUS_DELETED && $model->status < Orders::ORDER_STATUS_PAID):?>
+        <a href="<?= $this->createUrl('/order/delete/'.$model->id) ?>" class="btn btn-sm btn-danger" onclick="if(!confirm('<?= Yii::t('app', 'Are you sure you want to delete this order?') ?>')) return false;"><?= Yii::t('app', 'Delete') ?></a>
+    <?php endif;?>
+    <?php if($model->status == Orders::ORDER_STATUS_DELETED):?>
+        <a href="<?= $this->createUrl('/order/delete/'.$model->id.'?forever=true') ?>" class="btn btn-sm btn-danger" onclick="if(!confirm('<?= Yii::t('app', 'Are you sure you want to delete forever this order?') ?>')) return false;"><?= Yii::t('app', 'Delete Forever') ?></a>
     <?php endif;?>
     <?php if($model->status == Orders::ORDER_STATUS_PAYMENT):?>
         <a href="<?= $this->createUrl('/order/payment/'.$model->id) ?>" class="btn btn-sm btn-success pull-left"><?= Yii::t('app', 'Payment') ?></a>
