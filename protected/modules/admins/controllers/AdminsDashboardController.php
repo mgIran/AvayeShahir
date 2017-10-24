@@ -40,9 +40,17 @@ class AdminsDashboardController extends Controller
             ->where('model_name = "Classes" AND status="paid"')
             ->queryScalar();
 
+        Yii::app()->getModule('orders');
+        $orders['new'] = Orders::model()->count('status > 0 AND status = :s', [":s" => Orders::ORDER_STATUS_PENDING]);
+        $orders['payment'] = Orders::model()->count('status > 0 AND status = :s', [":s" => Orders::ORDER_STATUS_PAYMENT]);
+        $orders['paid'] = Orders::model()->count('status > 0 AND status = :s', [":s" => Orders::ORDER_STATUS_PAID]);
+        $orders['done'] = Orders::model()->count('status > 0 AND status = :s', [":s" => Orders::ORDER_STATUS_DONE]);
+        $orders['total'] = Orders::model()->count('status > 0');
+
 		$this->render('index',array(
             'transactionsModel' => $transactionsModel,
-            'totalTransactionsPaidAmount' => $totalTransactionsPaidAmount
+            'totalTransactionsPaidAmount' => $totalTransactionsPaidAmount,
+            'orders' => $orders
         ));
 	}
 

@@ -33,9 +33,9 @@ class CoursesClassesController extends Controller
 	public function actions()
 	{
 		return array(
-				'order' => array(
-						'class' => 'ext.yiiSortableModel.actions.AjaxSortingAction',
-				),
+			'order' => array(
+				'class' => 'ext.yiiSortableModel.actions.AjaxSortingAction',
+			),
 		);
 	}
 

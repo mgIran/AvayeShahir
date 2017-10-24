@@ -4,23 +4,37 @@
 /* @var $dataProvider CActiveDataProvider */
 /* @var $form CActiveForm */
 ?>
-<div class="table table-responsive">
-    <div class="thead">
-        <div class="tr">
-            <div class="th col-lg-2 col-md-2 col-sm-2 col-xs-2"><?= Yii::t('app','Tracking Code')?></div>
-            <div class="th col-lg-2 col-md-2 col-sm-2 col-xs-2"><?= Yii::t('app','Amount')?></div>
-            <div class="th col-lg-3 col-md-3 col-sm-3 hidden-xs"><?= Yii::t('app','Date')?></div>
-            <div class="th col-lg-5 col-md-5 col-sm-5 col-xs-5"><?= Yii::t('app','Description')?></div>
-        </div>
-    </div>
-    <div class="tbody">
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <td><?= Yii::t('app','Tracking Code')?></td>
+            <td><?= Yii::t('app','Amount')?></td>
+            <td><?= Yii::t('app','Date')?></td>
+            <td><?= Yii::t('app','Description')?></td>
+        </tr>
+        </thead>
+        <tbody>
         <?
-        $this->widget("zii.widgets.CListView",array(
-            'id' => 'transactions-list-view',
-            'dataProvider' => $dataProvider,
-            'itemView' => '_transaction_view',
-            'template' => '{items} {pager}'
-        ));
+        if($dataProvider->totalItemCount):
+            foreach($dataProvider->getData() as $data):
+                ?>
+                <tr>
+                    <td><?= $data->sale_reference_id ?></td>
+                    <td><?= $data->getHtmlAmount() ?></td>
+                    <td><?= Yii::app()->language == 'fa' ? Controller::parseNumbers(JalaliDate::date("Y/m/d - H:i",$data->date)):date("Y/m/d - H:i",$data->date); ?></td>
+                    <td><?= $data->description ?></td>
+                </tr>
+            <?php
+            endforeach;
+        else:
+            ?>
+            <tr>
+                <td colspan="4" align="center"><?= Yii::t('app', 'No results found.') ?></td>
+            </tr>
+        <?php
+        endif;
         ?>
-    </div>
+        </tbody>
+    </table>
 </div>

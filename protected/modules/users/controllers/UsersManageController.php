@@ -90,8 +90,20 @@ class UsersManageController extends Controller
 		}
 		if(isset($_POST['Users'])){
 			$model->attributes = $_POST['Users'];
+			$pass = $model->password;
 			$model->status = 2;
 			if($model->save()){
+				if($model->phone){
+                    $phone = $model->phone;
+                    $fullName = $model->name.' '.$model->family;
+                    $smsText = "با عرض سلام {$fullName} عزیز،
+ثبت نام شما در سایت آوای شهیر با موفقیت انجام شد.
+نام کاربری: {$model->email}
+کلمه عبور: {$pass}
+با تشکر
+آوای شهیر";
+                    @Notify::Send($smsText, $phone, $model->email, "ثبت نام در وبسایت آوای شهیر");
+                }
 				echo CJSON::encode(array('state' => 'ok'));
 			}else
 				echo CJSON::encode(array('state' => 'error'));

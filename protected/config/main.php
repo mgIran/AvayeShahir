@@ -155,6 +155,9 @@ return array(
             'appendParams'=>true,
 			'rules'=>array(
 				'gii' => 'gii/default/index',
+				'order' => 'orders/public/index',
+				'order/<action:(delete|payment|bill)>/<id:\d+>' => 'orders/public/<action>',
+				'order/verify' => 'orders/public/verify',
                 '<action:(terms|forum|guidance|FAQ)>' => 'site/<action>',
 				'gallery' => 'gallery/manage/index',
 				'<module:(news|articles)>/category/<id:\d+>/<title:(.*)>' => '<module>/category/view',
@@ -165,6 +168,7 @@ return array(
 				'teachers/<id:\d+>/<title:(.*)>' => 'users/teachers/view',
 				'<action:(login|logout|register|dashboard)>' => 'users/public/<action>',
                 '<module:\w+>/<id:\d+>/<title:(.*)>'=>'<module>/manage/view',
+				'<module:\w+>/manage/<id:\d+>'=>'<module>/manage/view',
 				'<module:\w+>/<id:\d+>'=>'<module>/manage/view',
 				'<module:\w+>/<controller:\w+>'=>'<module>/<controller>/index',
 				'<module:\w+>/<controller:\w+>/<id:\d+>/<title:\w+>'=>'<module>/<controller>/view',

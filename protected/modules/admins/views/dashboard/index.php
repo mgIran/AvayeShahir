@@ -17,21 +17,30 @@
     <?= Yii::app()->user->name; ?>
 	خوش آمدید
 </p>
-<div class="panel panel-default col-lg-4 col-md-4 col-sm-6 col-xs-12">
+<div class="panel panel-warning col-lg-4 col-md-4 col-sm-6 col-xs-12">
     <div class="panel-heading">
         آمار بازدیدکنندگان
     </div>
     <div class="panel-body">
         <p>
-            افراد آنلاین: <?php echo Yii::app()->userCounter->getOnline(); ?><br />
-            بازدید امروز: <?php echo Yii::app()->userCounter->getToday(); ?><br />
-            بازدید دیروز: <?php echo Yii::app()->userCounter->getYesterday(); ?><br />
-            تعداد کل بازدید ها: <?php echo Yii::app()->userCounter->getTotal(); ?><br />
-            بیشترین بازدید: <?php echo Yii::app()->userCounter->getMaximal(); ?><br />
+            افراد آنلاین: <?php echo Yii::app()->userCounter->getOnline(); ?>
+        </p>
+        <p>
+            بازدید امروز: <?php echo Yii::app()->userCounter->getToday(); ?>
+        </p>
+        <p>
+            بازدید دیروز: <?php echo Yii::app()->userCounter->getYesterday(); ?>
+        </p>
+        <p>
+            بیشترین بازدید: <?php echo Yii::app()->userCounter->getMaximal(); ?>
+        </p>
+        <hr>
+        <p>
+            تعداد کل بازدید ها: <?php echo Yii::app()->userCounter->getTotal(); ?>
         </p>
     </div>
 </div>
-<div class="panel panel-default col-lg-4 col-md-4 col-sm-6 col-xs-12">
+<div class="panel panel-danger col-lg-4 col-md-4 col-sm-6 col-xs-12">
     <div class="panel-heading">
         گزارش ثبت نام در کلاس ها
     </div>
@@ -41,6 +50,26 @@
         </p>
         <p>
             <a class="btn btn-info" href="<?= $this->createUrl('/courses/register/admin') ?>">مشاهده لیست کامل</a>
+        </p>
+    </div>
+</div>
+<div class="panel panel-info col-lg-4 col-md-4 col-sm-6 col-xs-12">
+    <div class="panel-heading">
+گزارش سفارشات ترجمه و تصحیح
+    </div>
+    <div class="panel-body">
+        <p class="<?= $orders['new']?'text-danger':'' ?>">
+            تعداد سفارشات جدید: <?= $orders['new'] ?>
+        </p>
+        <p>
+            تعداد سفارشات پرداخت شده: <?= $orders['paid'] ?>
+        </p>
+        <hr>
+        <p>
+            تعداد کل سفارشات: <?= $orders['total'] ?>
+        </p>
+        <p>
+            <a class="btn btn-warning" href="<?= $this->createUrl('/orders/manage/admin') ?>">مشاهده لیست سفارشات</a>
         </p>
     </div>
 </div>

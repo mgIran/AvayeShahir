@@ -149,35 +149,14 @@ class Controller extends AuthController
                     )
                 ),
                 array(
-                    'label' => 'اساتید<span class="caret"></span>',
+                    'label' => 'ترجمه و تصحیح<span class="caret"></span>',
                     'url' => '#',
                     'itemOptions' => array('class' => 'dropdown', 'tabindex' => "-1"),
                     'linkOptions' => array('class' => 'dropdown-toggle', 'data-toggle' => "dropdown"),
                     'items' => array(
-                        array('label' => 'مدیریت', 'url' => Yii::app()->createUrl('/users/teachers')),
-                        array('label' => 'افزودن', 'url' => Yii::app()->createUrl('/users/teachers/create')),
-                    )
-                ),
-
-                array(
-                    'label' => 'کارمندان <span class="caret"></span>',
-                    'url' => '#',
-                    'itemOptions' => array('class' => 'dropdown', 'tabindex' => "-1"),
-                    'linkOptions' => array('class' => 'dropdown-toggle', 'data-toggle' => "dropdown"),
-                    'items' => array(
-                        array('label' => 'مدیریت', 'url' => Yii::app()->createUrl('/personnel/manage')),
-                        array('label' => 'افزودن', 'url' => Yii::app()->createUrl('/personnel/manage/create')),
-                    )
-                ),
-
-                array(
-                    'label' => 'گالری تصاویر<span class="caret"></span>',
-                    'url' => '#',
-                    'itemOptions' => array('class' => 'dropdown', 'tabindex' => "-1"),
-                    'linkOptions' => array('class' => 'dropdown-toggle', 'data-toggle' => "dropdown"),
-                    'items' => array(
-                        array('label' => 'مدیریت', 'url' => Yii::app()->createUrl('/gallery/manage/admin')),
-                        array('label' => 'افزودن', 'url' => Yii::app()->createUrl('/gallery/manage/create')),
+                        array('label' => 'مدیریت سفارشات', 'url' => Yii::app()->createUrl('/orders/manage/admin/')),
+                        array('label' => 'سفارش جدید', 'url' => Yii::app()->createUrl('/orders/manage/create/')),
+                        array('label' => 'مدیریت دسته بندی ها', 'url' => Yii::app()->createUrl('/orders/categories/admin/')),
                     )
                 ),
                 array(
@@ -222,6 +201,9 @@ class Controller extends AuthController
                         array('label' => 'صفحات اصلی سایت', 'url' => Yii::app()->createUrl('/pages/manage/admin/slug/base')),
                         array('label' => 'قوانین', 'url' => Yii::app()->createUrl('/pages/manage/update/id/5/slug/rules')),
                         array('label' => 'صفحات راهنما', 'url' => Yii::app()->createUrl('/pages/manage/admin/slug/guide')),
+                        array('label' => 'مدیریت اساتید', 'url' => Yii::app()->createUrl('/users/teachers')),
+                        array('label' => 'مدیریت کارمندان', 'url' => Yii::app()->createUrl('/personnel/manage')),
+                        array('label' => 'مدیریت گالری تصاویر', 'url' => Yii::app()->createUrl('/gallery/manage/admin')),
                         array('label' => 'تغییر کلمه عبور', 'url' => Yii::app()->createUrl('/admins/manage/changePass')),
                     )
                 ),

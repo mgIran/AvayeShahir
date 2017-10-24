@@ -78,6 +78,8 @@ class dropZoneUploader extends CWidget
      */
     public $dictFileTooBig = "حجم فایل زیاد است.\n حداکثر حجم مجاز :{{maxFilesize}}";
 
+    public $dictMaxFiles = "تعداد فایل مجاز:";
+
     /**
      * @var array Of array files attributes that exist on server and we will added to DropZone
      * this array format :
@@ -122,6 +124,8 @@ class dropZoneUploader extends CWidget
         {
             $this->id = $this->camelCase($this->id);
         }
+        $this->dictDefaultMessage = Yii::t('app','Drag & Drop');
+        $this->dictMaxFiles = Yii::t('app','Max Files:');
         $this->dictDefaultMessage = '<i class="icon icon-cloud-upload icon-4x"></i><span style="display: block;">'.$this->dictDefaultMessage.'</span>';
         Yii::app()->clientScript->registerCoreScript( 'jquery' );
         $this->_scripts = array(
@@ -241,6 +245,7 @@ class dropZoneUploader extends CWidget
             'dictCancelUpload' => $this->dictCancelUpload,
             'dictRemoveFile' => $this->dictRemoveFile,
             'dictMaxFilesExceeded' => $this->dictMaxFilesExceeded,
+            'dictMaxFiles' => $this->dictMaxFiles,
             'acceptedFiles' => $this->acceptedFiles,
             'accept' => 'js: function(file, done){done();}',
             'init' => 'js: function() {

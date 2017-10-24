@@ -23,6 +23,7 @@
  * The followings are the available model relations:
  * @property Users $user
  * @property Classes $class
+ * @property Orders $order
  */
 class UserTransactions extends CActiveRecord
 {
@@ -85,6 +86,7 @@ class UserTransactions extends CActiveRecord
 		return array(
 			'user' => array(self::BELONGS_TO, 'Users', 'user_id'),
 			'class' => array(self::BELONGS_TO, 'Classes', 'model_id', 'on' => 't.model_name = "Classes"'),
+			'order' => array(self::BELONGS_TO, 'Orders', 'model_id', 'on' => 't.model_name = "Orders"'),
 		);
 	}
 

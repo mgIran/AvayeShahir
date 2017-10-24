@@ -91,6 +91,18 @@ $(function() {
     $('.courses .course').each(function () {
         setCourseCatHeight($(this));
     });
+    
+    $("body").on("click", ".dashboard-menu-trigger", function (e) {
+        e.preventDefault();
+        if($(this).parents(".container-fluid").hasClass("open-menu"))
+            $(this).parents(".container-fluid").removeClass("open-menu");
+        else
+            $(this).parents(".container-fluid").addClass("open-menu");
+    });
+
+    $("body").on("click", ".side-bar li a", function () {
+        $(this).parents(".container-fluid").removeClass("open-menu");
+    });
 });
 
 function setCourseCatHeight($this) {

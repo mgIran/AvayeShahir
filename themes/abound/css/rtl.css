@@ -310,3 +310,8 @@ textarea{
 .ltr{
     direction: ltr !important;
 }
+.box-header h3 {
+    display: inline-block;
+    margin-bottom: 30px;
+    margin-top: 0;
+}

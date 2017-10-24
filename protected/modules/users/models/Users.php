@@ -27,6 +27,7 @@
  * @property TeacherDetails $teacherDetails
  * @property UserRoles $role
  * @property UserTransactions $register
+ * @property Orders[] $orders
  */
 class Users extends SortableCActiveRecord
 {
@@ -114,6 +115,7 @@ class Users extends SortableCActiveRecord
             'teacherDetails' => array(self::BELONGS_TO, 'TeacherDetails', 'id'),
             'role' => array(self::BELONGS_TO, 'UserRoles', 'role_id'),
             'register' => array(self::HAS_ONE, 'UserTransactions', 'user_id', 'on' => 'register.model_name = "Classes" AND register.status = "paid"'),
+            'orders' => array(self::HAS_MANY, 'Orders', 'user_id'),
         );
     }
 

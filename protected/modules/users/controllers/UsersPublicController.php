@@ -166,7 +166,8 @@ class UsersPublicController extends Controller
     public function actionDashboard()
     {
         Yii::app()->theme = 'front-end';
-        $this->layout = '//layouts/inner';
+        $this->layout = '//layouts/panel';
+        Yii::app()->getModule('orders');
         $model=Users::model()->findByPk(Yii::app()->user->getId());
 
         $transactions=new UserTransactions('search');

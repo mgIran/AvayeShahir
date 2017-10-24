@@ -1,6 +1,6 @@
 <?php
 return array (
-  'template' => 'multiLanguage',
+  'template' => 'default',
   'connectionId' => 'db',
   'tablePrefix' => 'ym',
   'modelPath' => 'orders.models',

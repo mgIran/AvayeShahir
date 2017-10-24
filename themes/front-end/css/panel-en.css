@@ -1,0 +1,24 @@
+.side-bar{
+    right: auto;
+    left: 0;
+}
+.tab-content{
+    margin-right: 0;
+    margin-left: 20%;
+}
+
+.side-bar .icon{
+    margin-left: 0;
+    margin-right: 15px;
+}
+.side-bar li a span:not(.badge){
+    font-size: 12px !important;
+}
+.modal .table > tbody > tr > td,
+.modal .table > tbody > tr > th,
+.modal .table > tfoot > tr > td,
+.modal .table > tfoot > tr > th,
+.modal .table > thead > tr > td,
+.modal .table > thead > tr > th{
+    text-align: left !important;
+}

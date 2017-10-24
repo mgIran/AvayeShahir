@@ -16504,3 +16504,77 @@ in D:\Important\Xamppp\htdocs\shahir\index.php (11)
 in D:\Important\Xamppp\htdocs\shahir\protected\modules\admins\controllers\AdminsManageController.php (89)
 in D:\Important\Xamppp\htdocs\shahir\protected\components\AuthController.php (85)
 in D:\Important\Xamppp\htdocs\shahir\index.php (11)
+2017/10/19 17:18:46 [warning] [application] Failed to set unsafe attribute "files" of "Orders".
+in D:\Important\Xamppp\htdocs\shahir\protected\modules\orders\controllers\OrdersManageController.php (83)
+in D:\Important\Xamppp\htdocs\shahir\protected\components\AuthController.php (114)
+in D:\Important\Xamppp\htdocs\shahir\index.php (11)
+2017/10/19 17:30:18 [warning] [application] Failed to set unsafe attribute "files" of "Orders".
+in D:\Important\Xamppp\htdocs\shahir\protected\modules\orders\controllers\OrdersManageController.php (83)
+in D:\Important\Xamppp\htdocs\shahir\protected\components\AuthController.php (114)
+in D:\Important\Xamppp\htdocs\shahir\index.php (11)
+2017/10/19 17:30:57 [warning] [application] Failed to set unsafe attribute "files" of "Orders".
+in D:\Important\Xamppp\htdocs\shahir\protected\modules\orders\controllers\OrdersManageController.php (83)
+in D:\Important\Xamppp\htdocs\shahir\protected\components\AuthController.php (114)
+in D:\Important\Xamppp\htdocs\shahir\index.php (11)
+2017/10/19 17:35:11 [warning] [application] Failed to set unsafe attribute "files" of "Orders".
+in D:\Important\Xamppp\htdocs\shahir\protected\modules\orders\controllers\OrdersManageController.php (83)
+in D:\Important\Xamppp\htdocs\shahir\protected\components\AuthController.php (114)
+in D:\Important\Xamppp\htdocs\shahir\index.php (11)
+2017/10/19 17:55:38 [warning] [application] Failed to set unsafe attribute "files" of "Orders".
+in D:\Important\Xamppp\htdocs\shahir\protected\modules\orders\controllers\OrdersManageController.php (138)
+in D:\Important\Xamppp\htdocs\shahir\protected\components\AuthController.php (114)
+in D:\Important\Xamppp\htdocs\shahir\index.php (11)
+2017/10/19 17:57:33 [warning] [application] Failed to set unsafe attribute "files" of "Orders".
+in D:\Important\Xamppp\htdocs\shahir\protected\modules\orders\controllers\OrdersManageController.php (140)
+in D:\Important\Xamppp\htdocs\shahir\protected\components\AuthController.php (114)
+in D:\Important\Xamppp\htdocs\shahir\index.php (11)
+2017/10/19 17:57:45 [warning] [application] Failed to set unsafe attribute "files" of "Orders".
+in D:\Important\Xamppp\htdocs\shahir\protected\modules\orders\controllers\OrdersManageController.php (140)
+in D:\Important\Xamppp\htdocs\shahir\protected\components\AuthController.php (114)
+in D:\Important\Xamppp\htdocs\shahir\index.php (11)
+2017/10/19 18:01:56 [warning] [application] Failed to set unsafe attribute "files" of "Orders".
+in D:\Important\Xamppp\htdocs\shahir\protected\modules\orders\controllers\OrdersManageController.php (141)
+in D:\Important\Xamppp\htdocs\shahir\protected\components\AuthController.php (114)
+in D:\Important\Xamppp\htdocs\shahir\index.php (11)
+2017/10/19 18:03:31 [warning] [application] Failed to set unsafe attribute "files" of "Orders".
+in D:\Important\Xamppp\htdocs\shahir\protected\modules\orders\controllers\OrdersManageController.php (141)
+in D:\Important\Xamppp\htdocs\shahir\protected\components\AuthController.php (114)
+in D:\Important\Xamppp\htdocs\shahir\index.php (11)
+2017/10/19 18:04:22 [warning] [application] Failed to set unsafe attribute "files" of "Orders".
+in D:\Important\Xamppp\htdocs\shahir\protected\modules\orders\controllers\OrdersManageController.php (141)
+in D:\Important\Xamppp\htdocs\shahir\protected\components\AuthController.php (114)
+in D:\Important\Xamppp\htdocs\shahir\index.php (11)
+2017/10/19 18:04:32 [warning] [application] Failed to set unsafe attribute "files" of "Orders".
+in D:\Important\Xamppp\htdocs\shahir\protected\modules\orders\controllers\OrdersManageController.php (141)
+in D:\Important\Xamppp\htdocs\shahir\protected\components\AuthController.php (114)
+in D:\Important\Xamppp\htdocs\shahir\index.php (11)
+2017/10/19 18:04:46 [warning] [application] Failed to set unsafe attribute "files" of "Orders".
+in D:\Important\Xamppp\htdocs\shahir\protected\modules\orders\controllers\OrdersManageController.php (141)
+in D:\Important\Xamppp\htdocs\shahir\protected\components\AuthController.php (114)
+in D:\Important\Xamppp\htdocs\shahir\index.php (11)
+2017/10/21 09:15:23 [warning] [application] Failed to set unsafe attribute "files" of "Orders".
+in D:\Important\Xamppp\htdocs\shahir\protected\modules\orders\controllers\OrdersManageController.php (141)
+in D:\Important\Xamppp\htdocs\shahir\protected\components\AuthController.php (114)
+in D:\Important\Xamppp\htdocs\shahir\index.php (11)
+2017/10/21 11:09:47 [warning] [application] Failed to set unsafe attribute "address" of "UserDetails".
+in D:\Important\Xamppp\htdocs\shahir\protected\modules\users\models\UserDetails.php (46)
+in D:\Important\Xamppp\htdocs\shahir\protected\modules\users\controllers\UsersPublicController.php (253)
+in D:\Important\Xamppp\htdocs\shahir\protected\components\AuthController.php (114)
+2017/10/21 11:09:47 [warning] [application] Failed to set unsafe attribute "address" of "UserDetails".
+in D:\Important\Xamppp\htdocs\shahir\protected\modules\users\models\UserDetails.php (46)
+in D:\Important\Xamppp\htdocs\shahir\protected\modules\users\controllers\UsersPublicController.php (261)
+in D:\Important\Xamppp\htdocs\shahir\protected\components\AuthController.php (114)
+2017/10/22 15:22:30 [warning] [application] Failed to set unsafe attribute "files" of "Orders".
+in D:\Important\Xamppp\htdocs\shahir\protected\modules\orders\controllers\OrdersPublicController.php (83)
+in D:\Important\Xamppp\htdocs\shahir\index.php (11)
+2017/10/22 15:35:57 [warning] [application] Failed to set unsafe attribute "files" of "Orders".
+in D:\Important\Xamppp\htdocs\shahir\protected\modules\orders\controllers\OrdersPublicController.php (85)
+in D:\Important\Xamppp\htdocs\shahir\index.php (11)
+2017/10/23 17:16:01 [warning] [application] Failed to set unsafe attribute "address" of "UserDetails".
+in D:\Important\Xamppp\htdocs\shahir\protected\modules\users\models\UserDetails.php (46)
+in D:\Important\Xamppp\htdocs\shahir\protected\modules\users\controllers\UsersPublicController.php (254)
+in D:\Important\Xamppp\htdocs\shahir\protected\components\AuthController.php (114)
+2017/10/23 17:16:01 [warning] [application] Failed to set unsafe attribute "address" of "UserDetails".
+in D:\Important\Xamppp\htdocs\shahir\protected\modules\users\models\UserDetails.php (46)
+in D:\Important\Xamppp\htdocs\shahir\protected\modules\users\controllers\UsersPublicController.php (262)
+in D:\Important\Xamppp\htdocs\shahir\protected\components\AuthController.php (114)
