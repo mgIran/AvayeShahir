@@ -27,7 +27,7 @@ class OrdersManageController extends Controller
 		return array(
 			'backend' => array(
 				'view', 'index', 'create', 'update', 'admin', 'trash', 'restore', 'delete', 'upload', 'deleteUpload',
-                'setting', 'pricing', 'addFile', 'deleteFile', 'changeStatus', 'uploadFile'
+                'setting', 'verbalPay', 'pricing', 'addFile', 'deleteFile', 'changeStatus', 'uploadFile'
 			)
 		);
 	}
@@ -398,5 +398,38 @@ class OrdersManageController extends Controller
         $this->render('settings',[
             'settings' => $settings
         ]);
+    }
+
+    public function actionVerbalPay($id)
+    {
+        $model = $this->loadModel($id);
+        $model->status = Orders::ORDER_STATUS_PAID;
+        $lastTransaction = $model->transaction;
+        if($lastTransaction && $lastTransaction->status == 'paid'){
+            Yii::app()->user->setFlash("failed", 'این سفارش قبلا پرداخت شده است.');
+            $this->refresh();
+        }elseif($lastTransaction && $lastTransaction->status == 'unpaid')
+            $lastTransaction->delete();
+        $trModel = new UserTransactions();
+        $trModel->model_name = "Orders";
+        $trModel->model_id = $model->id;
+        $trModel->user_id = $model->user_id;
+        $trModel->amount = $model->order_price;
+        $trModel->description = "پرداخت هزینه سفارش ترجمه و تصحیح {$model->title} با شناسه #{$model->id}";
+        $trModel->date = time();
+        $trModel->status = 'paid';
+        $trModel->verbal = 1;
+        if($trModel->save() && $model->save()){
+            Yii::app()->user->setFlash("success", 'پرداخت حضوری با موفقیت تایید شد.');
+            // Send Notify to user
+            $smsText = "پرداخت حضوری هزینه سفارش {$model->title} شما با کد شناسه {$model->id} با موفقیت تایید گردید.
+شروع انجام سفارش متعاقباً به اطلاع شما خواهد رسید.
+    با تشکر
+آوای شهیر";
+            @Notify::Send($smsText, $model->user->userDetails->phone, $model->user->email);
+            Yii::app()->user->setFlash('success', '<span class="icon-check"></span>&nbsp;&nbsp;اطلاعات با موفقیت ذخیره شد.');
+            //
+            $this->redirect(array('/orders/manage/'.$model->id));
+        }
     }
 }

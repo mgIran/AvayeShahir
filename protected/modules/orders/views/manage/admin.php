@@ -87,7 +87,8 @@ $this->menu=array(
                     ],
                     array(
                         'class'=>'CButtonColumn',
-                        'template' => '{view} {delete}'
+                        'template' => '{view} {delete}',
+                        'deleteConfirmation' => 'آیتم موردنظر به زباله دان منتقل شود؟'
                     ),
                 ),
             )); ?>

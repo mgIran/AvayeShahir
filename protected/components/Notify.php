@@ -16,7 +16,8 @@ class Notify
     public static function Send($text, $phone, $email, $emailSubject=null)
     {
         self::SendSms($text, $phone);
-        self::SendEmail($text, $email, $emailSubject);
+        if($email)
+            self::SendEmail($text, $email, $emailSubject);
     }
 
 

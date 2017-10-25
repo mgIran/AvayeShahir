@@ -2,6 +2,19 @@
 /* @var $this OrdersManageController */
 /* @var $model Orders */
 
+if($model->status == Orders::ORDER_STATUS_DELETED)
+    $tc = 'danger';
+else if($model->status == Orders::ORDER_STATUS_PENDING)
+    $tc = 'info';
+else if($model->status == Orders::ORDER_STATUS_PAYMENT)
+    $tc = 'warning';
+else if($model->status == Orders::ORDER_STATUS_PAID)
+    $tc = 'success';
+else if($model->status == Orders::ORDER_STATUS_DOING)
+    $tc = 'info';
+else if($model->status == Orders::ORDER_STATUS_DONE)
+    $tc = 'primary';
+
 $this->breadcrumbs=array(
 	'مدیریت'=>array('admin'),
 	'سفارش #'.$model->title,
@@ -9,12 +22,12 @@ $this->breadcrumbs=array(
 
 $menu = [
     array('label'=>'مدیریت سفارشات', 'url'=>array('admin')),
-    array('label'=>'ویرایش سفارش', 'url'=>array('update', 'id'=>$model->id)),
+//    array('label'=>'ویرایش سفارش', 'url'=>array('update', 'id'=>$model->id)),
     array('label'=>'حذف سفارش', 'url'=>'#', 'linkOptions'=>array('style' => 'margin-bottom:30px;','submit'=>array('delete','id'=>$model->id),'confirm'=>'آیا از حذف این سفارش اطمینان دارید؟'))
 ];
 
-if($model->status < Orders::ORDER_STATUS_PAID)
-    $menu[] = array('label'=>'قیمت گذاری سفارش', 'url'=>'#', 'linkOptions'=>array('data-toggle'=>'modal','data-target' => '#pricing-modal'));
+if($model->status < Orders::ORDER_STATUS_PAYMENT)
+    $menu[] = array('label'=>'قیمت گذاری و زمانبندی سفارش', 'url'=>'#', 'linkOptions'=>array('data-toggle'=>'modal','data-target' => '#pricing-modal'));
 if($model->status == Orders::ORDER_STATUS_DOING)
     $menu[] = array('label'=>'افزودن فایل به سفارش', 'url'=>'#', 'itemOptions'=> array(
         'data-toggle' => 'modal',
@@ -25,10 +38,34 @@ $this->menu = $menu;
 ?>
 
 <h1>نمایش سفارش #<?php echo $model->id; ?></h1>
-<div class="form-group">
-    <label>تغییر وضعیت سفارش</label>
-    <?= $model->getChangeStatusTag() ?>
-</div>
+<?php
+if($model->status < Orders::ORDER_STATUS_PAYMENT):
+    ?>
+    <div class="form-group">
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#pricing-modal">
+            <i class="icon-dollar"></i>
+            قیمت گذاری و زمانبندی
+        </button>
+    </div>
+    <?php
+elseif($model->status == Orders::ORDER_STATUS_PAYMENT):
+    ?>
+    <div class="form-group">
+        <a href="<?= $this->createUrl('manage/verbalPay/'.$model->id) ?>" class="btn btn-success"
+           onclick="if(!confirm('آیا از تایید پرداخت هزینه این سفارش به صورت حضوری اطمینان دارید؟')) return false;">
+            تایید پرداخت حضوری
+        </a>
+    </div>
+    <?php
+elseif($model->status > Orders::ORDER_STATUS_PAID):
+    ?>
+    <div class="form-group">
+        <label>تغییر وضعیت سفارش</label>
+        <?= $model->getChangeStatusTag() ?>
+    </div>
+    <?php
+endif;
+?>
 <?php $this->renderPartial('//layouts/_flashMessage'); ?>
 <!--Order Details-->
 <?php $this->widget('zii.widgets.CDetailView', array(
@@ -36,7 +73,8 @@ $this->menu = $menu;
     'attributes'=>array(
         [
             'name' => 'status',
-            'value' => $model->getStatusLabel()
+            'value' => '<h4 class="label label-lg label-'.$tc.'">'.$model->getStatusLabel().'</h4>',
+            'type' => 'raw'
         ],
         [
             'name' => 'user_id',
@@ -247,3 +285,16 @@ endif;
         </div>
     </div>
 </div>
+
+
+<style>
+    table.detail-view th,
+    table.detail-view td {
+        vertical-align: middle !important;
+    }
+    code,
+    .label{
+        font-size: 16px !important;
+        display: inline-block !important;
+    }
+</style>

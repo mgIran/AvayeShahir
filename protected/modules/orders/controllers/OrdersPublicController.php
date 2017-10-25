@@ -386,6 +386,16 @@ class OrdersPublicController extends Controller
 با تشکر
 آوای شهیر";
             @Notify::Send($smsText, $phone, $model->user->email);
+
+            // Send Notify to Admins
+            Yii::app()->getModule('setting');
+            $phones = SiteSetting::getOption('order_receivers_phones')?explode(',', SiteSetting::getOption('order_receivers_phones')):false;
+            $emails = SiteSetting::getOption('order_receivers_emails')?explode(',', SiteSetting::getOption('order_receivers_emails')):false;
+            if($phones){
+                $smsText = "هزینه سفارش با کد شناسه {$model->id} پرداخت گردید.";
+                @Notify::Send($smsText, $phones, $emails);
+            }
+            //
         }
 
         $this->render('verify', array(
