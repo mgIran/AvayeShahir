@@ -435,6 +435,11 @@ ul.main-menu ol {
 .progress-bar{
     float: left;
 }
+.bordered::after {
+    right: auto;
+    left: 0;
+}
+
 @media (max-width: 1200px) and (min-width: 768px){
     .news-item .news-detail{
         padding-left: 115px;

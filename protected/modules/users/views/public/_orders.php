@@ -4,6 +4,12 @@
 /* @var $dataProvider CActiveDataProvider */
 /* @var $form CActiveForm */
 ?>
+<div class="form-group">
+    <a href="<?= $this->createUrl('/order') ?>" class="btn btn-info">
+        <i class="icon icon-plus"></i>
+        <?= Yii::t('app', 'New Order') ?>
+    </a>
+</div>
 <div class="table-responsive">
     <table class="table table-hover table-striped">
         <thead>

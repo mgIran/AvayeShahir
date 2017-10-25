@@ -48,6 +48,11 @@ class UserTransactions extends CActiveRecord
 		self::GATEWAY_SINA => 'بانک سینا'
 	);
 
+	public $statusLabels = [
+		'paid' => 'پرداخت شده',
+		'unpaid' => 'پرداخت نشده'
+	];
+
 	public $verbalFilter;
 
 	/**
@@ -210,5 +215,10 @@ class UserTransactions extends CActiveRecord
 	public function getGatewayLabel()
 	{
 		return $this->gatewayLabels[$this->gateway];
+	}
+
+	public function getStatusLabel()
+	{
+		return $this->statusLabels[$this->status];
 	}
 }

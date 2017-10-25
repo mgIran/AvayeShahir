@@ -6,14 +6,18 @@
  * The followings are the available columns in table '{{order_files}}':
  * @property string $id
  * @property string $order_id
+ * @property string $title
  * @property string $filename
  * @property string $ext
+ * @property string $file_type
  *
  * The followings are the available model relations:
  * @property Orders $order
  */
 class OrderFiles extends CActiveRecord
 {
+	const FILE_TYPE_USER = 1;
+	const FILE_TYPE_DONE_FILE = 2;
 	/**
 	 * @return string the associated database table name
 	 */
@@ -32,10 +36,12 @@ class OrderFiles extends CActiveRecord
 		return array(
 			array('filename', 'required'),
 			array('order_id', 'length', 'max'=>10),
-			array('filename, ext', 'length', 'max'=>255),
+			array('filename, ext, title', 'length', 'max'=>255),
+			array('file_type', 'length', 'max'=>1),
+			array('file_type', 'default', 'value'=>self::FILE_TYPE_USER),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, order_id, filename, ext', 'safe', 'on'=>'search'),
+			array('id, order_id, filename, ext, title, file_type', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -59,8 +65,10 @@ class OrderFiles extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'order_id' => 'سفارش',
+			'title' => 'عنوان فایل',
 			'filename' => 'نام فایل',
 			'ext' => 'پسوند',
+			'file_type' => 'نوع فایل',
 		);
 	}
 
@@ -84,8 +92,10 @@ class OrderFiles extends CActiveRecord
 
 		$criteria->compare('id',$this->id,true);
 		$criteria->compare('order_id',$this->order_id,true);
+		$criteria->compare('title',$this->title,true);
 		$criteria->compare('filename',$this->filename,true);
 		$criteria->compare('ext',$this->ext,true);
+		$criteria->compare('file_type',$this->file_type,true);
 		$criteria->order = 'id DESC';
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

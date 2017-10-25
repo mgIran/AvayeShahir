@@ -26,7 +26,8 @@ class OrdersManageController extends Controller
 	{
 		return array(
 			'backend' => array(
-				'view', 'index', 'create', 'update', 'admin', 'delete', 'upload', 'deleteUpload', 'pricing'
+				'view', 'index', 'create', 'update', 'admin', 'delete', 'upload', 'deleteUpload',
+                'pricing', 'addFile', 'deleteFile', 'changeStatus', 'uploadFile'
 			)
 		);
 	}
@@ -47,6 +48,14 @@ class OrdersManageController extends Controller
                 'attribute' => 'filename',
                 'uploadDir' => '/uploads/orders',
                 'storedMode' => 'record'
+            ),
+            'uploadFile' => array(
+                'class' => 'ext.dropZoneUploader.actions.AjaxUploadAction',
+                'attribute' => 'filename',
+                'rename' => 'random',
+                'validateOptions' => array(
+                    'acceptedTypes' => Orders::$acceptedFiles
+                )
             )
         );
     }
@@ -184,10 +193,71 @@ class OrdersManageController extends Controller
             $model->update_date = time();
             $model->status = Orders::ORDER_STATUS_PAYMENT;
             if($model->save()){
+                $phone = $model->user->userDetails->phone;
+                $time = Controller::parseNumbers(number_format($model->done_time));
+                $price = Controller::parseNumbers(number_format($model->order_price));
+                $smsText = "سفارش {$model->title} شما با کد شناسه {$model->id} در مدت {$time} روز کاری و مبلغ {$price} تومان زمانبندی و قیمت گذاری گردید.
+لطفا جهت پرداخت هزینه به داشبورد حساب کاربری خود مراجعه فرمایید.
+با تشکر
+آوای شهیر";
+                @Notify::Send($smsText, $phone, $model->user->email);
                 Yii::app()->user->setFlash('success', '<span class="icon-check"></span>&nbsp;&nbsp;اطلاعات با موفقیت ذخیره شد.');
                 $this->redirect(array('view', 'id' => $model->id));
             }else
                 Yii::app()->user->setFlash('failed', 'در ثبت اطلاعات خطایی رخ داده است! لطفا مجددا تلاش کنید.');
+        }
+    }
+
+    public function actionAddFile($id){
+        $model = new OrderFiles();
+        if(isset($_POST['OrderFiles']))
+        {
+            $model->attributes = $_POST['OrderFiles'];
+            $model->order_id = $id;
+            $model->file_type = OrderFiles::FILE_TYPE_DONE_FILE;
+            if($model->save()) {
+                if($model->filename && file_exists(Yii::getPathOfAlias('webroot').'/uploads/temp/'.$model->filename))
+                    rename(Yii::getPathOfAlias('webroot').'/uploads/temp/'.$model->filename,
+                        Yii::getPathOfAlias('webroot').'/uploads/orders/'.$model->filename);
+                echo CJSON::encode(['status' => true]);
+            }else
+                echo CJSON::encode(['status' => false]);
+        }
+        Yii::app()->end();
+    }
+
+    public function actionDeleteFile($id)
+    {
+        $filePath = Yii::getPathOfAlias('webroot') . '/uploads/orders/';
+        $model = OrderFiles::model()->findByPk($id);
+        if($model->filename && file_exists($filePath . $model->filename))
+            @unlink($filePath . $model->filename);
+        $model->delete();
+
+        if (!isset($_GET['ajax']))
+            $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+    }
+
+    public function actionChangeStatus()
+    {
+        if(isset($_POST['order_id'])){
+            /* @var $model Orders */
+            $model = $this->loadModel($_POST['order_id']);
+            $lastStatusLabel = $model->getStatusLabel();
+            $newStatus = $_POST['newStatus'];
+            $model->status = $newStatus;
+            if($model->save()){
+                if($model->status != Orders::ORDER_STATUS_DONE)
+                    $smsText = "سفارش {$model->title} شما با کد شناسه {$model->id} از وضعیت {$lastStatusLabel} به {$model->getStatusLabel()} تغییر کرد.
+با تشکر
+آوای شهیر";
+                else
+                    $smsText = "سفارش {$model->title} شما با کد شناسه {$model->id} آماده تحویل است. لطفاًً برای دریافت فایل ها، از طریق حساب کاربری خود اقدام فرمایید.
+با تشکر
+آوای شهیر";
+                @Notify::Send($smsText, $model->user->userDetails->phone, $model->user->email);
+                echo CJSON::encode(array('status' => 'success'));
+            }
         }
     }
 

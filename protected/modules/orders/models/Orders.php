@@ -21,6 +21,7 @@
  * @property OrderFiles[] $orderFiles
  * @property Users $user
  * @property OrderCategories $category
+ * @property UserTransactions $transaction
  */
 class Orders extends CActiveRecord
 {
@@ -93,7 +94,8 @@ class Orders extends CActiveRecord
             array('status', 'length', 'max'=>1),
             array('description', 'length', 'max'=>1024),
             array('order_priority', 'length', 'max'=>6),
-            array('create_date, update_date', 'default', 'value' => time()),
+            array('create_date', 'default', 'value' => time()),
+            array('update_date', 'default', 'value' => time()),
             array('order_priority', 'default', 'value' => self::ORDER_PRIORITY_NORMAL),
             array('status', 'default', 'value' => self::ORDER_STATUS_PENDING),
             array('create_date, update_date', 'safe'),
@@ -114,6 +116,7 @@ class Orders extends CActiveRecord
             'orderFiles' => array(self::HAS_MANY, 'OrderFiles', 'order_id'),
             'category' => array(self::BELONGS_TO, 'OrderCategories', 'category_id'),
             'user' => array(self::BELONGS_TO, 'Users', 'user_id'),
+            'transaction' => array(self::HAS_ONE, 'UserTransactions', 'model_id', 'on' => 'transaction.model_name = "Orders"'),
         );
 	}
 
@@ -254,5 +257,65 @@ class Orders extends CActiveRecord
                 return number_format($this->done_time).' '.Yii::t('app','Workday(s)');
         }
         return '-';
+    }
+
+    public function getStatusLabels($forChange = false)
+    {
+        if (!$forChange)
+            return $this->statusLabels;
+        switch ($this->status) {
+            default:
+            case self::ORDER_STATUS_PENDING:
+                $newList = $this->statusLabels;
+                unset($newList[$this::ORDER_STATUS_DELETED]);
+                return $newList;
+                break;
+            case self::ORDER_STATUS_PAYMENT:
+                $newList = $this->statusLabels;
+                unset($newList[$this::ORDER_STATUS_DELETED]);
+                unset($newList[$this::ORDER_STATUS_PENDING]);
+                return $newList;
+                break;
+            case self::ORDER_STATUS_PAID:
+                $newList = $this->statusLabels;
+                unset($newList[$this::ORDER_STATUS_DELETED]);
+                unset($newList[$this::ORDER_STATUS_PENDING]);
+                unset($newList[$this::ORDER_STATUS_PAYMENT]);
+                return $newList;
+                break;
+            case self::ORDER_STATUS_DOING:
+                $newList = $this->statusLabels;
+                unset($newList[$this::ORDER_STATUS_DELETED]);
+                unset($newList[$this::ORDER_STATUS_PENDING]);
+                unset($newList[$this::ORDER_STATUS_PAYMENT]);
+                unset($newList[$this::ORDER_STATUS_PAID]);
+                return $newList;
+                break;
+            case self::ORDER_STATUS_DONE:
+                $newList = $this->statusLabels;
+                unset($newList[$this::ORDER_STATUS_DELETED]);
+                unset($newList[$this::ORDER_STATUS_PENDING]);
+                unset($newList[$this::ORDER_STATUS_PAYMENT]);
+                unset($newList[$this::ORDER_STATUS_PAID]);
+                return $newList;
+                break;
+        }
+    }
+
+    public function getChangeStatusTag(){
+        if($this->status != 'done')
+            return CHtml::dropDownList("status",$this->status,$this->getStatusLabels(true),array(
+                "data-id"=>$this->id,
+                "onchange" => "if(!confirm('آیا از تغییر وضعیت اطمینان دارید؟')) return false; ",
+                "ajax"=>array(
+                    "type"=>"POST",
+                    "dataType"=>"JSON",
+                    "url"=>Yii::app()->createUrl("/orders/manage/changeStatus"),
+                    "data"=>"js:{newStatus:jQuery(this).val(),order_id:jQuery(this).data(\"id\")}",
+                    "success"=>"function(data){if(data.status==\"success\") location.reload(); }"
+                )
+            ));
+        else
+            return '';
     }
 }

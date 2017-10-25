@@ -27,6 +27,7 @@
 
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'افزودن' : 'ویرایش',array('class' => 'btn btn-success')); ?>
+		<button type="button" data-dismiss="modal" class="btn btn-default pull-left">انصراف</button>
 	</div>
 
 <?php $this->endWidget(); ?>

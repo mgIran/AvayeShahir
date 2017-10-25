@@ -55,12 +55,22 @@ $this->menu=array(
                     ],
                     [
                         'name' =>'done_time',
-                        'value' => '$data->done_time?JalaliDate::date("Y/m/d H:i",$data->done_time):"-"',
+                        'value' => '$data->getDoneTime()',
                         'filter' => false
                     ],
                     [
                         'name' =>'order_price',
-                        'value' => 'Controller::parseNumbers(number_format($data->order_price))." تومان"',
+                        'value' => '$data->getOrderPrice()',
+                        'filter' => false
+                    ],
+                    [
+                        'name' =>'create_date',
+                        'value' => 'Yii::app()->language == \'fa\' ? Controller::parseNumbers(JalaliDate::date("Y/m/d - H:i",$data->create_date)):date("Y/m/d - H:i",$data->create_date)',
+                        'filter' => false
+                    ],
+                    [
+                        'name' =>'update_date',
+                        'value' => 'Yii::app()->language == \'fa\' ? Controller::parseNumbers(JalaliDate::date("Y/m/d - H:i",$data->update_date)):date("Y/m/d - H:i",$data->update_date)',
                         'filter' => false
                     ],
                     [

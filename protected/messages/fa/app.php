@@ -213,4 +213,5 @@ return array(
     'Are you sure you want to delete this order?' => 'آیا از حذف این سفارش اطمینان دارید؟',
     'Are you sure you want to delete forever this order?' => 'آیا از حذف این سفارش برای همیشه اطمینان دارید؟',
     'Delete Forever' => 'حذف برای همیشه',
+    'New Order' => 'سفارش جدید',
 );
