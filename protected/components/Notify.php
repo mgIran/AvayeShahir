@@ -31,7 +31,7 @@ class Notify
     {
         if($phone && !empty($phone)){
             $sms = new SendSMS();
-            $sms->AddNumber($phone);
+            if(is_array($phone)) $sms->AddNumbers($phone); else $sms->AddNumber($phone);
             if($sms->getNumbers()){
                 $sms->AddMessage($message);
                 @$sms->SendWithLine();

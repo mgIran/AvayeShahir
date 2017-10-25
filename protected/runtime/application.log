@@ -16588,3 +16588,9 @@ in D:\Important\Xamppp\htdocs\shahir\index.php (11)
 in D:\Important\Xamppp\htdocs\shahir\protected\modules\orders\controllers\OrdersManageController.php (92)
 in D:\Important\Xamppp\htdocs\shahir\protected\components\AuthController.php (114)
 in D:\Important\Xamppp\htdocs\shahir\index.php (11)
+2017/10/25 11:14:01 [warning] [application] Failed to set unsafe attribute "files" of "Orders".
+in D:\Important\Xamppp\htdocs\shahir\protected\modules\orders\controllers\OrdersPublicController.php (84)
+in D:\Important\Xamppp\htdocs\shahir\index.php (11)
+2017/10/25 12:32:01 [warning] [application] Failed to set unsafe attribute "files" of "Orders".
+in D:\Important\Xamppp\htdocs\shahir\protected\modules\orders\controllers\OrdersPublicController.php (84)
+in D:\Important\Xamppp\htdocs\shahir\index.php (11)

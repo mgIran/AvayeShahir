@@ -14,16 +14,14 @@ $this->menu=array(
 
 <div class="box box-primary">
     <div class="box-header with-border">
-        <h3 class="box-title">مدیریت سفارشات</h3>
-        <a href="<?= $this->createUrl('create') ?>" class="btn btn-default btn-sm">افزودن سفارش جدید</a>
-        <a href="<?= $this->createUrl('trash') ?>" class="btn btn-warning btn-sm">زباله دان</a>
+        <h3 class="box-title">زباله دان</h3>
     </div>
     <div class="box-body">
         <?php $this->renderPartial("//layouts/_flashMessage"); ?>
         <div class="table-responsive">
             <?php $this->widget('zii.widgets.grid.CGridView', array(
                 'id'=>'orders-grid',
-                'dataProvider'=>$model->search(),
+                'dataProvider'=>$model->search(true),
                 'filter'=>$model,
                 'itemsCssClass'=>'table table-striped',
                 'ajaxUpdate' => true,
@@ -60,34 +58,28 @@ $this->menu=array(
                         'filter' => CHtml::listData(OrderCategories::validCategories(),'id', 'title')
                     ],
                     [
-                        'name' =>'status',
-                        'value' => '$data->statusLabels[$data->status]',
-                        'filter' => $model->statusLabels,
-                        'htmlOptions' => ['style' => 'width:150px']
-                    ],
-                    [
-                        'name' =>'done_time',
-                        'value' => '$data->getDoneTime()',
-                        'filter' => false
-                    ],
-                    [
-                        'name' =>'order_price',
-                        'value' => '$data->getOrderPrice()',
-                        'filter' => false
-                    ],
-                    [
-                        'name' =>'create_date',
-                        'value' => 'Yii::app()->language == \'fa\' ? Controller::parseNumbers(JalaliDate::date("Y/m/d - H:i",$data->create_date)):date("Y/m/d - H:i",$data->create_date)',
-                        'filter' => false
-                    ],
-                    [
                         'name' =>'update_date',
                         'value' => 'Yii::app()->language == \'fa\' ? Controller::parseNumbers(JalaliDate::date("Y/m/d - H:i",$data->update_date)):date("Y/m/d - H:i",$data->update_date)',
                         'filter' => false
                     ],
                     array(
                         'class'=>'CButtonColumn',
-                        'template' => '{view} {delete}'
+                        'template' => '{restore} {delete}',
+                        'htmlOptions' => [
+                            'style' => 'width: 150px'
+                        ],
+                        'buttons' => array(
+                            'delete' => array(
+                                'label' => 'حذف',
+                                'options' => array('class' => 'btn btn-danger btn-xs','style' => 'margin:0 10px 0 0'),
+                                'imageUrl' => false
+                            ),
+                            'restore' => array(
+                                'label' => 'بازیابی',
+                                'options' => array('class' => 'btn btn-success btn-xs'),
+                                'url' => 'Yii::app()->createUrl("/orders/manage/restore/".$data->id)',
+                            )
+                        )
                     ),
                 ),
             )); ?>

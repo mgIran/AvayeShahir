@@ -5,14 +5,27 @@
 /* @var $form CActiveForm */
 ?>
 <?php $form=$this->beginWidget('CActiveForm', array(
-    'id'=>'orders-form',
+    'id'=>'add-file-order-form',
     'action' => array('manage/addFile/'.$order->id),
     'enableAjaxValidation'=>false,
     'enableClientValidation'=>true,
     'clientOptions' => array(
-        'validateOnSubmit' => true
+        'validateOnSubmit' => true,
+        'afterValidate' => 'js:function(form ,data ,hasError){
+			if(!hasError)
+			{
+				var form = $("#add-file-order-form");
+				var loading = $("#add-file-order-form .loading-container");
+				var url = \''.Yii::app()->createUrl('/orders/manage/addFile/'.$order->id).'\';
+				submitAjaxForm(form ,url ,loading ,"location.reload();");
+				$("#close-add-modal").click();
+				$.fn.yiiGridView.update(\'orders-project-files-grid\');
+			}
+		}'
     )
 )); ?>
+
+    <?php $this->renderPartial('//layouts/_loading'); ?>
     <div class="row">
         <?php echo $form->labelEx($model,'title'); ?>
         <?php echo $form->textField($model, 'title', array('size' => 60, 'maxlength' => 255)) ?>
@@ -50,7 +63,7 @@
 
     <div class="row buttons">
         <?php echo CHtml::submitButton('افزودن',array('class' => 'btn btn-success')); ?>
-        <button type="button" data-dismiss="modal" class="btn btn-default pull-left">انصراف</button>
+        <button type="button" data-dismiss="modal" id="close-add-modal" class="btn btn-default pull-left">انصراف</button>
     </div>
 
 <?php $this->endWidget(); ?>

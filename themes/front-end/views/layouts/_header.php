@@ -74,7 +74,7 @@ $action = $this->action->id;
             }
             ?>
             <li>
-                <a href="<?= $menuID == 'orders' && $action == 'index'?'#top':Yii::app()->createUrl('/order'); ?>" title="<?= Yii::t('app','Translation & Correction');?>"><?= Yii::t('app','Translation & Correction');?></a>
+<!--                <a href="--><?//= $menuID == 'orders' && $action == 'index'?'#top':Yii::app()->createUrl('/order'); ?><!--" title="--><?//= Yii::t('app','Translation & Correction');?><!--">--><?//= Yii::t('app','Translation & Correction');?><!--</a>-->
             </li>
             <li>
                 <?

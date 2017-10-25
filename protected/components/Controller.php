@@ -157,6 +157,8 @@ class Controller extends AuthController
                         array('label' => 'مدیریت سفارشات', 'url' => Yii::app()->createUrl('/orders/manage/admin/')),
                         array('label' => 'سفارش جدید', 'url' => Yii::app()->createUrl('/orders/manage/create/')),
                         array('label' => 'مدیریت دسته بندی ها', 'url' => Yii::app()->createUrl('/orders/categories/admin/')),
+                        array('label' => 'زباله دان', 'url' => Yii::app()->createUrl('/orders/manage/trash')),
+                        array('label' => 'تنظیمات سفارشات', 'url' => Yii::app()->createUrl('/orders/manage/setting')),
                     )
                 ),
                 array(

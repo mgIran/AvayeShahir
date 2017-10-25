@@ -15,10 +15,11 @@
  * @property string $order_priority
  * @property string $create_date
  * @property string $update_date
- * @property string $files
+ * @property array $files
  *
  * The followings are the available model relations:
  * @property OrderFiles[] $orderFiles
+ * @property OrderFiles[] $doneFiles
  * @property Users $user
  * @property OrderCategories $category
  * @property UserTransactions $transaction
@@ -114,6 +115,7 @@ class Orders extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
             'orderFiles' => array(self::HAS_MANY, 'OrderFiles', 'order_id'),
+            'doneFiles' => array(self::HAS_MANY, 'OrderFiles', 'order_id', 'on' => 'file_type = :f', 'params'=>[':f' => OrderFiles::FILE_TYPE_DONE_FILE]),
             'category' => array(self::BELONGS_TO, 'OrderCategories', 'category_id'),
             'user' => array(self::BELONGS_TO, 'Users', 'user_id'),
             'transaction' => array(self::HAS_ONE, 'UserTransactions', 'model_id', 'on' => 'transaction.model_name = "Orders"'),
@@ -141,19 +143,11 @@ class Orders extends CActiveRecord
 		);
 	}
 
-	/**
-	 * Retrieves a list of models based on the current search/filter conditions.
-	 *
-	 * Typical usecase:
-	 * - Initialize the model fields with values from filter form.
-	 * - Execute this method to get CActiveDataProvider instance which will filter
-	 * models according to data in model fields.
-	 * - Pass data provider to CGridView, CListView or any similar widget.
-	 *
-	 * @return CActiveDataProvider the data provider that can return the models
-	 * based on the search/filter conditions.
-	 */
-	public function search()
+    /**
+     * @param bool $trash
+     * @return CActiveDataProvider
+     */
+	public function search($trash=false)
 	{
 		// @todo Please modify the following code to remove attributes that should not be searched.
 
@@ -172,7 +166,8 @@ class Orders extends CActiveRecord
             $criteria->addCondition('userDetails.name LIKE :n OR userDetails.name LIKE :n OR user.email LIKE :n');
             $criteria->params[":n"] = "%{$this->user_id}%";
         }
-		$criteria->addCondition('status > 0');
+        if(!$trash)
+		    $criteria->addCondition('status > 0');
         $criteria->order = 't.create_date';
 
 		return new CActiveDataProvider($this, array(

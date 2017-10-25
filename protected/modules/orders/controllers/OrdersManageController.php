@@ -26,8 +26,8 @@ class OrdersManageController extends Controller
 	{
 		return array(
 			'backend' => array(
-				'view', 'index', 'create', 'update', 'admin', 'delete', 'upload', 'deleteUpload',
-                'pricing', 'addFile', 'deleteFile', 'changeStatus', 'uploadFile'
+				'view', 'index', 'create', 'update', 'admin', 'trash', 'restore', 'delete', 'upload', 'deleteUpload',
+                'setting', 'pricing', 'addFile', 'deleteFile', 'changeStatus', 'uploadFile'
 			)
 		);
 	}
@@ -90,7 +90,10 @@ class OrdersManageController extends Controller
 		if(isset($_POST['Orders']))
 		{
 			$model->attributes=$_POST['Orders'];
-			$model->status = Orders::ORDER_STATUS_PAYMENT;
+            $model->status = Orders::ORDER_STATUS_PENDING;
+            if($model->order_price && $model->done_time)
+                $model->status = Orders::ORDER_STATUS_PAYMENT;
+
             if(isset($_POST['Orders']['files'])) {
                 foreach($_POST['Orders']['files'] as $file)
                     if ($file and file_exists($tmpDIR.$file)){
@@ -261,6 +264,27 @@ class OrdersManageController extends Controller
         }
     }
 
+    public function actionRestore($id)
+    {
+        $model = $this->loadModel($id);
+        $model->status = Orders::ORDER_STATUS_PENDING;
+        if($model->order_price){
+            if($model->doneFiles)
+                $model->status = Orders::ORDER_STATUS_DOING;
+            else if($model->transaction && $model->transaction->status == 'paid')
+                $model->status = Orders::ORDER_STATUS_PAID;
+            elseif($model->transaction && $model->transaction->status == 'unpaid')
+                $model->status = Orders::ORDER_STATUS_PAYMENT;
+        }
+        if($model->save()){
+            Yii::app()->user->setFlash('success', '<span class="icon-check"></span>&nbsp;&nbsp;سفارش موردنظر بازیابی شد.');
+            $this->redirect(array('admin'));
+        }else
+            Yii::app()->user->setFlash('failed', 'در ثبت اطلاعات خطایی رخ داده است! لطفا مجددا تلاش کنید.');
+    }
+
+
+
 	/**
 	 * Deletes a particular model.
 	 * If deletion is successful, the browser will be redirected to the 'admin' page.
@@ -268,7 +292,23 @@ class OrdersManageController extends Controller
 	 */
 	public function actionDelete($id)
 	{
-		$this->loadModel($id)->delete();
+        $model = $this->loadModel($id);
+        if(isset($_GET['forever']) && $_GET['forever']){
+            foreach($model->orderFiles as $file)
+                if($file->filename && file_exists(Yii::getPathOfAlias('webroot') . '/uploads/orders/' . $file->filename))
+                    @unlink(Yii::getPathOfAlias('webroot') . '/uploads/orders/' . $file->filename);
+            $flag = $model->delete();
+            $msg = 'سفارش به طور کامل حذف گردید';
+        }else{
+            $model->status = Orders::ORDER_STATUS_DELETED;
+            $flag = $model->save(false);
+            $msg = 'سفارش به زباله دان منتقل گردید.';
+        }
+
+        if($flag)
+            Yii::app()->user->setFlash('success', '<span class="icon-check"></span>&nbsp;&nbsp;'.$msg);
+        else
+            Yii::app()->user->setFlash('failed', 'در حذف سفارش مشکلی بوجود آمده است.');
 
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 		if(!isset($_GET['ajax']))
@@ -295,6 +335,23 @@ class OrdersManageController extends Controller
 			$model->attributes=$_GET['Orders'];
 
 		$this->render('admin',array(
+			'model'=>$model,
+		));
+	}
+
+    /**
+	 * Manages all models.
+	 */
+	public function actionTrash()
+	{
+        $this->layout = '//layouts/column2';
+		$model=new Orders('search');
+		$model->unsetAttributes();  // clear any default values
+		if(isset($_GET['Orders']))
+			$model->attributes=$_GET['Orders'];
+        $model->status = Orders::ORDER_STATUS_DELETED;
+
+		$this->render('trash',array(
 			'model'=>$model,
 		));
 	}
@@ -326,4 +383,20 @@ class OrdersManageController extends Controller
 			Yii::app()->end();
 		}
 	}
+    
+    public function actionSetting(){
+        Yii::app()->getModule('setting');
+        if(isset($_POST['OrdersSetting'])){
+            SiteSetting::setOption('order_receivers_phones',$_POST['OrdersSetting']['phones'], 'شماره تماس دریافت کنندگان اطلاعیه');
+            SiteSetting::setOption('order_receivers_emails',$_POST['OrdersSetting']['emails'], 'پست الکترونیک دریافت کنندگان اطلاعیه');
+            Yii::app()->user->setFlash('success', '<span class="icon-check"></span>&nbsp;&nbsp;تنظیمات ذخیره شد.');
+        }
+        $settings = [
+            'phones' => SiteSetting::getOption('order_receivers_phones'),
+            'emails' => SiteSetting::getOption('order_receivers_emails'),
+        ];
+        $this->render('settings',[
+            'settings' => $settings
+        ]);
+    }
 }

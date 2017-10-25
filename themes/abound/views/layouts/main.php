@@ -24,7 +24,7 @@
       $cs->registerCssFile($baseUrl.'/css/bootstrap-select.min.css');
 	  $cs->registerCssFile($baseUrl.'/css/bootstrap-responsive.min.css');
 	  $cs->registerCssFile($baseUrl.'/css/abound.css');
-      $cs->registerCssFile($baseUrl.'/css/rtl.css');
+      $cs->registerCssFile($baseUrl.'/css/rtl.css?1');
 	  $cs->registerCssFile($baseUrl.'/css/style-blue.css');
       $cs->registerCssFile($baseUrl.'/css/font-awesome.css');
       $cs->registerCssFile($baseUrl.'/css/persian-datepicker-0.4.5.min.css');

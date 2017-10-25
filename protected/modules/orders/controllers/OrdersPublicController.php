@@ -35,7 +35,7 @@ class OrdersPublicController extends Controller
             'upload' => array(
                 'class' => 'ext.dropZoneUploader.actions.AjaxUploadAction',
                 'attribute' => 'files',
-                'rename' => 'random',
+                'rename' => 'none',
                 'validateOptions' => array(
                     'acceptedTypes' => Orders::$acceptedFiles
                 )
@@ -99,6 +99,22 @@ class OrdersPublicController extends Controller
                 foreach($model->files as $file)
                     if ($file and file_exists($tmpDIR.$file))
                         @rename($tmpDIR.$file, $filesDIR.$file);
+                // Send Notify to User
+                $phone = $model->user->userDetails->phone;
+                $smsText = "سفارش {$model->title} با کد شناسه {$model->id} با موفقیت ثبت گردید و در اختیار کارشناسان قرار گرفت، پس از تعیین مدت زمان و هزینه انجام از طریق پیامک اطلاع رسانی خواهد شد. 
+با تشکر
+آوای شهیر";
+                @Notify::Send($smsText, $phone, $model->user->email);
+                //
+				// Send Notify to Admins
+                Yii::app()->getModule('setting');
+                $phones = SiteSetting::getOption('order_receivers_phones')?explode(',', SiteSetting::getOption('order_receivers_phones')):false;
+                $emails = SiteSetting::getOption('order_receivers_emails')?explode(',', SiteSetting::getOption('order_receivers_emails')):false;
+                if($phones){
+                    $smsText = "سفارش جدید با کد شناسه {$model->id} توسط کاربر در آوای شهیر ثبت گردید.";
+                    @Notify::Send($smsText, $phones, $emails);
+                }
+                //
 				Yii::app()->user->setFlash('success', '<span class="icon-check"></span>&nbsp;&nbsp;'.Yii::t('app', 'Your request has successfully been registered. Having examined your paper, we will inform you about thr price through an SMS.'));
 				$this->refresh();
 			}else
@@ -116,59 +132,59 @@ class OrdersPublicController extends Controller
 	 * If update is successful, the browser will be redirected to the 'view' page.
 	 * @param integer $id the ID of the model to be updated
 	 */
-	public function actionUpdate($id)
-	{
-		$model=$this->loadModel($id);
-        $tmpDIR = Yii::getPathOfAlias("webroot") . '/uploads/temp/';
-        if (!is_dir($tmpDIR))
-            mkdir($tmpDIR);
-        $tmpUrl = $this->createAbsoluteUrl('/uploads/temp/');
-        $filesDIR = Yii::getPathOfAlias("webroot") . "/uploads/orders/";
-        if (!is_dir($filesDIR))
-            mkdir($filesDIR);
-        $filesUrl = Yii::app()->getBaseUrl(true).'/uploads/orders';
-        $filesArray = [];
-        if($model->orderFiles){
-            foreach($model->orderFiles as $file)
-                if ($file->filename and file_exists($filesDIR.$file->filename)){
-                    $filesArray[] = array(
-                        'name' => $file->filename,
-                        'src' => $filesUrl . '/' . $file->filename,
-                        'size' => filesize($filesDIR . $file->filename),
-                        'serverName' => $file->filename,
-                    );
-                }else
-                    $file->delete();
-        }
-
-		if(isset($_POST['Orders']))
-		{
-			$model->attributes=$_POST['Orders'];
-            $model->files = $_POST['Orders']['files'];
-            if(isset($_POST['Orders']['files'])) {
-                foreach($_POST['Orders']['files'] as $file)
-                    if ($file and file_exists($tmpDIR.$file)){
-                        $filesArray[] = array(
-                            'name' => $file,
-                            'src' => $tmpUrl . '/' . $file,
-                            'size' => filesize($tmpDIR . $file),
-                            'serverName' => $file,
-                        );
-                        $model->files[] = $file;
-                    }
-            }
-			if($model->save()){
-                Yii::app()->user->setFlash('success', '<span class="icon-check"></span>&nbsp;&nbsp;'.Yii::t('app', 'Your request has successfully been registered. Having examined your paper, we will inform you about thr price through an SMS.'));
-                $this->refresh();
-            }else
-                Yii::app()->user->setFlash('failed', Yii::t('app', 'Oops! A problem has occurred! Please try again!'));
-		}
-
-		$this->render('update',array(
-			'model'=>$model,
-            'filesArray' => $filesArray
-		));
-	}
+//	public function actionUpdate($id)
+//	{
+//		$model=$this->loadModel($id);
+//        $tmpDIR = Yii::getPathOfAlias("webroot") . '/uploads/temp/';
+//        if (!is_dir($tmpDIR))
+//            mkdir($tmpDIR);
+//        $tmpUrl = $this->createAbsoluteUrl('/uploads/temp/');
+//        $filesDIR = Yii::getPathOfAlias("webroot") . "/uploads/orders/";
+//        if (!is_dir($filesDIR))
+//            mkdir($filesDIR);
+//        $filesUrl = Yii::app()->getBaseUrl(true).'/uploads/orders';
+//        $filesArray = [];
+//        if($model->orderFiles){
+//            foreach($model->orderFiles as $file)
+//                if ($file->filename and file_exists($filesDIR.$file->filename)){
+//                    $filesArray[] = array(
+//                        'name' => $file->filename,
+//                        'src' => $filesUrl . '/' . $file->filename,
+//                        'size' => filesize($filesDIR . $file->filename),
+//                        'serverName' => $file->filename,
+//                    );
+//                }else
+//                    $file->delete();
+//        }
+//
+//		if(isset($_POST['Orders']))
+//		{
+//			$model->attributes=$_POST['Orders'];
+//            $model->files = $_POST['Orders']['files'];
+//            if(isset($_POST['Orders']['files'])) {
+//                foreach($_POST['Orders']['files'] as $file)
+//                    if ($file and file_exists($tmpDIR.$file)){
+//                        $filesArray[] = array(
+//                            'name' => $file,
+//                            'src' => $tmpUrl . '/' . $file,
+//                            'size' => filesize($tmpDIR . $file),
+//                            'serverName' => $file,
+//                        );
+//                        $model->files[] = $file;
+//                    }
+//            }
+//			if($model->save()){
+//                Yii::app()->user->setFlash('success', '<span class="icon-check"></span>&nbsp;&nbsp;'.Yii::t('app', 'Your request has successfully been registered. Having examined your paper, we will inform you about thr price through an SMS.'));
+//                $this->refresh();
+//            }else
+//                Yii::app()->user->setFlash('failed', Yii::t('app', 'Oops! A problem has occurred! Please try again!'));
+//		}
+//
+//		$this->render('update',array(
+//			'model'=>$model,
+//            'filesArray' => $filesArray
+//		));
+//	}
 
 	/**
 	 * Deletes a particular model.
