@@ -155,9 +155,9 @@ return array(
             'appendParams'=>true,
 			'rules'=>array(
 				'gii' => 'gii/default/index',
-				'order' => 'orders/public/index',
-				'order/<action:(delete|payment|bill)>/<id:\d+>' => 'orders/public/<action>',
-				'order/verify' => 'orders/public/verify',
+				'edit&translation' => 'orders/public/index',
+				'edit&translation/<action:(delete|payment|bill)>/<id:\d+>' => 'orders/public/<action>',
+				'edit&translation/verify' => 'orders/public/verify',
                 '<action:(terms|forum|guidance|FAQ)>' => 'site/<action>',
 				'gallery' => 'gallery/manage/index',
 				'<module:(news|articles)>/category/<id:\d+>/<title:(.*)>' => '<module>/category/view',

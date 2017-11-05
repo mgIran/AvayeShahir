@@ -141,7 +141,7 @@ class tagIt extends CWidget
     {
         $this->registerClientScript();
         echo CHtml::textField($this->name,
-            $this->data && is_array($this->data) ? implode(',', $this->data) : $this->data,
+            $this->data && is_array($this->data) ? implode(',', $this->data) : $this->data?:'',
             array('id' => 'tagIt-'.$this->id)
         );
     }

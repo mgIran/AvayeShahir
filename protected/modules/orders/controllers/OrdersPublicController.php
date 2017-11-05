@@ -290,7 +290,7 @@ class OrdersPublicController extends Controller
                 }
                 if($flag){
                     $Amount = doubleval($lastTransaction->amount) * 10;
-                    $CallbackURL = Yii::app()->getBaseUrl(true) . '/order/verify';  // Required
+                    $CallbackURL = Yii::app()->getBaseUrl(true) . '/edit&translation/verify';  // Required
                     if($lastTransaction->gateway == UserTransactions::GATEWAY_MELLAT){
                         $result = Yii::app()->MellatPayment->PayRequest($Amount, $lastTransaction->order_id, $CallbackURL);
                         if(!$result['error']){
@@ -311,9 +311,9 @@ class OrdersPublicController extends Controller
                     }
                 }
             }else
-                $this->redirect($this->createUrl('/order/payment/' . $id));
+                $this->redirect($this->createUrl('/edit&translation/payment/' . $id));
         }else
-            $this->redirect($this->createUrl('/order/payment/' . $id));
+            $this->redirect($this->createUrl('/edit&translation/payment/' . $id));
 	}
 
     public function actionVerify()

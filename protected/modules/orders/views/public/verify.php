@@ -52,7 +52,7 @@
             <?
             if($model->res_code != 0):
             ?>
-            <a href="<?= $this->createUrl('/order/payment/'.$model->model_id) ?>" class="btn btn-info pull-left">تلاش مجدد</a>
+            <a href="<?= $this->createUrl('/edit&translation/payment/'.$model->model_id) ?>" class="btn btn-info pull-left">تلاش مجدد</a>
             <?php
             else:
             ?>

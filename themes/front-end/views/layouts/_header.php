@@ -74,7 +74,7 @@ $action = $this->action->id;
             }
             ?>
             <li>
-<!--                <a href="--><?//= $menuID == 'orders' && $action == 'index'?'#top':Yii::app()->createUrl('/order'); ?><!--" title="--><?//= Yii::t('app','Translation & Correction');?><!--">--><?//= Yii::t('app','Translation & Correction');?><!--</a>-->
+                <a href="<?= $menuID == 'orders' && $action == 'index'?'#top':Yii::app()->createUrl('/edit&translation'); ?>" title="<?= Yii::t('app','Translation & Correction');?>"><?= Yii::t('app','Translation & Correction');?></a>
             </li>
             <li>
                 <?
@@ -93,8 +93,7 @@ $action = $this->action->id;
                     'changeLabel' => false,
                     'onchange' => 'js:
                         var $s = {id};
-                        var $base = \''.Yii::app()->getBaseUrl(true).'/\';
-                        location.href = $base+$s;
+                        location.href = $s;
                     ',
                 ));
                 ?>

@@ -53,7 +53,7 @@
                     <div class="td"><?= $model->getOrderPrice() ?></div>
                 </div>
             </div>
-            <?php echo CHtml::beginForm(Yii::app()->createUrl('/order/bill/'.$model->id)); ?>
+            <?php echo CHtml::beginForm(Yii::app()->createUrl('/edit&translation/bill/'.$model->id)); ?>
             <?php echo CHtml::hiddenField('pay', ''); ?>
             <div class="form-group">
                 <div class="text-center col-lg-8 col-md-8 col-sm-8 col-xs-12 <?= Yii::app()->language == 'fa'?'col-lg-push-2 col-md-push-2 col-sm-push-2':'col-lg-pull-2 col-md-pull-2 col-sm-pull-2' ?>">
