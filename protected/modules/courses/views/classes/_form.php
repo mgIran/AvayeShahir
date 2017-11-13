@@ -96,15 +96,7 @@ Yii::app()->user->returnUrl = Yii::app()->request->getRequestUri();
             'model' => $model,
             'attribute' => 'classDays',
             'minLength' =>1,
-            'availableTags' => array(
-                'شنبه',
-                                'یکشنبه',
-                                'دوشنبه',
-                                'سه شنبه',
-                                'چهارشنبه',
-                                'پنجشنبه',
-                                'جمعه'
-            ),
+            'availableTags' => $model->weekDays,
             'data' => $model->classDays
         ));
         ?>

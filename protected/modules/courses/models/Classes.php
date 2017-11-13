@@ -46,14 +46,15 @@ class Classes extends SortableCActiveRecord
         return '{{classes}}';
     }
 
-    private $weekDays = array(
+    public $weekDays = array(
         'شنبه',
         'یکشنبه',
         'دوشنبه',
         'سه شنبه',
         'چهارشنبه',
         'پنجشنبه',
-        'جمعه'
+        'جمعه',
+        'جمعه ها',
     );
 
     public $formTags = [];
