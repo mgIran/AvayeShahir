@@ -81,7 +81,7 @@ class Courses extends SortableCActiveRecord
         $purifier = new CHtmlPurifier();
         $purifier->setOptions(array(
             'HTML.Allowed' => 'p,a,b,i,br,img',
-            'HTML.AllowedAttributes' => 'style,id,class,src,a.href',
+            'HTML.AllowedAttributes' => 'style,id,class,src,a.href,dir',
         ));
         return array(
             array('title, pic, summary', 'required'),

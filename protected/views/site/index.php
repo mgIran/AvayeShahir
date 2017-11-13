@@ -403,7 +403,7 @@ if($classes) :
                                         $purifier = new CHtmlPurifier();
                                         $purifier->setOptions(array(
                                             'HTML.Allowed'=> 'p,a[href|target],b,i,br',
-                                            'HTML.AllowedAttributes'=> 'style,id,class,src',
+                                            'HTML.AllowedAttributes'=> 'style,id,class,src,dir',
                                         ));
                                         echo $text = $purifier->purify($class->summary);
                                         ?>

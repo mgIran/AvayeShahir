@@ -50,6 +50,31 @@ $action = $this->action->id;
                 <a class="scroll-link" href="<?= $menuID == 'site' && $action == 'index'?'#classes':Yii::app()->getBaseUrl(true).'#classes'; ?>" title="<?= Yii::t('app','Classes');?>"><?= Yii::t('app','Classes');?></a>
             </li>
             <?php
+            if($this->getNewsCategories()){
+                ?>
+                <li>
+                    <?
+                    $this->widget('ext.dropDown.dropDown' ,array(
+                        'id' => 'nav_news' ,
+                        'name' => 'news' ,
+                        'label' => Yii::t('app' ,'News') ,
+                        'data' => $this->getNewsCategories() ,
+                        'caret' => '<i class="caret"></i>' ,
+                        'emptyOpt' => false ,
+                        'changeLabel' => false,
+                        'onchange' => 'js:
+                            var $s = {id};
+                            var $base = \'' . Yii::app()->createUrl('/') . '/\';
+                            location.href = $base+$s;
+                        ' ,
+                    ));
+                    ?>
+                </li>
+                <?php
+            }
+            ?>
+
+            <?php
             if($this->getArticleCategories()){
                 ?>
                 <li>
