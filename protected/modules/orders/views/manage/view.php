@@ -57,7 +57,9 @@ elseif($model->status == Orders::ORDER_STATUS_PAYMENT):
         </a>
     </div>
     <?php
-elseif($model->status > Orders::ORDER_STATUS_PAID):
+elseif($model->status >= Orders::ORDER_STATUS_PAID):
+    if($model->status == Orders::ORDER_STATUS_PAID)
+        echo '<h5 class="label label-danger">** لطفا پس از شروع فرآیند انجام سفارش جهت اطلاع کاربر، وضعیت سفارش را به "در حال انجام" تغییر دهید.</h5>';
     ?>
     <div class="form-group">
         <label>تغییر وضعیت سفارش</label>

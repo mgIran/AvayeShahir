@@ -424,7 +424,7 @@ class OrdersManageController extends Controller
             // Send Notify to user
             $smsText = "پرداخت حضوری هزینه سفارش {$model->title} شما با کد شناسه {$model->id} با موفقیت تایید گردید.
 شروع انجام سفارش متعاقباً به اطلاع شما خواهد رسید.
-    با تشکر
+با تشکر
 آوای شهیر";
             @Notify::Send($smsText, $model->user->userDetails->phone, $model->user->email);
             Yii::app()->user->setFlash('success', '<span class="icon-check"></span>&nbsp;&nbsp;اطلاعات با موفقیت ذخیره شد.');
