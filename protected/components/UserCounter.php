@@ -72,7 +72,7 @@ class UserCounter extends CComponent
 	 */
 	public function init()
 	{
-		$this->checkTables();
+		//$this->checkTables();
 		$this->refresh();
 	}
 

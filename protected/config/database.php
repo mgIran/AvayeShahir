@@ -5,16 +5,10 @@ return array(
 	//'connectionString' => 'sqlite:'.dirname(__FILE__).'/../data/testdrive.db',
 	// uncomment the following lines to use a MySQL database
 
-	/*'connectionString' => 'mysql:host=localhost;dbname=avayesha_db',
+	'connectionString' => 'mysql:host=localhost;dbname=avayeshahir_db',
 	'tablePrefix'=>'ym_',
 	'emulatePrepare' => true,
-	'username' => 'avayesha_gm',
-	'password' => '72k~l~y_9gEysp8zJI',
-	'charset' => 'utf8',*/
-	'connectionString' => 'mysql:host=localhost;dbname=shahir',
-	'tablePrefix'=>'ym_',
-	'emulatePrepare' => true,
-	'username' => 'root',
-	'password' => '',
-	'charset' => 'utf8',
+	'username' => 'avayeshahir_rahbod',
+	'password' => '6Qcr(R;emqgz~FHPi+',
+	'charset' => 'utf8'
 );

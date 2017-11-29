@@ -366,13 +366,7 @@ class UsersPublicController extends Controller
                         $message .= '<a href="'.Yii::app()->getBaseUrl(true).'/users/public/changePassword/token/'.$token.'">'.Yii::app()->getBaseUrl(true).'/users/public/changePassword/token/'.$token.'</a>';
                         $message .= '</div>';
                         $message .= '<div style="font-size: 8pt;color: #888;text-align: right;">اگر شخص دیگری غیر از شما این درخواست را صادر نموده است، یا شما کلمه عبور خود را به یاد آورده‌اید و دیگر نیازی به تغییر آن ندارید، کلمه عبور قبلی/موجود شما همچنان فعال می‌باشد و می توانید از طریق <a href="'.((strpos($_SERVER['SERVER_PROTOCOL'], 'https'))?'https://':'http://').$_SERVER['HTTP_HOST'].'/">این صفحه</a> وارد حساب کاربری خود شوید.</div>';
-                        $result = (new Mailer())->mail($model->email, 'درخواست تغییر کلمه عبور در '.Yii::app()->name, $message, Yii::app()->params['no-reply-email'],array(
-                            'Host' => 'mail.avayeshahir.com',
-                            'Port' => 465,
-                            'Secure' => 'ssl',
-                            'Username' => 'noreply@avayeshahir.com',
-                            'Password' => '!@avayeshahir1395',
-                        ));
+                        $result = (new Mailer())->mail($model->email, 'درخواست تغییر کلمه عبور در '.Yii::app()->name, $message, Yii::app()->params['no-reply-email']);
                         if($result)
                             echo CJSON::encode(array(
                                 'hasError'=>false,

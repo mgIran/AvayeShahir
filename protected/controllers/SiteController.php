@@ -648,7 +648,7 @@ class SiteController extends Controller
 
 	// temporary actions
 	public function actionRunSql(){
-		$flag = Yii::app()->db->createCommand("")
+		$flag = Yii::app()->db->createCommand("Update `ym_users` SET `change_password_request_count` = 0")
 			->execute();
         var_dump($flag);exit;
 	}
