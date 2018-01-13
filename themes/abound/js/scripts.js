@@ -1,4 +1,9 @@
 $(function(){
+    $.ajaxSetup({
+        data: {
+            'YII_CSRF_TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
     if($('.selectpicker').length && $.fn.selectpicker)
         $('.selectpicker').selectpicker();
     // CALL CALENDAR

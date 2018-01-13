@@ -40,6 +40,7 @@ return array(
 		'gallery',
 		'news',
 		'articles',
+		'writings',
 		'slideshow',
 		'orders',
 		'comments'=>array(
@@ -91,6 +92,13 @@ return array(
 
 	// application components
 	'components'=>array(
+		'request'=>array(
+			'enableCsrfValidation'=>true,
+		),
+		'jwt' => array(
+			'class' => 'ext.jwt.JWT',
+			'key' => base64_encode(md5('Rahbod-Avayeshahir-1396')),
+		),
 		'JGoogleAPI' => array(
 			'class' => 'ext.google.JGoogleAPI',
 			//Default authentication type to be used by the extension
@@ -155,16 +163,17 @@ return array(
             'appendParams'=>true,
 			'rules'=>array(
 				'gii' => 'gii/default/index',
+				'load' => 'writings/manage/ajaxLoad',
 				'edit&translation' => 'orders/public/index',
 				'edit&translation/<action:(delete|payment|bill)>/<id:\d+>' => 'orders/public/<action>',
 				'edit&translation/verify' => 'orders/public/verify',
                 '<action:(terms|forum|guidance|FAQ)>' => 'site/<action>',
 				'gallery' => 'gallery/manage/index',
-				'<module:(news|articles)>/category/<id:\d+>/<title:(.*)>' => '<module>/category/view',
-				'<module:(news|articles)>/category/<id:\d+>' => '<module>/category/view',
-				'<module:(news|articles)>/tag/<id:\d+>/<title:(.*)>' => '<module>/manage/tag',
-				'<module:(news|articles)>/tag/<id:\d+>' => '<module>/manage/tag',
-				'<module:(news|articles)>/tag' => '<module>/manage/tag',
+				'<module:(news|articles|writings)>/category/<id:\d+>/<title:(.*)>' => '<module>/category/view',
+				'<module:(news|articles|writings)>/category/<id:\d+>' => '<module>/category/view',
+				'<module:(news|articles|writings)>/tag/<id:\d+>/<title:(.*)>' => '<module>/manage/tag',
+				'<module:(news|articles|writings)>/tag/<id:\d+>' => '<module>/manage/tag',
+				'<module:(news|articles|writings)>/tag' => '<module>/manage/tag',
 				'teachers/<id:\d+>/<title:(.*)>' => 'users/teachers/view',
 				'<action:(login|logout|register|dashboard)>' => 'users/public/<action>',
                 '<module:\w+>/<id:\d+>/<title:(.*)>'=>'<module>/manage/view',

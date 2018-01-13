@@ -146,10 +146,9 @@
       dictResponseError: "Server responded with {{statusCode}} code.",
       dictCancelUpload: "Cancel upload",
       dictCancelUploadConfirmation: "Are you sure you want to cancel this upload?",
-      dictRemoveFile: "<span class=\"icon icon-lock\"></span>",
+      dictRemoveFile: "<span class=\"icon icon-lock fa fa-lock\"></span>",
       dictRemoveFileConfirmation: null,
       dictMaxFilesExceeded: "You can not upload any more files.",
-      dictMaxFiles: "Max Files:",
       accept: function(file, done) {
         return done();
       },
@@ -268,7 +267,7 @@
             node.innerHTML = this.filesize(file.size);
           }
           if (this.options.addRemoveLinks) {
-            file._removeLink = Dropzone.createElement("<a class=\"dz-remove icon icon-remove\" href=\"javascript:undefined;\" data-dz-remove>" + this.options.dictRemoveFile + "</a>");
+            file._removeLink = Dropzone.createElement("<a class=\"dz-remove icon icon-remove fa fa-remove\" href=\"javascript:undefined;\" data-dz-remove>" + this.options.dictRemoveFile + "</a>");
             file.previewElement.appendChild(file._removeLink);
           }
           removeFileEvent = (function(_this) {
@@ -537,7 +536,7 @@
         this.element.setAttribute("enctype", "multipart/form-data");
       }
       if (this.element.classList.contains("dropzone") && !this.element.querySelector(".dz-message")) {
-        this.element.appendChild(Dropzone.createElement("<div class=\"dz-default dz-message\"><span style='display: block;'>" + this.options.dictDefaultMessage + "</span>"+((this.options.maxFiles=='null')?"":"<span style='font-size:11px;display: block;'>"+this.options.dictMaxFiles+" "+this.options.maxFiles+"</span>")+"<span class='dz-accepted' >" + this.options.acceptedFiles + "</span></div>"));
+        this.element.appendChild(Dropzone.createElement("<div class=\"dz-default dz-message\"><span style='display: block;'>" + this.options.dictDefaultMessage + "</span>"+((this.options.maxFiles=='null')?"":"<span style='font-size:11px;display: block;'>تعداد فایل مجاز : "+this.options.maxFiles+"</span>")+"<span class='dz-accepted' >" + this.options.acceptedFiles + "</span></div>"));
       }
       if (this.clickableElements.length) {
         setupHiddenFileInput = (function(_this) {

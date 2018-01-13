@@ -90,7 +90,8 @@ class AjaxUploadAction extends CAction
             $validFlag = true;
             $uploadDir = Yii::getPathOfAlias("webroot").$this->uploadDir;
             if (!is_dir($uploadDir))
-                mkdir($uploadDir, 0777, true);
+                mkdir($uploadDir);
+
             if (isset($_FILES[$this->attribute])) {
                 $file = $_FILES[$this->attribute];
                 $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
@@ -140,17 +141,8 @@ class AjaxUploadAction extends CAction
                             $validFlag = false;
                         }
                     }
-                    if(isset($this->validateOptions['ratio'])){
-                        $imager = new Imager();
-                        $imageInfo = $imager->getImageInfo($file['tmp_name']);
-
-                        if(($imageInfo['width']/$imageInfo['height']) != $this->validateOptions['ratio']){
-                            $msg .= 'نسب ابعاد تصویر انتخاب شده صحیح نمی باشد.';
-                            $validFlag = false;
-                        }
-                    }
                     if (isset($this->validateOptions['acceptedTypes']) && is_array($this->validateOptions['acceptedTypes'])) {
-                        if (!in_array($ext, $this->validateOptions['acceptedTypes']) && !in_array('.'.$ext, $this->validateOptions['acceptedTypes'])) {
+                        if (!in_array($ext, $this->validateOptions['acceptedTypes'])) {
                             $msg .= 'فرمت فایل مجاز نیست.<br>فرمت های مجاز: '.implode(',', $this->validateOptions['acceptedTypes']).'<br>';
                             $validFlag = false;
                         }

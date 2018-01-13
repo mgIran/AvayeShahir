@@ -1,9 +1,9 @@
 <?php
 
 /**
- * This is the model class for table "{{articles}}".
+ * This is the model class for table "{{writings}}".
  *
- * The followings are the available columns in table '{{articles}}':
+ * The followings are the available columns in table '{{writings}}':
  * @property string $id
  * @property string $title
  * @property string $summary
@@ -16,13 +16,11 @@
  * @property string $order
  *
  * The followings are the available model relations:
- * @property ArticleFileLinks[] $links
- * @property ArticleLinks[] $extlinks
- * @property ArticleFiles[] $files
- * @property ArticleCategories $category
+
+ * @property WritingCategories $category
  * @property ClassTags[] $tags
  */
-class Articles extends SortableCActiveRecord
+class Writings extends SortableCActiveRecord
 {
 	const IS_WRITING = 1;
 
@@ -31,7 +29,7 @@ class Articles extends SortableCActiveRecord
 	 */
 	public function tableName()
 	{
-		return '{{articles}}';
+		return '{{writings}}';
 	}
 
 	public $formTags = [];
@@ -72,7 +70,7 @@ class Articles extends SortableCActiveRecord
 				'class' => 'ext.EasyMultiLanguage.EasyMultiLanguageBehavior',
 				// @todo Please change those attributes that should be translated.
 				'translated_attributes' => array('title', 'summary'),
-				'admin_routes' => array('articles/manage/admin', 'articles/manage/update', 'articles/manage/delete', 'articles/manage/create'),
+				'admin_routes' => array('writings/manage/admin', 'writings/manage/update', 'writings/manage/delete', 'writings/manage/create'),
 				//
 				'languages' => Yii::app()->params['languages'],
 				'default_language' => Yii::app()->params['default_language'],
@@ -121,12 +119,9 @@ class Articles extends SortableCActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'extlinks' => array(self::HAS_MANY, 'ArticleLinks', 'article_id', 'order' => 'extlinks.order'),
-			'links' => array(self::HAS_MANY, 'ArticleFileLinks', 'article_id', 'order' => 'links.order'),
-			'files' => array(self::HAS_MANY, 'ArticleFiles', 'article_id', 'order' => 'files.order'),
-			'category' => array(self::BELONGS_TO, 'ArticleCategories', 'category_id'),
-			'tags' => array(self::MANY_MANY, 'ClassTags', '{{article_tag_rel}}(article_id,tag_id)'),
-			'tagsRel' => array(self::HAS_MANY, 'ArticleTagRel', 'article_id'),
+			'category' => array(self::BELONGS_TO, 'WritingCategories', 'category_id'),
+			'tags' => array(self::MANY_MANY, 'ClassTags', '{{writing_tag_rel}}(writing_id,tag_id)'),
+			'tagsRel' => array(self::HAS_MANY, 'WritingTagRel', 'writing_id'),
 		);
 	}
 
@@ -190,7 +185,7 @@ class Articles extends SortableCActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return Articles the static model class
+	 * @return Writings the static model class
 	 */
 	public static function model($className = __CLASS__)
 	{
@@ -201,20 +196,20 @@ class Articles extends SortableCActiveRecord
 	{
 		if($this->formTags && !empty($this->formTags)){
 			if(!$this->isNewRecord)
-				ArticleTagRel::model()->deleteAll('article_id=' . $this->id);
+				WritingTagRel::model()->deleteAll('writing_id=' . $this->id);
 			foreach($this->formTags as $tag){
 				$tagModel = ClassTags::model()->findByAttributes(array('title' => $tag));
 				if($tagModel){
-					$tag_rel = new ArticleTagRel();
-					$tag_rel->article_id = $this->id;
+					$tag_rel = new WritingTagRel();
+					$tag_rel->writing_id = $this->id;
 					$tag_rel->tag_id = $tagModel->id;
 					$tag_rel->save(false);
 				}else{
 					$tagModel = new ClassTags;
 					$tagModel->title = $tag;
 					$tagModel->save(false);
-					$tag_rel = new ArticleTagRel();
-					$tag_rel->article_id = $this->id;
+					$tag_rel = new WritingTagRel();
+					$tag_rel->writing_id = $this->id;
 					$tag_rel->tag_id = $tagModel->id;
 					$tag_rel->save(false);
 				}
@@ -242,7 +237,7 @@ class Articles extends SortableCActiveRecord
 	 * @param string $alias
 	 * @return CDbCriteria
 	 */
-	public static function getValidArticles($categoryIds = array(), $order = 't.publish_date DESC', $limit = null, $alias = 't')
+	public static function getValidWritings($categoryIds = array(), $order = 't.publish_date DESC', $limit = null, $alias = 't')
 	{
 		$criteria = new CDbCriteria();
 		$criteria->compare($alias . '.' . 'status', 'publish');

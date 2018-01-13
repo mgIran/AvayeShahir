@@ -1,6 +1,11 @@
 var $body = $("body");
 var $window = $(window);
 $(function() {
+    $.ajaxSetup({
+        data: {
+            'YII_CSRF_TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
     $.material.init();
     // course categories show trigger
     var $courseHover;
