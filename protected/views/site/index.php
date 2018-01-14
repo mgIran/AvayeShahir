@@ -253,7 +253,7 @@ endif;
     <?php $this->renderPartial('_classes',compact('classes')); ?>
 </section>
 <?
-if($this->message):
+if($classes && $this->message):
 ?>
 <section class="message-box">
     <div class="container">
