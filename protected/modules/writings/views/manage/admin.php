@@ -8,6 +8,8 @@ $this->breadcrumbs=array(
 
 $this->menu=array(
 	array('label'=>'افزودن رایتینیگ', 'url'=>array('create')),
+	array('label'=>'مدیریت دسته بندی های رایتینیگ', 'url'=>array('/writings/category/admin')),
+	array('label'=>'افزودن دسته بندی رایتینیگ', 'url'=>array('/writings/category/create')),
 );
 ?>
 <? $this->renderPartial('//layouts/_flashMessage'); ?>
@@ -36,7 +38,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
 		),
 		array(
 			'class'=>'CButtonColumn',
-			'template' => '{update}{delete}'
+			'template' => '{view}{update}{delete}'
 		),
 	),
 )); ?>
