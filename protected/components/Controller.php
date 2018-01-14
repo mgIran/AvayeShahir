@@ -122,8 +122,8 @@ class Controller extends AuthController
                         array('label' => ' گروه ها', 'url' => Yii::app()->createUrl('/courses/categories/admin/')),
                         array('label' => ' کلاس ها', 'url' => Yii::app()->createUrl('/courses/classes/admin/')),
                         array('label' => 'ثبت نام حضوری در کلاس', 'url' => Yii::app()->createUrl('/courses/classes/classRegister/')),
-                        array('label' => 'کلمات کلیدی', 'url' => Yii::app()->createUrl('/courses/tags/admin/')),
-                        array('label' => 'نمونه های رایتینگ', 'url' => Yii::app()->createUrl('/writings/manage/admin/'))
+                        array('label' => 'نمونه های رایتینگ', 'url' => Yii::app()->createUrl('/writings/manage/admin/')),
+                        array('label' => 'کلمات کلیدی', 'url' => Yii::app()->createUrl('/courses/tags/admin/'))
                     )
                 ),
                 array(

@@ -649,9 +649,7 @@ class SiteController extends Controller
 	// temporary actions
 	public function actionRunSql(){
         $sql = "";
-		if(isset($_GET['filename']))
-			$sql = file_get_contents(Yii::getPathOfAlias("webroot")."/uploads/".$_GET['filename']);
-		$flag = Yii::app()->db->createCommand(strip_tags($sql))
+		$flag = Yii::app()->db->createCommand($sql)
 			->execute();
         var_dump($flag);exit;
 	}
