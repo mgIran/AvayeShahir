@@ -163,6 +163,17 @@ class Controller extends AuthController
                     )
                 ),
                 array(
+                    'label' => 'چند رسانه ای <span class="caret"></span>',
+                    'url' => '#',
+                    'itemOptions' => array('class' => 'dropdown', 'tabindex' => "-1"), 'linkOptions' => array('class' => 'dropdown-toggle', 'data-toggle' => "dropdown"),
+                    'items' => array(
+                        array('label' => 'افزودن ویدئو', 'url' => Yii::app()->createUrl('/multimedia/videos/create')),
+                        array('label' => 'افزودن تصویر', 'url' => Yii::app()->createUrl('/multimedia/pictures/create')),
+                        array('label' => 'مدیریت ویدئو ها', 'url' => Yii::app()->createUrl('/multimedia/videos/admin')),
+                        array('label' => 'مدیریت تصاویر', 'url' => Yii::app()->createUrl('/multimedia/pictures/admin')),
+                    )
+                ),
+                array(
                     'label' => 'FAQ<span class="caret"></span>',
                     'url' => '#',
                     'itemOptions' => array('class' => 'dropdown', 'tabindex' => "-1"),

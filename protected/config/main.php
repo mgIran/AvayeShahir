@@ -43,6 +43,7 @@ return array(
 		'writings',
 		'slideshow',
 		'orders',
+		'multimedia',
 		'comments'=>array(
 			//you may override default config for all connecting models
 			'defaultModelConfig' => array(

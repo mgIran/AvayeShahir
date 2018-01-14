@@ -217,5 +217,5 @@ return array(
     'Are you sure you want to delete forever this order?' => 'آیا از حذف این سفارش برای همیشه اطمینان دارید؟',
     'Delete Forever' => 'حذف برای همیشه',
     'New Order' => 'سفارش جدید',
-    'There is no class available at this time.' => 'در حال حاضر کلاسی موجود نیست.',
+    'There is no class available at the moment.' => 'در حال حاضر کلاسی موجود نیست.',
 );

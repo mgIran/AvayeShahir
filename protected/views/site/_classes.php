@@ -310,7 +310,7 @@
         ?>
         <div class="not-found">
             <div class="inner-flex">
-                <h3><?= Yii::t('app', 'There is no class available at this time.') ?></h3>
+                <h3><?= Yii::t('app', 'There is no class available at the moment.') ?></h3>
                 <p></p>
             </div>
         </div>
