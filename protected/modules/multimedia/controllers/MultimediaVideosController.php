@@ -162,7 +162,7 @@ class MultimediaVideosController extends Controller
 		if(isset($_POST['Multimedia']))
 		{
 			$model->attributes=$_POST['Multimedia'];
-            if(isset($_POST['Multimedia']['thumbnail'])){
+            if(isset($_POST['Multimedia']['thumbnail']) && is_file($tmpDIR.$_POST['Multimedia']['thumbnail'])){
                 $file = $_POST['Multimedia']['thumbnail'];
                 $thumbnail = array(
                     'name' => $file,
