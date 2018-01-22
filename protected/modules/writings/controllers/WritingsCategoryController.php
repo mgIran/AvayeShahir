@@ -15,7 +15,7 @@ class WritingsCategoryController extends Controller
 	{
 		return array(
 			'frontend'=>array('index', 'view'),
-			'backend' => array('create', 'update', 'admin', 'delete', 'upload','deleteUpload')
+			'backend' => array('create', 'update', 'admin', 'delete', 'upload','deleteUpload','order')
 		);
 	}
 
@@ -25,8 +25,17 @@ class WritingsCategoryController extends Controller
 	public function filters()
 	{
 		return array(
-			'checkAccess + create, update, admin, delete', // perform access control for CRUD operations
+			'checkAccess + create, update, admin, delete, order', // perform access control for CRUD operations
 			'postOnly + delete', // we only allow deletion via POST request
+		);
+	}
+
+	public function actions()
+	{
+		return array(
+			'order' => array(
+				'class' => 'ext.yiiSortableModel.actions.AjaxSortingAction',
+			)
 		);
 	}
 

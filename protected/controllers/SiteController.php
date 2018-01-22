@@ -89,6 +89,7 @@ class SiteController extends Controller
 		$this->render('index', compact(
 			'courses',
 			'newsProvider',
+			'writingsProvider',
 			'classes',
 			'personnel',
 			'teachers',

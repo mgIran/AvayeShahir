@@ -219,4 +219,5 @@ return array(
     'Delete Forever' => 'حذف برای همیشه',
     'New Order' => 'سفارش جدید',
     'There is no class available at the moment.' => 'در حال حاضر کلاسی موجود نیست.',
+    'new' => 'جدید',
 );

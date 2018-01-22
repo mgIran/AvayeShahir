@@ -3,6 +3,7 @@
 /* @var $slides Slideshow[] */
 /* @var $courses Courses[] */
 /* @var $newsProvider CActiveDataProvider */
+/* @var $writingsProvider CActiveDataProvider */
 /* @var $classes Classes[] */
 /* @var $personnel Personnel[] */
 /* @var $teachers Users[] */
@@ -123,6 +124,46 @@
     </div>
 </section>
 <?php
+if($writingsProvider->totalItemCount):
+?>
+<section class="news-section" id="writings">
+    <div class="container">
+        <h3 class="yekan-text"><?= Yii::t('app' ,'Writings') ?> <small class="text-danger"><?= Yii::t('app','new') ?></small></h3>
+        <div class="row">
+            <div class="col-lg-3 col-md-4 col-sm-5 col-xs-12 pull-left category-list">
+            <?php
+            $this->widget('ext.dropDown.dropDown', array(
+                'id' => 'writings_categories',
+                'name' => 'news',
+                'label' => Yii::t('app','Writings Category'),
+                'data' => $this->getWritingCategories(),
+                'caret' => '<i class="caret"></i>',
+                'emptyOpt' => false,
+                'onchange' => 'js:
+                    var $s = {id};
+                    var $base = \''.Yii::app()->createUrl('/').'/\';
+                    location.href = $base+$s;
+                ',
+            ));
+            ?>
+            </div>
+        </div>
+        <div class="news-container">
+            <?php
+            $this->widget("zii.widgets.CListView",array(
+                'id' => 'news-list',
+                'dataProvider' => $writingsProvider,
+                'itemView' => 'writings.views.manage._view',
+                'template' => '{items}',
+            ));
+            ?>
+        </div>
+    </div>
+</section>
+<?php
+endif;
+?>
+<?php /*
 if($newsProvider->totalItemCount):
 ?>
 <section class="news-section" id="news">
@@ -174,7 +215,7 @@ if($newsProvider->totalItemCount):
     </div>
 </section>
 <?php
-endif;
+endif;*/
 ?>
 <section class="signup" id="signup">
     <div class="mask"></div>

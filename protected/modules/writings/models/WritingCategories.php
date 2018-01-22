@@ -16,7 +16,7 @@
  * @property WritingCategories $parent
  * @property WritingCategories[] $childes
  */
-class WritingCategories extends CActiveRecord
+class WritingCategories extends SortableCActiveRecord
 {
 	/**
 	 * @return string the associated database table name
