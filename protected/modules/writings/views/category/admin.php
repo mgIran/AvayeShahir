@@ -26,7 +26,6 @@ $this->menu=array(
 	'columns'=>array(
 		'title',
 		'title_en',
-		'order',
 		array(
 			'header' => 'والد',
 			'name' => 'parent.fullTitle',
