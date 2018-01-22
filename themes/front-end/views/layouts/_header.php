@@ -98,6 +98,30 @@ $action = $this->action->id;
                 <?php
             }
             ?>
+            <?php
+            if($this->getWritingCategories()){
+                ?>
+                <li>
+                    <?
+                    $this->widget('ext.dropDown.dropDown' ,array(
+                        'id' => 'nav_writings' ,
+                        'name' => 'writing' ,
+                        'label' => Yii::t('app' ,'Writings') ,
+                        'data' => $this->getWritingCategories() ,
+                        'caret' => '<i class="caret"></i>' ,
+                        'emptyOpt' => false ,
+                        'changeLabel' => false,
+                        'onchange' => 'js:
+                            var $s = {id};
+                            var $base = \'' . Yii::app()->createUrl('/') . '/\';
+                            location.href = $base+$s;
+                        ' ,
+                    ));
+                    ?>
+                </li>
+                <?php
+            }
+            ?>
             <li>
                 <a href="<?= $menuID == 'orders' && $action == 'index'?'#top':Yii::app()->createUrl('/edit&translation'); ?>" title="<?= Yii::t('app','Translation & Correction');?>"><?= Yii::t('app','Translation & Correction');?></a>
             </li>

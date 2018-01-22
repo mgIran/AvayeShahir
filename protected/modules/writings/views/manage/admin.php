@@ -15,11 +15,11 @@ $this->menu=array(
 <? $this->renderPartial('//layouts/_flashMessage'); ?>
 <h1>مدیریت رایتینیگ ها</h1>
 
-<?php //$this->widget('ext.yiiSortableModel.widgets.SortableCGridView', array(
-//	'orderField' => 'order',
-//	'idField' => 'id',
-//	'orderUrl' => 'order',
-$this->widget('zii.widgets.grid.CGridView', array(
+<?php $this->widget('ext.yiiSortableModel.widgets.SortableCGridView', array(
+	'orderField' => 'order',
+	'idField' => 'id',
+	'orderUrl' => 'order',
+//$this->widget('zii.widgets.grid.CGridView', array(
 	'dataProvider'=>$model->search(),
 	'id'=>'class-categories-grid',
 	'filter'=>$model,

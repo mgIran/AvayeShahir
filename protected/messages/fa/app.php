@@ -144,6 +144,7 @@ return array(
     '{category} News' => 'اخبار {category}',
     '{category} Educational Materials' => 'مطالب آموزشی {category}',
     'News tagged "{tag}"' => 'اخبار برچسب "{tag}"',
+    'Writings tagged "{tag}"' => 'نمونه رایتینگ برچسب "{tag}"',
     'News Category' => 'دسته بندی های خبر',
     'Sharing' => 'اشتراک گذاری',
     'See More' => 'مشاهده مطالب بیشتر',

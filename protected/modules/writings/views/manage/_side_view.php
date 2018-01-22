@@ -4,7 +4,7 @@
 $thumbPath = Yii::getPathOfAlias("webroot").'/uploads/writings/200x200/';
 $date = Yii::app()->language=="fa" && $data->publish_date?JalaliDate::date("Y/m/d - H:i",$data->publish_date):($data->publish_date?date("Y/m/d - H:i",$data->publish_date):'');
 ?>
-<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 writing-container">
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 news-item-container">
 	<div class="news-item">
 		<div class="pic">
 			<?php

@@ -32,6 +32,7 @@ class SiteController extends Controller
 		Yii::app()->theme = 'front-end';
 		Yii::import('courses.models.*');
 		Yii::import('news.models.*');
+		Yii::import('writings.models.*');
 		Yii::import('personnel.models.*');
 		Yii::import('users.models.*');
 		Yii::import('pages.models.*');
@@ -68,6 +69,7 @@ class SiteController extends Controller
 				$classes[$course->id]['objects'] = Classes::model()->findAll($criteria);
 			}
 		}
+
 		$criteria = News::getValidNews();
 		$criteria->limit = 4;
 		$newsProvider = new CActiveDataProvider("News", array(
@@ -75,16 +77,23 @@ class SiteController extends Controller
 			'pagination' => array('pageSize' => 6)
 		));
 
+		$criteria = Writings::getValidWritings();
+		$criteria->limit = 4;
+		$writingsProvider = new CActiveDataProvider("Writings", array(
+			'criteria' => $criteria,
+			'pagination' => array('pageSize' => 6)
+		));
+
 
 		$this->slides = Slideshow::model()->getActiveSlides();
-		$this->render('index', array(
-			'courses' => $courses,
-			'newsProvider' => $newsProvider,
-			'classes' => $classes,
-			'personnel' => $personnel,
-			'teachers' => $teachers,
-			'aboutText' => $aboutText,
-			'termsText' => $termsText,
+		$this->render('index', compact(
+			'courses',
+			'newsProvider',
+			'classes',
+			'personnel',
+			'teachers',
+			'aboutText',
+			'termsText'
 		));
 	}
 

@@ -174,7 +174,7 @@ class Writings extends SortableCActiveRecord
 		$criteria->compare('category_id', $this->category_id, true);
 		$criteria->compare('order', $this->order, true);
 
-		$criteria->order = 't.create_date DESC';
+		$criteria->order = 't.order';
 
 		return new CActiveDataProvider($this, array(
 			'criteria' => $criteria,
@@ -237,7 +237,7 @@ class Writings extends SortableCActiveRecord
 	 * @param string $alias
 	 * @return CDbCriteria
 	 */
-	public static function getValidWritings($categoryIds = array(), $order = 't.publish_date DESC', $limit = null, $alias = 't')
+	public static function getValidWritings($categoryIds = array(), $order = 't.order', $limit = null, $alias = 't')
 	{
 		$criteria = new CDbCriteria();
 		$criteria->compare($alias . '.' . 'status', 'publish');
@@ -275,7 +275,8 @@ class Writings extends SortableCActiveRecord
 		}
 		$criteria->addCondition($condition);
 		$criteria->together = true;
-		$criteria->order = 't.publish_date DESC';
+//		$criteria->order = 't.publish_date DESC';
+		$criteria->order = 't.order';
 		return $criteria;
 	}
 }

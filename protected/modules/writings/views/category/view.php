@@ -17,7 +17,7 @@
 </div>
 <div class="page-content courses">
 	<div class="container">
-		<div class="writings-container">
+		<div class="news-container">
 			<div class="writings-category-list col-lg-4 col-md-4 col-sm-4 col-xs-12 pull-left">
 				<h3><?= Yii::t('app','Writings Category') ?></h3>
 				<ul class="main-menu nav nav-stacked tree">
@@ -26,7 +26,7 @@
 					?>
 				</ul>
 			</div>
-			<div class="writings-list col-lg-8 col-md-8 col-sm-8 col-xs-12 pull-left">
+			<div class="news-list col-lg-8 col-md-8 col-sm-8 col-xs-12 pull-left">
 				<?php
 				if($model->childes):
 				?>
@@ -54,7 +54,7 @@
 						'ajaxUpdate' => true,
 						'pager' => array(
 							'class' => 'ext.infiniteScroll.IasPager',
-							'rowSelector'=>'.writing-container',
+							'rowSelector'=>'.news-item-container',
 							'listViewId' => 'latest-writings-list',
 							'header' => '',
 							'loaderText'=>'در حال دریافت ...',
@@ -66,7 +66,7 @@
 								'triggerPageTreshold': 3,
 								'trigger': 'بیشتر',
 								'container': '#latest-writings-list',
-								'item': '.writing-container',
+								'item': '.news-item-container',
 								'pagination': '#latest-writings-list .pager',
 								'next': '#latest-writings-list .next:not(.disabled):not(.hidden) a',
 								'loader': 'در حال دریافت ...'

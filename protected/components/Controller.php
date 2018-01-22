@@ -38,6 +38,7 @@ class Controller extends AuthController
     public $courses = null;
     public $newsCategories = null;
     public $articleCategories = null;
+    public $writingCategories = null;
     /**
      * @var Slideshow[]
      */
@@ -313,6 +314,21 @@ class Controller extends AuthController
                 }
                 , 'title');
         return $this->articleCategories;
+    }
+
+    public function getWritingCategories()
+    {
+        Yii::import('writings.models.*');
+        if(!$this->writingCategories)
+            $this->writingCategories = CHtml::listData(WritingCategories::model()->findAll(array(
+                'condition' => 'parent_id IS NULL',
+                'order' => 't.order'
+            )),
+                function ($model){
+                    return 'writings/category/' . $model->id . '/' . urlencode($model->getValueLang('title', 'en'));
+                }
+                , 'title');
+        return $this->writingCategories;
     }
 
     public function getNewsCategories()
