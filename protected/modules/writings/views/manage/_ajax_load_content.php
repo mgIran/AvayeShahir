@@ -21,7 +21,7 @@ $imageUrl = Yii::app()->baseUrl.'/uploads/writings/';
 <div class="news-pic">
     <img src="<?= Yii::app()->baseUrl.'/uploads/writings/'.$model->image ?>" alt="<?= $model->title ?>">
 </div>
-<div class="news-text"><?= $model->summary ?></div>
+<div class="news-text" dir="auto"><?= $model->summary ?></div>
 <?php
 if($model->tags):
     ?>
