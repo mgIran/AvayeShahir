@@ -4208,3 +4208,7 @@ span.navTrigger > input[type="checkbox"]:checked + .lines::after {
     font-weight: bold;
     color: rgba(46, 165, 239, 0.6) !important;
 }
+.text *,
+.news-text *{
+    font-size: inherit;
+}

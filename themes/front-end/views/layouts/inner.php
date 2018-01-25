@@ -34,20 +34,20 @@
     $cs->registerCssFile($baseUrl.'/css/ripples.min.css');
     $cs->registerCssFile($baseUrl.'/css/owl.carousel.css');
     $cs->registerCssFile($baseUrl.'/css/font-awesome.css');
-    $cs->registerCssFile($baseUrl.'/css/svg.css?9');
-    $cs->registerCssFile($baseUrl.'/css/bootstrap-theme.css?9');
-    $cs->registerCssFile($baseUrl.'/css/responsive-theme.css?9');
+    $cs->registerCssFile($baseUrl.'/css/svg.css?9.3');
+    $cs->registerCssFile($baseUrl.'/css/bootstrap-theme.css?9.3');
+    $cs->registerCssFile($baseUrl.'/css/responsive-theme.css?9.3');
     if (Yii::app()->params['default_language'] !== Yii::app()->language)
     {
         // @todo add css for multi language
-        $cs->registerCssFile($baseUrl.'/css/bootstrap-theme-'.Yii::app()->language.'.css?9');
+        $cs->registerCssFile($baseUrl.'/css/bootstrap-theme-'.Yii::app()->language.'.css?9.3');
     }
 
     $cs->registerScriptFile($baseUrl.'/js/bootstrap.min.js');
     $cs->registerScriptFile($baseUrl.'/js/material.min.js');
     $cs->registerScriptFile($baseUrl.'/js/ripples.min.js');
     $cs->registerScriptFile($baseUrl.'/js/jquery.nicescroll.min.js');
-    $cs->registerScriptFile($baseUrl.'/js/scripts.js?9');
+    $cs->registerScriptFile($baseUrl.'/js/scripts.js?9.3');
     ?>
 </head>
 <body id="top" class="inner-page">
