@@ -71,8 +71,10 @@ class MultimediaVideosController extends Controller
 	 */
 	public function actionView($id)
 	{
+        Yii::app()->theme ='front-end';
+        $this->layout = '//layouts/inner';
+		Multimedia::model()->updateCounters(array('seen' => 1), 'id = :id', array(':id' => $id));
         if(Yii::app()->request->isAjaxRequest){
-            Multimedia::model()->updateCounters(array('seen' => 1), 'id = :id', array(':id' => $id));
             $this->beginClip('multimedia-view');
 			$this->renderPartial('_view', array('model' => $this->loadModel($id)));
 			$this->endClip();
@@ -201,6 +203,7 @@ class MultimediaVideosController extends Controller
             @unlink($path . 'thumbnail/' . $model->thumbnail);
         if($model->type == Multimedia::TYPE_PICTURE && $model->data && is_file($path . $model->data))
             @unlink($path . $model->data);
+        $model->delete();
 
         // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
         if(!isset($_GET['ajax']))
@@ -218,6 +221,7 @@ class MultimediaVideosController extends Controller
         $criteria->addCondition('type = :type');
 		$criteria->order = 't.order ASC';
         $criteria->params[':type']='video';
+        var_dump(Multimedia::model()->findAll($criteria));exit;
         $dataProvider = new CActiveDataProvider('Multimedia', array(
             'criteria'=>$criteria,
             'pagination'=>false,

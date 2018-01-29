@@ -163,7 +163,7 @@ if($writingsProvider->totalItemCount):
 <?php
 endif;
 ?>
-<?php /*
+<?php
 if($newsProvider->totalItemCount):
 ?>
 <section class="news-section" id="news">
@@ -214,9 +214,7 @@ if($newsProvider->totalItemCount):
         </div>
     </div>
 </section>
-<?php
-endif;*/
-?>
+<?php endif; ?>
 <section class="signup" id="signup">
     <div class="mask"></div>
     <?= $this->renderPartial("//layouts/_loading");?>
@@ -238,6 +236,9 @@ endif;*/
                         var loading = $(".signup .loading-container");
                         var url = \''.Yii::app()->createUrl('/register').'\';
                         submitAjaxForm(form ,url ,loading ,"if(html.state == \'ok\') location.reload();");
+                    }else{
+                        $("#signup .captcha a").click();    
+                        $("#signup #Users_verifyCode").val("");
                     }
                 }'
             ),
@@ -273,6 +274,20 @@ endif;*/
                         'max-length' => 11
                     ));
                     echo $form->error($signUpModel,'phone',array('class'=>'errorMessage tip'));?>
+                </div>
+                <div class="relative row">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <?php echo $form->textField($signUpModel,'verifyCode',array(
+                            'placeholder' => Yii::t('app','Verify Code'),
+                            'class' => 'text-field',
+                        )); ?>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-nowrap captcha">
+                        <?php $this->widget('CCaptcha', array(
+                            'captchaAction' => '/users/public/captcha2',
+                        )); ?>
+                    </div>
+                    <?= $form->error($signUpModel,'verifyCode',array('class'=>'errorMessage tip')); ?>
                 </div>
                 <div class="relative">
                     <div class="checkbox">

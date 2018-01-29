@@ -21,12 +21,12 @@ $this->menu=array(
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
 	'columns'=>array(
-//		array(
-//			'name' => 'data',
-//			'type' => 'raw',
-//			'htmlOptions' => array('style' => 'width:250px;'),
-//			'filter' => false
-//		),
+		array(
+			'name' => 'data',
+			'type' => 'raw',
+			'htmlOptions' => array('style' => 'width:250px;'),
+			'filter' => false
+		),
 		'title',
 		'seen',
 		array(

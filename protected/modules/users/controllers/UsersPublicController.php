@@ -11,6 +11,15 @@ class UsersPublicController extends Controller
             'checkAccess + dashboard, logout, setting, update', // perform access control for CRUD operations
         );
     }
+
+    public function actions(){
+        return array(
+            'captcha2' => array(
+                'class' => 'CCaptchaAction',
+                'backColor' => 0xFFFFFF,
+            )
+        );
+    }
     /**
      * Specifies the access control rules.
      * This method is used by the 'accessControl' filter.

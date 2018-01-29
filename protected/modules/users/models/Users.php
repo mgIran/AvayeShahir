@@ -56,6 +56,7 @@ class Users extends SortableCActiveRecord
 
     public $name;
     public $family;
+    public $verifyCode;
 
     /**
      * @return array validation rules for model attributes.
@@ -86,10 +87,21 @@ class Users extends SortableCActiveRecord
             array('phone', 'length', 'min' => 11, 'on' => 'agreeTerms,ajaxInsert'),
             array('name, family', 'length', 'max' => 50, 'on' => 'ajaxInsert'),
             array('create_date', 'length', 'max' => 20),
+//            array('verifyCode', 'captcha' ,'captchaAction'=>'captcha', 'allowEmpty'=>!CCaptcha::checkRequirements()),
+            array('verifyCode', 'activeCaptcha', 'on' => 'agreeTerms'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
             array('fullName ,email ,statusFilter,phone, create_date, verification_token, change_password_request_count', 'safe', 'on' => 'search,searchTeachers'),
         );
+    }
+
+    public function activeCaptcha()
+    {
+        $code = Yii::app()->getController()->createAction('captcha2')->verifyCode;
+        if(empty($code))
+            $this->addError('verifyCode', 'کد امنیتی نمی تواند خالی باشد.');
+        elseif($code != $this->verifyCode)
+            $this->addError('verifyCode', 'کد امنیتی نامعتبر است.');
     }
 
     /**

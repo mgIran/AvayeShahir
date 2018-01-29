@@ -4212,3 +4212,7 @@ span.navTrigger > input[type="checkbox"]:checked + .lines::after {
 .news-text *{
     font-size: inherit;
 }
+.signup .captcha{
+    margin-bottom: 0 !important;
+    padding-top: 15px;
+}
