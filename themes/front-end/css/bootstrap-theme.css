@@ -4203,10 +4203,16 @@ span.navTrigger > input[type="checkbox"]:checked + .lines::after {
     display: block;
     width:100%;
 }
-
 .inner-flex h3{
+    margin-top: -30px;
     font-weight: bold;
-    color: rgba(46, 165, 239, 0.6) !important;
+    margin-bottom: 50px !important;
+}
+.inner-flex p{
+    color: #777 !important;
+    white-space: pre-line;
+    font-size: 17px;
+    line-height: 30px;
 }
 .text *,
 .news-text *{

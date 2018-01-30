@@ -311,7 +311,7 @@
         <div class="not-found">
             <div class="inner-flex">
                 <h3><?= Yii::t('app', 'There is no class available at the moment.') ?></h3>
-                <p></p>
+                <p><?= Yii::t('app',"The Schedule for Future Classes Will Be Announced Soon.\nShould You Need More Information, Please Kindly Call the Institute.") ?></p>
             </div>
         </div>
         <?php
