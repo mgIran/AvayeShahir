@@ -236,6 +236,8 @@ if($newsProvider->totalItemCount):
                         var loading = $(".signup .loading-container");
                         var url = \''.Yii::app()->createUrl('/register').'\';
                         submitAjaxForm(form ,url ,loading ,"if(html.state == \'ok\') location.reload();");
+                        $("#signup .captcha a").click();    
+                        $("#signup #Users_verifyCode").val("");
                     }else{
                         $("#signup .captcha a").click();    
                         $("#signup #Users_verifyCode").val("");

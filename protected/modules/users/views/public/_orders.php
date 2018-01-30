@@ -5,7 +5,7 @@
 /* @var $form CActiveForm */
 ?>
 <div class="form-group">
-    <a href="<?= $this->createUrl('/order') ?>" class="btn btn-info">
+    <a href="<?= $this->createUrl('/edit&translation') ?>" class="btn btn-info">
         <i class="icon icon-plus"></i>
         <?= Yii::t('app', 'New Order') ?>
     </a>

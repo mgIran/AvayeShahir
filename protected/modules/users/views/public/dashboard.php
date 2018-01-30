@@ -41,7 +41,7 @@ if(isset($_GET['tab']) && !empty($_GET['tab']))
                         <i class="icon cart-icon"></i>
                         <span><?= Yii::t('app','Orders')?></span>
                         <?php
-                        $t = Orders::model()->count(['condition' => 'status = :s', 'params' => [":s"=> Orders::ORDER_STATUS_PAYMENT]]);
+                        $t = Orders::model()->count(['condition' => 'user_id = :user_id and status = :s', 'params' => [":user_id"=> Yii::app()->user->getId(),":s"=> Orders::ORDER_STATUS_PAYMENT]]);
                         if($t):
                         ?>
                         <span class="badge"><?= $t ?></span>
