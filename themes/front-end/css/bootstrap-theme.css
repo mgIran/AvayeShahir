@@ -3578,7 +3578,7 @@ ol{
     padding: 30px 15px;
 }
 .news-page-content.article-page-content .news-view .news-text{
-    min-height: 200px;
+    min-height: 50px;
     margin-bottom: 30px;
 }
 .extlinks li span{

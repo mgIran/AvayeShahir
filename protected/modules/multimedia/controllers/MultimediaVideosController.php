@@ -19,7 +19,8 @@ class MultimediaVideosController extends Controller
 		return array(
 			'frontend'=>array(
 				'index',
-				'view'
+				'view',
+				'tag',
 			),
 			'backend' => array(
 				'create',
@@ -99,6 +100,7 @@ class MultimediaVideosController extends Controller
 			$model->attributes=$_POST['Multimedia'];
             $thumbnail = new UploadedFiles($this->tempPath, $model->thumbnail, $this->thumbOptions);
 			$model->type = Multimedia::TYPE_VIDEO;
+			$model->formTags = isset($_POST['Multimedia']['formTags'])?explode(',',$_POST['Multimedia']['formTags']):null;
 			if($model->save()){
                 $thumbnail->move($this->thumbsPath);
 
@@ -124,11 +126,15 @@ class MultimediaVideosController extends Controller
 		$model=$this->loadModel($id);
 		$thumbnail = new UploadedFiles($this->thumbsPath, $model->thumbnail, $this->thumbOptions);
 
+		foreach($model->tags as $tag)
+			array_push($model->formTags,$tag->title);
+
 		if(isset($_POST['Multimedia']))
 		{
 			$oldImage = $model->thumbnail;
 			$model->attributes=$_POST['Multimedia'];
 			$model->type = Multimedia::TYPE_VIDEO;
+			$model->formTags = isset($_POST['Multimedia']['formTags'])?explode(',',$_POST['Multimedia']['formTags']):null;
 			if($model->save()){
                 $thumbnail->update($oldImage, $model->thumbnail,$this->tempPath);
 				Yii::app()->user->setFlash('success', '<span class="icon-check"></span>&nbsp;&nbsp;اطلاعات با موفقیت ذخیره شد.');
@@ -179,6 +185,34 @@ class MultimediaVideosController extends Controller
         $this->render('index', array(
             'dataProvider'=>$dataProvider,
         ));
+	}
+
+	/**
+	 * Displays a particular model.
+	 * @param integer $id the ID of the model to be displayed
+	 */
+	public function actionTag($id)
+	{
+		Yii::app()->theme = 'front-end';
+		$this->layout = '//layouts/inner';
+
+		$model = ClassTags::model()->findByPk($id);
+		$this->keywords = 'آوای شهیر,برچسب ویدئوها '.$model->title.',برچسب '.$model->title.','.$model->title;
+		$this->pageTitle = 'برچسب '.$model->title;
+
+		// get latest news
+		$criteria = new CDbCriteria();
+		$criteria->together = true;
+		$criteria->compare('tagsRel.tag_id',$model->id);
+		$criteria->with[] = 'tagsRel';
+		$dataProvider = new CActiveDataProvider("Multimedia",array(
+			'criteria' => $criteria,
+			'pagination' => array('pageSize' => 20)
+		));
+		$this->render('tags',array(
+			'model' => $model,
+			'dataProvider' => $dataProvider
+		));
 	}
 
 	/**

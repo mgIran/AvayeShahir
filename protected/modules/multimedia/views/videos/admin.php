@@ -17,14 +17,21 @@ $this->menu=array(
 	'orderField' => 'order',
 	'idField' => 'id',
 	'orderUrl' => 'order',
+	'allItemsInOnePage' => false,
+//$this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'multimedia-grid',
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
+	'template' => '{items} {pager}',
 	'columns'=>array(
 		array(
-			'name' => 'data',
+			'name' => 'thumbnail',
+			'value' => function($model){
+				$path = Yii::getPathOfAlias('webroot').'/uploads/multimedia/thumbnail/';
+				return $model->thumbnail && is_file($path.$model->thumbnail)?CHtml::image(Yii::app()->getBaseUrl(true).'/uploads/multimedia/thumbnail/'.$model->thumbnail,'', array('style' => 'width:80px;')):'';
+			},
 			'type' => 'raw',
-			'htmlOptions' => array('style' => 'width:250px;'),
+			'htmlOptions' => array('style' => 'width:50px;'),
 			'filter' => false
 		),
 		'title',

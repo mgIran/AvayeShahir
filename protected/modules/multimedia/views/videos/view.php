@@ -9,7 +9,7 @@ $imageUrl = Yii::app()->baseUrl.'/uploads/multimedia/videos/thumbnail/';
 	<div class="container">
 		<h2><?= $model->title ?></h2>
 		<div class="details">
-			<span><?= Yii::t('app','Multimedia') ?></span>
+			<span><?= Yii::t('app','Views') ?></span>
 			<span><?= Yii::app()->language == 'fa'?Controller::parseNumbers($model->seen):$model->seen ?></span>
 			<span class="svg svg-eye pull-right"></span>
 		</div>
@@ -22,6 +22,25 @@ $imageUrl = Yii::app()->baseUrl.'/uploads/multimedia/videos/thumbnail/';
 			<div class="news-pic">
 				<?= $model->data ?>
 			</div>
+			<div class="news-text"><?= $model->description ?></div>
+			<!-- END OF NEWS CONTENT -->
+
+
+			<?php
+			if($model->tags):
+				?>
+				<!-- NEWS META DATA : TAGS -->
+				<div class="news-tags">
+					<h5><?= Yii::t('app','Tags') ?></h5>
+					<?php
+					foreach ($model->tags as $tag)
+						if($tag->title && !empty($tag->title))
+							echo CHtml::link($tag->title,array('/multimedia/videos/tag/'.$tag->id.'/'.urlencode($tag->title)),array('class'=>'label label-blue'));
+					?>
+				</div>
+				<?php
+			endif;
+			?>
 			<div class="overflow-fix">
 				<div class="news-share pull-right">
 					<span><?= Yii::t('app','Sharing') ?></span><span class="share-icons">
@@ -40,7 +59,7 @@ $imageUrl = Yii::app()->baseUrl.'/uploads/multimedia/videos/thumbnail/';
 			</div>
 		</div>
 		<div class="latest-articles col-lg-4 col-md-4 col-sm-12 col-xs-12">
-			<h3><?= Yii::t('app','Category') ?></h3>
+			<h3><?= Yii::t('app','Latest Videos') ?></h3>
 			<ul class="main-menu nav nav-stacked tree">
 				<?php
 				Multimedia::getLatest('videos');
