@@ -319,15 +319,17 @@ class Controller extends AuthController
     public function getWritingCategories()
     {
         Yii::import('writings.models.*');
-        if(!$this->writingCategories)
-            $this->writingCategories = CHtml::listData(WritingCategories::model()->findAll(array(
-                'condition' => 'parent_id IS NULL',
+        if(!$this->writingCategories){
+            $models = WritingCategories::model()->findAll(array(
+                'condition' => 'parent_id IS NOT NULL',
                 'order' => 't.order'
-            )),
+            ));
+            $this->writingCategories = CHtml::listData($models,
                 function ($model){
                     return 'writings/category/' . $model->id . '/' . urlencode($model->getValueLang('title', 'en'));
                 }
                 , 'title');
+        }
         return $this->writingCategories;
     }
 
