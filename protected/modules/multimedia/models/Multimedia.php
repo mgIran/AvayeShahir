@@ -11,6 +11,7 @@
  * @property string $order
  * @property string $seen
  * @property string $thumbnail
+ * @property string $description
  *
  * The followings are the available model relations:
  * @property ClassTags[] $tags
@@ -61,7 +62,7 @@ class Multimedia extends SortableCActiveRecord
 		return array(
 			'EasyMultiLanguage' => array(
 				'class' => 'ext.EasyMultiLanguage.EasyMultiLanguageBehavior',
-				'translated_attributes' => array('title'),
+				'translated_attributes' => array('title', 'description'),
 				'admin_routes' => array('multimedia/videos/create', 'multimedia/videos/update', 'multimedia/videos/admin',
 					'multimedia/pictures/create', 'multimedia/pictures/update', 'multimedia/pictures/admin'),
 				//
@@ -86,7 +87,7 @@ class Multimedia extends SortableCActiveRecord
 			array('data', 'length', 'max' => 1000),
 			array('thumbnail', 'length', 'max' => 255),
 			array('order, seen', 'length', 'max' => 10),
-			array('formTags', 'safe'),
+			array('formTags, description', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, type, title, data, order, seen', 'safe', 'on' => 'search'),
@@ -119,6 +120,7 @@ class Multimedia extends SortableCActiveRecord
 			'order' => 'ترتیب',
 			'seen' => 'تعداد بازدید',
 			'thumbnail' => 'تصویر',
+			'description' => 'توضیحات',
 			'formTags' => 'برچسب ها',
 		);
 	}
@@ -169,8 +171,12 @@ class Multimedia extends SortableCActiveRecord
 
 	public static function getLatest($type = 'videos')
 	{
-		foreach(Multimedia::model()->findAllByAttributes(['type' => $type]) as $model)
-			echo '<li><a href="' . Yii::app()->createUrl('/multimedia/'.$type.'/' . $model->id . '/' . urlencode($model->title)) . '" ><span>' . $model->title . '</span></a></li>';
+		$criteria = new CDbCriteria();
+		$criteria->compare('type', $type == 'videos'?Multimedia::TYPE_VIDEO:Multimedia::TYPE_PICTURE);
+		$criteria->limit = 15;
+		$criteria->order = 'id DESC';
+		foreach(Multimedia::model()->findAll($criteria) as $model)
+			echo '<li><a href="' . Yii::app()->createUrl('/multimedia/' . $type . '/' . $model->id . '/' . urlencode($model->title)) . '" ><span>' . $model->title . '</span></a></li>';
 	}
 
 	protected function afterSave()

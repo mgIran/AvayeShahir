@@ -22,23 +22,6 @@ $imageUrl = Yii::app()->baseUrl.'/uploads/multimedia/videos/thumbnail/';
 			<div class="news-pic">
 				<?= $model->data ?>
 			</div>
-			<!-- END OF NEWS CONTENT -->
-<!--			--><?php
-//			if($model->tags):
-//				?>
-<!--				<!-- NEWS META DATA : TAGS -->
-<!--				<div class="news-tags">-->
-<!--					<h5>--><?//= Yii::t('app','Tags') ?><!--</h5>-->
-<!--					--><?php
-//					foreach ($model->tags as $tag)
-//						if($tag->title && !empty($tag->title))
-//							echo CHtml::link($tag->title,array('/multimedia/videos/tag/'.$tag->id.'/'.urlencode($tag->title)),array('class'=>'label label-blue'));
-//					?>
-<!--				</div>-->
-<!--				--><?php
-//			endif;
-//			?>
-			<!-- NEWS META DATA : SOCIAL MEDIA -->
 			<div class="overflow-fix">
 				<div class="news-share pull-right">
 					<span><?= Yii::t('app','Sharing') ?></span><span class="share-icons">
@@ -60,7 +43,7 @@ $imageUrl = Yii::app()->baseUrl.'/uploads/multimedia/videos/thumbnail/';
 			<h3><?= Yii::t('app','Category') ?></h3>
 			<ul class="main-menu nav nav-stacked tree">
 				<?php
-				Multimedia::getLatest('video');
+				Multimedia::getLatest('videos');
 				?>
 			</ul>
 		</div>

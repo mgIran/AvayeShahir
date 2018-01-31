@@ -168,6 +168,7 @@ return array(
 				'edit&translation' => 'orders/public/index',
 				'edit&translation/<action:(delete|payment|bill)>/<id:\d+>' => 'orders/public/<action>',
 				'edit&translation/verify' => 'orders/public/verify',
+				'multimedia/<controller:\w+>/<id:\d+>/<title:(.*)>'=>'multimedia/<controller>/view',
                 '<action:(terms|forum|guidance|FAQ)>' => 'site/<action>',
 				'gallery' => 'gallery/manage/index',
 				'<module:(news|articles|writings)>/category/<id:\d+>/<title:(.*)>' => '<module>/category/view',

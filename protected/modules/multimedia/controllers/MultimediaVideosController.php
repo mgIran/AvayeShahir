@@ -1,5 +1,5 @@
 <?php
-
+Yii::import('courses.models.ClassTags');
 class MultimediaVideosController extends Controller
 {
 	/**
@@ -7,7 +7,10 @@ class MultimediaVideosController extends Controller
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
 	 */
 	public $layout='//layouts/column2';
-
+	public $tempPath = 'uploads/temp';
+	public $thumbsPath = 'uploads/multimedia/thumbnail';
+	public $thumbOptions = ['thumbnail' => ['width' => 200, 'height' => 200]];
+	
 	/**
 	 * @return array action filters
 	 */
@@ -73,17 +76,14 @@ class MultimediaVideosController extends Controller
 	{
         Yii::app()->theme ='front-end';
         $this->layout = '//layouts/inner';
+		$model = $this->loadModel($id);
+		$this->keywords = $model->getKeywords();
+		$this->description = substr(strip_tags($model->getValueLang('description', 'en')), 0, 160);
+		$this->pageTitle = $model->getValueLang('title', 'en');
 		Multimedia::model()->updateCounters(array('seen' => 1), 'id = :id', array(':id' => $id));
-        if(Yii::app()->request->isAjaxRequest){
-            $this->beginClip('multimedia-view');
-			$this->renderPartial('_view', array('model' => $this->loadModel($id)));
-			$this->endClip();
-			echo CJSON::encode(['status' => true, 'html' => $this->clips['multimedia-view']]);
-			Yii::app()->end();
-		}else
-			$this->render('view', array(
-				'model' => $this->loadModel($id)
-			));
+		$this->render('view', array(
+			'model' => $model
+		));
 	}
 
 	/**
@@ -93,32 +93,14 @@ class MultimediaVideosController extends Controller
 	public function actionCreate()
 	{
 		$model=new Multimedia;
-
-        $tmpDIR = Yii::getPathOfAlias("webroot") . '/uploads/temp/';
-        if(!is_dir($tmpDIR))
-            mkdir($tmpDIR);
-        $tmpUrl = Yii::app()->baseUrl . '/uploads/temp/';
-        $dataDIR = Yii::getPathOfAlias("webroot") . "/uploads/multimedia/thumbnail/";
-        if(!is_dir($dataDIR))
-            mkdir($dataDIR, 0777, true);
-
-        $thumbnail = array();
+        $thumbnail = [];
 		if(isset($_POST['Multimedia']))
 		{
 			$model->attributes=$_POST['Multimedia'];
-            if(isset($_POST['Multimedia']['thumbnail'])){
-                $file = $_POST['Multimedia']['thumbnail'];
-                $thumbnail = array(
-                    'name' => $file,
-                    'src' => $tmpUrl . '/' . $file,
-                    'size' => filesize($tmpDIR . $file),
-                    'serverName' => $file,
-                );
-            }
+            $thumbnail = new UploadedFiles($this->tempPath, $model->thumbnail, $this->thumbOptions);
 			$model->type = Multimedia::TYPE_VIDEO;
 			if($model->save()){
-                if($model->thumbnail and file_exists($tmpDIR . $model->thumbnail))
-                    @rename($tmpDIR . $model->thumbnail, $dataDIR . $model->thumbnail);
+                $thumbnail->move($this->thumbsPath);
 
 				Yii::app()->user->setFlash('success', '<span class="icon-check"></span>&nbsp;&nbsp;اطلاعات با موفقیت ذخیره شد.');
 				$this->redirect(array('admin'));
@@ -140,44 +122,15 @@ class MultimediaVideosController extends Controller
 	public function actionUpdate($id)
 	{
 		$model=$this->loadModel($id);
-
-        $tmpDIR = Yii::getPathOfAlias("webroot") . '/uploads/temp/';
-        if(!is_dir($tmpDIR))
-            mkdir($tmpDIR);
-        $tmpUrl = Yii::app()->baseUrl . '/uploads/temp/';
-        $dataDIR = Yii::getPathOfAlias("webroot") . "/uploads/multimedia/thumbnail/";
-        if(!is_dir($dataDIR))
-            mkdir($dataDIR);
-        $dataUrl = Yii::app()->baseUrl . '/uploads/multimedia/thumbnail/';
-
-        $thumbnail = array();
-        if($model->thumbnail and file_exists($dataDIR . $model->thumbnail)){
-            $file = $model->thumbnail;
-            $thumbnail = array(
-                'name' => $file,
-                'src' => $dataUrl . '/' . $file,
-                'size' => filesize($dataDIR . $file),
-                'serverName' => $file,
-            );
-        }
+		$thumbnail = new UploadedFiles($this->thumbsPath, $model->thumbnail, $this->thumbOptions);
 
 		if(isset($_POST['Multimedia']))
 		{
+			$oldImage = $model->thumbnail;
 			$model->attributes=$_POST['Multimedia'];
-            if(isset($_POST['Multimedia']['thumbnail']) && is_file($tmpDIR.$_POST['Multimedia']['thumbnail'])){
-                $file = $_POST['Multimedia']['thumbnail'];
-                $thumbnail = array(
-                    'name' => $file,
-                    'src' => $tmpUrl . '/' . $file,
-                    'size' => filesize($tmpDIR . $file),
-                    'serverName' => $file,
-                );
-            }
 			$model->type = Multimedia::TYPE_VIDEO;
 			if($model->save()){
-                if($model->thumbnail and file_exists($tmpDIR . $model->thumbnail))
-                    @rename($tmpDIR . $model->thumbnail, $dataDIR . $model->thumbnail);
-
+                $thumbnail->update($oldImage, $model->thumbnail,$this->tempPath);
 				Yii::app()->user->setFlash('success', '<span class="icon-check"></span>&nbsp;&nbsp;اطلاعات با موفقیت ذخیره شد.');
 				$this->redirect(array('admin'));
 			}else
@@ -198,11 +151,8 @@ class MultimediaVideosController extends Controller
 	public function actionDelete($id)
     {
         $model = $this->loadModel($id);
-        $path = Yii::getPathOfAlias('webroot') . '/uploads/multimedia/';
-        if($model->thumbnail && is_file($path . 'thumbnail/' . $model->thumbnail))
-            @unlink($path . 'thumbnail/' . $model->thumbnail);
-        if($model->type == Multimedia::TYPE_PICTURE && $model->data && is_file($path . $model->data))
-            @unlink($path . $model->data);
+		$thumbnail = new UploadedFiles($this->tempPath, $model->thumbnail, $this->thumbOptions);
+		$thumbnail->removeAll(true);
         $model->delete();
 
         // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
@@ -221,10 +171,9 @@ class MultimediaVideosController extends Controller
         $criteria->addCondition('type = :type');
 		$criteria->order = 't.order ASC';
         $criteria->params[':type']='video';
-        var_dump(Multimedia::model()->findAll($criteria));exit;
         $dataProvider = new CActiveDataProvider('Multimedia', array(
             'criteria'=>$criteria,
-            'pagination'=>false,
+            'pagination'=>array('pageSize' => 15),
         ));
 
         $this->render('index', array(
