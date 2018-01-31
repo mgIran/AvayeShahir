@@ -33,20 +33,20 @@
     $cs->registerCssFile($baseUrl.'/css/ripples.min.css');
     $cs->registerCssFile($baseUrl.'/css/owl.carousel.css');
     $cs->registerCssFile($baseUrl.'/css/font-awesome.css');
-    $cs->registerCssFile($baseUrl.'/css/bootstrap-theme.css?9.5');
-    $cs->registerCssFile($baseUrl.'/css/responsive-theme.css?9.5');
+    $cs->registerCssFile($baseUrl.'/css/bootstrap-theme.css?9.6');
+    $cs->registerCssFile($baseUrl.'/css/responsive-theme.css?9.6');
     if (Yii::app()->params['default_language'] !== Yii::app()->language)
     {
         // @todo add css for multi language
-        $cs->registerCssFile($baseUrl.'/css/bootstrap-theme-'.Yii::app()->language.'.css?9.5');
+        $cs->registerCssFile($baseUrl.'/css/bootstrap-theme-'.Yii::app()->language.'.css?9.6');
     }
-    $cs->registerCssFile($baseUrl.'/css/panel.css?9.5');
+    $cs->registerCssFile($baseUrl.'/css/panel.css?9.6');
     if (Yii::app()->params['default_language'] !== Yii::app()->language)
     {
         // @todo add css for multi language
-        $cs->registerCssFile($baseUrl.'/css/panel-'.Yii::app()->language.'.css?9.5');
+        $cs->registerCssFile($baseUrl.'/css/panel-'.Yii::app()->language.'.css?9.6');
     }
-    $cs->registerCssFile($baseUrl.'/css/panel-responsive-theme.css?9.5');
+    $cs->registerCssFile($baseUrl.'/css/panel-responsive-theme.css?9.6');
     
     $cs->registerScriptFile($baseUrl.'/js/bootstrap.min.js');
     $cs->registerScriptFile($baseUrl.'/js/material.min.js');
@@ -54,7 +54,7 @@
     $cs->registerScriptFile($baseUrl.'/js/owl.carousel.min.js');
     $cs->registerScriptFile($baseUrl.'/js/jquery.nicescroll.min.js');
     $cs->registerScriptFile($baseUrl.'/js/jquery.mousewheel.min.js');
-    $cs->registerScriptFile($baseUrl.'/js/scripts.js?9.5');
+    $cs->registerScriptFile($baseUrl.'/js/scripts.js?9.6');
     ?>
 </head>
 <body class="inner-page" id="top">

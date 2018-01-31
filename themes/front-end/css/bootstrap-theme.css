@@ -904,6 +904,10 @@ section.classes .owl-prev .arrow,
     display: block;
     width: 100%;
 }
+
+.signup.video-bg{
+    background: transparent url("../images/latest-video-bg.jpg") no-repeat fixed center top;
+}
 .signup .mask{
     background: rgba(0,0,0,0.5);
     position: absolute;
@@ -4257,4 +4261,50 @@ span.navTrigger > input[type="checkbox"]:checked + .lines::after {
 
 iframe{
     border: none !important;
+}
+.signup.video-bg{
+    background: transparent url("../images/latest-video-bg.jpg") no-repeat fixed center top;
+    padding-bottom: 90px;
+}
+
+.signup.video-bg h4{
+    color: #fff !important;
+}
+
+.signup.video-bg .home-video{
+    margin:0 auto 100px;
+    float: none !important;
+}
+.signup.video-bg .home-video iframe{
+    display: block;
+    overflow:hidden;
+    border-radius: 4px;
+}
+
+.signup.video-bg .flat-button{
+    height: 42px;
+    color: #fff;
+    padding: 8px 30px;
+    text-align: center;
+    float: none;
+    border: 1px solid #fff;
+    -webkit-border-radius:50px;
+    -moz-border-radius:50px;
+    border-radius:50px;
+    -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    -webkit-transition: all 0.2s cubic-bezier(.25,.8,.25,1);
+    -moz-transition: all 0.2s cubic-bezier(.25,.8,.25,1);
+    -ms-transition: all 0.2s cubic-bezier(.25,.8,.25,1);
+    -o-transition: all 0.2s cubic-bezier(.25,.8,.25,1);
+    transition: all 0.2s cubic-bezier(.25,.8,.25,1);
+}
+
+.signup.video-bg .flat-button:hover{
+    background-color: #fff;
+    color: #0b3762;
+    -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    -moz-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }

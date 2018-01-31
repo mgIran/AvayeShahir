@@ -225,5 +225,8 @@ return array(
     'Article Translation; Editing TOEFL, IELTS, and GRE Writing Samoles; & Editing SOP and CV' => 'ترجمه مقاله و تصحیح رایتینگ تافل، آیلتس، جی آر ای و انگیزه نامه',
     "The Schedule for Future Classes Will Be Announced Soon.\nShould You Need More Information, Please Kindly Call the Institute." => "برنامه کلاس های آتی به زودی اعلام میگردد.\nدر صورت نیاز به اطلاعات بیشتر، لطفا با شماره تلفن های موسسه تماس بگیرید.",
     'Multimedia Videos' => 'ویدئوهای چندرسانه ای',
-    'Latest Videos' => 'آخرین ویدئوها'
+    'Latest Videos' => 'آخرین ویدئوها',
+    'Latest Video' => 'آخرین ویدئو',
+    'Videos' => 'ویدئوها',
+    'More Videos' => 'ویدئوهای بیشتر',
 );

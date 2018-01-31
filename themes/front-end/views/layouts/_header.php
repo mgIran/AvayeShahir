@@ -123,6 +123,9 @@ $action = $this->action->id;
             }
             ?>
             <li>
+                <a href="<?= $menuID == 'multimedia' && $action == 'index'?'#top':Yii::app()->createUrl('/multimedia/videos/'); ?>" title="<?= Yii::t('app','Videos');?>"><?= Yii::t('app','Videos');?></a>
+            </li>
+            <li>
                 <a href="<?= $menuID == 'orders' && $action == 'index'?'#top':Yii::app()->createUrl('/edit&translation'); ?>" title="<?= Yii::t('app','Translation & Correction');?>"><?= Yii::t('app','Translation & Correction');?></a>
             </li>
             <li>

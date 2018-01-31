@@ -9,7 +9,9 @@ class MultimediaVideosController extends Controller
 	public $layout='//layouts/column2';
 	public $tempPath = 'uploads/temp';
 	public $thumbsPath = 'uploads/multimedia/thumbnail';
-	public $thumbOptions = ['thumbnail' => ['width' => 200, 'height' => 200]];
+	public $thumbOptions = [
+		/*'thumbnail' => ['width' => 200, 'height' => 200]*/
+	];
 	
 	/**
 	 * @return array action filters

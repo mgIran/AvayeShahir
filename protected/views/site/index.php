@@ -164,6 +164,28 @@ if($writingsProvider->totalItemCount):
 endif;
 ?>
 <?php
+$latestVideo = Multimedia::getLatest('videos',1,'array');
+if($latestVideo):
+    $v = $latestVideo[0];
+    ?>
+<section class="signup video-bg">
+    <div class="mask"></div>
+    <div class="container-fluid">
+        <h2 class="yekan-text text-center"><?= Yii::t('app','Latest Video') ?></h2>
+        <div class="home-video col-lg-6 col-md-6 col-md-8 col-xs-12 text-center">
+            <div class="data"><?= $v->data ?></div>
+            <h4 class="yekan-text"><?= CHtml::encode($v->title) ?></h4>
+        </div>
+        <div class="clearfix"></div>
+        <div class="text-center">
+            <a href="<?= $this->createUrl('/multimedia/videos') ?>" class="flat-button"><?= Yii::t('app', 'More Videos') ?></a>
+        </div>
+    </div>
+</section>
+<?php
+endif;
+?>
+<?php
 if($newsProvider->totalItemCount):
 ?>
 <section class="news-section" id="news">

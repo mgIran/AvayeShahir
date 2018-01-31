@@ -169,15 +169,29 @@ class Multimedia extends SortableCActiveRecord
 		return parent::model($className);
 	}
 
-	public static function getLatest($type = 'videos')
-	{
-		$criteria = new CDbCriteria();
-		$criteria->compare('type', $type == 'videos'?Multimedia::TYPE_VIDEO:Multimedia::TYPE_PICTURE);
-		$criteria->limit = 15;
-		$criteria->order = 'id DESC';
-		foreach(Multimedia::model()->findAll($criteria) as $model)
-			echo '<li><a href="' . Yii::app()->createUrl('/multimedia/' . $type . '/' . $model->id . '/' . urlencode($model->title)) . '" ><span>' . $model->title . '</span></a></li>';
-	}
+    /**
+     * @param string $type
+     * @param int $limit
+     * @param string $return
+     * @return Multimedia[]|string
+     */
+	public static function getLatest($type = 'videos', $limit = 15, $return = 'html')
+    {
+        $criteria = new CDbCriteria();
+        $criteria->compare('type', $type == 'videos'?Multimedia::TYPE_VIDEO:Multimedia::TYPE_PICTURE);
+        $criteria->limit = $limit;
+        $criteria->order = 'id DESC';
+        if($return == 'html')
+            foreach(Multimedia::model()->findAll($criteria) as $model)
+                echo '<li><a href="' . Yii::app()->createUrl('/multimedia/' . $type . '/' . $model->id . '/' . urlencode($model->title)) . '" ><span>' . $model->title . '</span></a></li>';
+        else{
+            $out = array();
+            foreach(Multimedia::model()->findAll($criteria) as $model)
+                $out[] = $model;
+            return $out;
+        }
+        return '';
+    }
 
 	protected function afterSave()
 	{

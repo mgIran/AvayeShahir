@@ -38,6 +38,7 @@ class SiteController extends Controller
 		Yii::import('pages.models.*');
 		Yii::import('setting.models.*');
 		Yii::import('slideshow.models.*');
+		Yii::import('multimedia.models.*');
 		if(SiteSetting::model()->findByAttributes(array('name' => 'message_state'))->value == 1)
 			if(Yii::app()->language == 'fa')
 				$this->message = CHtml::encode(SiteSetting::model()->findByAttributes(array('name' => 'message'))->value);
@@ -83,7 +84,6 @@ class SiteController extends Controller
 			'criteria' => $criteria,
 			'pagination' => array('pageSize' => 6)
 		));
-
 
 		$this->slides = Slideshow::model()->getActiveSlides();
 		$this->render('index', compact(
