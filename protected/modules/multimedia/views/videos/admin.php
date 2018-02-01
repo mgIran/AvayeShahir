@@ -35,6 +35,14 @@ $this->menu=array(
 			'filter' => false
 		),
 		'title',
+		array(
+			'name' => 'category_id',
+			'value' => function($model){
+				return $model->category->title;
+			},
+			'type' => 'raw',
+			'filter' => MultimediaCategories::model()->adminSortList()
+		),
 		'seen',
 		array(
 			'class'=>'CButtonColumn',

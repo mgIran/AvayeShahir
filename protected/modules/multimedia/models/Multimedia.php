@@ -103,7 +103,7 @@ class Multimedia extends SortableCActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-            'category' => array(self::BELONGS_TO, 'NewsCategories', 'category_id'),
+            'category' => array(self::BELONGS_TO, 'MultimediaCategories', 'category_id'),
 			'tags' => array(self::MANY_MANY, 'ClassTags', '{{multimedia_tag_rel}}(multimedia_id,tag_id)'),
 			'tagsRel' => array(self::HAS_MANY, 'MultimediaTagRel', 'multimedia_id'),
 		);

@@ -67,7 +67,7 @@ class MultimediaCategoryController extends Controller
 		$criteria->addInCondition('category_id',$model->getCategoryChildes());
 		$dataProvider = new CActiveDataProvider("Multimedia",array(
 			'criteria' => $criteria,
-			'pagination' => array('pageSize' => 20)
+			'pagination' => array('pageSize' => 15)
 		));
 		$this->render('view',array(
 			'model' => $model,
