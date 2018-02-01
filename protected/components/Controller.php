@@ -168,6 +168,7 @@ class Controller extends AuthController
                     'url' => '#',
                     'itemOptions' => array('class' => 'dropdown', 'tabindex' => "-1"), 'linkOptions' => array('class' => 'dropdown-toggle', 'data-toggle' => "dropdown"),
                     'items' => array(
+                        array('label' => 'مدیریت دسته بندی ها', 'url' => Yii::app()->createUrl('/multimedia/category/admin/')),
                         array('label' => 'افزودن ویدئو', 'url' => Yii::app()->createUrl('/multimedia/videos/create')),
                         array('label' => 'افزودن تصویر', 'url' => Yii::app()->createUrl('/multimedia/pictures/create')),
                         array('label' => 'مدیریت ویدئو ها', 'url' => Yii::app()->createUrl('/multimedia/videos/admin')),

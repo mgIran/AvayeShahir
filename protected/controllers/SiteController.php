@@ -122,8 +122,6 @@ class SiteController extends Controller
 		if(isset($_POST['ContactForm'])){
 			$model->attributes = $_POST['ContactForm'];
 			if($model->validate()){
-				Yii::import('application.extensions.phpmailer.JPhpMailer');
-				$mail = new JPhpMailer;
 				$msg = '<div style="display: block;width: 100%;"><h2 style="-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;display: block;width: 100%;font-family:tahoma;background-color: #0b3762;line-height:60px;color:#f7f7f7;font-size: 24px;text-align: right;padding-right: 50px">آوای شهیر<span style="font-size: 14px;color:#dfdfdf">- بخش تماس با ما</span></span> </h2></div>';
 				$msg .= '<div style="display: inline-block;width: 100%;font-family:tahoma;">';
 				$msg .= '<div style="direction:rtl;display:block;overflow:hidden;border:1px solid #efefef;text-align: center;margin:10px 20px;padding:15px;">';
@@ -136,27 +134,13 @@ class SiteController extends Controller
 				$msg .= '</div>';
 				$msg .= '</div>';
 				$msg .= '</div>';
-				$mail->ContentType = 'html';
-				$mail->Subject = 'پیام از بخش تماس با ما وبسایت ' . Yii::app()->name;
-				$mail->IsSMTP();
-				$mail->Host = 'mail.avayeshahir.com';
-				$mail->SMTPAuth = true;
-				$mail->SMTPSecure = 'ssl';
-				$mail->Username = 'noreply@avayeshahir.com';
-				$mail->Password = '!@avayeshahir1395';
-				$mail->Port = 465;
-				$mail->isHTML(true);
-				$mail->SetFrom('noreply@avayeshahir.com', Yii::app()->name);
-				$mail->AltBody = '';
-				$mail->Body = $msg;
-				Yii::import('admins.models.Admins');
 				$admins = Admins::model()->findAll();
-				foreach($admins as $admin){
-					$mail->AddCC($admin->email, $admin->username);
-				}
-				$mail->AddCC(Yii::app()->params['adminEmail']);
-				$mail->AddAddress('yusef.mobasheri@gmail.com');
-				if($mail->send()){
+				$emails = [];
+				foreach($admins as $admin)
+					$emails[$admin->email] = $admin->email;
+				$emails[Yii::app()->params['adminEmail']] = Yii::app()->params['adminEmail'];
+				if((new Mailer())->mail($emails, 'پیام از بخش تماس با ما وبسایت ' . Yii::app()->name, $msg,
+					Yii::app()->params['no-reply-email'])){
 					Yii::app()->user->setFlash('footer-success', 'پیام شما با موفقیت ارسال شد.');
 					if(isset($_POST['ajax'])){
 						echo CJSON::encode(array('state' => 'ok'));

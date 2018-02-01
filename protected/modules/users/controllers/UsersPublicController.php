@@ -119,22 +119,8 @@ class UsersPublicController extends Controller
                 $msg .= '</div>';
                 $msg .= '</div>';
                 $msg .= '</div>';
-                Yii::import('application.extensions.phpmailer.JPhpMailer');
-                $mail = new JPhpMailer;
-                $mail->IsSMTP();
-                $mail->Host = 'mail.avayeshahir.com';
-                $mail->SMTPAuth = true;
-                $mail->SMTPSecure = 'ssl';
-                $mail->Username = 'noreply@avayeshahir.com';
-                $mail->Password = '!@avayeshahir1395';
-                $mail->Port = 465;
-                $mail->isHTML(true);
-                $mail->SetFrom('noreply@avayeshahir.com', Yii::app()->name);
-                $mail->AddAddress($model->email);
-                $mail->Subject = 'ثبت نام در '.Yii::app()->name;
-                $mail->AltBody = '';
-                $mail->Body = $msg;
-                $mail->Send();
+                (new Mailer())->mail($model->email, 'ثبت نام در '.Yii::app()->name, $msg,
+                    Yii::app()->params['no-reply-email']);
                 $msg = Yii::t('app','Registration was successful.');
 
                 Yii::app()->user->setFlash('success' ,$msg);

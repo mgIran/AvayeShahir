@@ -4,7 +4,8 @@ class MultimediaModule extends CWebModule
 {
 	public $controllerMap = [
 		'pictures' => 'multimedia.controllers.MultimediaPicturesController',
-		'videos' => 'multimedia.controllers.MultimediaVideosController'
+		'videos' => 'multimedia.controllers.MultimediaVideosController',
+		'category' => 'multimedia.controllers.MultimediaCategoryController'
 	];
 
 	public function init()

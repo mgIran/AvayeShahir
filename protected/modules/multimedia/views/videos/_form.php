@@ -20,7 +20,7 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'description'); ?>
-		<?php echo EMHelper::megaOgogo($model,'description',array('size'=>50,'maxlength'=>50),'textarea'); ?>
+		<?php echo EMHelper::megaOgogo($model,'description',array('size'=>50),'textarea'); ?>
 		<?php echo $form->error($model,'description'); ?>
 	</div>
 
