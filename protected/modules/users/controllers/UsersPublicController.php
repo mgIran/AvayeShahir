@@ -109,14 +109,12 @@ class UsersPublicController extends Controller
 //                $token=md5($model->id.'#'.$model->password.'#'.$model->email.'#'.$model->create_date);
 //                $model->updateByPk($model->id, array('verification_token'=>$token));
 
-                $msg = '<div style="display: block;width: 100%;"><h2 style="box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;display: block;width: 100%;font-family:tahoma;background-color: #0b3762;line-height:60px;color:#f7f7f7;font-size: 24px;text-align: right;padding-right: 50px">آوای شهیر<span style="font-size: 14px;color:#dfdfdf">- بخش ثبت نام</span></span> </h2></div>';
-                $msg .= '<div style="display: inline-block;width: 100%;font-family:tahoma;">';
+                $msg = '<div style="display: inline-block;width: 100%;font-family:tahoma;">';
                 $msg .= '<div style="direction:rtl;display:block;overflow:hidden;border:1px solid #efefef;text-align: center;margin:10px 20px;padding:15px;">';
                 $msg .= '<div style="color: #2d2d2d;font-size: 20px;text-align: right;">ثبت نام با موفقیت انجام شد.</div>';
                 $msg .= '<div style="color: #444;font-size: 13px;text-align: right;">';
                 $msg .= '<p>نام کاربری (پست الکترونیک) : '.$model->email.'</p>';
                 $msg .= '<p>رمز عبور : '.$_POST['Users']['password'].'</p>';
-                $msg .= '</div>';
                 $msg .= '</div>';
                 $msg .= '</div>';
                 (new Mailer())->mail($model->email, 'ثبت نام در '.Yii::app()->name, $msg,

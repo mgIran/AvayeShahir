@@ -8,8 +8,10 @@ $this->breadcrumbs=array(
 
 $this->menu=array(
 	array('label'=>'افزودن دسته بندی', 'url'=>array('create')),
-	array('label'=>'افزودن چندرسانه ای', 'url'=>array('manage/create')),
-	array('label'=>'مدیریت چندرسانه ای', 'url'=>array('/multimedia/manage/admin')),
+	array('label'=>'افزودن ویدئو', 'url'=>array('/multimedia/videos/create')),
+	array('label'=>'مدیریت ویدئوها', 'url'=>array('/multimedia/videos/admin')),
+	array('label'=>'افزودن تصویر', 'url'=>array('/multimedia/pictures/create')),
+	array('label'=>'مدیریت تصاویر', 'url'=>array('/multimedia/pictures/admin')),
 );
 ?>
 <h1>مدیریت دسته بندی چندرسانه ای</h1>

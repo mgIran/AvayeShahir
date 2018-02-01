@@ -17,7 +17,11 @@
 		<?php echo EMHelper::megaOgogo($model,'title',array('size'=>50,'maxlength'=>50)); ?>
 		<?php echo $form->error($model,'title'); ?>
 	</div>
-
+	<div class="row">
+		<?php echo $form->labelEx($model,'category_id'); ?>
+		<?php echo $form->dropDownList($model,'category_id',MultimediaCategories::model()->adminSortList()); ?>
+		<?php echo $form->error($model,'category_id'); ?>
+	</div>
 	<div class="row">
 		<?php echo $form->labelEx($model,'description'); ?>
 		<?php echo EMHelper::megaOgogo($model,'description',array('size'=>50),'textarea'); ?>

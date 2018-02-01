@@ -122,8 +122,7 @@ class SiteController extends Controller
 		if(isset($_POST['ContactForm'])){
 			$model->attributes = $_POST['ContactForm'];
 			if($model->validate()){
-				$msg = '<div style="display: block;width: 100%;"><h2 style="-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;display: block;width: 100%;font-family:tahoma;background-color: #0b3762;line-height:60px;color:#f7f7f7;font-size: 24px;text-align: right;padding-right: 50px">آوای شهیر<span style="font-size: 14px;color:#dfdfdf">- بخش تماس با ما</span></span> </h2></div>';
-				$msg .= '<div style="display: inline-block;width: 100%;font-family:tahoma;">';
+				$msg = '<div style="display: inline-block;width: 100%;font-family:tahoma;">';
 				$msg .= '<div style="direction:rtl;display:block;overflow:hidden;border:1px solid #efefef;text-align: center;margin:10px 20px;padding:15px;">';
 				$msg .= '<div style="color: #2d2d2d;font-size: 20px;text-align: right;"></div>';
 				$msg .= '<div style="color: #444;font-size: 13px;text-align: right;">';
@@ -131,7 +130,6 @@ class SiteController extends Controller
 				$msg .= '<hr>';
 				$msg .= '<p>نام فرستنده : ' . $model->name . '</p>';
 				$msg .= '<p>پست الکترونیک فرستنده : ' . $model->email . '</p>';
-				$msg .= '</div>';
 				$msg .= '</div>';
 				$msg .= '</div>';
 				$admins = Admins::model()->findAll();

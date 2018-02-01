@@ -12,6 +12,7 @@
  * @property string $seen
  * @property string $thumbnail
  * @property string $description
+ * @property string $category_id
  *
  * The followings are the available model relations:
  * @property ClassTags[] $tags
@@ -81,16 +82,16 @@ class Multimedia extends SortableCActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('type', 'required'),
+			array('type, category_id', 'required'),
 			array('type', 'length', 'max' => 7),
 			array('title', 'length', 'max' => 50),
 			array('data', 'length', 'max' => 1000),
 			array('thumbnail', 'length', 'max' => 255),
-			array('order, seen', 'length', 'max' => 10),
+			array('order, seen, category_id', 'length', 'max' => 10),
 			array('formTags, description', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, type, title, data, order, seen', 'safe', 'on' => 'search'),
+			array('id, category_id, type, title, data, order, seen', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -102,6 +103,7 @@ class Multimedia extends SortableCActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+            'category' => array(self::BELONGS_TO, 'NewsCategories', 'category_id'),
 			'tags' => array(self::MANY_MANY, 'ClassTags', '{{multimedia_tag_rel}}(multimedia_id,tag_id)'),
 			'tagsRel' => array(self::HAS_MANY, 'MultimediaTagRel', 'multimedia_id'),
 		);
@@ -114,6 +116,7 @@ class Multimedia extends SortableCActiveRecord
 	{
 		return array(
 			'id' => 'ID',
+            'category_id' => 'دسته بندی',
 			'type' => 'نوع',
 			'title' => 'عنوان',
 			'data' => 'محتوا',
@@ -146,6 +149,7 @@ class Multimedia extends SortableCActiveRecord
 		$criteria->compare('id', $this->id, true);
 		$criteria->compare('type', $this->type, true);
 		$criteria->compare('title', $this->title, true);
+        $criteria->compare('category_id',$this->category_id,true);
 		$criteria->compare('data', $this->data, true);
 		$criteria->compare('order', $this->order, true);
 		$criteria->compare('seen', $this->seen, true);
