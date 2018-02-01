@@ -9,8 +9,8 @@
 	<div class="container">
 		<h2><?= Yii::t('app','{category} Multimedia',array('{category}'=>$model->title)) ?></h2>
 		<div class="details">
-			<span><?= Yii::t('app','Number of Entries') ?>:&nbsp;</span>
-			<span><?= Yii::app()->language == 'fa'?Controller::parseNumbers($dataProvider->totalItemCount):$dataProvider->totalItemCount ?>&nbsp;<?= $dataProvider->totalItemCount>1?Yii::t('app','entries'):Yii::t('app','entry') ?></span>
+			<span><?= Yii::t('app','Number of Multimedia') ?>:&nbsp;</span>
+			<span><?= Yii::app()->language == 'fa'?Controller::parseNumbers($dataProvider->totalItemCount):$dataProvider->totalItemCount ?>&nbsp;<?= $dataProvider->totalItemCount>1?Yii::t('app','content'):Yii::t('app','content') ?></span>
 			<span class="svg svg-eye pull-right"></span>
 		</div>
 	</div>
@@ -31,7 +31,7 @@
 				$this->widget('zii.widgets.CListView', array(
 						'id' => 'latest-multimedia-list',
 						'dataProvider' => $dataProvider,
-						'itemView' => 'multimedia.views.manage._side_view',
+						'itemView' => 'multimedia.views.videos._view',
 						'template' => '{items} {pager}',
 						'ajaxUpdate' => true,
 						'pager' => array(

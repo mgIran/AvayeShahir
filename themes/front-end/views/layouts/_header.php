@@ -122,9 +122,30 @@ $action = $this->action->id;
                 <?php
             }
             ?>
-            <li>
-                <a href="<?= $menuID == 'multimedia' && $action == 'index'?'#top':Yii::app()->createUrl('/multimedia/videos/'); ?>" title="<?= Yii::t('app','Videos');?>"><?= Yii::t('app','Videos');?></a>
-            </li>
+            <?php
+            if($this->getMultimediaCategories()){
+                ?>
+                <li>
+                    <?
+                    $this->widget('ext.dropDown.dropDown' ,array(
+                        'id' => 'nav_videos' ,
+                        'name' => 'videos' ,
+                        'label' => Yii::t('app' ,'Videos') ,
+                        'data' => $this->getMultimediaCategories() ,
+                        'caret' => '<i class="caret"></i>' ,
+                        'emptyOpt' => false ,
+                        'changeLabel' => false,
+                        'onchange' => 'js:
+                            var $s = {id};
+                            var $base = \'' . Yii::app()->createUrl('/') . '/\';
+                            location.href = $base+$s;
+                        ' ,
+                    ));
+                    ?>
+                </li>
+                <?php
+            }
+            ?>
             <li>
                 <a href="<?= $menuID == 'orders' && $action == 'index'?'#top':Yii::app()->createUrl('/edit&translation'); ?>" title="<?= Yii::t('app','Translation & Correction');?>"><?= Yii::t('app','Translation & Correction');?></a>
             </li>

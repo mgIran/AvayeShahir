@@ -63,7 +63,7 @@ class MultimediaCategoryController extends Controller
 		$this->pageTitle = $model->getValueLang('title', 'en');
 
 		// get latest multimedia
-		$criteria = Multimedia::getValidMultimedia();
+		$criteria = new CDbCriteria();
 		$criteria->addInCondition('category_id',$model->getCategoryChildes());
 		$dataProvider = new CActiveDataProvider("Multimedia",array(
 			'criteria' => $criteria,

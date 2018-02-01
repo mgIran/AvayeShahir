@@ -141,6 +141,7 @@ return array(
     'Tags' => 'برچسب ها',
     'Category' => 'دسته بندی',
     'Categories' => 'گروه ها',
+    '{category} Multimedia' => 'چندرسانه ای {category}',
     '{category} News' => 'اخبار {category}',
     '{category} Educational Materials' => 'مطالب آموزشی {category}',
     'News tagged "{tag}"' => 'اخبار برچسب "{tag}"',
@@ -229,4 +230,6 @@ return array(
     'Latest Video' => 'آخرین ویدئو',
     'Videos' => 'ویدئوها',
     'More Videos' => 'ویدئوهای بیشتر',
+    'Number of Multimedia' => 'تعداد چندرسانه ای',
+    'content' => 'محتوا',
 );

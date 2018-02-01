@@ -39,6 +39,7 @@ class Controller extends AuthController
     public $newsCategories = null;
     public $articleCategories = null;
     public $writingCategories = null;
+    public $multimediaCategories = null;
     /**
      * @var Slideshow[]
      */
@@ -332,6 +333,23 @@ class Controller extends AuthController
                 , 'title');
         }
         return $this->writingCategories;
+    }
+
+    public function getMultimediaCategories()
+    {
+        Yii::import('multimedia.models.*');
+        if(!$this->multimediaCategories){
+            $models = MultimediaCategories::model()->findAll(array(
+                'condition' => 'parent_id IS NULL',
+                'order' => 't.order'
+            ));
+            $this->multimediaCategories = CHtml::listData($models,
+                function ($model){
+                    return 'multimedia/category/' . $model->id . '/' . urlencode($model->getValueLang('title', 'en'));
+                }
+                , 'title');
+        }
+        return $this->multimediaCategories;
     }
 
     public function getNewsCategories()
