@@ -65,6 +65,7 @@ class MultimediaCategoryController extends Controller
 		// get latest multimedia
 		$criteria = new CDbCriteria();
 		$criteria->addInCondition('category_id',$model->getCategoryChildes());
+        $criteria->order = 't.order ASC';
 		$dataProvider = new CActiveDataProvider("Multimedia",array(
 			'criteria' => $criteria,
 			'pagination' => array('pageSize' => 15)
