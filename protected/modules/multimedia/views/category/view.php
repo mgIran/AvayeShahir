@@ -27,36 +27,38 @@
 				</ul>
 			</div>
 			<div class="news-list col-lg-8 col-md-8 col-sm-8 col-xs-12 pull-left">
-				<?php
-				$this->widget('zii.widgets.CListView', array(
-						'id' => 'latest-multimedia-list',
-						'dataProvider' => $dataProvider,
-						'itemView' => 'multimedia.views.videos._view',
-						'template' => '{items} {pager}',
-						'ajaxUpdate' => true,
-						'pager' => array(
-							'class' => 'ext.infiniteScroll.IasPager',
-							'rowSelector'=>'.news-item-container',
-							'listViewId' => 'latest-multimedia-list',
-							'header' => '',
-							'loaderText'=>'در حال دریافت ...',
-							'options' => array('history' => false, 'triggerPageTreshold' => ((int)$dataProvider->totalItemCount+1), 'trigger'=>'بیشتر'),
-						),
-						'afterAjaxUpdate'=>"function(id, data) {
-							$.ias({
-								'history': false,
-								'triggerPageTreshold': ".((int)$dataProvider->totalItemCount+1).",
-								'trigger': 'بیشتر',
-								'container': '#latest-multimedia-list',
-								'item': '.news-item-container',
-								'pagination': '#latest-multimedia-list .pager',
-								'next': '#latest-multimedia-list .next:not(.disabled):not(.hidden) a',
-								'loader': 'در حال دریافت ...'
-							});
-						}",
-					)
-				);
-				?>
+                <?php
+                try {
+                    $this->widget('zii.widgets.CListView', array(
+                        'id' => 'latest-article-list',
+                        'dataProvider' => $dataProvider,
+                        'itemView' => 'multimedia.views.videos._view',
+                        'template' => '{items} {pager}',
+                        'ajaxUpdate' => true,
+                        'pager' => array(
+                            'class' => 'ext.infiniteScroll.IasPager',
+                            'rowSelector' => '.video-item',
+                            'listViewId' => 'latest-article-list',
+                            'header' => '',
+                            'loaderText' => 'در حال دریافت ...',
+                            'options' => array('history' => false, 'triggerPageTreshold' => ((int)$dataProvider->totalItemCount + 1), 'trigger' => 'بیشتر'),
+                        ),
+                        'afterAjaxUpdate' => "function(id, data) {
+                            $.ias({
+                                'history': false,
+                                'triggerPageTreshold': " . ((int)$dataProvider->totalItemCount + 1) . ",
+                                'trigger': 'بیشتر',
+                                'container': '#latest-article-list',
+                                'item': '.video-item',
+                                'pagination': '#latest-article-list .pager',
+                                'next': '#latest-article-list .next:not(.disabled):not(.hidden) a',
+                                'loader': 'در حال دریافت ...'
+                            });
+                        }"
+                    ));
+                } catch (Exception $e) {
+                }
+                ?>
 			</div>
 		</div>
 	</div>
