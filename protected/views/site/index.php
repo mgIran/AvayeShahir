@@ -129,31 +129,12 @@ if($writingsProvider->totalItemCount):
 <section class="news-section" id="writings">
     <div class="container">
         <h3 class="yekan-text"><?= Yii::t('app' ,'Writings') ?> <small class="text-danger"><?= Yii::t('app','new') ?></small></h3>
-        <div class="row">
-            <div class="col-lg-3 col-md-4 col-sm-5 col-xs-12 pull-left category-list">
-            <?php
-            $this->widget('ext.dropDown.dropDown', array(
-                'id' => 'writings_categories',
-                'name' => 'news',
-                'label' => Yii::t('app','Writings Category'),
-                'data' => $this->getWritingCategories(),
-                'caret' => '<i class="caret"></i>',
-                'emptyOpt' => false,
-                'onchange' => 'js:
-                    var $s = {id};
-                    var $base = \''.Yii::app()->createUrl('/').'/\';
-                    location.href = $base+$s;
-                ',
-            ));
-            ?>
-            </div>
-        </div>
-        <div class="news-container">
+        <div class="news-container news-list">
             <?php
             $this->widget("zii.widgets.CListView",array(
-                'id' => 'news-list',
-                'dataProvider' => $writingsProvider,
-                'itemView' => 'writings.views.manage._view',
+                'id' => 'writing-list',
+                'dataProvider' => $this->getWritingCategories(false),
+                'itemView' => 'writings.views.category._view',
                 'template' => '{items}',
             ));
             ?>
@@ -163,31 +144,8 @@ if($writingsProvider->totalItemCount):
 <?php
 endif;
 ?>
-<?php
-$latestVideo = Multimedia::getLatest('videos',1,'array');
-if($latestVideo):
-    $v = $latestVideo[0];
-    ?>
-<section class="signup video-bg">
-    <div class="mask"></div>
-    <div class="container-fluid">
-        <h2 class="yekan-text text-center"><?= Yii::t('app','Latest Video') ?></h2>
-        <div class="home-video col-lg-6 col-md-6 col-md-8 col-xs-12 text-center">
-            <div class="data"><?= $v->data ?></div>
-            <h4 class="yekan-text"><?= CHtml::encode($v->title) ?></h4>
-        </div>
-        <div class="clearfix"></div>
-        <div class="text-center">
-            <a href="<?= $this->createUrl('/multimedia/videos') ?>" class="flat-button"><?= Yii::t('app', 'More Videos') ?></a>
-        </div>
-    </div>
-</section>
-<?php
-endif;
-?>
-<?php
-if($newsProvider->totalItemCount):
-?>
+<?php $this->renderPartial('_videos') ?>
+<?php if($newsProvider->totalItemCount): ?>
 <section class="news-section" id="news">
     <div class="container">
         <h3 class="yekan-text"><?= Yii::t('app' ,'News') ?></h3>

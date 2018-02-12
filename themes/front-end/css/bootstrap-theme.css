@@ -626,18 +626,22 @@ section.courses{
     color: #333;
     font-size: 16px;
 }
+video-carousel,
 .courses .course-carousel{
     position: relative;
     display: inline-block;
     width: 100%;
 }
+.video-carousel .owl-controls .owl-nav [class*="owl-"],
 .courses .course-carousel .owl-controls .owl-nav [class*="owl-"]{
     position: absolute;
     top:0;
     margin-top: 72px;
     color: #b0b0b0;
 }
-
+.video-carousel .owl-controls .owl-nav [class*="owl-"]{
+    margin-top: 140px;
+}
 .gallery-carousel .owl-controls .owl-nav [class*="owl-"]{
     position: absolute;
     top:50%;
@@ -655,10 +659,16 @@ section.classes .owl-controls .owl-nav .owl-next,
 .courses .course-carousel .owl-controls .owl-nav .owl-next{
     left: -5%;
 }
+.video-carousel .owl-controls .owl-nav .owl-next{
+    left: 170px;
+}
 .gallery-carousel .owl-controls .owl-nav .owl-prev,
 section.classes .owl-controls .owl-nav .owl-prev,
 .courses .course-carousel .owl-controls .owl-nav .owl-prev{
     right: -5%;
+}
+.video-carousel .owl-controls .owl-nav .owl-prev{
+    right: 170px;
 }
 .courses .course{
     border-radius: 4px;
@@ -877,6 +887,7 @@ section.classes .owl-controls .owl-nav .owl-prev,
 .courses .course-detail .btn:active{
     background-color: #96b404;
 }
+.video-carousel .arrow,
 section.classes .arrow,
 .courses .arrow{
     background: url("../svg/arrow.svg") no-repeat transparent;
@@ -885,6 +896,10 @@ section.classes .arrow,
     display: block;
     opacity: 0.75;
 }
+.video-carousel .arrow {
+    background-image: url("../svg/arrow-white.svg");
+}
+.video-carousel .owl-prev .arrow,
 section.classes .owl-prev .arrow,
 .courses .owl-prev .arrow{
     transform: rotate(-180deg);
@@ -898,7 +913,7 @@ section.classes .owl-prev .arrow,
 
 .signup{
     background: transparent url("../images/signup-bg.jpg") no-repeat fixed center top;
-    background-size: cover;
+    background-size: cover !important;
     position: relative;
     overflow: hidden;
     display: block;
@@ -2155,15 +2170,28 @@ section.classes .owl-carousel .owl-controls .owl-nav [class*="owl-"].disabled ,
     -webkit-transition: all 0.5s linear; -moz-transition: all 0.5s linear; -ms-transition: all 0.5s linear; -o-transition: all 0.5s linear; transition: all 0.5s linear;
     -webkit-transition-delay: 6s; -moz-transition-delay: 6s; -ms-transition-delay: 6s; -o-transition-delay: 6s; transition-delay: 6s;
 }
+.video-carousel .owl-dots,
 .classes .owl-dots {
     text-align: center;
     right: 0;
+}
+.video-carousel .owl-dots{
+    bottom: 50px !important;
 }
 .classes .owl-dots .owl-dot span{
     width: 6px;
     height: 6px;
     margin: 2px 4px;
     background-color: #444;
+}
+.video-carousel .owl-dots .owl-dot span{
+    margin: 2px 4px;
+    background-color: #fff;
+    opacity: 0.5;
+}
+.video-carousel .owl-dots .owl-dot.active span,
+.video-carousel .owl-dots .owl-dot:hover span{
+    opacity: 1;
 }
 .classes .owl-dots .owl-dot.active span,
 .classes .owl-dots .owl-dot:hover span{
@@ -4307,4 +4335,20 @@ iframe{
     -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
     -moz-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+#show-class-detail-modal .modal-body table {
+    direction: ltr;
+    width: 100%;
+    max-width: 100%;
+}
+#show-class-detail-modal .modal-body,
+#show-class-detail-modal .modal-body * {
+    font-family: IRANSans !important;
+}
+
+.news-text table {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
 }

@@ -68,11 +68,11 @@ class JalaliDate
      */
     public function __construct($convert = null, $jalali = null, $timezone = null)
     {
-        if($jalali !== null)
+        if ($jalali !== null)
             self::$jalali = (bool)$jalali;
-        if($convert !== null)
+        if ($convert !== null)
             self::$convert = (bool)$convert;
-        if($timezone !== null)
+        if ($timezone !== null)
             self::$timezone = $timezone;
     }
 
@@ -98,10 +98,10 @@ class JalaliDate
         //Timestamp + Timezone
         $stamp = ($stamp !== false) ? $stamp : time();
         $timezone = ($timezone != null) ? $timezone : ((self::$timezone != null) ? self::$timezone : date_default_timezone_get());
-        $obj = new DateTime('@'.$stamp, new DateTimeZone($timezone));
+        $obj = new DateTime('@' . $stamp, new DateTimeZone($timezone));
         $obj->setTimezone(new DateTimeZone($timezone));
 
-        if((self::$jalali === false && $jalali === null) || $jalali === false) {
+        if ((self::$jalali === false && $jalali === null) || $jalali === false) {
             return $obj->format($format);
         } else {
 
@@ -113,7 +113,7 @@ class JalaliDate
             $intact = self::filterArray($chars, $intact);
             $intactValues = array();
 
-            foreach($intact as $k => $v) {
+            foreach ($intact as $k => $v) {
                 $intactValues[$k] = $obj->format($v);
             }
             //End Intact Keys
@@ -127,10 +127,10 @@ class JalaliDate
             $keys = self::filterArray($chars, $keys, array('z'));
             $values = array();
 
-            foreach($keys as $k => $key) {
+            foreach ($keys as $k => $key) {
 
                 $v = '';
-                switch($key) {
+                switch ($key) {
                     //Day
                     case 'd':
                         $v = sprintf('%02d', $jday);
@@ -154,7 +154,7 @@ class JalaliDate
                         $v = self::getDayNames($obj->format('l'), false, 1, true) - 1;
                         break;
                     case 'z':
-                        if($jmonth > 6) {
+                        if ($jmonth > 6) {
                             $v = 186 + (($jmonth - 6 - 1) * 30) + $jday;
                         } else {
                             $v = (($jmonth - 1) * 31) + $jday;
@@ -179,18 +179,18 @@ class JalaliDate
                         $v = $jmonth;
                         break;
                     case 't':
-                        if($jmonth >= 1 && $jmonth <= 6)
+                        if ($jmonth >= 1 && $jmonth <= 6)
                             $v = 31;
-                        else if($jmonth >= 7 && $jmonth <= 11)
+                        else if ($jmonth >= 7 && $jmonth <= 11)
                             $v = 30;
-                        else if($jmonth == 12 && $jyear % 4 == 3)
+                        else if ($jmonth == 12 && $jyear % 4 == 3)
                             $v = 30;
-                        else if($jmonth == 12 && $jyear % 4 != 3)
+                        else if ($jmonth == 12 && $jyear % 4 != 3)
                             $v = 29;
                         break;
                     //Year
                     case 'L':
-                        $tmpObj = new DateTime('@'.(time() - 31536000));
+                        $tmpObj = new DateTime('@' . (time() - 31536000));
                         $v = $tmpObj->format('L');
                         break;
                     case 'o':
@@ -209,12 +209,12 @@ class JalaliDate
                         break;
                     //Full Dates
                     case 'c':
-                        $v = $jyear.'-'.sprintf('%02d', $jmonth).'-'.sprintf('%02d', $jday).'T';
-                        $v .= $obj->format('H').':'.$obj->format('i').':'.$obj->format('s').$obj->format('P');
+                        $v = $jyear . '-' . sprintf('%02d', $jmonth) . '-' . sprintf('%02d', $jday) . 'T';
+                        $v .= $obj->format('H') . ':' . $obj->format('i') . ':' . $obj->format('s') . $obj->format('P');
                         break;
                     case 'r':
-                        $v = self::getDayNames($obj->format('D'), true).', '.sprintf('%02d', $jday).' '.self::getMonthNames($jmonth, true);
-                        $v .= ' '.$jyear.' '.$obj->format('H').':'.$obj->format('i').':'.$obj->format('s').' '.$obj->format('P');
+                        $v = self::getDayNames($obj->format('D'), true) . ', ' . sprintf('%02d', $jday) . ' ' . self::getMonthNames($jmonth, true);
+                        $v .= ' ' . $jyear . ' ' . $obj->format('H') . ':' . $obj->format('i') . ':' . $obj->format('s') . ' ' . $obj->format('P');
                         break;
                     //Timezone
                     case 'e':
@@ -348,14 +348,14 @@ class JalaliDate
         $year = (intval($year) == 0) ? self::date('Y') : $year;
 
         //Convert to Gregorian if necessary
-        if($jalali === true || ($jalali === null && self::$jalali === true)) {
+        if ($jalali === true || ($jalali === null && self::$jalali === true)) {
             list($year, $month, $day) = self::toGregorian($year, $month, $day);
         }
 
         //Create a new object and set the timezone if available
-        $date = $year.'-'.sprintf('%02d', $month).'-'.sprintf('%02d', $day).' '.$hour.':'.$minute.':'.$second;
+        $date = $year . '-' . sprintf('%02d', $month) . '-' . sprintf('%02d', $day) . ' ' . $hour . ':' . $minute . ':' . $second;
 
-        if(self::$timezone != null || $timezone != null) {
+        if (self::$timezone != null || $timezone != null) {
             $obj = new DateTime($date, new DateTimeZone(($timezone != null) ? $timezone : self::$timezone));
         } else {
             $obj = new DateTime($date);
@@ -395,10 +395,10 @@ class JalaliDate
         $year = (intval($year) == 0) ? self::date('Y') : intval($year);
 
         //Check if its jalali date
-        if($jalali === true || ($jalali === null && self::$jalali === true)) {
+        if ($jalali === true || ($jalali === null && self::$jalali === true)) {
             $epoch = self::mktime(0, 0, 0, $month, $day, $year);
 
-            if(self::date('Y-n-j', $epoch, false) == "$year-$month-$day") {
+            if (self::date('Y-n-j', $epoch, false) == "$year-$month-$day") {
                 $ret = true;
             } else {
                 $ret = false;
@@ -485,7 +485,7 @@ class JalaliDate
      */
     private static function substr($str, $start, $len)
     {
-        if(function_exists('mb_substr')) {
+        if (function_exists('mb_substr')) {
             return mb_substr($str, $start, $len, 'UTF-8');
         } else {
             return substr($str, $start, $len * 2);
@@ -508,9 +508,9 @@ class JalaliDate
 
         $g_day_no = 365 * $gy + self::div($gy + 3, 4) - self::div($gy + 99, 100) + self::div($gy + 399, 400);
 
-        for($i = 0; $i < $gm; ++$i)
+        for ($i = 0; $i < $gm; ++$i)
             $g_day_no += $g_days_in_month[$i];
-        if($gm > 1 && (($gy % 4 == 0 && $gy % 100 != 0) || ($gy % 400 == 0)))
+        if ($gm > 1 && (($gy % 4 == 0 && $gy % 100 != 0) || ($gy % 400 == 0)))
             $g_day_no++;
         $g_day_no += $gd;
 
@@ -523,12 +523,12 @@ class JalaliDate
 
         $j_day_no %= 1461;
 
-        if($j_day_no >= 366) {
+        if ($j_day_no >= 366) {
             $jy += self::div($j_day_no - 1, 365);
             $j_day_no = ($j_day_no - 1) % 365;
         }
 
-        for($i = 0; $i < 11 && $j_day_no >= $j_days_in_month[$i]; ++$i)
+        for ($i = 0; $i < 11 && $j_day_no >= $j_days_in_month[$i]; ++$i)
             $j_day_no -= $j_days_in_month[$i];
         $jm = $i + 1;
         $jd = $j_day_no + 1;
@@ -553,7 +553,7 @@ class JalaliDate
         $jd = $j_d - 1;
 
         $j_day_no = 365 * $jy + self::div($jy, 33) * 8 + self::div($jy % 33 + 3, 4);
-        for($i = 0; $i < $jm; ++$i)
+        for ($i = 0; $i < $jm; ++$i)
             $j_day_no += $j_days_in_month[$i];
 
         $j_day_no += $jd;
@@ -564,12 +564,12 @@ class JalaliDate
         $g_day_no = $g_day_no % 146097;
 
         $leap = true;
-        if($g_day_no >= 36525) {
+        if ($g_day_no >= 36525) {
             $g_day_no--;
             $gy += 100 * self::div($g_day_no, 36524);
             $g_day_no = $g_day_no % 36524;
 
-            if($g_day_no >= 365)
+            if ($g_day_no >= 365)
                 $g_day_no++;
             else
                 $leap = false;
@@ -578,7 +578,7 @@ class JalaliDate
         $gy += 4 * self::div($g_day_no, 1461);
         $g_day_no %= 1461;
 
-        if($g_day_no >= 366) {
+        if ($g_day_no >= 366) {
             $leap = false;
 
             $g_day_no--;
@@ -586,7 +586,7 @@ class JalaliDate
             $g_day_no = $g_day_no % 365;
         }
 
-        for($i = 0; $g_day_no >= $g_days_in_month[$i] + ($i == 1 && $leap); $i++)
+        for ($i = 0; $g_day_no >= $g_days_in_month[$i] + ($i == 1 && $leap); $i++)
             $g_day_no -= $g_days_in_month[$i] + ($i == 1 && $leap);
         $gm = $i + 1;
         $gd = $g_day_no + 1;
@@ -596,31 +596,31 @@ class JalaliDate
 
     public static function differenceTime($time)
     {
-        if(time() - $time < 60)
-            $str = Yii::t('jalali','some time ago');
-        elseif(time() - $time < 15 * 60)
-            $str = Yii::t('jalali','a few minutes ago');
-        elseif(time() - $time < 30 * 60)
-            $str = Yii::t('jalali','a quarter ago');
-        elseif(time() - $time < 60 * 60)
-            $str = Yii::t('jalali','half-hour ago');
-        elseif(time() - $time < 24 * 60 * 60) {
+        if (time() - $time < 60)
+            $str = Yii::t('jalali', 'some time ago');
+        elseif (time() - $time < 15 * 60)
+            $str = Yii::t('jalali', 'a few minutes ago');
+        elseif (time() - $time < 30 * 60)
+            $str = Yii::t('jalali', 'a quarter ago');
+        elseif (time() - $time < 60 * 60)
+            $str = Yii::t('jalali', 'half-hour ago');
+        elseif (time() - $time < 24 * 60 * 60) {
             $hour = (time() - $time) / (60 * 60);
-            if(abs(floor($hour)) == 1)
-                $str = Yii::t('jalali','one hour ago');
-            elseif(abs($hour)>1)
-                $str = self::convertNumbers(abs(floor($hour))).' '.Yii::t('jalali','hours ago');
-        } elseif(time() - $time < 2 * 24 * 60 * 60) {
+            if (abs(floor($hour)) == 1)
+                $str = Yii::t('jalali', 'one hour ago');
+            elseif (abs($hour) > 1)
+                $str = self::convertNumbers(abs(floor($hour))) . ' ' . Yii::t('jalali', 'hours ago');
+        } elseif (time() - $time < 2 * 24 * 60 * 60) {
             $str = 'دیروز';
-        } elseif(time() - $time < 30 * 24 * 60 * 60) {
+        } elseif (time() - $time < 30 * 24 * 60 * 60) {
             $day = (time() - $time) / (24 * 60 * 60);
-            $str = self::convertNumbers(abs(floor($day))).' '.Yii::t('jalali','days ago');;
-        } elseif(time() - $time > 30 * 24 * 60 * 60) {
+            $str = self::convertNumbers(abs(floor($day))) . ' ' . Yii::t('jalali', 'days ago');;
+        } elseif (time() - $time > 30 * 24 * 60 * 60) {
             $month = (time() - $time) / (30 * 24 * 60 * 60);
-            if(abs(floor($month)) == 1)
-                $str = Yii::t('jalali','one month ago');
-            elseif(abs(floor($month))>1)
-                $str = self::convertNumbers(abs(floor($month))).' '.Yii::t('jalali','months ago');
+            if (abs(floor($month)) == 1)
+                $str = Yii::t('jalali', 'one month ago');
+            elseif (abs(floor($month)) > 1)
+                $str = self::convertNumbers(abs(floor($month))) . ' ' . Yii::t('jalali', 'months ago');
         }
         return $str;
     }
@@ -637,12 +637,18 @@ class JalaliDate
             'سه شنبه' => 'Tuesday',
             'چهارشنبه' => 'Wednesday',
             'پنجشنبه' => 'Thursday',
-            'جمعه' => 'Friday'
+            'جمعه' => 'Friday',
+            'شنبه ها' => 'Saturdays',
+            'یکشنبه ها' => 'Sundays',
+            'دوشنبه ها' => 'Mondays',
+            'سه شنبه ها' => 'Tuesdays',
+            'چهارشنبه ها' => 'Wednesdays',
+            'پنجشنبه ها' => 'Thursdays',
+            'جمعه ها' => 'Fridays',
         );
-        if($lang == 'fa')
-            return $day.' ها';
+        if ($lang == 'fa')
+            return $day;
         else
-            return $days[$day].'s';
+            return $days[$day];
     }
-
 }

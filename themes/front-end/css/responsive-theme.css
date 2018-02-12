@@ -17,6 +17,9 @@
     .report > [class*="col-"]{
         padding: 0 5px;
     }
+    .video-carousel .owl-controls .owl-nav [class*="owl-"]{
+        margin-top: 80px;
+    }
 }
 @media (min-width: 992px) and (max-width: 1023px)
 {
@@ -158,6 +161,9 @@
     }
 }
 @media (max-width: 767px) {
+    .news-view{
+        padding: 0 !important;
+    }
     .classes .nav{
         padding: 0 !important;
     }

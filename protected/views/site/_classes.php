@@ -179,7 +179,7 @@
             endforeach;
             ?>
             <div id="show-class-detail-modal" class="modal fade" role="dialog">
-                <div class="modal-dialog">
+                <div class="modal-dialog modal-lg">
                     <!-- Modal content-->
                     <div class="modal-content">
                         <div class="modal-header" style="border-bottom: 1px solid #eee;">
