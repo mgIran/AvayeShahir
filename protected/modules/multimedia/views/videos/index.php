@@ -17,10 +17,10 @@
     <div class="container">
         <div class="news-container">
             <div class="news-category-list col-lg-4 col-md-4 col-sm-4 col-xs-12 pull-left">
-                <h3><?= Yii::t('app','Latest Videos') ?></h3>
+                <h3><?= Yii::t('app','Category') ?></h3>
                 <ul class="main-menu nav nav-stacked tree">
                     <?php
-                    Multimedia::getLatest('videos');
+                    MultimediaCategories::getHtmlSortList(Null,$model->id);
                     ?>
                 </ul>
             </div>

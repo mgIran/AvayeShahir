@@ -18,6 +18,14 @@
 <div class="page-content courses">
 	<div class="container">
 		<div class="news-container">
+            <div class="news-category-list col-lg-4 col-md-4 col-sm-4 col-xs-12 pull-left">
+                <h3><?= Yii::t('app','Category') ?></h3>
+                <ul class="main-menu nav nav-stacked tree">
+                    <?php
+                    MultimediaCategories::getHtmlSortList(Null,$model->id);
+                    ?>
+                </ul>
+            </div>
 			<div class="news-list col-lg-8 col-md-8 col-sm-8 col-xs-12">
                 <?php
                     $this->widget('zii.widgets.CListView', array(
@@ -49,20 +57,6 @@
                     ));
                 ?>
 			</div>
-            <div class="news-category-list col-lg-4 col-md-4 col-sm-4 col-xs-12 pull-left">
-                <h3><?= Yii::t('app','Category') ?></h3>
-                <ul class="main-menu nav nav-stacked tree">
-                    <?php
-                    MultimediaCategories::getHtmlSortList(Null,$model->id);
-                    ?>
-                </ul>
-                <h3><?= Yii::t('app','Latest Videos') ?></h3>
-                <ul class="main-menu nav nav-stacked tree">
-                    <?php
-                    Multimedia::getLatest('videos',5);
-                    ?>
-                </ul>
-            </div>
 		</div>
 	</div>
 </div>
