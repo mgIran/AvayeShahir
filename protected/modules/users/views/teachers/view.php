@@ -15,7 +15,7 @@ $fileDir = Yii::getPathOfAlias("webroot").'/uploads/teachers/files/';
 </div>
 <div class="page-content courses personnel-page">
     <div class="container">
-        <div class="basic-information">
+        <div class="basic-information col-lg-10 col-md-10 col-sm-12 col-xs-12 col-lg-push-1-1">
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                 <div class="image">
                     <?

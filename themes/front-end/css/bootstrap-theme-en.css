@@ -4,6 +4,20 @@ body {
     text-align: left;
     font-family: Circular, Helvetica, Arial, sans-serif;
 }
+.page-content.courses .collapsed .arrow-white {
+    -webkit-transform: rotate(180deg) !important;
+    -moz-transform: rotate(180deg) !important;
+    -ms-transform: rotate(180deg) !important;
+    -o-transform: rotate(180deg) !important;
+    transform: rotate(180deg) !important;
+}
+.page-content.courses .arrow-white{
+    -webkit-transform: rotate(270deg);
+    -moz-transform: rotate(270deg);
+    -ms-transform: rotate(270deg);
+    -o-transform: rotate(270deg);
+    transform: rotate(270deg);
+}
 /*}*/
 /**, .h1, .h2, .h3, .h4, body, h1, h2, h3, h4, h5, h6{*/
     /*font-family: Circular,Helvetica,Arial,sans-serif;*/
@@ -206,10 +220,6 @@ section.classes .owl-prev .arrow,
 .page-content.courses .arrow-white{
     right: 15px;
     left: auto;
-    -webkit-transform: rotate(-90deg); -moz-transform: rotate(-90deg); -ms-transform: rotate(-90deg); -o-transform: rotate(-90deg); transform: rotate(-90deg);
-}
-.page-content.courses .collapsed .arrow-white{
-    -webkit-transform: rotate(0deg); -moz-transform: rotate(0deg); -ms-transform: rotate(0deg); -o-transform: rotate(0deg); transform: rotate(0deg);
 }
 .page-content.courses .files .extension,
 .page-content.courses .files .download,
