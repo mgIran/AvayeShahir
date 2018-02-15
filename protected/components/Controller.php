@@ -102,7 +102,7 @@ class Controller extends AuthController
             return array(
                 array(
                     'label' => 'پیشخوان',
-                    'url' => array('/admins/dashboard')
+                    'url' => array('/moderators/dashboard')
                 ),
                 array(
                     'label' => 'اسلایدشو<span class="caret"></span>',
@@ -192,9 +192,9 @@ class Controller extends AuthController
                     'url' => '#',
                     'itemOptions' => array('class' => 'dropdown', 'tabindex' => "-1"), 'linkOptions' => array('class' => 'dropdown-toggle', 'data-toggle' => "dropdown"),
                     'items' => array(
-                        array('label' => 'نقش مدیران', 'url' => Yii::app()->createUrl('/admins/roles/admin')),
-                        array('label' => 'مدیریت', 'url' => Yii::app()->createUrl('/admins/manage')),
-                        array('label' => 'افزودن', 'url' => Yii::app()->createUrl('/admins/manage/create')),
+                        array('label' => 'نقش مدیران', 'url' => Yii::app()->createUrl('/moderators/roles/admin')),
+                        array('label' => 'مدیریت', 'url' => Yii::app()->createUrl('/moderators/manage')),
+                        array('label' => 'افزودن', 'url' => Yii::app()->createUrl('/moderators/manage/create')),
                     )
                 ),
                 array(
@@ -221,17 +221,17 @@ class Controller extends AuthController
                         array('label' => 'مدیریت اساتید', 'url' => Yii::app()->createUrl('/users/teachers')),
                         array('label' => 'مدیریت کارمندان', 'url' => Yii::app()->createUrl('/personnel/manage')),
                         array('label' => 'مدیریت گالری تصاویر', 'url' => Yii::app()->createUrl('/gallery/manage/admin')),
-                        array('label' => 'تغییر کلمه عبور', 'url' => Yii::app()->createUrl('/admins/manage/changePass')),
+                        array('label' => 'تغییر کلمه عبور', 'url' => Yii::app()->createUrl('/moderators/manage/changePass')),
                     )
                 ),
                 array(
                     'label' => 'ورود',
-                    'url' => array('/admins/login'),
+                    'url' => array('/moderators/login'),
                     'visible' => Yii::app()->user->isGuest
                 ),
                 array(
                     'label' => 'خروج',
-                    'url' => array('/admins/login/logout'),
+                    'url' => array('/moderators/login/logout'),
                     'visible' => !Yii::app()->user->isGuest),
             );
         else

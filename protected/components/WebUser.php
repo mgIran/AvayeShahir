@@ -12,7 +12,7 @@ class WebUser extends CWebUser
     {
         // for multi language
         if((is_array($operation) && in_array('admin', $operation)) || $operation === 'admin')
-            Yii::app()->user->loginUrl = array('/admins/login');
+            Yii::app()->user->loginUrl = array('/moderators/login');
         else
             Yii::app()->user->loginUrl = array('/login');
 

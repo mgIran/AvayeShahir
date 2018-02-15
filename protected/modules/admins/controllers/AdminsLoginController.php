@@ -36,7 +36,7 @@ class AdminsLoginController extends Controller
         Yii::app()->theme = 'abound';
         $this->layout = '//layouts/login';
         if(!Yii::app()->user->isGuest && Yii::app()->user->type === 'admin')
-            $this->redirect(array('/admins/'));
+            $this->redirect(array('/moderators/'));
 
         $model = new AdminLoginForm;
 
@@ -57,7 +57,7 @@ class AdminsLoginController extends Controller
             if ( $model->validate() && $model->login())
             {
                 Yii::app()->user->setState('attempts-login', 0);
-                $this->redirect(Yii::app()->createUrl('/admins/dashboard'));
+                $this->redirect(Yii::app()->createUrl('/moderators/dashboard'));
             }else
             {
                 Yii::app()->user->setState('attempts-login', Yii::app()->user->getState('attempts-login', 0) + 1);
@@ -76,6 +76,6 @@ class AdminsLoginController extends Controller
      */
     public function actionLogout() {
         Yii::app()->user->logout(false);
-        $this->redirect(array('/admins/login'));
+        $this->redirect(array('/moderators/login'));
     }
 }

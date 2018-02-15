@@ -4,8 +4,8 @@
 /* @var $form CActiveForm */
 
 $this->breadcrumbs=array(
-    'پیشخوان'=> array('/admins'),
-    'مدیران'=> array('/admins/manage'),
+    'پیشخوان'=> array('/moderators'),
+    'مدیران'=> array('/moderators/manage'),
     'تغییر کلمه عبور',
 );
 ?>

@@ -164,7 +164,10 @@ return array(
             'showScriptName'=>false,
             'appendParams'=>true,
 			'rules'=>array(
-//				'/min/serve/<params:(.*)>' => '/min/serve',
+				'admins' => '/',
+				'admins/<any:(.*)>' => '/',
+				'moderators' => 'admins',
+				'moderators/<any:(.*)>' => 'admins/<any>',
 				'gii' => 'gii/default/index',
 				'load' => 'writings/manage/ajaxLoad',
 				'edit&translation' => 'orders/public/index',

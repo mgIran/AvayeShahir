@@ -4,8 +4,8 @@
 /* @var $actions array */
 
 $this->breadcrumbs=array(
-    'پیشخوان'=> array('/admins'),
-    'کاربران'=> array('/admins/manage'),
+    'پیشخوان'=> array('/moderators'),
+    'کاربران'=> array('/moderators/manage'),
 	'نقش کاربران'=>array('admin'),
 	'افزودن',
 );

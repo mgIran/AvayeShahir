@@ -3,8 +3,8 @@
 /* @var $model Admins */
 
 $this->breadcrumbs=array(
-    'پیشخوان'=> array('/admins'),
-    'مدیران'=> array('/admins/manage'),
+    'پیشخوان'=> array('/moderators'),
+    'مدیران'=> array('/moderators/manage'),
     'مدیریت'=>array('admin'),
     'ویرایش',
 );
