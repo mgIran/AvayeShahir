@@ -24,6 +24,7 @@
         ?>
     </title>
     <link rel="shortcut icon" href="<?= Yii::app()->theme->baseUrl.'/images/favicon.ico'; ?>">
+    <link rel="stylesheet" href="<?php echo Yii::app()->theme->baseUrl;?>/css/fontiran.css">
     <?php
     $baseUrl = Yii::app()->theme->baseUrl;
     $cs = Yii::app()->getClientScript();

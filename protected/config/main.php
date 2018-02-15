@@ -164,6 +164,7 @@ return array(
             'showScriptName'=>false,
             'appendParams'=>true,
 			'rules'=>array(
+//				'/min/serve/<params:(.*)>' => '/min/serve',
 				'gii' => 'gii/default/index',
 				'load' => 'writings/manage/ajaxLoad',
 				'edit&translation' => 'orders/public/index',

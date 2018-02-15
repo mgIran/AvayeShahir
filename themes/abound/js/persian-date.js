@@ -1,4 +1,5 @@
-/* persian-date - v0.1.8 */ ( function () {String.prototype.toPersianDigit = function (a) {
+/* persian-date - v0.1.8 */
+( function () {String.prototype.toPersianDigit = function (a) {
     return this.replace(/\d+/g, function (digit) {
         var enDigitArr = [], peDigitArr = [], i, j;
         for (i = 0; i < digit.length; i += 1) {

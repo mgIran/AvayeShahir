@@ -6,7 +6,6 @@
  * 
  * @package Minify
  */
-
 define('MINIFY_MIN_DIR', dirname(__FILE__));
 
 // load config
@@ -54,6 +53,7 @@ if (isset($_GET['g'])) {
     // well need groups config
     $min_serveOptions['minApp']['groups'] = (require MINIFY_MIN_DIR . '/groupsConfig.php');
 }
+
 if (isset($_GET['f']) || isset($_GET['g'])) {
     // serve!   
 

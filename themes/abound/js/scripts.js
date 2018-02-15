@@ -6,23 +6,25 @@ $(function(){
     });
     if($('.selectpicker').length && $.fn.selectpicker)
         $('.selectpicker').selectpicker();
-    // CALL CALENDAR
-    $('.datepicker').persianDatepicker({
-        altField: '.date',
-        altFormat: 'X',
-        observer: true,
-        format: 'DD MMMM YYYY',
-        persianDigit: false
-    });
 
-    $('.timepicker').persianDatepicker({
-        altField: '.time',
-        altFormat: 'X',
-        format: 'HH:mm a',
-        onlyTimePicker: true
-    });
+    if($('.datepicker').length && $.fn.persianDatepicker) {
+        $('.datepicker').persianDatepicker({
+            altField: '.date',
+            altFormat: 'X',
+            observer: true,
+            format: 'DD MMMM YYYY',
+            persianDigit: false
+        });
 
-    // fade out alert messages
+        $('.timepicker').persianDatepicker({
+            altField: '.time',
+            altFormat: 'X',
+            format: 'HH:mm a',
+            onlyTimePicker: true
+        });
+    }
+
+
     setInterval(function(){
         $(".alert").fadeTo(500, 0).slideUp(500, function(){
             $(this).remove();
@@ -30,7 +32,6 @@ $(function(){
     }, 5000);
 
 
-    //
     $('.nav-tabs > li').click(function(event){
         if ($(this).hasClass('disabled')) {
             return false;
