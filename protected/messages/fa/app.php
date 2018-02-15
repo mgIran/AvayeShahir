@@ -232,4 +232,5 @@ return array(
     'More Videos' => 'ویدئوهای بیشتر',
     'Number of Multimedia' => 'تعداد چندرسانه ای',
     'content' => 'محتوا',
+    'Social Network Links' => 'لینک شبکه های اجتماعی',
 );

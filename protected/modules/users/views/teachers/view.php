@@ -39,6 +39,25 @@ $fileDir = Yii::getPathOfAlias("webroot").'/uploads/teachers/files/';
                                 <i></i>
                             </span>
                     </div>
+                    <h5><b><?= Yii::t('app','Social Network Links') ?></b></h5>
+                    <div>
+                        <?php
+                        $socials = $model->teacherDetails->social_links?json_decode($model->teacherDetails->social_links):null;
+                        if($socials):?>
+                            <ul>
+                                <?php foreach ($socials as $key => $social):
+                                    if($key == 0)
+                                        $title = Yii::t('app', 'Facebook');
+                                    else if($key == 1)
+                                        $title = Yii::t('app', 'Twitter');
+                                    else
+                                        $title = $social->title;
+                                    ?>
+                                    <li><a href="<?= $social->value ?>"><?= $title ?></a></li>
+                                <?php endforeach; ?>
+                            </ul>
+                        <?php endif; ?>
+                    </div>
                     <?
                 endif;
                 ?>
