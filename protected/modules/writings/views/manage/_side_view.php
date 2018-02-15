@@ -10,7 +10,7 @@ $date = Yii::app()->language=="fa" && $data->publish_date?JalaliDate::date("Y/m/
 			<?php
 			if($data->image && file_exists($thumbPath.$data->image)):
 			?>
-				<img src="<?= Yii::app()->baseUrl.'/uploads/writings/200x200/'.$data->image ?>" alt="<?= CHtml::encode($data->title) ?>">
+				<img src="<?= Yii::app()->baseUrl.'/uploads/writings/200x200/'.$data->image ?>" alt="<?= CHtml::encode($data->title) ?>" title="<?= CHtml::encode($data->title) ?>">
 			<?php
 			else:
 			?>

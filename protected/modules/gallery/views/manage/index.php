@@ -39,7 +39,7 @@
                            data-toggle="lightbox" data-gallery="gallery"
                         >
                             <div class="gallery-pic">
-                                <img src="<?= Yii::app()->baseUrl.'/uploads/gallery/'.$model->file_name; ?>" alt="<?= $model->title ?>" style="width: 100%">
+                                <img src="<?= Yii::app()->baseUrl.'/uploads/gallery/'.$model->file_name; ?>" alt="<?= $model->title ?>" title="<?= $model->title ?>" style="width: 100%">
                             </div>
                             <div class="gallery-detail container-fluid">
                                 <div class="blur-mask" id="blur-mask-<?= $model->id ?>"></div>

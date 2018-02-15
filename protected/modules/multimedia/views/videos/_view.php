@@ -6,7 +6,7 @@
     <div class="inner-item">
         <a href="<?= $this->createUrl('/multimedia/videos/'.$data->id.'/'.urlencode($data->title)) ?>" title="<?= $data->title ?>">
             <div class="image-container">
-                <img src="<?php echo Yii::app()->baseUrl.'/uploads/multimedia/thumbnail/'.$data->thumbnail;?>" alt="<?= $data->title ?>">
+                <img src="<?php echo Yii::app()->baseUrl.'/uploads/multimedia/thumbnail/'.$data->thumbnail;?>" alt="<?= $data->title ?>" title="<?= $data->title ?>">
             </div>
             <div class="text-container" style="margin-top: 15px;">
                 <h5><?php echo $data->title;?></h5>

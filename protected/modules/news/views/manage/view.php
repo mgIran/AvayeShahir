@@ -33,7 +33,7 @@
                 </span>
             </div>
             <div class="news-pic">
-                <img src="<?= Yii::app()->baseUrl.'/uploads/news/'.$model->image ?>" alt="<?= $model->title ?>">
+                <img src="<?= Yii::app()->baseUrl.'/uploads/news/'.$model->image ?>" alt="<?= $model->title ?>" title="<?= $model->title ?>">
             </div>
             <?php
             if($model->summary):

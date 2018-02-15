@@ -19,7 +19,7 @@ $imageUrl = Yii::app()->baseUrl.'/uploads/writings/';
         </span>
 </div>
 <div class="news-pic">
-    <img src="<?= Yii::app()->baseUrl.'/uploads/writings/'.$model->image ?>" alt="<?= $model->title ?>">
+    <img src="<?= Yii::app()->baseUrl.'/uploads/writings/'.$model->image ?>" alt="<?= $model->title ?>" title="<?= $model->title ?>">
 </div>
 <div class="news-text" dir="auto"><?= $model->summary ?></div>
 <?php

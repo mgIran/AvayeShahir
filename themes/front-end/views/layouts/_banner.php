@@ -8,7 +8,7 @@ if($this->slides):
         foreach($this->slides as $slide):
             ?>
             <div class="slider-item">
-                <div class="slider-thumbnail"><img src="<?= Yii::app()->baseUrl.'/uploads/slideshow/'.$slide->image ?>" alt="<?= $slide->image ?>"></div>
+                <div class="slider-thumbnail"><img src="<?= Yii::app()->baseUrl.'/uploads/slideshow/'.$slide->image ?>" alt="<?= $slide->image ?>" title="<?= $slide->image ?>"></div>
             </div>
             <?php
         endforeach;

@@ -21,7 +21,7 @@ $fileDir = Yii::getPathOfAlias("webroot").'/uploads/teachers/files/';
                     <?
                     if($model->teacherDetails->avatar && file_exists(Yii::getPathOfAlias('webroot').'/uploads/teachers/'.$model->teacherDetails->avatar)):
                         ?>
-                        <img src="<?= Yii::app()->baseUrl.'/uploads/teachers/'.$model->teacherDetails->avatar ?>" alt="<?= $model->teacherDetails->getFullName() ?>">
+                        <img src="<?= Yii::app()->baseUrl.'/uploads/teachers/'.$model->teacherDetails->avatar ?>" alt="<?= $model->teacherDetails->getFullName() ?>" title="<?= $model->teacherDetails->getFullName() ?>">
                         <?
                     endif;
                     ?>

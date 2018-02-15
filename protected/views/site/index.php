@@ -30,7 +30,7 @@
                             <div class="overlay">
                             </div>
                             <a href="<?= Yii::app()->createUrl('/courses/'.urlencode($course->getValueLang('title', 'en')).'/'.$course->id); ?>">
-                                <img src="<?= Yii::app()->baseUrl.'/uploads/courses/'.$course->pic; ?>" alt="<?= $course->title ?>">
+                                <img src="<?= Yii::app()->baseUrl.'/uploads/courses/'.$course->pic; ?>" alt="<?= $course->title ?>" title="<?= $course->title ?>">
                             </a>
                         </div>
                         <div class="course-detail container-fluid">
@@ -254,7 +254,7 @@ endif;
                                 <?
                                 if($teacher->teacherDetails->avatar):
                                 ?>
-                                    <img src="<?= Yii::app()->baseUrl.'/uploads/teachers/'.$teacher->teacherDetails->avatar ?>" alt="<?= CHtml::encode($teacher->teacherDetails->getFullName()) ?>">
+                                    <img src="<?= Yii::app()->baseUrl.'/uploads/teachers/'.$teacher->teacherDetails->avatar ?>" alt="<?= CHtml::encode($teacher->teacherDetails->getFullName()) ?>" title="<?= CHtml::encode($teacher->teacherDetails->getFullName()) ?>">
                                 <?
                                 else:
                                 ?>

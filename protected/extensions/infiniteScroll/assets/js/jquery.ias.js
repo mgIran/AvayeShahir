@@ -414,7 +414,7 @@
         pagination: '#pagination',
         next: '.next',
         noneleft: false,
-        loader: '<img src="images/loader.gif"/>',
+        loader: '<img src="images/loader.gif" alt="loading..." title="loading..."/>',
         loaderDelay: 600,
         triggerPageTreshold: 3,
         trigger: 'Load more items',

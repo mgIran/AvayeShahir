@@ -4,7 +4,7 @@
 ?>
 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 item">
 	<div class="image-container">
-		<img src="<?php echo Yii::app()->baseUrl.'/uploads/multimedia/'.$data->data;?>">
+		<img src="<?php echo Yii::app()->baseUrl.'/uploads/multimedia/'.$data->data;?>" alt="<?= $data->title ?>" title="<?= $data->title ?>">
 	</div>
 	<div class="text-container" style="margin-top: 15px;">
 		<a href="#" class="pull-left picture-modal-trigger">مشاهده</a>

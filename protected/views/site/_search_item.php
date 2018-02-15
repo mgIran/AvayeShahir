@@ -30,7 +30,7 @@ elseif($type == 'news')
             <?php
             if($data->{$image} && file_exists($thumbPath.$data->{$image})):
                 ?>
-                <img src="<?= $thumbUrl.$data->{$image} ?>" alt="<?= CHtml::encode($data->title) ?>">
+                <img src="<?= $thumbUrl.$data->{$image} ?>" alt="<?= CHtml::encode($data->title) ?>" title="<?= CHtml::encode($data->title) ?>">
                 <?php
             else:
                 ?>

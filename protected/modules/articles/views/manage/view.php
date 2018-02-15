@@ -32,7 +32,7 @@ $imageUrl = Yii::app()->baseUrl.'/uploads/articles/fileimages/';
                 </span>
             </div>
             <div class="news-pic">
-                <img src="<?= Yii::app()->baseUrl.'/uploads/articles/'.$model->image ?>" alt="<?= $model->title ?>">
+                <img src="<?= Yii::app()->baseUrl.'/uploads/articles/'.$model->image ?>" alt="<?= $model->title ?>" title="<?= $model->title ?>">
             </div>
             <div class="news-text"><?= $model->summary ?></div>
             <!-- END OF NEWS CONTENT -->

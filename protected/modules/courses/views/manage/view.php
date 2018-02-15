@@ -35,7 +35,7 @@ Yii::app()->clientScript->registerScript('active-collapse','
 					<?
 					if($model->pic):
 					?>
-						<img src="<?= Yii::app()->baseUrl.'/uploads/courses/'.$model->pic ?>" alt="<?= $model->title ?>">
+						<img src="<?= Yii::app()->baseUrl.'/uploads/courses/'.$model->pic ?>" alt="<?= $model->title ?>" title="<?= $model->title ?>">
 					<?
 					endif;
 					?>
