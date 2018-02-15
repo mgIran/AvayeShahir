@@ -191,8 +191,8 @@ class ExtMinScript extends CClientScript {
 				return false;
 			}
 			$urlPath = (isset($urlSegments['path'])) ? $urlSegments['path'] : '';
-			$path = $docRoot . $urlPath;
-			Yii::log('The URL "' . $url . '" is absolute and points to the file system path "' . $path . '".', CLogger::LEVEL_INFO, 'ext.minScript.components.ExtMinScript');
+            $path = $docRoot . $urlPath;
+            Yii::log('The URL "' . $url . '" is absolute and points to the file system path "' . $path . '".', CLogger::LEVEL_INFO, 'ext.minScript.components.ExtMinScript');
 		} elseif (strpos($url, Yii::app() -> assetManager -> baseUrl) === 0) {
 			// The URL points to an asset
 			$assetBasePath = rtrim(Yii::app() -> assetManager -> basePath, '/\\');
@@ -247,6 +247,7 @@ class ExtMinScript extends CClientScript {
 		} elseif ($lm !== false) {
 			$params['lm'] = $lm;
 		}
+		return str_replace(Yii::app()->language.'/','',Yii::app()->createAbsoluteUrl($this->minScriptControllerId . '/serve').'?'.http_build_query($params));
 		return Yii::app() -> createUrl($this -> minScriptControllerId . '/serve', $params);
 	}
 

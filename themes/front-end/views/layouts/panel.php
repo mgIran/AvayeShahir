@@ -29,12 +29,12 @@
     Yii::app()->clientScript->registerCoreScript('jquery');
     Yii::app()->clientScript->registerCoreScript('jquery.ui');
     $cs->registerCssFile($baseUrl.'/css/bootstrap.min.css');
+    $cs->registerCssFile($baseUrl.'/css/bootstrap-rtl.min.css');
     $cs->registerCssFile($baseUrl.'/css/bootstrap-material-design.min.css');
     $cs->registerCssFile($baseUrl.'/css/ripples.min.css');
     $cs->registerCssFile($baseUrl.'/css/owl.carousel.css');
     $cs->registerCssFile($baseUrl.'/css/font-awesome.css');
     $cs->registerCssFile($baseUrl.'/css/bootstrap-theme.css?10');
-    $cs->registerCssFile($baseUrl.'/css/responsive-theme.css?10');
     if (Yii::app()->params['default_language'] !== Yii::app()->language)
     {
         // @todo add css for multi language

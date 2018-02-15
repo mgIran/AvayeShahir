@@ -46,7 +46,6 @@ if ($min_errorLogger) {
     }
     Minify_Logger::setLogger($min_errorLogger);
 }
-
 // check for URI versioning
 if (preg_match('/&\\d/', $_SERVER['QUERY_STRING'])) {
     $min_serveOptions['maxAge'] = 31536000;

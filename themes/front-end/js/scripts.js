@@ -7,7 +7,7 @@ $(function() {
         }
     });
     $.material.init();
-    // course categories show trigger
+    /* course categories show trigger*/
     var $courseHover;
     $body.on('click','.course .three-dots-container',function () {
         $('.course .three-dots-container').not($(this)).parent().removeClass('open');
@@ -20,7 +20,7 @@ $(function() {
     $body.on('mouseleave','.course',function () {
         $(this).removeClass('open');
     });
-//
+
     $('.scrollbar').each(function () {
         var $this = $(this),
             $align = (typeof $this.data('railalign') !== "undefined"?$this.data('railalign'):'right'),
@@ -34,7 +34,7 @@ $(function() {
             autohidemode:false
         });
     });
-    // fade out alert messages
+    /* fade out alert messages */
     setInterval(function(){
         $(".alert:not(.message)").fadeTo(500, 0).slideUp(500, function(){
             $(this).remove();
@@ -87,7 +87,7 @@ $(function() {
         var $affix = $('.affix-top');
         $affix.width($affix.parents('[class*="col-"]').width());
 
-        // resize course category boxes
+        /* resize course category boxes */
         $('.courses .course').each(function () {
             setCourseCatHeight($(this));
         });

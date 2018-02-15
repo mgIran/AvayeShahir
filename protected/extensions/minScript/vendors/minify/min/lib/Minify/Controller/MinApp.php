@@ -5,7 +5,7 @@
  */
 
 /**
- * Controller class for requests to /min/index.php
+ * Controller class for requests to /min/page.php
  * 
  * @package Minify
  * @author Stephen Clay <steve@mrclay.org>

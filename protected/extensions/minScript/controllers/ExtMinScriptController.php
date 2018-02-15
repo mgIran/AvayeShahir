@@ -28,9 +28,7 @@ class ExtMinScriptController extends CExtController {
 	 */
 	protected $_minScriptComponent;
 
-	/**
-	 * Serve files.
-	 */
+
 	public function actionServe() {
 		Yii::$enableIncludePath = false;
 		require (dirname(dirname(__FILE__)) . '/vendors/minify/min/index.php');

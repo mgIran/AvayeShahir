@@ -7,7 +7,7 @@
 /**
  * Controller class for serving a single HTML page
  * 
- * @link http://code.google.com/p/minify/source/browse/trunk/web/examples/1/index.php#59
+ * @link http://code.google.com/p/minify/source/browse/trunk/web/examples/1/page.php#59
  * @package Minify
  * @author Stephen Clay <steve@mrclay.org>
  */
@@ -48,7 +48,7 @@ class Minify_Controller_Page extends Minify_Controller_Base {
             $f = $options['id'];
             unset($options['content'], $options['id']);
         }
-        // something like "builder,index.php" or "directory,file.html"
+        // something like "builder,page.php" or "directory,file.html"
         $this->selectionId = strtr(substr($f, 1 + strlen(dirname(dirname($f)))), '/\\', ',,');
 
         if (isset($options['minifyAll'])) {
