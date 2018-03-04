@@ -69,7 +69,7 @@
                 </div>
             <?= CHtml::submitButton(Yii::t('app','Send'),array('class'=>"button-field btn pull-left")); ?>
             <?php
-            echo CHtml::hiddenField('ajax','footer-contact-form');
+            echo CHtml::hiddenField('ajax','footer-contact-form', array('id' => false));
             $this->endWidget(); ?>
         </div>
         <div class="info-box">
