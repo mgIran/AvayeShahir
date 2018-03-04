@@ -159,7 +159,7 @@ endif;
         Yii::app()->clientScript->registerScript('registerForm','
             document.getElementById("register-form").reset();
         ');
-        echo CHtml::hiddenField('ajax','register-form');
+        echo CHtml::hiddenField('ajax','register-form', array('id' => false));
         ?>
             <div class="center-block box">
                 <?= $this->renderPartial("//layouts/_flashMessage");?>

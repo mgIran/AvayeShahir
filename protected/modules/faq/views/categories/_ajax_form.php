@@ -25,7 +25,7 @@
 		}'
 	)
 ));
-echo CHtml::hiddenField('ajax','category-ajax-form');
+echo CHtml::hiddenField('ajax','category-ajax-form', array('id' => false));
 ?>
 
 	<div class="row">
