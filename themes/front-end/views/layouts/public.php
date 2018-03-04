@@ -3,7 +3,7 @@
 /* @var $cs CClientScript */
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="<?= Yii::app()->language ?>">
 <head>
     <meta name="google-site-verification" content="eLig20wuueY0sZTGCnc8lSvjKPFW_bqNtfgl3UivuI0" />
     <meta charset="utf-8">

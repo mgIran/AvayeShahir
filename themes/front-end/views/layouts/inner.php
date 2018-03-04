@@ -3,7 +3,7 @@
 /* @var $cs CClientScript */
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="<?= Yii::app()->language ?>">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -23,7 +23,8 @@
             echo Yii::app()->name;
         ?>
     </title>
-    <link rel="shortcut icon" href="<?= Yii::app()->theme->baseUrl.'/images/favicon.ico'; ?>">
+
+    <link rel="shortcut icon" href="<?= Yii::app()->theme->baseUrl; ?>/images/logo.ico">
     <link rel="stylesheet" href="<?php echo Yii::app()->theme->baseUrl;?>/css/fontiran.css">
     <?php
     $baseUrl = Yii::app()->theme->baseUrl;
