@@ -2,6 +2,8 @@
 
 class SiteController extends Controller
 {
+    use SitemapTrait;
+
 	public $layout = '//layouts/public';
 
 	/**
@@ -20,6 +22,18 @@ class SiteController extends Controller
 			'page' => array(
 				'class' => 'CViewAction',
 			),
+            'sitemap'=>array(
+                'class'=>'ext.sitemap.ESitemapAction',
+                'importListMethod'=>'getBaseSitePageList',
+                'classConfig'=>$this->sitemapClassConfig,
+                'theme' => 'frontend',
+                'layout' => '//layouts/sitemap',
+            ),
+            'sitemapxml'=>array(
+                'class'=>'ext.sitemap.ESitemapXMLAction',
+                'classConfig'=>$this->sitemapClassConfig,
+                'importListMethod'=>'getBaseSitePageList',
+            ),
 		);
 	}
 

@@ -245,4 +245,22 @@ class Courses extends SortableCActiveRecord
         $criteria->order = 't.order';
         return $criteria;
     }
+
+    public function scopes()
+    {
+        return array(
+            'sitemap' => self::getQuery(),
+        );
+    }
+
+    /**
+     * @return CDbCriteria
+     */
+    public static function getQuery()
+    {
+        $criteria = new CDbCriteria();
+        $criteria->addCondition('t.deleted = 0');
+        $criteria->order = 't.order';
+        return $criteria;
+    }
 }

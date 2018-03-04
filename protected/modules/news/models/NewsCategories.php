@@ -290,4 +290,11 @@ class NewsCategories extends SortableCActiveRecord
 		$criteria->addInCondition('category_id' ,NewsCategories::model()->getCategoryChildes($id));
 		return News::model()->count($criteria);
 	}
+
+    public function scopes()
+    {
+        return array(
+            'sitemap' => self::getCategoryChildes(null, true,'criteria'),
+        );
+    }
 }

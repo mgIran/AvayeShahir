@@ -335,4 +335,11 @@ class ArticleCategories extends CActiveRecord
 		$tags = CHtml::listData($this->tags ,'title' ,'title');
 		return implode(',' ,$tags);
 	}
+
+    public function scopes()
+    {
+        return array(
+            'sitemap' => self::getCategoryChildes(null, true,'criteria'),
+        );
+    }
 }

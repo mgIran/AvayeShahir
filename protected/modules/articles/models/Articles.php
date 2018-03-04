@@ -283,4 +283,11 @@ class Articles extends SortableCActiveRecord
 		$criteria->order = 't.publish_date DESC';
 		return $criteria;
 	}
+
+    public function scopes()
+    {
+        return array(
+            'sitemap' => self::getValidArticles(),
+        );
+    }
 }

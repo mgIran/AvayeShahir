@@ -27,9 +27,9 @@ class News extends CActiveRecord
 	 * @return string the associated database table name
 	 */
 	public function tableName()
-	{
-		return '{{news}}';
-	}
+    {
+        return '{{news}}';
+    }
 
 	public $formTags=[];
 	public $statusLabels=[
@@ -254,4 +254,11 @@ class News extends CActiveRecord
         $criteria->order = 't.publish_date DESC';
         return $criteria;
 	}
+
+    public function scopes()
+    {
+        return array(
+            'sitemap' => self::getValidNews(),
+        );
+    }
 }

@@ -164,6 +164,8 @@ return array(
             'showScriptName'=>false,
             'appendParams'=>true,
 			'rules'=>array(
+                'sitemap'=>'site/sitemap',
+                'sitemap.xml'=>'site/sitemapxml',
 				'admins' => '/',
 				'admins/<any:(.*)>' => '/',
 				'moderators' => 'admins',

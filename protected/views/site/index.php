@@ -129,7 +129,6 @@ endif;
     <?= $this->renderPartial("//layouts/_loading");?>
     <div class="container-fluid">
         <h2 class="yekan-text text-center"><?= Yii::t('app','Sign Up Account') ?></h2>
-
         <?php
         $signUpModel = new Users('agreeTerms');
         $form=$this->beginWidget('CActiveForm', array(
@@ -262,7 +261,6 @@ endif;
                                 <?
                                 endif;
                                 ?>
-
                                 <div class="img-overlay"></div>
                             </div>
                             <span class="name"><?= CHtml::encode($teacher->teacherDetails->getFullName()) ?></span>
