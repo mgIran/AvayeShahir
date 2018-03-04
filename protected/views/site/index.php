@@ -251,7 +251,7 @@ endif;
                             <div class="image">
                                 <a href="<?= Yii::app()->createUrl('/teachers/'.$teacher->id.'/'.urlencode($teacher->teacherDetails->getFullName())) ?>" class="person-link"></a>
                                 <?
-                                if($teacher->teacherDetails->avatar):
+                                if($teacher->teacherDetails->avatar && is_file(Yii::getPathOfAlias('webroot').'/uploads/teachers/'.$teacher->teacherDetails->avatar)):
                                 ?>
                                     <img src="<?= Yii::app()->baseUrl.'/uploads/teachers/'.$teacher->teacherDetails->avatar ?>" alt="<?= CHtml::encode($teacher->teacherDetails->getFullName()) ?>" title="<?= CHtml::encode($teacher->teacherDetails->getFullName()) ?>">
                                 <?
