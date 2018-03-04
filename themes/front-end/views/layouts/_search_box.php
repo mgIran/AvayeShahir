@@ -14,7 +14,7 @@ $form = $this->beginWidget("CActiveForm",array(
 ?>
 <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12">
     <div class="row">
-        <?= $form->textField($this->searchModel,'text' ,array('class' => 'col-md-8 text-field' ,'placeholder' => Yii::t('app','Search for ...'), 'autocomplete' => "off")) ?>
+        <?= $form->textField($this->searchModel,'text' ,array('id' => 'search-txt','class' => 'col-md-8 text-field' ,'placeholder' => Yii::t('app','Search for ...'), 'autocomplete' => "off")) ?>
     </div>
 </div>
 <div class="btn-group col-lg-3 col-md-3 col-sm-4 col-xs-7">
