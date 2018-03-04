@@ -5,9 +5,7 @@
 @font-face{
     font-family:'BYekan';
     src:
-        /*url(../fonts/yekan/yekan.woff) format('woff'),*/
         url(../fonts/yekan/yekan.eot) format('embedded-opentype'),
-        url(../fonts/yekan/yekan.svg),
         url(../fonts/yekan/yekan.ttf)  format('truetype'),
         url(../fonts/yekan/yekannumbers.woff),
         url(../fonts/yekan/yekannumbers.ttf),
