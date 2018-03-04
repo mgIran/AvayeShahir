@@ -22,7 +22,7 @@
             echo Yii::app()->name;
         ?>
     </title>
-    <link rel="shortcut icon" href="<?= Yii::app()->theme->baseUrl; ?>/svg/logo-only.svg">
+    <link rel="shortcut icon" href="<?= Yii::app()->theme->baseUrl; ?>/images/logo.ico">
     <link rel="stylesheet" href="<?php echo Yii::app()->theme->baseUrl;?>/css/fontiran.css">
     <?php
     $baseUrl = Yii::app()->theme->baseUrl;
