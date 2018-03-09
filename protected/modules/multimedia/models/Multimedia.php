@@ -187,7 +187,7 @@ class Multimedia extends SortableCActiveRecord
         $criteria->order = 'id DESC';
         if($return == 'html')
             foreach(Multimedia::model()->findAll($criteria) as $model)
-                echo '<li><a href="' . Yii::app()->createUrl('/multimedia/' . $type . '/' . $model->id . '/' . urlencode($model->title)) . '" ><span>' . $model->title . '</span></a></li>';
+                echo '<li><a href="' . Yii::app()->createUrl('/multimedia/' . $type . '/' . $model->id . '/' . urlencode(str_replace('.','',$model->title))) . '" ><span>' . $model->title . '</span></a></li>';
         else{
             $out = array();
             foreach(Multimedia::model()->findAll($criteria) as $model)

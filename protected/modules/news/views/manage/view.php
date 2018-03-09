@@ -55,7 +55,7 @@
                 <?php
                 foreach ($model->tags as $tag)
                     if($tag->title && !empty($tag->title))
-                        echo CHtml::link($tag->title,array('/news/tag/'.$tag->id.'/'.urlencode($tag->title)),array('class'=>'label label-blue'));
+                        echo CHtml::link($tag->title,array('/news/tag/'.$tag->id.'/'.urlencode(str_replace('.','',$tag->title))),array('class'=>'label label-blue'));
                 ?>
             </div>
             <?php
@@ -65,10 +65,10 @@
             <div class="overflow-fix">
                 <div class="news-share pull-right">
                     <span><?= Yii::t('app','Sharing') ?></span><span class="share-icons">
-                        <a target="_blank" class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=<?= $this->createAbsoluteUrl('/news/'.$model->id.'/'.urlencode($model->title)) ?>"></a>
-                        <a target="_blank" class="twitter" href="https://twitter.com/home?status=<?= $this->createAbsoluteUrl('/news/'.$model->id.'/'.urlencode($model->title)) ?>"></a>
-                        <a target="_blank" class="google-plus" href="https://plus.google.com/share?url=<?= $this->createAbsoluteUrl('/news/'.$model->id.'/'.urlencode($model->title)) ?>"></a>
-                        <a target="_blank" class="telegram" href="https://telegram.me/share/url?url=<?= $this->createAbsoluteUrl('/news/'.$model->id.'/'.urlencode($model->title)) ?>"></a>
+                        <a target="_blank" class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=<?= $this->createAbsoluteUrl('/news/'.$model->id.'/'.urlencode(str_replace('.','',$model->title))) ?>"></a>
+                        <a target="_blank" class="twitter" href="https://twitter.com/home?status=<?= $this->createAbsoluteUrl('/news/'.$model->id.'/'.urlencode(str_replace('.','',$model->title))) ?>"></a>
+                        <a target="_blank" class="google-plus" href="https://plus.google.com/share?url=<?= $this->createAbsoluteUrl('/news/'.$model->id.'/'.urlencode(str_replace('.','',$model->title))) ?>"></a>
+                        <a target="_blank" class="telegram" href="https://telegram.me/share/url?url=<?= $this->createAbsoluteUrl('/news/'.$model->id.'/'.urlencode(str_replace('.','',$model->title))) ?>"></a>
                     </span>
                 </div>
                 <div class="short-url pull-left">

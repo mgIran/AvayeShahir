@@ -20,7 +20,7 @@ $date = Yii::app()->language=="fa"?JalaliDate::date("Y/m/d - H:i",$data->publish
 			?>
 		</div>
 		<div class="news-detail">
-			<a href="<?= $this->createUrl('/news/'.$data->id.'/'.urlencode($data->title)) ?>">
+			<a href="<?= $this->createUrl('/news/'.$data->id.'/'.urlencode(str_replace('.','',$data->title))) ?>">
 				<h3><?= CHtml::encode($data->title) ?></h3>
 			</a>
 			<span class="date"><?= $date ?></span>

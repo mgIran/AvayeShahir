@@ -90,6 +90,8 @@ class UsersPublicController extends Controller
 
     public function actionRegister()
     {
+        if(!Yii::app()->request->isAjaxRequest)
+            $this->redirect(Yii::app()->getBaseUrl(true));
         Yii::app()->theme = 'front-end';
         $this->layout = '//layouts/public';
         $model = new Users('agreeTerms');

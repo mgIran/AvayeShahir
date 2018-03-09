@@ -45,7 +45,7 @@ class CoursesRegisterController extends Controller
         }
         $class = Classes::model()->findByPk($id);
         if(!$class)
-            $this->redirect(Yii::app()->baseUrl);
+            $this->redirect(Yii::app()->getBaseUrl(true));
         $lastTransaction = UserTransactions::model()->findByAttributes(array('user_id' => Yii::app()->user->getId(), 'model_id' => $id, 'model_name' => "Classes"));
         if($lastTransaction && $lastTransaction->status == 'paid')
             $message = Yii::t('app', 'You have already registered in this class.');
