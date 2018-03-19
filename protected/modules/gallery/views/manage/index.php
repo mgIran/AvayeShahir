@@ -31,7 +31,7 @@
                           gutter: 5
                         }
                     });
-                ",CClientScript::POS_READY);
+                ",CClientScript::POS_LOAD);
                 foreach($models as $model):
                     ?>
                     <div class="gallery-item">
@@ -43,9 +43,11 @@
                             </div>
                             <div class="gallery-detail container-fluid">
                                 <div class="blur-mask" id="blur-mask-<?= $model->id ?>"></div>
+                                <?php if($model->title):?>
                                 <div class="gallery-detail-inner">
                                     <h2><?= $model->title ?></h2>
                                 </div>
+                                <?php endif; ?>
                             </div>
                         </a>
                     </div>

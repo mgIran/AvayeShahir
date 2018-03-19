@@ -22,8 +22,8 @@
             echo Yii::app()->name;
         ?>
     </title>
-    <link rel="shortcut icon" href="<?= Yii::app()->theme->baseUrl; ?>/images/logo.ico">
-    <link rel="stylesheet" href="<?php echo Yii::app()->theme->baseUrl;?>/css/fontiran.css">
+    <link rel="shortcut icon" href="<?php echo Yii::app()->getBaseUrl(true);?>/themes/front-end/images/logo.ico">
+    <link rel="stylesheet" href="<?php echo Yii::app()->getBaseUrl(true);?>/themes/front-end/css/fontiran.css">
     <?php
     $baseUrl = Yii::app()->theme->baseUrl;
     $cs = Yii::app()->getClientScript();
@@ -35,11 +35,11 @@
     $cs->registerCssFile($baseUrl.'/css/ripples.min.css');
     $cs->registerCssFile($baseUrl.'/css/owl.carousel.css');
     $cs->registerCssFile($baseUrl.'/css/font-awesome.css');
-    $cs->registerCssFile($baseUrl.'/css/bootstrap-theme.css?10.1');
+    $cs->registerCssFile($baseUrl.'/css/bootstrap-theme.css?10.2');
     if (Yii::app()->params['default_language'] !== Yii::app()->language)
     {
         // @todo add css for multi language
-        $cs->registerCssFile($baseUrl.'/css/bootstrap-theme-'.Yii::app()->language.'.css?10.1');
+        $cs->registerCssFile($baseUrl.'/css/bootstrap-theme-'.Yii::app()->language.'.css?10.2');
     }
 
     $cs->registerScriptFile($baseUrl.'/js/bootstrap.min.js');
@@ -48,7 +48,7 @@
     $cs->registerScriptFile($baseUrl.'/js/owl.carousel.min.js');
     $cs->registerScriptFile($baseUrl.'/js/jquery.nicescroll.min.js');
     $cs->registerScriptFile($baseUrl.'/js/jquery.mousewheel.min.js');
-    $cs->registerScriptFile($baseUrl.'/js/scripts.js?10.1');
+    $cs->registerScriptFile($baseUrl.'/js/scripts.js?10.2');
     ?>
 </head>
 <body id="top">

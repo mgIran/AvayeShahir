@@ -1970,9 +1970,9 @@ section.classes .owl-carousel .owl-controls .owl-nav [class*="owl-"].disabled ,
     background: #fff url('../svg/attachment.svg') no-repeat scroll right 20px center;
     background-size: 18px auto;
     border-right: 3px solid #ef5350;
-    height:50px;
+    height:80px;
     line-height:50px;
-    padding-right: 60px;
+    padding-right: 95px;
     color: #4f4f4f;
     cursor: default;
     margin-bottom: 10px;
@@ -3590,7 +3590,7 @@ ol{
     left: 140px;
     overflow: hidden;
     position: absolute;
-    right: 60px;
+    right: 95px;
     text-overflow: ellipsis;
     white-space: nowrap;
     -webkit-transition: all 0.3s;
@@ -3622,15 +3622,14 @@ ol{
 }
 
 .file-image {
-    border-radius: 2px;
+    border-radius: 0;
     display: inline-block;
-    height: 40px;
-    max-width: 40px;
+    height: 80px;
+    max-width: 80px;
     overflow: hidden;
     position: absolute;
-    right: 10px;
-    top: 50%;
-    margin-top: -20px;
+    right: 0;
+    top: 0;
 }
 
 .ias_trigger > a {
