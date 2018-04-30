@@ -3906,6 +3906,9 @@ ol{
         -o-transform: none;
         transform: none;
     }
+    .news-list{
+        padding: 0 !important;
+    }
 }
 @media all and (max-width: 480px){
     .gallery-item{

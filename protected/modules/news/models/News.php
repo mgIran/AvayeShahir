@@ -245,11 +245,13 @@ class News extends CActiveRecord
 		$criteria->with = array('category');
 		$condition = 't.title LIKE :text OR t.summary LIKE :text OR t.body LIKE :text OR category.title LIKE :text';
 		$criteria->params['text'] = "%{$text}%";
-		foreach($words as $key => $word){
-			$condition .= " OR t.title LIKE :text$key OR t.summary LIKE :text$key OR t.body LIKE :text$key OR category.title LIKE :text$key";
-			$criteria->params["text$key"] = "%{$word}%";
-		}
-		$criteria->addCondition($condition);
+        if($words && is_array($words)) {
+            foreach ($words as $key => $word) {
+                $condition .= " OR t.title LIKE :text$key OR t.summary LIKE :text$key OR t.body LIKE :text$key OR category.title LIKE :text$key";
+                $criteria->params["text$key"] = "%{$word}%";
+            }
+            $criteria->addCondition($condition);
+        }
 		$criteria->together = true;
         $criteria->order = 't.publish_date DESC';
         return $criteria;

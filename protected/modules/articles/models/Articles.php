@@ -268,17 +268,20 @@ class Articles extends SortableCActiveRecord
 		if($withExtLinks)
 			$condition .= ' OR extlinks.title LIKE :text OR extlinks.summary LIKE :text';
 		$criteria->params['text'] = "%{$text}%";
-		foreach($words as $key => $word){
-			$condition .= " OR t.title LIKE :text$key OR t.summary LIKE :text$key OR category.title  LIKE :text$key";
-			if($withLinks)
-				$condition .= " OR links.title LIKE :text$key OR links.summary LIKE :text$key";
-			if($withFiles)
-				$condition .= " OR files.title LIKE :text$key OR files.summary LIKE :text$key";
-			if($withExtLinks)
-				$condition .= " OR extlinks.title LIKE :text$key OR extlinks.summary LIKE :text$key";
-			$criteria->params["text$key"] = "%{$word}%";
-		}
-		$criteria->addCondition($condition);
+
+        if($words && is_array($words)) {
+            foreach ($words as $key => $word) {
+                $condition .= " OR t.title LIKE :text$key OR t.summary LIKE :text$key OR category.title  LIKE :text$key";
+                if ($withLinks)
+                    $condition .= " OR links.title LIKE :text$key OR links.summary LIKE :text$key";
+                if ($withFiles)
+                    $condition .= " OR files.title LIKE :text$key OR files.summary LIKE :text$key";
+                if ($withExtLinks)
+                    $condition .= " OR extlinks.title LIKE :text$key OR extlinks.summary LIKE :text$key";
+                $criteria->params["text$key"] = "%{$word}%";
+            }
+            $criteria->addCondition($condition);
+        }
 		$criteria->together = true;
 		$criteria->order = 't.publish_date DESC';
 		return $criteria;

@@ -192,12 +192,14 @@ class ClassCategoryFileLinks extends SortableCActiveRecord
 		$condition = 't.title LIKE :text';
 //		$condition .= ' OR t.summary LIKE :text';
 		$criteria->params['text'] = "%{$text}%";
-		foreach($words as $key => $word){
-			$condition .= " OR t.title LIKE :text$key";
-    //		$condition .= " OR t.summary LIKE :text$key";
-			$criteria->params["text$key"] = "%{$word}%";
-		}
-		$criteria->addCondition($condition);
+        if($words && is_array($words)) {
+            foreach ($words as $key => $word) {
+                $condition .= " OR t.title LIKE :text$key";
+                //		$condition .= " OR t.summary LIKE :text$key";
+                $criteria->params["text$key"] = "%{$word}%";
+            }
+            $criteria->addCondition($condition);
+        }
 //		$criteria->addCondition('deleted = 0');
 		$criteria->order = 't.order';
 		return $criteria;

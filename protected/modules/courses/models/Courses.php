@@ -231,15 +231,17 @@ class Courses extends SortableCActiveRecord
             $criteria->with[] = 'categories.files';
         }
         $criteria->params['text'] = "%{$text}%";
-        foreach($words as $key => $word){
-            $condition .= " OR t.title LIKE :text$key OR t.summary LIKE :text$key OR categories.title LIKE :text$key OR categories.summary LIKE :text$key";
-            if($withLinks)
-                $condition .= " OR links.title LIKE :text$key OR links.summary LIKE :text$key";
-            if($withFiles)
-                $condition .= " OR files.title LIKE :text$key OR files.summary LIKE :text$key";
-            $criteria->params["text$key"] = "%{$word}%";
+        if($words && is_array($words)) {
+            foreach ($words as $key => $word) {
+                $condition .= " OR t.title LIKE :text$key OR t.summary LIKE :text$key OR categories.title LIKE :text$key OR categories.summary LIKE :text$key";
+                if ($withLinks)
+                    $condition .= " OR links.title LIKE :text$key OR links.summary LIKE :text$key";
+                if ($withFiles)
+                    $condition .= " OR files.title LIKE :text$key OR files.summary LIKE :text$key";
+                $criteria->params["text$key"] = "%{$word}%";
+            }
+            $criteria->addCondition($condition);
         }
-        $criteria->addCondition($condition);
         $criteria->together = true;
         $criteria->addCondition('deleted = 0');
         $criteria->order = 't.order';

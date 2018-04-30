@@ -246,6 +246,7 @@ class SiteController extends Controller
 			$model->attributes = $_GET['SearchForm'];
 			$pageSize = 10;
 			$words = explode(' ', $model->text);
+			$words = null;
 			switch($model->type){
 				case 'courses':
 					Yii::app()->getModule('courses');
