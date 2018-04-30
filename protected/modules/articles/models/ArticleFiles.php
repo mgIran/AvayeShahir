@@ -184,8 +184,8 @@ class ArticleFiles extends SortableCActiveRecord
                 //		$condition .= " OR t.summary LIKE :text$key";
                 $criteria->params["text$key"] = "%{$word}%";
             }
-            $criteria->addCondition($condition);
         }
+        $criteria->addCondition($condition);
 //		$criteria->addCondition('deleted = 0');
 		$criteria->order = 't.order';
 		return $criteria;

@@ -240,8 +240,8 @@ class Courses extends SortableCActiveRecord
                     $condition .= " OR files.title LIKE :text$key OR files.summary LIKE :text$key";
                 $criteria->params["text$key"] = "%{$word}%";
             }
-            $criteria->addCondition($condition);
         }
+        $criteria->addCondition($condition);
         $criteria->together = true;
         $criteria->addCondition('deleted = 0');
         $criteria->order = 't.order';

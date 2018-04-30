@@ -250,9 +250,9 @@ class News extends CActiveRecord
                 $condition .= " OR t.title LIKE :text$key OR t.summary LIKE :text$key OR t.body LIKE :text$key OR category.title LIKE :text$key";
                 $criteria->params["text$key"] = "%{$word}%";
             }
-            $criteria->addCondition($condition);
         }
-		$criteria->together = true;
+        $criteria->addCondition($condition);
+        $criteria->together = true;
         $criteria->order = 't.publish_date DESC';
         return $criteria;
 	}

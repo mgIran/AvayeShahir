@@ -280,9 +280,9 @@ class Articles extends SortableCActiveRecord
                     $condition .= " OR extlinks.title LIKE :text$key OR extlinks.summary LIKE :text$key";
                 $criteria->params["text$key"] = "%{$word}%";
             }
-            $criteria->addCondition($condition);
         }
-		$criteria->together = true;
+        $criteria->addCondition($condition);
+        $criteria->together = true;
 		$criteria->order = 't.publish_date DESC';
 		return $criteria;
 	}
