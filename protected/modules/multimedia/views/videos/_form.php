@@ -29,33 +29,38 @@
 	</div>
 
 
-
+<?php
+//var_dump($model->data);exit;
+?>
 	<div class="row">
 		<label>نوع ویدئو</label>
-		<?php echo CHtml::radioButtonList('Multimedia[dataType]', $model->type, array(
-            Multimedia::TYPE_VIDEO=> 'خارج از سرور',
+        <div class="clearfix"></div>
+		<?php echo CHtml::radioButtonList('Multimedia[type]', $model->isNewRecord?Multimedia::TYPE_VIDEO_INTERNAL:$model->type, array(
             Multimedia::TYPE_VIDEO_INTERNAL=> 'داخل سرور',
-        ),array('rows' => 6,'cols'=>60,'maxlength'=>1000,'class'=>'form-control ltr text-left')); ?>
+            Multimedia::TYPE_VIDEO=> 'خارج از سرور',
+        )); ?>
 		<?php echo $form->error($model,'data'); ?>
 	</div>
 
-	<div class="row">
-		<label>کد آی فریم ویدئوی خارجی</label>
-		<?php echo CHtml::textArea('Multimedia[iframe]',array('rows' => 6,'cols'=>60,'maxlength'=>1000,'class'=>'form-control ltr text-left')); ?>
-	</div>
-
+    <div class="well">
     <div class='row'>
         <label>ویدئوی داخلی</label>
         <?php
         $this->widget('ext.fileManager.fileManager', array(
             'id' => 'video-file',
             'name' => 'Multimedia[video_file]',
-            'url' => $this->createUrl('/multimedia/video/fetch'),
+            'url' => $this->createUrl('/multimedia/videos/fetch'),
             'maxFiles' => 1,
             'serverDir' => $this->videoPath,
-            'serverFile' => $model->data,
+            'serverFile' => $model->type==Multimedia::TYPE_VIDEO_INTERNAL?$model->data:null,
         ));
         ?>
+    </div>
+<hr>
+	<div class="row">
+		<label>کد آی فریم ویدئوی خارجی</label>
+		<?php echo CHtml::textArea('Multimedia[iframe]', $model->type==Multimedia::TYPE_VIDEO?$model->data:'',array('rows' => 6,'cols'=>60,'maxlength'=>1000,'class'=>'form-control ltr text-left')); ?>
+	</div>
     </div>
 
     <?php echo $form->error($model,'data'); ?>

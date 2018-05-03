@@ -84,7 +84,7 @@ class Multimedia extends SortableCActiveRecord
 		// will receive user inputs.
 		return array(
 			array('type, category_id', 'required'),
-			array('type', 'length', 'max' => 7),
+			array('type', 'length', 'max' => 15),
 			array('title', 'length', 'max' => 50),
 			array('data', 'length', 'max' => 1000),
 			array('thumbnail', 'length', 'max' => 255),
@@ -160,6 +160,7 @@ class Multimedia extends SortableCActiveRecord
 
 		return new CActiveDataProvider($this, array(
 			'criteria' => $criteria,
+            'pagination' => array('pageSize' => 50)
 		));
 	}
 

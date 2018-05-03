@@ -24,17 +24,18 @@ $this->menu=array(
 	'filter'=>$model,
 	'template' => '{items} {pager}',
 	'columns'=>array(
-		array(
-			'name' => 'thumbnail',
-			'value' => function($model){
-				$path = Yii::getPathOfAlias('webroot').'/uploads/multimedia/thumbnail/';
-				return $model->thumbnail && is_file($path.$model->thumbnail)?CHtml::image(Yii::app()->getBaseUrl(true).'/uploads/multimedia/thumbnail/'.$model->thumbnail,'', array('style' => 'width:80px;')):'';
-			},
-			'type' => 'raw',
-			'htmlOptions' => array('style' => 'width:50px;'),
-			'filter' => false
-		),
+//		array(
+//			'name' => 'thumbnail',
+//			'value' => function($model){
+//				$path = Yii::getPathOfAlias('webroot').'/uploads/multimedia/thumbnail/';
+//				return $model->thumbnail && is_file($path.$model->thumbnail)?CHtml::image(Yii::app()->getBaseUrl(true).'/uploads/multimedia/thumbnail/'.$model->thumbnail,'', array('style' => 'width:80px;')):'';
+//			},
+//			'type' => 'raw',
+//			'htmlOptions' => array('style' => 'width:50px;'),
+//			'filter' => false
+//		),
 		'title',
+		'order',
 		array(
 			'name' => 'category_id',
 			'value' => function($model){

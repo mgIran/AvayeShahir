@@ -105,7 +105,6 @@ class MultimediaVideosController extends Controller
         if (isset($_POST['Multimedia'])) {
             $model->attributes = $_POST['Multimedia'];
             $thumbnail = new UploadedFiles($this->tempPath, $model->thumbnail, $this->thumbOptions);
-            $model->type = Multimedia::TYPE_VIDEO;
             $model->formTags = isset($_POST['Multimedia']['formTags']) ? explode(',', $_POST['Multimedia']['formTags']) : null;
 
             if ($model->type == Multimedia::TYPE_VIDEO)
@@ -145,7 +144,6 @@ class MultimediaVideosController extends Controller
 		{
 			$oldImage = $model->thumbnail;
 			$model->attributes=$_POST['Multimedia'];
-			$model->type = Multimedia::TYPE_VIDEO;
 			$model->formTags = isset($_POST['Multimedia']['formTags'])?explode(',',$_POST['Multimedia']['formTags']):null;
 
             if ($model->type == Multimedia::TYPE_VIDEO)

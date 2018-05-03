@@ -62,7 +62,8 @@ class fileManager extends CWidget
         if(!$this->serverDir)
             throw new CHttpException(404, 'مسیر دریافت فایل مشخص نشده است.');
         else if(!is_dir($this->serverDir) && !is_dir(Yii::getPathOfAlias('webroot').$this->serverDir) && !is_dir(Yii::getPathOfAlias('webroot').'/'.$this->serverDir))
-            throw new CHttpException(404, 'مسیر دریافت فایل نامعتبر است.');
+            @mkdir(Yii::getPathOfAlias('webroot').'/'.$this->serverDir,0777, true);
+//            throw new CHttpException(404, 'مسیر دریافت فایل نامعتبر است.');
         else{
             if(is_dir(Yii::getPathOfAlias('webroot') . $this->serverDir))
                 $this->serverDir = Yii::getPathOfAlias('webroot') . $this->serverDir;
