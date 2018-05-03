@@ -28,11 +28,37 @@
 		<?php echo $form->error($model,'description'); ?>
 	</div>
 
+
+
 	<div class="row">
-		<label>کد آی فریم</label>
-		<?php echo $form->textArea($model,'data',array('rows' => 6,'cols'=>60,'maxlength'=>1000,'class'=>'form-control ltr text-left')); ?>
+		<label>نوع ویدئو</label>
+		<?php echo CHtml::radioButtonList('Multimedia[dataType]', $model->type, array(
+            Multimedia::TYPE_VIDEO=> 'خارج از سرور',
+            Multimedia::TYPE_VIDEO_INTERNAL=> 'داخل سرور',
+        ),array('rows' => 6,'cols'=>60,'maxlength'=>1000,'class'=>'form-control ltr text-left')); ?>
 		<?php echo $form->error($model,'data'); ?>
 	</div>
+
+	<div class="row">
+		<label>کد آی فریم ویدئوی خارجی</label>
+		<?php echo CHtml::textArea('Multimedia[iframe]',array('rows' => 6,'cols'=>60,'maxlength'=>1000,'class'=>'form-control ltr text-left')); ?>
+	</div>
+
+    <div class='row'>
+        <label>ویدئوی داخلی</label>
+        <?php
+        $this->widget('ext.fileManager.fileManager', array(
+            'id' => 'video-file',
+            'name' => 'Multimedia[video_file]',
+            'url' => $this->createUrl('/multimedia/video/fetch'),
+            'maxFiles' => 1,
+            'serverDir' => $this->videoPath,
+            'serverFile' => $model->data,
+        ));
+        ?>
+    </div>
+
+    <?php echo $form->error($model,'data'); ?>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'thumbnail'); ?>

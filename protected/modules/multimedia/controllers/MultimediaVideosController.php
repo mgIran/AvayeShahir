@@ -8,6 +8,7 @@ class MultimediaVideosController extends Controller
 	 */
 	public $layout='//layouts/column2';
 	public $tempPath = 'uploads/temp';
+	public $videoPath = 'uploads/multimedia/videos';
 	public $thumbsPath = 'uploads/multimedia/thumbnail';
 	public $thumbOptions = [
 		/*'thumbnail' => ['width' => 200, 'height' => 200]*/
@@ -31,7 +32,8 @@ class MultimediaVideosController extends Controller
 				'delete',
 				'upload',
 				'deleteUpload',
-				'order'
+				'order',
+				'fetch',
 			)
 		);
 	}
@@ -42,7 +44,7 @@ class MultimediaVideosController extends Controller
 	public function filters()
 	{
 		return array(
-			'checkAccess + create, update, admin, delete, upload, deleteUpload, order', // perform access control for CRUD operations
+			'checkAccess + create, update, admin, delete, upload, deleteUpload, order, fetch', // perform access control for CRUD operations
 			'postOnly + delete', // we only allow deletion via POST request
 		);
 	}
@@ -68,13 +70,16 @@ class MultimediaVideosController extends Controller
                 'uploadDir' => '/uploads/multimedia/thumbnail',
                 'storedMode' => 'field'
             ),
+            'fetch' => array(
+                'class' => 'ext.fileManager.actions.AjaxFetchFilesListAction',
+            ),
 		);
 	}
 
-	/**
-	 * Displays a particular model.
-	 * @param integer $id the ID of the model to be displayed
-	 */
+    /**
+     * @param $id
+     * @throws CHttpException
+     */
 	public function actionView($id)
 	{
         Yii::app()->theme ='front-end';
@@ -94,29 +99,34 @@ class MultimediaVideosController extends Controller
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
 	public function actionCreate()
-	{
-		$model=new Multimedia;
+    {
+        $model = new Multimedia;
         $thumbnail = [];
-		if(isset($_POST['Multimedia']))
-		{
-			$model->attributes=$_POST['Multimedia'];
+        if (isset($_POST['Multimedia'])) {
+            $model->attributes = $_POST['Multimedia'];
             $thumbnail = new UploadedFiles($this->tempPath, $model->thumbnail, $this->thumbOptions);
-			$model->type = Multimedia::TYPE_VIDEO;
-			$model->formTags = isset($_POST['Multimedia']['formTags'])?explode(',',$_POST['Multimedia']['formTags']):null;
-			if($model->save()){
+            $model->type = Multimedia::TYPE_VIDEO;
+            $model->formTags = isset($_POST['Multimedia']['formTags']) ? explode(',', $_POST['Multimedia']['formTags']) : null;
+
+            if ($model->type == Multimedia::TYPE_VIDEO)
+                $model->data = isset($_POST['Multimedia']['iframe']) ? $_POST['Multimedia']['iframe'] : null;
+            elseif ($model->type == Multimedia::TYPE_VIDEO_INTERNAL)
+                $model->data = isset($_POST['Multimedia']['video_file']) ? $_POST['Multimedia']['video_file'] : null;
+
+            if ($model->save()) {
                 $thumbnail->move($this->thumbsPath);
 
-				Yii::app()->user->setFlash('success', '<span class="icon-check"></span>&nbsp;&nbsp;اطلاعات با موفقیت ذخیره شد.');
-				$this->redirect(array('admin'));
-			}else
-				Yii::app()->user->setFlash('failed', 'در ثبت اطلاعات خطایی رخ داده است! لطفا مجددا تلاش کنید.');
-		}
+                Yii::app()->user->setFlash('success', '<span class="icon-check"></span>&nbsp;&nbsp;اطلاعات با موفقیت ذخیره شد.');
+                $this->redirect(array('admin'));
+            } else
+                Yii::app()->user->setFlash('failed', 'در ثبت اطلاعات خطایی رخ داده است! لطفا مجددا تلاش کنید.');
+        }
 
-		$this->render('create',array(
-			'model'=>$model,
-            'thumbnail'=>$thumbnail
-		));
-	}
+        $this->render('create', array(
+            'model' => $model,
+            'thumbnail' => $thumbnail
+        ));
+    }
 
 	/**
 	 * Updates a particular model.
@@ -137,6 +147,12 @@ class MultimediaVideosController extends Controller
 			$model->attributes=$_POST['Multimedia'];
 			$model->type = Multimedia::TYPE_VIDEO;
 			$model->formTags = isset($_POST['Multimedia']['formTags'])?explode(',',$_POST['Multimedia']['formTags']):null;
+
+            if ($model->type == Multimedia::TYPE_VIDEO)
+                $model->data = isset($_POST['Multimedia']['iframe']) ? $_POST['Multimedia']['iframe'] : null;
+            elseif ($model->type == Multimedia::TYPE_VIDEO_INTERNAL)
+                $model->data = isset($_POST['Multimedia']['video_file']) ? $_POST['Multimedia']['video_file'] : null;
+
 			if($model->save()){
                 $thumbnail->update($oldImage, $model->thumbnail,$this->tempPath);
 				Yii::app()->user->setFlash('success', '<span class="icon-check"></span>&nbsp;&nbsp;اطلاعات با موفقیت ذخیره شد.');

@@ -21,6 +21,7 @@ class Multimedia extends SortableCActiveRecord
 {
 	const TYPE_PICTURE = 'picture';
 	const TYPE_VIDEO = 'video';
+	const TYPE_VIDEO_INTERNAL = 'internal-video';
 
 	public $formTags = [];
 

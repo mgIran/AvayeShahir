@@ -44,6 +44,7 @@ class fileManager extends CWidget
      * @var string specific path on server for fetch files
      */
     public $serverDir;
+    public $serverFile = null;
 
     /**
      * init widget
@@ -122,13 +123,17 @@ class fileManager extends CWidget
         if($this->model && $this->attribute){
             $hiddenFieldName = CHtml::activeHiddenField($this->model, $this->attribute, $this->htmlOptions);
         }else if($this->model && !$this->attribute && $this->name)
-            $hiddenFieldName = CHtml::activeHiddenField($this->model, $this->name, $this->htmlOptions);
-        else if(!$this->model && !$this->attribute && $this->name)
+        {
+            $this->name = CHtml::activeName($this->model, $this->name);
             $hiddenFieldName = CHtml::hiddenField($this->name, '', $this->htmlOptions);
+        }
+        else if(!$this->model && !$this->attribute && $this->name)
+            $hiddenFieldName = CHtml::hiddenField($this->name, $this->serverFile?:'', $this->htmlOptions);
         $this->render('_viewer', array(
             'id' => $this->id,
             'url' => $this->url,
             'path' => $this->serverDir,
+            'filename' => $this->serverFile?:'',
             'hiddenField' => $hiddenFieldName,
             'maxFiles' => $this->maxFiles
         ));

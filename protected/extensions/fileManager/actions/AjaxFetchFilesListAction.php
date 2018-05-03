@@ -31,11 +31,12 @@ class AjaxFetchFilesListAction extends CAction
    {
       if(isset($_POST['path'])){
          $path = $_POST['path'];
+         if(!is_dir($path)) @mkdir($path, 0777, true);
          $files = scandir($path, SCANDIR_SORT_ASCENDING);
          if($files){
             $items = [];
             foreach($files as $file)
-               if(is_file($path . DIRECTORY_SEPARATOR . $file))
+               if(is_file($path . DIRECTORY_SEPARATOR . $file) && $file !='index.html' && $file !='index.php')
                   $items[] = '<div class="filemanager-item"  data-file-name="' . $file . '"><span class="item-title">' . $file . '</span><span class="ltr text-left pull-left item-size">' . Controller::fileSize($path . DIRECTORY_SEPARATOR . $file) . '</span></div>';
             // create output html
             $html = '<div class="filemanager-list-header"><span>نام فایل</span><span class="text-left pull-left">حجم فایل</span></div>';
