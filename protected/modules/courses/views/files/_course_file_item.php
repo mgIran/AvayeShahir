@@ -7,12 +7,12 @@ $fileDir = Yii::getPathOfAlias("webroot").'/uploads/classCategoryFiles/';
 $imageDir = Yii::getPathOfAlias("webroot").'/uploads/fileImages/';
 $imageUrl = Yii::app()->baseUrl.'/uploads/fileImages/';
 
-if($data->path and file_exists($fileDir.$data->path)):
+if($data->path and is_file($fileDir.$data->path)):
 	?>
 	<li data-toggle="tooltip" data-placement="top" title="<?= CHtml::encode($data->summary) ?>">
 		<a href="<?= $fileUrl.$data->path ?>"></a>
 		<?php
-		if($data->image && file_exists($imageDir.$data->image))
+		if($data->image && is_file($imageDir.$data->image))
 			echo CHtml::image($imageUrl.$data->image,$data->title,array('class' => 'file-image'))
 		?>
 		<div><?= $data->title ?></div>

@@ -11,7 +11,7 @@ $(function () {
             responsive: {
                 0: {
                     items: 1,
-                    nav: false,
+                    nav: true,
                     margin: 15,
                     dots: true,
                     stagePadding: 15

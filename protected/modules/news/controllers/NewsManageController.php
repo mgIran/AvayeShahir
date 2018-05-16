@@ -68,7 +68,7 @@ class NewsManageController extends Controller
 		// get latest news
 		$criteria = News::getValidNews();
 		$criteria->addCondition('id <> :id');
-		$criteria->params = array(':id' => $id);
+		$criteria->params[':id'] = $id;
 		$criteria->limit = 4;
 		$latestNewsProvider = new CActiveDataProvider("News",array(
 			'criteria' => $criteria,
@@ -142,7 +142,7 @@ class NewsManageController extends Controller
 			$model->formTags = isset($_POST['News']['formTags'])?explode(',',$_POST['News']['formTags']):null;
 			if($model->save())
 			{
-				if ($model->image and file_exists($tmpDIR.$model->image)) {
+				if ($model->image and is_file($tmpDIR.$model->image)) {
 					$thumbnail = new Imager();
 					$thumbnail->createThumbnail($tmpDIR . $model->image, 200, 200, false, $imageDIR.'200x200/' . $model->image);
 					rename($tmpDIR . $model->image, $imageDIR . $model->image);
@@ -176,7 +176,7 @@ class NewsManageController extends Controller
 		$imageUrl = Yii::app()->baseUrl .'/uploads/news/';
 
 		$image = array();
-		if ($model->image and file_exists($imageDIR.$model->image)) {
+		if ($model->image and is_file($imageDIR.$model->image)) {
 			$file = $model->image;
 			$image = array(
 				'name' => $file,
@@ -192,7 +192,7 @@ class NewsManageController extends Controller
 		if(isset($_POST['News']))
 		{
 			$model->attributes=$_POST['News'];
-			if (isset($_POST['News']['image']) and file_exists($tmpDIR.$_POST['News']['image'])) {
+			if (isset($_POST['News']['image']) and is_file($tmpDIR.$_POST['News']['image'])) {
 				$file = $_POST['News']['image'];
 				$image = array(
 					'name' => $file,
@@ -206,7 +206,7 @@ class NewsManageController extends Controller
 			$model->formTags = isset($_POST['News']['formTags'])?explode(',',$_POST['News']['formTags']):null;
 			if($model->save())
 			{
-				if ($model->image and file_exists($tmpDIR.$model->image)) {
+				if ($model->image and is_file($tmpDIR.$model->image)) {
 					$thumbnail = new Imager();
 					$thumbnail->createThumbnail($tmpDIR . $model->image, 200, 200, false, $imageDIR.'200x200/' . $model->image);
 					rename($tmpDIR . $model->image, $imageDIR . $model->image);
@@ -232,7 +232,7 @@ class NewsManageController extends Controller
 	{
 		$imageDIR = Yii::getPathOfAlias("webroot") . "/uploads/news/";
 		$model = $this->loadModel($id);
-		if(file_exists($imageDIR.$model->image))
+		if(is_file($imageDIR.$model->image))
 		{
 			@unlink($imageDIR.$model->image);
 			@unlink($imageDIR.'200x200/'.$model->image);
@@ -315,7 +315,7 @@ class NewsManageController extends Controller
 			$file = $_FILES['image'];
 			$ext = pathinfo($file['name'], PATHINFO_EXTENSION);
 			$file['name'] = Controller::generateRandomString(5) . time();
-			while (file_exists($tempDir . DIRECTORY_SEPARATOR . $file['name'].'.'.$ext))
+			while (is_file($tempDir . DIRECTORY_SEPARATOR . $file['name'].'.'.$ext))
 				$file['name'] = Controller::generateRandomString(5) . time();
 			$file['name'] = $file['name'] . '.' . $ext;
 			if (move_uploaded_file($file['tmp_name'], $tempDir . DIRECTORY_SEPARATOR . CHtml::encode($file['name'])))

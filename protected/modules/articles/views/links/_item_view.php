@@ -11,7 +11,7 @@ if($data->link):
 	<li class="link-item-container" data-toggle="tooltip" data-placement="top" title="<?= CHtml::encode($data->summary) ?>">
 		<a target="_blank" rel="nofollow" href="<?= $data->link ?>"></a>
 		<?php
-		if($data->image && file_exists($imageDir.$data->image))
+		if($data->image && is_file($imageDir.$data->image))
 			echo CHtml::image($imageUrl.$data->image,$data->title,array('class' => 'file-image'))
 		?>
 		<div><?= $data->title ?></div>

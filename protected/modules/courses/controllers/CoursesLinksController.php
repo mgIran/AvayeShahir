@@ -91,7 +91,7 @@ class CoursesLinksController extends Controller
 			$file = $_FILES['image'];
 			$ext = pathinfo($file['name'], PATHINFO_EXTENSION);
 			$file['name'] = Controller::generateRandomString(5) . time();
-			while (file_exists($tempDir . DIRECTORY_SEPARATOR . $file['name']))
+			while (is_file($tempDir . DIRECTORY_SEPARATOR . $file['name']))
 				$file['name'] = Controller::generateRandomString(5) . time();
 			$file['name'] = $file['name'] . '.' . $ext;
 			$model = ClassCategoryFileLinks::model()->findByPk((int)$_POST['id']);

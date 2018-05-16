@@ -19,7 +19,7 @@ $fileDir = Yii::getPathOfAlias("webroot").'/uploads/teachers/files/';
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                 <div class="image">
                     <?
-                    if($model->teacherDetails->avatar && file_exists(Yii::getPathOfAlias('webroot').'/uploads/teachers/'.$model->teacherDetails->avatar)):
+                    if($model->teacherDetails->avatar && is_file(Yii::getPathOfAlias('webroot').'/uploads/teachers/'.$model->teacherDetails->avatar)):
                         ?>
                         <img src="<?= Yii::app()->baseUrl.'/uploads/teachers/'.$model->teacherDetails->avatar ?>" alt="<?= $model->teacherDetails->getFullName() ?>" title="<?= $model->teacherDetails->getFullName() ?>">
                         <?
@@ -28,7 +28,7 @@ $fileDir = Yii::getPathOfAlias("webroot").'/uploads/teachers/files/';
                 </div>
                 <div class="files">
                 <?
-                if($model->teacherDetails->file && file_exists($fileDir.$model->teacherDetails->file)):
+                if($model->teacherDetails->file && is_file($fileDir.$model->teacherDetails->file)):
                     ?>
                     <h3><?= Yii::t('app','Resume File') ?></h3>
                     <div class="file">

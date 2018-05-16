@@ -85,7 +85,7 @@ class OrdersPublicController extends Controller
             $model->user_id = Yii::app()->user->getId();
             if(isset($_POST['Orders']['files'])) {
                 foreach($_POST['Orders']['files'] as $file)
-                    if ($file and file_exists($tmpDIR.$file)){
+                    if ($file and is_file($tmpDIR.$file)){
                         $filesArray[] = array(
                             'name' => $file,
                             'src' => $tmpUrl . '/' . $file,
@@ -97,7 +97,7 @@ class OrdersPublicController extends Controller
             }
 			if($model->save()){
                 foreach($model->files as $file)
-                    if ($file and file_exists($tmpDIR.$file))
+                    if ($file and is_file($tmpDIR.$file))
                         @rename($tmpDIR.$file, $filesDIR.$file);
                 // Send Notify to User
                 $phone = $model->user->userDetails->phone;
@@ -146,7 +146,7 @@ class OrdersPublicController extends Controller
 //        $filesArray = [];
 //        if($model->orderFiles){
 //            foreach($model->orderFiles as $file)
-//                if ($file->filename and file_exists($filesDIR.$file->filename)){
+//                if ($file->filename and is_file($filesDIR.$file->filename)){
 //                    $filesArray[] = array(
 //                        'name' => $file->filename,
 //                        'src' => $filesUrl . '/' . $file->filename,
@@ -163,7 +163,7 @@ class OrdersPublicController extends Controller
 //            $model->files = $_POST['Orders']['files'];
 //            if(isset($_POST['Orders']['files'])) {
 //                foreach($_POST['Orders']['files'] as $file)
-//                    if ($file and file_exists($tmpDIR.$file)){
+//                    if ($file and is_file($tmpDIR.$file)){
 //                        $filesArray[] = array(
 //                            'name' => $file,
 //                            'src' => $tmpUrl . '/' . $file,
@@ -196,7 +196,7 @@ class OrdersPublicController extends Controller
         $model = $this->loadModel($id);
         if(isset($_GET['forever']) && $_GET['forever']){
             foreach($model->orderFiles as $file)
-                if($file->filename && file_exists(Yii::getPathOfAlias('webroot') . '/uploads/orders/' . $file->filename))
+                if($file->filename && is_file(Yii::getPathOfAlias('webroot') . '/uploads/orders/' . $file->filename))
                     @unlink(Yii::getPathOfAlias('webroot') . '/uploads/orders/' . $file->filename);
             $flag = $model->delete();
         }else{

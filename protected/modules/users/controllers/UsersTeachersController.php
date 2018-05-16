@@ -101,7 +101,7 @@ class UsersTeachersController extends Controller
 	{
 		$avatarDIR = Yii::getPathOfAlias("webroot") . "/uploads/teachers/";
 		$model = $this->loadModel($id);
-		if($model->teacherDetails->avatar && file_exists($avatarDIR.$model->teacherDetails->avatar))
+		if($model->teacherDetails->avatar && is_file($avatarDIR.$model->teacherDetails->avatar))
 			unlink($avatarDIR.$model->teacherDetails->avatar);
 		$model->delete();
 

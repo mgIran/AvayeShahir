@@ -96,7 +96,7 @@ class OrdersManageController extends Controller
 
             if(isset($_POST['Orders']['files'])) {
                 foreach($_POST['Orders']['files'] as $file)
-                    if ($file and file_exists($tmpDIR.$file)){
+                    if ($file and is_file($tmpDIR.$file)){
                         $filesArray[] = array(
                             'name' => $file,
                             'src' => $tmpUrl . '/' . $file,
@@ -108,7 +108,7 @@ class OrdersManageController extends Controller
             }
 			if($model->save()){
 				foreach($model->files as $file)
-					if ($file and file_exists($tmpDIR.$file))
+					if ($file and is_file($tmpDIR.$file))
 						@rename($tmpDIR.$file, $filesDIR.$file);
 				Yii::app()->user->setFlash('success', '<span class="icon-check"></span>&nbsp;&nbsp;اطلاعات با موفقیت ذخیره شد.');
 				$this->redirect(array('admin'));
@@ -141,7 +141,7 @@ class OrdersManageController extends Controller
         $filesArray = [];
         if($model->orderFiles){
             foreach($model->orderFiles as $file)
-                if ($file->filename and file_exists($filesDIR.$file->filename)){
+                if ($file->filename and is_file($filesDIR.$file->filename)){
                     $filesArray[] = array(
                         'name' => $file->filename,
                         'src' => $filesUrl . '/' . $file->filename,
@@ -159,7 +159,7 @@ class OrdersManageController extends Controller
 			$model->update_date = time();
             if(isset($_POST['Orders']['files'])) {
                 foreach($_POST['Orders']['files'] as $file)
-                    if ($file and file_exists($tmpDIR.$file)){
+                    if ($file and is_file($tmpDIR.$file)){
                         $filesArray[] = array(
                             'name' => $file,
                             'src' => $tmpUrl . '/' . $file,
@@ -219,7 +219,7 @@ class OrdersManageController extends Controller
             $model->order_id = $id;
             $model->file_type = OrderFiles::FILE_TYPE_DONE_FILE;
             if($model->save()) {
-                if($model->filename && file_exists(Yii::getPathOfAlias('webroot').'/uploads/temp/'.$model->filename))
+                if($model->filename && is_file(Yii::getPathOfAlias('webroot').'/uploads/temp/'.$model->filename))
                     rename(Yii::getPathOfAlias('webroot').'/uploads/temp/'.$model->filename,
                         Yii::getPathOfAlias('webroot').'/uploads/orders/'.$model->filename);
                 echo CJSON::encode(['status' => true]);
@@ -233,7 +233,7 @@ class OrdersManageController extends Controller
     {
         $filePath = Yii::getPathOfAlias('webroot') . '/uploads/orders/';
         $model = OrderFiles::model()->findByPk($id);
-        if($model->filename && file_exists($filePath . $model->filename))
+        if($model->filename && is_file($filePath . $model->filename))
             @unlink($filePath . $model->filename);
         $model->delete();
 
@@ -295,7 +295,7 @@ class OrdersManageController extends Controller
         $model = $this->loadModel($id);
         if(isset($_GET['forever']) && $_GET['forever']){
             foreach($model->orderFiles as $file)
-                if($file->filename && file_exists(Yii::getPathOfAlias('webroot') . '/uploads/orders/' . $file->filename))
+                if($file->filename && is_file(Yii::getPathOfAlias('webroot') . '/uploads/orders/' . $file->filename))
                     @unlink(Yii::getPathOfAlias('webroot') . '/uploads/orders/' . $file->filename);
             $flag = $model->delete();
             $msg = 'سفارش به طور کامل حذف گردید';

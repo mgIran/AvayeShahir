@@ -391,7 +391,7 @@ class Controller extends AuthController
         else
             file_put_contents($file . '.sql', $dumper->getDump());
 
-        if(file_exists($file . '.sql') || file_exists($file . '.sql.gz'))
+        if(is_file($file . '.sql') || is_file($file . '.sql.gz'))
             echo 'OK';
         else
             echo 'NOK';

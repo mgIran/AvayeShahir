@@ -28,7 +28,7 @@ elseif($type == 'news')
     <div class="news-item">
         <div class="pic">
             <?php
-            if($data->{$image} && file_exists($thumbPath.$data->{$image})):
+            if($data->{$image} && is_file($thumbPath.$data->{$image})):
                 ?>
                 <img src="<?= $thumbUrl.$data->{$image} ?>" alt="<?= CHtml::encode($data->title) ?>" title="<?= CHtml::encode($data->title) ?>">
                 <?php

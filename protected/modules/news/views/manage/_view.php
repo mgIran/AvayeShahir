@@ -8,7 +8,7 @@ $date = Yii::app()->language=="fa"?JalaliDate::date("Y/m/d - H:i",$data->publish
 	<div class="news-item">
 		<div class="pic">
 			<?php
-			if($data->image && file_exists($thumbPath.$data->image)):
+			if($data->image && is_file($thumbPath.$data->image)):
 			?>
 				<img src="<?= Yii::app()->baseUrl.'/uploads/news/200x200/'.$data->image ?>" alt="<?= CHtml::encode($data->title) ?>" title="<?= CHtml::encode($data->title) ?>">
 			<?php

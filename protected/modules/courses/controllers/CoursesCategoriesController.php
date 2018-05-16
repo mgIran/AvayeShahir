@@ -121,7 +121,7 @@ class CoursesCategoriesController extends Controller
 		$Dir = Yii::getPathOfAlias("webroot") . '/uploads/classCategoryFiles/';
 		$model = $this->loadModel($id);
 		foreach($model->files as $file){
-			if($file->path && file_exists($Dir . $file->path))
+			if($file->path && is_file($Dir . $file->path))
 				unlink($Dir . $file->path);
 		}
 		$model->delete();

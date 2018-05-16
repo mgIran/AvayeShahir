@@ -129,7 +129,7 @@ class ArticlesManageController extends Controller
 			$model->formTags = isset($_POST['Articles']['formTags'])?explode(',',$_POST['Articles']['formTags']):null;
 			if($model->save())
 			{
-				if ($model->image and file_exists($tmpDIR.$model->image)) {
+				if ($model->image and is_file($tmpDIR.$model->image)) {
 					$thumbnail = new Imager();
 					$thumbnail->createThumbnail($tmpDIR . $model->image, 200, 200, false, $imageDIR.'200x200/' . $model->image);
 					@rename($tmpDIR . $model->image, $imageDIR . $model->image);
@@ -167,7 +167,7 @@ class ArticlesManageController extends Controller
 		$imageUrl = Yii::app()->baseUrl .'/uploads/articles/';
 
 		$image = array();
-		if ($model->image and file_exists($imageDIR.$model->image)) {
+		if ($model->image and is_file($imageDIR.$model->image)) {
 			$file = $model->image;
 			$image = array(
 				'name' => $file,
@@ -183,7 +183,7 @@ class ArticlesManageController extends Controller
 		if(isset($_POST['Articles']))
 		{
 			$model->attributes=$_POST['Articles'];
-			if (isset($_POST['Articles']['image']) and file_exists($tmpDIR.$_POST['Articles']['image'])) {
+			if (isset($_POST['Articles']['image']) and is_file($tmpDIR.$_POST['Articles']['image'])) {
 				$file = $_POST['Articles']['image'];
 				$image = array(
 					'name' => $file,
@@ -197,7 +197,7 @@ class ArticlesManageController extends Controller
 			$model->formTags = isset($_POST['Articles']['formTags'])?explode(',',$_POST['Articles']['formTags']):null;
 			if($model->save())
 			{
-				if ($model->image and file_exists($tmpDIR.$model->image)) {
+				if ($model->image and is_file($tmpDIR.$model->image)) {
 					$thumbnail = new Imager();
 					$thumbnail->createThumbnail($tmpDIR . $model->image, 200, 200, false, $imageDIR.'200x200/' . $model->image);
 					@rename($tmpDIR . $model->image, $imageDIR . $model->image);
@@ -251,14 +251,14 @@ class ArticlesManageController extends Controller
 		$imageDIR = Yii::getPathOfAlias("webroot") . "/uploads/articles/";
 		$Dir = Yii::getPathOfAlias("webroot") . '/uploads/articles/files/';
 		$model = $this->loadModel($id);
-		if(file_exists($imageDIR.$model->image))
+		if(is_file($imageDIR.$model->image))
 		{
 			@unlink($imageDIR.$model->image);
 			@unlink($imageDIR.'200x200/'.$model->image);
 		}
 		foreach($model->files as $file)
 		{
-			if($file->path && file_exists($Dir.$file->path))
+			if($file->path && is_file($Dir.$file->path))
 				unlink($Dir.$file->path);
 		}
 		$model->delete();
@@ -339,7 +339,7 @@ class ArticlesManageController extends Controller
 			$file = $_FILES['image'];
 			$ext = pathinfo($file['name'], PATHINFO_EXTENSION);
 			$file['name'] = Controller::generateRandomString(5) . time();
-			while (file_exists($tempDir . DIRECTORY_SEPARATOR . $file['name'].'.'.$ext))
+			while (is_file($tempDir . DIRECTORY_SEPARATOR . $file['name'].'.'.$ext))
 				$file['name'] = Controller::generateRandomString(5) . time();
 			$file['name'] = $file['name'] . '.' . $ext;
 			if (move_uploaded_file($file['tmp_name'], $tempDir . DIRECTORY_SEPARATOR . CHtml::encode($file['name'])))

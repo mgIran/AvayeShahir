@@ -67,7 +67,7 @@ class GalleryManageController extends Controller
 		$image =array();
 		if(isset($_POST['Gallery'])) {
 			$model->attributes = $_POST['Gallery'];
-			if(isset($_POST['Gallery']['file_name']) and file_exists($tmpDIR.$_POST['Gallery']['file_name'])) {
+			if(isset($_POST['Gallery']['file_name']) and is_file($tmpDIR.$_POST['Gallery']['file_name'])) {
 				$file = $_POST['Gallery']['file_name'];
 				$image = array(
 					'name' => $file,
@@ -77,7 +77,7 @@ class GalleryManageController extends Controller
 				);
 			}
 			if($model->save()) {
-				if($model->file_name and file_exists($tmpDIR.$model->file_name)) {
+				if($model->file_name and is_file($tmpDIR.$model->file_name)) {
 					$thumbnail = new Imager();
 					$thumbnail->createThumbnail($tmpDIR.$model->file_name,50,50,false,$fileThumbDIR.$model->file_name);
 					rename($tmpDIR.$model->file_name, $fileDIR.$model->file_name);
@@ -105,7 +105,7 @@ class GalleryManageController extends Controller
 		$fileThumbDIR = Yii::getPathOfAlias("webroot")."/uploads/gallery/50x50/";
 
 		$image = array();
-		if($model->file_name and file_exists($fileDIR.$model->file_name)) {
+		if($model->file_name and is_file($fileDIR.$model->file_name)) {
 			$file = $model->file_name;
 			$image = array(
 				'name' => $file,
@@ -116,7 +116,7 @@ class GalleryManageController extends Controller
 		}
 		if(isset($_POST['Gallery'])) {
 			$model->attributes = $_POST['Gallery'];
-			if(isset($_POST['Gallery']['file_name']) and file_exists($tmpDIR.$_POST['Gallery']['file_name'])) {
+			if(isset($_POST['Gallery']['file_name']) and is_file($tmpDIR.$_POST['Gallery']['file_name'])) {
 				$file = $_POST['Gallery']['file_name'];
 				$image = array(
 					'name' => $file,
@@ -126,7 +126,7 @@ class GalleryManageController extends Controller
 				);
 			}
 			if($model->save()) {
-				if($model->file_name and file_exists($tmpDIR.$model->file_name)) {
+				if($model->file_name and is_file($tmpDIR.$model->file_name)) {
 					$thumbnail = new Imager();
 					$thumbnail->createThumbnail($tmpDIR.$model->file_name,50,50,false,$fileThumbDIR.$model->file_name);
 					rename($tmpDIR.$model->file_name, $fileDIR.$model->file_name);
@@ -152,7 +152,7 @@ class GalleryManageController extends Controller
 			$file = $_FILES['file_name'];
 			$ext = pathinfo($file['name'], PATHINFO_EXTENSION);
 			$file['name'] = Controller::generateRandomString(5) . time();
-			while (file_exists($tempDir . DIRECTORY_SEPARATOR . $file['name']))
+			while (is_file($tempDir . DIRECTORY_SEPARATOR . $file['name']))
 				$file['name'] = Controller::generateRandomString(5) . time();
 			$file['name'] = $file['name'] . '.' . $ext;
 			if (move_uploaded_file($file['tmp_name'], $tempDir . DIRECTORY_SEPARATOR . CHtml::encode($file['name'])))
@@ -201,7 +201,7 @@ class GalleryManageController extends Controller
 	{
 		$Dir = Yii::getPathOfAlias("webroot") . '/uploads/gallery/';
 		$model = Gallery::model()->findByPk($id);
-		if($model->file_name && file_exists($Dir.$model->file_name))
+		if($model->file_name && is_file($Dir.$model->file_name))
 		{
 			@unlink($Dir.$model->file_name);
 			@unlink($Dir.'50x50/'.$model->file_name);

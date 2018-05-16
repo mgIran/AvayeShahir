@@ -83,7 +83,7 @@ class nusoap_wsdlcache {
 		if ($this->obtainMutex($filename, "r")) {
 			// check for expired WSDL that must be removed from the cache
  			if ($this->cache_lifetime > 0) {
-				if (file_exists($filename) && (time() - filemtime($filename) > $this->cache_lifetime)) {
+				if (is_file($filename) && (time() - filemtime($filename) > $this->cache_lifetime)) {
 					unlink($filename);
 					$this->debug("Expired $wsdl ($filename) from cache");
 					$this->releaseMutex($filename);
@@ -91,7 +91,7 @@ class nusoap_wsdlcache {
   				}
 			}
 			// see what there is to return
-			if (!file_exists($filename)) {
+			if (!is_file($filename)) {
 				$this->debug("$wsdl ($filename) not in cache (1)");
 				$this->releaseMutex($filename);
 				return null;
@@ -188,7 +188,7 @@ class nusoap_wsdlcache {
 	*/
 	function remove($wsdl) {
 		$filename = $this->createFilename($wsdl);
-		if (!file_exists($filename)) {
+		if (!is_file($filename)) {
 			$this->debug("$wsdl ($filename) not in cache to be removed");
 			return false;
 		}

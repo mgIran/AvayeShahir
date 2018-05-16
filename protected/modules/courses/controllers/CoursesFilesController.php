@@ -74,7 +74,7 @@ class CoursesFilesController extends Controller
 		$fileUrl = Yii::app()->baseUrl.'/uploads/classCategoryFiles/';
 
 		$fileArr = array();
-		if($model->path and file_exists($fileDIR.$model->path)) {
+		if($model->path and is_file($fileDIR.$model->path)) {
 			$file = $model->path;
 			$fileArr = array(
 				'name' => $file,
@@ -86,7 +86,7 @@ class CoursesFilesController extends Controller
 		if(isset($_POST['ClassCategoryFiles'])) {
 			$model->attributes = $_POST['ClassCategoryFiles'];
 			$model->file_type = pathinfo($_POST['ClassCategoryFiles']['path'], PATHINFO_EXTENSION);
-			if(isset($_POST['ClassCategoryFiles']['path']) and file_exists($tmpDIR.$_POST['ClassCategoryFiles']['path'])) {
+			if(isset($_POST['ClassCategoryFiles']['path']) and is_file($tmpDIR.$_POST['ClassCategoryFiles']['path'])) {
 				$file = $_POST['ClassCategoryFiles']['path'];
 				$fileArr = array(
 					'name' => $file,
@@ -96,7 +96,7 @@ class CoursesFilesController extends Controller
 				);
 			}
 			if($model->save()) {
-				if($model->path and file_exists($tmpDIR.$model->path)) {
+				if($model->path and is_file($tmpDIR.$model->path)) {
 					rename($tmpDIR.$model->path, $fileDIR.$model->path);
 				}
 				Yii::app()->user->setFlash('upload-success', '<span class="icon-check"></span>&nbsp;&nbsp;اطلاعات با موفقیت ذخیره شد.');
@@ -121,9 +121,9 @@ class CoursesFilesController extends Controller
 			$ext = pathinfo($file['name'], PATHINFO_EXTENSION);
 			$file['name'] = str_ireplace('.'.$ext,'',$file['name']);
 			$i=1;
-			if(file_exists($Dir . DIRECTORY_SEPARATOR . $file['name']. '.' . $ext))
+			if(is_file($Dir . DIRECTORY_SEPARATOR . $file['name']. '.' . $ext))
 			{
-				while(file_exists($Dir . DIRECTORY_SEPARATOR . $file['name'].'-'.$i. '.' . $ext))
+				while(is_file($Dir . DIRECTORY_SEPARATOR . $file['name'].'-'.$i. '.' . $ext))
 					$i++;
 				$file['name'] = $file['name'].'-'.$i;
 			}
@@ -167,7 +167,7 @@ class CoursesFilesController extends Controller
 	public function actionDelete($id){
 		$Dir = Yii::getPathOfAlias("webroot") . '/uploads/classCategoryFiles/';
 		$model = ClassCategoryFiles::model()->findByPk($id);
-//		if($model->path && file_exists($Dir.$model->path))
+//		if($model->path && is_file($Dir.$model->path))
 //			unlink($Dir.$model->path);
 		if($model->delete()) {
 			Yii::app()->user->setFlash('upload-success', '<span class="icon-check"></span>&nbsp;&nbsp;اطلاعات با موفقیت ذخیره شد.');
@@ -191,7 +191,7 @@ class CoursesFilesController extends Controller
 			$file = $_FILES['image'];
 			$ext = pathinfo($file['name'], PATHINFO_EXTENSION);
 			$file['name'] = Controller::generateRandomString(5) . time();
-			while (file_exists($tempDir . DIRECTORY_SEPARATOR . $file['name']))
+			while (is_file($tempDir . DIRECTORY_SEPARATOR . $file['name']))
 				$file['name'] = Controller::generateRandomString(5) . time();
 			$file['name'] = $file['name'] . '.' . $ext;
 			$model = ClassCategoryFiles::model()->findByPk((int)$_POST['id']);

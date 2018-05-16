@@ -93,7 +93,7 @@ class CoursesManageController extends Controller
 			$model->formTags = isset($_POST['Courses']['formTags'])?explode(',',$_POST['Courses']['formTags']):null;
 			if($model->save())
 			{
-				if ($model->pic and file_exists($tmpDIR.$model->pic)) {
+				if ($model->pic and is_file($tmpDIR.$model->pic)) {
 					$imager = new Imager();
 					$imager->resize($tmpDIR.$model->pic ,$picDIR.$model->pic,600,600);
 					unlink($tmpDIR.$model->pic);
@@ -127,7 +127,7 @@ class CoursesManageController extends Controller
 		$picUrl = Yii::app()->baseUrl .'/uploads/courses/';
 
 		$pic = array();
-		if ($model->pic and file_exists($picDIR.$model->pic)) {
+		if ($model->pic and is_file($picDIR.$model->pic)) {
 			$file = $model->pic;
 			$pic = array(
 				'name' => $file,
@@ -143,7 +143,7 @@ class CoursesManageController extends Controller
 		if(isset($_POST['Courses']))
 		{
 			$model->attributes=$_POST['Courses'];
-			if (isset($_POST['Courses']['pic']) and file_exists($tmpDIR.$_POST['Courses']['pic'])) {
+			if (isset($_POST['Courses']['pic']) and is_file($tmpDIR.$_POST['Courses']['pic'])) {
 				$file = $_POST['Courses']['pic'];
 				$pic = array(
 						'name' => $file,
@@ -155,7 +155,7 @@ class CoursesManageController extends Controller
 			$model->formTags = isset($_POST['Courses']['formTags'])?explode(',',$_POST['Courses']['formTags']):null;
 			if($model->save())
 			{
-				if ($model->pic and file_exists($tmpDIR.$model->pic)) {
+				if ($model->pic and is_file($tmpDIR.$model->pic)) {
 					$imager = new Imager();
 					$imager->resize($tmpDIR.$model->pic ,$picDIR.$model->pic,600,600);
 					unlink($tmpDIR.$model->pic);
@@ -182,7 +182,7 @@ class CoursesManageController extends Controller
 		$picDIR = Yii::getPathOfAlias("webroot") . "/uploads/courses/";
 		$model = $this->loadModel($id);
 		if($model->deleted){
-			if(file_exists($picDIR . $model->pic))
+			if(is_file($picDIR . $model->pic))
 				unlink($picDIR . $model->pic);
 			$model->delete();
 		}else{
@@ -284,7 +284,7 @@ class CoursesManageController extends Controller
 			$file = $_FILES['pic'];
 			$ext = pathinfo($file['name'], PATHINFO_EXTENSION);
 			$file['name'] = Controller::generateRandomString(5) . time();
-			while (file_exists($tempDir . DIRECTORY_SEPARATOR . $file['name']))
+			while (is_file($tempDir . DIRECTORY_SEPARATOR . $file['name']))
 				$file['name'] = Controller::generateRandomString(5) . time();
 			$file['name'] = $file['name'] . '.' . $ext;
 			if (move_uploaded_file($file['tmp_name'], $tempDir . DIRECTORY_SEPARATOR . CHtml::encode($file['name'])))

@@ -74,7 +74,7 @@ class ArticlesFilesController extends Controller
 		$fileUrl = Yii::app()->baseUrl.'/uploads/articles/files/';
 
 		$fileArr = array();
-		if($model->path and file_exists($fileDIR.$model->path)) {
+		if($model->path and is_file($fileDIR.$model->path)) {
 			$file = $model->path;
 			$fileArr = array(
 				'name' => $file,
@@ -86,7 +86,7 @@ class ArticlesFilesController extends Controller
 		if(isset($_POST['ArticleFiles'])) {
 			$model->attributes = $_POST['ArticleFiles'];
 			$model->file_type = pathinfo($_POST['ArticleFiles']['path'], PATHINFO_EXTENSION);
-			if(isset($_POST['ArticleFiles']['path']) and file_exists($tmpDIR.$_POST['ArticleFiles']['path'])) {
+			if(isset($_POST['ArticleFiles']['path']) and is_file($tmpDIR.$_POST['ArticleFiles']['path'])) {
 				$file = $_POST['ArticleFiles']['path'];
 				$fileArr = array(
 					'name' => $file,
@@ -96,7 +96,7 @@ class ArticlesFilesController extends Controller
 				);
 			}
 			if($model->save()) {
-				if($model->path and file_exists($tmpDIR.$model->path)) {
+				if($model->path and is_file($tmpDIR.$model->path)) {
 					rename($tmpDIR.$model->path, $fileDIR.$model->path);
 				}
 				Yii::app()->user->setFlash('upload-success', '<span class="icon-check"></span>&nbsp;&nbsp;اطلاعات با موفقیت ذخیره شد.');
@@ -121,9 +121,9 @@ class ArticlesFilesController extends Controller
 			$ext = pathinfo($file['name'], PATHINFO_EXTENSION);
 			$file['name'] = str_ireplace('.'.$ext,'',$file['name']);
 			$i=1;
-			if(file_exists($Dir . DIRECTORY_SEPARATOR . $file['name']. '.' . $ext))
+			if(is_file($Dir . DIRECTORY_SEPARATOR . $file['name']. '.' . $ext))
 			{
-				while(file_exists($Dir . DIRECTORY_SEPARATOR . $file['name'].'-'.$i. '.' . $ext))
+				while(is_file($Dir . DIRECTORY_SEPARATOR . $file['name'].'-'.$i. '.' . $ext))
 					$i++;
 				$file['name'] = $file['name'].'-'.$i;
 			}
@@ -167,7 +167,7 @@ class ArticlesFilesController extends Controller
 	public function actionDelete($id){
 		$Dir = Yii::getPathOfAlias("webroot") . '/uploads/articles/files/';
 		$model = ArticleFiles::model()->findByPk($id);
-		if($model->path && file_exists($Dir.$model->path))
+		if($model->path && is_file($Dir.$model->path))
 			unlink($Dir.$model->path);
 		if($model->delete()) {
 			Yii::app()->user->setFlash('upload-success', '<span class="icon-check"></span>&nbsp;&nbsp;اطلاعات با موفقیت ذخیره شد.');
@@ -191,7 +191,7 @@ class ArticlesFilesController extends Controller
 			$file = $_FILES['image'];
 			$ext = pathinfo($file['name'], PATHINFO_EXTENSION);
 			$file['name'] = Controller::generateRandomString(5) . time();
-			while (file_exists($tempDir . DIRECTORY_SEPARATOR . $file['name']))
+			while (is_file($tempDir . DIRECTORY_SEPARATOR . $file['name']))
 				$file['name'] = Controller::generateRandomString(5) . time();
 			$file['name'] = $file['name'] . '.' . $ext;
 			$model = ArticleFiles::model()->findByPk((int)$_POST['id']);

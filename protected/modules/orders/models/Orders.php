@@ -199,7 +199,7 @@ class Orders extends CActiveRecord
             $tmpDIR = Yii::getPathOfAlias("webroot") . '/uploads/temp/';
             $filesDIR = Yii::getPathOfAlias("webroot") . "/uploads/orders/";
             foreach($this->files as $file){
-                if($file && file_exists($tmpDIR.$file)){
+                if($file && is_file($tmpDIR.$file)){
                     $fm = new OrderFiles();
                     $fm->filename = $file;
                     $fm->ext = pathinfo($tmpDIR.$file, PATHINFO_EXTENSION);

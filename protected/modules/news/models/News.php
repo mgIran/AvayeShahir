@@ -15,6 +15,7 @@
  * @property string $status
  * @property string $category_id
  * @property string $order
+ * @property string $type
  *
  * The followings are the available model relations:
  * @property NewsCategories $category
@@ -23,6 +24,9 @@
  */
 class News extends CActiveRecord
 {
+    const TYPE_NORMAL = 1;
+    const TYPE_SLIDE = 2;
+
 	/**
 	 * @return string the associated database table name
 	 */
@@ -35,6 +39,12 @@ class News extends CActiveRecord
 	public $statusLabels=[
 		'draft' => 'پیش نویس',
 		'publish' => 'انتشار یافته'
+	];
+
+
+	public $typeLabels=[
+		self::TYPE_NORMAL => 'معمولی',
+		self::TYPE_SLIDE => 'اسلاید'
 	];
 
 	/**
@@ -98,10 +108,12 @@ class News extends CActiveRecord
 			array('summary, body','filter','filter'=>array($purifier,'purify')),
 			array('image', 'length', 'max'=>200),
 			array('status', 'length', 'max'=>7),
+			array('type', 'length', 'max'=>1),
 			array('category_id, order', 'length', 'max'=>10),
 			array('create_date, publish_date, formTags', 'safe'),
 			array('create_date', 'default' , 'value' => time()),
 			array('seen', 'default' , 'value' => 0),
+			array('type', 'default' , 'value' => self::TYPE_NORMAL),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, title, summary, body, image, seen, create_date, publish_date, status, category_id, order', 'safe', 'on'=>'search'),
@@ -140,6 +152,7 @@ class News extends CActiveRecord
 			'status' => 'وضعیت',
 			'category_id' => 'دسته بندی',
 			'order' => 'ترتیب',
+			'type' => 'نوع نمایش',
 			'formTags' => 'برچسب ها'
 		);
 	}
@@ -156,7 +169,7 @@ class News extends CActiveRecord
 	 * @return CActiveDataProvider the data provider that can return the models
 	 * based on the search/filter conditions.
 	 */
-	public function search()
+	public function search($slide = false)
 	{
 		// @todo Please modify the following code to remove attributes that should not be searched.
 
@@ -172,6 +185,10 @@ class News extends CActiveRecord
 		$criteria->compare('status',$this->status,true);
 		$criteria->compare('category_id',$this->category_id,true);
 		$criteria->compare('order',$this->order,true);
+		if($slide)
+            $criteria->compare('type',self::TYPE_SLIDE);
+		else
+            $criteria->compare('type',$this->type);
 //		$criteria->order = 't.order';
 		$criteria->order = 'create_date DESC';
 		return new CActiveDataProvider($this, array(
@@ -227,18 +244,21 @@ class News extends CActiveRecord
 		return $this->statusLabels[$this->status];
 	}
 
-	/**
-	 * get Valid New to show
-	 * @return CDbCriteria
-	 */
-	public static function getValidNews(){
+    /**
+     * get Valid New to show
+     *
+     * @param bool $slide
+     * @return CDbCriteria
+     */
+	public static function getValidNews($slide = false){
 		$criteria = new CDbCriteria();
 		$criteria->addCondition('t.status = "publish"');
+        $criteria->compare('type',$slide?self::TYPE_SLIDE:self::TYPE_NORMAL);
 		$criteria->order = 't.publish_date DESC';
 		return $criteria;
 	}
 
-	public static function getSearchCriteria($text, $words){
+	public static function getSearchCriteria($text, $words, $slide = false){
 		$criteria = new CDbCriteria();
 		$criteria->addCondition('t.status = "publish"');
 		$criteria->order = 't.publish_date DESC';
@@ -252,6 +272,7 @@ class News extends CActiveRecord
             }
         }
         $criteria->addCondition($condition);
+        $criteria->compare('type',$slide?self::TYPE_SLIDE:self::TYPE_NORMAL);
         $criteria->together = true;
         $criteria->order = 't.publish_date DESC';
         return $criteria;

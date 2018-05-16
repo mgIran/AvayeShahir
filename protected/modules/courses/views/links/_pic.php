@@ -5,7 +5,7 @@
 $image = array();
 $uploadDir = Yii::getPathOfAlias('webroot').'/uploads/fileImages';
 $uploadUrl = Yii::app()->baseUrl.'/uploads/fileImages';
-if($model->image && file_exists($uploadDir.DIRECTORY_SEPARATOR.$model->image))
+if($model->image && is_file($uploadDir.DIRECTORY_SEPARATOR.$model->image))
 	$image = array(
 		'name' => $model->image,
 		'src' => $uploadUrl . '/' . $model->image,

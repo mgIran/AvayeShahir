@@ -19,6 +19,12 @@
 		<?php echo $form->error($model,'category_id'); ?>
 	</div>
 
+	<div class="row">
+		<?php echo $form->labelEx($model,'type'); ?>
+		<?php echo $form->dropDownList($model,'type',$model->typeLabels); ?>
+		<?php echo $form->error($model,'type'); ?>
+	</div>
+
 	<div class='row'>
 		<?php echo $form->labelEx($model,'image', array('class'=>'control-label')); ?>
 		<?php

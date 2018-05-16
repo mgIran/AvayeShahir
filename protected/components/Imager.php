@@ -4,7 +4,7 @@ class Imager
 {
     public function createThumbnail($imagePath, $width, $height, $faceDetection = true, $outputDirection = null)
     {
-        if(!file_exists($imagePath))
+        if(!is_file($imagePath))
             throw new Exception("Image doesn't exists.");
 
         if($outputDirection == null)
@@ -136,7 +136,7 @@ class Imager
             $img_r = imagecreatefromjpeg($imagePath);
             $dst_r = imagecreatetruecolor($dstW, $dstH);
             imagecopyresampled($dst_r, $img_r, 0, 0, $srcX, $srcY, $dstW, $dstH, $dstW, $dstH);
-            while(!file_exists($imagePath))
+            while(!is_file($imagePath))
                 ;
 
             sleep(1);

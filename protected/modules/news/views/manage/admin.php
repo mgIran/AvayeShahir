@@ -55,6 +55,11 @@ $this->menu=array(
 			'value' => '$data->publish_date?JalaliDate::date("Y/m/d - H:i",$data->publish_date):"-"'
 		),
 		'seen',
+        array(
+            'name' => 'type',
+            'value' => '$data->typeLabels[$data->type]',
+            'filter' => $model->typeLabels
+        ),
 		array(
 			'class'=>'CButtonColumn',
 		),

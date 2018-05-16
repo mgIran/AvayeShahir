@@ -1976,6 +1976,7 @@ section.classes .owl-carousel .owl-controls .owl-nav [class*="owl-"].disabled ,
     color: #4f4f4f;
     cursor: default;
     margin-bottom: 10px;
+    overflow: hidden;
     position: relative;
     -webkit-box-shadow: 0 0 8px #d4dee8;
     -moz-box-shadow: 0 0 8px #d4dee8;
@@ -1987,14 +1988,14 @@ section.classes .owl-carousel .owl-controls .owl-nav [class*="owl-"].disabled ,
 .page-content.courses .files > ul .file > a,
 .page-content.courses .files .items .file > a,
 .page-content.courses .files > ul > li > a,
-.page-content.courses .files .items > li > a{
+.page-content.courses .files .items > li > a {
     position: absolute;
-    top:0;
-    right:0;
-    left:0;
-    bottom:0;
-    z-index: 1;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
     display: block;
+    z-index: 1;
 }
 .page-content.courses .files > ul .file:hover,
 .page-content.courses .files .items .file:hover,
@@ -4512,6 +4513,19 @@ iframe{
     }
 }
 @media (max-width: 767px) {
+    .video-carousel .owl-controls .owl-nav [class*="owl-"],
+    .courses .course-carousel .owl-controls .owl-nav [class*="owl-"]{
+        background-color: #aaaaaab3;
+        border-radius: 50%;
+        margin: 72px 10px 0;
+    }
+    .video-carousel .arrow,
+    section.classes .arrow,
+    .courses .arrow{
+        height: 35px;
+        width: 35px;
+        margin: 5px;
+    }
     .news-view{
         padding: 0 !important;
     }
@@ -4781,8 +4795,18 @@ iframe{
     .page-content.courses .files .file,
     .page-content.courses .files > ul > li,
     .page-content.courses .files .items > li{
-        padding-right: 15px !important;
+        padding-right: 55px !important;
         background-image: none !important;
+    }
+    .file-image{
+        max-width: 50px;
+        height: auto;
+        top: 50%;
+        -webkit-transform: translateY(-50%);
+        -moz-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        -o-transform: translateY(-50%);
+        transform: translateY(-50%);
     }
     .page-content.courses .files > ul .items li > div:first-of-type,
     .page-content.courses .files > ul > li > div:first-of-type{

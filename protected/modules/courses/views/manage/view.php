@@ -1,10 +1,6 @@
 <?
 /* @var $this CoursesManageController */
 /* @var $model Courses */
-$fileUrl = Yii::app()->baseUrl.'/uploads/classCategoryFiles/';
-$fileDir = Yii::getPathOfAlias("webroot").'/uploads/classCategoryFiles/';
-$imageDir = Yii::getPathOfAlias("webroot").'/uploads/fileImages/';
-$imageUrl = Yii::app()->baseUrl.'/uploads/fileImages/';
 Yii::app()->clientScript->registerScript('active-collapse','
 	var url = window.location.hash, idx = url.indexOf("#")
 	var hash = idx != -1 ? url.substring(idx) : -1;
@@ -71,28 +67,11 @@ Yii::app()->clientScript->registerScript('active-collapse','
 							<h3><?= Yii::t('app','Files') ?></h3>
 							<h4><?= Yii::t('app','Direct Links') ?></h4>
 							<ul>
-							<?
-							foreach($category->files as $file):
-								if($file->path && file_exists($fileDir.$file->path)):
-							?>
-								<li data-toggle="tooltip" data-placement="top" title="<?= CHtml::encode($file->summary) ?>">
-									<a href="<?= $fileUrl.$file->path ?>"></a>
-									<?php
-									if($file->image && file_exists($imageDir.$file->image))
-										echo CHtml::image($imageUrl.$file->image,$file->title,array('class' => 'file-image'))
-									?>
-									<div><?= $file->title ?></div>
-									<span class="extension"><?= strtoupper($file->file_type) ?></span>
-									<span class="download">
-										<i></i>
-										<span><?= Yii::t('app','Download'); ?></span>
-										<span class="size"><?= Controller::fileSize($fileDir.$file->path) ?></span>
-									</span>
-								</li>
-							<?
-								endif;
-							endforeach;
-							?>
+							<?php // print file items
+                            foreach($category->files as $file):
+                                $this->renderPartial('//site/_file_item', array('file' => $file));
+                            endforeach;
+                            ?>
 							</ul>
 						<?
 						endif;
@@ -104,24 +83,7 @@ Yii::app()->clientScript->registerScript('active-collapse','
 							<ul>
 							<?
 							foreach($category->links as $fileLink):
-								if($fileLink->link):
-							?>
-								<li data-toggle="tooltip" data-placement="top" title="<?= CHtml::encode($fileLink->summary) ?>">
-									<a target="_blank" rel="nofollow" href="<?= $fileLink->link ?>"></a>
-									<?php
-									if($fileLink->image && file_exists($imageDir.$fileLink->image))
-										echo CHtml::image($imageUrl.$fileLink->image,$fileLink->title,array('class' => 'file-image'))
-									?>
-									<div><?= $fileLink->title ?></div>
-									<span class="extension"><?= strtoupper($fileLink->file_type) ?></span>
-									<span class="download">
-										<i></i>
-										<span><?= Yii::t('app','Download'); ?></span>
-										<?= $fileLink->link_size?'<span class="size">'.$fileLink->link_size.'</span>':'' ?>
-									</span>
-								</li>
-							<?
-								endif;
+                                $this->renderPartial('//site/_link_item', array('fileLink' => $fileLink));
 							endforeach;
 							?>
 							</ul>

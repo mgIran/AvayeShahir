@@ -180,7 +180,7 @@ endif;
                 array(
                     'header' => 'دریافت فایل',
                     'value' => function($data){
-                        if($data->filename && file_exists(Yii::getPathOfAlias('webroot').'/uploads/orders/'.$data->filename))
+                        if($data->filename && is_file(Yii::getPathOfAlias('webroot').'/uploads/orders/'.$data->filename))
                             return CHtml::link('دانلود', Yii::app()->baseUrl.'/uploads/orders/'.$data->filename);
                         return NULL;
                     },
@@ -231,7 +231,7 @@ endif;
                     array(
                         'header' => 'دریافت فایل',
                         'value' => function($data){
-                            if($data->filename && file_exists(Yii::getPathOfAlias('webroot').'/uploads/orders/'.$data->filename))
+                            if($data->filename && is_file(Yii::getPathOfAlias('webroot').'/uploads/orders/'.$data->filename))
                                 return CHtml::link('دانلود', Yii::app()->baseUrl.'/uploads/orders/'.$data->filename);
                             return NULL;
                         },

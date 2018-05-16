@@ -185,7 +185,7 @@ section.classes .owl-prev .arrow,
     background: #fff url("../svg/attachment.svg") no-repeat scroll left 20px center;
     background-size: 18px auto;
     padding-right: 0;
-    padding-left: 60px;
+    padding-left: 95px;
     border-right: none;
     border-left: 3px solid #ef5350;
 }
@@ -194,12 +194,12 @@ section.classes .owl-prev .arrow,
 .page-content.courses .files > ul > li,
 .page-content.courses .files .items > li{
     padding-right: 0;
-    padding-left: 60px;
+    padding-left: 95px;
 }
 
 .files > ul > li > div:first-of-type ,
 .files ul .items > li > div:first-of-type {
-    left: 60px !important;
+    left: 90px !important;
     right: 140px;
 }
 .files > ul > li:hover > div:first-of-type ,
@@ -424,7 +424,7 @@ ul.main-menu ol {
 }
 .file-image {
     right: auto;
-    left: 10px;
+    left: 0;
 }
 .btn-input .btn.form-control .caret{
     left: auto !important;
@@ -487,6 +487,12 @@ ul.main-menu ol {
     }
 }
 @media (max-width: 420px) {
+    .page-content.courses .files .file,
+    .page-content.courses .files > ul > li,
+    .page-content.courses .files .items > li{
+        padding-right: 0 !important;
+        padding-left: 55px !important;
+    }
     .news-item .news-detail{
         padding-right: 15px;
         padding-left: 115px;

@@ -94,7 +94,7 @@ class ArticlesCategoryController extends Controller
             }
             $model->formTags = isset($_POST['ArticleCategories']['formTags'])?explode(',',$_POST['ArticleCategories']['formTags']):null;
 			if($model->save()) {
-                if ($model->image and file_exists($tmpDIR.$model->image)) {
+                if ($model->image and is_file($tmpDIR.$model->image)) {
                     $thumbnail = new Imager();
                     $thumbnail->createThumbnail($tmpDIR . $model->image, 80, 80, false, $imageDIR.'80x80/' . $model->image);
                     @rename($tmpDIR . $model->image, $imageDIR . $model->image);
@@ -128,7 +128,7 @@ class ArticlesCategoryController extends Controller
         $model=$this->loadModel($id);
 
         $image = array();
-        if ($model->image and file_exists($imageDIR.$model->image)) {
+        if ($model->image and is_file($imageDIR.$model->image)) {
             $file = $model->image;
             $image = array(
                 'name' => $file,
@@ -144,7 +144,7 @@ class ArticlesCategoryController extends Controller
 		if(isset($_POST['ArticleCategories']))
 		{
 			$model->attributes=$_POST['ArticleCategories'];
-            if (isset($_POST['ArticleCategories']['image']) and file_exists($tmpDIR.$_POST['ArticleCategories']['image'])) {
+            if (isset($_POST['ArticleCategories']['image']) and is_file($tmpDIR.$_POST['ArticleCategories']['image'])) {
                 $file = $_POST['ArticleCategories']['image'];
                 $image = array(
                     'name' => $file,
@@ -155,7 +155,7 @@ class ArticlesCategoryController extends Controller
             }
             $model->formTags = isset($_POST['ArticleCategories']['formTags'])?explode(',',$_POST['ArticleCategories']['formTags']):null;
 			if($model->save()) {
-                if ($model->image and file_exists($tmpDIR.$model->image)) {
+                if ($model->image and is_file($tmpDIR.$model->image)) {
                     $thumbnail = new Imager();
                     $thumbnail->createThumbnail($tmpDIR . $model->image, 80, 80, false, $imageDIR.'80x80/' . $model->image);
                     @rename($tmpDIR . $model->image, $imageDIR . $model->image);
@@ -251,7 +251,7 @@ class ArticlesCategoryController extends Controller
 			$file = $_FILES['image'];
 			$ext = pathinfo($file['name'], PATHINFO_EXTENSION);
 			$file['name'] = Controller::generateRandomString(5) . time();
-			while (file_exists($tempDir . DIRECTORY_SEPARATOR . $file['name'].'.'.$ext))
+			while (is_file($tempDir . DIRECTORY_SEPARATOR . $file['name'].'.'.$ext))
 				$file['name'] = Controller::generateRandomString(5) . time();
 			$file['name'] = $file['name'] . '.' . $ext;
 			if (move_uploaded_file($file['tmp_name'], $tempDir . DIRECTORY_SEPARATOR . CHtml::encode($file['name'])))

@@ -339,11 +339,11 @@ class Comment extends CActiveRecord {
                     $avatar = $user;
                 }
 
-                if(isset($userConfig['avatarFolderPath']) && isset($avatar) && $avatar && file_exists($userConfig['avatarFolderPath'].$avatar))
+                if(isset($userConfig['avatarFolderPath']) && isset($avatar) && $avatar && is_file($userConfig['avatarFolderPath'].$avatar))
                     $avatarLink = $userConfig['avatarFolderPath'].$avatar;
-                if(isset($userConfig['avatarFolderPath']) && isset($avatar) && $avatar && file_exists($userConfig['avatarFolderPath'].DIRECTORY_SEPARATOR.$avatar))
+                if(isset($userConfig['avatarFolderPath']) && isset($avatar) && $avatar && is_file($userConfig['avatarFolderPath'].DIRECTORY_SEPARATOR.$avatar))
                     $avatarLink = $userConfig['avatarFolderPath'].DIRECTORY_SEPARATOR.$avatar;
-                elseif(!isset($userConfig['avatarFolderPath']) && isset($avatar) && $avatar && file_exists($avatar))
+                elseif(!isset($userConfig['avatarFolderPath']) && isset($avatar) && $avatar && is_file($avatar))
                     $avatarLink = $avatar;
             }
         }

@@ -4,7 +4,7 @@
             <li id="comment-<?php echo $comment->comment_id; ?>">
                 <div class="comment-avatar">
                     <?php
-                    if($comment->avatarLink && !empty($comment->avatarLink) && file_exists($comment->avatarLink))
+                    if($comment->avatarLink && !empty($comment->avatarLink) && is_file($comment->avatarLink))
                         echo '<img src="'.$comment->avatarLink.'" >';
                     else
                         echo '<div class="default-comment-avatar"></div>';
