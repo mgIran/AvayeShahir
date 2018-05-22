@@ -107,6 +107,15 @@ $(function() {
 
     $("body").on("click", ".side-bar li a", function () {
         $(this).parents(".container-fluid").removeClass("open-menu");
+    }).on("click", ".magnifier-trigger", function () {
+        var $this = $(this),
+            href = $this.data("href"),
+            target = $this.data("target");
+            $(target).find(".picture-view").html("<img src='"+href+"'>");
+    });
+
+    $("#magnifier-modal").on('hidden.bs.modal', function () {
+        $(this).find(".picture-view").html("");
     });
 });
 

@@ -3631,6 +3631,14 @@ ol{
     position: absolute;
     right: 0;
     top: 0;
+    z-index: 10;
+    cursor: zoom-in;
+}
+.file-image img {
+    display: block;
+    height: 80px;
+    max-width: 80px;
+    overflow: hidden;
 }
 
 .ias_trigger > a {
@@ -4349,6 +4357,54 @@ iframe{
     max-width: 100% !important;
     margin: 0 !important;
 }
+
+.magnifier-modal{
+    padding: 0 !important;
+}
+.magnifier-modal.fade .modal-dialog {
+    -webkit-transition: -webkit-transform .3s ease-out;
+    -o-transition: -o-transform .3s ease-out;
+    transition: transform .3s ease-out;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+    top: 50%;
+    margin: 0 auto;
+    height: auto;
+    max-height: 80vh !important;
+}
+.magnifier-modal.fade.in .modal-dialog {
+    -webkit-transition: -webkit-transform .3s ease-out;
+    -o-transition: -o-transform .3s ease-out;
+    transition: transform .3s ease-out;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+.magnifier-modal .modal-content {
+    background: none !important;
+    border-radius: 0 !important;
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    box-shadow: none !important;
+    margin-top: -24px !important;
+}
+.magnifier-modal .modal-header,
+.magnifier-modal .modal-body{
+    padding: 0 !important;
+    color: #fff !important;
+}
+.magnifier-modal .modal-body .picture-view{
+    -webkit-box-shadow: 0 27px 24px 0 rgba(0, 0, 0, .2), 0 40px 77px 0 rgba(0, 0, 0, .22);
+    -moz-box-shadow: 0 27px 24px 0 rgba(0, 0, 0, .2), 0 40px 77px 0 rgba(0, 0, 0, .22);
+    box-shadow: 0 27px 24px 0 rgba(0, 0, 0, .2), 0 40px 77px 0 rgba(0, 0, 0, .22);
+}
+.magnifier-modal .modal-body .picture-view img {
+    display: block;
+    width: 100%;
+}
 /*#endregion*/
 /*#region Responsive */
 @media (min-width: 1200px)
@@ -4801,7 +4857,7 @@ iframe{
     .file-image{
         max-width: 50px;
         height: auto;
-        top: 50%;
+        top: 50% !important;
         -webkit-transform: translateY(-50%);
         -moz-transform: translateY(-50%);
         -ms-transform: translateY(-50%);

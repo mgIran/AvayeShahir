@@ -68,6 +68,21 @@
     </div>
 </footer>
 
+<!--magnifier modal-->
+<div class="magnifier-modal modal fade" id="magnifier-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" type="button" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="picture-view"></div>
+                <div class="details-view"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-115410787-1"></script>
 <script>

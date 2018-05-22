@@ -73,7 +73,7 @@ if($writingsProvider->totalItemCount):
 <?php
 endif;
 ?>
-<?php $this->renderPartial('_videos') ?>
+<?php $this->renderPartial('_videos'); ?>
 <?php if($newsProvider->totalItemCount): ?>
 <section class="news-section" id="news">
     <div class="container">
@@ -218,7 +218,7 @@ endif;
 <section class="classes" id="classes">
     <?php $this->renderPartial('_classes',compact('classes')); ?>
 </section>
-<?
+<?php
 if($classes && $this->message):
 ?>
 <section class="message-box">
