@@ -630,6 +630,7 @@ video-carousel,
     display: inline-block;
     width: 100%;
 }
+.news-carousel .owl-controls .owl-nav [class*="owl-"],
 .video-carousel .owl-controls .owl-nav [class*="owl-"],
 .courses .course-carousel .owl-controls .owl-nav [class*="owl-"]{
     position: absolute;
@@ -657,6 +658,11 @@ section.classes .owl-controls .owl-nav .owl-next,
 .courses .course-carousel .owl-controls .owl-nav .owl-next{
     left: -5%;
 }
+
+.news-carousel .owl-controls .owl-nav .owl-next{
+    left: 50px;
+}
+
 .video-carousel .owl-controls .owl-nav .owl-next{
     left: 170px;
 }
@@ -664,6 +670,10 @@ section.classes .owl-controls .owl-nav .owl-next,
 section.classes .owl-controls .owl-nav .owl-prev,
 .courses .course-carousel .owl-controls .owl-nav .owl-prev{
     right: -5%;
+}
+
+.news-carousel .owl-controls .owl-nav .owl-prev{
+    right: 50px;
 }
 .video-carousel .owl-controls .owl-nav .owl-prev{
     right: 170px;
@@ -4406,6 +4416,62 @@ iframe{
 .magnifier-modal .modal-body .picture-view img {
     display: block;
     width: 100%;
+}
+
+.news-carousel{
+    height: 400px;
+    overflow: hidden;
+}
+.news-slide {
+    display: inline-block;
+    width: 200px;
+    height: 400px;
+    background-color: #f9f9f9;
+    vertical-align: top;
+}
+.news-slide .news-slide-mask {
+    background-color: rgba(120, 0, 145, 0.3);
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: block;
+    overflow: hidden;
+}
+.news-slide .news-image {
+    display: block;
+    width: 200px;
+    height: 200px;
+    position: relative;
+
+}
+.news-slide-category {
+    color: #fff;
+    z-index: 2;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 25px;
+    text-align: center;
+    opacity: 0.7;
+}
+.news-slide-details{
+    padding:15px;
+}
+.news-slide-details *{
+    color: #444 !important;
+}
+.news-slide-details .news-date {
+    padding-bottom: 15px;
+}
+.news-slide-details .news-slide-title{
+    line-height: 20px;
+    padding-bottom: 15px;
+}
+.news-slide-details .news-slide-title h4{
+    margin: 0;
 }
 /*#endregion*/
 /*#region Responsive */

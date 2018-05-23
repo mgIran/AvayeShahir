@@ -49,6 +49,9 @@
     $cs->registerScriptFile($baseUrl.'/js/jquery.nicescroll.min.js');
     $cs->registerScriptFile($baseUrl.'/js/jquery.mousewheel.min.js');
     $cs->registerScriptFile($baseUrl.'/js/scripts.js?10.2');
+
+    $cs->registerScriptFile($baseUrl.'/js/owl.carousel.min.js');
+    $cs->registerScriptFile($baseUrl.'/js/owl.carousel-init.js');
     ?>
 </head>
 <body id="top">
@@ -62,7 +65,7 @@
     </section>
     <?= $content ?>
     <section class="map">
-        <?= $this->renderPartial('//layouts/_map'); ?>
+<!--        --><?//= $this->renderPartial('//layouts/_map'); ?>
     </section>
     <?= $this->renderPartial('//layouts/_footer'); ?>
 </body>

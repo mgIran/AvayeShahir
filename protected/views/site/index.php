@@ -1,6 +1,6 @@
-<?
+<?php
 /* @var $this SiteController */
-/* @var $slides Slideshow[] */
+/* @var $newsSlides News[] */
 /* @var $courses Courses[] */
 /* @var $newsProvider CActiveDataProvider */
 /* @var $writingsProvider CActiveDataProvider */
@@ -10,15 +10,48 @@
 /* @var $form CActiveForm */
 /* @var $aboutText Pages */
 ?>
+<?php if($newsSlides && isset($_GET["debug"])) : ?>
+<section class="news-slider">
+        <div class="news-carousel" data-rtl="<?= Yii::app()->language == 'fa'?'true':'false' ?>">
+        <?php if($newsSlides):
+            foreach($newsSlides as $slide):?>
+                <div class="news-slide">
+                    <a href="<?= $this->createUrl('/news/'.$slide->id.'/'.urlencode($slide->title)) ?>">
+                        <div class="news-slide-inner">
+                            <div class="news-image">
+                                <div class="news-slide-mask"></div>
+                                <div class="news-slide-category"><?= $slide->category->title ?></div>
+                                <?php if($slide->image && is_file(Yii::getPathOfAlias('webroot').'/uploads/news/200x200/'.$slide->image)):?>
+                                    <img src="<?= Yii::app()->getBaseUrl(true). '/uploads/news/200x200/'.$slide->image ?>">
+                                <?php else:?>
+                                <?php endif;?>
+                            </div>
+                            <div class="news-slide-details">
+                                <div class="news-date">
+                                    <i class="icon icon-calendar"></i>
+                                    <?= JalaliDate::date('Y/m/d', $slide->publish_date) ?>
+                                </div>
+                                <div class="news-slide-title">
+                                    <h4><b><?= Controller::cutText($slide->title, 60) ?></b></h4>
+                                </div>
+                                <div class="news-slide-desc text-justify">
+                                    <?= Controller::cutText($slide->summary, 60) ?>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            <?php endforeach;
+        endif; ?>
+    </div>
+</section>
+<?php endif; ?>
+
 <section class="courses" id="courses">
     <div class="container">
         <h3 class="yekan-text"><?= Yii::t('app' ,'Education Courses & Resources') ?></h3>
-        <div class="course-carousel" data-rtl="<?= Yii::app()->language == 'fa' ?>">
-            <?
-            if($courses) :
-                $baseUrl = Yii::app()->theme->baseUrl;
-                Yii::app()->clientScript->registerScriptFile($baseUrl.'/js/owl.carousel.min.js');
-                Yii::app()->clientScript->registerScriptFile($baseUrl.'/js/owl.carousel-init.js');
+        <div class="course-carousel" data-rtl="<?= Yii::app()->language == 'fa'?'true':'false' ?>">
+            <?php if($courses) :
                 foreach($courses as $course):
                     ?>
                     <div class="course">
@@ -52,6 +85,7 @@
         </div>
     </div>
 </section>
+
 <?php
 if($writingsProvider->totalItemCount):
 ?>

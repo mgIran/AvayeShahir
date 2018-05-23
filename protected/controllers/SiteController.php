@@ -92,6 +92,10 @@ class SiteController extends Controller
 			'pagination' => array('pageSize' => 6)
 		));
 
+		$criteria = News::getValidNews(true);
+		$criteria->limit = 15;
+        $newsSlides = News::model()->findAll($criteria);
+
 		$criteria = Writings::getValidWritings();
 		$criteria->limit = 4;
 		$writingsProvider = new CActiveDataProvider("Writings", array(
@@ -101,7 +105,8 @@ class SiteController extends Controller
 
 		$this->slides = Slideshow::model()->getActiveSlides();
 		$this->render('index', compact(
-			'courses',
+            'newsSlides',
+            'courses',
 			'newsProvider',
 			'writingsProvider',
 			'classes',

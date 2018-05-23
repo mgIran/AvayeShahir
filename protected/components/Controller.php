@@ -98,7 +98,7 @@ class Controller extends AuthController
 
     public static function createAdminMenu()
     {
-        if(Yii::app()->user->type === 'admin')
+        if (Yii::app()->user->type === 'admin')
             return array(
                 array(
                     'label' => 'پیشخوان',
@@ -245,7 +245,7 @@ class Controller extends AuthController
     public function implodeErrors($model)
     {
         $errors = '';
-        foreach($model->getErrors() as $err){
+        foreach ($model->getErrors() as $err) {
             $errors .= implode('<br>', $err) . '<br>';
         }
         return $errors;
@@ -256,7 +256,7 @@ class Controller extends AuthController
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $charactersLength = strlen($characters);
         $randomString = '';
-        for($i = 0;$i < $length;$i++){
+        for ($i = 0; $i < $length; $i++) {
             $randomString .= $characters[rand(0, $charactersLength - 1)];
         }
         return $randomString;
@@ -276,15 +276,15 @@ class Controller extends AuthController
     public static function fileSize($file)
     {
         $size = filesize($file);
-        if($size < 1024)
+        if ($size < 1024)
             return $size . ' Byte';
-        elseif($size < 1024 * 1024){
+        elseif ($size < 1024 * 1024) {
             $size = (float)$size / 1024;
             return number_format($size, 1) . ' KB';
-        }elseif($size < 1024 * 1024 * 1024){
+        } elseif ($size < 1024 * 1024 * 1024) {
             $size = (float)$size / (1024 * 1024);
             return number_format($size, 1) . ' MB';
-        }else{
+        } else {
             $size = (float)$size / (1024 * 1024 * 1024);
             return number_format($size, 1) . ' GB';
         }
@@ -293,10 +293,10 @@ class Controller extends AuthController
     public function getCoursesList()
     {
         Yii::import('courses.models.*');
-        if(!$this->courses)
+        if (!$this->courses)
             $this->courses = CHtml::listData(Courses::model()->findAll(array(
                 'order' => 't.order')),
-                function ($model){
+                function ($model) {
                     return 'courses/' . $model->id . '/' . urlencode($model->getValueLang('title', 'en'));
                 }
                 , 'title');
@@ -306,12 +306,12 @@ class Controller extends AuthController
     public function getArticleCategories()
     {
         Yii::import('articles.models.*');
-        if(!$this->articleCategories)
+        if (!$this->articleCategories)
             $this->articleCategories = CHtml::listData(ArticleCategories::model()->findAll(array(
                 'condition' => 'parent_id IS NULL',
                 'order' => 't.order'
             )),
-                function ($model){
+                function ($model) {
                     return 'articles/category/' . $model->id . '/' . urlencode($model->getValueLang('title', 'en'));
                 }
                 , 'title');
@@ -321,7 +321,7 @@ class Controller extends AuthController
     public function getWritingCategories($array = true)
     {
         Yii::import('writings.models.*');
-        if($array) {
+        if ($array) {
             $models = WritingCategories::model()->findAll(array(
                 'condition' => 'parent_id IS NOT NULL',
                 'order' => 't.order'
@@ -331,7 +331,7 @@ class Controller extends AuthController
                     return 'writings/category/' . $model->id . '/' . urlencode($model->getValueLang('title', 'en'));
                 }
                 , 'title');
-        }else{
+        } else {
             $this->writingCategories = new CActiveDataProvider("WritingCategories", array(
                 'criteria' => array(
                     'condition' => 'parent_id IS NOT NULL',
@@ -345,13 +345,13 @@ class Controller extends AuthController
     public function getMultimediaCategories()
     {
         Yii::import('multimedia.models.*');
-        if(!$this->multimediaCategories){
+        if (!$this->multimediaCategories) {
             $models = MultimediaCategories::model()->findAll(array(
                 'condition' => 'parent_id IS NULL',
                 'order' => 't.order'
             ));
             $this->multimediaCategories = CHtml::listData($models,
-                function ($model){
+                function ($model) {
                     return 'multimedia/category/' . $model->id . '/' . urlencode($model->getValueLang('title', 'en'));
                 }
                 , 'title');
@@ -362,12 +362,12 @@ class Controller extends AuthController
     public function getNewsCategories()
     {
         Yii::import('news.models.*');
-        if(!$this->newsCategories)
+        if (!$this->newsCategories)
             $this->newsCategories = CHtml::listData(NewsCategories::model()->findAll(array(
                 'condition' => 'parent_id IS NULL',
                 'order' => 't.order'
             )),
-                function ($model){
+                function ($model) {
                     return 'news/category/' . $model->id . '/' . urlencode($model->getValueLang('title', 'en'));
                 }
                 , 'title');
@@ -377,7 +377,7 @@ class Controller extends AuthController
     public function actionBackup()
     {
         $dbPath = Yii::getPathOfAlias('webroot') . DIRECTORY_SEPARATOR . 'db_backup';
-        if(!is_dir($dbPath))
+        if (!is_dir($dbPath))
             mkdir($dbPath);
 
         Yii::import('ext.yii-database-dumper.SDatabaseDumper');
@@ -386,12 +386,12 @@ class Controller extends AuthController
 
         // Gzip dump
         $file = $dbPath . DIRECTORY_SEPARATOR . 'sql-dump-' . date('Y-m-d');
-        if(isset($_GET['gz']) && function_exists('gzencode'))
+        if (isset($_GET['gz']) && function_exists('gzencode'))
             file_put_contents($file . '.sql.gz', gzencode($dumper->getDump()));
         else
             file_put_contents($file . '.sql', $dumper->getDump());
 
-        if(is_file($file . '.sql') || is_file($file . '.sql.gz'))
+        if (is_file($file . '.sql') || is_file($file . '.sql.gz'))
             echo 'OK';
         else
             echo 'NOK';
@@ -401,13 +401,18 @@ class Controller extends AuthController
         unset($files[1]);
         $expireTime = time() - 7 * 24 * 60 * 60;
         $index = 0;
-        foreach($files as $key => $file){
-            if(strpos($file, 'sql-dump-' . date('Y-m-d', $expireTime)) !== false){
+        foreach ($files as $key => $file) {
+            if (strpos($file, 'sql-dump-' . date('Y-m-d', $expireTime)) !== false) {
                 $index = $key;
                 break;
             }
         }
-        for($i = 2;$i <= $index;$i++)
+        for ($i = 2; $i <= $index; $i++)
             @unlink($dbPath . DIRECTORY_SEPARATOR . $files[$i]);
+    }
+
+    public static function cutText($text, $count = 200)
+    {
+        return mb_substr($text, 0, $count, "UTF-8") . (mb_strlen($text, "UTF-8") > $count ? '...' : '');
     }
 }

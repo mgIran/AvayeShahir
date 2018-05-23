@@ -36,31 +36,31 @@ if($this->slides):
     </div>
 </section>
 <?php
-    if(count($this->slides)>1)
-        Yii::app()->clientScript->registerScript('slider', "
-            if ($('.slider').length != 0) {
-                var loop = $('.slider').attr('data-loop');
-                if (typeof loop === 'undefined')
-                    loop = false;
-                $('.slider').owlCarousel({
-                    items: 1,
-                    dots: false,
-                    nav: true,
-                    navText: [\"<i class='arrow-icon'></i>\", \"<i class='arrow-icon'></i>\"],
-                    autoplay: true,
-                    autoplayTimeout: 8000,
-                    autoplayHoverPause: false,
-                    rtl: true,
-                    loop: loop
-                });
-        
-                $('.slider-overlay-nav').click(function () {
-                    if ($(this).hasClass('slider-next'))
-                        $('.slider .owl-controls .owl-nav .owl-next').trigger('click');
-                    else if ($(this).hasClass('slider-prev'))
-                        $('.slider .owl-controls .owl-nav .owl-prev').trigger('click');
-                    return false;
-                });
-            }
-        ");
+if(count($this->slides)>1)
+    Yii::app()->clientScript->registerScript('slider', "
+        if ($('.slider').length != 0) {
+            var loop = $('.slider').attr('data-loop');
+            if (typeof loop === 'undefined')
+                loop = false;
+            $('.slider').owlCarousel({
+                items: 1,
+                dots: false,
+                nav: true,
+                navText: [\"<i class='arrow-icon'></i>\", \"<i class='arrow-icon'></i>\"],
+                autoplay: true,
+                autoplayTimeout: 8000,
+                autoplayHoverPause: false,
+                rtl: true,
+                loop: loop
+            });
+    
+            $('.slider-overlay-nav').click(function () {
+                if ($(this).hasClass('slider-next'))
+                    $('.slider .owl-controls .owl-nav .owl-next').trigger('click');
+                else if ($(this).hasClass('slider-prev'))
+                    $('.slider .owl-controls .owl-nav .owl-prev').trigger('click');
+                return false;
+            });
+        }
+    ");
 endif;
