@@ -320,7 +320,7 @@ header.header.scroll-mode{
     font-size: 9vmin;
     text-align: center;
     text-shadow: 0 0 8px #000;
-    z-index: 2;
+    z-index: 3;
 }
 .introduction .chevron {
     position: absolute;
@@ -4091,7 +4091,6 @@ span.navTrigger > input[type="checkbox"]:checked + .lines::after {
     min-width: 100%;
     width: auto;
     height: 100%;
-    position: relative;
     max-height: 800px;
 }
 
@@ -4100,7 +4099,6 @@ span.navTrigger > input[type="checkbox"]:checked + .lines::after {
     width: auto;
     height: 100%;
     overflow: hidden;
-    position: relative;
 }
 
 .slider-item .slider-thumbnail img {
@@ -4362,6 +4360,7 @@ iframe{
     padding: 0 !important;
 }
 .magnifier-modal.fade .modal-dialog {
+    width: 300px;
     -webkit-transition: -webkit-transform .3s ease-out;
     -o-transition: -o-transform .3s ease-out;
     transition: transform .3s ease-out;
@@ -4390,6 +4389,7 @@ iframe{
     -moz-box-shadow: none !important;
     box-shadow: none !important;
     margin-top: -24px !important;
+    padding-bottom: 30px;
 }
 .magnifier-modal .modal-header,
 .magnifier-modal .modal-body{

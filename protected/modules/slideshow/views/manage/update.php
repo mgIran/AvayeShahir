@@ -1,5 +1,5 @@
 <?php
-/* @var $this ManageController */
+/* @var $this SlideshowManageController */
 /* @var $model Slideshow */
 
 $this->breadcrumbs=array(
@@ -13,6 +13,6 @@ $this->menu=array(
 );
 ?>
 
-<h1>ویرایش تصویر <?php echo $model->title ?></h1>
+<h1>ویرایش تصویر <?php echo $model->id ?></h1>
 
 <?php $this->renderPartial('_form', array('model'=>$model,'image' => $image)); ?>

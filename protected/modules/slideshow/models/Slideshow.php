@@ -8,6 +8,7 @@
  * @property string $image
  * @property string $status
  * @property string $order
+ * @property string $description
  */
 class Slideshow extends SortableCActiveRecord
 {
@@ -36,6 +37,7 @@ class Slideshow extends SortableCActiveRecord
 			array('image', 'length', 'max'=>255),
 			array('status', 'length', 'max'=>1),
 			array('order', 'length', 'max'=>10),
+			array('description', 'length', 'max'=>100),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, image, status, order', 'safe', 'on'=>'search'),
@@ -63,6 +65,7 @@ class Slideshow extends SortableCActiveRecord
 			'image' => 'تصویر',
 			'status' => 'وضعیت',
 			'order' => 'Order',
+			'description' => 'متن تصویر',
 		);
 	}
 

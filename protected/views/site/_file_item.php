@@ -14,7 +14,7 @@ if(isset($file) && $file):
         <li data-toggle="tooltip" data-placement="top" title="<?= CHtml::encode($file->summary) ?>">
             <a href="<?= $fileUrl.$file->path ?>"></a>
             <?php if($file->image && is_file($imageDir.$file->image)): ?>
-                <a href="<?= $imageUrl.$file->image ?>" class="file-image magnifier-trigger" data-toggle="modal" data-target="#magnifier-modal">
+                <a data-href="<?= $imageUrl.$file->image ?>" class="file-image magnifier-trigger" data-toggle="modal" data-target="#magnifier-modal">
                     <?php echo CHtml::image($imageUrl.$file->image,$file->title) ?>
                 </a>
             <?php endif; ?>

@@ -42,7 +42,7 @@ $this->menu=array(
 		),
 		array(
 			'class'=>'CButtonColumn',
-			'template' => '{changeStatus} {delete}',
+			'template' => '{update} {changeStatus} {delete}',
 			'htmlOptions' => array('style' => 'width:150px'),
 			'buttons' => array(
 				'changeStatus' => array(

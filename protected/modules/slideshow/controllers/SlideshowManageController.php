@@ -72,7 +72,7 @@ class SlideshowManageController extends Controller
 		$tmpDIR = Yii::getPathOfAlias("webroot") . '/uploads/temp/';
 		if (!is_dir($tmpDIR))
 			mkdir($tmpDIR);
-		$tmpUrl = $this->createAbsoluteUrl('/uploads/temp/');
+		$tmpUrl = Yii::app()->getBaseUrl(true)."/uploads/temp/";
 		$imageDIR = Yii::getPathOfAlias("webroot") . "/uploads/slideshow/";
 		if (!is_dir($imageDIR))
 			mkdir($imageDIR);
@@ -116,10 +116,10 @@ class SlideshowManageController extends Controller
 		$tmpDIR = Yii::getPathOfAlias("webroot") . '/uploads/temp/';
 		if (!is_dir($tmpDIR))
 			mkdir($tmpDIR);
-		$tmpUrl = $this->createAbsoluteUrl('/uploads/temp/');
+		$tmpUrl = Yii::app()->getBaseUrl(true)."/uploads/temp/";
 
 		$imageDIR = Yii::getPathOfAlias("webroot") . "/uploads/slideshow/";
-		$imageUrl = $this->createAbsoluteUrl("/uploads/slideshow/");
+		$imageUrl = Yii::app()->getBaseUrl(true)."/uploads/slideshow/";
 
 		$image = array();
 		if($model->image && file_exists($imageDIR . $model->image))

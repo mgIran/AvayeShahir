@@ -9,11 +9,12 @@ $imageUrl = Yii::app()->baseUrl.'/uploads/articles/fileimages/';
 if($data->link):
 	?>
 	<li class="link-item-container" data-toggle="tooltip" data-placement="top" title="<?= CHtml::encode($data->summary) ?>">
-		<a target="_blank" rel="nofollow" href="<?= $data->link ?>"></a>
-		<?php
-		if($data->image && is_file($imageDir.$data->image))
-			echo CHtml::image($imageUrl.$data->image,$data->title,array('class' => 'file-image'))
-		?>
+        <a target="_blank" rel="nofollow" href="<?= $data->link ?>"></a>
+        <?php if($data->image && is_file($imageDir.$data->image)): ?>
+            <a data-href="<?= $imageUrl.$data->image ?>" class="file-image magnifier-trigger" data-toggle="modal" data-target="#magnifier-modal">
+                <?php echo CHtml::image($imageUrl.$data->image,$data->title); ?>
+            </a>
+        <?php endif; ?>
 		<div><?= $data->title ?></div>
 		<span class="extension"><?= strtoupper($data->file_type) ?></span>
 		<span class="download">

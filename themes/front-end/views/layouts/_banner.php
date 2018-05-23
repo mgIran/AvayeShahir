@@ -8,15 +8,17 @@ if($this->slides):
         foreach($this->slides as $slide):
             ?>
             <div class="slider-item">
-                <div class="slider-thumbnail"><img src="<?= Yii::app()->baseUrl.'/uploads/slideshow/'.$slide->image ?>" alt="<?= $slide->image ?>" title="<?= $slide->image ?>"></div>
+                <h2><?= Yii::t('app','Learn English with us ...')?></h2>
+                <div class="slider-thumbnail">
+                    <div class="mask"></div>
+                    <img src="<?= Yii::app()->baseUrl.'/uploads/slideshow/'.$slide->image ?>" alt="<?= $slide->image ?>" title="<?= $slide->image ?>">
+                </div>
             </div>
             <?php
         endforeach;
         ?>
     </div>
-    <div class="mask"></div>
     <div class="logo"></div>
-    <h2><?= Yii::t('app','Learn English with us ...')?></h2>
     <div class="chevron">
         <a class="mover scroll-link" href="#courses">
             <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 245.059 245.059" xml:space="preserve">

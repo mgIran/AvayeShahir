@@ -12,10 +12,11 @@ if($data->path and is_file($fileDir.$data->path)):
 	?>
 	<li class="file-item-container" data-toggle="tooltip" data-placement="top" title="<?= CHtml::encode($data->summary) ?>">
 		<a href="<?= $fileUrl.$data->path ?>"></a>
-		<?php
-		if($data->image && is_file($imageDir.$data->image))
-			echo CHtml::image($imageUrl.$data->image,$data->title,array('class' => 'file-image'))
-		?>
+        <?php if($data->image && is_file($imageDir.$data->image)): ?>
+            <a data-href="<?= $imageUrl.$data->image ?>" class="file-image magnifier-trigger" data-toggle="modal" data-target="#magnifier-modal">
+                <?php echo CHtml::image($imageUrl.$data->image,$data->title) ?>
+            </a>
+        <?php endif; ?>
 		<div><?= $data->title ?></div>
 		<span class="extension"><?= strtoupper($data->file_type) ?></span>
 		<span class="download">

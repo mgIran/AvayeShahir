@@ -43,6 +43,12 @@
 	</div>
 
 	<div class="row">
+		<?php echo $form->labelEx($model, 'description'); ?>
+		<?php echo $form->textArea($model, 'description'); ?>
+		<?php echo $form->error($model, 'description'); ?>
+	</div>
+
+    <div class="row">
 		<?php echo $form->labelEx($model, 'status'); ?>
 		<?php echo $form->dropDownList($model, 'status', $model->statusLabels); ?>
 		<?php echo $form->error($model, 'status'); ?>
