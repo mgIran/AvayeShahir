@@ -3604,6 +3604,7 @@ ol{
     right: 95px;
     text-overflow: ellipsis;
     white-space: nowrap;
+    text-align: justify;
     -webkit-transition: all 0.3s;
     -moz-transition: all 0.3s;
     -ms-transition: all 0.3s;
@@ -4916,6 +4917,22 @@ iframe{
     }
 }
 @media (max-width: 420px) {
+    .page-content.courses .files .extension{
+        margin: 10px 5px;
+    }
+    .page-content.courses .files .download span:last-of-type{
+        padding: 5px;
+    }
+    .container{
+        padding: 0 5px;
+    }
+    .groups-container .container-fluid{
+        padding: 0;
+    }
+    .groups-container .container-fluid h3,
+    .groups-container .container-fluid h4{
+        padding: 0 10px;
+    }
     .page-content.courses .files .file,
     .page-content.courses .files > ul > li,
     .page-content.courses .files .items > li{
