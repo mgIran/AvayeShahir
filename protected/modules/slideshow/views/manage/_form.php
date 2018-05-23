@@ -44,7 +44,7 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model, 'description'); ?>
-		<?php echo $form->textArea($model, 'description'); ?>
+		<?php echo EMHelper::megaOgogo($model, 'description',array(),'textarea'); ?>
 		<?php echo $form->error($model, 'description'); ?>
 	</div>
 

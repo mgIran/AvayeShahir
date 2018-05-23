@@ -8,7 +8,8 @@ if($this->slides):
         foreach($this->slides as $slide):
             ?>
             <div class="slider-item">
-                <h2><?= Yii::t('app','Learn English with us ...')?></h2>
+<!--                <h2 dir="auto">--><?//= Yii::t('app','Learn English with us ...'); ?><!--</h2>-->
+                <h2 dir="auto"><?= CHtml::encode($slide->description); ?></h2>
                 <div class="slider-thumbnail">
                     <div class="mask"></div>
                     <img src="<?= Yii::app()->baseUrl.'/uploads/slideshow/'.$slide->image ?>" alt="<?= $slide->image ?>" title="<?= $slide->image ?>">
@@ -48,7 +49,7 @@ if($this->slides):
                     navText: [\"<i class='arrow-icon'></i>\", \"<i class='arrow-icon'></i>\"],
                     autoplay: true,
                     autoplayTimeout: 8000,
-                    autoplayHoverPause: true,
+                    autoplayHoverPause: false,
                     rtl: true,
                     loop: loop
                 });

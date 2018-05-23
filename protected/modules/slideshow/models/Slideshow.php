@@ -25,6 +25,47 @@ class Slideshow extends SortableCActiveRecord
 		0 => 'غیرفعال'
 	];
 
+    /**
+     * __set
+     *
+     * Rewrite default setter, so we can dynamically add
+     * new virtual attribtues such as name_en, name_de etc.
+     *
+     * @param string $name
+     * @param string $value
+     * @return string
+     */
+
+    public function __set($name, $value)
+    {
+        if (EMHelper::WinnieThePooh($name, $this->behaviors()))
+            $this->{$name} = $value;
+        else
+            parent::__set($name, $value);
+    }
+
+
+    /**
+     * behaviors
+     *
+     * @return array
+     */
+
+    public function behaviors()
+    {
+        return array(
+            'EasyMultiLanguage'=>array(
+                'class' => 'ext.EasyMultiLanguage.EasyMultiLanguageBehavior',
+                'translated_attributes' => array('description'),
+                'admin_routes' => array('slideshow/manage/create','slideshow/manage/update','slideshow/manage/admin','slideshow/manage/delete','slideshow/manage/changeStatus'),
+                //
+                'languages' => Yii::app()->params['languages'],
+                'default_language' => Yii::app()->params['default_language'],
+                'translations_table' => 'ym_translations',
+            ),
+        );
+    }
+
 	/**
 	 * @return array validation rules for model attributes.
 	 */
