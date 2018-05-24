@@ -83,7 +83,7 @@ $(function () {
             navClass: ['owl-prev disabled', 'owl-next'],
             callbacks: true,
             info: true,
-            margin: 4,
+            margin: 3,
             dots: false,
             nav: true,
             autoWidth:true,

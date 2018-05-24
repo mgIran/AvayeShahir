@@ -15,12 +15,12 @@
         <div class="news-carousel" data-rtl="<?= Yii::app()->language == 'fa'?'true':'false' ?>">
         <?php if($newsSlides):
             foreach($newsSlides as $slide):?>
-                <div class="news-slide">
+                <div class="news-slide cubic">
                     <a href="<?= $this->createUrl('/news/'.$slide->id.'/'.urlencode($slide->title)) ?>">
                         <div class="news-slide-inner">
                             <div class="news-image">
-                                <div class="news-slide-mask"></div>
-                                <div class="news-slide-category"><?= $slide->category->title ?></div>
+                                <div class="news-slide-mask cubic"></div>
+                                <div class="news-slide-category cubic"><?= $slide->category->title ?></div>
                                 <?php if($slide->image && is_file(Yii::getPathOfAlias('webroot').'/uploads/news/200x200/'.$slide->image)):?>
                                     <img src="<?= Yii::app()->getBaseUrl(true). '/uploads/news/200x200/'.$slide->image ?>">
                                 <?php else:?>
