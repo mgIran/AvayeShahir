@@ -359,7 +359,10 @@ endif;
 
         </div>
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 licenses-container">
-            <div class="col-md-12"><img id='nbpegwmdgwmdgwmdsgui' style='cursor:pointer' onclick='window.open("https://trustseal.enamad.ir/Verify.aspx?id=29990&p=wkynjzpgjzpgjzpgdrfs", "Popup","toolbar=no, location=no, statusbar=no, menubar=no, scrollbars=1, resizable=0, width=580, height=600, top=30")' alt='' src='https://trustseal.enamad.ir/logo.aspx?id=29990&p=qesgzpfvzpfvzpfvgthv'/></div>
+            <div class="col-md-12">
+                <img src="https://trustseal.enamad.ir/logo.aspx?id=29990&amp;p=H6mcUtl3gzhOdhzS" alt="" onclick="window.open(&quot;https://trustseal.enamad.ir/Verify.aspx?id=29990&amp;p=H6mcUtl3gzhOdhzS&quot;, &quot;Popup&quot;,&quot;toolbar=no, location=no, statusbar=no, menubar=no, scrollbars=1, resizable=0, width=580, height=600, top=30&quot;)" style="cursor:pointer" id="H6mcUtl3gzhOdhzS">
+<!--                <img id='nbpegwmdgwmdgwmdsgui' style='cursor:pointer' onclick='window.open("https://trustseal.enamad.ir/Verify.aspx?id=29990&p=wkynjzpgjzpgjzpgdrfs", "Popup","toolbar=no, location=no, statusbar=no, menubar=no, scrollbars=1, resizable=0, width=580, height=600, top=30")' alt='' src='https://trustseal.enamad.ir/logo.aspx?id=29990&p=qesgzpfvzpfvzpfvgthv'/>-->
+            </div>
         </div>
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="col-md-12">
