@@ -51,6 +51,7 @@ if(count($this->slides)>1)
                 autoplayTimeout: 8000,
                 autoplayHoverPause: false,
                 rtl: true,
+                autoHeight: true,
                 loop: loop
             });
     

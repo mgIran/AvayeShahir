@@ -310,8 +310,11 @@
         ?>
         <div class="not-found">
             <div class="inner-flex">
-                <h3><?= Yii::t('app', 'There is no class available at the moment.') ?></h3>
-                <p><?= Yii::t('app',"The Schedule for Future Classes Will Be Announced Soon.\nShould You Need More Information, Please Kindly Call the Institute.") ?></p>
+                <h3><?= Yii::t('app', 'To get more information about the classes, please call the institute.') ?></h3>
+<!--                <h3>--><?//= Yii::t('app', 'There is no class available at the moment.') ?><!--</h3>-->
+                <p dir="auto"><?= Yii::app()->language == 'fa'?Controller::parseNumbers("021 88546127 - 021 88546128 - 021 88730902 - 
+                    021 88736668 - 021 88502049"):'021 88546127 - 021 88546128 - 021 88730902 - 
+                    021 88736668 - 021 88502049' ?></p>
             </div>
         </div>
         <?php

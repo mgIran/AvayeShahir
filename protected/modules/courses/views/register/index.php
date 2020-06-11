@@ -117,18 +117,18 @@
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
                         <h4>درگاه موردنظر خود را انتخاب کنید</h4>
                     </div>
-                    <div class="text-center relative gateway-select">
-                        <div class="gateway-logo">
-                            <img src="<?= Yii::app()->baseUrl.'/images/fanavaLogo.png' ?>" width="200" height="200" alt="فن آوا کارت" title="فن آوا کارت">
-                        </div>
-                        <?php echo CHtml::radioButton('gateway', true, array('value'=>UserTransactions::GATEWAY_SINA)) ?>
-                        <?php echo CHtml::label('بانک سینا','',array('style' => 'color:#000')) ?>
-                    </div>
+<!--                    <div class="text-center relative gateway-select">-->
+<!--                        <div class="gateway-logo">-->
+<!--                            <img src="--><?//= Yii::app()->baseUrl.'/images/fanavaLogo.png' ?><!--" width="200" height="200" alt="فن آوا کارت" title="فن آوا کارت">-->
+<!--                        </div>-->
+<!--                        --><?php //echo CHtml::radioButton('gateway', true, array('value'=>UserTransactions::GATEWAY_SINA)) ?>
+<!--                        --><?php //echo CHtml::label('بانک سینا','',array('style' => 'color:#000')) ?>
+<!--                    </div>-->
                     <div class="text-center relative gateway-select">
                         <div class="gateway-logo">
                             <img src="<?= Yii::app()->baseUrl.'/images/mellatLogo.png' ?>" width="200" height="200" alt="بانک ملت" title="بانک ملت">
                         </div>
-                        <?php echo CHtml::radioButton('gateway', false, array('value'=>UserTransactions::GATEWAY_MELLAT)) ?>
+                        <?php echo CHtml::radioButton('gateway', true, array('value'=>UserTransactions::GATEWAY_MELLAT)) ?>
                         <?php echo CHtml::label('بانک ملت','',array('style' => 'color:#000')) ?>
                     </div>
                 </div>

@@ -64,9 +64,9 @@
         <div class="bg-icon"></div>
     </section>
     <?= $content ?>
-    <section class="map">
-<!--        --><?//= $this->renderPartial('//layouts/_map'); ?>
-    </section>
+<!--    <section class="map">-->
+<!--        --><?////= $this->renderPartial('//layouts/_map'); ?>
+<!--    </section>-->
     <?= $this->renderPartial('//layouts/_footer'); ?>
 </body>
 </html>
