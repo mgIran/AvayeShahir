@@ -13,11 +13,11 @@ RewriteCond %{REQUEST_URI} !^/[0-9]+\..+\.cpaneldcv$
 RewriteCond %{REQUEST_URI} !^/\.well-known/pki-validation/[A-F0-9]{32}\.txt(?:\ Comodo\ DCV)?$
 RewriteRule ^(.*)$ "http\:\/\/www.avayeshahir\.com\/$1" [R=302,L]
 
-RewriteCond %{HTTP_HOST} ^avayeshahir\.ir$ [OR]
-RewriteCond %{HTTP_HOST} ^www\.avayeshahir\.ir$
-RewriteCond %{REQUEST_URI} !^/[0-9]+\..+\.cpaneldcv$
-RewriteCond %{REQUEST_URI} !^/\.well-known/pki-validation/[A-F0-9]{32}\.txt(?:\ Comodo\ DCV)?$
-RewriteRule ^(.*)$ "http\:\/\/www.avayeshahir\.com\/$1" [R=302,L]
+#RewriteCond %{HTTP_HOST} ^avayeshahir\.ir$ [OR]
+#RewriteCond %{HTTP_HOST} ^www\.avayeshahir\.ir$
+#RewriteCond %{REQUEST_URI} !^/[0-9]+\..+\.cpaneldcv$
+#RewriteCond %{REQUEST_URI} !^/\.well-known/pki-validation/[A-F0-9]{32}\.txt(?:\ Comodo\ DCV)?$
+#RewriteRule ^(.*)$ "http\:\/\/www.avayeshahir\.com\/$1" [R=302,L]
 
 RewriteCond %{HTTPS} off
 RewriteCond %{REQUEST_URI} !^/[0-9]+\..+\.cpaneldcv$

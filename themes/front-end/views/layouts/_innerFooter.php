@@ -1,7 +1,7 @@
 <footer class="footer">
     <div class="container">
         <div class="info-box">
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <div><i class="map-point"></i><div class="address <?= Yii::app()->language == 'fa' ?"text-right":"text-left" ?>"><?= Yii::t("app",'Unit 1, No 9, 10th Street, Sarafraz Street, Beheshti Avenue, Tehran, Iran.') ?></div></div>
                 <p>
                     <i class="phone"></i>
@@ -14,7 +14,7 @@
                     <span>pardis@avayeshahir.com</span>
                 </p>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <h4><?= Yii::t('app','Visit Statistics') ?></h4>
                 <div class="report">
 
@@ -60,9 +60,9 @@
                     </span>
                 </div>
             </div>
-            <div class="col-md-4">
-                <?= $this->renderPartial('//layouts/_map'); ?>
-            </div>
+<!--            <div class="col-md-4">-->
+<!--                --><?//= $this->renderPartial('//layouts/_map'); ?>
+<!--            </div>-->
             <p class="copyright"><?= Yii::t('app','All Rights Reserved By Pardis-e Avaye Shahir. ©‏') ?>&nbsp;<?= Yii::app()->language=='fa'?Controller::parseNumbers('1394'):'2016'; ?> </p>
         </div>
     </div>

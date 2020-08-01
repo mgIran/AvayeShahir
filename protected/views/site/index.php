@@ -302,8 +302,8 @@ endif;
 
                             <div class="socials">
                                 <a href="mailto:<?= $teacher->email ?>" class="email" title="<?= Yii::t('app','Email') ?>"></a>
-                                <a target="_blank" href="<?= $socialLinks[0]['value'] ?>" class="facebook" title="<?= Yii::t('app','Facebook') ?>"></a>
-                                <a target="_blank" href="<?= $socialLinks[1]['value'] ?>" class="twitter" title="<?= Yii::t('app','Twitter') ?>"></a>
+                                <a target="_blank" href="<?= isset($socialLinks[0]['value'])?$socialLinks[0]['value']:'' ?>" class="facebook" title="<?= Yii::t('app','Facebook') ?>"></a>
+                                <a target="_blank" href="<?= isset($socialLinks[1]['value'])?$socialLinks[1]['value']:'' ?>" class="twitter" title="<?= Yii::t('app','Twitter') ?>"></a>
                             </div>
                             <a href="<?= Yii::app()->createUrl('/teachers/'.$teacher->id.'/'.urlencode($teacher->teacherDetails->getFullName())) ?>" class="person-link" title="<?= CHtml::encode($teacher->teacherDetails->getFullName()) ?>"></a>
                         </div>

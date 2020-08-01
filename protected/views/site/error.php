@@ -1,10 +1,12 @@
 <?php
 /* @var $this SiteController */
 /* @var $error array */
+
 ?>
 <div class="page-error">
     <div class="code"><?php echo $code; ?></div>
-    <div class="title"><?php echo CHtml::encode($message);?></div>
+    <div class="title"><?php echo CHtml::encode($message);?>
+    <?php if(isset($_GET['debug'])):?><br><code style="color:red">File:<?= $file;?><br>Line: <?= $line?></code><?php endif;?></div>
 
     <div class="buttons">
         <div class="row">
