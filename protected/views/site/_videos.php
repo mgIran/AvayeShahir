@@ -1,29 +1,37 @@
 <?php
-$latestVideo = Multimedia::getLatest('videos',5,'array');
-if($latestVideo):
-?>
-<section class="signup video-bg">
-    <div class="mask"></div>
-    <div class="container-fluid">
-        <h2 class="yekan-text text-center"><?= Yii::t('app','Latest Video') ?></h2>
-        <div class="video-carousel">
-            <?php foreach ($latestVideo as $video): ?>
-            <div class="home-video col-lg-6 col-md-6 col-md-8 col-xs-12 text-center">
-                <div class="data"><?= $video->data ?></div>
-                <h4 class="yekan-text"><?= CHtml::encode($video->title) ?></h4>
+$latestVideo = Multimedia::getLatest('videos', 5, 'array');
+if ($latestVideo):
+    ?>
+    <section class="signup video-bg">
+        <div class="mask"></div>
+        <div class="container-fluid">
+            <h2 class="yekan-text text-center"><?= Yii::t('app', 'Latest Video') ?></h2>
+            <div class="video-carousel">
+                <?php foreach ($latestVideo as $video): ?>
+                    <div class="home-video col-lg-6 col-md-6 col-md-8 col-xs-12 text-center">
+                        <div class="data"><?php if ($video->type == Multimedia::TYPE_VIDEO): ?>
+                                <?= $video->data ?>
+                            <?php else: ?>
+                                <video preload="metadata" controls style="width: 100%">
+                                    <source src="<?php echo Yii::app()->baseUrl . '/uploads/multimedia/videos/' . $video->data; ?>"
+                                            type="video/mp4">
+                                </video>
+                            <?php endif; ?></div>
+                        <h4 class="yekan-text"><?= CHtml::encode($video->title) ?></h4>
+                    </div>
+                <?php endforeach; ?>
             </div>
-            <?php endforeach; ?>
+            <div class="clearfix"></div>
+            <div class="text-center">
+                <a href="<?= $this->createUrl('/multimedia/videos') ?>" class="flat-button"><?= Yii::t('app',
+                        'More Videos') ?></a>
+            </div>
         </div>
-        <div class="clearfix"></div>
-        <div class="text-center">
-            <a href="<?= $this->createUrl('/multimedia/videos') ?>" class="flat-button"><?= Yii::t('app', 'More Videos') ?></a>
-        </div>
-    </div>
-</section>
-<?php
-Yii::app()->clientScript->registerScript("video-carousel","
+    </section>
+    <?php
+    Yii::app()->clientScript->registerScript("video-carousel", "
     $('.video-carousel').owlCarousel({
-        ".(Yii::app()->language == 'fa'?'rtl:true,':'')."
+        " . (Yii::app()->language == 'fa' ? 'rtl:true,' : '') . "
         navText:['<span class=\"arrow\"></span>','<span class=\"arrow\"></span>'],
         navClass: ['owl-prev disabled','owl-next'],
         callbacks: true,

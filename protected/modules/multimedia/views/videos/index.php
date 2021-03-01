@@ -20,7 +20,7 @@
                 <h3><?= Yii::t('app','Category') ?></h3>
                 <ul class="main-menu nav nav-stacked tree">
                     <?php
-                    MultimediaCategories::getHtmlSortList(Null,$model->id);
+                    MultimediaCategories::getHtmlSortList();
                     ?>
                 </ul>
             </div>
