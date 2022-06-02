@@ -20,7 +20,13 @@ $imageUrl = Yii::app()->baseUrl.'/uploads/multimedia/videos/thumbnail/';
 		<div class="news-view col-lg-8 col-md-8 col-sm-12 col-xs-12">
 			<h2><?= $model->title ?></h2>
 			<div class="news-pic">
-				<?= $model->data ?>
+                <?php if ($model->type == Multimedia::TYPE_VIDEO): ?>
+                    <?= $model->data ?>
+                <?php else: ?>
+                    <video preload="metadata" controls style="width: 100%">
+                        <source src="<?php echo Yii::app()->baseUrl .'/uploads/multimedia/videos/'.$model->data; ?>" type="video/mp4">
+                    </video>
+                <?php endif; ?>
 			</div>
 			<div class="news-text"><?= $model->description ?></div>
 			<!-- END OF NEWS CONTENT -->
