@@ -62,18 +62,18 @@
                         <div class="course-pic" title="<?= $course->title ?>">
                             <div class="overlay">
                             </div>
-                            <a href="<?= Yii::app()->createUrl('/courses/'.urlencode($course->getValueLang('title', 'en')).'/'.$course->id); ?>">
+                            <a href="<?= Yii::app()->createUrl('/courses/'.$course->id); ?>">
                                 <img src="<?= Yii::app()->baseUrl.'/uploads/courses/'.$course->pic; ?>" alt="<?= $course->title ?>" title="<?= $course->title ?>">
                             </a>
                         </div>
                         <div class="course-detail container-fluid">
-                            <h4><a href="<?= Yii::app()->createUrl('/courses/'.urlencode($course->getValueLang('title', 'en')).'/'.$course->id); ?>"><?= $course->title ?></a></h4>
+                            <h4><a href="<?= Yii::app()->createUrl('/courses/'.$course->id); ?>"><?= $course->title ?></a></h4>
 
                             <p class="text">
                                 <?= strip_tags($course->summary) ?>
                                 <span class="paragraph-end"></span>
                             </p>
-                            <a href="<?= Yii::app()->createUrl('/courses/'.urlencode($course->getValueLang('title', 'en')).'/'.$course->id); ?>"
+                            <a href="<?= Yii::app()->createUrl('/courses/'.$course->id); ?>"
                                data-toggle="tooltip" data-placement="<?= Yii::app()->language == 'fa'?'right':'left';?>" title="<?= Yii::t('app','Course Details') ?>"
                                class="btn pull-left"><?= Yii::t('app','Details')?></a>
                         </div>
@@ -360,7 +360,7 @@ endif;
         </div>
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 licenses-container">
             <div class="col-md-12">
-                <a target="_blank" href="https://trustseal.enamad.ir/?id=29990&amp;Code=axuoEFltj5WY9GnSjcvA"><img src="https://Trustseal.eNamad.ir/logo.aspx?id=29990&amp;Code=axuoEFltj5WY9GnSjcvA" alt="" style="cursor:pointer" id="axuoEFltj5WY9GnSjcvA"></a>
+                <a referrerpolicy="origin" target="_blank" href="https://trustseal.enamad.ir/?id=271352&amp;Code=Lp5f2opRJu3WulurFYvw"><img referrerpolicy="origin" src="https://Trustseal.eNamad.ir/logo.aspx?id=271352&amp;Code=Lp5f2opRJu3WulurFYvw" alt="" style="cursor:pointer" id="Lp5f2opRJu3WulurFYvw"></a>
             </div>
         </div>
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">

@@ -104,6 +104,9 @@ class UsersPublicController extends Controller
         }
         if(isset($_POST['Users'])) {
             $model->attributes = $_POST['Users'];
+            if(empty($model->username)){
+                $model->username = $model->email;
+            }
             $model->status = 'active';
             $model->create_date=time();
             if($model->save()) {

@@ -665,4 +665,9 @@ class SiteController extends Controller
 			->execute();
         var_dump($flag);exit;
 	}
+
+	public function actionTest()
+    {
+        var_dump($_SERVER);
+    }
 }

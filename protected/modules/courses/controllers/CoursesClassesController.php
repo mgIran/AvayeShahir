@@ -63,6 +63,7 @@ class CoursesClassesController extends Controller
 			$model->teachers = isset($_POST['Classes']['teachers']) ? $_POST['Classes']['teachers']: null;
 			$model->classDays = isset($_POST['Classes']['classDays']) ? explode(',', $_POST['Classes']['classDays']) : null;
 			$model->price = isset($_POST['Classes']['price']) ? $_POST['Classes']['price'] : 0;
+			$model->teacher_id = 0;
 
 			if($model->save()) {
 				Yii::app()->user->setFlash('success', '<span class="icon-check"></span>&nbsp;&nbsp;اطلاعات با موفقیت ذخیره شد.');

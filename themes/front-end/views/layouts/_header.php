@@ -290,7 +290,7 @@ $action = $this->action->id;
                     ));
                     echo CHtml::hiddenField('ajax','login-form'); ?>
                     <div class="relative">
-                        <?php echo $formL->emailField($loginModel,'email' ,array(
+                        <?php echo $formL->textField($loginModel,'email' ,array(
                             'placeholder' => Yii::t('app','Email'),
                             'class' => 'text-field email'
                         ));
