@@ -83,6 +83,9 @@
                     <i class="email"></i>
                     <span>pardis@avayeshahir.com</span>
                 </p>
+                <p>
+                    <span>Instagram ID: @avaye_shahir</span>
+                </p>
             </div>
             <div class="col-md-6">
                 <h4><?= Yii::t('app','Visit Statistics') ?></h4>
