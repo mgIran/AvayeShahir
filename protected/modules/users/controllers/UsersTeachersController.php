@@ -64,6 +64,7 @@ class UsersTeachersController extends Controller
 		$model = new Users();
 		if(isset($_POST['Users'])) {
 			$model->attributes = $_POST['Users'];
+			$model->username = $model->email;
 			$model->role_id = self::TEACHER_ROLE;
 			$model->status = self::STATUS_ACTIVE;
 			if($model->save())
@@ -74,7 +75,10 @@ class UsersTeachersController extends Controller
 				else
 					$this->redirect(array('/users/teacherDetails/update/id/'.$model->id));
 			}else
-				Yii::app()->user->setFlash('failed' ,'در ثبت اطلاعات خطایی رخ داده است! لطفا مجددا تلاش کنید.');
+            {
+                $model->password = $_POST['Users']['password'];
+                Yii::app()->user->setFlash('failed' ,'در ثبت اطلاعات خطایی رخ داده است! لطفا مجددا تلاش کنید.');
+            }
 		}
 
 		$this->render('create', array(
